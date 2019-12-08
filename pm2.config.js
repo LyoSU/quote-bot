@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'app',
+    name: 'QuoteBot',
     script: './index.js',
     instances: 'max',
     exec_mode: 'cluster',
