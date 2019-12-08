@@ -72,6 +72,7 @@ module.exports = async (ctx) => {
         // ser background color
         let backgroundColor = '#130f1c'
 
+        if (ctx.session.userInfo.settings.quote.backgroundColor) backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
         if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
 
         let colorName
@@ -160,6 +161,10 @@ module.exports = async (ctx) => {
       filename: 'sticker.webp'
     }, {
       reply_to_message_id: ctx.message.reply_to_message.message_id
+    })
+  } else {
+    ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+      reply_to_message_id: ctx.message.message_id
     })
   }
 }

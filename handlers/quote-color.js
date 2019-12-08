@@ -1,0 +1,10 @@
+module.exports = async (ctx) => {
+  let backgroundColor = '#130f1c'
+  if (ctx.match && ctx.match[1] === '#' && ctx.match[2]) backgroundColor = `#${ctx.match[2]}`
+  else if (ctx.match && ctx.match[2]) backgroundColor = `${ctx.match[2]}`
+
+  if (ctx.group) ctx.group.info.settings.quote.backgroundColor = backgroundColor
+  else ctx.session.userInfo.settings.quote.backgroundColor = backgroundColor
+
+  ctx.replyWithHTML(ctx.i18n.t('quote.set_backgroun_color', { backgroundColor }))
+}
