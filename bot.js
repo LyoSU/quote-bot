@@ -78,7 +78,6 @@ bot.use(async (ctx, next) => {
 
 bot.use((ctx, next) => {
   if (ctx.updateType === 'message' && ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 1000)
-  next()
 })
 
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleSave)
