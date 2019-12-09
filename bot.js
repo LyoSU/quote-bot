@@ -76,10 +76,6 @@ bot.use(async (ctx, next) => {
   console.log('Response time %sms', ms)
 })
 
-bot.use((ctx, next) => {
-  if (ctx.updateType === 'message' && ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 1000)
-})
-
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleSave)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, handleQuoteColor)
 bot.hears(/^(\/qd|\/q)(?:(?:(?:\s(\d+))?\s(?:(#?))([^\s]+))?)/, handleQuote)
@@ -90,6 +86,10 @@ bot.on('new_chat_members', (ctx) => {
 
 bot.start(handleHelp)
 bot.command('help', handleHelp)
+
+bot.use((ctx, next) => {
+  if (ctx.updateType === 'message' && ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 1000)
+})
 
 db.connection.once('open', async () => {
   console.log('Connected to MongoDB')
