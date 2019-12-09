@@ -6,29 +6,34 @@ const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
 module.exports = async (ctx) => {
-  if (ctx.message.reply_to_message) {
-    let quoteMessage = ctx.message.reply_to_message
+  const maxQuoteMessage = 10
+  let messageCount = 1
+  if (ctx.match && ctx.match[1] === '/qd') {
+    messageCount = 2
+    if (ctx.match[2] > 0) messageCount = ctx.match[2]
+    if (ctx.match[4] > 0) messageCount = ctx.match[4]
+  }
 
-    let messageCount = 1
-    if (ctx.match[1] === '/qd') {
-      messageCount = 2
-      if (ctx.match[2] > 0) messageCount = ctx.match[2]
-      if (ctx.match[4] > 0) messageCount = ctx.match[4]
-    }
+  let quoteMessage = ctx.message.reply_to_message
+  if (ctx.chat.type === 'private' && ctx.message.forward_date) {
+    quoteMessage = ctx.message
+    messageCount = maxQuoteMessage
+  }
 
-    const maxQuoteMessage = 10
+  if (messageCount > maxQuoteMessage) messageCount = maxQuoteMessage
 
-    if (messageCount > maxQuoteMessage) messageCount = maxQuoteMessage
-
+  if (quoteMessage) {
     const quoteMessages = []
     const quoteImages = []
+
+    const startMessage = quoteMessage.message_id
 
     for (let index = 0; index < messageCount; index++) {
       if (index > 0) {
         try {
           let chatForward = ctx.message.chat.id
           if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
-          quoteMessages[index] = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, ctx.message.reply_to_message.message_id + index)
+          quoteMessages[index] = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
           if (!process.env.GROUP_ID) ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessages[index].message_id)
           quoteMessage = quoteMessages[index]
         } catch (error) {
@@ -76,7 +81,7 @@ module.exports = async (ctx) => {
         if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
 
         let colorName
-        if (ctx.match[1] !== '/qd' || ctx.match[2]) colorName = ctx.match[4]
+        if (ctx.match && (ctx.match[1] !== '/qd' || ctx.match[2])) colorName = ctx.match[4]
 
         if ((ctx.match && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
         else if (ctx.match && ctx.match[3] === '#' && colorName) backgroundColor = `#${colorName}`
@@ -160,7 +165,7 @@ module.exports = async (ctx) => {
       source: quoteImage,
       filename: 'sticker.webp'
     }, {
-      reply_to_message_id: ctx.message.reply_to_message.message_id
+      reply_to_message_id: ctx.message.message_id
     })
   } else {
     ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {

@@ -64,7 +64,6 @@ bot.use(async (ctx, next) => {
     ctx.group.info = await updateGroup(ctx)
     if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
   }
-
   await next(ctx)
 
   await ctx.session.userInfo.save()
@@ -75,6 +74,11 @@ bot.use(async (ctx, next) => {
   const ms = new Date() - ctx.ms
 
   console.log('Response time %sms', ms)
+})
+
+bot.use((ctx, next) => {
+  if (ctx.updateType === 'message' && ctx.chat.type === 'private' && ctx.message.forward_date) setTimeout(() => handleQuote(ctx, next), 1000)
+  next()
 })
 
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleSave)
