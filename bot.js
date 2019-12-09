@@ -87,8 +87,9 @@ bot.on('new_chat_members', (ctx) => {
 bot.start(handleHelp)
 bot.command('help', handleHelp)
 
-bot.use((ctx, next) => {
-  if (ctx.updateType === 'message' && ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 1000)
+bot.on('message', (ctx, next) => {
+  if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 1000)
+  else next()
 })
 
 db.connection.once('open', async () => {
