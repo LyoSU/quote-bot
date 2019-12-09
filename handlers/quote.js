@@ -15,7 +15,7 @@ module.exports = async (ctx) => {
   }
 
   let quoteMessage = ctx.message.reply_to_message
-  if (ctx.chat.type === 'private' && ctx.message.forward_date) {
+  if (ctx.chat.type === 'private') {
     quoteMessage = ctx.message
     messageCount = maxQuoteMessage
   }
