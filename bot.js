@@ -88,7 +88,7 @@ bot.start(handleHelp)
 bot.command('help', handleHelp)
 
 bot.on('message', (ctx, next) => {
-  if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 1000)
+  if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 100)
   else next()
 })
 
