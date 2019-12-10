@@ -81,189 +81,187 @@ function lightOrDark (color) {
   }
 }
 
-function drawMultilineText (text, entities, fontSize, fontColor, textX, textY, maxWidth, maxHeight) {
-  return new Promise(async (resolve, reject) => {
-    const canvas = createCanvas(maxWidth + fontSize, maxHeight + fontSize)
-    const canvasСtx = canvas.getContext('2d')
+async function drawMultilineText (text, entities, fontSize, fontColor, textX, textY, maxWidth, maxHeight) {
+  const canvas = createCanvas(maxWidth + fontSize, maxHeight + fontSize)
+  const canvasСtx = canvas.getContext('2d')
 
-    const chars = text.split('')
+  const chars = text.split('')
 
-    const lineHeight = 4 * (fontSize * 0.3)
+  const lineHeight = 4 * (fontSize * 0.3)
 
-    const styledChar = []
+  const styledChar = []
 
-    const emojis = emojiDb.searchFromText({ input: text, fixCodePoints: true })
+  const emojis = emojiDb.searchFromText({ input: text, fixCodePoints: true })
 
-    for (let charIndex = 0; charIndex < chars.length; charIndex++) {
-      const char = chars[charIndex]
+  for (let charIndex = 0; charIndex < chars.length; charIndex++) {
+    const char = chars[charIndex]
 
-      styledChar[charIndex] = {
-        char,
-        style: []
-      }
-
-      if (entities && typeof entities === 'string') styledChar[charIndex].style.push(entities)
+    styledChar[charIndex] = {
+      char,
+      style: []
     }
 
-    if (entities && typeof entities === 'object') {
-      for (let entityIndex = 0; entityIndex < entities.length; entityIndex++) {
-        const entity = entities[entityIndex]
-        const style = []
+    if (entities && typeof entities === 'string') styledChar[charIndex].style.push(entities)
+  }
 
-        if (entity.type === 'bold') style.push('bold')
-        if (entity.type === 'italic') style.push('italic')
-        if (['pre', 'code'].includes(entity.type)) {
-          style.push('monospace')
-        }
-        if (['mention', 'text_mention', 'hashtag', 'email', 'phone_number', 'bot_command', 'url', 'text_link'].includes(entity.type)) style.push('mention')
+  if (entities && typeof entities === 'object') {
+    for (let entityIndex = 0; entityIndex < entities.length; entityIndex++) {
+      const entity = entities[entityIndex]
+      const style = []
 
-        for (let charIndex = entity.offset; charIndex < entity.offset + entity.length; charIndex++) {
-          styledChar[charIndex].style = style
-        }
+      if (entity.type === 'bold') style.push('bold')
+      if (entity.type === 'italic') style.push('italic')
+      if (['pre', 'code'].includes(entity.type)) {
+        style.push('monospace')
+      }
+      if (['mention', 'text_mention', 'hashtag', 'email', 'phone_number', 'bot_command', 'url', 'text_link'].includes(entity.type)) style.push('mention')
+
+      for (let charIndex = entity.offset; charIndex < entity.offset + entity.length; charIndex++) {
+        styledChar[charIndex].style = style
       }
     }
+  }
 
-    for (let emojiIndex = 0; emojiIndex < emojis.length; emojiIndex++) {
-      const emoji = emojis[emojiIndex]
+  for (let emojiIndex = 0; emojiIndex < emojis.length; emojiIndex++) {
+    const emoji = emojis[emojiIndex]
 
-      for (let charIndex = emoji.offset; charIndex < emoji.offset + emoji.length; charIndex++) {
-        styledChar[charIndex].emoji = {
-          index: emojiIndex,
-          code: emoji.found
-        }
+    for (let charIndex = emoji.offset; charIndex < emoji.offset + emoji.length; charIndex++) {
+      styledChar[charIndex].emoji = {
+        index: emojiIndex,
+        code: emoji.found
       }
     }
+  }
 
-    const styledWords = []
+  const styledWords = []
 
-    let stringNum = 0
+  let stringNum = 0
 
-    const breakMatch = /<br>|\n|\r/
-    const spaceMatch = /\s/
+  const breakMatch = /<br>|\n|\r/
+  const spaceMatch = /\s/
 
-    for (let index = 0; index < styledChar.length; index++) {
-      const charStyle = styledChar[index]
-      const lastChar = styledChar[index - 1]
+  for (let index = 0; index < styledChar.length; index++) {
+    const charStyle = styledChar[index]
+    const lastChar = styledChar[index - 1]
 
-      if (
-        lastChar && (
-          (
-            (charStyle.emoji && !lastChar.emoji) ||
+    if (
+      lastChar && (
+        (
+          (charStyle.emoji && !lastChar.emoji) ||
             (!charStyle.emoji && lastChar.emoji) ||
             (charStyle.emoji && lastChar.emoji && charStyle.emoji.index !== lastChar.emoji.index)
-          ) ||
+        ) ||
           (
             (charStyle.char.match(breakMatch)) ||
             (charStyle.char.match(spaceMatch) && !lastChar.char.match(spaceMatch)) ||
             (lastChar.char.match(spaceMatch) && !charStyle.char.match(spaceMatch)) ||
             (charStyle.style && lastChar.style && charStyle.style.toString() !== lastChar.style.toString())
           )
-        )
-      ) {
-        stringNum++
-      }
-
-      if (!styledWords[stringNum]) {
-        styledWords[stringNum] = {
-          word: charStyle.char
-        }
-
-        if (charStyle.style) styledWords[stringNum].style = charStyle.style
-        if (charStyle.emoji) styledWords[stringNum].emoji = charStyle.emoji
-      } else styledWords[stringNum].word += charStyle.char
+      )
+    ) {
+      stringNum++
     }
 
-    let lineX = textX
-    let lineY = textY
-
-    let textWidth = 0
-
-    let breakWrite = false
-    for (let index = 0; index < styledWords.length; index++) {
-      const styledWord = styledWords[index]
-
-      let emojiImage
-
-      if (styledWord.emoji) {
-        const emojiPng = `${emojiDataDir}${styledWord.emoji.code}.png`
-
-        try {
-          emojiImage = await loadCanvasImage(emojiPng)
-        } catch (error) {
-        }
+    if (!styledWords[stringNum]) {
+      styledWords[stringNum] = {
+        word: charStyle.char
       }
 
-      if (styledWord.style.includes('bold')) {
-        canvasСtx.font = `bold ${fontSize}px OpenSans`
-        canvasСtx.fillStyle = fontColor
-      } else if (styledWord.style.includes('italic')) {
-        canvasСtx.font = `italic ${fontSize}px OpenSans`
-        canvasСtx.fillStyle = fontColor
-      } else if (styledWord.style.includes('monospace')) {
-        canvasСtx.font = `${fontSize}px monospace`
-        canvasСtx.fillStyle = '#5887a7'
-      } else if (styledWord.style.includes('mention')) {
-        canvasСtx.font = `${fontSize}px mention`
-        canvasСtx.fillStyle = '#6ab7ec'
-      } else {
-        canvasСtx.font = `${fontSize}px OpenSans`
-        canvasСtx.fillStyle = fontColor
-      }
+      if (charStyle.style) styledWords[stringNum].style = charStyle.style
+      if (charStyle.emoji) styledWords[stringNum].emoji = charStyle.emoji
+    } else styledWords[stringNum].word += charStyle.char
+  }
 
-      if (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize) {
-        while (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 2) {
+  let lineX = textX
+  let lineY = textY
+
+  let textWidth = 0
+
+  let breakWrite = false
+  for (let index = 0; index < styledWords.length; index++) {
+    const styledWord = styledWords[index]
+
+    let emojiImage
+
+    if (styledWord.emoji) {
+      const emojiPng = `${emojiDataDir}${styledWord.emoji.code}.png`
+
+      try {
+        emojiImage = await loadCanvasImage(emojiPng)
+      } catch (error) {
+      }
+    }
+
+    if (styledWord.style.includes('bold')) {
+      canvasСtx.font = `bold ${fontSize}px OpenSans`
+      canvasСtx.fillStyle = fontColor
+    } else if (styledWord.style.includes('italic')) {
+      canvasСtx.font = `italic ${fontSize}px OpenSans`
+      canvasСtx.fillStyle = fontColor
+    } else if (styledWord.style.includes('monospace')) {
+      canvasСtx.font = `${fontSize}px monospace`
+      canvasСtx.fillStyle = '#5887a7'
+    } else if (styledWord.style.includes('mention')) {
+      canvasСtx.font = `${fontSize}px mention`
+      canvasСtx.fillStyle = '#6ab7ec'
+    } else {
+      canvasСtx.font = `${fontSize}px OpenSans`
+      canvasСtx.fillStyle = fontColor
+    }
+
+    if (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize) {
+      while (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 2) {
+        styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
+        if (styledWord.word.length <= 0) break
+      }
+      styledWord.word += '…'
+    }
+
+    let lineWidth
+    const wordlWidth = canvasСtx.measureText(styledWord.word).width
+
+    if (styledWord.emoji) lineWidth = lineX + fontSize + (fontSize * 0.15)
+    else lineWidth = lineX + wordlWidth
+
+    if (styledWord.word.match(breakMatch) || (lineWidth > maxWidth - fontSize * 2 && wordlWidth < maxWidth)) {
+      if (styledWord.word.match(spaceMatch)) styledWord.word = ''
+      if (!styledWord.word.match(breakMatch) && lineY + lineHeight > maxHeight) {
+        while (lineWidth > maxWidth - fontSize * 2) {
           styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
+          lineWidth = lineX + canvasСtx.measureText(styledWord.word).width
           if (styledWord.word.length <= 0) break
         }
+
         styledWord.word += '…'
-      }
-
-      let lineWidth
-      let wordlWidth = canvasСtx.measureText(styledWord.word).width
-
-      if (styledWord.emoji) lineWidth = lineX + fontSize + (fontSize * 0.15)
-      else lineWidth = lineX + wordlWidth
-
-      if (styledWord.word.match(breakMatch) || (lineWidth > maxWidth - fontSize * 2 && wordlWidth < maxWidth)) {
-        if (styledWord.word.match(spaceMatch)) styledWord.word = ''
-        if (!styledWord.word.match(breakMatch) && lineY + lineHeight > maxHeight) {
-          while (lineWidth > maxWidth - fontSize * 2) {
-            styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
-            lineWidth = lineX + canvasСtx.measureText(styledWord.word).width
-            if (styledWord.word.length <= 0) break
-          }
-
-          styledWord.word += '…'
-          breakWrite = true
-        } else {
-          if (styledWord.emoji) lineWidth = textX + fontSize + (fontSize * 0.15)
-          else lineWidth = textX + canvasСtx.measureText(styledWord.word).width
-          lineX = textX
-          lineY += lineHeight
-        }
-      }
-
-      if (lineWidth > textWidth) textWidth = lineWidth
-      if (textWidth > maxWidth) textWidth = maxWidth
-
-      if (emojiImage) {
-        canvasСtx.drawImage(emojiImage, lineX, lineY - fontSize + (fontSize * 0.15), fontSize, fontSize)
+        breakWrite = true
       } else {
-        canvasСtx.fillText(styledWord.word, lineX, lineY)
+        if (styledWord.emoji) lineWidth = textX + fontSize + (fontSize * 0.15)
+        else lineWidth = textX + canvasСtx.measureText(styledWord.word).width
+        lineX = textX
+        lineY += lineHeight
       }
-
-      lineX = lineWidth
-
-      if (breakWrite) break
     }
 
-    const canvasResize = createCanvas(textWidth, lineY + fontSize)
-    const canvasResizeСtx = canvasResize.getContext('2d')
+    if (lineWidth > textWidth) textWidth = lineWidth
+    if (textWidth > maxWidth) textWidth = maxWidth
 
-    canvasResizeСtx.drawImage(canvas, 0, 0)
+    if (emojiImage) {
+      canvasСtx.drawImage(emojiImage, lineX, lineY - fontSize + (fontSize * 0.15), fontSize, fontSize)
+    } else {
+      canvasСtx.fillText(styledWord.word, lineX, lineY)
+    }
 
-    resolve(canvasResize)
-  })
+    lineX = lineWidth
+
+    if (breakWrite) break
+  }
+
+  const canvasResize = createCanvas(textWidth, lineY + fontSize)
+  const canvasResizeСtx = canvasResize.getContext('2d')
+
+  canvasResizeСtx.drawImage(canvas, 0, 0)
+
+  return canvasResize
 }
 
 // https://stackoverflow.com/a/3368118
