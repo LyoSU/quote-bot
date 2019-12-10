@@ -56,6 +56,8 @@ module.exports = async (ctx) => {
 
         let messageFrom = quoteMessage.from
 
+        if (quoteMessage.forward_from) messageFrom = quoteMessage.forward_from
+
         if (quoteMessage.forward_sender_name) {
           messageFrom = {
             id: 0,
@@ -69,10 +71,9 @@ module.exports = async (ctx) => {
             username: quoteMessage.forward_from_chat.username || null
           }
         }
+
         if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
         if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
-
-        if (quoteMessage.forward_from) messageFrom = quoteMessage.forward_from
 
         quoteMessages[index].from = messageFrom
 
@@ -92,8 +93,12 @@ module.exports = async (ctx) => {
         let diffUser = true
         if (quoteMessages[index - 1] && (quoteMessages[index].from.name === quoteMessages[index - 1].from.name)) diffUser = false
 
+        if (quoteMessages[index - 1]) console.log(quoteMessages[index].from.name, quoteMessages[index - 1].from.name)
+
+        let name
         let avatarImage
         if (diffUser) {
+          name = quoteMessages[index].from.name
           try {
             let userPhotoUrl = './assets/404.png'
 
@@ -109,7 +114,7 @@ module.exports = async (ctx) => {
           }
         }
 
-        const canvasQuote = await generateQuote(avatarImage, backgroundColor, messageFrom.id, messageFrom.name, text, entities)
+        const canvasQuote = await generateQuote(avatarImage, backgroundColor, messageFrom.id, name, text, entities)
 
         quoteImages.push(canvasQuote)
       }
