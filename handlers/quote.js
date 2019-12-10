@@ -93,8 +93,6 @@ module.exports = async (ctx) => {
         let diffUser = true
         if (quoteMessages[index - 1] && (quoteMessages[index].from.name === quoteMessages[index - 1].from.name)) diffUser = false
 
-        if (quoteMessages[index - 1]) console.log(quoteMessages[index].from.name, quoteMessages[index - 1].from.name)
-
         let name
         let avatarImage
         if (diffUser) {
