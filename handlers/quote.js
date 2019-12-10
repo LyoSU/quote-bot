@@ -69,7 +69,8 @@ module.exports = async (ctx) => {
             username: quoteMessage.forward_from_chat.username || null
           }
         }
-        if (messageFrom.first_name) messageFrom.name = `${messageFrom.first_name} ${messageFrom.last_name || ''}`
+        if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
+        if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
         if (quoteMessage.forward_from) messageFrom = quoteMessage.forward_from
 
