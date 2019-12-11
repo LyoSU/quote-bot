@@ -2,6 +2,9 @@ const {
   loadCanvasImage,
   generateQuote
 } = require('../utils')
+const {
+  tdlib
+} = require('../helpers')
 const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
@@ -31,11 +34,16 @@ module.exports = async (ctx) => {
     for (let index = 0; index < messageCount; index++) {
       if (index > 0) {
         try {
-          let chatForward = ctx.message.chat.id
-          if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
-          quoteMessages[index] = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
           if (!process.env.GROUP_ID) ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessages[index].message_id)
-          quoteMessage = quoteMessages[index]
+          const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
+          if (getMessages) {
+            quoteMessages[index] = getMessages[0]
+          } else {
+            let chatForward = ctx.message.chat.id
+            if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
+            quoteMessages[index] = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
+          }
+          if (quoteMessages[index]) quoteMessage = quoteMessages[index]
         } catch (error) {
           quoteMessage = null
         }
@@ -118,57 +126,63 @@ module.exports = async (ctx) => {
       }
     }
 
-    let canvasQuote
+    if (quoteImages.length > 0) {
+      let canvasQuote
 
-    if (quoteImages.length > 1) {
-      let width = 0
-      let height = 0
+      if (quoteImages.length > 1) {
+        let width = 0
+        let height = 0
 
-      for (let index = 0; index < quoteImages.length; index++) {
-        if (quoteImages[index].width > width) width = quoteImages[index].width
-        height += quoteImages[index].height
+        for (let index = 0; index < quoteImages.length; index++) {
+          if (quoteImages[index].width > width) width = quoteImages[index].width
+          height += quoteImages[index].height
+        }
+
+        const quoteMargin = 5
+
+        const canvas = createCanvas(width, height + (quoteMargin * quoteImages.length))
+        const canvasCtx = canvas.getContext('2d')
+
+        let imageY = 0
+
+        for (let index = 0; index < quoteImages.length; index++) {
+          canvasCtx.drawImage(quoteImages[index], 0, imageY)
+          imageY += quoteImages[index].height + quoteMargin
+        }
+        canvasQuote = canvas
+      } else {
+        canvasQuote = quoteImages[0]
       }
 
-      const quoteMargin = 5
+      const downPadding = 75
+      const maxWidth = 512
+      const maxHeight = 512
 
-      const canvas = createCanvas(width, height + (quoteMargin * quoteImages.length))
-      const canvasCtx = canvas.getContext('2d')
+      const imageQuoteSharp = sharp(canvasQuote.toBuffer())
 
-      let imageY = 0
+      if (canvasQuote.height > canvasQuote.width) imageQuoteSharp.resize({ height: maxHeight })
+      else imageQuoteSharp.resize({ width: maxWidth })
 
-      for (let index = 0; index < quoteImages.length; index++) {
-        canvasCtx.drawImage(quoteImages[index], 0, imageY)
-        imageY += quoteImages[index].height + quoteMargin
-      }
-      canvasQuote = canvas
+      const canvasImage = await loadCanvasImage(await imageQuoteSharp.toBuffer())
+
+      const canvasPadding = createCanvas(canvasImage.width, canvasImage.height + downPadding)
+      const canvasPaddingCtx = canvasPadding.getContext('2d')
+
+      canvasPaddingCtx.drawImage(canvasImage, 0, 0)
+
+      const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
+
+      ctx.replyWithDocument({
+        source: quoteImage,
+        filename: 'sticker.webp'
+      }, {
+        reply_to_message_id: ctx.message.message_id
+      })
     } else {
-      canvasQuote = quoteImages[0]
+      ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+        reply_to_message_id: ctx.message.message_id
+      })
     }
-
-    const downPadding = 75
-    const maxWidth = 512
-    const maxHeight = 512
-
-    const imageQuoteSharp = sharp(canvasQuote.toBuffer())
-
-    if (canvasQuote.height > canvasQuote.width) imageQuoteSharp.resize({ height: maxHeight })
-    else imageQuoteSharp.resize({ width: maxWidth })
-
-    const canvasImage = await loadCanvasImage(await imageQuoteSharp.toBuffer())
-
-    const canvasPadding = createCanvas(canvasImage.width, canvasImage.height + downPadding)
-    const canvasPaddingCtx = canvasPadding.getContext('2d')
-
-    canvasPaddingCtx.drawImage(canvasImage, 0, 0)
-
-    const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
-
-    ctx.replyWithDocument({
-      source: quoteImage,
-      filename: 'sticker.webp'
-    }, {
-      reply_to_message_id: ctx.message.message_id
-    })
   } else {
     ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
       reply_to_message_id: ctx.message.message_id

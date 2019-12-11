@@ -105,5 +105,6 @@ dist
 
 assets/fonts/*
 assets/emojis/*
+helpers/tdlib/data
 
 !.gitkeep
