@@ -375,95 +375,93 @@ async function drawQuote (backgroundColor, avatar, nick, text, maxWidth, maxHeig
   return canvas
 }
 
-module.exports = (avatar, backgroundColor, userId, nick, text, entities) => {
-  return new Promise(async (resolve, reject) => {
-    const canvas = createCanvas(0, 0)
-    const canvasCtx = canvas.getContext('2d')
+module.exports = async (avatar, backgroundColor, userId, nick, text, entities) => {
+  const canvas = createCanvas(0, 0)
+  const canvasCtx = canvas.getContext('2d')
 
-    canvasCtx.fillStyle = backgroundColor
-    backgroundColor = canvasCtx.fillStyle
+  canvasCtx.fillStyle = backgroundColor
+  backgroundColor = canvasCtx.fillStyle
 
-    // check background style color black/light
-    const backStyle = lightOrDark(canvasCtx.fillStyle)
+  // check background style color black/light
+  const backStyle = lightOrDark(canvasCtx.fillStyle)
 
-    const width = 512
-    const height = 512
+  const width = 512
+  const height = 512
 
-    // defsult color from tdesktop
-    // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43
-    // const nickColor = [
-    //   '#c03d33',
-    //   '#4fad2d',
-    //   '#d09306',
-    //   '#168acd',
-    //   '#8544d6',
-    //   '#cd4073',
-    //   '#2996ad',
-    //   '#ce671b'
-    // ]
+  // defsult color from tdesktop
+  // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43
+  // const nickColor = [
+  //   '#c03d33',
+  //   '#4fad2d',
+  //   '#d09306',
+  //   '#168acd',
+  //   '#8544d6',
+  //   '#cd4073',
+  //   '#2996ad',
+  //   '#ce671b'
+  // ]
 
-    // nick light style color
-    const nickColorLight = [
-      '#862a23',
-      '#37791f',
-      '#916604',
-      '#0f608f',
-      '#5d2f95',
-      '#8f2c50',
-      '#1c6979',
-      '#904812'
-    ]
+  // nick light style color
+  const nickColorLight = [
+    '#862a23',
+    '#37791f',
+    '#916604',
+    '#0f608f',
+    '#5d2f95',
+    '#8f2c50',
+    '#1c6979',
+    '#904812'
+  ]
 
-    // nick black style color
-    const nickColorBlack = [
-      '#fb6169',
-      '#85de85',
-      '#f3bc5c',
-      '#65bdf3',
-      '#b48bf2',
-      '#ff5694',
-      '#62d4e3',
-      '#faa357'
-    ]
+  // nick black style color
+  const nickColorBlack = [
+    '#fb6169',
+    '#85de85',
+    '#f3bc5c',
+    '#65bdf3',
+    '#b48bf2',
+    '#ff5694',
+    '#62d4e3',
+    '#faa357'
+  ]
 
-    // user nick  color
-    // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43
-    const nickIndex = Math.abs(userId) % 7
-    const nickMap = [0, 7, 4, 1, 6, 3, 5]
+  // user nick  color
+  // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43
+  const nickIndex = Math.abs(userId) % 7
+  const nickMap = [0, 7, 4, 1, 6, 3, 5]
 
-    let nickColor = nickColorBlack[nickMap[nickIndex]]
-    if (backStyle === 'light') nickColor = nickColorLight[nickMap[nickIndex]]
+  let nickColor = nickColorBlack[nickMap[nickIndex]]
+  if (backStyle === 'light') nickColor = nickColorLight[nickMap[nickIndex]]
 
-    const nickSize = 22
+  const nickSize = 22
 
-    let nickCanvas
-    if (nick) nickCanvas = await drawMultilineText(nick, 'bold', nickSize, nickColor, 0, nickSize, width, nickSize)
+  let nickCanvas
+  if (nick) nickCanvas = await drawMultilineText(nick, 'bold', nickSize, nickColor, 0, nickSize, width, nickSize)
 
-    // const minFontSize = 18
-    // const maxFontSize = 28
+  // const minFontSize = 18
+  // const maxFontSize = 28
 
-    // let fontSize = 25 / ((text.length / 10) * 0.2)
+  // let fontSize = 25 / ((text.length / 10) * 0.2)
 
-    // if (fontSize < minFontSize) fontSize = minFontSize
-    // if (fontSize > maxFontSize) fontSize = maxFontSize
+  // if (fontSize < minFontSize) fontSize = minFontSize
+  // if (fontSize > maxFontSize) fontSize = maxFontSize
 
-    const fontSize = 24
+  const fontSize = 24
 
-    let textColor = '#fff'
-    if (backStyle === 'light') textColor = '#000'
+  let textColor = '#fff'
+  if (backStyle === 'light') textColor = '#000'
 
-    const drawTextCanvas = drawMultilineText(text, entities, fontSize, textColor, 0, fontSize, width, height - fontSize)
+  const drawTextCanvas = drawMultilineText(text, entities, fontSize, textColor, 0, fontSize, width, height - fontSize)
 
-    let avatarCanvas
-    if (avatar) avatarCanvas = drawAvatar(avatar)
+  let avatarCanvas
+  if (avatar) avatarCanvas = drawAvatar(avatar)
 
-    const quote = drawQuote(
-      backgroundColor,
-      avatarCanvas,
-      nickCanvas, await drawTextCanvas,
-      width, height
-    )
+  const quote = drawQuote(
+    backgroundColor,
+    avatarCanvas,
+    nickCanvas, await drawTextCanvas,
+    width, height
+  )
 
-    resolve(quote)
-  })
+  return quote
 }
