@@ -35,7 +35,7 @@ module.exports = async (ctx) => {
       if (index > 0) {
         try {
           const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
-          if (getMessages) {
+          if (getMessages.length > 0) {
             quoteMessages[index] = getMessages[0]
           } else {
             let chatForward = ctx.message.chat.id
