@@ -80,6 +80,7 @@ function getMessages (chatId, messageIds) {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const messages = response.messages.map((messageInfo) => {
+        if (!messageInfo) return {}
         return new Promise((resolve, reject) => {
           Promise.all([getChat(messageInfo.chatId), getChat(messageInfo.senderUserId)]).then((chats) => {
             const message = {
