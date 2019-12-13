@@ -15,8 +15,7 @@ const {
 } = require('./handlers')
 const {
   updateUser,
-  updateGroup,
-  tdlib
+  updateGroup
 } = require('./helpers')
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
@@ -100,7 +99,7 @@ db.connection.once('open', async () => {
     bot.launch({
       webhook: {
         domain: process.env.BOT_DOMAIN,
-        hookPath: `/LyAdminBot:${process.env.BOT_TOKEN}`,
+        hookPath: `/QuoteBot:${process.env.BOT_TOKEN}`,
         port: process.env.WEBHOOK_PORT || 2200
       }
     }).then(() => {

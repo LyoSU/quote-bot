@@ -3,7 +3,7 @@ const fs = require('fs')
 const { Airgram, Auth } = require('airgram')
 
 const tdDirectory = path.resolve(__dirname, 'data')
-fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
+// fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
 
 const tdLibFile = process.platform === 'win32' ? 'tdjson/tdjson' : 'libtdjson/libtdjson'
 const airgram = new Airgram({
@@ -85,60 +85,83 @@ function getMessages (chatId, messageIds) {
       const messages = response.messages.map((messageInfo) => {
         if (!messageInfo) return {}
         return new Promise((resolve, reject) => {
-          Promise.all([getChat(messageInfo.chatId), getChat(messageInfo.senderUserId)]).then((chats) => {
-            const message = {
-              message_id: messageInfo.id / Math.pow(2, 20),
-              chat: chats[0],
-              from: chats[1],
-              date: messageInfo.date
-            }
+          const message = {
+            message_id: messageInfo.id / Math.pow(2, 20),
+            date: messageInfo.date
+          }
+          const messagePromise = []
+          const replyToMessageId = messageInfo.replyToMessageId / Math.pow(2, 20)
 
-            let entities
+          if (messageInfo.replyToMessageId) messagePromise.push(getMessages(chatId, [replyToMessageId]))
+          Promise.all(messagePromise).then((replyMessage) => {
+            if (replyMessage && replyMessage[0] && replyMessage[0][0]) message.reply_to_message = replyMessage[0][0]
 
-            if (messageInfo.replyToMessageId) message.reply_to_message = { message_id: messageInfo.replyToMessageId }
+            const chatIds = [
+              messageInfo.chatId,
+              messageInfo.senderUserId
+            ]
 
-            if (messageInfo.content.text) {
-              message.text = messageInfo.content.text.text
-              entities = messageInfo.content.text.entities
-            }
-            if (messageInfo.content.caption) {
-              message.caption = messageInfo.content.caption.text
-              entities = messageInfo.content.caption.entities
-            }
+            if (messageInfo.forwardInfo && messageInfo.forwardInfo.origin.senderUserId) chatIds.push(messageInfo.forwardInfo.origin.senderUserId)
 
-            if (entities) {
-              message.entities = entities.map((entityInfo) => {
-                const typeMap = {
-                  textEntityTypeMention: 'mention',
-                  textEntityTypeHashtag: 'hashtag',
-                  textEntityTypeCashtag: 'cashtag',
-                  textEntityTypeBotCommand: 'bot_command',
-                  textEntityTypeUrl: 'url',
-                  textEntityTypeEmailAddress: 'email',
-                  textEntityTypeBold: 'bold',
-                  textEntityTypeItalic: 'italic',
-                  textEntityTypeCode: 'code',
-                  textEntityTypePre: 'pre',
-                  textEntityTypePreCode: 'pre_code',
-                  textEntityTypeTextUrl: 'text_link',
-                  textEntityTypeMentionName: 'text_mention',
-                  textEntityTypePhoneNumber: 'phone_number'
-                }
+            const chatInfoPromise = chatIds.map(getChat)
 
-                const entity = {
-                  length: entityInfo.length,
-                  offset: entityInfo.offset,
-                  type: typeMap[entityInfo.type._]
-                }
-
-                if (entity.type === 'text_link') entity.url = entityInfo.type.url
-                if (entity.type === 'text_mention') entity.user = entityInfo.type.userId
-
-                return entity
+            Promise.all(chatInfoPromise).then((chats) => {
+              const chatInfo = {}
+              chats.map((chat) => {
+                chatInfo[chat.id] = chat
               })
-            }
 
-            resolve(message)
+              message.chat = chatInfo[messageInfo.chatId]
+              message.from = chatInfo[messageInfo.senderUserId]
+
+              if (chatInfo[messageInfo.forwardInfo.origin.senderUserId]) message.forward_from = chatInfo[messageInfo.forwardInfo.origin.senderUserId]
+              if (messageInfo.forwardInfo.origin.senderName) message.forward_sender_name = messageInfo.forwardInfo.origin.senderName
+
+              let entities
+
+              if (messageInfo.content.text) {
+                message.text = messageInfo.content.text.text
+                entities = messageInfo.content.text.entities
+              }
+              if (messageInfo.content.caption) {
+                message.caption = messageInfo.content.caption.text
+                entities = messageInfo.content.caption.entities
+              }
+
+              if (entities) {
+                message.entities = entities.map((entityInfo) => {
+                  const typeMap = {
+                    textEntityTypeMention: 'mention',
+                    textEntityTypeHashtag: 'hashtag',
+                    textEntityTypeCashtag: 'cashtag',
+                    textEntityTypeBotCommand: 'bot_command',
+                    textEntityTypeUrl: 'url',
+                    textEntityTypeEmailAddress: 'email',
+                    textEntityTypeBold: 'bold',
+                    textEntityTypeItalic: 'italic',
+                    textEntityTypeCode: 'code',
+                    textEntityTypePre: 'pre',
+                    textEntityTypePreCode: 'pre_code',
+                    textEntityTypeTextUrl: 'text_link',
+                    textEntityTypeMentionName: 'text_mention',
+                    textEntityTypePhoneNumber: 'phone_number'
+                  }
+
+                  const entity = {
+                    length: entityInfo.length,
+                    offset: entityInfo.offset,
+                    type: typeMap[entityInfo.type._]
+                  }
+
+                  if (entity.type === 'text_link') entity.url = entityInfo.type.url
+                  if (entity.type === 'text_mention') entity.user = entityInfo.type.userId
+
+                  return entity
+                })
+              }
+
+              resolve(message)
+            })
           })
         })
       })

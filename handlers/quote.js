@@ -30,29 +30,29 @@ module.exports = async (ctx) => {
     const quoteImages = []
 
     const startMessage = quoteMessage.message_id
+    let lastMessage = quoteMessage
 
     for (let index = 0; index < messageCount; index++) {
-      if (index > 0) {
+      if (index > -1) {
         try {
           const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
           if (getMessages.length > 0) {
-            quoteMessages[index] = getMessages[0]
+            quoteMessage = getMessages[0]
           } else {
             let chatForward = ctx.message.chat.id
             if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
-            quoteMessages[index] = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
-            if (!process.env.GROUP_ID) ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessages[index].message_id)
+            quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
+            if (!process.env.GROUP_ID) ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
           }
-          if (quoteMessages[index]) quoteMessage = quoteMessages[index]
         } catch (error) {
           quoteMessage = null
         }
-      } else {
-        quoteMessages[index] = quoteMessage
       }
 
       if (quoteMessage && (quoteMessage.text || quoteMessage.caption)) {
         let text, entities
+
+        if (quoteMessage) quoteMessages[index] = quoteMessage
 
         if (quoteMessage.caption) {
           text = quoteMessage.caption
@@ -83,7 +83,7 @@ module.exports = async (ctx) => {
         if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
         if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
-        quoteMessages[index].from = messageFrom
+        quoteMessage.from = messageFrom
 
         // ser background color
         let backgroundColor = '#130f1c'
@@ -99,23 +99,25 @@ module.exports = async (ctx) => {
         else if (ctx.match && colorName) backgroundColor = `${colorName}`
 
         let diffUser = true
-        if (quoteMessages[index - 1] && (quoteMessages[index].from.name === quoteMessages[index - 1].from.name)) diffUser = false
+        if (quoteMessage.from.name === lastMessage.from.name) diffUser = false
 
         let name
         let avatarImage
         if (diffUser) {
           name = quoteMessages[index].from.name
           try {
+            let userPhoto
             let userPhotoUrl = './assets/404.png'
 
             const getChat = await ctx.telegram.getChat(messageFrom.id)
-            const userPhoto = getChat.photo.small_file_id
+            if (getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
 
             if (userPhoto) userPhotoUrl = await ctx.telegram.getFileLink(userPhoto)
             else if (messageFrom.username) userPhotoUrl = `https://telega.one/i/userpic/320/${messageFrom.username}.jpg`
 
             avatarImage = await loadCanvasImage(userPhotoUrl)
           } catch (error) {
+            console.log(error)
             avatarImage = await loadCanvasImage('./assets/404.png')
           }
         }
@@ -123,6 +125,7 @@ module.exports = async (ctx) => {
         const canvasQuote = await generateQuote(avatarImage, backgroundColor, messageFrom.id, name, text, entities)
 
         quoteImages.push(canvasQuote)
+        lastMessage = quoteMessage
       }
     }
 
