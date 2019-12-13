@@ -121,7 +121,7 @@ function getMessages (chatId, messageIds) {
 
               if (messageInfo.forwardInfo) {
                 if (chatInfo[forwarderId]) {
-                  if (chatInfo[forwarderId].type === 'private') message.forward_from = chatInfo[forwarderId]
+                  if (!chatInfo[forwarderId].type) message.forward_from = chatInfo[forwarderId]
                   else message.forward_from_chat = chatInfo[forwarderId]
                 }
                 if (messageInfo.forwardInfo.origin.senderName) message.forward_sender_name = messageInfo.forwardInfo.origin.senderName
