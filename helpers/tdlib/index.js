@@ -3,7 +3,7 @@ const fs = require('fs')
 const { Airgram, Auth } = require('airgram')
 
 const tdDirectory = path.resolve(__dirname, 'data')
-// fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
+fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
 
 const tdLibFile = process.platform === 'win32' ? 'tdjson/tdjson' : 'libtdjson/libtdjson'
 const airgram = new Airgram({
