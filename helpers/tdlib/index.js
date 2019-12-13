@@ -3,7 +3,7 @@ const fs = require('fs')
 const { Airgram, Auth } = require('airgram')
 
 const tdDirectory = path.resolve(__dirname, 'data')
-fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
+if (process.env.NODE_ENV === 'production') fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
 
 const tdLibFile = process.platform === 'win32' ? 'tdjson/tdjson' : 'libtdjson/libtdjson'
 const airgram = new Airgram({
@@ -66,7 +66,7 @@ function getChat (chatId) {
 
         if (response.type.isChannel && response.type.isChannel === true) chat.type = 'channel'
 
-        resolve(response)
+        resolve(chat)
       }
     })
   })
@@ -101,7 +101,12 @@ function getMessages (chatId, messageIds) {
               messageInfo.senderUserId
             ]
 
-            if (messageInfo.forwardInfo && messageInfo.forwardInfo.origin.senderUserId) chatIds.push(messageInfo.forwardInfo.origin.senderUserId)
+            let forwarderId
+
+            if (messageInfo.forwardInfo && messageInfo.forwardInfo.origin.senderUserId) forwarderId = messageInfo.forwardInfo.origin.senderUserId
+            if (messageInfo.forwardInfo && messageInfo.forwardInfo.origin.chatId) forwarderId = messageInfo.forwardInfo.origin.chatId
+
+            if (forwarderId) chatIds.push(forwarderId)
 
             const chatInfoPromise = chatIds.map(getChat)
 
@@ -114,8 +119,13 @@ function getMessages (chatId, messageIds) {
               message.chat = chatInfo[messageInfo.chatId]
               message.from = chatInfo[messageInfo.senderUserId]
 
-              if (chatInfo[messageInfo.forwardInfo.origin.senderUserId]) message.forward_from = chatInfo[messageInfo.forwardInfo.origin.senderUserId]
-              if (messageInfo.forwardInfo.origin.senderName) message.forward_sender_name = messageInfo.forwardInfo.origin.senderName
+              if (messageInfo.forwardInfo) {
+                if (chatInfo[forwarderId]) {
+                  if (chatInfo[forwarderId].type === 'private') message.forward_from = chatInfo[forwarderId]
+                  else message.forward_from_chat = chatInfo[forwarderId]
+                }
+                if (messageInfo.forwardInfo.origin.senderName) message.forward_sender_name = messageInfo.forwardInfo.origin.senderName
+              }
 
               let entities
 
