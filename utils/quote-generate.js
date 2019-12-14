@@ -413,7 +413,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
     const backStyle = lightOrDark(backgroundColor)
     let lineColor = '#fff'
     if (backStyle === 'light') lineColor = '#000'
-    canvasCtx.drawImage(deawReplyLine(replyName.height + replyText.height * 0.4, lineColor), textPosY - 10, replyNamePosY)
+    canvasCtx.drawImage(deawReplyLine(replyName.height + replyText.height * 0.4, lineColor), textPosY * 0.85, replyNamePosY)
 
     canvasCtx.drawImage(replyName, replyPosX, replyNamePosY)
     canvasCtx.drawImage(replyText, replyPosX, replyTextPosY)
@@ -510,13 +510,13 @@ module.exports = async (backgroundColor, message, replyMessage, entities) => {
     let repltNameColor = nameColorBlack[nameMap[replyNameIndex]]
     if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
 
-    const replyNameFontSize = 14
+    const replyNameFontSize = 16
     if (message.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyNameFontSize, repltNameColor, 0, replyNameFontSize, width * 0.9, replyNameFontSize)
 
     let textColor = '#fff'
     if (backStyle === 'light') textColor = '#000'
 
-    const replyTextFontSize = 19
+    const replyTextFontSize = 21
     replyText = await drawMultilineText(replyMessage.text, null, replyTextFontSize, textColor, 0, replyTextFontSize, width * 0.9, replyTextFontSize)
   }
 
