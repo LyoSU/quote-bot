@@ -380,9 +380,10 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   if (name) textPosY = name.height
 
   if (replyName) {
+    const replyPdding = 5
     textPosY += replyName.height
 
-    replyTextPosX = replyName.width + replyPosX
+    replyTextPosX = replyName.width + replyPosX + replyPdding
     const replySize = replyTextPosX + replyText.width + indent
 
     if (width < replySize) width = replySize
