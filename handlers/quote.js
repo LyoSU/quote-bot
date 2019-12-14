@@ -122,7 +122,24 @@ module.exports = async (ctx) => {
           }
         }
 
-        const canvasQuote = await generateQuote(avatarImage, backgroundColor, messageFrom.id, name, text, entities)
+        const message = {}
+
+        if (messageFrom.id) message.chatId = messageFrom.id
+        if (avatarImage) message.avatar = avatarImage
+        if (name) message.name = name
+        if (text) message.text = text
+
+        const replyMessage = {}
+        if (quoteMessage.reply_to_message) {
+          const repltMessageInfo = quoteMessage.reply_to_message
+          replyMessage.chatId = repltMessageInfo.from.id
+          if (repltMessageInfo.from.first_name) replyMessage.name = repltMessageInfo.from.first_name
+          if (repltMessageInfo.from.last_name) replyMessage.name += ' ' + repltMessageInfo.from.last_name
+          if (repltMessageInfo.text) replyMessage.text = repltMessageInfo.text
+          if (repltMessageInfo.caption) replyMessage.text = repltMessageInfo.caption
+        }
+
+        const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities)
 
         quoteImages.push(canvasQuote)
         lastMessage = quoteMessage

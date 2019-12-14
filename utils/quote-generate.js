@@ -310,6 +310,19 @@ function drawRoundRect (color, width, height, radius, fill, stroke) {
   return canvas
 }
 
+function deawReplyLine (height, color) {
+  const canvas = createCanvas(20, height)
+  const context = canvas.getContext('2d')
+  context.beginPath()
+  context.moveTo(10, 0)
+  context.lineTo(10, height)
+  context.lineWidth = 5
+  context.strokeStyle = color
+  context.stroke()
+
+  return canvas
+}
+
 function drawAvatar (avatar) {
   const avatarSize = avatar.naturalHeight
 
@@ -329,7 +342,7 @@ function drawAvatar (avatar) {
   return canvas
 }
 
-async function drawQuote (backgroundColor, avatar, nick, text, maxWidth, maxHeight) {
+async function drawQuote (backgroundColor, avatar, replyName, replyText, name, text) {
   const blockPosX = 75
   const blockPosY = 0
 
@@ -340,14 +353,41 @@ async function drawQuote (backgroundColor, avatar, nick, text, maxWidth, maxHeig
   const avatarSize = 65
 
   let width = 0
-  if (nick) width = nick.width
+  if (name) width = name.width
   if (width < text.width) width = text.width
 
   let height = text.height + indent
-  if (nick) height = nick.height + text.height
+  if (name) height = name.height + text.height
+  if (replyName) height += replyName.height
 
   width += blockPosX + (indent * 2)
   height += blockPosY
+
+  const namePosX = blockPosX + indent
+  const namePosY = indent
+
+  let replyPosX = 0
+  let replyPosY = 0
+  let replyTextPosX = 0
+
+  if (name) {
+    const replyPdding = 15
+    replyPosX = namePosX + replyPdding
+    replyPosY = namePosY + (name.height * 0.8)
+    replyTextPosX = replyName.width + replyPosX + replyPdding
+    const replySize = replyTextPosX + replyText.width + indent
+
+    if (width < replySize) width = replySize
+  }
+
+  const textPosX = blockPosX + indent
+  let textPosY = indent
+  if (name) textPosY = name.height
+
+  if (replyName) textPosY += replyName.height
+
+  const canvas = createCanvas(width, height)
+  const canvasCtx = canvas.getContext('2d')
 
   const rectWidth = width - blockPosX
   const rectHeight = height
@@ -355,27 +395,26 @@ async function drawQuote (backgroundColor, avatar, nick, text, maxWidth, maxHeig
   const rectPosY = blockPosY
   const rectRoundRadius = 25
 
-  const nickPosX = blockPosX + indent
-  const nickPosY = indent
-
-  const textPosX = blockPosX + indent
-  let textPosY = indent
-  if (nick) textPosY = nick.height
-
-  const canvas = createCanvas(width, height)
-  const canvasCtx = canvas.getContext('2d')
-
   const rect = drawRoundRect(backgroundColor, rectWidth, rectHeight, rectRoundRadius, '#fff', false)
 
   if (avatar) canvasCtx.drawImage(avatar, avatarPosX, avatarPosY, avatarSize, avatarSize)
   if (rect) canvasCtx.drawImage(rect, rectPosX, rectPosY)
-  if (nick) canvasCtx.drawImage(nick, nickPosX, nickPosY)
+  if (replyName) canvasCtx.drawImage(replyName, replyPosX, replyPosY)
+  if (replyText) canvasCtx.drawImage(replyText, replyTextPosX, replyPosY)
+  if (name) canvasCtx.drawImage(name, namePosX, namePosY)
   if (text) canvasCtx.drawImage(text, textPosX, textPosY)
+
+  if (replyName) {
+    const backStyle = lightOrDark(backgroundColor)
+    let lineColor = '#fff'
+    if (backStyle === 'light') lineColor = '#000'
+    canvasCtx.drawImage(deawReplyLine(replyName.height * 0.6, lineColor), namePosX - 5, replyPosY)
+  }
 
   return canvas
 }
 
-module.exports = async (avatar, backgroundColor, userId, nick, text, entities) => {
+module.exports = async (backgroundColor, message, replyMessage, entities) => {
   const canvas = createCanvas(0, 0)
   const canvasCtx = canvas.getContext('2d')
 
@@ -390,7 +429,7 @@ module.exports = async (avatar, backgroundColor, userId, nick, text, entities) =
 
   // defsult color from tdesktop
   // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43
-  // const nickColor = [
+  // const nameColor = [
   //   '#c03d33',
   //   '#4fad2d',
   //   '#d09306',
@@ -401,8 +440,8 @@ module.exports = async (avatar, backgroundColor, userId, nick, text, entities) =
   //   '#ce671b'
   // ]
 
-  // nick light style color
-  const nickColorLight = [
+  // name light style color
+  const nameColorLight = [
     '#862a23',
     '#37791f',
     '#916604',
@@ -413,8 +452,8 @@ module.exports = async (avatar, backgroundColor, userId, nick, text, entities) =
     '#904812'
   ]
 
-  // nick black style color
-  const nickColorBlack = [
+  // name black style color
+  const nameColorBlack = [
     '#fb6169',
     '#85de85',
     '#f3bc5c',
@@ -425,18 +464,34 @@ module.exports = async (avatar, backgroundColor, userId, nick, text, entities) =
     '#faa357'
   ]
 
-  // user nick  color
+  // user name  color
   // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43
-  const nickIndex = Math.abs(userId) % 7
-  const nickMap = [0, 7, 4, 1, 6, 3, 5]
+  const nameMap = [0, 7, 4, 1, 6, 3, 5]
 
-  let nickColor = nickColorBlack[nickMap[nickIndex]]
-  if (backStyle === 'light') nickColor = nickColorLight[nickMap[nickIndex]]
+  let replyName, replyText
+  if (replyMessage.name && replyMessage.text) {
+    const replyNameIndex = Math.abs(replyMessage.chatId) % 7
+    let repltNameColor = nameColorBlack[nameMap[replyNameIndex]]
+    if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
 
-  const nickSize = 22
+    const replyFontSizee = 20
+    if (message.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyFontSizee, repltNameColor, 0, replyFontSizee, width / 2, replyFontSizee)
 
-  let nickCanvas
-  if (nick) nickCanvas = await drawMultilineText(nick, 'bold', nickSize, nickColor, 0, nickSize, width, nickSize)
+    let textColor = '#fff'
+    if (backStyle === 'light') textColor = '#000'
+
+    replyText = await drawMultilineText(replyMessage.text, null, replyFontSizee, textColor, 0, replyFontSizee, width / 2, replyFontSizee)
+  }
+
+  const nameIndex = Math.abs(message.chatId) % 7
+
+  let nameColor = nameColorBlack[nameMap[nameIndex]]
+  if (backStyle === 'light') nameColor = nameColorLight[nameMap[nameIndex]]
+
+  const nameSize = 22
+
+  let nameCanvas
+  if (message.name) nameCanvas = await drawMultilineText(message.name, 'bold', nameSize, nameColor, 0, nameSize, width, nameSize)
 
   // const minFontSize = 18
   // const maxFontSize = 28
@@ -451,16 +506,16 @@ module.exports = async (avatar, backgroundColor, userId, nick, text, entities) =
   let textColor = '#fff'
   if (backStyle === 'light') textColor = '#000'
 
-  const drawTextCanvas = drawMultilineText(text, entities, fontSize, textColor, 0, fontSize, width, height - fontSize)
+  const drawTextCanvas = await drawMultilineText(message.text, entities, fontSize, textColor, 0, fontSize, width, height - fontSize)
 
   let avatarCanvas
-  if (avatar) avatarCanvas = drawAvatar(avatar)
+  if (message.avatar) avatarCanvas = drawAvatar(message.avatar)
 
   const quote = drawQuote(
     backgroundColor,
     avatarCanvas,
-    nickCanvas, await drawTextCanvas,
-    width, height
+    replyName, replyText,
+    nameCanvas, drawTextCanvas
   )
 
   return quote
