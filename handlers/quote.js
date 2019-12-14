@@ -130,7 +130,7 @@ module.exports = async (ctx) => {
         if (text) message.text = text
 
         const replyMessage = {}
-        if (quoteMessage.reply_to_message) {
+        if (ctx.match && ctx.match[1] === '/qr' && quoteMessage.reply_to_message) {
           const repltMessageInfo = quoteMessage.reply_to_message
           replyMessage.chatId = repltMessageInfo.from.id
           if (repltMessageInfo.from.first_name) replyMessage.name = repltMessageInfo.from.first_name

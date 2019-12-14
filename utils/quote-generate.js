@@ -346,7 +346,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   const blockPosX = 75
   const blockPosY = 0
 
-  const indent = 15
+  const indent = 20
 
   const avatarPosX = 0
   const avatarPosY = 0
@@ -382,15 +382,15 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
 
     replyPosX = textPosX + replyPdding
 
-    const repltNameHeight = replyName.height * 1.1
+    const repltNameHeight = replyName.height * 1.2
     const repltTextHeight = replyText.height * 0.5
 
     replyNamePosY = namePosY + repltNameHeight
     replyTextPosY = replyNamePosY + repltTextHeight
 
-    textPosY += repltNameHeight + repltTextHeight
+    textPosY += repltNameHeight + repltTextHeight + replyPdding
 
-    height += repltNameHeight + repltTextHeight
+    height += repltNameHeight + repltTextHeight + replyPdding
   }
 
   const canvas = createCanvas(width, height)
@@ -413,7 +413,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
     const backStyle = lightOrDark(backgroundColor)
     let lineColor = '#fff'
     if (backStyle === 'light') lineColor = '#000'
-    canvasCtx.drawImage(deawReplyLine(replyName.height + replyText.height * 0.4, lineColor), textPosY * 0.85, replyNamePosY)
+    canvasCtx.drawImage(deawReplyLine(replyName.height + replyText.height * 0.4, lineColor), namePosX * 0.9, replyNamePosY)
 
     canvasCtx.drawImage(replyName, replyPosX, replyNamePosY)
     canvasCtx.drawImage(replyText, replyPosX, replyTextPosY)
