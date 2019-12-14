@@ -316,7 +316,7 @@ function deawReplyLine (height, color) {
   context.beginPath()
   context.moveTo(10, 0)
   context.lineTo(10, height)
-  context.lineWidth = 5
+  context.lineWidth = 3
   context.strokeStyle = color
   context.stroke()
 
@@ -380,10 +380,9 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   if (name) textPosY = name.height
 
   if (replyName) {
-    const replyPdding = 15
     textPosY += replyName.height
 
-    replyTextPosX = replyName.width + replyPosX + replyPdding
+    replyTextPosX = replyName.width + replyPosX
     const replySize = replyTextPosX + replyText.width + indent
 
     if (width < replySize) width = replySize
@@ -477,13 +476,13 @@ module.exports = async (backgroundColor, message, replyMessage, entities) => {
     let repltNameColor = nameColorBlack[nameMap[replyNameIndex]]
     if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
 
-    const replyFontSizee = 20
-    if (message.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyFontSizee, repltNameColor, 0, replyFontSizee, width / 2, replyFontSizee)
+    const replyFontSize = 21
+    if (message.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyFontSize, repltNameColor, 0, replyFontSize, width * 0.25, replyFontSize)
 
     let textColor = '#fff'
     if (backStyle === 'light') textColor = '#000'
 
-    replyText = await drawMultilineText(replyMessage.text, null, replyFontSizee, textColor, 0, replyFontSizee, width / 2, replyFontSizee)
+    replyText = await drawMultilineText(replyMessage.text, null, replyFontSize, textColor, 0, replyFontSize, width * 0.75, replyFontSize)
   }
 
   const nameIndex = Math.abs(message.chatId) % 7
