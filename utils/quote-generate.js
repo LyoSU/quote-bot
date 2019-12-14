@@ -346,7 +346,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   const blockPosX = 75
   const blockPosY = 0
 
-  const indent = 20
+  const indent = 15
 
   const avatarPosX = 0
   const avatarPosY = 0
