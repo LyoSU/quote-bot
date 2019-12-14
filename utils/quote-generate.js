@@ -233,6 +233,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
         }
 
         styledWord.word += '…'
+        lineWidth = lineX + canvasСtx.measureText(styledWord.word).width
         breakWrite = true
       } else {
         if (styledWord.emoji) lineWidth = textX + fontSize + (fontSize * 0.15)
@@ -356,8 +357,8 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   if (name) width = name.width
   if (width < text.width) width = text.width + indent
   if (replyName) {
-    if (width < replyName.width) width = replyName.width
-    if (width < replyText.width) width = replyText.width
+    if (width < replyName.width) width = replyName.width + indent
+    if (width < replyText.width) width = replyText.width + indent
   }
 
   let height = text.height + indent
