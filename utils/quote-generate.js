@@ -371,20 +371,23 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   let replyTextPosX = 0
 
   if (name) {
-    const replyPdding = 15
-    replyPosX = namePosX + replyPdding
-    replyPosY = namePosY + (name.height * 0.8)
-    replyTextPosX = replyName.width + replyPosX + replyPdding
-    const replySize = replyTextPosX + replyText.width + indent
-
-    if (width < replySize) width = replySize
+    replyPosX = namePosX + 15
+    replyPosY = namePosY + name.height - 10
   }
 
   const textPosX = blockPosX + indent
   let textPosY = indent
   if (name) textPosY = name.height
 
-  if (replyName) textPosY += replyName.height
+  if (replyName) {
+    const replyPdding = 15
+    textPosY += replyName.height
+
+    replyTextPosX = replyName.width + replyPosX + replyPdding
+    const replySize = replyTextPosX + replyText.width + indent
+
+    if (width < replySize) width = replySize
+  }
 
   const canvas = createCanvas(width, height)
   const canvasCtx = canvas.getContext('2d')
