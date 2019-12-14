@@ -511,13 +511,13 @@ module.exports = async (backgroundColor, message, replyMessage, entities) => {
     if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
 
     const replyNameFontSize = 14
-    if (message.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyNameFontSize, repltNameColor, 0, replyNameFontSize, width * 0.5, replyNameFontSize)
+    if (message.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyNameFontSize, repltNameColor, 0, replyNameFontSize, width * 0.9, replyNameFontSize)
 
     let textColor = '#fff'
     if (backStyle === 'light') textColor = '#000'
 
     const replyTextFontSize = 19
-    replyText = await drawMultilineText(replyMessage.text, null, replyTextFontSize, textColor, 0, replyTextFontSize, width * 0.5, replyTextFontSize)
+    replyText = await drawMultilineText(replyMessage.text, null, replyTextFontSize, textColor, 0, replyTextFontSize, width * 0.9, replyTextFontSize)
   }
 
   const quote = drawQuote(
