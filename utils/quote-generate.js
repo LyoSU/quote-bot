@@ -209,8 +209,8 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       canvasСtx.fillStyle = fontColor
     }
 
-    if (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize) {
-      while (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 2) {
+    if (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
+      while (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
         styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
         if (styledWord.word.length <= 0) break
       }
