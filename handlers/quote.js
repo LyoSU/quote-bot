@@ -30,13 +30,13 @@ module.exports = async (ctx) => {
     const quoteImages = []
 
     const startMessage = quoteMessage.message_id
-    let lastMessage = quoteMessage
+    let lastMessage
 
     for (let index = 0; index < messageCount; index++) {
       if (index > -1) {
         try {
           const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
-          if (getMessages.length > 0) {
+          if (getMessages.length > 0 && getMessages[0].message_id) {
             quoteMessage = getMessages[0]
           } else {
             if (index > 0) {
@@ -101,7 +101,7 @@ module.exports = async (ctx) => {
         else if (ctx.match && colorName) backgroundColor = `${colorName}`
 
         let diffUser = true
-        if (quoteMessage.from.name === lastMessage.from.name) diffUser = false
+        if (lastMessage && (quoteMessage.from.name === lastMessage.from.name)) diffUser = false
 
         let name
         let avatarImage
