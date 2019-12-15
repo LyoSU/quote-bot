@@ -482,8 +482,6 @@ module.exports = async (backgroundColor, message, replyMessage, entities) => {
   let nameColor = nameColorBlack[nameMap[nameIndex]]
   if (backStyle === 'light') nameColor = nameColorLight[nameMap[nameIndex]]
 
-  console.log(message)
-
   const nameSize = 22
 
   let nameCanvas
