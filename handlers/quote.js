@@ -119,7 +119,6 @@ module.exports = async (ctx) => {
 
             avatarImage = await loadCanvasImage(userPhotoUrl)
           } catch (error) {
-            console.log(error)
             avatarImage = await loadCanvasImage('./assets/404.png')
           }
         }
@@ -127,6 +126,7 @@ module.exports = async (ctx) => {
         const message = {}
 
         if (messageFrom.id) message.chatId = messageFrom.id
+        else message.chatId = 1
         if (avatarImage) message.avatar = avatarImage
         if (name) message.name = name
         if (text) message.text = text
