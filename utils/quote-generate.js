@@ -19,28 +19,72 @@ fs.readdir(fontsDir, (_err, files) => {
   })
 })
 
-async function downloadEmoji () {
-  const dbData = emojiDb.dbData
+const emojiJsonDir = 'assets/'
+const fileJsonName = 'emoji-image.json'
 
-  Object.keys(dbData).map(async (key) => {
-    const emoji = dbData[key]
+let emojiImageJson = {}
 
-    if (emoji.image) {
-      const fileName = `${emoji.code}.png`
-      if (!fs.existsSync(`${emojiDataDir}${fileName}`)) {
-        const fileUrl = `${process.env.EMOJI_DOMAIN}/thumbs/60/${emoji.image.brand}/${emoji.image.folder_id}/${emoji.image.file_name}`
-
-        const img = await loadImageFromUrl(fileUrl)
-
-        fs.writeFile(`${emojiDataDir}${fileName}`, img, (err) => {
-          if (err) return console.log(err)
-        })
-      }
-    }
-  })
+if (fs.existsSync(`${emojiJsonDir}${fileJsonName}`)) {
+  emojiImageJson = require(`../${emojiJsonDir}${fileJsonName}`)
 }
 
-downloadEmoji()
+async function downloadEmoji () {
+  const dbData = emojiDb.dbData
+  const dbArray = Object.keys(dbData)
+  const emojiPromiseArray = []
+
+  dbArray.map((key) => {
+    const emoji = dbData[key]
+
+    if (!emoji.qualified) {
+      emojiPromiseArray.push(new Promise((resolve, reject) => {
+        const fileUrl = `${process.env.EMOJI_DOMAIN}/thumbs/60/${emoji.image.brand}/${emoji.image.folder_id}/${emoji.image.file_name}`
+
+        loadImageFromUrl(fileUrl).then((img) => {
+          const result = {
+            key,
+            base64: img.toString('base64')
+          }
+
+          resolve(result)
+        })
+      }))
+    }
+  })
+
+  const emojiImages = {}
+
+  await Promise.all(emojiPromiseArray).then(values => {
+    values.map((emojiData) => {
+      emojiImages[emojiData.key] = emojiData.base64
+    })
+  })
+
+  const emojiJson = JSON.stringify(emojiImages, null, 4)
+
+  fs.writeFile(`${emojiJsonDir}${fileJsonName}`, emojiJson, (err) => {
+    if (err) return console.log(err)
+  })
+
+  // Object.keys(dbData).map(async (key) => {
+  //   const emoji = dbData[key]
+
+  //   if (emoji.image) {
+  //     const fileName = `${emoji.code}.png`
+  //     if (!fs.existsSync(`${emojiDataDir}${fileName}`)) {
+  //       const fileUrl = `${process.env.EMOJI_DOMAIN}/thumbs/60/${emoji.image.brand}/${emoji.image.folder_id}/${emoji.image.file_name}`
+
+  //       const img = await loadImageFromUrl(fileUrl)
+
+  //       fs.writeFile(`${emojiDataDir}${fileName}`, img, (err) => {
+  //         if (err) return console.log(err)
+  //       })
+  //     }
+  //   }
+  // })
+}
+
+// downloadEmoji()
 
 // https://codepen.io/andreaswik/pen/YjJqpK
 function lightOrDark (color) {
@@ -184,11 +228,15 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
     let emojiImage
 
     if (styledWord.emoji) {
-      const emojiPng = `${emojiDataDir}${styledWord.emoji.code}.png`
+      if (emojiImageJson && emojiImageJson[styledWord.emoji.code]) {
+        emojiImage = await loadCanvasImage(Buffer.from(emojiImageJson[styledWord.emoji.code], 'base64'))
+      } else {
+        const emojiPng = `${emojiDataDir}${styledWord.emoji.code}.png`
 
-      try {
-        emojiImage = await loadCanvasImage(emojiPng)
-      } catch (error) {
+        try {
+          emojiImage = await loadCanvasImage(emojiPng)
+        } catch (error) {
+        }
       }
     }
 
