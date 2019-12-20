@@ -43,7 +43,8 @@ sticker:
     btn:
       save_sticker: Save the sticker
   empty_forward: |
-   Command must be executed with a reply to a sticker, photo or file with a picture.
-  only_admin: |
-      This command can be executed only by group administrator.
+    Command must be executed with a reply to a sticker, photo or file with a picture.
+  fstik: |
       To save the sticker in your personal sticker pack, forward this message to @fStikBot
+only_admin: |
+    This command can be executed only by group administrator.

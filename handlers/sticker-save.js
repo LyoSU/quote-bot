@@ -132,10 +132,10 @@ module.exports = async (ctx) => {
         result = ctx.i18n.t('sticker.empty_forward')
       }
     } else {
-      result = ctx.i18n.t('sticker.only_admin')
+      result = ctx.i18n.t('only_admin') + ctx.i18n.t('sticker.fstik')
     }
   } else {
-    result = ctx.i18n.t('sticker.only_admin')
+    result = ctx.i18n.t('only_admin') + ctx.i18n.t('sticker.fstik')
   }
 
   if (result) {
