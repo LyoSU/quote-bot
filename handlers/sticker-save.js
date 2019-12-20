@@ -2,6 +2,10 @@ const https = require('https')
 const Stream = require('stream').Transform
 const sharp = require('sharp')
 
+const {
+  userName
+} = require('../utils')
+
 const downloadFileByUrl = (fileUrl) => new Promise((resolve, reject) => {
   const data = new Stream()
 
@@ -94,9 +98,15 @@ module.exports = async (ctx) => {
                 png_sticker: { source: stickerPNG },
                 emojis
               }).catch((error) => {
-                result = ctx.i18n.t('sticker.save.error.telegram', {
-                  error
-                })
+                if (error.description === 'Bad Request: PEER_ID_INVALID' || error.description === 'Forbidden: bot was blocked by the user') {
+                  result = ctx.i18n.t('sticker.save.error.need_creator', {
+                    creator: userName(chatAdministrator, true)
+                  })
+                } else {
+                  result = ctx.i18n.t('sticker.save.error.telegram', {
+                    error
+                  })
+                }
               })
 
               if (stickerAdd) {
