@@ -9,13 +9,21 @@ const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
 module.exports = async (ctx) => {
+  const args = ctx.message.text.split(' ')
+  args.splice(0, 1)
+
+  // for (let index = 1; index < args.length; index++) {
+  //   const arg = args[index]
+  //   console.log(isNaN(parseInt(arg)))
+  // }
+
+  const qCount = args.filter(arg => !isNaN(parseInt(arg)))[0]
+  const qReply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
+  const qColor = args.filter(arg => (arg !== qCount && arg !== qReply))[0]
+
   const maxQuoteMessage = 10
   let messageCount = 1
-  if (ctx.match && ctx.match[1] === '/qd') {
-    messageCount = 2
-    if (ctx.match[2] > 0) messageCount = ctx.match[2]
-    if (ctx.match[4] > 0) messageCount = ctx.match[4]
-  }
+  if (qCount) messageCount = qCount
 
   let quoteMessage = ctx.message.reply_to_message
   if (!quoteMessage && ctx.chat.type === 'private') {
@@ -94,11 +102,14 @@ module.exports = async (ctx) => {
         if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
 
         let colorName
-        if (ctx.match && (ctx.match[1] !== '/qd' || ctx.match[2])) colorName = ctx.match[4]
+        if (qColor) {
+          colorName = qColor
+          if (qColor[0] === '#') colorName = colorName.substr(1)
+        }
 
         if ((ctx.match && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
-        else if (ctx.match && ctx.match[3] === '#' && colorName) backgroundColor = `#${colorName}`
-        else if (ctx.match && colorName) backgroundColor = `${colorName}`
+        else if (colorName && qColor[0] === '#') backgroundColor = `#${colorName}`
+        else if (colorName) backgroundColor = `${colorName}`
 
         let diffUser = true
         if (lastMessage && (quoteMessage.from.name === lastMessage.from.name)) diffUser = false
@@ -132,13 +143,13 @@ module.exports = async (ctx) => {
         if (text) message.text = text
 
         const replyMessage = {}
-        if (ctx.match && ctx.match[1] === '/qr' && quoteMessage.reply_to_message) {
-          const repltMessageInfo = quoteMessage.reply_to_message
-          replyMessage.chatId = repltMessageInfo.from.id
-          if (repltMessageInfo.from.first_name) replyMessage.name = repltMessageInfo.from.first_name
-          if (repltMessageInfo.from.last_name) replyMessage.name += ' ' + repltMessageInfo.from.last_name
-          if (repltMessageInfo.text) replyMessage.text = repltMessageInfo.text
-          if (repltMessageInfo.caption) replyMessage.text = repltMessageInfo.caption
+        if (qReply && quoteMessage.reply_to_message) {
+          const replyMessageInfo = quoteMessage.reply_to_message
+          replyMessage.chatId = replyMessageInfo.from.id
+          if (replyMessageInfo.from.first_name) replyMessage.name = replyMessageInfo.from.first_name
+          if (replyMessageInfo.from.last_name) replyMessage.name += ' ' + replyMessageInfo.from.last_name
+          if (replyMessageInfo.text) replyMessage.text = replyMessageInfo.text
+          if (replyMessageInfo.caption) replyMessage.text = replyMessageInfo.caption
         }
 
         const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities)

@@ -9,7 +9,10 @@ const emojiJsonFile = path.resolve(__dirname, '../assets/emoji-image.json')
 
 let emojiImageJson = {}
 
-if (fs.existsSync(emojiJsonFile)) emojiImageJson = require(emojiJsonFile)
+try {
+  if (fs.existsSync(emojiJsonFile)) emojiImageJson = require(emojiJsonFile)
+} catch (error) {
+}
 
 async function downloadEmoji () {
   console.log('emoji image load start')

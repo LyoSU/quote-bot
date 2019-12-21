@@ -94,7 +94,7 @@ function getMessages (chatId, messageIds) {
 
           if (messageInfo.replyToMessageId) messagePromise.push(getMessages(chatId, [replyToMessageId]))
           Promise.all(messagePromise).then((replyMessage) => {
-            if (replyMessage && replyMessage[0] && replyMessage[0][0]) message.reply_to_message = replyMessage[0][0]
+            if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
             const chatIds = [
               messageInfo.chatId,

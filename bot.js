@@ -8,10 +8,14 @@ const {
   db
 } = require('./database')
 const {
+  onlyAdmin
+} = require('./middlewares')
+const {
   handleHelp,
   handleQuote,
   handleQuoteColor,
-  handleSave
+  handleSave,
+  handleDelete
 } = require('./handlers')
 const {
   updateUser,
@@ -76,10 +80,10 @@ bot.use(async (ctx, next) => {
   console.log('Response time %sms', ms)
 })
 
-bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleSave)
-bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, handleQuoteColor)
 bot.command('q', handleQuote)
-bot.hears(/^(\/qd|\/qr|\/q)(?:(?:(?:\s(\d+))?\s(?:(#?))([^\s]+))?)/, handleQuote)
+bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyAdmin, handleSave)
+bot.command('qd', onlyAdmin, handleDelete)
+bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, handleQuoteColor)
 
 bot.on('new_chat_members', (ctx) => {
   if (ctx.message.new_chat_member.id === ctx.botInfo.id) handleHelp(ctx)
