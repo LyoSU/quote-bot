@@ -1,0 +1,49 @@
+help: |
+  <b>Merhaba!</b>
+  Bir mesajdan alıntı oluşturmanıza yardım ederim. Sadece yapman gereken mesajı /q ile yanıtlaman.
+
+    <b>⚙️ Aktif Komutlar:</b>
+
+  <code>/help</code> — bu mesajı almak için
+  <code>/q #130f1c</code> <i>[mesajı yanıtlayarak]</i> — mesajı renkli alıntılı şekilde oluşturmak<b>#130f1c</b>
+  <code>/qd 3 blue</code> <i>[mesajı yanıtlayarak]</i> — alıntılı metnin rengini <b>mavi</b> olarak oluşturmak ve bundan sonraki alıntılardan 3 tanesini aynı formatta yapmak
+  <code>/qs 💜</code> <i>[mesajı yanıtlayarak] [sadece adminler]</i> — alıntıyı stiker/resim/dosya olarak yanıtlanan mesajı sticker packi olarak oluşturmak ve 💜 emojisi şeklinde kaydetmek
+
+    <b>❕ Ek bilgiler:</b>
+
+  ➖ Alıntı rengi bir onaltılık kod olmalıdır, örneğin <b>#ffffff</b> veya bir metin açıklaması olduğunda: <B>white</b>.
+  ➖ Benzer şekilde, bunu başka bir renk için yapabilirsiniz.
+  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
+  ➖ Emoji eklemek şart değildir
+  ➖ İlk komut <code>/qs</code> bot'un doğrudan mesajlarına yazmadan önce chat yönetici tarafından kullanılmalıdır.
+  ➖ Bot hem gruplarda hem de doğrudan mesajlarda çalışabilir.
+  ➖ Grubunuza botu eklemek için aşağıdaki düğmeyi tıklayın.
+
+  <b>👨🏻‍💻 Geliştiricinin bloğu:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
+btn:
+  add_group: Gruba Ekle
+quote:
+  empty_forward: |
+    Komutu bir mesajı yanıtlayarak kullanmalısınız.
+  set_backgroun_color: |
+    Alıntının arkaplan rengi: <code>${backgroundColor}</code>
+  sticker:
+sticker:
+  save:
+    suc: Çıkartma <a href="${link}">grubun çıkartma paketi olarak ayarlandı</a>.
+    error:
+      animated: Hareketli çıkartmalar ekleyemem.
+      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+  delete:
+    suc: Çıkartma başarılı bir şekilde  <a href="${link}">grup çıkartma paketinden silindi</a>.
+    error:
+      telegram: <b>Bu çıkartmayı kaydedemedim</b>\n<pre>${error}</pre>
+    btn:
+      save_sticker: Stickeri kaydet
+  empty_forward: |
+    Komut, bir etikete, fotoğrafa veya resme sahip bir dosyaya yanıtlayarak kullanılmalıdır.
+  fstik: |
+      Çıkartmayı kişisel çıkartma paketinize kaydetmek için bu mesajı @fstikbot'a iletin
+only_admin: |
+    Bu komut yalnızca grup yöneticisi tarafından çalıştırılabilir.
