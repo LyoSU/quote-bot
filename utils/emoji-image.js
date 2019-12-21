@@ -44,11 +44,13 @@ async function downloadEmoji () {
     })
   })
 
-  const emojiJson = JSON.stringify(emojiImageJson, null, 2)
+  if (Object.keys(emojiImageJson).length > 0) {
+    const emojiJson = JSON.stringify(emojiImageJson, null, 2)
 
-  fs.writeFile(emojiJsonFile, emojiJson, (err) => {
-    if (err) return console.log(err)
-  })
+    fs.writeFile(emojiJsonFile, emojiJson, (err) => {
+      if (err) return console.log(err)
+    })
+  }
 
   console.log('emoji image load end')
 
