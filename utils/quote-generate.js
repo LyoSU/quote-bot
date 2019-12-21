@@ -1,90 +1,30 @@
 const fs = require('fs')
 const { createCanvas, registerFont } = require('canvas')
-const loadImageFromUrl = require('./image-load-url')
 const EmojiDbLib = require('emoji-db')
 const loadCanvasImage = require('./canvas-image-load')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 
-const fontsDir = 'assets/fonts/'
-const emojiDataDir = 'assets/emojis/'
+function loadFont () {
+  console.log('font load start')
+  const fontsDir = 'assets/fonts/'
 
-fs.readdir(fontsDir, (_err, files) => {
-  files.forEach((file) => {
-    try {
-      registerFont(`${fontsDir}${file}`, { family: file })
-    } catch (error) {
-      console.error(`${fontsDir}${file} not font file`)
-    }
-  })
-})
-
-const emojiJsonDir = 'assets/'
-const fileJsonName = 'emoji-image.json'
-
-let emojiImageJson = {}
-
-if (fs.existsSync(`${emojiJsonDir}${fileJsonName}`)) {
-  emojiImageJson = require(`../${emojiJsonDir}${fileJsonName}`)
-}
-
-async function downloadEmoji () {
-  const dbData = emojiDb.dbData
-  const dbArray = Object.keys(dbData)
-  const emojiPromiseArray = []
-
-  dbArray.map((key) => {
-    const emoji = dbData[key]
-
-    if (!emoji.qualified) {
-      emojiPromiseArray.push(new Promise((resolve, reject) => {
-        const fileUrl = `${process.env.EMOJI_DOMAIN}/thumbs/60/${emoji.image.brand}/${emoji.image.folder_id}/${emoji.image.file_name}`
-
-        loadImageFromUrl(fileUrl).then((img) => {
-          const result = {
-            key,
-            base64: img.toString('base64')
-          }
-
-          resolve(result)
-        })
-      }))
-    }
-  })
-
-  const emojiImages = {}
-
-  await Promise.all(emojiPromiseArray).then(values => {
-    values.map((emojiData) => {
-      emojiImages[emojiData.key] = emojiData.base64
+  fs.readdir(fontsDir, (_err, files) => {
+    files.forEach((file) => {
+      try {
+        registerFont(`${fontsDir}${file}`, { family: file })
+      } catch (error) {
+        console.error(`${fontsDir}${file} not font file`)
+      }
     })
   })
 
-  const emojiJson = JSON.stringify(emojiImages, null, 4)
-
-  fs.writeFile(`${emojiJsonDir}${fileJsonName}`, emojiJson, (err) => {
-    if (err) return console.log(err)
-  })
-
-  // Object.keys(dbData).map(async (key) => {
-  //   const emoji = dbData[key]
-
-  //   if (emoji.image) {
-  //     const fileName = `${emoji.code}.png`
-  //     if (!fs.existsSync(`${emojiDataDir}${fileName}`)) {
-  //       const fileUrl = `${process.env.EMOJI_DOMAIN}/thumbs/60/${emoji.image.brand}/${emoji.image.folder_id}/${emoji.image.file_name}`
-
-  //       const img = await loadImageFromUrl(fileUrl)
-
-  //       fs.writeFile(`${emojiDataDir}${fileName}`, img, (err) => {
-  //         if (err) return console.log(err)
-  //       })
-  //     }
-  //   }
-  // })
+  console.log('font load end')
 }
 
-// downloadEmoji()
+loadFont()
+
+const { emojiImageJson } = require('../helpers/')
 
 // https://codepen.io/andreaswik/pen/YjJqpK
 function lightOrDark (color) {

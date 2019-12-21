@@ -78,6 +78,7 @@ bot.use(async (ctx, next) => {
 
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleSave)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, handleQuoteColor)
+bot.command('q', handleQuote)
 bot.hears(/^(\/qd|\/qr|\/q)(?:(?:(?:\s(\d+))?\s(?:(#?))([^\s]+))?)/, handleQuote)
 
 bot.on('new_chat_members', (ctx) => {
