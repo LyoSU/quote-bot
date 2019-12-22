@@ -185,7 +185,15 @@ module.exports = async (ctx) => {
           if (replyMessageInfo.caption) replyMessage.text = replyMessageInfo.caption
         }
 
-        const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities)
+        let width = 512
+        let height = 512
+
+        if (qPng || qImg) {
+          width *= 1.5
+          height *= 5
+        }
+
+        const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities, width, height)
 
         quoteImages.push(canvasQuote)
         lastMessage = quoteMessage
