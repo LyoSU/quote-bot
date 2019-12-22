@@ -233,7 +233,10 @@ module.exports = async (ctx) => {
 
         const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
 
-        canvasPicCtx.drawImage(canvasPatternImage, 0, 0)
+        const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
+        canvasPicCtx.fillStyle = pattern
+        canvasPicCtx.fillRect(0, 0, canvasPic.width, canvasPic.height)
+
         canvasPicCtx.drawImage(canvasImage, padding, padding)
 
         const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
