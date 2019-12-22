@@ -8,6 +8,44 @@ const {
 const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
+const { Telegram } = require('telegraf')
+const LRU = require('lru-cache')
+
+const telegram = new Telegram(process.env.BOT_TOKEN)
+const avatarCache = new LRU({
+  max: 20,
+  maxAge: 1000 * 60 * 5
+})
+
+const downloadAvatarImage = async (userId, username) => {
+  let avatarImage
+
+  const avatarImageCache = avatarCache.get(userId)
+
+  if (avatarImageCache) {
+    avatarImage = avatarImageCache
+  } else {
+    try {
+      let userPhoto
+      let userPhotoUrl = './assets/404.png'
+
+      const getChat = await telegram.getChat(userId)
+      if (getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
+
+      if (userPhoto) userPhotoUrl = await telegram.getFileLink(userPhoto)
+      else if (username) userPhotoUrl = `https://telega.one/i/userpic/320/${username}.jpg`
+
+      avatarImage = await loadCanvasImage(userPhotoUrl)
+
+      avatarCache.set(userId, avatarImage)
+    } catch (error) {
+      avatarImage = await loadCanvasImage('./assets/404.png')
+    }
+  }
+
+  return avatarImage
+}
+
 module.exports = async (ctx) => {
   let qCount, qReply, qPng, qImg, qColor
 
@@ -124,20 +162,7 @@ module.exports = async (ctx) => {
         let avatarImage
         if (diffUser) {
           name = quoteMessages[index].from.name
-          try {
-            let userPhoto
-            let userPhotoUrl = './assets/404.png'
-
-            const getChat = await ctx.telegram.getChat(messageFrom.id)
-            if (getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
-
-            if (userPhoto) userPhotoUrl = await ctx.telegram.getFileLink(userPhoto)
-            else if (messageFrom.username) userPhotoUrl = `https://telega.one/i/userpic/320/${messageFrom.username}.jpg`
-
-            avatarImage = await loadCanvasImage(userPhotoUrl)
-          } catch (error) {
-            avatarImage = await loadCanvasImage('./assets/404.png')
-          }
+          avatarImage = await downloadAvatarImage(messageFrom.id, messageFrom.username)
         }
 
         const message = {}
