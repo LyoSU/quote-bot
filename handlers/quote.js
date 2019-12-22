@@ -101,6 +101,8 @@ module.exports = async (ctx) => {
         } catch (error) {
           quoteMessage = null
         }
+
+        if (ctx.chat.type === 'private' && !quoteMessage) break
       }
 
       if (quoteMessage && (quoteMessage.text || quoteMessage.caption)) {
