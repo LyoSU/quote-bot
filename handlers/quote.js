@@ -9,7 +9,7 @@ const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
 module.exports = async (ctx) => {
-  let qCount, qReply, qColor
+  let qCount, qReply, qPng, qImg, qColor
 
   if (ctx.message.text.match(/\/q/)) {
     const args = ctx.message.text.split(' ')
@@ -22,10 +22,12 @@ module.exports = async (ctx) => {
 
     qCount = args.filter(arg => !isNaN(parseInt(arg)))[0]
     qReply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
-    qColor = args.filter(arg => (arg !== qCount && arg !== qReply))[0]
+    qPng = args.filter(arg => ['p', 'png'].includes(arg))[0]
+    qImg = args.filter(arg => ['i', 'img'].includes(arg))[0]
+    qColor = args.filter(arg => (arg !== qCount && arg !== qReply && arg !== qPng && arg !== qImg))[0]
   }
 
-  const maxQuoteMessage = 10
+  const maxQuoteMessage = 30
   let messageCount = 1
   if (qCount) messageCount = qCount
 
@@ -191,30 +193,67 @@ module.exports = async (ctx) => {
         canvasQuote = quoteImages[0]
       }
 
-      const downPadding = 75
-      const maxWidth = 512
-      const maxHeight = 512
+      if (!qImg && canvasQuote.height > 1024) qPng = true
 
-      const imageQuoteSharp = sharp(canvasQuote.toBuffer())
+      if (qPng || qImg) {
+        const padding = 25
 
-      if (canvasQuote.height > canvasQuote.width) imageQuoteSharp.resize({ height: maxHeight })
-      else imageQuoteSharp.resize({ width: maxWidth })
+        const canvasImage = await loadCanvasImage(canvasQuote.toBuffer())
 
-      const canvasImage = await loadCanvasImage(await imageQuoteSharp.toBuffer())
+        const canvasPic = createCanvas(canvasImage.width + padding * 2, canvasImage.height + padding * 2)
+        const canvasPicCtx = canvasPic.getContext('2d')
 
-      const canvasPadding = createCanvas(canvasImage.width, canvasImage.height + downPadding)
-      const canvasPaddingCtx = canvasPadding.getContext('2d')
+        canvasPicCtx.fillStyle = '#252839'
+        canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
 
-      canvasPaddingCtx.drawImage(canvasImage, 0, 0)
+        const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
 
-      const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
+        canvasPicCtx.drawImage(canvasPatternImage, 0, 0)
+        canvasPicCtx.drawImage(canvasImage, padding, padding)
 
-      ctx.replyWithDocument({
-        source: quoteImage,
-        filename: 'sticker.webp'
-      }, {
-        reply_to_message_id: ctx.message.message_id
-      })
+        const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
+
+        if (qPng) {
+          ctx.replyWithDocument({
+            source: quoteImage,
+            filename: 'sticker.png'
+          }, {
+            reply_to_message_id: ctx.message.message_id
+          })
+        } else {
+          ctx.replyWithPhoto({
+            source: quoteImage,
+            filename: 'sticker.png'
+          }, {
+            reply_to_message_id: ctx.message.message_id
+          })
+        }
+      } else {
+        const downPadding = 75
+        const maxWidth = 512
+        const maxHeight = 512
+
+        const imageQuoteSharp = sharp(canvasQuote.toBuffer())
+
+        if (canvasQuote.height > canvasQuote.width) imageQuoteSharp.resize({ height: maxHeight })
+        else imageQuoteSharp.resize({ width: maxWidth })
+
+        const canvasImage = await loadCanvasImage(await imageQuoteSharp.toBuffer())
+
+        const canvasPadding = createCanvas(canvasImage.width, canvasImage.height + downPadding)
+        const canvasPaddingCtx = canvasPadding.getContext('2d')
+
+        canvasPaddingCtx.drawImage(canvasImage, 0, 0)
+
+        const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
+
+        ctx.replyWithDocument({
+          source: quoteImage,
+          filename: 'sticker.webp'
+        }, {
+          reply_to_message_id: ctx.message.message_id
+        })
+      }
     } else {
       ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
         reply_to_message_id: ctx.message.message_id
