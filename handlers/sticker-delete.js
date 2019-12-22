@@ -18,7 +18,11 @@ module.exports = async (ctx) => {
           link: `${stickerLinkPrefix}${ctx.group.info.stickerSet.name}`
         })
       }
+    } else {
+      result = ctx.i18n.t('sticker.empty_forward')
     }
+  } else {
+    result = ctx.i18n.t('sticker.empty_forward')
   }
 
   if (result) {

@@ -8,6 +8,7 @@ const {
   db
 } = require('./database')
 const {
+  onlyGroup,
   onlyAdmin
 } = require('./middlewares')
 const {
@@ -81,9 +82,9 @@ bot.use(async (ctx, next) => {
 })
 
 bot.command('q', handleQuote)
-bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyAdmin, handleSave)
-bot.command('qd', onlyAdmin, handleDelete)
-bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, handleQuoteColor)
+bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
+bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
+bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleQuoteColor)
 
 bot.on('new_chat_members', (ctx) => {
   if (ctx.message.new_chat_member.id === ctx.botInfo.id) handleHelp(ctx)
@@ -92,7 +93,7 @@ bot.on('new_chat_members', (ctx) => {
 bot.start(handleHelp)
 bot.command('help', handleHelp)
 
-bot.on('message', (ctx, next) => {
+bot.on('text', (ctx, next) => {
   if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 100)
   else next()
 })

@@ -12,5 +12,7 @@ module.exports = async (ctx, next) => {
         reply_to_message_id: ctx.message.message_id
       })
     }
+  } else {
+    next()
   }
 }

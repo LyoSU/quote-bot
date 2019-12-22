@@ -9,17 +9,21 @@ const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
 module.exports = async (ctx) => {
-  const args = ctx.message.text.split(' ')
-  args.splice(0, 1)
+  let qCount, qReply, qColor
 
-  // for (let index = 1; index < args.length; index++) {
-  //   const arg = args[index]
-  //   console.log(isNaN(parseInt(arg)))
-  // }
+  if (ctx.message.text.match(/\/q/)) {
+    const args = ctx.message.text.split(' ')
+    args.splice(0, 1)
 
-  const qCount = args.filter(arg => !isNaN(parseInt(arg)))[0]
-  const qReply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
-  const qColor = args.filter(arg => (arg !== qCount && arg !== qReply))[0]
+    // for (let index = 1; index < args.length; index++) {
+    //   const arg = args[index]
+    //   console.log(isNaN(parseInt(arg)))
+    // }
+
+    qCount = args.filter(arg => !isNaN(parseInt(arg)))[0]
+    qReply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
+    qColor = args.filter(arg => (arg !== qCount && arg !== qReply))[0]
+  }
 
   const maxQuoteMessage = 10
   let messageCount = 1
