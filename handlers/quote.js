@@ -29,8 +29,8 @@ const downloadAvatarImage = async (userId, username) => {
       let userPhoto
       let userPhotoUrl = './assets/404.png'
 
-      const getChat = await telegram.getChat(userId)
-      if (getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
+      const getChat = await telegram.getChat(userId).catch(() => {})
+      if (getChat && getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
 
       if (userPhoto) userPhotoUrl = await telegram.getFileLink(userPhoto)
       else if (username) userPhotoUrl = `https://telega.one/i/userpic/320/${username}.jpg`
@@ -136,6 +136,25 @@ module.exports = async (ctx) => {
           }
         }
 
+        // if (messageFrom.id === 0) {
+        //   let sarchForwardName
+
+        //   sarchForwardName = await ctx.db.User.findOne({
+        //     $expr: { $eq: [messageFrom.name, { $concat: ['$first_name', ' ', '$last_name'] }] }
+        //   })
+
+        //   if (!sarchForwardName) {
+        //     sarchForwardName = await ctx.db.User.findOne({
+        //       first_name: messageFrom.name
+        //     })
+        //   }
+
+        //   if (sarchForwardName) {
+        //     messageFrom.id = sarchForwardName.telegram_id
+        //     messageFrom.username = sarchForwardName.username || null
+        //   }
+        // }
+
         if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
         if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
@@ -170,7 +189,7 @@ module.exports = async (ctx) => {
         const message = {}
 
         if (messageFrom.id) message.chatId = messageFrom.id
-        else message.chatId = 1
+        else message.chatId = 0
         if (avatarImage) message.avatar = avatarImage
         if (name) message.name = name
         if (text) message.text = text
@@ -178,7 +197,8 @@ module.exports = async (ctx) => {
         const replyMessage = {}
         if (qReply && quoteMessage.reply_to_message) {
           const replyMessageInfo = quoteMessage.reply_to_message
-          replyMessage.chatId = replyMessageInfo.from.id
+          if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.id
+          else replyMessage.chatId = 0
           if (replyMessageInfo.from.first_name) replyMessage.name = replyMessageInfo.from.first_name
           if (replyMessageInfo.from.last_name) replyMessage.name += ' ' + replyMessageInfo.from.last_name
           if (replyMessageInfo.text) replyMessage.text = replyMessageInfo.text
@@ -241,7 +261,8 @@ module.exports = async (ctx) => {
         canvasPicCtx.fillStyle = '#252839'
         canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
 
-        const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
+        // const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
+        const canvasPatternImage = await loadCanvasImage('./assets/ChatWallpaperBuiltin0_ny.jpg')
 
         const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
         canvasPicCtx.fillStyle = pattern
