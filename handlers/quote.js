@@ -46,6 +46,32 @@ const downloadAvatarImage = async (userId, username) => {
   return avatarImage
 }
 
+// https://codepen.io/jreyesgs/pen/yadmge
+const addLight = (color, amount) => {
+  const cc = parseInt(color, 16) + amount
+  let c = (cc > 255) ? 255 : (cc)
+  c = (c.toString(16).length > 1) ? c.toString(16) : `0${c.toString(16)}`
+  return c
+}
+
+const lighten = (color, amount) => {
+  color = (color.indexOf('#') >= 0) ? color.substring(1, color.length) : color
+  amount = parseInt((255 * amount) / 100)
+  color = `#${addLight(color.substring(0, 2), amount)}${addLight(color.substring(2, 4), amount)}${addLight(color.substring(4, 6), amount)}`
+
+  return color
+}
+
+const normalizeColor = (color) => {
+  const canvas = createCanvas(0, 0)
+  const canvasCtx = canvas.getContext('2d')
+
+  canvasCtx.fillStyle = color
+  color = canvasCtx.fillStyle
+
+  return color
+}
+
 module.exports = async (ctx) => {
   let qCount, qReply, qPng, qImg, qColor
 
@@ -64,6 +90,24 @@ module.exports = async (ctx) => {
     qImg = args.filter(arg => ['i', 'img'].includes(arg))[0]
     qColor = args.filter(arg => (arg !== qCount && arg !== qReply && arg !== qPng && arg !== qImg))[0]
   }
+
+  // set background color
+  let backgroundColor = '#130f1c'
+
+  if (ctx.session.userInfo.settings.quote.backgroundColor) backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
+  if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
+
+  let colorName
+  if (qColor) {
+    colorName = qColor
+    if (qColor[0] === '#') colorName = colorName.substr(1)
+  }
+
+  if ((ctx.match && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
+  else if (colorName && qColor[0] === '#') backgroundColor = `#${colorName}`
+  else if (colorName) backgroundColor = `${colorName}`
+
+  backgroundColor = normalizeColor(backgroundColor)
 
   const maxQuoteMessage = 30
   let messageCount = 1
@@ -160,22 +204,6 @@ module.exports = async (ctx) => {
 
         quoteMessage.from = messageFrom
 
-        // ser background color
-        let backgroundColor = '#130f1c'
-
-        if (ctx.session.userInfo.settings.quote.backgroundColor) backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
-        if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
-
-        let colorName
-        if (qColor) {
-          colorName = qColor
-          if (qColor[0] === '#') colorName = colorName.substr(1)
-        }
-
-        if ((ctx.match && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
-        else if (colorName && qColor[0] === '#') backgroundColor = `#${colorName}`
-        else if (colorName) backgroundColor = `${colorName}`
-
         let diffUser = true
         if (lastMessage && (quoteMessage.from.name === lastMessage.from.name)) diffUser = false
 
@@ -258,11 +286,11 @@ module.exports = async (ctx) => {
         const canvasPic = createCanvas(canvasImage.width + padding * 2, canvasImage.height + padding * 2)
         const canvasPicCtx = canvasPic.getContext('2d')
 
-        canvasPicCtx.fillStyle = '#252839'
+        canvasPicCtx.fillStyle = lighten(backgroundColor, 20)
         canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
 
-        // const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
-        const canvasPatternImage = await loadCanvasImage('./assets/ChatWallpaperBuiltin0_ny.jpg')
+        const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
+        // const canvasPatternImage = await loadCanvasImage('./assets/ChatWallpaperBuiltin0_ny.jpg')
 
         const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
         canvasPicCtx.fillStyle = pattern
