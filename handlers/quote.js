@@ -289,8 +289,8 @@ module.exports = async (ctx) => {
         canvasPicCtx.fillStyle = lighten(backgroundColor, 20)
         canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
 
-        const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
-        // const canvasPatternImage = await loadCanvasImage('./assets/ChatWallpaperBuiltin0_ny.jpg')
+        // const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
+        const canvasPatternImage = await loadCanvasImage('./assets/pattern_ny.png')
 
         const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
         canvasPicCtx.fillStyle = pattern
