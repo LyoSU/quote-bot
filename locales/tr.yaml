@@ -1,0 +1,62 @@
+help: |
+  <b>Merhaba!</b>
+  Bir mesajı alıntı oluşturup size gönderirim.
+  Bunu yapabilmem için bir mesajı /q komutu ile alıntılayın.
+
+    <b>⚙️ Kullanılabilir Komutlar:</b>
+
+  <code>/help</code> — Bu mesajı gösterir
+  
+  <code>/q #130f1c</code> <i>[bir mesaja cevaplayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#130f1c</b>
+  <code>/q 3</code> <i>[bir mesaja cevaplayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
+  <code>/q r</code> <i>[bir mesaja cevaplayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
+  <code>/q white r 3</code> <i>[bir mesaja cevaplayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
+    
+  <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
+  
+  <code>/qs 💜</code> <i>[bir mesaja cevaplayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
+  <code>/qd</code> <i>[bir mesaja cevaplayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
+    
+    <b>❕ Ekstra Bilgiler:</b>
+
+  ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
+  ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
+  ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
+  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
+  ➖ Emoji belirtilmesi zorunlu değildir.
+  ➖ Initial command <code>/qs</code> must be executed by chat creator, before that writing to bot's direct messages.
+  ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
+  ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
+  ➖ Argümanların sırası önemli değildir.
+
+  <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
+btn:
+  add_group: Gruba Ekle
+quote:
+  empty_forward: |
+    Komut, bir mesaja yanıt vererek kullanılmalıdır.
+  set_backgroun_color: |
+    Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
+  sticker:
+sticker:
+  save:
+    suc: Çıkartma başarıyla pakete eklendi <a href="${link}">Grup Çıkartma Paketi</a>.
+    error:
+      animated: Animasyonlu bir çıkartma ekleyemiyorum.
+      need_creator: <b>Bu çıkartmayı kaydedemedim..</b>\n${creator} bana özel mesajlarda herhangi bir mesaj yazmalı.
+      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+  delete:
+    suc: Çıkartma, başarıyla çıkartma paketinden kaldırıldı <a href="${link}">Grup Çıkartma Paketi</a>.
+    error:
+      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+    btn:
+      save_sticker: Çıkartmayı kaydet
+  empty_forward: |
+    Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
+  fstik: |
+      Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+only_admin: |
+    Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
+only_group: |
+    Bu komut yalnızca gruplar içerisinde kullanılabilir.
