@@ -95,13 +95,15 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
 
       if (entity.type === 'bold') style.push('bold')
       if (entity.type === 'italic') style.push('italic')
+      if (entity.type === 'strikethrough') style.push('strikethrough')
+      if (entity.type === 'underline') style.push('underline')
       if (['pre', 'code'].includes(entity.type)) {
         style.push('monospace')
       }
       if (['mention', 'text_mention', 'hashtag', 'email', 'phone_number', 'bot_command', 'url', 'text_link'].includes(entity.type)) style.push('mention')
 
       for (let charIndex = entity.offset; charIndex < entity.offset + entity.length; charIndex++) {
-        styledChar[charIndex].style = style
+        styledChar[charIndex].style = styledChar[charIndex].style.concat(style)
       }
     }
   }
@@ -180,22 +182,30 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       }
     }
 
+    let fontType = ''
+    let fontName = 'OpenSans'
+    let fillStyle = fontColor
+
     if (styledWord.style.includes('bold')) {
-      canvasСtx.font = `bold ${fontSize}px OpenSans`
-      canvasСtx.fillStyle = fontColor
-    } else if (styledWord.style.includes('italic')) {
-      canvasСtx.font = `italic ${fontSize}px OpenSans`
-      canvasСtx.fillStyle = fontColor
-    } else if (styledWord.style.includes('monospace')) {
-      canvasСtx.font = `${fontSize}px monospace`
-      canvasСtx.fillStyle = '#5887a7'
-    } else if (styledWord.style.includes('mention')) {
-      canvasСtx.font = `${fontSize}px mention`
-      canvasСtx.fillStyle = '#6ab7ec'
-    } else {
-      canvasСtx.font = `${fontSize}px OpenSans`
-      canvasСtx.fillStyle = fontColor
+      fontType += 'bold '
     }
+    if (styledWord.style.includes('italic')) {
+      fontType += 'italic '
+    }
+    if (styledWord.style.includes('monospace')) {
+      fontName = 'monospace'
+      fillStyle = '#5887a7'
+    }
+    if (styledWord.style.includes('mention')) {
+      fillStyle = '#6ab7ec'
+    }
+    // else {
+    //   canvasСtx.font = `${fontSize}px OpenSans`
+    //   canvasСtx.fillStyle = fontColor
+    // }
+
+    canvasСtx.font = `${fontType} ${fontSize}px ${fontName}`
+    canvasСtx.fillStyle = fillStyle
 
     if (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
       while (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
@@ -238,6 +248,9 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       canvasСtx.drawImage(emojiImage, lineX, lineY - fontSize + (fontSize * 0.15), fontSize, fontSize)
     } else {
       canvasСtx.fillText(styledWord.word, lineX, lineY)
+
+      if (styledWord.style.includes('strikethrough')) canvasСtx.fillRect(lineX, lineY - fontSize / 2.8, canvasСtx.measureText(styledWord.word).width, 2)
+      if (styledWord.style.includes('underline')) canvasСtx.fillRect(lineX, lineY + 2, canvasСtx.measureText(styledWord.word).width, 2)
     }
 
     lineX = lineWidth
