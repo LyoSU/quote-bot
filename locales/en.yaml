@@ -7,13 +7,20 @@ help: |
 
   <code>/help</code> — get this text
   <code>/q #130f1c</code> <i>[in reply to a message]</i> — creates a quote from a message with color<b>#130f1c</b>
-  <code>/qd 3 blue</code> <i>[in reply to a message]</i> — creates a quote with color <b>blue</b> starting from the first and down to last 3 messages
+  <code>/q 3</code> <i>[in reply to a message]</i> — creates a quote from <b>the reply and down from it to 3 messages</b>
+  <code>/q r</code> <i>[in reply to a message]</i> — creates a quote with reply
+  <code>/q white r 3</code> <i>[in reply to a message]</i> — creates a quote with 3 messages with color <b>white</b> with reply
+  
+  <code>/qcolor green</code> — make color <b>green</b> default
+
   <code>/qs 💜</code> <i>[in reply to a message] [only for administrators]</i> — saves a sticker/photo/document with a photo into a group sticker pack with 💜 emoji
+  <code>/qd</code> <i>[in reply to a message] [only for administrators]</i> — delete sticker from group sticker pack
 
     <b>❕ Additional information:</b>
 
-  ➖ The quote color must be a HEX code, for instance <b>#ffffff</b>, or when there is a text description: <b>white</b>.
-  ➖ Analogously, you can do that with any other color.
+  ➖ Arguments order is not important
+  ➖ The quote color must be a HEX code, for instance <b>#ffffff</b>, or you can specify it by name: <b>white</b>.
+  ➖ For a random color, you can write <b>random</b> as color
   ➖ Any emoji for saving the sticker can be used.
   ➖ Emoji specification is not necessary.
   ➖ Initial command <code>/qs</code> must be executed by chat creator, before that writing to bot's direct messages.
@@ -35,6 +42,7 @@ sticker:
     suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
     error:
       animated: I can't add an animated sticker.
+      need_creator: <b>I can't save this sticker.</b>\n${creator} must write me any message in private messages.
       telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
   delete:
     suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
@@ -48,3 +56,5 @@ sticker:
       To save the sticker in your personal sticker pack, forward this message to @fStikBot
 only_admin: |
     This command can be executed only by group administrator.
+only_group: |
+    This command can be executed only in groups.
