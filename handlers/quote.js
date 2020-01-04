@@ -129,7 +129,7 @@ module.exports = async (ctx) => {
     let lastMessage
 
     for (let index = 0; index < messageCount; index++) {
-      if (index > -1 && qReply || index > 0) {
+      if (index > -1) {
         try {
           const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
           if (getMessages.length > 0 && getMessages[0].message_id) {

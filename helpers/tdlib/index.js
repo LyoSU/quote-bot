@@ -149,6 +149,8 @@ function getMessages (chatId, messageIds) {
                     textEntityTypeEmailAddress: 'email',
                     textEntityTypeBold: 'bold',
                     textEntityTypeItalic: 'italic',
+                    textEntityTypeUnderline: 'underline',
+                    textEntityTypeStrikethrough: 'strikethrough',
                     textEntityTypeCode: 'code',
                     textEntityTypePre: 'pre',
                     textEntityTypePreCode: 'pre_code',
