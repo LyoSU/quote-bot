@@ -10,7 +10,7 @@ help: |
   <code>/q 3</code> <i>[in reply to a message]</i> — creates a quote from <b>the reply and down from it to 3 messages</b>
   <code>/q r</code> <i>[in reply to a message]</i> — creates a quote with reply
   <code>/q white r 3</code> <i>[in reply to a message]</i> — creates a quote with 3 messages with color <b>white</b> with reply
-  
+
   <code>/qcolor green</code> — make color <b>green</b> default
 
   <code>/qs 💜</code> <i>[in reply to a message] [only for administrators]</i> — saves a sticker/photo/document with a photo into a group sticker pack with 💜 emoji
@@ -54,6 +54,11 @@ sticker:
     Command must be executed with a reply to a sticker, photo or file with a picture.
   fstik: |
       To save the sticker in your personal sticker pack, forward this message to @fStikBot
+rate:
+  rated: |
+    You ${rateName} this.
+  back: |
+    You took your vote back.
 only_admin: |
     This command can be executed only by group administrator.
 only_group: |

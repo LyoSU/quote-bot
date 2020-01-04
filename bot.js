@@ -14,9 +14,13 @@ const {
 const {
   handleHelp,
   handleQuote,
+  handleRandom,
   handleQuoteColor,
   handleSave,
-  handleDelete
+  handleDelete,
+  handleRate,
+  handleSettingsRate,
+  handleLanguage
 } = require('./handlers')
 const {
   updateUser,
@@ -81,10 +85,17 @@ bot.use(async (ctx, next) => {
   console.log('Response time %sms', ms)
 })
 
+bot.command('rand', onlyGroup, rateLimit({
+  window: 1000 * 30,
+  limit: 3
+}), handleRandom)
 bot.command('q', handleQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleQuoteColor)
+
+bot.hears(/^!rate/, onlyGroup, onlyAdmin, handleSettingsRate)
+bot.action(/^(rate):(👍|👎)/, handleRate)
 
 bot.on('new_chat_members', (ctx) => {
   if (ctx.message.new_chat_member.id === ctx.botInfo.id) handleHelp(ctx)
@@ -92,6 +103,9 @@ bot.on('new_chat_members', (ctx) => {
 
 bot.start(handleHelp)
 bot.command('help', handleHelp)
+
+bot.command('lang', handleLanguage)
+bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('text', (ctx, next) => {
   if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 100)

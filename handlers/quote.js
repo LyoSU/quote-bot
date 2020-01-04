@@ -301,7 +301,7 @@ module.exports = async (ctx) => {
         const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
 
         if (qPng) {
-          ctx.replyWithDocument({
+          await ctx.replyWithDocument({
             source: quoteImage,
             filename: 'sticker.png'
           }, {
@@ -334,12 +334,49 @@ module.exports = async (ctx) => {
 
         const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
 
-        ctx.replyWithDocument({
+        let reply_markup = {}
+
+        if (ctx.group && ctx.group.info.settings.rate) {
+          reply_markup = {
+            inline_keyboard: [
+              [
+                { text: '👍', callback_data: 'rate:👍' },
+                { text: '👎', callback_data: 'rate:👎' }
+              ]
+            ]
+          }
+        }
+
+        const sendResult = await ctx.replyWithDocument({
           source: quoteImage,
           filename: 'sticker.webp'
         }, {
-          reply_to_message_id: ctx.message.message_id
+          reply_to_message_id: ctx.message.message_id,
+          reply_markup
         })
+
+        if (ctx.group && ctx.group.info.settings.rate) {
+          const quoteDb = new ctx.db.Quote()
+          quoteDb.group = ctx.group.info
+          quoteDb.user = ctx.session.userInfo
+          quoteDb.file_id = sendResult.sticker.file_id
+          quoteDb.file_unique_id = sendResult.sticker.file_unique_id
+          quoteDb.rate = {
+            votes: [
+              {
+                name: '👍',
+                vote: []
+              },
+              {
+                name: '👎',
+                vote: []
+              }
+            ],
+            score: 0
+          }
+
+          await quoteDb.save()
+        }
       }
     } else {
       ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {

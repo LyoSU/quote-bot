@@ -17,6 +17,10 @@ const groupSchema = mongoose.Schema({
         type: String,
         default: '#130f1c'
       }
+    },
+    rate: {
+      type: Boolean,
+      default: false
     }
   },
   stickerSet: {
