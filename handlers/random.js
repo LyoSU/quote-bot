@@ -1,7 +1,14 @@
 module.exports = async (ctx) => {
   const randomQuote = await ctx.db.Quote.aggregate(
     [
-      { $match: { 'rate.score': { $gte: 0 } } },
+      {
+        $match: {
+          $and: [
+            { group: ctx.group.info._id },
+            { 'rate.score': { $gte: 0 } }
+          ]
+        }
+      },
       { $sample: { size: 1 } }
     ]
   )
