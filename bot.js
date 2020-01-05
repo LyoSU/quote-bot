@@ -87,7 +87,7 @@ bot.use(async (ctx, next) => {
   console.log('Response time %sms', ms)
 })
 
-bot.command('qtop', onlyGroup,, handleTopQuote)
+bot.command('qtop', onlyGroup, handleTopQuote)
 bot.command('qrand', onlyGroup, rateLimit({
   window: 1000 * 30,
   limit: 3,
