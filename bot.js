@@ -14,8 +14,10 @@ const {
 const {
   handleHelp,
   handleQuote,
-  handleRandom,
-  handleQuoteColor,
+  handleGetQuote,
+  handleTopQuote,
+  handleRandomQuote,
+  handleColorQuote,
   handleSave,
   handleDelete,
   handleRate,
@@ -85,16 +87,21 @@ bot.use(async (ctx, next) => {
   console.log('Response time %sms', ms)
 })
 
-bot.command('rand', onlyGroup, rateLimit({
+bot.command('qtop', handleTopQuote)
+bot.command('qrand', onlyGroup, rateLimit({
   window: 1000 * 30,
-  limit: 3
-}), handleRandom)
+  limit: 3,
+  keyGenerator: (ctx) => {
+    return ctx.chat.id
+  }
+}), handleRandomQuote)
 bot.command('q', handleQuote)
+bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
-bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleQuoteColor)
+bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 
-bot.hears(/^!rate/, onlyGroup, onlyAdmin, handleSettingsRate)
+bot.hears(/^!qrate/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 
 bot.on('new_chat_members', (ctx) => {

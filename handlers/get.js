@@ -1,18 +1,7 @@
 module.exports = async (ctx) => {
-  const randomQuote = await ctx.db.Quote.aggregate(
-    [
-      {
-        $match: {
-          $and: [
-            { group: ctx.group.info._id },
-            { 'rate.score': { $gt: 0 } }
-          ]
-        }
-      },
-      { $sample: { size: 1 } }
-    ]
-  )
-  const quote = randomQuote[0]
+  const quoteId = ctx.match[1].split('@')[0]
+
+  const quote = await ctx.db.Quote.findById(quoteId).catch(() => {})
 
   if (quote) {
     ctx.replyWithDocument(quote.file_id, {
@@ -24,10 +13,6 @@ module.exports = async (ctx) => {
           ]
         ]
       },
-      reply_to_message_id: ctx.message.message_id
-    })
-  } else {
-    ctx.replyWithHTML(ctx.i18n.t('rate.random.empty'), {
       reply_to_message_id: ctx.message.message_id
     })
   }
