@@ -42,7 +42,6 @@ async function downloadEmoji () {
 
   await Promise.all(emojiPromiseArray).then(values => {
     values.map((emojiData) => {
-      console.log(emojiData.key)
       emojiImageJson[emojiData.key] = emojiData.base64
     })
   })
