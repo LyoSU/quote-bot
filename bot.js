@@ -96,7 +96,7 @@ bot.command('qrand', onlyGroup, rateLimit({
   }
 }), handleRandomQuote)
 bot.command('q', handleQuote)
-bot.hears(/\/q_(.*)/, onlyGroup,, handleGetQuote)
+bot.hears(/\/q_(.*)/, onlyGroup, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
