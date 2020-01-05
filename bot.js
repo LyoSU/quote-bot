@@ -87,7 +87,7 @@ bot.use(async (ctx, next) => {
   console.log('Response time %sms', ms)
 })
 
-bot.command('qtop', handleTopQuote)
+bot.command('qtop', onlyGroup,, handleTopQuote)
 bot.command('qrand', onlyGroup, rateLimit({
   window: 1000 * 30,
   limit: 3,
@@ -96,7 +96,7 @@ bot.command('qrand', onlyGroup, rateLimit({
   }
 }), handleRandomQuote)
 bot.command('q', handleQuote)
-bot.hears(/\/q_(.*)/, handleGetQuote)
+bot.hears(/\/q_(.*)/, onlyGroup,, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
