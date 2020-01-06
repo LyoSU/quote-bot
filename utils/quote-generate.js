@@ -431,7 +431,7 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
 }
 
 module.exports = async (backgroundColor, message, replyMessage, entities, width = 512, height = 512) => {
-  const scale = 2.5
+  const scale = 2
 
   width *= scale
   height *= scale
