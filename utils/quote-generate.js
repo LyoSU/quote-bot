@@ -251,8 +251,8 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
     } else {
       canvasСtx.fillText(styledWord.word, lineX, lineY)
 
-      if (styledWord.style.includes('strikethrough')) canvasСtx.fillRect(lineX, lineY - fontSize / 2.8, canvasСtx.measureText(styledWord.word).width, 2)
-      if (styledWord.style.includes('underline')) canvasСtx.fillRect(lineX, lineY + 2, canvasСtx.measureText(styledWord.word).width, 2)
+      if (styledWord.style.includes('strikethrough')) canvasСtx.fillRect(lineX, lineY - fontSize / 2.8, canvasСtx.measureText(styledWord.word).width, fontSize * 0.1)
+      if (styledWord.style.includes('underline')) canvasСtx.fillRect(lineX, lineY + 2, canvasСtx.measureText(styledWord.word).width, fontSize * 0.1)
     }
 
     lineX = lineWidth
@@ -431,7 +431,7 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
 }
 
 module.exports = async (backgroundColor, message, replyMessage, entities, width = 512, height = 512) => {
-  const scale = 2
+  const scale = 1
 
   width *= scale
   height *= scale
