@@ -73,7 +73,14 @@ const normalizeColor = (color) => {
 }
 
 module.exports = async (ctx) => {
-  let qCount, qReply, qPng, qImg, qColor
+  const flag = {
+    count: false,
+    reply: false,
+    png: false,
+    img: false,
+    color: false,
+    rate: false
+  }
 
   if (ctx.message.text.match(/\/q/)) {
     const args = ctx.message.text.split(' ')
@@ -84,11 +91,12 @@ module.exports = async (ctx) => {
     //   console.log(isNaN(parseInt(arg)))
     // }
 
-    qCount = args.filter(arg => !isNaN(parseInt(arg)))[0]
-    qReply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
-    qPng = args.filter(arg => ['p', 'png'].includes(arg))[0]
-    qImg = args.filter(arg => ['i', 'img'].includes(arg))[0]
-    qColor = args.filter(arg => (arg !== qCount && arg !== qReply && arg !== qPng && arg !== qImg))[0]
+    flag.count = args.filter(arg => !isNaN(parseInt(arg)))[0]
+    flag.reply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
+    flag.png = args.filter(arg => ['p', 'png'].includes(arg))[0]
+    flag.img = args.filter(arg => ['i', 'img'].includes(arg))[0]
+    flag.rate = args.filter(arg => ['rate'].includes(arg))[0]
+    flag.color = args.filter(arg => (arg !== flag.count && arg !== flag.reply && arg !== flag.png && arg !== flag.img))[0]
   }
 
   // set background color
@@ -98,20 +106,20 @@ module.exports = async (ctx) => {
   if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
 
   let colorName
-  if (qColor) {
-    colorName = qColor
-    if (qColor[0] === '#') colorName = colorName.substr(1)
+  if (flag.color) {
+    colorName = flag.color
+    if (flag.color[0] === '#') colorName = colorName.substr(1)
   }
 
   if ((ctx.match && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
-  else if (colorName && qColor[0] === '#') backgroundColor = `#${colorName}`
+  else if (colorName && flag.color[0] === '#') backgroundColor = `#${colorName}`
   else if (colorName) backgroundColor = `${colorName}`
 
   backgroundColor = normalizeColor(backgroundColor)
 
   const maxQuoteMessage = 30
   let messageCount = 1
-  if (qCount) messageCount = qCount
+  if (flag.count) messageCount = flag.count
 
   let quoteMessage = ctx.message.reply_to_message
   if (!quoteMessage && ctx.chat.type === 'private') {
@@ -223,7 +231,7 @@ module.exports = async (ctx) => {
         if (text) message.text = text
 
         const replyMessage = {}
-        if (qReply && quoteMessage.reply_to_message) {
+        if (flag.reply && quoteMessage.reply_to_message) {
           const replyMessageInfo = quoteMessage.reply_to_message
           if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.id
           else replyMessage.chatId = 0
@@ -236,7 +244,7 @@ module.exports = async (ctx) => {
         let width = 512
         let height = 512
 
-        if (qPng || qImg) {
+        if (flag.png || flag.img) {
           width *= 1.5
           height *= 5
         }
@@ -276,41 +284,41 @@ module.exports = async (ctx) => {
         canvasQuote = quoteImages[0]
       }
 
-      if (!qImg && canvasQuote.height > 1024) qPng = true
+      if (!flag.img && canvasQuote.height > 1024 * 3) flag.png = true
 
-      if (qPng || qImg) {
-        const padding = 25
-
-        const canvasImage = await loadCanvasImage(canvasQuote.toBuffer())
-
-        const canvasPic = createCanvas(canvasImage.width + padding * 2, canvasImage.height + padding * 2)
-        const canvasPicCtx = canvasPic.getContext('2d')
-
-        canvasPicCtx.fillStyle = lighten(backgroundColor, 20)
-        canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
-
-        // const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
-        const canvasPatternImage = await loadCanvasImage('./assets/pattern_ny.png')
-
-        const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
-        canvasPicCtx.fillStyle = pattern
-        canvasPicCtx.fillRect(0, 0, canvasPic.width, canvasPic.height)
-
-        canvasPicCtx.drawImage(canvasImage, padding, padding)
-
-        const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
-
-        if (qPng) {
+      if (flag.png || flag.img) {
+        if (flag.png) {
           await ctx.replyWithDocument({
-            source: quoteImage,
-            filename: 'sticker.png'
+            source: canvasQuote.toBuffer(),
+            filename: 'quote.png'
           }, {
             reply_to_message_id: ctx.message.message_id
           })
         } else {
+          const padding = 25
+
+          const canvasImage = await loadCanvasImage(canvasQuote.toBuffer())
+
+          const canvasPic = createCanvas(canvasImage.width + padding * 2, canvasImage.height + padding * 2)
+          const canvasPicCtx = canvasPic.getContext('2d')
+
+          canvasPicCtx.fillStyle = lighten(backgroundColor, 20)
+          canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
+
+          // const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
+          const canvasPatternImage = await loadCanvasImage('./assets/pattern_ny.png')
+
+          const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
+          canvasPicCtx.fillStyle = pattern
+          canvasPicCtx.fillRect(0, 0, canvasPic.width, canvasPic.height)
+
+          canvasPicCtx.drawImage(canvasImage, padding, padding)
+
+          const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
+
           ctx.replyWithPhoto({
             source: quoteImage,
-            filename: 'sticker.png'
+            filename: 'quote.png'
           }, {
             reply_to_message_id: ctx.message.message_id
           })
@@ -349,13 +357,13 @@ module.exports = async (ctx) => {
 
         const sendResult = await ctx.replyWithDocument({
           source: quoteImage,
-          filename: 'sticker.webp'
+          filename: 'quote.webp'
         }, {
           reply_to_message_id: ctx.message.message_id,
           reply_markup
         })
 
-        if (ctx.group && ctx.group.info.settings.rate) {
+        if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
           const quoteDb = new ctx.db.Quote()
           quoteDb.group = ctx.group.info
           quoteDb.user = ctx.session.userInfo

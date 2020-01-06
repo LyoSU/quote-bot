@@ -173,6 +173,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       if (emojiImageJson && emojiImageJson[styledWord.emoji.code]) {
         emojiImage = await loadCanvasImage(Buffer.from(emojiImageJson[styledWord.emoji.code], 'base64'))
       } else {
+        const emojiDataDir = 'assets/emojis/'
         const emojiPng = `${emojiDataDir}${styledWord.emoji.code}.png`
 
         try {
@@ -312,13 +313,13 @@ function drawRoundRect (color, width, height, radius, fill, stroke) {
   return canvas
 }
 
-function deawReplyLine (height, color) {
+function deawReplyLine (lineWidth, height, color) {
   const canvas = createCanvas(20, height)
   const context = canvas.getContext('2d')
   context.beginPath()
   context.moveTo(10, 0)
   context.lineTo(10, height)
-  context.lineWidth = 3
+  context.lineWidth = lineWidth
   context.strokeStyle = color
   context.stroke()
 
@@ -344,15 +345,15 @@ function drawAvatar (avatar) {
   return canvas
 }
 
-async function drawQuote (backgroundColor, avatar, replyName, replyText, name, text) {
-  const blockPosX = 75
+async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyText, name, text) {
+  const blockPosX = 75 * scale
   const blockPosY = 0
 
-  const indent = 15
+  const indent = 15 * scale
 
   const avatarPosX = 0
   const avatarPosY = 0
-  const avatarSize = 65
+  const avatarSize = 65 * scale
 
   let width = 0
   if (name) width = name.width
@@ -385,7 +386,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   let replyTextPosY = 0
 
   if (replyName) {
-    const replyPdding = 10
+    const replyPdding = 10 * scale
 
     replyPosX = textPosX + replyPdding
 
@@ -406,7 +407,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
   const rectHeight = height
   const rectPosX = blockPosX
   const rectPosY = blockPosY
-  const rectRoundRadius = 25
+  const rectRoundRadius = 25 * scale
 
   const rect = drawRoundRect(backgroundColor, rectWidth, rectHeight, rectRoundRadius, '#fff', false)
 
@@ -419,7 +420,7 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
     const backStyle = lightOrDark(backgroundColor)
     let lineColor = '#fff'
     if (backStyle === 'light') lineColor = '#000'
-    canvasCtx.drawImage(deawReplyLine(replyName.height + replyText.height * 0.4, lineColor), replyPosX * 0.8, replyNamePosY)
+    canvasCtx.drawImage(deawReplyLine(3 * scale, replyName.height + replyText.height * 0.4, lineColor), textPosX - 5 * scale, replyNamePosY)
 
     canvasCtx.drawImage(replyName, replyPosX, replyNamePosY)
     canvasCtx.drawImage(replyText, replyPosX, replyTextPosY)
@@ -429,6 +430,11 @@ async function drawQuote (backgroundColor, avatar, replyName, replyText, name, t
 }
 
 module.exports = async (backgroundColor, message, replyMessage, entities, width = 512, height = 512) => {
+  const scale = 2.5
+
+  width *= scale
+  height *= scale
+
   const canvas = createCanvas(0, 0)
   const canvasCtx = canvas.getContext('2d')
 
@@ -484,7 +490,7 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
   let nameColor = nameColorBlack[nameMap[nameIndex]]
   if (backStyle === 'light') nameColor = nameColorLight[nameMap[nameIndex]]
 
-  const nameSize = 22
+  const nameSize = 22 * scale
 
   let nameCanvas
   if (message.name) nameCanvas = await drawMultilineText(message.name, 'bold', nameSize, nameColor, 0, nameSize, width, nameSize)
@@ -497,7 +503,7 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
   // if (fontSize < minFontSize) fontSize = minFontSize
   // if (fontSize > maxFontSize) fontSize = maxFontSize
 
-  const fontSize = 24
+  const fontSize = 24 * scale
 
   let textColor = '#fff'
   if (backStyle === 'light') textColor = '#000'
@@ -513,17 +519,18 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
     let repltNameColor = nameColorBlack[nameMap[replyNameIndex]]
     if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
 
-    const replyNameFontSize = 16
+    const replyNameFontSize = 16 * scale
     if (replyMessage.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyNameFontSize, repltNameColor, 0, replyNameFontSize, width * 0.9, replyNameFontSize)
 
     let textColor = '#fff'
     if (backStyle === 'light') textColor = '#000'
 
-    const replyTextFontSize = 21
+    const replyTextFontSize = 21 * scale
     replyText = await drawMultilineText(replyMessage.text, null, replyTextFontSize, textColor, 0, replyTextFontSize, width * 0.9, replyTextFontSize)
   }
 
   const quote = drawQuote(
+    scale,
     backgroundColor,
     avatarCanvas,
     replyName, replyText,
