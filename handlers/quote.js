@@ -73,6 +73,8 @@ const normalizeColor = (color) => {
 }
 
 module.exports = async (ctx) => {
+  ctx.replyWithChatAction('upload_photo')
+
   const flag = {
     count: false,
     reply: false,
@@ -82,7 +84,7 @@ module.exports = async (ctx) => {
     rate: false
   }
 
-  if (ctx.message.text.match(/\/q/)) {
+  if (ctx.message && ctx.message.text && ctx.message.text.match(/\/q/)) {
     const args = ctx.message.text.split(' ')
     args.splice(0, 1)
 
