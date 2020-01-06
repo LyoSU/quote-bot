@@ -223,8 +223,8 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
     else lineWidth = lineX + wordlWidth
 
     if (styledWord.word.match(breakMatch) || (lineWidth > maxWidth - fontSize * 2 && wordlWidth < maxWidth)) {
-      if (styledWord.word.match(spaceMatch)) styledWord.word = ''
-      if (!styledWord.word.match(breakMatch) && lineY + lineHeight > maxHeight) {
+      if (styledWord.word.match(spaceMatch) && !styledWord.word.match(breakMatch)) styledWord.word = ''
+      if ((styledWord.word.match(spaceMatch) || !styledWord.word.match(breakMatch)) && lineY + lineHeight > maxHeight) {
         while (lineWidth > maxWidth - fontSize * 2) {
           styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
           lineWidth = lineX + canvasСtx.measureText(styledWord.word).width
@@ -237,6 +237,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       } else {
         if (styledWord.emoji) lineWidth = textX + fontSize + (fontSize * 0.15)
         else lineWidth = textX + canvasСtx.measureText(styledWord.word).width
+
         lineX = textX
         lineY += lineHeight
       }
