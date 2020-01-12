@@ -1,9 +1,5 @@
 const mongoose = require('mongoose')
 
-const voteSchema = mongoose.Schema({
-
-})
-
 const quoteSchema = mongoose.Schema({
   group: {
     type: mongoose.Schema.Types.ObjectId,

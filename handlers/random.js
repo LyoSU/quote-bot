@@ -1,3 +1,5 @@
+const Markup = require('telegraf/markup')
+
 module.exports = async (ctx) => {
   const randomQuote = await ctx.db.Quote.aggregate(
     [
@@ -16,14 +18,10 @@ module.exports = async (ctx) => {
 
   if (quote) {
     ctx.replyWithDocument(quote.file_id, {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            { text: `👍 ${quote.rate.votes[0].vote.length}`, callback_data: 'rate:👍' },
-            { text: `👎 ${quote.rate.votes[1].vote.length}`, callback_data: 'rate:👎' }
-          ]
-        ]
-      },
+      reply_markup: Markup.inlineKeyboard([
+        Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length}`, 'rate:👍'),
+        Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length}`, 'rate:👎'),
+      ]),
       reply_to_message_id: ctx.message.message_id
     })
   } else {

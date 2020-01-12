@@ -1,3 +1,4 @@
+const Markup = require('telegraf/markup')
 const {
   loadCanvasImage,
   generateQuote
@@ -347,14 +348,10 @@ module.exports = async (ctx) => {
         let reply_markup = {}
 
         if (ctx.group && ctx.group.info.settings.rate) {
-          reply_markup = {
-            inline_keyboard: [
-              [
-                { text: '👍', callback_data: 'rate:👍' },
-                { text: '👎', callback_data: 'rate:👎' }
-              ]
-            ]
-          }
+          reply_markup = Markup.inlineKeyboard([
+            Markup.callbackButton('👍', 'rate:👍'),
+            Markup.callbackButton('👎', 'rate:👎'),
+          ])
         }
 
         const sendResult = await ctx.replyWithDocument({
