@@ -388,9 +388,7 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
   let replyTextPosY = 0
 
   if (replyName) {
-    const replyPdding = 10 * scale
-
-    replyPosX = textPosX + replyPdding
+    replyPosX = textPosX + 15 * scale
 
     const replyNameHeight = replyName.height * 1.2
     const replyTextHeight = replyText.height * 0.5
@@ -398,8 +396,8 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
     replyNamePosY = namePosY + replyNameHeight
     replyTextPosY = replyNamePosY + replyTextHeight
 
-    textPosY += replyNameHeight + replyTextHeight + replyPdding
-    height += replyNameHeight + replyTextHeight + replyPdding
+    textPosY += replyNameHeight + replyTextHeight
+    height += replyNameHeight + replyTextHeight
   }
 
   const canvas = createCanvas(width, height)
@@ -422,7 +420,7 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
     const backStyle = lightOrDark(backgroundColor)
     let lineColor = '#fff'
     if (backStyle === 'light') lineColor = '#000'
-    canvasCtx.drawImage(deawReplyLine(3 * scale, replyName.height + replyText.height * 0.4, lineColor), textPosX - 5 * scale, replyNamePosY)
+    canvasCtx.drawImage(deawReplyLine(3 * scale, replyName.height + replyText.height * 0.4, lineColor), textPosX, replyNamePosY)
 
     canvasCtx.drawImage(replyName, replyPosX, replyNamePosY)
     canvasCtx.drawImage(replyText, replyPosX, replyTextPosY)
