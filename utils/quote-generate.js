@@ -187,7 +187,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       }
 
       let fontType = ''
-      let fontName = 'OpenSans'
+      let fontName = 'NotoSansDisplay'
       let fillStyle = fontColor
 
       if (styledWord.style.includes('bold')) {
@@ -197,7 +197,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
         fontType += 'italic '
       }
       if (styledWord.style.includes('monospace')) {
-        fontName = 'monospace'
+        fontName = 'NotoSansMono-Regular'
         fillStyle = '#5887a7'
       }
       if (styledWord.style.includes('mention')) {
