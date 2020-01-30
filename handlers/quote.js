@@ -245,7 +245,7 @@ module.exports = async (ctx) => {
         }
 
         let width = 512
-        let height = 512
+        let height = 512 * 1.5
 
         if (flag.png || flag.img) {
           width *= 1.5

@@ -197,7 +197,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
         fontType += 'italic '
       }
       if (styledWord.style.includes('monospace')) {
-        fontName = 'NotoSansMono-Regular'
+        fontName = 'NotoSansMono'
         fillStyle = '#5887a7'
       }
       if (styledWord.style.includes('mention')) {
@@ -222,7 +222,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       let lineWidth
       const wordlWidth = canvasСtx.measureText(styledWord.word).width
 
-      if (styledWord.emoji) lineWidth = lineX + fontSize + (fontSize * 0.15)
+      if (styledWord.emoji) lineWidth = lineX + fontSize
       else lineWidth = lineX + wordlWidth
 
       if (styledWord.word.match(breakMatch) || (lineWidth > maxWidth - fontSize * 2 && wordlWidth < maxWidth)) {
