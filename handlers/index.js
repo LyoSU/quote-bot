@@ -9,6 +9,7 @@ const handleDelete = require('./sticker-delete')
 const handleRate = require('./rate')
 const handleSettingsRate = require('./rate-settings')
 const handleLanguage = require('./language')
+const handleFstik = require('./fstik')
 
 module.exports = {
   handleHelp,
@@ -21,5 +22,6 @@ module.exports = {
   handleDelete,
   handleRate,
   handleSettingsRate,
-  handleLanguage
+  handleLanguage,
+  handleFstik
 }

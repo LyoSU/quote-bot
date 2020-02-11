@@ -7,12 +7,9 @@ module.exports = async (ctx, next) => {
 
     if (chatMember && ['creator', 'administrator'].includes(chatMember.status)) {
       return next()
-    } else {
-      ctx.replyWithHTML(ctx.i18n.t('only_admin'), {
-        reply_to_message_id: ctx.message.message_id
-      })
     }
-  } else {
-    return next()
   }
+  ctx.replyWithHTML(ctx.i18n.t('sticker.fstik'), {
+    reply_to_message_id: ctx.message.message_id
+  })
 }

@@ -22,7 +22,8 @@ const {
   handleDelete,
   handleRate,
   handleSettingsRate,
-  handleLanguage
+  handleLanguage,
+  handleFstik
 } = require('./handlers')
 const {
   updateUser,
@@ -97,6 +98,7 @@ bot.command('qrand', onlyGroup, rateLimit({
 }), handleRandomQuote)
 bot.command('q', handleQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
+bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
