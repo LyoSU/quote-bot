@@ -90,8 +90,8 @@ bot.use(async (ctx, next) => {
 
 bot.command('qtop', onlyGroup, handleTopQuote)
 bot.command('qrand', onlyGroup, rateLimit({
-  window: 1000 * 30,
-  limit: 3,
+  window: 1000 * 60,
+  limit: 2,
   keyGenerator: (ctx) => {
     return ctx.chat.id
   }
