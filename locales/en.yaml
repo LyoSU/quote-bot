@@ -6,7 +6,7 @@ help: |
     <b>⚙️ Available commands:</b>
 
   <code>/help</code> — get this text
-  <code>/q #120E1BB3</code> <i>[in reply to a message]</i> — creates a quote from a message with color<b>#120E1BB3</b>
+  <code>/q #130f1c</code> <i>[in reply to a message]</i> — creates a quote from a message with color<b>#130f1c</b>
   <code>/q 3</code> <i>[in reply to a message]</i> — creates a quote from <b>the reply and down from it to 3 messages</b>
   <code>/q r</code> <i>[in reply to a message]</i> — creates a quote with reply
   <code>/q white r 3</code> <i>[in reply to a message]</i> — creates a quote with 3 messages with color <b>white</b> with reply

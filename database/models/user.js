@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
     type: Number,
     index: true,
     unique: true,
-    required: true,
+    required: true
   },
   first_name: String,
   last_name: String,
@@ -15,12 +15,12 @@ const userSchema = mongoose.Schema({
     quote: {
       backgroundColor: {
         type: String,
-        default: '#120E1BB3'
+        default: '#130f1c'
       }
     }
   }
 }, {
-  timestamps: true,
+  timestamps: true
 })
 
 module.exports = userSchema
