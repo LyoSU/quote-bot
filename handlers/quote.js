@@ -103,7 +103,7 @@ module.exports = async (ctx) => {
   }
 
   // set background color
-  let backgroundColor = '#120E1B80'
+  let backgroundColor = '#120E1BB3'
 
   if (ctx.session.userInfo.settings.quote.backgroundColor) backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
   if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor

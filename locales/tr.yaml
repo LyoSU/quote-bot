@@ -7,7 +7,7 @@ help: |
 
   <code>/help</code> — Bu mesajı gösterir
 
-  <code>/q #120E1B80</code> <i>[bir mesaja cevaplayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#120E1B80</b>
+  <code>/q #120E1BB3</code> <i>[bir mesaja cevaplayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#120E1BB3</b>
   <code>/q 3</code> <i>[bir mesaja cevaplayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
   <code>/q r</code> <i>[bir mesaja cevaplayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
   <code>/q white r 3</code> <i>[bir mesaja cevaplayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
