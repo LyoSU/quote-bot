@@ -15,7 +15,7 @@ const groupSchema = mongoose.Schema({
     quote: {
       backgroundColor: {
         type: String,
-        default: '#130f1c'
+        default: '#120E1B80'
       }
     },
     rate: {
