@@ -94,7 +94,8 @@ bot.command('qrand', onlyGroup, rateLimit({
   limit: 2,
   keyGenerator: (ctx) => {
     return ctx.chat.id
-  }
+  },
+  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }), handleRandomQuote)
 bot.command('q', handleQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)

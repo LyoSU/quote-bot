@@ -345,12 +345,12 @@ module.exports = async (ctx) => {
 
         const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
 
-        let reply_markup = {}
+        let replyMarkup = {}
 
-        if (ctx.group && ctx.group.info.settings.rate) {
-          reply_markup = Markup.inlineKeyboard([
+        if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+          replyMarkup = Markup.inlineKeyboard([
             Markup.callbackButton('👍', 'rate:👍'),
-            Markup.callbackButton('👎', 'rate:👎'),
+            Markup.callbackButton('👎', 'rate:👎')
           ])
         }
 
@@ -359,7 +359,7 @@ module.exports = async (ctx) => {
           filename: 'quote.webp'
         }, {
           reply_to_message_id: ctx.message.message_id,
-          reply_markup
+          reply_markup: replyMarkup
         })
 
         if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
