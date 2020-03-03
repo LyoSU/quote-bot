@@ -127,7 +127,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
     let stringNum = 0
 
     const breakMatch = /<br>|\n|\r/
-    const spaceMatch = /\s/
+    const spaceMatch = /[\f\n\r\t\v\u0020\u1680\u2000-\u200a\u2028\u2029\u205f\u3000]/
 
     for (let index = 0; index < styledChar.length; index++) {
       const charStyle = styledChar[index]

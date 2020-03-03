@@ -89,11 +89,6 @@ module.exports = async (ctx) => {
     const args = ctx.message.text.split(' ')
     args.splice(0, 1)
 
-    // for (let index = 1; index < args.length; index++) {
-    //   const arg = args[index]
-    //   console.log(isNaN(parseInt(arg)))
-    // }
-
     flag.count = args.filter(arg => !isNaN(parseInt(arg)))[0]
     flag.reply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
     flag.png = args.filter(arg => ['p', 'png'].includes(arg))[0]
