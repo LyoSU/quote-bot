@@ -80,12 +80,12 @@ bot.use(async (ctx, next) => {
     ctx.group.info = await updateGroup(ctx)
     if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
   }
-  return next(ctx).then(async () => {
-    await ctx.session.userInfo.save()
-    if (ctx.group && ctx.group.info) {
-      await ctx.group.info.save()
-    }
-  })
+  await next(ctx)
+
+  await ctx.session.userInfo.save()
+  if (ctx.group && ctx.group.info) {
+    await ctx.group.info.save()
+  }
 })
 
 bot.command('qtop', onlyGroup, handleTopQuote)
