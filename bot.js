@@ -36,20 +36,29 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   }
 })
 
-const stats = {}
+const stats = {
+  avrg: 0,
+  rps: {}
+}
 
 setInterval(() => {
   const now = Math.floor(new Date() / 1000)
   let lastRPS = 0
-  if (stats[now - 1]) lastRPS = stats[now - 1]
+  if (stats.rps[now - 1]) {
+    lastRPS = stats.rps[now - 1]
+    stats.avrg = (stats.avrg + lastRPS) / 2
+    delete stats.rps[now - 1]
+  }
   console.log('last rps: ', lastRPS)
+  console.log('avrg rps: ', stats.avrg)
 }, 1000)
 
-bot.use(() => {
+bot.use((ctx, next) => {
   const now = Math.floor(new Date() / 1000)
 
-  if (!stats[now]) stats[now] = 0
-  stats[now]++
+  if (!stats.rps[now]) stats.rps[now] = 0
+  stats.rps[now]++
+  return next()
 })
 
 bot.context.db = db
