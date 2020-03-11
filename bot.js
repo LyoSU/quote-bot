@@ -36,6 +36,22 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   }
 })
 
+const stats = {}
+
+setInterval(() => {
+  const now = Math.floor(new Date() / 1000)
+  let lastRPS = 0
+  if (stats[now - 1]) lastRPS = stats[now - 1]
+  console.log('last rps: ', lastRPS)
+}, 1000)
+
+bot.use(() => {
+  const now = Math.floor(new Date() / 1000)
+
+  if (!stats[now]) stats[now] = 0
+  stats[now]++
+})
+
 bot.context.db = db
 
 const i18n = new I18n({
@@ -51,11 +67,6 @@ bot.use(rateLimit({
   limit: 1
 }))
 
-bot.use(async (ctx, next) => {
-  ctx.ms = new Date()
-  next()
-})
-
 bot.use(session({ ttl: 60 * 5 }))
 bot.use(session({
   property: 'group',
@@ -69,6 +80,7 @@ bot.use(session({
 }))
 
 bot.use(async (ctx, next) => {
+  const startMs = new Date()
   ctx.session.userInfo = await updateUser(ctx)
   if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
 
@@ -76,16 +88,14 @@ bot.use(async (ctx, next) => {
     ctx.group.info = await updateGroup(ctx)
     if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
   }
-  await next(ctx)
+  return next(ctx).then(() => {
+    ctx.session.userInfo.save()
+    if (ctx.group && ctx.group.info) {
+      ctx.group.info.save()
+    }
 
-  await ctx.session.userInfo.save()
-  if (ctx.group && ctx.group.info) {
-    await ctx.group.info.save()
-  }
-
-  const ms = new Date() - ctx.ms
-
-  console.log('Response time %sms', ms)
+    console.log('Response time %sms', new Date() - startMs)
+  })
 })
 
 bot.command('qtop', onlyGroup, handleTopQuote)
@@ -119,7 +129,7 @@ bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('message', (ctx, next) => {
   if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 100)
-  else next()
+  else return next()
 })
 
 db.connection.once('open', async () => {
