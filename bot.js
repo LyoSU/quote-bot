@@ -8,6 +8,7 @@ const {
   db
 } = require('./database')
 const {
+  stats,
   onlyGroup,
   onlyAdmin
 } = require('./middlewares')
@@ -36,30 +37,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   }
 })
 
-const stats = {
-  avrg: 0,
-  rps: {}
-}
-
-setInterval(() => {
-  const now = Math.floor(new Date() / 1000)
-  let lastRPS = 0
-  if (stats.rps[now - 1]) {
-    lastRPS = stats.rps[now - 1]
-    stats.avrg = (stats.avrg + lastRPS) / 2
-    delete stats.rps[now - 1]
-  }
-  console.log('last rps: ', lastRPS)
-  console.log('avrg rps: ', stats.avrg)
-}, 1000)
-
-bot.use((ctx, next) => {
-  const now = Math.floor(new Date() / 1000)
-
-  if (!stats.rps[now]) stats.rps[now] = 0
-  stats.rps[now]++
-  return next()
-})
+bot.use(stats)
 
 bot.context.db = db
 
@@ -89,7 +67,6 @@ bot.use(session({
 }))
 
 bot.use(async (ctx, next) => {
-  const startMs = new Date()
   ctx.session.userInfo = await updateUser(ctx)
   if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
 
@@ -102,8 +79,6 @@ bot.use(async (ctx, next) => {
     if (ctx.group && ctx.group.info) {
       ctx.group.info.save()
     }
-
-    console.log('Response time %sms', new Date() - startMs)
   })
 })
 
