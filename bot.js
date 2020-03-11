@@ -37,6 +37,12 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   }
 })
 
+bot.on(['channel_post', 'edited_channel_post'], () => {})
+
+bot.catch((error) => {
+  console.log('Oops', error)
+})
+
 bot.use(stats)
 
 bot.context.db = db
