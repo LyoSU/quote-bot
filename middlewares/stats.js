@@ -26,7 +26,7 @@ setInterval(() => {
 module.exports = (ctx, next) => {
   const startMs = new Date()
 
-  return next().then(() => {
+  return next().then(async () => {
     const now = Math.floor(new Date() / 1000)
     if (!stats.times[now]) stats.times[now] = []
     stats.times[now].push(new Date() - startMs)
