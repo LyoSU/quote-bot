@@ -82,9 +82,9 @@ bot.use(async (ctx, next) => {
   }
   await next(ctx)
 
-  await ctx.session.userInfo.save()
+  await ctx.session.userInfo.save().catch(() => {})
   if (ctx.group && ctx.group.info) {
-    await ctx.group.info.save()
+    await ctx.group.info.save().catch(() => {})
   }
 })
 
