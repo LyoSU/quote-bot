@@ -24,14 +24,14 @@ help: |
   ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
   ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
   ➖ Emoji belirtilmesi zorunlu değildir.
-  ➖ Initial command <code>/qs</code> must be executed by chat creator, before that writing to bot's direct messages.
+  ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
   ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
   ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
   ➖ Argümanların sırası önemli değildir.
 
   <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  Çeviriyi yapan: @By_Azade
+  <b>Çeviri:</b> @Holytotem
 btn:
   add_group: Gruba Ekle
 quote:
