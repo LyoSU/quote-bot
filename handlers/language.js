@@ -1,12 +1,26 @@
+const fs = require('fs')
+const path = require('path')
 const Markup = require('telegraf/markup')
+const I18n = require('telegraf-i18n')
 const handleHelp = require('./help')
 
+const i18n = new I18n({
+  directory: path.resolve(__dirname, '../locales'),
+  defaultLanguage: 'ru',
+  defaultLanguageOnMissing: true
+})
+
 module.exports = async (ctx) => {
-  const locales = {
-    en: '🇺🇸',
-    ru: '🇷🇺',
-    uk: '🇺🇦'
-  }
+  const localseFile = fs.readdirSync('./locales/')
+
+  const locales = {}
+
+  localseFile.forEach((fileName) => {
+    const localName = fileName.split('.')[0]
+    locales[localName] = {
+      flag: i18n.t(localName, 'language_name')
+    }
+  })
 
   if (ctx.updateType === 'callback_query') {
     if (locales[ctx.match[1]]) {
@@ -25,7 +39,7 @@ module.exports = async (ctx) => {
           ctx.answerCbQuery()
         }
       } else {
-        ctx.answerCbQuery(locales[ctx.match[1]])
+        ctx.answerCbQuery(locales[ctx.match[1]].flag)
 
         ctx.session.userInfo.settings.locale = ctx.match[1]
         ctx.i18n.locale(ctx.match[1])
@@ -36,12 +50,12 @@ module.exports = async (ctx) => {
     const button = []
 
     Object.keys(locales).map((key) => {
-      button.push(Markup.callbackButton(locales[key], `set_language:${key}`))
+      button.push(Markup.callbackButton(locales[key].flag, `set_language:${key}`))
     })
 
     ctx.reply('🇷🇺 Выберите язык\n🇺🇸 Choose language', {
       reply_markup: Markup.inlineKeyboard(button, {
-        columns: 5
+        columns: 2
       })
     })
   }
