@@ -3,6 +3,7 @@ const Telegraf = require('telegraf')
 const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
+const TelegrafMixpanel = require('telegraf-mixpanel')
 
 const {
   db
@@ -42,6 +43,10 @@ bot.on(['channel_post', 'edited_channel_post'], () => {})
 bot.catch((error) => {
   console.log('Oops', error)
 })
+
+const mixpanel = new TelegrafMixpanel(process.env.MIXPANEL_TOKEN)
+
+bot.use(mixpanel)
 
 bot.use(stats)
 

@@ -74,6 +74,8 @@ const normalizeColor = (color) => {
 }
 
 module.exports = async (ctx) => {
+  ctx.mixpanel.track('quote')
+
   ctx.replyWithChatAction('upload_photo')
 
   const flag = {
