@@ -1,6 +1,8 @@
 const Markup = require('telegraf/markup')
 
 module.exports = async (ctx) => {
+  ctx.mixpanel.track('qrand')
+
   const randomQuote = await ctx.db.Quote.aggregate(
     [
       {

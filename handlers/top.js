@@ -1,4 +1,6 @@
 module.exports = async (ctx) => {
+  ctx.mixpanel.track('top')
+
   let resultText = `${ctx.i18n.t('top')}`
 
   const topQuote = await ctx.db.Quote.find({

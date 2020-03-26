@@ -1,6 +1,8 @@
 const Markup = require('telegraf/markup')
 
 module.exports = async (ctx) => {
+  ctx.mixpanel.track('help')
+
   if (ctx.updateType === 'callback_query') {
     await ctx.editMessageText(ctx.i18n.t('help'), {
       parse_mode: 'HTML',
