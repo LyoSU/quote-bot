@@ -23,12 +23,7 @@ setInterval(() => {
       console.log('response time avrg last:', lastResponseTimeAvrg)
       console.log('response time avrg total:', stats.responseTimeAvrg)
 
-      mixpanel.track('stats', {
-        rps,
-        rpsAvrg: stats.rpsAvrg,
-        lastResponseTimeAvrg,
-        responseTimeAvrg: stats.responseTimeAvrg
-      })
+      mixpanel.track('statsRps', rps)
 
       delete stats.times[time]
     })
