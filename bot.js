@@ -4,7 +4,6 @@ const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
 const TelegrafMixpanel = require('telegraf-mixpanel')
-
 const {
   db
 } = require('./database')

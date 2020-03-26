@@ -1,3 +1,7 @@
+const {
+  db
+} = require('../database')
+
 const stats = {
   rpsAvrg: 0,
   responseTimeAvrg: 0,
@@ -18,6 +22,11 @@ setInterval(() => {
       console.log('rps avrg:', stats.rpsAvrg)
       console.log('response time avrg last:', lastResponseTimeAvrg)
       console.log('response time avrg total:', stats.responseTimeAvrg)
+
+      db.Stats.create({
+        rps,
+        responseTime: lastResponseTimeAvrg
+      })
 
       delete stats.times[time]
     })
