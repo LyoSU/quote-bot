@@ -1,7 +1,3 @@
-const Mixpanel = require('mixpanel')
-
-const mixpanel = Mixpanel.init(process.env.MIXPANEL_TOKEN)
-
 const stats = {
   rpsAvrg: 0,
   responseTimeAvrg: 0,
@@ -22,8 +18,6 @@ setInterval(() => {
       console.log('rps avrg:', stats.rpsAvrg)
       console.log('response time avrg last:', lastResponseTimeAvrg)
       console.log('response time avrg total:', stats.responseTimeAvrg)
-
-      mixpanel.track('statsRps', rps)
 
       delete stats.times[time]
     })
