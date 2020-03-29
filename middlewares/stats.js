@@ -25,7 +25,8 @@ setInterval(() => {
 
       db.Stats.create({
         rps,
-        responseTime: lastResponseTimeAvrg
+        responseTime: lastResponseTimeAvrg,
+        date: new Date()
       })
 
       delete stats.times[time]
