@@ -39,6 +39,16 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 
 bot.on(['channel_post', 'edited_channel_post'], () => {})
 
+bot.use(rateLimit({
+  window: 1000,
+  limit: 1
+}))
+
+bot.use((ctx, next) => {
+  next()
+  return true
+})
+
 bot.catch((error) => {
   console.log('Oops', error)
 })
@@ -58,11 +68,6 @@ const i18n = new I18n({
 })
 
 bot.use(i18n.middleware())
-
-bot.use(rateLimit({
-  window: 1000,
-  limit: 1
-}))
 
 bot.use(session({ ttl: 60 * 5 }))
 bot.use(session({
