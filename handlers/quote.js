@@ -74,8 +74,6 @@ const normalizeColor = (color) => {
 }
 
 module.exports = async (ctx) => {
-  ctx.mixpanel.track('quote')
-
   ctx.replyWithChatAction('upload_photo')
 
   const flag = {
@@ -249,6 +247,7 @@ module.exports = async (ctx) => {
           height *= 5
         }
 
+        console.log('start generate quote')
         const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities, width, height)
 
         quoteImages.push(canvasQuote)
