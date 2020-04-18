@@ -23,7 +23,8 @@ const {
   handleRate,
   handleSettingsRate,
   handleLanguage,
-  handleFstik
+  handleFstik,
+  handleDonate
 } = require('./handlers')
 const {
   updateUser,
@@ -91,6 +92,11 @@ bot.use(async (ctx, next) => {
     await ctx.group.info.save().catch(() => {})
   }
 })
+
+bot.command('donate', handleDonate)
+bot.action(/(donate):(.*)/, handleDonate)
+bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) => answerPreCheckoutQuery(true))
+bot.on('successful_payment', handleDonate)
 
 bot.command('qtop', onlyGroup, handleTopQuote)
 bot.command('qrand', onlyGroup, rateLimit({

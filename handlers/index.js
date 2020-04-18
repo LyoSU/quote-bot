@@ -10,6 +10,7 @@ const handleRate = require('./rate')
 const handleSettingsRate = require('./rate-settings')
 const handleLanguage = require('./language')
 const handleFstik = require('./fstik')
+const handleDonate = require('./donate')
 
 module.exports = {
   handleHelp,
@@ -23,5 +24,6 @@ module.exports = {
   handleRate,
   handleSettingsRate,
   handleLanguage,
-  handleFstik
+  handleFstik,
+  handleDonate
 }
