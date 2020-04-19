@@ -50,7 +50,7 @@ module.exports = async (ctx) => {
       action: 'pay',
       amount: amount / 100,
       currency,
-      description: ctx.i18n.t('callback.donate.description'),
+      description: ctx.i18n.t('donate.description'),
       order_id: orderId,
       result_url: `https://t.me/${ctx.options.username}?start=liqpay_${orderId}`,
       version: 3
@@ -62,6 +62,6 @@ module.exports = async (ctx) => {
       [Markup.urlButton(ctx.i18n.t('donate.other'), 'donate.lyo.su')]
     ]).extra())
   } else if (ctx.updateSubTypes[0] === 'successful_payment') {
-    await ctx.replyWithHTML(ctx.i18n.t('callback.donate.successful'))
+    await ctx.replyWithHTML(ctx.i18n.t('donate.successful'))
   }
 }
