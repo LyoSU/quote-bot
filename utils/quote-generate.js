@@ -72,6 +72,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
     const canvasСtx = canvas.getContext('2d')
 
     text = text.slice(0, 4096)
+    text = text.replace(/і/g, 'i')
     const chars = text.split('')
 
     const lineHeight = 4 * (fontSize * 0.3)
