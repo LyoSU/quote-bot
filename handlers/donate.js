@@ -6,20 +6,24 @@ const liqpay = new LiqPay(process.env.LIQPAY_PUBLIC, process.env.LIQPAY_PRIVATE)
 
 module.exports = async (ctx) => {
   if (ctx.updateType === 'message') {
-    await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
-      reply_markup: Markup.inlineKeyboard([
-        [
+    if (ctx.chat.type === 'private') {
+      await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
+        reply_markup: Markup.inlineKeyboard([
+          [
 
-          Markup.callbackButton('100 RUB', 'donate:100'),
-          Markup.callbackButton('150 RUB', 'donate:150'),
-          Markup.callbackButton('300 RUB', 'donate:300')
-        ],
-        [
-          Markup.callbackButton('500 RUB', 'donate:500'),
-          Markup.callbackButton('1000 RUB', 'donate:1000')
-        ]
-      ])
-    })
+            Markup.callbackButton('100 RUB', 'donate:100'),
+            Markup.callbackButton('150 RUB', 'donate:150'),
+            Markup.callbackButton('300 RUB', 'donate:300')
+          ],
+          [
+            Markup.callbackButton('500 RUB', 'donate:500'),
+            Markup.callbackButton('1000 RUB', 'donate:1000')
+          ]
+        ])
+      })
+    } else {
+      await ctx.replyWithHTML(ctx.i18n.t('donate.info_group'))
+    }
   } else if (ctx.updateType === 'callback_query') {
     ctx.answerCbQuery()
 
