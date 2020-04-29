@@ -434,7 +434,7 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
   const indent = 15 * scale
 
   const avatarPosX = 0
-  const avatarPosY = 0
+  const avatarPosY = 15
   const avatarSize = 50 * scale
 
   let width = 0
