@@ -428,14 +428,14 @@ async function drawAvatar (user) {
 }
 
 async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyText, name, text) {
-  const blockPosX = 75 * scale
+  const blockPosX = 55 * scale
   const blockPosY = 0
 
   const indent = 15 * scale
 
   const avatarPosX = 0
   const avatarPosY = 0
-  const avatarSize = 65 * scale
+  const avatarSize = 50 * scale
 
   let width = 0
   if (name) width = name.width
