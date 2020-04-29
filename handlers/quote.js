@@ -18,29 +18,48 @@ const avatarCache = new LRU({
   maxAge: 1000 * 60 * 5
 })
 
-const downloadAvatarImage = async (userId, username) => {
+const avatarImageLatters = (letters, color) => {
+  const size = 500
+  const canvas = createCanvas(size, size)
+  const context = canvas.getContext('2d')
+
+  color = color || '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
+
+  context.font = Math.round(canvas.width / 2) + 'px Arial'
+  context.textAlign = 'center'
+
+  context.fillStyle = color
+  context.fillRect(0, 0, canvas.width, canvas.height)
+  context.fillStyle = '#FFF'
+  context.fillText(letters, size / 2, size / 1.5)
+
+  return canvas.toBuffer()
+}
+
+const downloadAvatarImage = async (user) => {
   let avatarImage
 
-  const avatarImageCache = avatarCache.get(userId)
+  const avatarImageCache = avatarCache.get(user.id)
 
   if (avatarImageCache) {
     avatarImage = avatarImageCache
   } else {
     try {
       let userPhoto
-      let userPhotoUrl = './assets/404.png'
+      const userPhotoUrl = avatarImageLatters(user.first_name[0].user.last_name[0] ? user.last_name[0] : '', 500)
 
-      const getChat = await telegram.getChat(userId).catch(() => {})
+      const getChat = await telegram.getChat(user.id).catch(() => {})
       if (getChat && getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
 
-      if (userPhoto) userPhotoUrl = await telegram.getFileLink(userPhoto)
-      else if (username) userPhotoUrl = `https://telega.one/i/userpic/320/${username}.jpg`
+      // if (userPhoto) userPhotoUrl = await telegram.getFileLink(userPhoto)
+      // else if (user.username) userPhotoUrl = `https://telega.one/i/userpic/320/${user.username}.jpg`
 
       avatarImage = await loadCanvasImage(userPhotoUrl)
 
-      avatarCache.set(userId, avatarImage)
+      avatarCache.set(user.id, avatarImage)
     } catch (error) {
-      avatarImage = await loadCanvasImage('./assets/404.png')
+      avatarImage = avatarImageLatters('YL')
+      avatarImage = await loadCanvasImage(avatarImageLatters('YL'))
     }
   }
 
@@ -217,7 +236,7 @@ module.exports = async (ctx) => {
         let avatarImage
         if (diffUser) {
           name = quoteMessages[index].from.name
-          avatarImage = await downloadAvatarImage(messageFrom.id, messageFrom.username)
+          avatarImage = await downloadAvatarImage(messageFrom)
         }
 
         const message = {}
