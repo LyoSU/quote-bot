@@ -201,12 +201,11 @@ module.exports = async (ctx) => {
 
         const replyMessage = {}
         if (flag.reply && quoteMessage.reply_to_message) {
-          const replyMessageInfo = quoteMessage.reply_to_message_id
-          if (replyMessageInfo.from) {
-            if (replyMessageInfo.from.first_name) replyMessage.name = replyMessageInfo.from.first_name
-            if (replyMessageInfo.from.last_name) replyMessage.name += ' ' + replyMessageInfo.from.last_name
-            if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.index
-          } else replyMessage.chatId = hashCode(replyMessage.name)
+          const replyMessageInfo = quoteMessage.reply_to_message
+          if (replyMessageInfo.from.first_name) replyMessage.name = replyMessageInfo.from.first_name
+          if (replyMessageInfo.from.last_name) replyMessage.name += ' ' + replyMessageInfo.from.last_name
+          if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.id
+          else replyMessage.chatId = hashCode(replyMessage.name)
           if (replyMessageInfo.text) replyMessage.text = replyMessageInfo.text
           if (replyMessageInfo.caption) replyMessage.text = replyMessageInfo.caption
         }
