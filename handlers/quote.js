@@ -9,63 +9,6 @@ const {
 const { createCanvas } = require('canvas')
 const sharp = require('sharp')
 
-const { Telegram } = require('telegraf')
-const LRU = require('lru-cache')
-
-const telegram = new Telegram(process.env.BOT_TOKEN)
-const avatarCache = new LRU({
-  max: 20,
-  maxAge: 1000 * 60 * 5
-})
-
-const avatarImageLatters = (letters, color) => {
-  const size = 500
-  const canvas = createCanvas(size, size)
-  const context = canvas.getContext('2d')
-
-  color = color || '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
-
-  context.font = Math.round(canvas.width / 2) + 'px Arial'
-  context.textAlign = 'center'
-
-  context.fillStyle = color
-  context.fillRect(0, 0, canvas.width, canvas.height)
-  context.fillStyle = '#FFF'
-  context.fillText(letters, size / 2, size / 1.5)
-
-  return canvas.toBuffer()
-}
-
-const downloadAvatarImage = async (user) => {
-  let avatarImage
-
-  const avatarImageCache = avatarCache.get(user.id)
-
-  if (avatarImageCache) {
-    avatarImage = avatarImageCache
-  } else {
-    try {
-      let userPhoto
-      const userPhotoUrl = avatarImageLatters(user.first_name[0].user.last_name[0] ? user.last_name[0] : '', 500)
-
-      const getChat = await telegram.getChat(user.id).catch(() => {})
-      if (getChat && getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
-
-      // if (userPhoto) userPhotoUrl = await telegram.getFileLink(userPhoto)
-      // else if (user.username) userPhotoUrl = `https://telega.one/i/userpic/320/${user.username}.jpg`
-
-      avatarImage = await loadCanvasImage(userPhotoUrl)
-
-      avatarCache.set(user.id, avatarImage)
-    } catch (error) {
-      avatarImage = avatarImageLatters('YL')
-      avatarImage = await loadCanvasImage(avatarImageLatters('YL'))
-    }
-  }
-
-  return avatarImage
-}
-
 // https://codepen.io/jreyesgs/pen/yadmge
 const addLight = (color, amount) => {
   const cc = parseInt(color, 16) + amount
@@ -90,6 +33,14 @@ const normalizeColor = (color) => {
   color = canvasCtx.fillStyle
 
   return color
+}
+
+const hashCode = function (s) {
+  let h = 0; var l = s.length; var i = 0
+  if (l > 0) {
+    while (i < l) { h = (h << 5) - h + s.charCodeAt(i++) | 0 }
+  }
+  return h
 }
 
 module.exports = async (ctx) => {
@@ -193,7 +144,7 @@ module.exports = async (ctx) => {
 
         if (quoteMessage.forward_sender_name) {
           messageFrom = {
-            id: 0,
+            id: hashCode(quoteMessage.forward_sender_name),
             name: quoteMessage.forward_sender_name,
             username: 'HiddenSender'
           }
@@ -205,7 +156,7 @@ module.exports = async (ctx) => {
           }
         }
 
-        // if (messageFrom.id === 0) {
+        // if (messageFrom.id ==message) {
         //   let sarchForwardName
 
         //   sarchForwardName = await ctx.db.User.findOne({
@@ -233,27 +184,28 @@ module.exports = async (ctx) => {
         if (lastMessage && (quoteMessage.from.name === lastMessage.from.name)) diffUser = false
 
         let name
-        let avatarImage
+        let avatarImage = false
         if (diffUser) {
           name = quoteMessages[index].from.name
-          avatarImage = await downloadAvatarImage(messageFrom)
+          avatarImage = true
         }
 
         const message = {}
 
         if (messageFrom.id) message.chatId = messageFrom.id
-        else message.chatId = 0
+        else message.chatId = hashCode(name)
         if (avatarImage) message.avatar = avatarImage
+        if (messageFrom) message.from = messageFrom
         if (name) message.name = name
         if (text) message.text = text
 
         const replyMessage = {}
         if (flag.reply && quoteMessage.reply_to_message) {
-          const replyMessageInfo = quoteMessage.reply_to_message
-          if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.id
-          else replyMessage.chatId = 0
+          const replyMessageInfo = quoteMessage.reply_to_message_id
           if (replyMessageInfo.from.first_name) replyMessage.name = replyMessageInfo.from.first_name
           if (replyMessageInfo.from.last_name) replyMessage.name += ' ' + replyMessageInfo.from.last_name
+          if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.index
+          else replyMessage.chatId = hashCode(replyMessage.name)
           if (replyMessageInfo.text) replyMessage.text = replyMessageInfo.text
           if (replyMessageInfo.caption) replyMessage.text = replyMessageInfo.caption
         }

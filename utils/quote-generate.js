@@ -2,6 +2,8 @@ const fs = require('fs')
 const { createCanvas, registerFont } = require('canvas')
 const EmojiDbLib = require('emoji-db')
 const loadCanvasImage = require('./canvas-image-load')
+const runes = require('runes')
+const { Telegram } = require('telegraf')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 
@@ -25,6 +27,78 @@ function loadFont () {
 loadFont()
 
 const { emojiImageJson } = require('../helpers/')
+
+const LRU = require('lru-cache')
+
+const telegram = new Telegram(process.env.BOT_TOKEN)
+const avatarCache = new LRU({
+  max: 20,
+  maxAge: 1000 * 60 * 5
+})
+
+const avatarImageLatters = async (letters, color) => {
+  const size = 500
+  const canvas = createCanvas(size, size)
+  const context = canvas.getContext('2d')
+
+  color = color || '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
+
+  context.fillStyle = color
+  context.fillRect(0, 0, canvas.width, canvas.height)
+  const drawLetters = await drawMultilineText(letters, null, size / 2, '#FFF', 0, size, size * 5, size * 5)
+  context.drawImage(drawLetters, (canvas.width - drawLetters.width) / 2, (canvas.height - drawLetters.height) / 1.5)
+
+  return canvas.toBuffer()
+}
+
+const downloadAvatarImage = async (user) => {
+  let avatarImage
+
+  const nameLatters = runes(user.first_name || user.name)[0] + (user.last_name ? runes(user.last_name || '')[0] : '')
+
+  const cacheKey = user.id
+
+  const avatarImageCache = avatarCache.get(cacheKey)
+
+  const avatarColorArray = [
+    '#c03d33',
+    '#4fad2d',
+    '#d09306',
+    '#168acd',
+    '#8544d6',
+    '#cd4073',
+    '#2996ad',
+    '#ce671b'
+  ]
+
+  const colorMapId = [0, 7, 4, 1, 6, 3, 5]
+  const nameIndex = Math.abs(user.id) % 7
+
+  const avatarColor = avatarColorArray[colorMapId[nameIndex]]
+
+  if (avatarImageCache) {
+    avatarImage = avatarImageCache
+  } else {
+    try {
+      let userPhoto
+      let userPhotoUrl = await avatarImageLatters(nameLatters, avatarColor)
+
+      const getChat = await telegram.getChat(user.id).catch(() => {})
+      if (getChat && getChat.photo && getChat.photo.small_file_id) userPhoto = getChat.photo.small_file_id
+
+      if (userPhoto) userPhotoUrl = await telegram.getFileLink(userPhoto)
+      else if (user.username) userPhotoUrl = `https://telega.one/i/userpic/320/${user.username}.jpg`
+
+      avatarImage = await loadCanvasImage(userPhotoUrl)
+
+      avatarCache.set(cacheKey, avatarImage)
+    } catch (error) {
+      avatarImage = await loadCanvasImage(await avatarImageLatters(nameLatters, avatarColor))
+    }
+  }
+
+  return avatarImage
+}
 
 // https://codepen.io/andreaswik/pen/YjJqpK
 function lightOrDark (color) {
@@ -332,7 +406,9 @@ function deawReplyLine (lineWidth, height, color) {
   return canvas
 }
 
-function drawAvatar (avatar) {
+async function drawAvatar (user) {
+  const avatar = await downloadAvatarImage(user)
+
   const avatarSize = avatar.naturalHeight
 
   const canvas = createCanvas(avatarSize, avatarSize)
@@ -515,7 +591,7 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
   const drawTextCanvas = await drawMultilineText(message.text, entities, fontSize, textColor, 0, fontSize, width, height - fontSize)
 
   let avatarCanvas
-  if (message.avatar) avatarCanvas = drawAvatar(message.avatar)
+  if (message.avatar) avatarCanvas = await drawAvatar(message.from)
 
   let replyName, replyText
   if (replyMessage.name && replyMessage.text) {
