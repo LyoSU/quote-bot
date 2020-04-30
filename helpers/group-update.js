@@ -19,5 +19,5 @@ module.exports = async (ctx) => {
 
   group.updatedAt = new Date()
 
-  ctx.group.info = group
+  return group
 }

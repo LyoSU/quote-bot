@@ -79,19 +79,19 @@ bot.use(session({
 }))
 
 bot.use(async (ctx, next) => {
-  await updateUser(ctx)
+  ctx.session.userInfo = await updateUser(ctx)
   if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
 
   if (ctx.group) {
-    await updateGroup(ctx)
+    ctx.group.info = await updateGroup(ctx)
     if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
   }
-  return next(ctx).then(() => {
-    ctx.session.userInfo.save().catch(() => {})
-    if (ctx.group && ctx.group.info) {
-      ctx.group.info.save().catch(() => {})
-    }
-  })
+  await next(ctx)
+
+  await ctx.session.userInfo.save().catch(() => {})
+  if (ctx.group && ctx.group.info) {
+    await ctx.group.info.save().catch(() => {})
+  }
 })
 
 bot.command('donate', handleDonate)
