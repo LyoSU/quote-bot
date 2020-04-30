@@ -38,7 +38,6 @@ module.exports = (ctx, next) => {
   const startMs = new Date()
 
   return next().then(async () => {
-    console.log('end')
     const now = Math.floor(new Date() / 1000)
     if (!stats.times[now]) stats.times[now] = []
     stats.times[now].push(new Date() - startMs)
