@@ -38,13 +38,15 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   }
 })
 
+bot.catch((error) => {
+  console.log('Oops', error)
+})
+
+bot.context.db = db
+
 bot.use((ctx, next) => {
   next()
   return true
-})
-
-bot.catch((error) => {
-  console.log('Oops', error)
 })
 
 bot.on(['channel_post', 'edited_channel_post'], () => {})
@@ -55,8 +57,6 @@ bot.use(rateLimit({
   window: 1000,
   limit: 1
 }))
-
-bot.context.db = db
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
@@ -130,7 +130,7 @@ bot.command('help', handleHelp)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', Composer.optional((ctx) => ctx.chat.type === 'private', handleQuote))
+bot.on('message', Composer.privateChat(handleQuote))
 
 db.connection.once('open', async () => {
   console.log('Connected to MongoDB')
