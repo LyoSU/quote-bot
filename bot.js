@@ -1,5 +1,6 @@
 const path = require('path')
 const Telegraf = require('telegraf')
+const Composer = require('telegraf/composer')
 const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
@@ -37,13 +38,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   }
 })
 
-bot.on(['channel_post', 'edited_channel_post'], () => {})
-
-bot.use(rateLimit({
-  window: 1000,
-  limit: 1
-}))
-
 bot.use((ctx, next) => {
   next()
   return true
@@ -53,7 +47,14 @@ bot.catch((error) => {
   console.log('Oops', error)
 })
 
+bot.on(['channel_post', 'edited_channel_post'], () => {})
+
 bot.use(stats)
+
+bot.use(rateLimit({
+  window: 1000,
+  limit: 1
+}))
 
 bot.context.db = db
 
@@ -78,19 +79,19 @@ bot.use(session({
 }))
 
 bot.use(async (ctx, next) => {
-  ctx.session.userInfo = await updateUser(ctx)
+  await updateUser(ctx)
   if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
 
   if (ctx.group) {
-    ctx.group.info = await updateGroup(ctx)
+    await updateGroup(ctx)
     if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
   }
-  await next(ctx)
-
-  await ctx.session.userInfo.save().catch(() => {})
-  if (ctx.group && ctx.group.info) {
-    await ctx.group.info.save().catch(() => {})
-  }
+  return next(ctx).then(() => {
+    ctx.session.userInfo.save().catch(() => {})
+    if (ctx.group && ctx.group.info) {
+      ctx.group.info.save().catch(() => {})
+    }
+  })
 })
 
 bot.command('donate', handleDonate)
@@ -107,6 +108,7 @@ bot.command('qrand', onlyGroup, rateLimit({
   },
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }), handleRandomQuote)
+
 bot.command('q', handleQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
@@ -117,8 +119,9 @@ bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 bot.hears(/^!qrate/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 
-bot.on('new_chat_members', (ctx) => {
-  if (ctx.message.new_chat_member.id === ctx.botInfo.id) handleHelp(ctx)
+bot.on('new_chat_members', (ctx, next) => {
+  if (ctx.message.new_chat_member.id === ctx.botInfo.id) return handleHelp(ctx)
+  else return next()
 })
 
 bot.start(handleHelp)
@@ -127,10 +130,7 @@ bot.command('help', handleHelp)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', (ctx, next) => {
-  if (ctx.chat.type === 'private') setTimeout(() => handleQuote(ctx, next), 100)
-  else return next()
-})
+bot.on('message', Composer.branch((ctx) => ['private'].includes(ctx.chat.type), handleQuote))
 
 db.connection.once('open', async () => {
   console.log('Connected to MongoDB')

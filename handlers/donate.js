@@ -10,7 +10,6 @@ module.exports = async (ctx) => {
       await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
         reply_markup: Markup.inlineKeyboard([
           [
-
             Markup.callbackButton('100 RUB', 'donate:100'),
             Markup.callbackButton('150 RUB', 'donate:150'),
             Markup.callbackButton('300 RUB', 'donate:300')
@@ -25,7 +24,7 @@ module.exports = async (ctx) => {
       await ctx.replyWithHTML(ctx.i18n.t('donate.info_group'))
     }
   } else if (ctx.updateType === 'callback_query') {
-    ctx.answerCbQuery()
+    await ctx.answerCbQuery()
 
     const orderId = uuidv4()
 

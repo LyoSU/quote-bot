@@ -44,7 +44,7 @@ const hashCode = function (s) {
 }
 
 module.exports = async (ctx) => {
-  ctx.replyWithChatAction('upload_photo')
+  await ctx.replyWithChatAction('upload_photo')
 
   const flag = {
     count: false,
@@ -79,7 +79,7 @@ module.exports = async (ctx) => {
     if (flag.color[0] === '#') colorName = colorName.substr(1)
   }
 
-  if ((ctx.match && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
+  if ((flag.color && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
   else if (colorName && flag.color[0] === '#') backgroundColor = `#${colorName}`
   else if (colorName) backgroundColor = `${colorName}`
 
@@ -115,7 +115,7 @@ module.exports = async (ctx) => {
               let chatForward = ctx.message.chat.id
               if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
               quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
-              if (!process.env.GROUP_ID) ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
+              if (!process.env.GROUP_ID) await ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
             }
           }
         } catch (error) {
@@ -156,7 +156,8 @@ module.exports = async (ctx) => {
           }
         }
 
-        // if (messageFrom.id ==message) {
+        // // поиск юзера у которых скрыт форвард по имени (отключено)
+        // if (messageFrom.id == message) {
         //   let sarchForwardName
 
         //   sarchForwardName = await ctx.db.User.findOne({
@@ -286,7 +287,7 @@ module.exports = async (ctx) => {
 
           const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
 
-          ctx.replyWithPhoto({
+          await ctx.replyWithPhoto({
             source: quoteImage,
             filename: 'quote.png'
           }, {
@@ -353,13 +354,14 @@ module.exports = async (ctx) => {
         }
       }
     } else {
-      ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+      await ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
         reply_to_message_id: ctx.message.message_id
       })
     }
   } else {
-    ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+    await ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
       reply_to_message_id: ctx.message.message_id
     })
   }
+  console.log('quote end')
 }

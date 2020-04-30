@@ -16,5 +16,5 @@ module.exports = async (ctx) => {
   user.username = ctx.from.username
   user.updatedAt = new Date()
 
-  return user
+  ctx.session.userInfo = user
 }
