@@ -130,7 +130,7 @@ bot.command('help', handleHelp)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', Composer.branch((ctx) => ['private'].includes(ctx.chat.type), handleQuote))
+bot.on('message', Composer.optional((ctx) => ctx.chat.type === 'private', handleQuote))
 
 db.connection.once('open', async () => {
   console.log('Connected to MongoDB')
