@@ -134,10 +134,14 @@ module.exports = async (ctx) => {
 
     if (ctx.chat.type === 'private' && !quoteMessage) break
 
-    if (quoteMessage && (quoteMessage.text || quoteMessage.caption)) {
+    if (!quoteMessage) {
+      continue
+    }
+
+    if (quoteMessage.text || quoteMessage.caption) {
       let text, entities
 
-      if (quoteMessage) quoteMessages[index] = quoteMessage
+      quoteMessages[index] = quoteMessage
 
       if (quoteMessage.caption) {
         text = quoteMessage.caption
