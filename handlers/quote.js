@@ -116,25 +116,23 @@ module.exports = async (ctx) => {
   let lastMessage
 
   for (let index = 0; index < messageCount; index++) {
-    if (index > -1) {
-      try {
-        const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
-        if (getMessages.length > 0 && getMessages[0].message_id) {
-          quoteMessage = getMessages[0]
-        } else {
-          if (index > 0) {
-            let chatForward = ctx.message.chat.id
-            if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
-            quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
-            if (!process.env.GROUP_ID) await ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
-          }
+    try {
+      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
+      if (getMessages.length > 0 && getMessages[0].message_id) {
+        quoteMessage = getMessages[0]
+      } else {
+        if (index > 0) {
+          let chatForward = ctx.message.chat.id
+          if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
+          quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
+          if (!process.env.GROUP_ID) await ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
         }
-      } catch (error) {
-        quoteMessage = null
       }
-
-      if (ctx.chat.type === 'private' && !quoteMessage) break
+    } catch (error) {
+      quoteMessage = null
     }
+
+    if (ctx.chat.type === 'private' && !quoteMessage) break
 
     if (quoteMessage && (quoteMessage.text || quoteMessage.caption)) {
       let text, entities
