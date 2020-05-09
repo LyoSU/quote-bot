@@ -93,8 +93,7 @@ module.exports = async (ctx) => {
   backgroundColor = normalizeColor(backgroundColor)
 
   const maxQuoteMessage = 30
-  let messageCount = 1
-  if (flag.count) messageCount = flag.count
+  let messageCount = flag.count || 1
 
   let quoteMessage = ctx.message.reply_to_message
   if (!quoteMessage && ctx.chat.type === 'private') {
