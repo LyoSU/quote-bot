@@ -95,7 +95,7 @@ module.exports = async (ctx) => {
     messageCount = maxQuoteMessage
   }
 
-  if (messageCount > maxQuoteMessage) messageCount = maxQuoteMessage
+  messageCount = Math.min(messageCount, maxQuoteMessage)
 
   if (quoteMessage) {
     const quoteMessages = []
