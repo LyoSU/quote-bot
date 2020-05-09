@@ -59,12 +59,12 @@ module.exports = async (ctx) => {
     const args = ctx.message.text.split(' ')
     args.splice(0, 1)
 
-    flag.count = args.filter(arg => !isNaN(parseInt(arg)))[0]
-    flag.reply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
-    flag.png = args.filter(arg => ['p', 'png'].includes(arg))[0]
-    flag.img = args.filter(arg => ['i', 'img'].includes(arg))[0]
-    flag.rate = args.filter(arg => ['rate'].includes(arg))[0]
-    flag.color = args.filter(arg => (arg !== flag.count && arg !== flag.reply && arg !== flag.png && arg !== flag.img))[0]
+    flag.count = args.find((arg) => !isNaN(parseInt(arg)))
+    flag.reply = args.find((arg) => ['r', 'reply'].includes(arg))
+    flag.png = args.find((arg) => ['p', 'png'].includes(arg))
+    flag.img = args.find((arg) => ['i', 'img'].includes(arg))
+    flag.rate = args.find((arg) => ['rate'].includes(arg))
+    flag.color = args.find((arg) => (arg !== flag.count && arg !== flag.reply && arg !== flag.png && arg !== flag.img))
   }
 
   // set background color
