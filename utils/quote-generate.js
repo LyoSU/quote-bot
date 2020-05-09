@@ -509,20 +509,26 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
   return canvas
 }
 
+const normalizeColor = (color) => {
+  const canvas = createCanvas(0, 0)
+  const canvasCtx = canvas.getContext('2d')
+
+  canvasCtx.fillStyle = color
+  color = canvasCtx.fillStyle
+
+  return color
+}
+
 module.exports = async (backgroundColor, message, replyMessage, entities, width = 512, height = 512) => {
   const scale = 2
 
   width *= scale
   height *= scale
 
-  const canvas = createCanvas(0, 0)
-  const canvasCtx = canvas.getContext('2d')
-
-  canvasCtx.fillStyle = backgroundColor
-  backgroundColor = canvasCtx.fillStyle
+  backgroundColor = normalizeColor(backgroundColor)
 
   // check background style color black/light
-  const backStyle = lightOrDark(canvasCtx.fillStyle)
+  const backStyle = lightOrDark(backgroundColor)
 
   // defsult color from tdesktop
   // https://github.com/telegramdesktop/tdesktop/blob/67d08c2d4064e04bec37454b5b32c5c6e606420a/Telegram/SourceFiles/data/data_peer.cpp#L43

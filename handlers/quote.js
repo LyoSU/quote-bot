@@ -25,16 +25,6 @@ const lighten = (color, amount) => {
   return color
 }
 
-const normalizeColor = (color) => {
-  const canvas = createCanvas(0, 0)
-  const canvasCtx = canvas.getContext('2d')
-
-  canvasCtx.fillStyle = color
-  color = canvasCtx.fillStyle
-
-  return color
-}
-
 const hashCode = function (s) {
   let h = 0; var l = s.length; var i = 0
   if (l > 0) {
@@ -89,8 +79,6 @@ module.exports = async (ctx) => {
   } else {
     backgroundColor = '#130f1c'
   }
-
-  backgroundColor = normalizeColor(backgroundColor)
 
   const maxQuoteMessage = 30
   let messageCount = flag.count || 1
