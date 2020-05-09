@@ -555,8 +555,8 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
     '#904812'
   ]
 
-  // name black style color
-  const nameColorBlack = [
+  // name dark style color
+  const nameColorDark = [
     '#fb6169',
     '#85de85',
     '#f3bc5c',
@@ -573,7 +573,7 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
 
   const nameIndex = Math.abs(message.chatId) % 7
 
-  let nameColor = nameColorBlack[nameMap[nameIndex]]
+  let nameColor = nameColorDark[nameMap[nameIndex]]
   if (backStyle === 'light') nameColor = nameColorLight[nameMap[nameIndex]]
 
   const nameSize = 22 * scale
@@ -602,7 +602,7 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
   let replyName, replyText
   if (replyMessage.name && replyMessage.text) {
     const replyNameIndex = Math.abs(replyMessage.chatId) % 7
-    let repltNameColor = nameColorBlack[nameMap[replyNameIndex]]
+    let repltNameColor = nameColorDark[nameMap[replyNameIndex]]
     if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
 
     const replyNameFontSize = 16 * scale
