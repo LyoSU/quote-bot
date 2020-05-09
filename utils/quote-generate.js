@@ -573,8 +573,10 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
 
   const nameIndex = Math.abs(message.chatId) % 7
 
-  let nameColor = nameColorDark[nameMap[nameIndex]]
-  if (backStyle === 'light') nameColor = nameColorLight[nameMap[nameIndex]]
+  const nameColorIndex = nameMap[nameIndex]
+  const nameColorPalette = backStyle === 'light' ? nameColorLight : nameColorDark
+
+  const nameColor = nameColorPalette[nameColorIndex]
 
   const nameSize = 22 * scale
 
