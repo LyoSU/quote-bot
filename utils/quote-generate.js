@@ -602,11 +602,11 @@ module.exports = async (backgroundColor, message, replyMessage, entities, width 
   let replyName, replyText
   if (replyMessage.name && replyMessage.text) {
     const replyNameIndex = Math.abs(replyMessage.chatId) % 7
-    let repltNameColor = nameColorDark[nameMap[replyNameIndex]]
-    if (backStyle === 'light') repltNameColor = nameColorLight[nameMap[replyNameIndex]]
+    let replyNameColor = nameColorDark[nameMap[replyNameIndex]]
+    if (backStyle === 'light') replyNameColor = nameColorLight[nameMap[replyNameIndex]]
 
     const replyNameFontSize = 16 * scale
-    if (replyMessage.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyNameFontSize, repltNameColor, 0, replyNameFontSize, width * 0.9, replyNameFontSize)
+    if (replyMessage.name) replyName = await drawMultilineText(replyMessage.name, 'bold', replyNameFontSize, replyNameColor, 0, replyNameFontSize, width * 0.9, replyNameFontSize)
 
     let textColor = '#fff'
     if (backStyle === 'light') textColor = '#000'
