@@ -25,22 +25,18 @@ const lighten = (color, amount) => {
   return color
 }
 
-const normalizeColor = (color) => {
-  const canvas = createCanvas(0, 0)
-  const canvasCtx = canvas.getContext('2d')
-
-  canvasCtx.fillStyle = color
-  color = canvasCtx.fillStyle
-
-  return color
-}
-
 const hashCode = function (s) {
   let h = 0; var l = s.length; var i = 0
   if (l > 0) {
     while (i < l) { h = (h << 5) - h + s.charCodeAt(i++) | 0 }
   }
   return h
+}
+
+const generateRandomColor = () => {
+  const rawColor = (Math.floor(Math.random() * 16777216)).toString(16)
+  const color = '0'.repeat(6 - rawColor.length) + rawColor
+  return `#${color}`
 }
 
 module.exports = async (ctx) => {
@@ -59,35 +55,33 @@ module.exports = async (ctx) => {
     const args = ctx.message.text.split(' ')
     args.splice(0, 1)
 
-    flag.count = args.filter(arg => !isNaN(parseInt(arg)))[0]
-    flag.reply = args.filter(arg => ['r', 'reply'].includes(arg))[0]
-    flag.png = args.filter(arg => ['p', 'png'].includes(arg))[0]
-    flag.img = args.filter(arg => ['i', 'img'].includes(arg))[0]
-    flag.rate = args.filter(arg => ['rate'].includes(arg))[0]
-    flag.color = args.filter(arg => (arg !== flag.count && arg !== flag.reply && arg !== flag.png && arg !== flag.img))[0]
+    flag.count = args.find((arg) => !isNaN(parseInt(arg)))
+    flag.reply = args.find((arg) => ['r', 'reply'].includes(arg))
+    flag.png = args.find((arg) => ['p', 'png'].includes(arg))
+    flag.img = args.find((arg) => ['i', 'img'].includes(arg))
+    flag.rate = args.find((arg) => ['rate'].includes(arg))
+    flag.color = args.find((arg) => (arg !== flag.count && arg !== flag.reply && arg !== flag.png && arg !== flag.img))
   }
 
   // set background color
-  let backgroundColor = '#130f1c'
+  let backgroundColor
 
-  if (ctx.session.userInfo.settings.quote.backgroundColor) backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
-  if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
-
-  let colorName
   if (flag.color) {
-    colorName = flag.color
-    if (flag.color[0] === '#') colorName = colorName.substr(1)
+    if (flag.color === 'random') {
+      backgroundColor = generateRandomColor()
+    } else {
+      backgroundColor = flag.color
+    }
+  } else if (ctx.group && ctx.group.info.settings.quote.backgroundColor) {
+    backgroundColor = ctx.group.info.settings.quote.backgroundColor
+  } else if (ctx.session.userInfo.settings.quote.backgroundColor) {
+    backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
+  } else {
+    backgroundColor = '#130f1c'
   }
 
-  if ((flag.color && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
-  else if (colorName && flag.color[0] === '#') backgroundColor = `#${colorName}`
-  else if (colorName) backgroundColor = `${colorName}`
-
-  backgroundColor = normalizeColor(backgroundColor)
-
   const maxQuoteMessage = 30
-  let messageCount = 1
-  if (flag.count) messageCount = flag.count
+  let messageCount = flag.count || 1
 
   let quoteMessage = ctx.message.reply_to_message
   if (!quoteMessage && ctx.chat.type === 'private') {
@@ -110,30 +104,32 @@ module.exports = async (ctx) => {
   let lastMessage
 
   for (let index = 0; index < messageCount; index++) {
-    if (index > -1) {
-      try {
-        const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
-        if (getMessages.length > 0 && getMessages[0].message_id) {
-          quoteMessage = getMessages[0]
-        } else {
-          if (index > 0) {
-            let chatForward = ctx.message.chat.id
-            if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
-            quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
-            if (!process.env.GROUP_ID) await ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
-          }
+    try {
+      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
+      if (getMessages.length > 0 && getMessages[0].message_id) {
+        quoteMessage = getMessages[0]
+      } else {
+        if (index > 0) {
+          let chatForward = ctx.message.chat.id
+          if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
+          quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
+          if (!process.env.GROUP_ID) await ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
         }
-      } catch (error) {
-        quoteMessage = null
       }
-
-      if (ctx.chat.type === 'private' && !quoteMessage) break
+    } catch (error) {
+      quoteMessage = null
     }
 
-    if (quoteMessage && (quoteMessage.text || quoteMessage.caption)) {
+    if (ctx.chat.type === 'private' && !quoteMessage) break
+
+    if (!quoteMessage) {
+      continue
+    }
+
+    if (quoteMessage.text || quoteMessage.caption) {
       let text, entities
 
-      if (quoteMessage) quoteMessages[index] = quoteMessage
+      quoteMessages[index] = quoteMessage
 
       if (quoteMessage.caption) {
         text = quoteMessage.caption
@@ -143,9 +139,7 @@ module.exports = async (ctx) => {
         entities = quoteMessage.entities
       }
 
-      let messageFrom = quoteMessage.from
-
-      if (quoteMessage.forward_from) messageFrom = quoteMessage.forward_from
+      let messageFrom
 
       if (quoteMessage.forward_sender_name) {
         messageFrom = {
@@ -159,6 +153,10 @@ module.exports = async (ctx) => {
           name: quoteMessage.forward_from_chat.title,
           username: quoteMessage.forward_from_chat.username || null
         }
+      } else if (quoteMessage.forward_from) {
+        messageFrom = quoteMessage.forward_from
+      } else {
+        messageFrom = quoteMessage.from
       }
 
       // // поиск юзера у которых скрыт форвард по имени (отключено)
