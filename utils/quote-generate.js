@@ -348,47 +348,26 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
 }
 
 // https://stackoverflow.com/a/3368118
-function drawRoundRect (color, width, height, radius, fill, stroke) {
+function drawRoundRect (color, w, h, r) {
   const x = 0
   const y = 0
 
-  const canvas = createCanvas(width, height)
+  const canvas = createCanvas(w, h)
   const canvasCtx = canvas.getContext('2d')
 
   canvasCtx.fillStyle = color
 
-  if (typeof stroke === 'undefined') {
-    stroke = true
-  }
-  if (typeof radius === 'undefined') {
-    radius = 5
-  }
-  if (typeof radius === 'number') {
-    radius = { tl: radius, tr: radius, br: radius, bl: radius }
-  } else {
-    const defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 }
-
-    for (const side in defaultRadius) {
-      radius[side] = radius[side] || defaultRadius[side]
-    }
-  }
+  if (w < 2 * r) r = w / 2
+  if (h < 2 * r) r = h / 2
   canvasCtx.beginPath()
-  canvasCtx.moveTo(x + radius.tl, y)
-  canvasCtx.lineTo(x + width - radius.tr, y)
-  canvasCtx.quadraticCurveTo(x + width, y, x + width, y + radius.tr)
-  canvasCtx.lineTo(x + width, y + height - radius.br)
-  canvasCtx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height)
-  canvasCtx.lineTo(x + radius.bl, y + height)
-  canvasCtx.quadraticCurveTo(x, y + height, x, y + height - radius.bl)
-  canvasCtx.lineTo(x, y + radius.tl)
-  canvasCtx.quadraticCurveTo(x, y, x + radius.tl, y)
+  canvasCtx.moveTo(x + r, y)
+  canvasCtx.arcTo(x + w, y, x + w, y + h, r)
+  canvasCtx.arcTo(x + w, y + h, x, y + h, r)
+  canvasCtx.arcTo(x, y + h, x, y, r)
+  canvasCtx.arcTo(x, y, x + w, y, r)
   canvasCtx.closePath()
-  if (fill) {
-    canvasCtx.fill()
-  }
-  if (stroke) {
-    canvasCtx.stroke()
-  }
+
+  canvasCtx.fill()
 
   return canvas
 }
@@ -489,7 +468,7 @@ async function drawQuote (scale = 1, backgroundColor, avatar, replyName, replyTe
   const rectPosY = blockPosY
   const rectRoundRadius = 25 * scale
 
-  const rect = drawRoundRect(backgroundColor, rectWidth, rectHeight, rectRoundRadius, '#fff', false)
+  const rect = drawRoundRect(backgroundColor, rectWidth, rectHeight, rectRoundRadius)
 
   if (avatar) canvasCtx.drawImage(avatar, avatarPosX, avatarPosY, avatarSize, avatarSize)
   if (rect) canvasCtx.drawImage(rect, rectPosX, rectPosY)
