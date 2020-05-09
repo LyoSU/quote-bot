@@ -43,6 +43,12 @@ const hashCode = function (s) {
   return h
 }
 
+const generateRandomColor = () => {
+  const rawColor = (Math.floor(Math.random() * 16777216)).toString(16)
+  const color = '0'.repeat(6 - rawColor.length) + rawColor
+  return `#${color}`
+}
+
 module.exports = async (ctx) => {
   await ctx.replyWithChatAction('upload_photo')
 
@@ -68,20 +74,21 @@ module.exports = async (ctx) => {
   }
 
   // set background color
-  let backgroundColor = '#130f1c'
+  let backgroundColor
 
-  if (ctx.session.userInfo.settings.quote.backgroundColor) backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
-  if (ctx.group && ctx.group.info.settings.quote.backgroundColor) backgroundColor = ctx.group.info.settings.quote.backgroundColor
-
-  let colorName
   if (flag.color) {
-    colorName = flag.color
-    if (flag.color[0] === '#') colorName = colorName.substr(1)
+    if (flag.color === 'random') {
+      backgroundColor = generateRandomColor()
+    } else {
+      backgroundColor = flag.color
+    }
+  } else if (ctx.group && ctx.group.info.settings.quote.backgroundColor) {
+    backgroundColor = ctx.group.info.settings.quote.backgroundColor
+  } else if (ctx.session.userInfo.settings.quote.backgroundColor) {
+    backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
+  } else {
+    backgroundColor = '#130f1c'
   }
-
-  if ((flag.color && colorName === 'random') || backgroundColor === 'random') backgroundColor = `#${(Math.floor(Math.random() * 16777216)).toString(16)}`
-  else if (colorName && flag.color[0] === '#') backgroundColor = `#${colorName}`
-  else if (colorName) backgroundColor = `${colorName}`
 
   backgroundColor = normalizeColor(backgroundColor)
 
