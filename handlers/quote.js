@@ -151,9 +151,7 @@ module.exports = async (ctx) => {
         entities = quoteMessage.entities
       }
 
-      let messageFrom = quoteMessage.from
-
-      if (quoteMessage.forward_from) messageFrom = quoteMessage.forward_from
+      let messageFrom
 
       if (quoteMessage.forward_sender_name) {
         messageFrom = {
@@ -167,6 +165,10 @@ module.exports = async (ctx) => {
           name: quoteMessage.forward_from_chat.title,
           username: quoteMessage.forward_from_chat.username || null
         }
+      } else if (quoteMessage.forward_from) {
+        messageFrom = quoteMessage.forward_from
+      } else {
+        messageFrom = quoteMessage.from
       }
 
       // // поиск юзера у которых скрыт форвард по имени (отключено)
