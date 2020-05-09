@@ -519,9 +519,7 @@ const normalizeColor = (color) => {
   return color
 }
 
-module.exports = async (backgroundColor, message, replyMessage, entities, width = 512, height = 512) => {
-  const scale = 2
-
+module.exports = async (backgroundColor, message, replyMessage, entities, width = 512, height = 512, scale = 2) => {
   width *= scale
   height *= scale
 

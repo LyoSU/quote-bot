@@ -47,8 +47,9 @@ module.exports = async (ctx) => {
     reply: false,
     png: false,
     img: false,
+    rate: false,
     color: false,
-    rate: false
+    scale: false
   }
 
   if (ctx.message && ctx.message.text && ctx.message.text.match(/\/q/)) {
@@ -60,7 +61,10 @@ module.exports = async (ctx) => {
     flag.png = args.find((arg) => ['p', 'png'].includes(arg))
     flag.img = args.find((arg) => ['i', 'img'].includes(arg))
     flag.rate = args.find((arg) => ['rate'].includes(arg))
-    flag.color = args.find((arg) => (arg !== flag.count && arg !== flag.reply && arg !== flag.png && arg !== flag.img))
+    flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
+    flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
+
+    if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
   }
 
   // set background color
@@ -223,7 +227,7 @@ module.exports = async (ctx) => {
       }
 
       console.log('start generate quote')
-      const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities, width, height)
+      const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities, width, height, flag.scale)
 
       quoteImages.push(canvasQuote)
       lastMessage = quoteMessage
