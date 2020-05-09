@@ -143,7 +143,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     const canvas = createCanvas(maxWidth + fontSize, maxHeight + fontSize)
-    const canvasСtx = canvas.getContext('2d')
+    const canvasCtx = canvas.getContext('2d')
 
     text = text.slice(0, 4096)
     text = text.replace(/і/g, 'i')
@@ -279,15 +279,15 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
         fillStyle = '#6ab7ec'
       }
       // else {
-      //   canvasСtx.font = `${fontSize}px OpenSans`
-      //   canvasСtx.fillStyle = fontColor
+      //   canvasCtx.font = `${fontSize}px OpenSans`
+      //   canvasCtx.fillStyle = fontColor
       // }
 
-      canvasСtx.font = `${fontType} ${fontSize}px ${fontName}`
-      canvasСtx.fillStyle = fillStyle
+      canvasCtx.font = `${fontType} ${fontSize}px ${fontName}`
+      canvasCtx.fillStyle = fillStyle
 
-      if (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
-        while (canvasСtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
+      if (canvasCtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
+        while (canvasCtx.measureText(styledWord.word).width > maxWidth - fontSize * 3) {
           styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
           if (styledWord.word.length <= 0) break
         }
@@ -295,7 +295,7 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       }
 
       let lineWidth
-      const wordlWidth = canvasСtx.measureText(styledWord.word).width
+      const wordlWidth = canvasCtx.measureText(styledWord.word).width
 
       if (styledWord.emoji) lineWidth = lineX + fontSize
       else lineWidth = lineX + wordlWidth
@@ -305,16 +305,16 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
         if ((styledWord.word.match(spaceMatch) || !styledWord.word.match(breakMatch)) && lineY + lineHeight > maxHeight) {
           while (lineWidth > maxWidth - fontSize * 2) {
             styledWord.word = styledWord.word.substr(0, styledWord.word.length - 1)
-            lineWidth = lineX + canvasСtx.measureText(styledWord.word).width
+            lineWidth = lineX + canvasCtx.measureText(styledWord.word).width
             if (styledWord.word.length <= 0) break
           }
 
           styledWord.word += '…'
-          lineWidth = lineX + canvasСtx.measureText(styledWord.word).width
+          lineWidth = lineX + canvasCtx.measureText(styledWord.word).width
           breakWrite = true
         } else {
           if (styledWord.emoji) lineWidth = textX + fontSize + (fontSize * 0.15)
-          else lineWidth = textX + canvasСtx.measureText(styledWord.word).width
+          else lineWidth = textX + canvasCtx.measureText(styledWord.word).width
 
           lineX = textX
           lineY += lineHeight
@@ -325,12 +325,12 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
       if (textWidth > maxWidth) textWidth = maxWidth
 
       if (emojiImage) {
-        canvasСtx.drawImage(emojiImage, lineX, lineY - fontSize + (fontSize * 0.15), fontSize, fontSize)
+        canvasCtx.drawImage(emojiImage, lineX, lineY - fontSize + (fontSize * 0.15), fontSize, fontSize)
       } else {
-        canvasСtx.fillText(styledWord.word, lineX, lineY)
+        canvasCtx.fillText(styledWord.word, lineX, lineY)
 
-        if (styledWord.style.includes('strikethrough')) canvasСtx.fillRect(lineX, lineY - fontSize / 2.8, canvasСtx.measureText(styledWord.word).width, fontSize * 0.1)
-        if (styledWord.style.includes('underline')) canvasСtx.fillRect(lineX, lineY + 2, canvasСtx.measureText(styledWord.word).width, fontSize * 0.1)
+        if (styledWord.style.includes('strikethrough')) canvasCtx.fillRect(lineX, lineY - fontSize / 2.8, canvasCtx.measureText(styledWord.word).width, fontSize * 0.1)
+        if (styledWord.style.includes('underline')) canvasCtx.fillRect(lineX, lineY + 2, canvasCtx.measureText(styledWord.word).width, fontSize * 0.1)
       }
 
       lineX = lineWidth
@@ -339,9 +339,9 @@ async function drawMultilineText (text, entities, fontSize, fontColor, textX, te
     }
 
     const canvasResize = createCanvas(textWidth, lineY + fontSize)
-    const canvasResizeСtx = canvasResize.getContext('2d')
+    const canvasResizeCtx = canvasResize.getContext('2d')
 
-    canvasResizeСtx.drawImage(canvas, 0, 0)
+    canvasResizeCtx.drawImage(canvas, 0, 0)
 
     resolve(canvasResize)
   })
