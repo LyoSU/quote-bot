@@ -1,29 +1,8 @@
 const Markup = require('telegraf/markup')
 const {
-  loadCanvasImage,
-  generateQuote
-} = require('../utils')
-const {
   tdlib
 } = require('../helpers')
-const { createCanvas } = require('canvas')
-const sharp = require('sharp')
-
-// https://codepen.io/jreyesgs/pen/yadmge
-const addLight = (color, amount) => {
-  const cc = parseInt(color, 16) + amount
-  let c = (cc > 255) ? 255 : (cc)
-  c = (c.toString(16).length > 1) ? c.toString(16) : `0${c.toString(16)}`
-  return c
-}
-
-const lighten = (color, amount) => {
-  color = (color.indexOf('#') >= 0) ? color.substring(1, color.length) : color
-  amount = parseInt((255 * amount) / 100)
-  color = `#${addLight(color.substring(0, 2), amount)}${addLight(color.substring(2, 4), amount)}${addLight(color.substring(4, 6), amount)}`
-
-  return color
-}
+const got = require('got')
 
 const hashCode = function (s) {
   let h = 0; var l = s.length; var i = 0
@@ -133,8 +112,6 @@ module.exports = async (ctx) => {
     if (quoteMessage.text || quoteMessage.caption) {
       let text, entities
 
-      quoteMessages[index] = quoteMessage
-
       if (quoteMessage.caption) {
         text = quoteMessage.caption
         entities = quoteMessage.caption_entities
@@ -191,20 +168,20 @@ module.exports = async (ctx) => {
       let diffUser = true
       if (lastMessage && (quoteMessage.from.name === lastMessage.from.name)) diffUser = false
 
-      let name
-      let avatarImage = false
-      if (diffUser) {
-        name = quoteMessages[index].from.name
-        avatarImage = true
-      }
-
       const message = {}
 
       if (messageFrom.id) message.chatId = messageFrom.id
-      else message.chatId = hashCode(name)
+      else message.chatId = hashCode(quoteMessage.from.name)
+
+      let avatarImage = false
+      if (diffUser) {
+        avatarImage = true
+      } else {
+        quoteMessage.from.name = false
+      }
+
       if (avatarImage) message.avatar = avatarImage
       if (messageFrom) message.from = messageFrom
-      if (name) message.name = name
       if (text) message.text = text
 
       const replyMessage = {}
@@ -218,151 +195,108 @@ module.exports = async (ctx) => {
         if (replyMessageInfo.caption) replyMessage.text = replyMessageInfo.caption
       }
 
-      let width = 512
-      let height = 512 * 1.5
-
-      if (flag.png || flag.img) {
-        width *= 1.5
-        height *= 5
+      quoteMessages[index] = {
+        message,
+        replyMessage,
+        entities
       }
 
-      console.log('start generate quote')
-      const canvasQuote = await generateQuote(backgroundColor, message, replyMessage, entities, width, height, flag.scale)
-
-      quoteImages.push(canvasQuote)
+      // quoteImages.push(canvasQuote)
       lastMessage = quoteMessage
     }
   }
 
-  if (quoteImages.length === 0) {
-    return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+  if (quoteMessages.length < 1) {
+    if (quoteImages.length === 0) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+        reply_to_message_id: ctx.message.message_id
+      })
+    }
+  }
+
+  const width = 512
+  const height = 512 * 1.5
+
+  let type = 'quote'
+
+  if (flag.img) type = 'image'
+  if (flag.png) type = 'png'
+
+  const quoteImage = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
+    json: {
+      type,
+      backgroundColor,
+      width,
+      height,
+      scale: flag.scale || 2,
+      messages: quoteMessages
+    }
+  }).buffer().catch((error) => {
+    const errorMessage = JSON.parse(error.response.body).error
+    console.error(errorMessage)
+
+    ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
       reply_to_message_id: ctx.message.message_id
     })
-  }
 
-  let canvasQuote
+    return false
+  })
 
-  if (quoteImages.length > 1) {
-    let width = 0
-    let height = 0
-
-    for (let index = 0; index < quoteImages.length; index++) {
-      if (quoteImages[index].width > width) width = quoteImages[index].width
-      height += quoteImages[index].height
-    }
-
-    const quoteMargin = 5
-
-    const canvas = createCanvas(width, height + (quoteMargin * quoteImages.length))
-    const canvasCtx = canvas.getContext('2d')
-
-    let imageY = 0
-
-    for (let index = 0; index < quoteImages.length; index++) {
-      canvasCtx.drawImage(quoteImages[index], 0, imageY)
-      imageY += quoteImages[index].height + quoteMargin
-    }
-    canvasQuote = canvas
-  } else {
-    canvasQuote = quoteImages[0]
-  }
-
-  if (!flag.img && canvasQuote.height > 1024 * 3) flag.png = true
-
-  if (flag.png || flag.img) {
+  if (quoteImage) {
     if (flag.png) {
       await ctx.replyWithDocument({
-        source: canvasQuote.toBuffer(),
+        source: quoteImage,
         filename: 'quote.png'
       }, {
         reply_to_message_id: ctx.message.message_id
       })
-    } else {
-      const padding = 25
-
-      const canvasImage = await loadCanvasImage(canvasQuote.toBuffer())
-
-      const canvasPic = createCanvas(canvasImage.width + padding * 2, canvasImage.height + padding * 2)
-      const canvasPicCtx = canvasPic.getContext('2d')
-
-      canvasPicCtx.fillStyle = lighten(backgroundColor, 20)
-      canvasPicCtx.fillRect(0, 0, canvasPic.width + padding, canvasPic.height + padding)
-
-      const canvasPatternImage = await loadCanvasImage('./assets/pattern_02.png')
-      // const canvasPatternImage = await loadCanvasImage('./assets/pattern_ny.png')
-
-      const pattern = canvasPicCtx.createPattern(canvasPatternImage, 'repeat')
-      canvasPicCtx.fillStyle = pattern
-      canvasPicCtx.fillRect(0, 0, canvasPic.width, canvasPic.height)
-
-      canvasPicCtx.drawImage(canvasImage, padding, padding)
-
-      const quoteImage = await sharp(canvasPic.toBuffer()).png({ lossless: true, force: true }).toBuffer()
-
+    } else if (flag.img) {
       await ctx.replyWithPhoto({
         source: quoteImage,
         filename: 'quote.png'
       }, {
         reply_to_message_id: ctx.message.message_id
       })
-    }
-  } else {
-    const downPadding = 75
-    const maxWidth = 512
-    const maxHeight = 512
+    } else {
+      let replyMarkup = {}
 
-    const imageQuoteSharp = sharp(canvasQuote.toBuffer())
-
-    if (canvasQuote.height > canvasQuote.width) imageQuoteSharp.resize({ height: maxHeight })
-    else imageQuoteSharp.resize({ width: maxWidth })
-
-    const canvasImage = await loadCanvasImage(await imageQuoteSharp.toBuffer())
-
-    const canvasPadding = createCanvas(canvasImage.width, canvasImage.height + downPadding)
-    const canvasPaddingCtx = canvasPadding.getContext('2d')
-
-    canvasPaddingCtx.drawImage(canvasImage, 0, 0)
-
-    const quoteImage = await sharp(canvasPadding.toBuffer()).webp({ lossless: true, force: true }).toBuffer()
-
-    let replyMarkup = {}
-
-    if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
-      replyMarkup = Markup.inlineKeyboard([
-        Markup.callbackButton('👍', 'rate:👍'),
-        Markup.callbackButton('👎', 'rate:👎')
-      ])
-    }
-
-    const sendResult = await ctx.replyWithDocument({
-      source: quoteImage,
-      filename: 'quote.webp'
-    }, {
-      reply_to_message_id: ctx.message.message_id,
-      reply_markup: replyMarkup
-    })
-
-    if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
-      const quoteDb = new ctx.db.Quote()
-      quoteDb.group = ctx.group.info
-      quoteDb.user = ctx.session.userInfo
-      quoteDb.file_id = sendResult.sticker.file_id
-      quoteDb.file_unique_id = sendResult.sticker.file_unique_id
-      quoteDb.rate = {
-        votes: [
-          {
-            name: '👍',
-            vote: []
-          },
-          {
-            name: '👎',
-            vote: []
-          }
-        ],
-        score: 0
+      if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+        replyMarkup = Markup.inlineKeyboard([
+          Markup.callbackButton('👍', 'rate:👍'),
+          Markup.callbackButton('👎', 'rate:👎')
+        ])
       }
 
-      await quoteDb.save()
+      const sendResult = await ctx.replyWithDocument({
+        source: quoteImage,
+        filename: 'quote.webp'
+      }, {
+        reply_to_message_id: ctx.message.message_id,
+        reply_markup: replyMarkup
+      })
+
+      if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+        const quoteDb = new ctx.db.Quote()
+        quoteDb.group = ctx.group.info
+        quoteDb.user = ctx.session.userInfo
+        quoteDb.file_id = sendResult.sticker.file_id
+        quoteDb.file_unique_id = sendResult.sticker.file_unique_id
+        quoteDb.rate = {
+          votes: [
+            {
+              name: '👍',
+              vote: []
+            },
+            {
+              name: '👎',
+              vote: []
+            }
+          ],
+          score: 0
+        }
+
+        await quoteDb.save()
+      }
     }
   }
 }
