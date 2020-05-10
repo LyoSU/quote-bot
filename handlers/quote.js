@@ -166,7 +166,7 @@ module.exports = async (ctx) => {
       quoteMessage.from = messageFrom
 
       let diffUser = true
-      if (lastMessage && (quoteMessage.from.name === lastMessage.from.name)) diffUser = false
+      if (lastMessage && (quoteMessage.from.name === lastMessage.from.name || !lastMessage.from.name)) diffUser = false
 
       const message = {}
 
@@ -232,13 +232,16 @@ module.exports = async (ctx) => {
       messages: quoteMessages
     }
   }).buffer().catch((error) => {
-    const errorMessage = JSON.parse(error.response.body).error
-    console.error(errorMessage)
+    if (error.response.body) {
+      const errorMessage = JSON.parse(error.response.body).error
+      console.error(errorMessage)
 
-    ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-      reply_to_message_id: ctx.message.message_id
-    })
-
+      ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+        reply_to_message_id: ctx.message.message_id
+      })
+    } else {
+      console.error(error)
+    }
     return false
   })
 
