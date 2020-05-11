@@ -18,8 +18,13 @@ const generateRandomColor = () => {
   return `#${color}`
 }
 
+function sleep (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 module.exports = async (ctx) => {
   await ctx.replyWithChatAction('upload_photo')
+  await sleep(100)
 
   const flag = {
     count: false,
