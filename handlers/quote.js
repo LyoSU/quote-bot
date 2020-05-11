@@ -229,7 +229,7 @@ module.exports = async (ctx) => {
   if (flag.img) type = 'image'
   if (flag.png) type = 'png'
 
-  const quoteImage = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
+  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
     json: {
       type,
       backgroundColor,
@@ -238,7 +238,7 @@ module.exports = async (ctx) => {
       scale: flag.scale || scale,
       messages: quoteMessages
     }
-  }).buffer().catch((error) => {
+  }).json().catch((error) => {
     if (error.response && error.response.body) {
       const errorMessage = JSON.parse(error.response.body).error.message
 
@@ -258,22 +258,10 @@ module.exports = async (ctx) => {
     return false
   })
 
-  if (quoteImage) {
-    if (flag.png) {
-      await ctx.replyWithDocument({
-        source: quoteImage,
-        filename: 'quote.png'
-      }, {
-        reply_to_message_id: ctx.message.message_id
-      })
-    } else if (flag.img) {
-      await ctx.replyWithPhoto({
-        source: quoteImage,
-        filename: 'quote.png'
-      }, {
-        reply_to_message_id: ctx.message.message_id
-      })
-    } else {
+  if (generate.result.image) {
+    // eslint-disable-next-line node/no-deprecated-api
+    const image = new Buffer(generate.result.image, 'base64')
+    if (generate.result.type === 'quote') {
       let replyMarkup = {}
 
       if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
@@ -284,7 +272,7 @@ module.exports = async (ctx) => {
       }
 
       const sendResult = await ctx.replyWithDocument({
-        source: quoteImage,
+        source: image,
         filename: 'quote.webp'
       }, {
         reply_to_message_id: ctx.message.message_id,
@@ -313,6 +301,20 @@ module.exports = async (ctx) => {
 
         await quoteDb.save()
       }
+    } else if (generate.result.type === 'image') {
+      await ctx.replyWithPhoto({
+        source: image,
+        filename: 'quote.png'
+      }, {
+        reply_to_message_id: ctx.message.message_id
+      })
+    } else {
+      await ctx.replyWithDocument({
+        source: image,
+        filename: 'quote.png'
+      }, {
+        reply_to_message_id: ctx.message.message_id
+      })
     }
   }
 }
