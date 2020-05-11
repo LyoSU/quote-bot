@@ -166,7 +166,7 @@ module.exports = async (ctx) => {
       quoteMessage.from = messageFrom
 
       let diffUser = true
-      if (lastMessage && (quoteMessage.from.name === lastMessage.from.name || !lastMessage.from.name)) diffUser = false
+      if (lastMessage && (quoteMessage.from.id === lastMessage.from.id)) diffUser = false
 
       const message = {}
 
@@ -214,8 +214,15 @@ module.exports = async (ctx) => {
     }
   }
 
-  const width = 512
-  const height = 512 * 1.5
+  let width = 512
+  let height = 512 * 1.5
+  let scale = 2
+
+  if (flag.png || flag.img) {
+    width *= 1.5
+    height *= 5
+    scale *= 1.5
+  }
 
   let type = 'quote'
 
@@ -228,19 +235,25 @@ module.exports = async (ctx) => {
       backgroundColor,
       width,
       height,
-      scale: flag.scale || 2,
+      scale: flag.scale || scale,
       messages: quoteMessages
     }
   }).buffer().catch((error) => {
-    if (error.response.body) {
-      const errorMessage = JSON.parse(error.response.body).error
-      console.error(errorMessage)
+    if (error.response && error.response.body) {
+      const errorMessage = JSON.parse(error.response.body).error.message
 
-      ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+      ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
+        error: errorMessage
+      }), {
         reply_to_message_id: ctx.message.message_id
       })
     } else {
       console.error(error)
+      ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
+        error: 'quote_api_down'
+      }), {
+        reply_to_message_id: ctx.message.message_id
+      })
     }
     return false
   })
