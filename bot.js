@@ -49,6 +49,8 @@ bot.use(rateLimit({
   limit: 1
 }))
 
+bot.use(stats)
+
 bot.use(Composer.command(Composer.groupChat(rateLimit({
   window: 1000 * 30,
   limit: 3,
@@ -64,8 +66,6 @@ bot.use((ctx, next) => {
 })
 
 bot.on(['channel_post', 'edited_channel_post'], () => {})
-
-bot.use(stats)
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
