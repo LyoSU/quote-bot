@@ -50,7 +50,7 @@ bot.use(rateLimit({
 }))
 
 bot.use(Composer.command(Composer.groupChat(rateLimit({
-  window: 1000 * 15,
+  window: 1000 * 30,
   limit: 3,
   keyGenerator: (ctx) => {
     return ctx.chat.id
