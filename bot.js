@@ -44,11 +44,6 @@ bot.catch((error) => {
 
 bot.context.db = db
 
-bot.use(rateLimit({
-  window: 1000,
-  limit: 1
-}))
-
 bot.use(stats)
 
 bot.use(Composer.command(Composer.groupChat(rateLimit({
@@ -59,6 +54,11 @@ bot.use(Composer.command(Composer.groupChat(rateLimit({
   },
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }))))
+
+bot.use(rateLimit({
+  window: 1000,
+  limit: 1
+}))
 
 bot.use((ctx, next) => {
   next()
