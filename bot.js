@@ -44,6 +44,20 @@ bot.catch((error) => {
 
 bot.context.db = db
 
+bot.use(rateLimit({
+  window: 1000,
+  limit: 1
+}))
+
+bot.use(Composer.command(Composer.groupChat(rateLimit({
+  window: 1000 * 15,
+  limit: 3,
+  keyGenerator: (ctx) => {
+    return ctx.chat.id
+  },
+  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+}))))
+
 bot.use((ctx, next) => {
   next()
   return true
@@ -52,11 +66,6 @@ bot.use((ctx, next) => {
 bot.on(['channel_post', 'edited_channel_post'], () => {})
 
 bot.use(stats)
-
-bot.use(rateLimit({
-  window: 1000,
-  limit: 1
-}))
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
