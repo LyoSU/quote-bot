@@ -88,7 +88,7 @@ const i18n = new I18n({
 bot.use(i18n.middleware())
 
 bot.use(session({ ttl: 60 * 5 }))
-bot.use(session({
+bot.use(Composer.groupChat(session({
   property: 'group',
   getSessionKey: (ctx) => {
     if (ctx.from && ctx.chat && ['supergroup', 'group'].includes(ctx.chat.type)) {
@@ -97,23 +97,21 @@ bot.use(session({
     return null
   },
   ttl: 60 * 5
+})))
+
+bot.use(Composer.groupChat(async (ctx, next) => {
+  await updateUser(ctx)
+  await updateGroup(ctx)
+  await next(ctx)
+  await ctx.group.info.save().catch(() => {})
+  await ctx.session.userInfo.save().catch(() => {})
 }))
 
-bot.use(async (ctx, next) => {
-  ctx.session.userInfo = await updateUser(ctx)
-  if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
-
-  if (ctx.group) {
-    ctx.group.info = await updateGroup(ctx)
-    if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
-  }
+bot.use(Composer.privateChat(async (ctx, next) => {
+  await updateUser(ctx)
   await next(ctx)
-
   await ctx.session.userInfo.save().catch(() => {})
-  if (ctx.group && ctx.group.info) {
-    await ctx.group.info.save().catch(() => {})
-  }
-})
+}))
 
 bot.command('donate', handleDonate)
 bot.action(/(donate):(.*)/, handleDonate)

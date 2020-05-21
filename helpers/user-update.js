@@ -16,5 +16,8 @@ module.exports = async (ctx) => {
   user.username = ctx.from.username
   user.updatedAt = new Date()
 
-  return user
+  ctx.session.userInfo = user
+  if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
+
+  return true
 }
