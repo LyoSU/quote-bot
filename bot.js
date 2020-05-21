@@ -44,6 +44,8 @@ bot.catch((error) => {
 
 bot.context.db = db
 
+bot.use(stats)
+
 bot.use((ctx, next) => {
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
@@ -61,18 +63,14 @@ bot.use((ctx, next) => {
   return true
 })
 
-bot.use(stats)
-
 bot.use(Composer.command(Composer.groupChat(rateLimit({
   window: 1000 * 60 * 2,
   limit: 2,
   keyGenerator: (ctx) => {
     return ctx.chat.id
-  }
-  // onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+  },
+  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }))))
-
-// bot.use(Composer.command(Composer.groupChat(() => {})))
 
 bot.use(rateLimit({
   window: 1000,
