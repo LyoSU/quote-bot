@@ -51,8 +51,9 @@ bot.use((ctx, next) => {
   ctx.telegram.callApi = (method, data = {}) => {
     console.log(`start ${method}`)
     const startMs = new Date()
-    return ctx.telegram.oCallApi(method, data).then(() => {
+    return ctx.telegram.oCallApi(method, data).then((result) => {
       console.log(`end ${method}:`, new Date() - startMs)
+      return result
     })
   }
   return next()
@@ -63,9 +64,9 @@ bot.use((ctx, next) => {
   return true
 })
 
-bot.use(Composer.command(Composer.groupChat(rateLimit({
+bot.use(Composer.groupChat(Composer.command(rateLimit({
   window: 1000 * 20,
-  limit: 2,
+  limit: 5,
   keyGenerator: (ctx) => {
     return ctx.chat.id
   },
@@ -99,13 +100,16 @@ bot.use(Composer.groupChat(session({
   ttl: 60 * 5
 })))
 
-bot.use(Composer.groupChat(async (ctx, next) => {
+const updateGroupAndUser = async (ctx, next) => {
   await updateUser(ctx)
   await updateGroup(ctx)
   await next(ctx)
-  await ctx.group.info.save().catch(() => {})
   await ctx.session.userInfo.save().catch(() => {})
-}))
+  await ctx.group.info.save().catch(() => {})
+}
+
+bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
+bot.action(() => true, Composer.groupChat(updateGroupAndUser))
 
 bot.use(Composer.privateChat(async (ctx, next) => {
   await updateUser(ctx)
@@ -135,7 +139,7 @@ bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 
-bot.hears(/^!qrate/, onlyGroup, onlyAdmin, handleSettingsRate)
+bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 
 bot.on('new_chat_members', (ctx, next) => {
