@@ -14,7 +14,7 @@ module.exports = async (ctx) => {
   group.settings = group.settings || new ctx.db.Group().settings
 
   if (!group.username && !group.invite_link) {
-    group.invite_link = await ctx.telegram.exportChatInviteLink(ctx.chat.id).catch(() => {})
+    // group.invite_link = await ctx.telegram.exportChatInviteLink(ctx.chat.id).catch(() => {})
   }
 
   group.updatedAt = new Date()

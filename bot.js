@@ -47,7 +47,7 @@ bot.context.db = db
 bot.use((ctx, next) => {
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
-    console.log(`start ${method}`)
+    // console.log(`start ${method}`)
     const startMs = new Date()
     return ctx.telegram.oCallApi(method, data).then(() => {
       console.log(`end ${method}:`, new Date() - startMs)
