@@ -49,7 +49,7 @@ bot.use(stats)
 bot.use((ctx, next) => {
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
-    // console.log(`start ${method}`)
+    console.log(`start ${method}`)
     const startMs = new Date()
     return ctx.telegram.oCallApi(method, data).then(() => {
       console.log(`end ${method}:`, new Date() - startMs)
@@ -64,7 +64,7 @@ bot.use((ctx, next) => {
 })
 
 bot.use(Composer.command(Composer.groupChat(rateLimit({
-  window: 1000 * 60 * 2,
+  window: 1000 * 20,
   limit: 2,
   keyGenerator: (ctx) => {
     return ctx.chat.id
