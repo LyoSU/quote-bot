@@ -1,23 +1,23 @@
-language_name: 🇹🇷 Türk
+language_name: 🇹🇷 Türkçe
 
 help: |
   <b>Merhaba!</b>
   Bir mesajı alıntı oluşturup size gönderirim.
-  Bunu yapabilmem için bir mesajı /q komutu ile alıntılayın.
+  Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
 
     <b>⚙️ Kullanılabilir Komutlar:</b>
 
   <code>/help</code> — Bu mesajı gösterir
 
-  <code>/q #130f1c</code> <i>[bir mesaja cevaplayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#130f1c</b>
-  <code>/q 3</code> <i>[bir mesaja cevaplayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
-  <code>/q r</code> <i>[bir mesaja cevaplayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
-  <code>/q white r 3</code> <i>[bir mesaja cevaplayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
+  <code>/q #130f1c</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#130f1c</b>
+  <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
+  <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
+  <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
 
   <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
 
-  <code>/qs 💜</code> <i>[bir mesaja cevaplayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
-  <code>/qd</code> <i>[bir mesaja cevaplayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
+  <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
+  <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
 
     <b>❕ Ekstra Bilgiler:</b>
 
@@ -33,12 +33,12 @@ help: |
 
   <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  <b>Çeviri:</b> @Holytotem
+  <b>Çeviri:</b> @By_Azade
 btn:
   add_group: Gruba Ekle
 quote:
   empty_forward: |
-    Komut, bir mesaja yanıt vererek kullanılmalıdır.
+    Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_backgroun_color: |
     Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
   sticker:
