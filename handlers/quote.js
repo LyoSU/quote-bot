@@ -137,7 +137,8 @@ module.exports = async (ctx) => {
         messageFrom = {
           id: quoteMessage.forward_from_chat.id,
           name: quoteMessage.forward_from_chat.title,
-          username: quoteMessage.forward_from_chat.username || null
+          username: quoteMessage.forward_from_chat.username || null,
+          photo: quoteMessage.forward_from_chat.photo
         }
       } else if (quoteMessage.forward_from) {
         messageFrom = quoteMessage.forward_from

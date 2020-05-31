@@ -37,6 +37,21 @@ function getUser (userId) {
   })
 }
 
+function getSupergroup (supergroupId) {
+  return new Promise((resolve, reject) => {
+    airgram.api.getSupergroup({
+      supergroupId
+    }).then(({ response }) => {
+      if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      const supergroup = {
+        username: response.username
+      }
+
+      resolve(supergroup)
+    })
+  })
+}
+
 function getChat (chatId) {
   return new Promise((resolve, reject) => {
     airgram.api.getChat({
@@ -45,7 +60,13 @@ function getChat (chatId) {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const chat = {
-        id: response.id
+        id: response.id,
+        photo: {
+          small_file_id: response.photo.small.remote.id,
+          small_file_unique_id: response.photo.small.remote.uniqueId,
+          big_file_id: response.photo.big.remote.id,
+          big_file_unique_id: response.photo.big.remote.uniqueId
+        }
       }
 
       const chatTypeMap = {
@@ -59,14 +80,20 @@ function getChat (chatId) {
 
       if (['private', 'secret'].includes(chat.type)) {
         getUser(chat.id).then((user) => {
-          resolve(user)
+          resolve(Object.assign(user, chat))
         })
       } else {
         chat.title = response.title
 
         if (response.type.isChannel && response.type.isChannel === true) chat.type = 'channel'
 
-        resolve(chat)
+        if (response.type.supergroupId) {
+          getSupergroup(response.type.supergroupId).then((supergroup) => {
+            resolve(Object.assign(supergroup, chat))
+          })
+        } else {
+          resolve(chat)
+        }
       }
     })
   })
