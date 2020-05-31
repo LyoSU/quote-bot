@@ -60,7 +60,8 @@ function getChat (chatId) {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const chat = {
-        id: response.id
+        id: response.id,
+        title: response.title
       }
 
       if (response.photo) {
