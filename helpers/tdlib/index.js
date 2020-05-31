@@ -60,8 +60,11 @@ function getChat (chatId) {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const chat = {
-        id: response.id,
-        photo: {
+        id: response.id
+      }
+
+      if (response.photo) {
+        chat.photo = {
           small_file_id: response.photo.small.remote.id,
           small_file_unique_id: response.photo.small.remote.uniqueId,
           big_file_id: response.photo.big.remote.id,
