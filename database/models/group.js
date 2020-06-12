@@ -21,7 +21,8 @@ const groupSchema = mongoose.Schema({
     rate: {
       type: Boolean,
       default: false
-    }
+    },
+    hidden: Boolean
   },
   stickerSet: {
     name: String,

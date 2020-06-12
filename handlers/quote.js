@@ -45,6 +45,7 @@ module.exports = async (ctx) => {
     flag.png = args.find((arg) => ['p', 'png'].includes(arg))
     flag.img = args.find((arg) => ['i', 'img'].includes(arg))
     flag.rate = args.find((arg) => ['rate'].includes(arg))
+    flag.hidden = args.find((arg) => ['h', 'hidden'].includes(arg))
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
@@ -67,6 +68,8 @@ module.exports = async (ctx) => {
   } else {
     backgroundColor = '#130f1c'
   }
+
+  if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
 
   const maxQuoteMessage = 30
   let messageCount = flag.count || 1
@@ -128,10 +131,40 @@ module.exports = async (ctx) => {
       let messageFrom
 
       if (quoteMessage.forward_sender_name) {
-        messageFrom = {
-          id: hashCode(quoteMessage.forward_sender_name),
-          name: quoteMessage.forward_sender_name,
-          username: 'HiddenSender'
+        if (flag.hidden) {
+          let sarchForwardName
+
+          sarchForwardName = await ctx.db.User.find({
+            $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
+          })
+
+          if (sarchForwardName.length === 0) {
+            sarchForwardName = await ctx.db.User.find({
+              first_name: quoteMessage.forward_sender_name
+            })
+          }
+
+          if (sarchForwardName.length === 1) {
+            const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id)
+            messageFrom = {
+              id: sarchForwardName[0].telegram_id,
+              name: quoteMessage.forward_sender_name,
+              username: sarchForwardName[0].username || null,
+              photo: getHiddenChat.photo
+            }
+          } else {
+            messageFrom = {
+              id: hashCode(quoteMessage.forward_sender_name),
+              name: quoteMessage.forward_sender_name,
+              username: 'HiddenSender'
+            }
+          }
+        } else {
+          messageFrom = {
+            id: hashCode(quoteMessage.forward_sender_name),
+            name: quoteMessage.forward_sender_name,
+            username: 'HiddenSender'
+          }
         }
       } else if (quoteMessage.forward_from_chat) {
         messageFrom = {
@@ -145,26 +178,6 @@ module.exports = async (ctx) => {
       } else {
         messageFrom = quoteMessage.from
       }
-
-      // // поиск юзера у которых скрыт форвард по имени (отключено)
-      // if (messageFrom.id == message) {
-      //   let sarchForwardName
-
-      //   sarchForwardName = await ctx.db.User.findOne({
-      //     $expr: { $eq: [messageFrom.name, { $concat: ['$first_name', ' ', '$last_name'] }] }
-      //   })
-
-      //   if (!sarchForwardName) {
-      //     sarchForwardName = await ctx.db.User.findOne({
-      //       first_name: messageFrom.name
-      //     })
-      //   }
-
-      //   if (sarchForwardName) {
-      //     messageFrom.id = sarchForwardName.telegram_id
-      //     messageFrom.username = sarchForwardName.username || null
-      //   }
-      // }
 
       if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
       if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name

@@ -3,7 +3,8 @@ const handleQuote = require('./quote')
 const handleGetQuote = require('./get')
 const handleTopQuote = require('./top')
 const handleRandomQuote = require('./random')
-const handleColorQuote = require('./color')
+const handleColorQuote = require('./color-settings')
+const handleSettingsHidden = require('./hidden-settings')
 const handleSave = require('./sticker-save')
 const handleDelete = require('./sticker-delete')
 const handleRate = require('./rate')
@@ -19,6 +20,7 @@ module.exports = {
   handleTopQuote,
   handleRandomQuote,
   handleColorQuote,
+  handleSettingsHidden,
   handleSave,
   handleDelete,
   handleRate,

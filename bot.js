@@ -19,6 +19,7 @@ const {
   handleTopQuote,
   handleRandomQuote,
   handleColorQuote,
+  handleSettingsHidden,
   handleSave,
   handleDelete,
   handleRate,
@@ -138,7 +139,7 @@ bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
-
+bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 
