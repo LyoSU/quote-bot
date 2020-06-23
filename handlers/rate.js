@@ -29,7 +29,7 @@ module.exports = async (ctx) => {
 
   await quoteDb.save()
 
-  updateTopPack(ctx.db, ctx.group.info)
+  updateTopPack(ctx.db, ctx.group.info, quoteDb)
 
   await ctx.answerCbQuery(resultText)
 

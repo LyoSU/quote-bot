@@ -30,8 +30,8 @@ const downloadFileByUrl = (fileUrl) => new Promise((resolve, reject) => {
   }).on('error', reject)
 })
 
-module.exports = async (db, group) => {
-  if (group.topSet && group.topSet.lastUpdate && (Date.now() - group.topSet.lastUpdate.getTime()) < 60 * 60) return
+module.exports = async (db, group, quote) => {
+  if (group.topSet && group.topSet.lastUpdate && (Date.now() - group.topSet.lastUpdate.getTime()) < 60 * 15) return
 
   group.topSet.lastUpdate = new Date()
   await group.save()
@@ -43,82 +43,90 @@ module.exports = async (db, group) => {
     'rate.score': -1
   }).limit(50)
 
-  for (const sticker of group.topSet.stickers) {
-    const quote = await topQuote.find((quote) => quote.id.toString() === sticker.quote.id.toString())
-    if (!quote) {
-      telegram.deleteStickerFromSet(sticker.fileId)
-      group.topSet.stickers.pull(sticker)
+  const topQuoteIndex = await topQuote.findIndex((q) => q.id.toString() === quote.id.toString())
+  const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote.id.toString() === quote.id.toString())
+
+  if (topQuoteIndex < 0) {
+    if (quoteIndex > 0) {
+      telegram.deleteStickerFromSet(group.topSet.stickers[quoteIndex].fileId)
+      group.topSet.stickers.pull(group.topSet.stickers[quoteIndex])
+    }
+    return
+  }
+
+  if (quoteIndex < 0) {
+    const fileUrl = await telegram.getFileLink(quote.file_id)
+    const data = await downloadFileByUrl(fileUrl)
+    const imageSharp = sharp(data.read())
+
+    const stickerPNG = await imageSharp.webp({ quality: 100 }).png({ compressionLevel: 9, force: false }).toBuffer()
+
+    let stickerAdd = false
+    const emojis = '🌟'
+
+    const chatAdministrators = await telegram.getChatAdministrators(group.group_id)
+    let chatAdministrator
+
+    chatAdministrators.forEach((administrator) => {
+      if (administrator.status === 'creator') chatAdministrator = administrator.user
+    })
+
+    if (!group.topSet.name) {
+      const getMe = await telegram.getMe()
+
+      const packName = `tq${Math.random().toString(36).substring(5)}_${Math.abs(group.group_id)}_by_${getMe.username}`
+      const packTitle = `${group.title.substring(0, 30)} top quote by @${getMe.username}`
+
+      stickerAdd = await telegram.createNewStickerSet(chatAdministrator.id, packName, packTitle, {
+        png_sticker: { source: stickerPNG },
+        emojis
+      }).catch((error) => {
+        console.error(error)
+      })
+
+      if (stickerAdd) {
+        group.topSet.name = packName
+        group.topSet.create = true
+      }
+    } else {
+      stickerAdd = await telegram.addStickerToSet(chatAdministrator.id, group.topSet.name, {
+        png_sticker: { source: stickerPNG },
+        emojis
+      }).catch((error) => {
+        console.error(error)
+        if (error.description === 'Bad Request: STICKERSET_INVALID') {
+          group.topSet = undefined
+          delete group.topSet
+        }
+      })
+    }
+
+    if (stickerAdd) {
+      const getStickerSet = await telegram.getStickerSet(group.topSet.name)
+      const stickerInfo = getStickerSet.stickers.slice(-1)[0]
+
+      group.topSet.stickers.push({
+        quote,
+        fileId: stickerInfo.file_id,
+        fileUniqueId: stickerInfo.file_unique_id
+      })
     }
   }
 
-  if (!group.topSet.stickers) group.topSet.stickers = []
+  const topOnlyAdded = []
 
-  for (const index in topQuote) {
+  topQuote.forEach((q) => {
+    const quoteIndex = group.topSet.stickers.findIndex((s) => s.quote.id.toString() === q.id.toString())
+    if (quoteIndex > 0) topOnlyAdded.push(q)
+  })
+
+  for (const index in topOnlyAdded) {
     const quote = topQuote[index]
-    if (!group.topSet.stickers[index] || quote.id !== group.topSet.stickers[index].quote.toString()) {
-      const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote.id.toString() === quote.id.toString())
+    const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote.id.toString() === quote.id.toString())
 
-      if (quoteIndex < 0) {
-        const fileUrl = await telegram.getFileLink(quote.file_id)
-        const data = await downloadFileByUrl(fileUrl)
-        const imageSharp = sharp(data.read())
-
-        const stickerPNG = await imageSharp.webp({ quality: 100 }).png({ compressionLevel: 9, force: false }).toBuffer()
-
-        let stickerAdd = false
-        const emojis = '🌟'
-
-        const chatAdministrators = await telegram.getChatAdministrators(group.group_id)
-        let chatAdministrator
-
-        chatAdministrators.forEach((administrator) => {
-          if (administrator.status === 'creator') chatAdministrator = administrator.user
-        })
-
-        if (!group.topSet.name) {
-          const getMe = await telegram.getMe()
-
-          const packName = `tq${Math.random().toString(36).substring(5)}_${Math.abs(group.group_id)}_by_${getMe.username}`
-          const packTitle = `${group.title.substring(0, 30)} top quote by @${getMe.username}`
-
-          stickerAdd = await telegram.createNewStickerSet(chatAdministrator.id, packName, packTitle, {
-            png_sticker: { source: stickerPNG },
-            emojis
-          }).catch((error) => {
-            console.error(error)
-          })
-
-          if (stickerAdd) {
-            group.topSet.name = packName
-            group.topSet.create = true
-          }
-        } else {
-          stickerAdd = await telegram.addStickerToSet(chatAdministrator.id, group.topSet.name, {
-            png_sticker: { source: stickerPNG },
-            emojis
-          }).catch((error) => {
-            console.error(error)
-            if (error.description === 'Bad Request: STICKERSET_INVALID') {
-              group.topSet = undefined
-              delete group.topSet
-            }
-          })
-        }
-
-        if (stickerAdd) {
-          const getStickerSet = await telegram.getStickerSet(group.topSet.name)
-          const stickerInfo = getStickerSet.stickers.slice(-1)[0]
-
-          group.topSet.stickers.push({
-            quote,
-            fileId: stickerInfo.file_id,
-            fileUniqueId: stickerInfo.file_unique_id
-          })
-        }
-      } else {
-        arrayMove(group.topSet.stickers, quoteIndex, index)
-        telegram.setStickerPositionInSet(group.topSet.stickers[index].fileId, index)
-      }
+    if (quoteIndex > 0) {
+      arrayMove(group.topSet.stickers, quoteIndex, index)
+      telegram.setStickerPositionInSet(group.topSet.stickers[index].fileId, index)
     }
   }
 
