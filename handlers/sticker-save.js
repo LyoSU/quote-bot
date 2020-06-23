@@ -98,7 +98,10 @@ module.exports = async (ctx) => {
           png_sticker: { source: stickerPNG },
           emojis
         }).catch((error) => {
-          if (error.description === 'Bad Request: STICKERSET_INVALID') ctx.group.info.stickerSet = null
+          if (error.description === 'Bad Request: STICKERSET_INVALID') {
+            ctx.group.info.stickerSet = undefined
+            delete ctx.group.info.stickerSet
+          }
 
           result = ctx.i18n.t('sticker.save.error.telegram', {
             error

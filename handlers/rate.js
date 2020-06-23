@@ -1,3 +1,7 @@
+const {
+  updateTopPack
+} = require('../helpers')
+
 module.exports = async (ctx) => {
   let resultText = ''
   const rateName = ctx.match[2]
@@ -25,9 +29,11 @@ module.exports = async (ctx) => {
 
   await quoteDb.save()
 
-  ctx.answerCbQuery(resultText)
+  updateTopPack(ctx.db, ctx.group.info)
 
-  ctx.editMessageReplyMarkup({
+  await ctx.answerCbQuery(resultText)
+
+  await ctx.editMessageReplyMarkup({
     inline_keyboard: [
       [
         { text: `👍 ${quoteDb.rate.votes[0].vote.length}`, callback_data: 'rate:👍' },

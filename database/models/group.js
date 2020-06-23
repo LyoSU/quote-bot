@@ -30,6 +30,22 @@ const groupSchema = mongoose.Schema({
       type: Boolean,
       default: false
     }
+  },
+  topSet: {
+    name: String,
+    create: {
+      type: Boolean,
+      default: false
+    },
+    lastUpdate: Date,
+    stickers: [{
+      quote: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quote'
+      },
+      fileId: String,
+      fileUniqueId: String
+    }]
   }
 }, {
   timestamps: true
