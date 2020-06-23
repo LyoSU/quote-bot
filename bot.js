@@ -68,11 +68,16 @@ bot.use((ctx, next) => {
 bot.use(Composer.groupChat(Composer.command(rateLimit({
   window: 1000 * 20,
   limit: 5,
-  keyGenerator: (ctx) => {
-    return ctx.chat.id
-  },
+  keyGenerator: (ctx) => ctx.chat.id,
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }))))
+
+bot.use(Composer.mount('callback_query', rateLimit({
+  window: 3000,
+  limit: 1,
+  keyGenerator: (ctx) => ctx.from.id,
+  onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
+})))
 
 bot.use(rateLimit({
   window: 1000,
