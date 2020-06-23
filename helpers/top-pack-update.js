@@ -130,5 +130,21 @@ module.exports = async (db, group, quote) => {
     }
   }
 
+  const conterArray = {}
+
+  group.topSet.stickers.forEach((sticker) => {
+    if (!conterArray[sticker.quote.toString()]) conterArray[sticker.quote.toString()] = true
+    else group.topSet.stickers.pull(sticker)
+  })
+
+  const getStickerSet = await telegram.getStickerSet(group.topSet.name)
+
+  getStickerSet.stickers.forEach(async (sticker) => {
+    const quoteIndex = await group.topSet.stickers.findIndex((s) => s.fileUniqueId === sticker.file_unique_id)
+    if (quoteIndex < 0) {
+      telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+    }
+  })
+
   await group.save()
 }
