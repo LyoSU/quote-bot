@@ -41,7 +41,7 @@ module.exports = async (db, group, quote) => {
     'rate.score': { $gt: 0 }
   }).sort({
     'rate.score': -1
-  }).limit(50)
+  }).limit(100)
 
   const topQuoteIndex = await topQuote.findIndex((q) => q.id.toString() === quote.id.toString())
   const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote.id.toString() === quote.id.toString())
