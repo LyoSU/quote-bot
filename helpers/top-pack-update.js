@@ -113,13 +113,11 @@ module.exports = async (db, group, quote) => {
     }
   }
 
-  group = await group.save()
-
   const topOnlyAdded = []
 
   topQuote.forEach((q) => {
-    const quoteIndex = group.topSet.stickers.findIndex((s) => s.quote._id.toString() === q._id.toString())
-    if (quoteIndex > 0) topOnlyAdded.push(q._id.toString())
+    const quoteIndex = group.topSet.stickers.findIndex((s) => s.quote._id === q._id)
+    if (quoteIndex > 0) topOnlyAdded.push(q.id.toString())
   })
 
   for (const index in topOnlyAdded) {
