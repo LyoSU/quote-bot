@@ -43,7 +43,7 @@ module.exports = async (db, group, quote) => {
     'rate.score': -1
   }).limit(100)
 
-  const topQuoteIndex = await topQuote.findIndex((q) => q.id.toString() === quote.id.toString())
+  const topQuoteIndex = await topQuote.findIndex((q) => q._id === quote._id)
   const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote._id === quote._id)
 
   if (topQuoteIndex < 0) {
@@ -122,7 +122,7 @@ module.exports = async (db, group, quote) => {
 
   for (const index in topOnlyAdded) {
     const quote = topQuote[index]
-    const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote.id.toString() === quote.id.toString())
+    const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote._id === quote._id)
 
     if (quoteIndex > 0) {
       arrayMove(group.topSet.stickers, quoteIndex, index)
