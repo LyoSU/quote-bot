@@ -44,7 +44,7 @@ module.exports = async (db, group, quote) => {
   }).limit(100)
 
   const topQuoteIndex = await topQuote.findIndex((q) => q.id.toString() === quote.id.toString())
-  const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote.id.toString() === quote.id.toString())
+  const quoteIndex = await group.topSet.stickers.findIndex((s) => s.quote._id === quote._id)
 
   if (topQuoteIndex < 0) {
     if (quoteIndex > 0) {
