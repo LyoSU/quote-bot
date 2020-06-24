@@ -113,6 +113,8 @@ module.exports = async (db, group, quote) => {
     }
   }
 
+  group = await group.save()
+
   const topOnlyAdded = []
 
   topQuote.forEach((q) => {
