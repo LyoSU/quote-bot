@@ -135,8 +135,14 @@ module.exports = async (ctx) => {
           let sarchForwardName
 
           sarchForwardName = await ctx.db.User.find({
-            $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
+            fill_name: quoteMessage.forward_sender_name
           })
+
+          if (sarchForwardName.length === 0) {
+            sarchForwardName = await ctx.db.User.find({
+              $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
+            })
+          }
 
           if (sarchForwardName.length === 0) {
             sarchForwardName = await ctx.db.User.find({
