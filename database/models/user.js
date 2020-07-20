@@ -7,9 +7,18 @@ const userSchema = mongoose.Schema({
     unique: true,
     required: true
   },
-  first_name: String,
-  last_name: String,
-  username: String,
+  first_name: {
+    type: String,
+    index: true
+  },
+  last_name: {
+    type: String,
+    index: true
+  },
+  username: {
+    type: String,
+    index: true
+  },
   settings: {
     locale: String,
     quote: {
