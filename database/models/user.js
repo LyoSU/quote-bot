@@ -15,6 +15,10 @@ const userSchema = mongoose.Schema({
     type: String,
     index: true
   },
+  full_name: {
+    type: String,
+    index: true
+  },
   username: {
     type: String,
     index: true

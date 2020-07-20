@@ -13,6 +13,7 @@ module.exports = async (ctx) => {
   }
   user.first_name = ctx.from.first_name
   user.last_name = ctx.from.last_name
+  user.full_name = `${ctx.from.first_name}${ctx.from.last_name ? ` ${ctx.from.last_name}` : ''}`
   user.username = ctx.from.username
   user.updatedAt = new Date()
 
