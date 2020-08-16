@@ -1,0 +1,119 @@
+language_name: 🇦🇿 Azərbaycanca
+
+help: |
+  <b>Salam!</b>
+  Mən mesajdan sitat yaratmaq üçün xidmət göstərirəm.
+  Bot həm şəxsi söhbətlərdə, həm də qruplarda işləyə bilər.
+
+    <b>⚙️ Mövcud komandalar:</b>
+  /q <i>[mesaja cavab]</i> — mesajdan sitat yaratmaq.
+
+    <b>/q komandasının mövcud bayraqları :</b>
+      hex-kodu vəya ingilis dilində rəng adı: məsələn <code>#cbafff</code> vəya <code>indigo</code> — <b>#cbafff</b> rəngində sitat yaratmaq.
+      Rəqəm: <code>3</code> — mesajın aşağısında olan <b>3 mesajdan</b> sitat yaratmaq.
+      <code>random</code>: təsadüf seçilən rəngdə sitat.
+      <code>reply</code> vəya <code>r</code>: cavab saxlanılması ilə sitat yaratmaq.
+      <code>p</code> vəya <code>png</code> — PNG sitat yaratmaq.
+      <code>i</code> vəya <code>img</code> — sitatı şəkil kimi yaratmaq.
+      <code>rate</code> — sitata qiymətləndirmə sistemi əlavə etmək
+
+    <b>Bayraqların istifadə nümunələri:</b>
+    <code>/q white r p</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
+
+  <code>/qcolor green</code> — <b>green</b> rəngi standart eləmək və sitat yaratmaq. <i>(hex-kodu vəya ingilis dilində rəng adı)</i>
+
+  <code>/qs 🥰💜</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — 🥰💜 emoji ilə qrupun stikerpakında stikeri/şəkli/faylı saxlayır <i>(hər hansı bir emoji istənilən sayda ola bilər)</i>
+  <code>/qd</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — stikeri qrupun stikerpakdan silmək
+
+  <code>/qrate</code> <i>[yalnız admin üçün]</i> — Sitatların qiymətləndirməsini birləşdirmək/söndürmək.
+  /qrand — müsbət reytinqli təsadüfi seçilən sitat
+  /qtop — qrupun sitatlarının topu
+
+  /help vəya /start — bu mesajı almaq.
+
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
+
+  <b>☕️ Botun yaradıcısına qəhvə fincanı almaq:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Bot yaradıcısının bloqu:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Tərcüməçinin GitHub-ı:</b> <a href="https://github.com/Sadykhzadeh">@Sadykhzadeh</a>
+btn:
+  add_group: Qrupa əlavə etmək
+quote:
+  api_error:
+    <b>😓 Sitatı yaratmaq alınmadı</b>
+    <pre>${error}</pre>
+  empty_forward: |
+    Komandanı mesaja cavab olaraq yazmaq lazımdır.
+  set_backgroun_color: |
+    Sitatın standart rəngi <code>${backgroundColor}</code> oldu.
+  sticker:
+sticker:
+  save:
+    suc: Stiker uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu.
+    error:
+      animated: Mən animasiyalı stikeri əlavə edə bilmirəm.
+      need_creator: <b>Məndə bu stikeri saxlamaq alınmadı.</b>\n${creator} mənə şəxsi mesajlarda yazın.
+      telegram: <b>Məndə bu stiker saxlamaq alınmadı.</b>\n<pre>${error}</pre>
+  delete:
+    suc: Stiker uğurla <a href="${link}">qrupun stikerpakından</a> silinib.
+    error:
+      telegram: <b>Məndə bu stikeri silmək alınmadı.</b>\n<pre>${error}</pre>
+    btn:
+      save_sticker: Stikeri saxlamaq
+  empty_forward: |
+    Komandanı stikerə, şəkilə vəya foto faylına cavab olaraq yazmaq lazımdır.
+  fstik: |
+    Stikerı şəxsi stikerpaka saxlamaq üçün bu mesajı @fStikBot-a göndər.
+rate:
+  vote:
+    rated: |
+      Siz bunu ${rateName}.
+    back: |
+      Siz səsinizi qaytardız.
+  settings:
+    enable: |
+      Sitatların qiymətləndirməsi açılıb.
+    disable: |
+      Sitatların qiymətləndirməsi bağlanıb.
+  random:
+    empty: |
+      Qrupda müsbət reytinqə malik olan sitat yoxdur.
+hidden:
+  settings:
+    enable: |
+      Göndərənin axtarışı açılıb.
+    disable: |
+      Göndərənin axtarışı bağlanıb.
+top:
+  info: |
+    <b>Qrupun top sitatları:</b>
+
+  pack: Top sitat ilə stikerpak
+donate:
+  info:
+    Botu dəstəkləsəz minnətdar olaram :)
+
+  info_group: |
+    Botu dəstəkləsəz minnətdar olaram :)
+
+    donate.lyo.su linkinə keçib maddi dəstək verə bilərsiniz.
+    Telegram vasitəsilə maddi dəstək etmək istəyirsinizsə, eyni komandanı şəxsi mesaj kimi yazın.
+
+  title: Maddi dəstək ${botUsername}
+  description: Botun inkişafına dəstək
+
+  successful: |
+      <b>Botu dəstək elədiyiniz üçün təşəkkür edirəm 💜</b>
+
+  pay: 💜 Ödəniş etmək (Telegram)
+  liqpay: LiqPay (VISA, MasterCard)
+  other: Digər yollar
+only_admin: |
+    Bu komandanı yalnız qrupun admini istifadə edə bilər.
+only_group: |
+    Bu komandanı yalnız qrupda istifadə etmək olar.
