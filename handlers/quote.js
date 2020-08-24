@@ -118,7 +118,6 @@ module.exports = async (ctx) => {
       continue
     }
 
-a    0.19.2
     let messageFrom
 
     if (quoteMessage.forward_sender_name) {
