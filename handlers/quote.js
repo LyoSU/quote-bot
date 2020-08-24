@@ -46,6 +46,7 @@ module.exports = async (ctx) => {
     flag.img = args.find((arg) => ['i', 'img'].includes(arg))
     flag.rate = args.find((arg) => ['rate'].includes(arg))
     flag.hidden = args.find((arg) => ['h', 'hidden'].includes(arg))
+    flag.media = args.find((arg) => ['m', 'media'].includes(arg))
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
@@ -118,7 +119,6 @@ module.exports = async (ctx) => {
     }
 
     if (quoteMessage.text || quoteMessage.caption || quoteMessage.photo) {
-
       let messageFrom
 
       if (quoteMessage.forward_sender_name) {
@@ -186,9 +186,9 @@ module.exports = async (ctx) => {
 
       const message = {}
 
-      let text, media
+      let text
 
-      if (quoteMessage.photo) message.media = quoteMessage.photo
+      if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
 
       if (quoteMessage.caption) {
         text = quoteMessage.caption
