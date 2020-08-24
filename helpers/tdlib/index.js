@@ -165,12 +165,33 @@ function getMessages (chatId, messageIds) {
                 entities = messageInfo.content.text.entities
               }
               if (messageInfo.content.caption) {
+                const mediaType = {
+                  messagePhoto: 'photo',
+                  // messageVideo: 'video'
+                }
+
+                const type = mediaType[messageInfo.content._]
+
+                if (type) {
+                  const media = messageInfo.content[type].sizes.map((size) => {
+                    return {
+                      file_id: size[type].remote.id,
+                      file_unique_id: size[type].remote.uniqueId,
+                      file_size: size[type].size,
+                      height: size.height,
+                      width: size.width
+                    }
+                  })
+
+                  message[type] = media
+                }
+
                 message.caption = messageInfo.content.caption.text
                 entities = messageInfo.content.caption.entities
               }
 
               if (entities) {
-                message.entities = entities.map((entityInfo) => {
+                const entitiesFormat = entities.map((entityInfo) => {
                   const typeMap = {
                     textEntityTypeMention: 'mention',
                     textEntityTypeHashtag: 'hashtag',
@@ -201,6 +222,9 @@ function getMessages (chatId, messageIds) {
 
                   return entity
                 })
+
+                if (message.caption) message.caption_entities = entitiesFormat
+                else message.entities = entitiesFormat
               }
 
               resolve(message)

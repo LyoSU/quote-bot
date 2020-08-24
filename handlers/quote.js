@@ -117,16 +117,7 @@ module.exports = async (ctx) => {
       continue
     }
 
-    if (quoteMessage.text || quoteMessage.caption) {
-      let text, entities
-
-      if (quoteMessage.caption) {
-        text = quoteMessage.caption
-        entities = quoteMessage.caption_entities
-      } else {
-        text = quoteMessage.text
-        entities = quoteMessage.entities
-      }
+    if (quoteMessage.text || quoteMessage.caption || quoteMessage.photo) {
 
       let messageFrom
 
@@ -195,6 +186,18 @@ module.exports = async (ctx) => {
 
       const message = {}
 
+      let text, media
+
+      if (quoteMessage.photo) message.media = quoteMessage.photo
+
+      if (quoteMessage.caption) {
+        text = quoteMessage.caption
+        message.entities = quoteMessage.caption_entities
+      } else {
+        text = quoteMessage.text
+        message.entities = quoteMessage.entities
+      }
+
       if (messageFrom.id) message.chatId = messageFrom.id
       else message.chatId = hashCode(quoteMessage.from.name)
 
@@ -209,22 +212,18 @@ module.exports = async (ctx) => {
       if (messageFrom) message.from = messageFrom
       if (text) message.text = text
 
-      const replyMessage = {}
+      message.replyMessage = {}
       if (flag.reply && quoteMessage.reply_to_message) {
         const replyMessageInfo = quoteMessage.reply_to_message
-        if (replyMessageInfo.from.first_name) replyMessage.name = replyMessageInfo.from.first_name
-        if (replyMessageInfo.from.last_name) replyMessage.name += ' ' + replyMessageInfo.from.last_name
-        if (replyMessageInfo.from.id) replyMessage.chatId = replyMessageInfo.from.id
-        else replyMessage.chatId = hashCode(replyMessage.name)
-        if (replyMessageInfo.text) replyMessage.text = replyMessageInfo.text
-        if (replyMessageInfo.caption) replyMessage.text = replyMessageInfo.caption
+        if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
+        if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
+        if (replyMessageInfo.from.id) message.replyMessage.chatId = replyMessageInfo.from.id
+        else message.replyMessage.chatId = hashCode(message.replyMessage.name)
+        if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
+        if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
       }
 
-      quoteMessages[index] = {
-        message,
-        replyMessage,
-        entities
-      }
+      quoteMessages[index] = message
 
       // quoteImages.push(canvasQuote)
       lastMessage = quoteMessage
@@ -253,7 +252,6 @@ module.exports = async (ctx) => {
 
   if (flag.img) type = 'image'
   if (flag.png) type = 'png'
-
   const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
     json: {
       type,
