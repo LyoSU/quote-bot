@@ -164,30 +164,44 @@ function getMessages (chatId, messageIds) {
                 message.text = messageInfo.content.text.text
                 entities = messageInfo.content.text.entities
               }
-              if (messageInfo.content.caption) {
+              if (messageInfo.content) {
                 const mediaType = {
                   messagePhoto: 'photo',
+                  messageSticker: 'sticker'
                   // messageVideo: 'video'
                 }
 
                 const type = mediaType[messageInfo.content._]
 
                 if (type) {
-                  const media = messageInfo.content[type].sizes.map((size) => {
-                    return {
-                      file_id: size[type].remote.id,
-                      file_unique_id: size[type].remote.uniqueId,
-                      file_size: size[type].size,
-                      height: size.height,
-                      width: size.width
+                  let media
+                  if (messageInfo.content[type].sizes) {
+                    media = messageInfo.content[type].sizes.map((size) => {
+                      return {
+                        file_id: size[type].remote.id,
+                        file_unique_id: size[type].remote.uniqueId,
+                        file_size: size[type].size,
+                        height: size.height,
+                        width: size.width
+                      }
+                    })
+                  } else {
+                    media = {
+                      file_id: messageInfo.content[type][type].remote.id,
+                      file_unique_id: messageInfo.content[type][type].remote.uniqueId,
+                      file_size: messageInfo.content[type][type].size,
+                      height: messageInfo.content[type].height,
+                      width: messageInfo.content[type].width
                     }
-                  })
+                  }
 
                   message[type] = media
                 }
 
-                message.caption = messageInfo.content.caption.text
-                entities = messageInfo.content.caption.entities
+                if (messageInfo.content.caption) {
+                  message.caption = messageInfo.content.caption.text
+                  if (messageInfo.content.caption.entities) entities = messageInfo.content.caption.entities
+                }
               }
 
               if (entities) {

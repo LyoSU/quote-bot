@@ -118,43 +118,36 @@ module.exports = async (ctx) => {
       continue
     }
 
-    if (quoteMessage.text || quoteMessage.caption || quoteMessage.photo) {
-      let messageFrom
+a    0.19.2
+    let messageFrom
 
-      if (quoteMessage.forward_sender_name) {
-        if (flag.hidden) {
-          let sarchForwardName
+    if (quoteMessage.forward_sender_name) {
+      if (flag.hidden) {
+        let sarchForwardName
 
+        sarchForwardName = await ctx.db.User.find({
+          fill_name: quoteMessage.forward_sender_name
+        })
+
+        if (sarchForwardName.length === 0) {
           sarchForwardName = await ctx.db.User.find({
-            fill_name: quoteMessage.forward_sender_name
+            $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
           })
+        }
 
-          if (sarchForwardName.length === 0) {
-            sarchForwardName = await ctx.db.User.find({
-              $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
-            })
-          }
+        if (sarchForwardName.length === 0) {
+          sarchForwardName = await ctx.db.User.find({
+            first_name: quoteMessage.forward_sender_name
+          })
+        }
 
-          if (sarchForwardName.length === 0) {
-            sarchForwardName = await ctx.db.User.find({
-              first_name: quoteMessage.forward_sender_name
-            })
-          }
-
-          if (sarchForwardName.length === 1) {
-            const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id)
-            messageFrom = {
-              id: sarchForwardName[0].telegram_id,
-              name: quoteMessage.forward_sender_name,
-              username: sarchForwardName[0].username || null,
-              photo: getHiddenChat.photo
-            }
-          } else {
-            messageFrom = {
-              id: hashCode(quoteMessage.forward_sender_name),
-              name: quoteMessage.forward_sender_name,
-              username: 'HiddenSender'
-            }
+        if (sarchForwardName.length === 1) {
+          const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id)
+          messageFrom = {
+            id: sarchForwardName[0].telegram_id,
+            name: quoteMessage.forward_sender_name,
+            username: sarchForwardName[0].username || null,
+            photo: getHiddenChat.photo
           }
         } else {
           messageFrom = {
@@ -163,71 +156,78 @@ module.exports = async (ctx) => {
             username: 'HiddenSender'
           }
         }
-      } else if (quoteMessage.forward_from_chat) {
+      } else {
         messageFrom = {
-          id: quoteMessage.forward_from_chat.id,
-          name: quoteMessage.forward_from_chat.title,
-          username: quoteMessage.forward_from_chat.username || null,
-          photo: quoteMessage.forward_from_chat.photo
+          id: hashCode(quoteMessage.forward_sender_name),
+          name: quoteMessage.forward_sender_name,
+          username: 'HiddenSender'
         }
-      } else if (quoteMessage.forward_from) {
-        messageFrom = quoteMessage.forward_from
-      } else {
-        messageFrom = quoteMessage.from
       }
-
-      if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
-      if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
-
-      quoteMessage.from = messageFrom
-
-      let diffUser = true
-      if (lastMessage && (quoteMessage.from.id === lastMessage.from.id)) diffUser = false
-
-      const message = {}
-
-      let text
-
-      if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
-
-      if (quoteMessage.caption) {
-        text = quoteMessage.caption
-        message.entities = quoteMessage.caption_entities
-      } else {
-        text = quoteMessage.text
-        message.entities = quoteMessage.entities
+    } else if (quoteMessage.forward_from_chat) {
+      messageFrom = {
+        id: quoteMessage.forward_from_chat.id,
+        name: quoteMessage.forward_from_chat.title,
+        username: quoteMessage.forward_from_chat.username || null,
+        photo: quoteMessage.forward_from_chat.photo
       }
-
-      if (messageFrom.id) message.chatId = messageFrom.id
-      else message.chatId = hashCode(quoteMessage.from.name)
-
-      let avatarImage = false
-      if (diffUser) {
-        avatarImage = true
-      } else {
-        quoteMessage.from.name = false
-      }
-
-      if (avatarImage) message.avatar = avatarImage
-      if (messageFrom) message.from = messageFrom
-      if (text) message.text = text
-
-      message.replyMessage = {}
-      if (flag.reply && quoteMessage.reply_to_message) {
-        const replyMessageInfo = quoteMessage.reply_to_message
-        if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
-        if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
-        if (replyMessageInfo.from.id) message.replyMessage.chatId = replyMessageInfo.from.id
-        else message.replyMessage.chatId = hashCode(message.replyMessage.name)
-        if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
-        if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
-      }
-
-      quoteMessages[index] = message
-
-      // quoteImages.push(canvasQuote)
-      lastMessage = quoteMessage
+    } else if (quoteMessage.forward_from) {
+      messageFrom = quoteMessage.forward_from
+    } else {
+      messageFrom = quoteMessage.from
     }
+
+    if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
+    if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
+
+    quoteMessage.from = messageFrom
+
+    let diffUser = true
+    if (lastMessage && (quoteMessage.from.id === lastMessage.from.id)) diffUser = false
+
+    const message = {}
+
+    let text
+
+    if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
+    if (flag.media && quoteMessage.sticker) message.media = [quoteMessage.sticker]
+
+    if (quoteMessage.caption) {
+      text = quoteMessage.caption
+      message.entities = quoteMessage.caption_entities
+    } else {
+      text = quoteMessage.text
+      message.entities = quoteMessage.entities
+    }
+
+    if (messageFrom.id) message.chatId = messageFrom.id
+    else message.chatId = hashCode(quoteMessage.from.name)
+
+    let avatarImage = false
+    if (diffUser) {
+      avatarImage = true
+    } else {
+      quoteMessage.from.name = false
+    }
+
+    if (avatarImage) message.avatar = avatarImage
+    if (messageFrom) message.from = messageFrom
+    if (text) message.text = text
+
+    message.replyMessage = {}
+    if (flag.reply && quoteMessage.reply_to_message) {
+      const replyMessageInfo = quoteMessage.reply_to_message
+      if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
+      if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
+      if (replyMessageInfo.from.id) message.replyMessage.chatId = replyMessageInfo.from.id
+      else message.replyMessage.chatId = hashCode(message.replyMessage.name)
+      if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
+      if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
+    }
+
+    quoteMessages[index] = message
+
+    // quoteImages.push(canvasQuote)
+    lastMessage = quoteMessage
   }
 
   if (quoteMessages.length < 1) {
