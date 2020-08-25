@@ -187,18 +187,19 @@ module.exports = async (ctx) => {
 
     let text
 
-    if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
-    if (flag.media && quoteMessage.sticker) {
-      message.media = [quoteMessage.sticker]
-      message.mediaType = 'sticker'
-    }
-
     if (quoteMessage.caption) {
       text = quoteMessage.caption
       message.entities = quoteMessage.caption_entities
     } else {
       text = quoteMessage.text
       message.entities = quoteMessage.entities
+    }
+
+    if (!text) flag.media = true
+    if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
+    if (flag.media && quoteMessage.sticker) {
+      message.media = [quoteMessage.sticker]
+      message.mediaType = 'sticker'
     }
 
     if (messageFrom.id) message.chatId = messageFrom.id

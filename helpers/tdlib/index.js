@@ -196,6 +196,8 @@ function getMessages (chatId, messageIds) {
                   }
 
                   message[type] = media
+                } else {
+                  messageInfo.content.unsupportedMedia = {}
                 }
 
                 if (messageInfo.content.caption) {
