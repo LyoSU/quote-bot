@@ -67,7 +67,7 @@ module.exports = async (ctx) => {
   } else if (ctx.session.userInfo.settings.quote.backgroundColor) {
     backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
   } else {
-    backgroundColor = '#130f1c'
+    backgroundColor = '#1b1429'
   }
 
   if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
@@ -125,7 +125,7 @@ module.exports = async (ctx) => {
         let sarchForwardName
 
         sarchForwardName = await ctx.db.User.find({
-          fill_name: quoteMessage.forward_sender_name
+          full_name: quoteMessage.forward_sender_name
         })
 
         if (sarchForwardName.length === 0) {
@@ -188,7 +188,10 @@ module.exports = async (ctx) => {
     let text
 
     if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
-    if (flag.media && quoteMessage.sticker) message.media = [quoteMessage.sticker]
+    if (flag.media && quoteMessage.sticker) {
+      message.media = [quoteMessage.sticker]
+      message.mediaType = 'sticker'
+    }
 
     if (quoteMessage.caption) {
       text = quoteMessage.caption

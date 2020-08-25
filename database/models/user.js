@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
     quote: {
       backgroundColor: {
         type: String,
-        default: '#130f1c'
+        default: '#1b1429'
       }
     },
     hidden: Boolean
