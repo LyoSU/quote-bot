@@ -205,10 +205,9 @@ module.exports = async (ctx) => {
     if (messageFrom.id) message.chatId = messageFrom.id
     else message.chatId = hashCode(quoteMessage.from.name)
 
-    let avatarImage = false
-    if (diffUser) {
-      avatarImage = true
-    } else {
+    let avatarImage = true
+    if (!diffUser || (ctx.me === quoteMessage.from.username && index > 0)) {
+      avatarImage = false
       quoteMessage.from.name = false
     }
 
