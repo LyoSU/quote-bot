@@ -171,6 +171,14 @@ module.exports = async (ctx) => {
       }
     } else if (quoteMessage.forward_from) {
       messageFrom = quoteMessage.forward_from
+    } else if (quoteMessage.from.id === 1087968824) {
+      /* 1087968824 is id of @GroupAnonymousBot. This part swaps anon bot data to the chat data */
+      messageFrom = {
+        id: quoteMessage.chat.id,
+        name: quoteMessage.chat.title,
+        username: quoteMessage.chat.username || null,
+        photo: quoteMessage.chat.photo
+      }
     } else {
       messageFrom = quoteMessage.from
     }
