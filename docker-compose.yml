@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+    bot:
+        build:
+            context: .
+        env_file: .env
+        restart: always
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+        networks:
+            - quotly
+        command: node index.js
+    mongo:
+        restart: always
+        image: mongo:4
+        volumes:
+            - mongo-volume:/data/db
+        ports:
+            - 127.0.0.1:27017:27017
+        networks:
+            - quotly
+    
+volumes:
+    mongo-volume:
+        driver: 'local'
+
+networks:
+    quotly:
+        external: true
+        
