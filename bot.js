@@ -45,6 +45,7 @@ bot.catch((error) => {
 
 bot.context.db = db
 
+bot.use(require('./middlewares/metrics'))
 bot.use(stats)
 
 bot.use((ctx, next) => {
