@@ -1,0 +1,67 @@
+language_name: 🇮🇩 Indonesia
+
+help: |
+  <b>Halo!</b>
+  Saya akan membantu Anda membuat kutipan dari sebuah pesan.
+  Untuk itu cukup balas pesan dengan /q
+
+    <b>⚙️ Perintah yang tersedia:</b>
+
+  <code>/help</code> — dapatkan teks ini
+  <code>/q #1b1429</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari pesan dengan warna<b>#1b1429</b>
+  <code>/q 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari <b>balasan dan turun dari itu menjadi 3 pesan</b>
+  <code>/q r</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan balasan
+  <code>/q white r 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan 3 pesan berwarna <b>white</b> dengan balasan
+
+  <code>/qcolor green</code> — membuat warna <b>hijau</b> bawaan
+
+  <code>/qs 💜</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — menyimpan stiker/foto/dokumen dengan foto ke dalam paket stiker grup dengan 💜 emoji
+  <code>/qd</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — hapus stiker dari paket stiker grup
+
+    <b>❕ Informasi tambahan:</b>
+
+  ➖ Urutan argumen tidak penting
+  ➖ Warna kutipan harus berupa kode HEX, misalnya <b>#ffffff</b>, atau anda dapat menentukannya dengan nama: <b>white</b>.
+  ➖ Untuk warna acak, anda bisa menulis <b>acak</b> sebagai warna
+  ➖ Emoji apa pun untuk menyimpan stiker dapat digunakan.
+  ➖ Spesifikasi emoji tidak diperlukan.
+  ➖ Perintah awal <code>/qs</code> harus dijalankan oleh pembuat obrolan, sebelum itu menulis ke pesan langsung bot.
+  ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
+  ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
+
+  <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
+btn:
+  add_group: Tambahkan ke Grup
+quote:
+  empty_forward: |
+    Perintah harus dijalankan dengan membalas pesan.
+  set_backgroun_color: |
+    Warna latar belakang kutipan disetel ke: <code>${backgroundColor}</code>
+  sticker:
+sticker:
+  save:
+    suc: Stiker telah berhasil ditambahkan ke <a href="${link}">paket stiker grup</a>.
+    error:
+      animated: Saya tidak dapat menambahkan stiker animasi.
+      need_creator: <b>Saya tidak bisa menyimpan stiker ini.</b>\n${creator} harus menulis pesan apa pun kepada saya di pesan pribadi.
+      telegram: <b>Saya tidak bisa menyimpan stiker itu.</b>\n<pre>${error}</pre>
+  delete:
+    suc: Stiker berhasil dihapus dari <a href="${link}">paket stiker grup</a>.
+    error:
+      telegram: <b>ISaya tidak bisa menyimpan stiker itu.</b>\n<pre>${error}</pre>
+    btn:
+      save_sticker: Simpan stikernya
+  empty_forward: |
+    Perintah harus dijalankan dengan membalas stiker, foto atau file dengan gambar.
+  fstik: |
+      Untuk menyimpan stiker di paket stiker pribadi Anda, teruskan pesan ini ke @fStikBot
+rate:
+  rated: |
+    Anda ${rateName} ini.
+  back: |
+    Anda mengambil kembali suara Anda.
+only_admin: |
+    Perintah ini hanya dapat dijalankan oleh administrator grup.
+only_group: |
+    Perintah ini hanya dapat dijalankan dalam grup.
