@@ -80,9 +80,9 @@ rate:
       Sitatların qiymətləndirməsi açılıb.
     disable: |
       Sitatların qiymətləndirməsi bağlanıb.
-  random:
-    empty: |
-      Qrupda müsbət reytinqə malik olan sitat yoxdur.
+random:
+  empty: |
+    Qrupda müsbət reytinqə malik olan sitat yoxdur.
 hidden:
   settings:
     enable: |

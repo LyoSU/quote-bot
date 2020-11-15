@@ -22,7 +22,11 @@ const groupSchema = mongoose.Schema({
       type: Boolean,
       default: true
     },
-    hidden: Boolean
+    hidden: Boolean,
+    randomQuoteGab: {
+      type: Number,
+      default: 0
+    }
   },
   stickerSet: {
     name: String,

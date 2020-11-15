@@ -20,6 +20,7 @@ const {
   handleRandomQuote,
   handleColorQuote,
   handleSettingsHidden,
+  handleGabHidden,
   handleSave,
   handleDelete,
   handleRate,
@@ -32,6 +33,8 @@ const {
   updateUser,
   updateGroup
 } = require('./helpers')
+
+const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: {
@@ -146,6 +149,7 @@ bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
+bot.hears(/^\/(gab) (\d+)/, onlyAdmin, handleGabHidden)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 
@@ -159,6 +163,27 @@ bot.command('help', handleHelp)
 
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
+
+bot.on('message', onlyGroup, rateLimit({
+  window: 1000 * 60,
+  limit: 1,
+  keyGenerator: (ctx) => {
+    return ctx.chat.id
+  }
+}), updateGroupAndUser, async (ctx, next) => {
+  const gab = ctx.group.info.settings.randomQuoteGab
+
+  if (gab > 0) {
+    const quoteCount = await ctx.db.Quote.count({
+      $and: [
+        { group: ctx.group.info._id },
+        { 'rate.score': { $gt: 0 } }
+      ]
+    })
+    if (randomInteger(quoteCount, gab) === gab || quoteCount >= gab) await handleRandomQuote(ctx)
+    else await next()
+  }
+})
 
 bot.on('message', Composer.privateChat(handleQuote))
 

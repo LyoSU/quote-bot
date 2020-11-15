@@ -1,31 +1,17 @@
-const handleHelp = require('./help')
-const handleQuote = require('./quote')
-const handleGetQuote = require('./get')
-const handleTopQuote = require('./top')
-const handleRandomQuote = require('./random')
-const handleColorQuote = require('./color-settings')
-const handleSettingsHidden = require('./hidden-settings')
-const handleSave = require('./sticker-save')
-const handleDelete = require('./sticker-delete')
-const handleRate = require('./rate')
-const handleSettingsRate = require('./rate-settings')
-const handleLanguage = require('./language')
-const handleFstik = require('./fstik')
-const handleDonate = require('./donate')
-
 module.exports = {
-  handleHelp,
-  handleQuote,
-  handleGetQuote,
-  handleTopQuote,
-  handleRandomQuote,
-  handleColorQuote,
-  handleSettingsHidden,
-  handleSave,
-  handleDelete,
-  handleRate,
-  handleSettingsRate,
-  handleLanguage,
-  handleFstik,
-  handleDonate
+  handleHelp: require('./help'),
+  handleQuote: require('./quote'),
+  handleGetQuote: require('./get'),
+  handleTopQuote: require('./top'),
+  handleRandomQuote: require('./random'),
+  handleColorQuote: require('./color-settings'),
+  handleSettingsHidden: require('./hidden-settings'),
+  handleGabHidden: require('./gab-settings'),
+  handleSave: require('./sticker-save'),
+  handleDelete: require('./sticker-delete'),
+  handleRate: require('./rate'),
+  handleSettingsRate: require('./rate-settings'),
+  handleLanguage: require('./language'),
+  handleFstik: require('./fstik'),
+  handleDonate: require('./donate')
 }
