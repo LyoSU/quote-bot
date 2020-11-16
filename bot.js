@@ -164,6 +164,8 @@ bot.command('help', handleHelp)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
+bot.on('message', Composer.privateChat(handleQuote))
+
 bot.on('message', onlyGroup, rateLimit({
   window: 1000 * 60,
   limit: 1,
@@ -184,8 +186,6 @@ bot.on('message', onlyGroup, rateLimit({
     else await next()
   }
 })
-
-bot.on('message', Composer.privateChat(handleQuote))
 
 db.connection.once('open', async () => {
   console.log('Connected to MongoDB')
