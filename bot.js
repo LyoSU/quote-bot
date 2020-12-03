@@ -110,12 +110,6 @@ bot.use(Composer.groupChat(session({
   ttl: 60 * 5
 })))
 
-bot.hears('Accept', async (ctx) => await ctx.reply('Accepted'))
-
-bot.on('message', async (ctx) => {
-  await ctx.telegram.sendMessage(ctx.from.id, '<b>Test</b>', { parse_mode: 'HTML', reply_markup: JSON.stringify({ keyboard: [['Accept']] }) })
-})
-
 const updateGroupAndUser = async (ctx, next) => {
   await updateUser(ctx)
   await updateGroup(ctx)
