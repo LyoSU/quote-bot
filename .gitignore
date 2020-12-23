@@ -108,3 +108,5 @@ assets/emojis/*
 helpers/tdlib/data
 
 !.gitkeep
+
+config.js
