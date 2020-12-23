@@ -391,7 +391,7 @@ module.exports = async (ctx) => {
         if (addSticker) {
           const sticketSet = await ctx.getStickerSet(packName)
 
-          if (ctx.session.userInfo.tempStickerSet.create)
+          if (ctx.session.userInfo.tempStickerSet.create) {
             for (const i in sticketSet.stickers) {
               const sticker = sticketSet.stickers[i]
               if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
