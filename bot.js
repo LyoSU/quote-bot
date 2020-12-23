@@ -143,7 +143,14 @@ bot.command('qrand', onlyGroup, rateLimit({
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }), handleRandomQuote)
 
-bot.command('q', handleQuote)
+bot.command('q', rateLimit({
+  window: 3000,
+  limit: 1,
+  keyGenerator: (ctx) => {
+    return ctx.chat.id
+  },
+  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+}), handleQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
@@ -167,7 +174,14 @@ bot.command('privacy', handlePrivacy)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', Composer.privateChat(handleQuote))
+bot.on('message', rateLimit({
+  window: 3000,
+  limit: 1,
+  keyGenerator: (ctx) => {
+    return ctx.chat.id
+  },
+  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+}), Composer.privateChat(handleQuote))
 
 bot.on('message', onlyGroup, rateLimit({
   window: 1000 * 60,
