@@ -31,7 +31,8 @@ const userSchema = mongoose.Schema({
         default: '#1b1429'
       }
     },
-    hidden: Boolean
+    hidden: Boolean,
+    privacy: Boolean
   }
 }, {
   timestamps: true
