@@ -16,17 +16,17 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 //   emojis: '💜'
 // }).then(console.log)
 
-// async function loopCLearStickerPack () {
-//   while (true) {
-//     await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
-//       for (const i in sticketSet.stickers) {
-//         const sticker = sticketSet.stickers[i]
-//         if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
-//       }
-//     })
-//   }
-// }
-// loopCLearStickerPack()
+async function loopCLearStickerPack () {
+  while (true) {
+    await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
+      for (const i in sticketSet.stickers) {
+        const sticker = sticketSet.stickers[i]
+        if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+      }
+    })
+  }
+}
+loopCLearStickerPack()
 
 const hashCode = (s) => {
   let h = 0; var l = s.length; var i = 0
@@ -391,9 +391,11 @@ module.exports = async (ctx) => {
         if (addSticker) {
           const sticketSet = await ctx.getStickerSet(packName)
 
-          for (const i in sticketSet.stickers) {
-            const sticker = sticketSet.stickers[i]
-            if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+          if (ctx.session.userInfo.tempStickerSet.create)
+            for (const i in sticketSet.stickers) {
+              const sticker = sticketSet.stickers[i]
+              if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+            }
           }
 
           sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
