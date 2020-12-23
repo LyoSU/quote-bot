@@ -23,6 +23,7 @@ const groupSchema = mongoose.Schema({
       default: true
     },
     hidden: Boolean,
+    privacy: Boolean,
     randomQuoteGab: {
       type: Number,
       default: 0
