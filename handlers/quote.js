@@ -2,9 +2,32 @@ const Markup = require('telegraf/markup')
 const {
   tdlib
 } = require('../helpers')
+const Telegram = require('telegraf/telegram')
+const fs = require('fs')
 const got = require('got')
 
-const hashCode = function (s) {
+const telegram = new Telegram(process.env.BOT_TOKEN)
+
+const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+
+// for create global sticker pack
+// telegram.createNewStickerSet(66478514, 'created_by_QuotLyBot', 'Created by @QuotLyBot', {
+//   png_sticker: { source: 'placeholder.png' },
+//   emojis: '💜'
+// }).then(console.log)
+
+async function loopCLearStickerPack () {
+  while (true) {
+    await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
+      for (const sticker of sticketSet.stickers) {
+        if (sticker.file_unique_id !== 'AgADzw8AArJh9gM') telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+      }
+    })
+  }
+}
+loopCLearStickerPack()
+
+const hashCode = (s) => {
   let h = 0; var l = s.length; var i = 0
   if (l > 0) {
     while (i < l) { h = (h << 5) - h + s.charCodeAt(i++) | 0 }
@@ -262,9 +285,14 @@ module.exports = async (ctx) => {
 
   if (flag.img) type = 'image'
   if (flag.png) type = 'png'
+
+  let format
+  if (type === 'quote') format = 'png'
+
   const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
     json: {
       type,
+      format,
       backgroundColor,
       width,
       height,
@@ -304,10 +332,14 @@ module.exports = async (ctx) => {
         ])
       }
 
-      const sendResult = await ctx.replyWithDocument({
-        source: image,
-        filename: 'quote.webp'
-      }, {
+      await ctx.tg.addStickerToSet(config.globalStickerSet.ownerId, config.globalStickerSet.name, {
+        png_sticker: { source: image },
+        emojis: '💜'
+      })
+
+      const sticketSet = await ctx.getStickerSet(config.globalStickerSet.name)
+
+      const sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
         reply_to_message_id: ctx.message.message_id,
         reply_markup: replyMarkup
       })

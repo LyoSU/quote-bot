@@ -77,14 +77,14 @@ bot.use(Composer.groupChat(Composer.command(rateLimit({
 }))))
 
 bot.use(Composer.mount('callback_query', rateLimit({
-  window: 3000,
+  window: 2000,
   limit: 1,
   keyGenerator: (ctx) => ctx.from.id,
   onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
 })))
 
 bot.use(rateLimit({
-  window: 1000,
+  window: 2500,
   limit: 1
 }))
 
