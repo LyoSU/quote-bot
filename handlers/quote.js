@@ -244,14 +244,14 @@ module.exports = async (ctx) => {
       quoteMessage.from.name = false
     }
 
-    if (!flag.privacy) {
-      const quoterFind = await ctx.db.Quote.findOne({ telegram_id: messageFrom.id })
-      if (quoterFind.settings.privacy) flag.privacy = true
-    }
-
     if (avatarImage) message.avatar = avatarImage
     if (messageFrom) message.from = messageFrom
     if (text) message.text = text
+
+    if (!flag.privacy && message.from) {
+      const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
+      if (quotedFind.settings.privacy) flag.privacy = true
+    }
 
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
