@@ -250,7 +250,7 @@ module.exports = async (ctx) => {
 
     if (!flag.privacy && message.from) {
       const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
-      if (quotedFind.settings.privacy) flag.privacy = true
+      if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
     }
 
     message.replyMessage = {}
@@ -341,7 +341,15 @@ module.exports = async (ctx) => {
 
       let sendResult
 
-      if (!flag.privacy) {
+      if (flag.privacy) {
+        sendResult = await ctx.replyWithDocument({
+          source: image,
+          filename: 'quote.webp'
+        }, {
+          reply_to_message_id: ctx.message.message_id,
+          reply_markup: replyMarkup
+        })
+      } else {
         await ctx.tg.addStickerToSet(config.globalStickerSet.ownerId, config.globalStickerSet.name, {
           png_sticker: { source: image },
           emojis: '💜'
@@ -350,14 +358,6 @@ module.exports = async (ctx) => {
         const sticketSet = await ctx.getStickerSet(config.globalStickerSet.name)
 
         sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
-          reply_to_message_id: ctx.message.message_id,
-          reply_markup: replyMarkup
-        })
-      } else {
-        sendResult = await ctx.replyWithDocument({
-          source: image,
-          filename: 'quote.webp'
-        }, {
           reply_to_message_id: ctx.message.message_id,
           reply_markup: replyMarkup
         })
