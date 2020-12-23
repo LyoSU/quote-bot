@@ -25,6 +25,7 @@ const {
   handleDelete,
   handleRate,
   handleSettingsRate,
+  handlePrivacy,
   handleLanguage,
   handleFstik,
   handleDonate
@@ -160,6 +161,8 @@ bot.on('new_chat_members', (ctx, next) => {
 
 bot.start(handleHelp)
 bot.command('help', handleHelp)
+
+bot.command('privacy', handlePrivacy)
 
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)

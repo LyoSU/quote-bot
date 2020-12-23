@@ -11,6 +11,7 @@ module.exports = {
   handleDelete: require('./sticker-delete'),
   handleRate: require('./rate'),
   handleSettingsRate: require('./rate-settings'),
+  handlePrivacy: require('./privacy-settings'),
   handleLanguage: require('./language'),
   handleFstik: require('./fstik'),
   handleDonate: require('./donate')

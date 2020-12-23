@@ -57,7 +57,8 @@ module.exports = async (ctx) => {
     img: false,
     rate: false,
     color: false,
-    scale: false
+    scale: false,
+    privacy: false
   }
 
   if (ctx.message && ctx.message.text && ctx.message.text.match(/\/q/)) {
@@ -243,6 +244,11 @@ module.exports = async (ctx) => {
       quoteMessage.from.name = false
     }
 
+    if (!flag.privacy) {
+      const quoterFind = await ctx.db.Quote.findOne({ telegram_id: messageFrom.id })
+      if (quoterFind.settings.privacy) flag.privacy = true
+    }
+
     if (avatarImage) message.avatar = avatarImage
     if (messageFrom) message.from = messageFrom
     if (text) message.text = text
@@ -288,7 +294,7 @@ module.exports = async (ctx) => {
   if (flag.png) type = 'png'
 
   let format
-  if (type === 'quote') format = 'png'
+  if (!flag.privacy && type === 'quote') format = 'png'
 
   const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
     json: {
@@ -333,17 +339,29 @@ module.exports = async (ctx) => {
         ])
       }
 
-      await ctx.tg.addStickerToSet(config.globalStickerSet.ownerId, config.globalStickerSet.name, {
-        png_sticker: { source: image },
-        emojis: '💜'
-      })
+      let sendResult
 
-      const sticketSet = await ctx.getStickerSet(config.globalStickerSet.name)
+      if (!flag.privacy) {
+        await ctx.tg.addStickerToSet(config.globalStickerSet.ownerId, config.globalStickerSet.name, {
+          png_sticker: { source: image },
+          emojis: '💜'
+        })
 
-      const sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
-        reply_to_message_id: ctx.message.message_id,
-        reply_markup: replyMarkup
-      })
+        const sticketSet = await ctx.getStickerSet(config.globalStickerSet.name)
+
+        sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
+          reply_to_message_id: ctx.message.message_id,
+          reply_markup: replyMarkup
+        })
+      } else {
+        sendResult = await ctx.replyWithDocument({
+          source: image,
+          filename: 'quote.webp'
+        }, {
+          reply_to_message_id: ctx.message.message_id,
+          reply_markup: replyMarkup
+        })
+      }
 
       if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
         const quoteDb = new ctx.db.Quote()
