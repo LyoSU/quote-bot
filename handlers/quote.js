@@ -19,8 +19,9 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 async function loopCLearStickerPack () {
   while (true) {
     await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
-      for (const sticker of sticketSet.stickers) {
-        if (sticker.file_unique_id !== config.globalStickerSet.main_sticker) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+      for (const i in sticketSet.stickers) {
+        const sticker = sticketSet.stickers[i]
+        if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
       }
     })
   }
