@@ -16,17 +16,17 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 //   emojis: '💜'
 // }).then(console.log)
 
-async function loopCLearStickerPack () {
-  while (true) {
-    await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
-      for (const i in sticketSet.stickers) {
-        const sticker = sticketSet.stickers[i]
-        if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
-      }
-    })
-  }
-}
-loopCLearStickerPack()
+// async function loopCLearStickerPack () {
+//   while (true) {
+//     await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
+//       for (const i in sticketSet.stickers) {
+//         const sticker = sticketSet.stickers[i]
+//         if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+//       }
+//     })
+//   }
+// }
+// loopCLearStickerPack()
 
 const hashCode = (s) => {
   let h = 0; var l = s.length; var i = 0
@@ -136,6 +136,8 @@ module.exports = async (ctx) => {
     } catch (error) {
       quoteMessage = null
     }
+
+    if (index === 0) quoteMessage = ctx.message
 
     if (ctx.chat.type === 'private' && !quoteMessage) break
 
@@ -350,20 +352,55 @@ module.exports = async (ctx) => {
           reply_markup: replyMarkup
         })
       } else {
-        await ctx.tg.addStickerToSet(config.globalStickerSet.ownerId, config.globalStickerSet.name, {
+        if (!ctx.session.userInfo.tempStickerSet.create) {
+          const getMe = await telegram.getMe()
+
+          const packName = `temp_${Math.random().toString(36).substring(5)}_${Math.abs(ctx.from.id)}_by_${getMe.username}`
+          const packTitle = `Created by @${getMe.username}`
+
+          const created = await telegram.createNewStickerSet(ctx.from.id, packName, packTitle, {
+            png_sticker: { source: 'placeholder.png' },
+            emojis: '💜'
+          }).catch(() => {})
+
+          ctx.session.userInfo.tempStickerSet.name = packName
+          ctx.session.userInfo.tempStickerSet.create = created
+        }
+
+        let packOwnerId = config.globalStickerSet.ownerId
+        let packName = config.globalStickerSet.name
+
+        if (ctx.session.userInfo.tempStickerSet.create) {
+          packOwnerId = ctx.from.id
+          packName = ctx.session.userInfo.tempStickerSet.name
+        }
+
+        const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName, {
           png_sticker: { source: image },
           emojis: '💜'
+        }).catch((error) => {
+          console.error(error)
+          if (error.description === 'Bad Request: STICKERSET_INVALID') {
+            ctx.session.userInfo.tempStickerSet.create = false
+          }
         })
 
-        const sticketSet = await ctx.getStickerSet(config.globalStickerSet.name)
+        if (addSticker) {
+          const sticketSet = await ctx.getStickerSet(packName)
 
-        sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
-          reply_to_message_id: ctx.message.message_id,
-          reply_markup: replyMarkup
-        })
+          for (const i in sticketSet.stickers) {
+            const sticker = sticketSet.stickers[i]
+            if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+          }
+
+          sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
+            reply_to_message_id: ctx.message.message_id,
+            reply_markup: replyMarkup
+          })
+        }
       }
 
-      if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+      if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
         const quoteDb = new ctx.db.Quote()
         quoteDb.group = ctx.group.info
         quoteDb.user = ctx.session.userInfo

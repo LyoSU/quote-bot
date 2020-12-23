@@ -33,6 +33,13 @@ const userSchema = mongoose.Schema({
     },
     hidden: Boolean,
     privacy: Boolean
+  },
+  tempStickerSet: {
+    name: String,
+    create: {
+      type: Boolean,
+      default: false
+    }
   }
 }, {
   timestamps: true
