@@ -31,8 +31,14 @@ const userSchema = mongoose.Schema({
         default: '#1b1429'
       }
     },
-    hidden: Boolean,
-    privacy: Boolean
+    hidden: {
+      type: Boolean,
+      default: false
+    },
+    privacy: {
+      type: Boolean,
+      default: false
+    }
   },
   tempStickerSet: {
     name: String,

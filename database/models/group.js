@@ -22,8 +22,14 @@ const groupSchema = mongoose.Schema({
       type: Boolean,
       default: true
     },
-    hidden: Boolean,
-    privacy: Boolean,
+    hidden: {
+      type: Boolean,
+      default: false
+    },
+    privacy: {
+      type: Boolean,
+      default: false
+    },
     randomQuoteGab: {
       type: Number,
       default: 0
