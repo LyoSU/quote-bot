@@ -20,7 +20,7 @@ async function loopCLearStickerPack () {
   while (true) {
     await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
       for (const sticker of sticketSet.stickers) {
-        if (sticker.file_unique_id !== 'AgADzw8AArJh9gM') telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+        if (sticker.file_unique_id !== config.globalStickerSet.main_sticker) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
       }
     })
   }
