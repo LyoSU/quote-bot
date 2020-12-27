@@ -1,31 +1,20 @@
 const Markup = require('telegraf/markup')
 
 module.exports = async (ctx) => {
-  const query = {
-    $and: [
-      { group: ctx.group.info._id },
-      { 'rate.score': { $gt: 0 } }
+  const randomQuote = await ctx.db.Quote.aggregate(
+    [
+      {
+        $match: {
+          $and: [
+            { group: ctx.group.info._id },
+            { 'rate.score': { $gt: 0 } }
+          ]
+        }
+      },
+      { $sample: { size: 15 } }
     ]
-  }
-
-  const quoteCount = ctx.db.Quote.count(query)
-  const randomQuote = await ctx.db.Quote.find(query).limit(1).skip(Math.floor(Math.random() * quoteCount))
-
-  // const randomQuote = await ctx.db.Quote.aggregate(
-  //   [
-  //     {
-  //       $match: {
-  //         $and: [
-  //           { group: ctx.group.info._id },
-  //           { 'rate.score': { $gt: 0 } }
-  //         ]
-  //       }
-  //     },
-  //     { $sample: { size: 1 } }
-  //   ]
-  // )
-
-  const quote = randomQuote[0]
+  )
+  const quote = randomQuote[Math.floor(Math.random() * randomQuote.length)]
 
   if (quote) {
     ctx.replyWithDocument(quote.file_id, {
