@@ -4,6 +4,7 @@ module.exports = async (ctx) => {
   if (ctx.updateType === 'callback_query') {
     await ctx.editMessageText(ctx.i18n.t('help'), {
       parse_mode: 'HTML',
+      disable_web_page_preview: true,
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
           ctx.i18n.t('btn.add_group'),
