@@ -8,8 +8,8 @@ module.exports = async (ctx) => {
     ]
   }
 
-  const quoteCount = ctx.db.Quote.count(query);
-  const quote = await ctx.db.Quote.findOne(query).limit(1).skip(Math.floor(Math.random() * quoteCount))
+  const quoteCount = ctx.db.Quote.count(query)
+  const randomQuote = await ctx.db.Quote.find(query).limit(1).skip(Math.floor(Math.random() * quoteCount))
 
   // const randomQuote = await ctx.db.Quote.aggregate(
   //   [
@@ -24,9 +24,8 @@ module.exports = async (ctx) => {
   //     { $sample: { size: 1 } }
   //   ]
   // )
-  // const quote = randomQuote[0]
 
-  console.log(quote)
+  const quote = randomQuote[0]
 
   if (quote) {
     ctx.replyWithDocument(quote.file_id, {
