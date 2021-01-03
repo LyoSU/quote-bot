@@ -1,6 +1,6 @@
 {
   "name": "quote-bot",
-  "version": "0.21.18",
+  "version": "0.21.19",
   "description": "Telegram quote bot",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/LyoSU/quote-bot#readme",
   "dependencies": {
-    "airgram": "^3.2.3",
+    "airgram": "^4.0.0",
     "dotenv": "^8.2.0",
     "got": "^10.7.0",
     "mongoose": "^5.8.2",
