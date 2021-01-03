@@ -44,7 +44,7 @@ help: |
 btn:
   add_group: Qrupa əlavə etmək
 quote:
-  api_error:
+  api_error: |
     <b>😓 Sitatı yaratmaq alınmadı</b>
     <pre>${error}</pre>
   empty_forward: |

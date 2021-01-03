@@ -98,7 +98,7 @@ module.exports = async (ctx) => {
           png_sticker: { source: stickerPNG },
           emojis
         }).catch((error) => {
-          if (error.description === 'Bad Request: STICKERSET_INVALID') {
+          if (error.description.includes('STICKERSET_INVALID') || error.description.includes('TOO_MUCH')) {
             ctx.group.info.stickerSet = undefined
             delete ctx.group.info.stickerSet
           }

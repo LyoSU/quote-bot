@@ -3,7 +3,7 @@ module.exports = async (ctx) => {
 
   let result
 
-  if (ctx.message.reply_to_message) {
+  if (ctx.message.reply_to_message && ctx.group.info.stickerSet.name === ctx.message.reply_to_message.sticker.set_name) {
     const replyMessage = ctx.message.reply_to_message
 
     if (replyMessage.sticker) {

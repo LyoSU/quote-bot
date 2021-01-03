@@ -23,7 +23,7 @@ function getUser (userId) {
     airgram.api.getUser({
       userId
     }).then(({ response }) => {
-      if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      if (response._ === 'error') return resolve(new Error(`[TDLib][${response.code}] ${response.message}`))
       const user = {
         id: response.id,
         first_name: response.firstName,
@@ -42,7 +42,7 @@ function getSupergroup (supergroupId) {
     airgram.api.getSupergroup({
       supergroupId
     }).then(({ response }) => {
-      if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      if (response._ === 'error') return resolve(new Error(`[TDLib][${response.code}] ${response.message}`))
       const supergroup = {
         username: response.username
       }
@@ -57,7 +57,7 @@ function getChat (chatId) {
     airgram.api.getChat({
       chatId
     }).then(({ response }) => {
-      if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      if (response._ === 'error') return resolve(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const chat = {
         id: response.id,
@@ -111,7 +111,7 @@ function getMessages (chatId, messageIds) {
       chatId,
       messageIds: tdlibMessageIds
     }).then(({ response }) => {
-      if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      if (response._ === 'error') return resolve(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const messages = response.messages.map((messageInfo) => {
         if (!messageInfo) return {}
@@ -129,7 +129,7 @@ function getMessages (chatId, messageIds) {
 
             const chatIds = [
               messageInfo.chatId,
-              messageInfo.senderUserId
+              messageInfo.sender.userId
             ]
 
             let forwarderId
@@ -148,7 +148,7 @@ function getMessages (chatId, messageIds) {
               })
 
               message.chat = chatInfo[messageInfo.chatId]
-              message.from = chatInfo[messageInfo.senderUserId]
+              message.from = chatInfo[messageInfo.sender.userId]
 
               if (messageInfo.forwardInfo) {
                 if (chatInfo[forwarderId]) {
