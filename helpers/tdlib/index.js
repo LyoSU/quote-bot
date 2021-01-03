@@ -11,7 +11,7 @@ const airgram = new Airgram({
   apiHash: process.env.API_HASH || '68875f756c9b437a8b916ca3de215815',
   command: `${tdDirectory}/${tdLibFile}`,
   databaseDirectory: `${tdDirectory}/db`,
-  logVerbosityLevel: 0
+  logVerbosityLevel: 2
 })
 
 airgram.use(new Auth({

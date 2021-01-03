@@ -122,7 +122,7 @@ module.exports = async (ctx) => {
 
   for (let index = 0; index < messageCount; index++) {
     try {
-      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(() => {})
+      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(console.error)
       if (getMessages.length > 0 && getMessages[0].message_id) {
         quoteMessage = getMessages[0]
       } else {
@@ -134,6 +134,7 @@ module.exports = async (ctx) => {
         }
       }
     } catch (error) {
+      console.error(error)
       quoteMessage = null
     }
 
