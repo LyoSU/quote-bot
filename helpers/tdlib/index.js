@@ -129,7 +129,7 @@ function getMessages (chatId, messageIds) {
 
             const chatIds = [
               messageInfo.chatId,
-              messageInfo.sender.userId
+              messageInfo.senderUserId
             ]
 
             let forwarderId
@@ -148,7 +148,7 @@ function getMessages (chatId, messageIds) {
               })
 
               message.chat = chatInfo[messageInfo.chatId]
-              message.from = chatInfo[messageInfo.sender.userId]
+              message.from = chatInfo[messageInfo.senderUserId]
 
               if (messageInfo.forwardInfo) {
                 if (chatInfo[forwarderId]) {
