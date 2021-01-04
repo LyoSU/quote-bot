@@ -4,9 +4,11 @@ const tdDirectory = path.resolve(__dirname, 'data')
 
 const { Client } = require('tdl')
 const { TDLib } = require('tdl-tdlib-addon')
-const { compose } = require('telegraf/composer')
 
-const client = new Client(new TDLib(`${tdDirectory}/libtdjson.dylib`), {
+let tdLibFile = process.platform === 'win32' ? 'tdjson.dll' : 'libtdjson.so'
+if (process.platform === 'darwin') tdLibFile = 'libtdjson.dylib'
+
+const client = new Client(new TDLib(`${tdDirectory}/${tdLibFile}`), {
   apiId: process.env.TELEGRAM_API_ID || 2834,
   apiHash: process.env.TELEGRAM_API_HASH || '68875f756c9b437a8b916ca3de215815',
   databaseDirectory: `${tdDirectory}/db`,
