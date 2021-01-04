@@ -122,15 +122,17 @@ module.exports = async (ctx) => {
 
   for (let index = 0; index < messageCount; index++) {
     try {
-      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index]).catch(console.error)
+      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index])
       if (getMessages.length > 0 && getMessages[0].message_id) {
         quoteMessage = getMessages[0]
       } else {
         if (index > 0) {
-          let chatForward = ctx.message.chat.id
-          if (process.env.GROUP_ID) chatForward = process.env.GROUP_ID
-          quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
-          if (!process.env.GROUP_ID) await ctx.telegram.deleteMessage(ctx.message.chat.id, quoteMessage.message_id)
+          if (process.env.GROUP_ID) {
+            const chatForward = process.env.GROUP_ID
+            quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
+          } else {
+            quoteMessage = null
+          }
         }
       }
     } catch (error) {

@@ -1,47 +1,62 @@
 const path = require('path')
-const fs = require('fs')
-const { Airgram, Auth } = require('airgram')
 
 const tdDirectory = path.resolve(__dirname, 'data')
-if (process.env.NODE_ENV === 'production') fs.rmdirSync(`${tdDirectory}/db`, { recursive: true })
 
-const tdLibFile = process.platform === 'win32' ? 'tdjson/tdjson' : 'libtdjson/libtdjson'
-const airgram = new Airgram({
-  apiId: process.env.API_ID || 2834,
-  apiHash: process.env.API_HASH || '68875f756c9b437a8b916ca3de215815',
-  command: `${tdDirectory}/${tdLibFile}`,
+const { Client } = require('tdl')
+const { TDLib } = require('tdl-tdlib-addon')
+const { compose } = require('telegraf/composer')
+
+const client = new Client(new TDLib(`${tdDirectory}/libtdjson.dylib`), {
+  apiId: process.env.TELEGRAM_API_ID || 2834,
+  apiHash: process.env.TELEGRAM_API_HASH || '68875f756c9b437a8b916ca3de215815',
   databaseDirectory: `${tdDirectory}/db`,
+  filesDirectory: tdDirectory,
   logVerbosityLevel: 2
 })
 
-airgram.use(new Auth({
-  token: process.env.BOT_TOKEN
-}))
+client.on('error', console.error)
 
-function getUser (userId) {
+async function main () {
+  await client.connectAndLogin(() => ({
+    type: 'bot',
+    getToken: retry => retry
+      ? Promise.reject('Token is not valid')
+      : Promise.resolve(process.env.BOT_TOKEN)
+  }))
+}
+
+main()
+
+function sendMethod (method, parm) {
   return new Promise((resolve, reject) => {
-    airgram.api.getUser({
-      userId
-    }).then(({ response }) => {
+    client.invoke(Object.assign({ _: method }, parm)).then(resolve).catch(resolve)
+  })
+}
+
+function getUser (user_id) {
+  return new Promise((resolve, reject) => {
+    sendMethod('getUser', {
+      user_id
+    }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
       const user = {
         id: response.id,
-        first_name: response.firstName,
-        last_name: response.lastName,
+        first_name: response.first_name,
+        last_name: response.last_name,
         username: response.username,
-        language_code: response.languageCode
+        language_code: response.language_code
       }
 
-      resolve(user)
-    })
+      return resolve(user)
+    }).catch((console.error))
   })
 }
 
 function getSupergroup (supergroupId) {
   return new Promise((resolve, reject) => {
-    airgram.api.getSupergroup({
-      supergroupId
-    }).then(({ response }) => {
+    sendMethod('getSupergroup', {
+      supergroup_id
+    }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
       const supergroup = {
         username: response.username
@@ -52,11 +67,11 @@ function getSupergroup (supergroupId) {
   })
 }
 
-function getChat (chatId) {
+function getChat (chat_id) {
   return new Promise((resolve, reject) => {
-    airgram.api.getChat({
-      chatId
-    }).then(({ response }) => {
+    sendMethod('getChat', {
+      chat_id
+    }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
       const chat = {
@@ -103,43 +118,43 @@ function getChat (chatId) {
   })
 }
 
-function getMessages (chatId, messageIds) {
+function getMessages (chat_id, messageIds) {
   const tdlibMessageIds = messageIds.map((id) => id * Math.pow(2, 20))
 
   return new Promise((resolve, reject) => {
-    airgram.api.getMessages({
-      chatId,
-      messageIds: tdlibMessageIds
-    }).then(({ response }) => {
+    sendMethod('getMessages', {
+      chat_id,
+      message_ids: tdlibMessageIds
+    }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
-      const messages = response.messages.map((messageInfo) => {
-        if (!messageInfo) return {}
+      const messages = response.messages.map((message_info) => {
+        if (!message_info) return {}
         return new Promise((resolve, reject) => {
           const message = {
-            message_id: messageInfo.id / Math.pow(2, 20),
-            date: messageInfo.date
+            message_id: message_info.id / Math.pow(2, 20),
+            date: message_info.date
           }
           const messagePromise = []
-          const replyToMessageId = messageInfo.replyToMessageId / Math.pow(2, 20)
+          const reply_to_message_id = message_info.reply_to_message_id / Math.pow(2, 20)
 
-          if (messageInfo.replyToMessageId) messagePromise.push(getMessages(chatId, [replyToMessageId]))
+          if (message_info.reply_to_message_id) messagePromise.push(getMessages(chat_id, [reply_to_message_id]))
           Promise.all(messagePromise).then((replyMessage) => {
             if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
-            const chatIds = [
-              messageInfo.chatId,
-              messageInfo.senderUserId
+            const chat_ids = [
+              message_info.chat_id,
+              message_info.sender.user_id
             ]
 
             let forwarderId
 
-            if (messageInfo.forwardInfo && messageInfo.forwardInfo.origin.senderUserId) forwarderId = messageInfo.forwardInfo.origin.senderUserId
-            if (messageInfo.forwardInfo && messageInfo.forwardInfo.origin.chatId) forwarderId = messageInfo.forwardInfo.origin.chatId
+            if (message_info.forward_info && message_info.forward_info.origin.sender_user_id) forwarderId = message_info.forward_info.origin.sender_user_id
+            if (message_info.forward_info && message_info.forward_info.origin.chat_id) forwarderId = message_info.forward_info.origin.chat_id
 
-            if (forwarderId) chatIds.push(forwarderId)
+            if (forwarderId) chat_ids.push(forwarderId)
 
-            const chatInfoPromise = chatIds.map(getChat)
+            const chatInfoPromise = chat_ids.map(getChat)
 
             Promise.all(chatInfoPromise).then((chats) => {
               const chatInfo = {}
@@ -147,36 +162,36 @@ function getMessages (chatId, messageIds) {
                 chatInfo[chat.id] = chat
               })
 
-              message.chat = chatInfo[messageInfo.chatId]
-              message.from = chatInfo[messageInfo.senderUserId]
+              message.chat = chatInfo[message_info.chat_id]
+              message.from = chatInfo[message_info.sender.user_id]
 
-              if (messageInfo.forwardInfo) {
+              if (message_info.forward_info) {
                 if (chatInfo[forwarderId]) {
                   if (!chatInfo[forwarderId].type) message.forward_from = chatInfo[forwarderId]
                   else message.forward_from_chat = chatInfo[forwarderId]
                 }
-                if (messageInfo.forwardInfo.origin.senderName) message.forward_sender_name = messageInfo.forwardInfo.origin.senderName
+                if (message_info.forward_info.origin.sender_name) message.forward_sender_name = message_info.forward_info.origin.sender_name
               }
 
               let entities
 
-              if (messageInfo.content.text) {
-                message.text = messageInfo.content.text.text
-                entities = messageInfo.content.text.entities
+              if (message_info.content.text) {
+                message.text = message_info.content.text.text
+                entities = message_info.content.text.entities
               }
-              if (messageInfo.content) {
+              if (message_info.content) {
                 const mediaType = {
                   messagePhoto: 'photo',
                   messageSticker: 'sticker'
                   // messageVideo: 'video'
                 }
 
-                const type = mediaType[messageInfo.content._]
+                const type = mediaType[message_info.content._]
 
                 if (type) {
                   let media
-                  if (messageInfo.content[type].sizes) {
-                    media = messageInfo.content[type].sizes.map((size) => {
+                  if (message_info.content[type].sizes) {
+                    media = message_info.content[type].sizes.map((size) => {
                       return {
                         file_id: size[type].remote.id,
                         file_unique_id: size[type].remote.uniqueId,
@@ -187,22 +202,22 @@ function getMessages (chatId, messageIds) {
                     })
                   } else {
                     media = {
-                      file_id: messageInfo.content[type][type].remote.id,
-                      file_unique_id: messageInfo.content[type][type].remote.uniqueId,
-                      file_size: messageInfo.content[type][type].size,
-                      height: messageInfo.content[type].height,
-                      width: messageInfo.content[type].width
+                      file_id: message_info.content[type][type].remote.id,
+                      file_unique_id: message_info.content[type][type].remote.uniqueId,
+                      file_size: message_info.content[type][type].size,
+                      height: message_info.content[type].height,
+                      width: message_info.content[type].width
                     }
                   }
 
                   message[type] = media
                 } else {
-                  messageInfo.content.unsupportedMedia = {}
+                  message_info.content.unsupportedMedia = {}
                 }
 
-                if (messageInfo.content.caption) {
-                  message.caption = messageInfo.content.caption.text
-                  if (messageInfo.content.caption.entities) entities = messageInfo.content.caption.entities
+                if (message_info.content.caption) {
+                  message.caption = message_info.content.caption.text
+                  if (message_info.content.caption.entities) entities = message_info.content.caption.entities
                 }
               }
 
@@ -234,7 +249,7 @@ function getMessages (chatId, messageIds) {
                   }
 
                   if (entity.type === 'text_link') entity.url = entityInfo.type.url
-                  if (entity.type === 'text_mention') entity.user = entityInfo.type.userId
+                  if (entity.type === 'text_mention') entity.user = entityInfo.type.user_id
 
                   return entity
                 })
