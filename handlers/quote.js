@@ -171,7 +171,7 @@ module.exports = async (ctx) => {
         }
 
         if (sarchForwardName.length === 1) {
-          const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id)
+          const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
           messageFrom = {
             id: sarchForwardName[0].telegram_id,
             name: quoteMessage.forward_sender_name,
