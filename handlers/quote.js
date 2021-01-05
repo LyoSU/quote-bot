@@ -171,13 +171,14 @@ module.exports = async (ctx) => {
         }
 
         if (sarchForwardName.length === 1) {
-          const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
           messageFrom = {
             id: sarchForwardName[0].telegram_id,
             name: quoteMessage.forward_sender_name,
-            username: sarchForwardName[0].username || null,
-            photo: getHiddenChat.photo
+            username: sarchForwardName[0].username || null
           }
+
+          const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
+          if (getHiddenChat) messageFrom.photo = getHiddenChat.photo
         } else {
           messageFrom = {
             id: hashCode(quoteMessage.forward_sender_name),
