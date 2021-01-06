@@ -44,7 +44,7 @@ quote:
     <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be executed with a reply to a message.
+    Command must be sent as a reply to a message.
   set_backgroun_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
@@ -53,8 +53,8 @@ sticker:
     suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
     error:
       animated: I can't add an animated sticker.
-      need_creator: <b>I can't save this sticker.</b>\n${creator} must write me any message in private messages.
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
+      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
   delete:
     suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
     error:
@@ -62,9 +62,9 @@ sticker:
     btn:
       save_sticker: Save the sticker
   empty_forward: |
-    Command must be executed with a reply to a sticker, photo or file with a picture.
+    Command must be sent a reply to a sticker, photo or file with a picture.
   fstik: |
-    To save the sticker in your personal sticker pack, forward this message to @fStikBot
+    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
 rate:
   vote:
     rated: |
@@ -112,6 +112,6 @@ donate:
   liqpay: LiqPay (VISA, MasterCard)
   other: Other options
 only_admin: |
-  This command can be executed only by group administrator.
+  Only group administrator can use this command.
 only_group: |
-  This command can be executed only in groups.
+  This command can be used only in groups.
