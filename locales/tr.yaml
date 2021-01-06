@@ -35,16 +35,14 @@ help: |
   <b>GitHub:</b> github.com/LyoSU/quote-bot
   <b>Çeviri:</b> @Holytotem, @By_Azade
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
-
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+  <b>Merhaba!</b>
+  /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
 btn:
   add_group: Gruba Ekle
-  help: Справка
+  help: Dökümanlar
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Fiyat teklifi oluşturulamadı</b>
     <pre>${error}</pre>
   empty_forward: |
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
@@ -71,47 +69,47 @@ sticker:
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      Sen ${rateName} bu.
     back: |
       Oyunuzu geri aldınız.
   settings:
     enable: |
-      Оценка для цитат включена.
+      Teklifler için değerlendirme dahildir.
     disable: |
-      Оценка для цитат выключена.
+      Teklifler için derecelendirme kapalı.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    Grupta olumlu derecelendirmeye sahip alıntı yok.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    Rastgele alıntı yapma şansı ${gab} olarak ayarlanmıştır
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      Gönderen arama etkinleştirildi.
     disable: |
-      Поиск отправителя отключен.
+      Gönderen arama devre dışı bırakıldı.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      Gizlilik modu açık.
     disable: |
-      Режим приватности отключен.
+      Gizlilik modu devre dışı bırakıldı.
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+    <b>En iyi grup alıntıları:</b>
+  pack: En iyi alıntıları içeren çıkartma paketi
 donate:
-  info: Буду благодарен за поддержку бота :)
+  info: Bot desteği için minnettar olurum :)
   info_group: |
-    Буду благодарен за поддержку бота :)
+    Botun desteğinden dolayı minnettar olurum :)
 
-    Поддержать меня можно по ссылке donate.lyo.su
-    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+    Donate.lyo.su linkinden bana destek olabilirsiniz
+    Telegram ile ödeme yaparak isterseniz aynı komutu LAN'a yazın.
+  title: Bağış yap ${botUsername}
+  description: Bot geliştirme desteği
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Botu desteklediğiniz için teşekkürler 💜</b>
+  pay: '💜 Telegram Üzerinden Ödeyin'
   liqpay: LiqPay (VISA, MasterCard)
   other: Diğer yöntemler
 only_admin: |
