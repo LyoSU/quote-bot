@@ -32,16 +32,16 @@ help: |
   <b>👨🏻‍💻 Developer's blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+  <b>Hello!</b>
+  I will create quotes in the group using the / q command in response to message
 
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+  You can learn more about the command <a href="t.me/${username}?start=help">/ help</a> in private messages with me
 btn:
   add_group: Add to Group
-  help: Справка
+  help: Help
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
   empty_forward: |
     Command must be executed with a reply to a message.
@@ -68,49 +68,49 @@ sticker:
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      You ${rateName} this.
     back: |
-      Вы вернули свой голос.
+      You got your vote back.
   settings:
     enable: |
-      Оценка для цитат включена.
+      Evaluation for quotes is included.
     disable: |
-      Оценка для цитат выключена.
+      Rating for quotes is off.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    There are no quotes with a positive rating in the group.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    The chance of random quotes is set to ${gab}
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      Sender search is enabled.
     disable: |
-      Поиск отправителя отключен.
+      Sender search is disabled.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      Privacy mode is on.
     disable: |
-      Режим приватности отключен.
+      Privacy mode is disabled.
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+    <b>Top group quotes:</b>
+  pack: Sticker pack with top quotes
 donate:
-  info: Буду благодарен за поддержку бота :)
+  info: I would be grateful for the bot support :)
   info_group: |
-    Буду благодарен за поддержку бота :)
+    I would be grateful for the support of the bot :)
 
-    Поддержать меня можно по ссылке donate.lyo.su
-    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+    You can support me at the link donate.lyo.su
+    And if you want by payment via Telegram, write the same command in the PM.
+  title: Donate ${botUsername}
+  description: Bot development support
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Thank you for supporting the bot 💜</b>
+  pay: '💜 Pay Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Other methods
 only_admin: |
   This command can be executed only by group administrator.
 only_group: |
