@@ -1,79 +1,73 @@
 ---
-language_name: '🇷🇺 Русский'
+language_name: '🇹🇷 Türkçe'
 help: |
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>Merhaba!</b>
+  Bir mesajı alıntı oluşturup size gönderirim.
+  Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️ Kullanılabilir Komutlar:</b>
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+  <code>/help</code> — Bu mesajı gösterir
 
-    <b>Пример использования флагов:</b>
-    <code>/q white r p</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+  <code>/q #1b1429</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#1b1429</b>
+  <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
+  <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
+  <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
+  <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
+    <b>❕ Ekstra Bilgiler:</b>
 
-  /help или /start — получить этот текст
+  ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
+  ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
+  ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
+  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
+  ➖ Emoji belirtilmesi zorunlu değildir.
+  ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
+  ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
+  ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
+  ➖ Argümanların sırası önemli değildir.
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
-
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
-
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
+  <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>Çeviri:</b> @Holytotem, @By_Azade
 help_group: |
   <b>Привет!</b>
   Я буду создавать цитаты в группе по команде /q в ответ на сообщение
 
   Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
-  add_group: Добавить в группу
+  add_group: Gruba Ekle
   help: Справка
 quote:
   api_error: |
     <b>😓 Не удалось сгенерировать цитату</b>
     <pre>${error}</pre>
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение.
+    Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_backgroun_color: |
-    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
+    Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
+    suc: Çıkartma başarıyla pakete eklendi <a href="${link}">Grup Çıkartma Paketi</a>.
     error:
-      animated: Я не могу добавить анимированный стикер.
-      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
-      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
+      animated: Animasyonlu bir çıkartma ekleyemiyorum.
+      need_creator: <b>Bu çıkartmayı kaydedemedim..</b>\n${creator} bana özel mesajlarda herhangi bir mesaj yazmalı.
+      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
   delete:
-    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
+    suc: Çıkartma, başarıyla çıkartma paketinden kaldırıldı <a href="${link}">Grup Çıkartma Paketi</a>.
     error:
-      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
+      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Сохранить стикер
+      save_sticker: Çıkartmayı kaydet
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
+    Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
   fstik: |
-    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
+    Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
 rate:
   vote:
     rated: |
@@ -121,6 +115,6 @@ donate:
   liqpay: LiqPay (VISA, MasterCard)
   other: Другие способы
 only_admin: |
-  Команду может использовать только администратор группы.
+  Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |
-  Команду можно использовать только в группах.
+  Bu komut yalnızca gruplar içerisinde kullanılabilir.
