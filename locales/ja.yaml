@@ -1,0 +1,126 @@
+---
+language_name: '🇯🇵 日本人'
+help: |
+  <b>こんにちは！</b>
+  私は、ポストからの引用を作成するのに役立ちます。
+  ボットは、プライベートメッセージおよびグループの両方で動作することができる
+
+    <b>⚙️使用可能なコマンド：</b>
+  /q <i>[メッセージに応答して]</i> -メッセージからの引用を行う
+
+    <b>/ qコマンド使用可能フラグ：</b>
+      進コードまたは色名： <code>#cbafff</code> 又は <code>藍</code> -色で引用する <b>#cbafff</b>
+      番号： <code>3</code> -から引用する <b>3つのポスト</b> ダウン
+      <code>ランダム</code>：ランダム引用色
+      <code>応答</code> 又は <code>R</code>：応答保存中に引用する
+      <code>P</code> 又は <code>PNG</code> - PNG引用する
+      <code>I</code> 又は <code>IMG</code> -画像として引用する
+      <code>速度</code> 見積りに評価を追加-
+
+    <b>のフラグの使用例：</b>
+    <code>/q white r p</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
+
+  <code>/qcolor green</code> -引用符の色設定 <b>グリーン</b> デフォルトでは <i>（16進コードまたはカラー名）</i>
+
+  <code>/qs 🥰💜</code> <i>[管理者のみのために] [メッセージに応答して]</i> -絵文字🥰💜のグループのステッカーパックに写真付きステッカー/写真/文書保存し <i>（絵文字は、任意のおよび任意の数とすることができますC）</i>
+  <code>/qd</code> <i>[管理者のみのために] [メッセージに応答した]</i> -基のステッカーパックからシールを取り除く
+
+  <code>/qrate</code> <i>[管理者のみのために]</i> — イネーブル/引用符の無効評価
+  /qrand — ランダムに正の評価と引用
+  /qtop — トップグループの引用符
+
+  /help または/開始-取得このテキスト
+
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
+
+  <b>：☕️開発者のための購入のコーヒー</b> donate.lyo.su
+
+  <b>👨🏻💻開発者ブログ：</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
+help_group: |
+  <b>こんにちは！</b>
+  私は、メッセージに応じて、/ qコマンドを使用して、グループ内の引用符を作成する
+
+  あなたはより多くのコマンドについて学ぶことができます <a href="t.me/${username}?start=help">/ヘルプ</a> 私と一緒にプライベートメッセージで
+btn:
+  add_group: グループに追加：
+  help: ヘルプ
+quote:
+  api_error: |
+    <b>😓見積りを生成できませんでした</b>
+    <pre>${error}</pre>
+  empty_forward: |
+    コマンドは、メッセージに応答して作成する必要があります。
+  set_backgroun_color: |
+    引用符の背景色は次のように設定されます： <code>${backgroundColor}</code>
+  sticker:
+sticker:
+  save:
+    suc: ステッカーは、グループ</a><a href="${link}">ステッカーパックに正常に追加されました。
+    error:
+      animated: アニメーションステッカーを追加できません。
+      need_creator: <b>このステッカーを保存できませんでした。</b>\n${creator} は、プライベートメッセージにメッセージを書き込む必要があります。
+      telegram: <b>このステッカーを保存できませんでした。</b>\n<pre>${error}</pre>
+  delete:
+    suc: <a href="${link}">ステッカーは、グループ</a>ステッカーパックから正常に削除されました。
+    error:
+      telegram: <b>このステッカーを剥がすことができませんでした。</b>\n<pre>${error}</pre>
+    btn:
+      save_sticker: ステッカーを保存
+  empty_forward: |
+    コマンドは、ステッカー、写真、または写真ファイルを含むメッセージに応答して作成する必要があります。
+  fstik: |
+    ステッカーを個人用ステッカーパックに保存するには、@fStikBot にメッセージを転送してください
+rate:
+  vote:
+    rated: |
+      あなたはこれを ${rateName} します。
+    back: |
+      あなたはあなたの投票を取り戻しました。
+  settings:
+    enable: |
+      見積もりの評価が含まれています。
+    disable: |
+      見積もりの評価はオフです。
+random:
+  empty: |
+    グループ内に肯定的な評価の引用はありません。
+  gab: |
+    ランダム引用の可能性は ${gab} 設定され
+hidden:
+  settings:
+    enable: |
+      送信者検索が有効になります。
+    disable: |
+      送信者検索は無効になっています。
+privacy:
+  settings:
+    enable: |
+      プライバシーモードがオンになっています。
+    disable: |
+      プライバシーモードは無効になっています。
+top:
+  info: |
+    <b>上位グループの引用：</b>
+  pack: トップクォート付きステッカーパック
+donate:
+  info: ボットのサポートに感謝します:)
+  info_group: |
+    ボットのサポートに感謝します:)
+
+    リンクdonate.lyo.suで私をサポートすることができます
+    また、テレグラムで支払う場合は、同じコマンドをPMに書き込みます。
+  title: '${botUsername} 寄付する'
+  description: ボット開発サポート
+  successful: |
+    <b>ボットを支援してくれてありがとう💜</b>
+  pay: '💜 ペイテレグラム'
+  liqpay: LiqPay（VISA、MasterCard）
+  other: 他の方法
+only_admin: |
+  このコマンドは、グループ管理者のみが使用できます。
+only_group: |
+  このコマンドはグループでのみ使用できます。

@@ -1,5 +1,5 @@
-language_name: 🇦🇿 Azərbaycanca
-
+---
+language_name: '🇦🇿 Azərbaycanca'
 help: |
   <b>Salam!</b>
   Mən mesajdan sitat yaratmaq üçün xidmət göstərirəm.
@@ -41,8 +41,14 @@ help: |
   <b>👨🏻‍💻 Bot yaradıcısının bloqu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
   <b>👨🏻‍💻 Tərcüməçinin GitHub-ı:</b> <a href="https://github.com/Sadykhzadeh">@Sadykhzadeh</a>
+help_group: |
+  <b>Привет!</b>
+  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+
+  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
   add_group: Qrupa əlavə etmək
+  help: Справка
 quote:
   api_error: |
     <b>😓 Sitatı yaratmaq alınmadı</b>
@@ -83,37 +89,39 @@ rate:
 random:
   empty: |
     Qrupda müsbət reytinqə malik olan sitat yoxdur.
+  gab: |
+    Шанс случайных цитат установлен на ${gab}
 hidden:
   settings:
     enable: |
       Göndərənin axtarışı açılıb.
     disable: |
       Göndərənin axtarışı bağlanıb.
+privacy:
+  settings:
+    enable: |
+      Режим приватности включен.
+    disable: |
+      Режим приватности отключен.
 top:
   info: |
     <b>Qrupun top sitatları:</b>
-
   pack: Top sitat ilə stikerpak
 donate:
-  info:
-    Botu dəstəkləsəz minnətdar olaram :)
-
+  info: Botu dəstəkləsəz minnətdar olaram :)
   info_group: |
     Botu dəstəkləsəz minnətdar olaram :)
 
     donate.lyo.su linkinə keçib maddi dəstək verə bilərsiniz.
     Telegram vasitəsilə maddi dəstək etmək istəyirsinizsə, eyni komandanı şəxsi mesaj kimi yazın.
-
   title: Maddi dəstək ${botUsername}
   description: Botun inkişafına dəstək
-
   successful: |
-      <b>Botu dəstək elədiyiniz üçün təşəkkür edirəm 💜</b>
-
-  pay: 💜 Ödəniş etmək (Telegram)
+    <b>Botu dəstək elədiyiniz üçün təşəkkür edirəm 💜</b>
+  pay: '💜 Ödəniş etmək (Telegram)'
   liqpay: LiqPay (VISA, MasterCard)
   other: Digər yollar
 only_admin: |
-    Bu komandanı yalnız qrupun admini istifadə edə bilər.
+  Bu komandanı yalnız qrupun admini istifadə edə bilər.
 only_group: |
-    Bu komandanı yalnız qrupda istifadə etmək olar.
+  Bu komandanı yalnız qrupda istifadə etmək olar.

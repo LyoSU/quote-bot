@@ -1,5 +1,5 @@
 ---
-language_name: '🇷🇺 Русский'
+language_name: '🇺🇿 O''zbek'
 help: |
   <b>Привет!</b>
   Я помогу создать цитату из сообщения.
@@ -46,16 +46,16 @@ help_group: |
 
   Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
-  add_group: Добавить в группу
-  help: Справка
+  add_group: Guruhga qo'shish
+  help: Yordam
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Iqtibosni hosil qilib bo'lmadi</b>
     <pre>${error}</pre>
   empty_forward: |
     Команду необходимо писать в ответ на сообщение.
   set_backgroun_color: |
-    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
+    Iqtiboslar fon rangi: <code>${backgroundColor}</code> deya belgilandi
   sticker:
 sticker:
   save:
@@ -69,7 +69,7 @@ sticker:
     error:
       telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Сохранить стикер
+      save_sticker: Stikerni saqlash
   empty_forward: |
     Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
   fstik: |
@@ -77,50 +77,50 @@ sticker:
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      Siz ${rateName}.
     back: |
-      Вы вернули свой голос.
+      Siz o'z ovozingizni qaytarib oldingiz.
   settings:
     enable: |
-      Оценка для цитат включена.
+      Iqtibosni baholash yoqilgan.
     disable: |
-      Оценка для цитат выключена.
+      Iqtibosni baholash o'chirilgan.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    Guruhda ijobiy reytingga ega iqtiboslar yo'q.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    Tasodifiy iqtiboslar imkoniyat darajasi ${gab}ga o'rnatildi
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      Yuboruvchini qidirish yoqilgan.
     disable: |
-      Поиск отправителя отключен.
+      Yuboruvchini qidirish o'chirilgan.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      Maxfiylik rejimi yoqilgan.
     disable: |
-      Режим приватности отключен.
+      Maxfiylik rejimi o'chirilgan.
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+    <b>Guruhdagi eng yaxshi iqtiboslar:</b>
+  pack: Eng yaxshi iqtibosli stikerlar to'plami
 donate:
-  info: Буду благодарен за поддержку бота :)
+  info: Botni qo'llab-quvvatlashiz uchun minnatdor bo'lar edim :)
   info_group: |
     Буду благодарен за поддержку бота :)
 
     Поддержать меня можно по ссылке donate.lyo.su
     А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
-  title: Донат ${botUsername}
+  title: Xayriya ${botUsername}
   description: Поддержка разработки бота
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Botni qo'llab-quvvatlaganingiz uchun tashakkur 💜</b>
+  pay: '💜 Telegram to''lov'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Boshqa usullar
 only_admin: |
   Команду может использовать только администратор группы.
 only_group: |
-  Команду можно использовать только в группах.
+  Buyruq faqat guruhlarda ishlatilishi mumkin.

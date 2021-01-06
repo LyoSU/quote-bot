@@ -1,5 +1,5 @@
-language_name: 🇹🇷 Türkçe
-
+---
+language_name: '🇹🇷 Türkçe'
 help: |
   <b>Merhaba!</b>
   Bir mesajı alıntı oluşturup size gönderirim.
@@ -34,9 +34,16 @@ help: |
   <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
   <b>Çeviri:</b> @Holytotem, @By_Azade
+help_group: |
+  <b>Merhaba!</b>
+  /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
 btn:
   add_group: Gruba Ekle
+  help: Dökümanlar
 quote:
+  api_error: |
+    <b>😓 Fiyat teklifi oluşturulamadı</b>
+    <pre>${error}</pre>
   empty_forward: |
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_backgroun_color: |
@@ -58,8 +65,54 @@ sticker:
   empty_forward: |
     Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
   fstik: |
-      Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+    Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+rate:
+  vote:
+    rated: |
+      Sen ${rateName} bu.
+    back: |
+      Oyunuzu geri aldınız.
+  settings:
+    enable: |
+      Teklifler için değerlendirme dahildir.
+    disable: |
+      Teklifler için derecelendirme kapalı.
+random:
+  empty: |
+    Grupta olumlu derecelendirmeye sahip alıntı yok.
+  gab: |
+    Rastgele alıntı yapma şansı ${gab} olarak ayarlanmıştır
+hidden:
+  settings:
+    enable: |
+      Gönderen arama etkinleştirildi.
+    disable: |
+      Gönderen arama devre dışı bırakıldı.
+privacy:
+  settings:
+    enable: |
+      Gizlilik modu açık.
+    disable: |
+      Gizlilik modu devre dışı bırakıldı.
+top:
+  info: |
+    <b>En iyi grup alıntıları:</b>
+  pack: En iyi alıntıları içeren çıkartma paketi
+donate:
+  info: Bot desteği için minnettar olurum :)
+  info_group: |
+    Буду благодарен за поддержку бота :)
+
+    Поддержать меня можно по ссылке donate.lyo.su
+    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
+  title: Bağış yap ${botUsername}
+  description: Bot geliştirme desteği
+  successful: |
+    <b>Botu desteklediğiniz için teşekkürler 💜</b>
+  pay: '💜 Telegram Üzerinden Ödeyin'
+  liqpay: LiqPay (VISA, MasterCard)
+  other: Diğer yöntemler
 only_admin: |
-    Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
+  Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |
-    Bu komut yalnızca gruplar içerisinde kullanılabilir.
+  Bu komut yalnızca gruplar içerisinde kullanılabilir.
