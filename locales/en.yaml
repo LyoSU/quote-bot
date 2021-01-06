@@ -73,7 +73,7 @@ rate:
       You got your vote back.
   settings:
     enable: |
-      Evaluation for quotes is included.
+      Quotes rating is on.
     disable: |
       Rating for quotes is off.
 random:
@@ -90,7 +90,7 @@ hidden:
 privacy:
   settings:
     enable: |
-      Privacy mode is on.
+      Privacy mode is enabled.
     disable: |
       Privacy mode is disabled.
 top:
@@ -100,17 +100,17 @@ top:
 donate:
   info: I would be grateful for the bot support :)
   info_group: |
-    I would be grateful for the support of the bot :)
+    I would be grateful for the bot support :)
 
-    You can support me at the link donate.lyo.su
-    And if you want by payment via Telegram, write the same command in the PM.
+    You can support me at donate.lyo.su
+    And if you want to donate via Telegram, send the same command in the PM.
   title: Donate ${botUsername}
-  description: Bot development support
+  description: Support bot development
   successful: |
     <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay Telegram'
+  pay: '💜 Pay via Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other methods
+  other: Other options
 only_admin: |
   This command can be executed only by group administrator.
 only_group: |
