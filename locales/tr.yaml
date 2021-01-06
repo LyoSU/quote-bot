@@ -73,7 +73,7 @@ rate:
     rated: |
       Вы ${rateName} это.
     back: |
-      Вы вернули свой голос.
+      Oyunuzu geri aldınız.
   settings:
     enable: |
       Оценка для цитат включена.
@@ -113,7 +113,7 @@ donate:
     <b>Спасибо за поддержку бота 💜</b>
   pay: '💜 Оплатить Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Diğer yöntemler
 only_admin: |
   Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |
