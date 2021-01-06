@@ -101,10 +101,10 @@ top:
 donate:
   info: Bot desteği için minnettar olurum :)
   info_group: |
-    Botun desteğinden dolayı minnettar olurum :)
+    Буду благодарен за поддержку бота :)
 
-    Donate.lyo.su linkinden bana destek olabilirsiniz
-    Telegram ile ödeme yaparak isterseniz aynı komutu LAN'a yazın.
+    Поддержать меня можно по ссылке donate.lyo.su
+    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
   title: Bağış yap ${botUsername}
   description: Bot geliştirme desteği
   successful: |
