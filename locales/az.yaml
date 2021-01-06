@@ -1,119 +1,126 @@
-language_name: 🇦🇿 Azərbaycanca
-
+---
+language_name: '🇷🇺 Русский'
 help: |
-  <b>Salam!</b>
-  Mən mesajdan sitat yaratmaq üçün xidmət göstərirəm.
-  Bot həm şəxsi söhbətlərdə, həm də qruplarda işləyə bilər.
+  <b>Привет!</b>
+  Я помогу создать цитату из сообщения.
+  Бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Mövcud komandalar:</b>
-  /q <i>[mesaja cavab]</i> — mesajdan sitat yaratmaq.
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
 
-    <b>/q komandasının mövcud bayraqları :</b>
-      hex-kodu vəya ingilis dilində rəng adı: məsələn <code>#cbafff</code> vəya <code>indigo</code> — <b>#cbafff</b> rəngində sitat yaratmaq.
-      Rəqəm: <code>3</code> — mesajın aşağısında olan <b>3 mesajdan</b> sitat yaratmaq.
-      <code>random</code>: təsadüf seçilən rəngdə sitat.
-      <code>reply</code> vəya <code>r</code>: cavab saxlanılması ilə sitat yaratmaq.
-      <code>p</code> vəya <code>png</code> — PNG sitat yaratmaq.
-      <code>i</code> vəya <code>img</code> — sitatı şəkil kimi yaratmaq.
-      <code>rate</code> — sitata qiymətləndirmə sistemi əlavə etmək
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
+      <code>random</code>: случайный цвет цитаты
+      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> — сделать PNG цитату
+      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
+      <code>rate</code> — добавить оценку к цитате
 
-    <b>Bayraqların istifadə nümunələri:</b>
+    <b>Пример использования флагов:</b>
     <code>/q white r p</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — <b>green</b> rəngi standart eləmək və sitat yaratmaq. <i>(hex-kodu vəya ingilis dilində rəng adı)</i>
+  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
 
-  <code>/qs 🥰💜</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — 🥰💜 emoji ilə qrupun stikerpakında stikeri/şəkli/faylı saxlayır <i>(hər hansı bir emoji istənilən sayda ola bilər)</i>
-  <code>/qd</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — stikeri qrupun stikerpakdan silmək
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
+  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
 
-  <code>/qrate</code> <i>[yalnız admin üçün]</i> — Sitatların qiymətləndirməsini birləşdirmək/söndürmək.
-  /qrand — müsbət reytinqli təsadüfi seçilən sitat
-  /qtop — qrupun sitatlarının topu
+  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
+  /qrand — случайная цитата с положительным рейтингом
+  /qtop — топ цитат группы
 
-  /help vəya /start — bu mesajı almaq.
+  /help или /start — получить этот текст
 
   🇺🇸 /lang — change the language
   🇷🇺 /lang — изменить язык
 
-  <b>☕️ Botun yaradıcısına qəhvə fincanı almaq:</b> donate.lyo.su
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Bot yaradıcısının bloqu:</b> @LyBlog
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  <b>👨🏻‍💻 Tərcüməçinin GitHub-ı:</b> <a href="https://github.com/Sadykhzadeh">@Sadykhzadeh</a>
+help_group: |
+  <b>Привет!</b>
+  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+
+  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
-  add_group: Qrupa əlavə etmək
+  add_group: Добавить в группу
+  help: Справка
 quote:
   api_error: |
-    <b>😓 Sitatı yaratmaq alınmadı</b>
+    <b>😓 Не удалось сгенерировать цитату</b>
     <pre>${error}</pre>
   empty_forward: |
-    Komandanı mesaja cavab olaraq yazmaq lazımdır.
+    Команду необходимо писать в ответ на сообщение.
   set_backgroun_color: |
-    Sitatın standart rəngi <code>${backgroundColor}</code> oldu.
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Stiker uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu.
+    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
     error:
-      animated: Mən animasiyalı stikeri əlavə edə bilmirəm.
-      need_creator: <b>Məndə bu stikeri saxlamaq alınmadı.</b>\n${creator} mənə şəxsi mesajlarda yazın.
-      telegram: <b>Məndə bu stiker saxlamaq alınmadı.</b>\n<pre>${error}</pre>
+      animated: Я не могу добавить анимированный стикер.
+      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
+      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
   delete:
-    suc: Stiker uğurla <a href="${link}">qrupun stikerpakından</a> silinib.
+    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
     error:
-      telegram: <b>Məndə bu stikeri silmək alınmadı.</b>\n<pre>${error}</pre>
+      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Stikeri saxlamaq
+      save_sticker: Сохранить стикер
   empty_forward: |
-    Komandanı stikerə, şəkilə vəya foto faylına cavab olaraq yazmaq lazımdır.
+    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
   fstik: |
-    Stikerı şəxsi stikerpaka saxlamaq üçün bu mesajı @fStikBot-a göndər.
+    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
 rate:
   vote:
     rated: |
-      Siz bunu ${rateName}.
+      Вы ${rateName} это.
     back: |
-      Siz səsinizi qaytardız.
+      Вы вернули свой голос.
   settings:
     enable: |
-      Sitatların qiymətləndirməsi açılıb.
+      Оценка для цитат включена.
     disable: |
-      Sitatların qiymətləndirməsi bağlanıb.
+      Оценка для цитат выключена.
 random:
   empty: |
-    Qrupda müsbət reytinqə malik olan sitat yoxdur.
+    В группе нет цитат с положительным рейтингом.
+  gab: |
+    Шанс случайных цитат установлен на ${gab}
 hidden:
   settings:
     enable: |
-      Göndərənin axtarışı açılıb.
+      Поиск отправителя включен.
     disable: |
-      Göndərənin axtarışı bağlanıb.
+      Поиск отправителя отключен.
+privacy:
+  settings:
+    enable: |
+      Режим приватности включен.
+    disable: |
+      Режим приватности отключен.
 top:
   info: |
-    <b>Qrupun top sitatları:</b>
-
-  pack: Top sitat ilə stikerpak
+    <b>Топ цитат группы:</b>
+  pack: Стикерпак с топом цитат
 donate:
-  info:
-    Botu dəstəkləsəz minnətdar olaram :)
-
+  info: Буду благодарен за поддержку бота :)
   info_group: |
-    Botu dəstəkləsəz minnətdar olaram :)
+    Буду благодарен за поддержку бота :)
 
-    donate.lyo.su linkinə keçib maddi dəstək verə bilərsiniz.
-    Telegram vasitəsilə maddi dəstək etmək istəyirsinizsə, eyni komandanı şəxsi mesaj kimi yazın.
-
-  title: Maddi dəstək ${botUsername}
-  description: Botun inkişafına dəstək
-
+    Поддержать меня можно по ссылке donate.lyo.su
+    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
+  title: Донат ${botUsername}
+  description: Поддержка разработки бота
   successful: |
-      <b>Botu dəstək elədiyiniz üçün təşəkkür edirəm 💜</b>
-
-  pay: 💜 Ödəniş etmək (Telegram)
+    <b>Спасибо за поддержку бота 💜</b>
+  pay: '💜 Оплатить Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Digər yollar
+  other: Другие способы
 only_admin: |
-    Bu komandanı yalnız qrupun admini istifadə edə bilər.
+  Команду может использовать только администратор группы.
 only_group: |
-    Bu komandanı yalnız qrupda istifadə etmək olar.
+  Команду можно использовать только в группах.
