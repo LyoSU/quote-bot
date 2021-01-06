@@ -32,16 +32,16 @@ help: |
   <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+  <b>Halo!</b>
+  Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan
 
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+  Anda dapat mempelajari lebih lanjut tentang perintah <a href="t.me/${username}?start=help">/ bantuan</a> dalam pesan pribadi dengan saya
 btn:
   add_group: Tambahkan ke Grup
-  help: Справка
+  help: Bantuan
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Gagal menghasilkan kutipan</b>
     <pre>${error}</pre>
   empty_forward: |
     Perintah harus dijalankan dengan membalas pesan.
@@ -68,49 +68,49 @@ sticker:
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      Anda ${rateName} ini.
     back: |
-      Вы вернули свой голос.
+      Anda mendapatkan suara Anda kembali.
   settings:
     enable: |
-      Оценка для цитат включена.
+      Evaluasi untuk kutipan disertakan.
     disable: |
-      Оценка для цитат выключена.
+      Peringkat untuk kutipan tidak aktif.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    Tidak ada kutipan dengan peringkat positif di grup.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    Peluang kutipan acak disetel ke ${gab}
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      Pencarian pengirim diaktifkan.
     disable: |
-      Поиск отправителя отключен.
+      Pencarian pengirim dinonaktifkan.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      Mode privasi aktif.
     disable: |
-      Режим приватности отключен.
+      Mode privasi dinonaktifkan.
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+    <b>Kutipan grup teratas:</b>
+  pack: Paket stiker dengan kutipan teratas
 donate:
-  info: Буду благодарен за поддержку бота :)
+  info: Saya akan berterima kasih atas dukungan bot :)
   info_group: |
-    Буду благодарен за поддержку бота :)
+    Saya akan berterima kasih atas dukungan bot :)
 
-    Поддержать меня можно по ссылке donate.lyo.su
-    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+    Anda dapat mendukung saya di tautan donate.lyo.su
+    Dan jika Anda ingin dengan pembayaran melalui Telegram, tulis perintah yang sama di LAN.
+  title: Donasi ${botUsername}
+  description: Dukungan pengembangan bot
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Terima kasih telah mendukung bot 💜</b>
+  pay: '💜 Bayar Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Sebaliknya
 only_admin: |
   Perintah ini hanya dapat dijalankan oleh administrator grup.
 only_group: |
