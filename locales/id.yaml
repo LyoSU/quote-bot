@@ -1,5 +1,5 @@
-language_name: 🇮🇩 Indonesia
-
+---
+language_name: '🇮🇩 Indonesia'
 help: |
   <b>Halo!</b>
   Saya akan membantu Anda membuat kutipan dari sebuah pesan.
@@ -31,9 +31,18 @@ help: |
 
   <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
+help_group: |
+  <b>Halo!</b>
+  Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan
+
+  Anda dapat mempelajari lebih lanjut tentang perintah <a href="t.me/${username}?start=help">/ bantuan</a> dalam pesan pribadi dengan saya
 btn:
   add_group: Tambahkan ke Grup
+  help: Bantuan
 quote:
+  api_error: |
+    <b>😓 Gagal menghasilkan kutipan</b>
+    <pre>${error}</pre>
   empty_forward: |
     Perintah harus dijalankan dengan membalas pesan.
   set_backgroun_color: |
@@ -55,13 +64,54 @@ sticker:
   empty_forward: |
     Perintah harus dijalankan dengan membalas stiker, foto atau file dengan gambar.
   fstik: |
-      Untuk menyimpan stiker di paket stiker pribadi Anda, teruskan pesan ini ke @fStikBot
+    Untuk menyimpan stiker di paket stiker pribadi Anda, teruskan pesan ini ke @fStikBot
 rate:
-  rated: |
-    Anda ${rateName} ini.
-  back: |
-    Anda mengambil kembali suara Anda.
+  vote:
+    rated: |
+      Anda ${rateName} ini.
+    back: |
+      Anda mendapatkan suara Anda kembali.
+  settings:
+    enable: |
+      Evaluasi untuk kutipan disertakan.
+    disable: |
+      Peringkat untuk kutipan tidak aktif.
+random:
+  empty: |
+    Tidak ada kutipan dengan peringkat positif di grup.
+  gab: |
+    Peluang kutipan acak disetel ke ${gab}
+hidden:
+  settings:
+    enable: |
+      Pencarian pengirim diaktifkan.
+    disable: |
+      Pencarian pengirim dinonaktifkan.
+privacy:
+  settings:
+    enable: |
+      Mode privasi aktif.
+    disable: |
+      Mode privasi dinonaktifkan.
+top:
+  info: |
+    <b>Kutipan grup teratas:</b>
+  pack: Paket stiker dengan kutipan teratas
+donate:
+  info: Saya akan berterima kasih atas dukungan bot :)
+  info_group: |
+    Saya akan berterima kasih atas dukungan bot :)
+
+    Anda dapat mendukung saya di tautan donate.lyo.su
+    Dan jika Anda ingin dengan pembayaran melalui Telegram, tulis perintah yang sama di LAN.
+  title: Donasi ${botUsername}
+  description: Dukungan pengembangan bot
+  successful: |
+    <b>Terima kasih telah mendukung bot 💜</b>
+  pay: '💜 Bayar Telegram'
+  liqpay: LiqPay (VISA, MasterCard)
+  other: Sebaliknya
 only_admin: |
-    Perintah ini hanya dapat dijalankan oleh administrator grup.
+  Perintah ini hanya dapat dijalankan oleh administrator grup.
 only_group: |
-    Perintah ini hanya dapat dijalankan dalam grup.
+  Perintah ini hanya dapat dijalankan dalam grup.

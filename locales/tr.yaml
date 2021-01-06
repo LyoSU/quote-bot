@@ -1,5 +1,5 @@
-language_name: 🇹🇷 Türkçe
-
+---
+language_name: '🇹🇷 Türkçe'
 help: |
   <b>Merhaba!</b>
   Bir mesajı alıntı oluşturup size gönderirim.
@@ -34,9 +34,18 @@ help: |
   <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
   <b>Çeviri:</b> @Holytotem, @By_Azade
+help_group: |
+  <b>Привет!</b>
+  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+
+  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
   add_group: Gruba Ekle
+  help: Справка
 quote:
+  api_error: |
+    <b>😓 Не удалось сгенерировать цитату</b>
+    <pre>${error}</pre>
   empty_forward: |
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_backgroun_color: |
@@ -58,8 +67,54 @@ sticker:
   empty_forward: |
     Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
   fstik: |
-      Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+    Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+rate:
+  vote:
+    rated: |
+      Вы ${rateName} это.
+    back: |
+      Вы вернули свой голос.
+  settings:
+    enable: |
+      Оценка для цитат включена.
+    disable: |
+      Оценка для цитат выключена.
+random:
+  empty: |
+    В группе нет цитат с положительным рейтингом.
+  gab: |
+    Шанс случайных цитат установлен на ${gab}
+hidden:
+  settings:
+    enable: |
+      Поиск отправителя включен.
+    disable: |
+      Поиск отправителя отключен.
+privacy:
+  settings:
+    enable: |
+      Режим приватности включен.
+    disable: |
+      Режим приватности отключен.
+top:
+  info: |
+    <b>Топ цитат группы:</b>
+  pack: Стикерпак с топом цитат
+donate:
+  info: Буду благодарен за поддержку бота :)
+  info_group: |
+    Буду благодарен за поддержку бота :)
+
+    Поддержать меня можно по ссылке donate.lyo.su
+    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
+  title: Донат ${botUsername}
+  description: Поддержка разработки бота
+  successful: |
+    <b>Спасибо за поддержку бота 💜</b>
+  pay: '💜 Оплатить Telegram'
+  liqpay: LiqPay (VISA, MasterCard)
+  other: Другие способы
 only_admin: |
-    Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
+  Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |
-    Bu komut yalnızca gruplar içerisinde kullanılabilir.
+  Bu komut yalnızca gruplar içerisinde kullanılabilir.

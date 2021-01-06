@@ -1,5 +1,5 @@
-language_name: 🇺🇸 English
-
+---
+language_name: '🇺🇸 English'
 help: |
   <b>Hi!</b>
   I'll help you to create a quote from a message.
@@ -31,11 +31,20 @@ help: |
 
   <b>👨🏻‍💻 Developer's blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
+help_group: |
+  <b>Hello!</b>
+  I will create quotes in the group using the / q command in response to message
+
+  You can learn more about the command <a href="t.me/${username}?start=help">/ help</a> in private messages with me
 btn:
   add_group: Add to Group
+  help: Help
 quote:
+  api_error: |
+    <b>😓 Failed to generate quote</b>
+    <pre>${error}</pre>
   empty_forward: |
-    Command must be executed with a reply to a message.
+    Command must be sent as a reply to a message.
   set_backgroun_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
@@ -44,8 +53,8 @@ sticker:
     suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
     error:
       animated: I can't add an animated sticker.
-      need_creator: <b>I can't save this sticker.</b>\n${creator} must write me any message in private messages.
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
+      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
   delete:
     suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
     error:
@@ -53,15 +62,56 @@ sticker:
     btn:
       save_sticker: Save the sticker
   empty_forward: |
-    Command must be executed with a reply to a sticker, photo or file with a picture.
+    Command must be sent a reply to a sticker, photo or file with a picture.
   fstik: |
-      To save the sticker in your personal sticker pack, forward this message to @fStikBot
+    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
 rate:
-  rated: |
-    You ${rateName} this.
-  back: |
-    You took your vote back.
+  vote:
+    rated: |
+      You ${rateName} this.
+    back: |
+      You got your vote back.
+  settings:
+    enable: |
+      Quotes rating is on.
+    disable: |
+      Rating for quotes is off.
+random:
+  empty: |
+    There are no quotes with a positive rating in the group.
+  gab: |
+    The chance of random quotes is set to ${gab}
+hidden:
+  settings:
+    enable: |
+      Sender search is enabled.
+    disable: |
+      Sender search is disabled.
+privacy:
+  settings:
+    enable: |
+      Privacy mode is enabled.
+    disable: |
+      Privacy mode is disabled.
+top:
+  info: |
+    <b>Top group quotes:</b>
+  pack: Sticker pack with top quotes
+donate:
+  info: I would be grateful for the bot support :)
+  info_group: |
+    I would be grateful for the bot support :)
+
+    You can support me at donate.lyo.su
+    And if you want to donate via Telegram, send the same command in the PM.
+  title: Donate ${botUsername}
+  description: Support bot development
+  successful: |
+    <b>Thank you for supporting the bot 💜</b>
+  pay: '💜 Pay via Telegram'
+  liqpay: LiqPay (VISA, MasterCard)
+  other: Other options
 only_admin: |
-    This command can be executed only by group administrator.
+  Only group administrator can use this command.
 only_group: |
-    This command can be executed only in groups.
+  This command can be used only in groups.
