@@ -61,8 +61,8 @@ sticker:
   save:
     suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
     error:
-      animated: Я не могу добавить анимированный стикер.
-      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
+      animated: Men animatsion stiker qo'sha olmayman.
+      need_creator: <b>Ushbu stikerni saqlashni uddalay olmadim.</b>\n${creator} menga shaxsiy xabarlarda, har qanday xabarni yozishi shart.
       telegram: <b>Ushbu stikerni saqlashni uddalay olmadim.</b>\n<pre>${error}</pre>
   delete:
     suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
@@ -73,7 +73,7 @@ sticker:
   empty_forward: |
     Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
   fstik: |
-    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
+    Stikerni shaxsiy stikerlar to'plamiga saqlab qo'yish uchun @fStikBot ga xabar yuboring
 rate:
   vote:
     rated: |
@@ -113,7 +113,7 @@ donate:
 
     donate.Iyo.su havolasidan o'tib meni qo'llab-quvatlashingiz mumkin. Agarda, Telegram orqali to'lov qilmoqchi bo'lsangiz, huddi shu buyruqni shaxsiy xabarda qoldiring.
   title: Xayriya ${botUsername}
-  description: Поддержка разработки бота
+  description: Botni rivojlanishini qo'llab-quvatlash
   successful: |
     <b>Botni qo'llab-quvvatlaganingiz uchun tashakkur 💜</b>
   pay: '💜 Telegram to''lov'
