@@ -54,7 +54,7 @@ function getUser (user_id) {
   })
 }
 
-function getSupergroup (supergroupId) {
+function getSupergroup (supergroup_id) {
   return new Promise((resolve, reject) => {
     sendMethod('getSupergroup', {
       supergroup_id
@@ -84,9 +84,9 @@ function getChat (chat_id) {
       if (response.photo) {
         chat.photo = {
           small_file_id: response.photo.small.remote.id,
-          small_file_unique_id: response.photo.small.remote.uniqueId,
+          small_file_unique_id: response.photo.small.remote.unique_id,
           big_file_id: response.photo.big.remote.id,
-          big_file_unique_id: response.photo.big.remote.uniqueId
+          big_file_unique_id: response.photo.big.remote.unique_id
         }
       }
 
@@ -106,10 +106,10 @@ function getChat (chat_id) {
       } else {
         chat.title = response.title
 
-        if (response.type.isChannel && response.type.isChannel === true) chat.type = 'channel'
+        if (response.type.is_channel && response.type.is_channel === true) chat.type = 'channel'
 
-        if (response.type.supergroupId) {
-          getSupergroup(response.type.supergroupId).then((supergroup) => {
+        if (response.type.supergroup_id) {
+          getSupergroup(response.type.supergroup_id).then((supergroup) => {
             resolve(Object.assign(supergroup, chat))
           })
         } else {
@@ -145,13 +145,16 @@ function getMessages (chat_id, messageIds) {
             if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
             const chat_ids = [
-              message_info.chat_id,
-              message_info.sender.user_id
+              message_info.chat_id
             ]
+
+            if (message_info.sender.user_id) chat_ids.push(message_info.sender.user_id)
 
             let forwarderId
 
             if (message_info.forward_info && message_info.forward_info.origin.sender_user_id) forwarderId = message_info.forward_info.origin.sender_user_id
+            if (message_info.forward_info && message_info.forward_info.origin.sender_chat_id) forwarderId = message_info.forward_info.origin.sender_chat_id
+            if (message_info.forward_info && message_info.forward_info.origin.user_id) forwarderId = message_info.forward_info.origin.user_id
             if (message_info.forward_info && message_info.forward_info.origin.chat_id) forwarderId = message_info.forward_info.origin.chat_id
 
             if (forwarderId) chat_ids.push(forwarderId)
