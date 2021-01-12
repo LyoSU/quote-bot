@@ -38,9 +38,8 @@ const {
 const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
-  telegram: {
-    webhookReply: false
-  }
+  telegram: { webhookReply: false },
+  handlerTimeout: 1
 })
 
 bot.catch((error) => {
@@ -63,11 +62,6 @@ bot.use((ctx, next) => {
     })
   }
   return next()
-})
-
-bot.use((ctx, next) => {
-  next()
-  return true
 })
 
 bot.use(Composer.groupChat(Composer.command(rateLimit({
