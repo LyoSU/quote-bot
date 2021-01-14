@@ -68,50 +68,50 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this.
+      Votaste ${rateName}.
     back: |
-      You got your vote back.
+      Retractaste tu voto.
   settings:
     enable: |
-      Quotes rating is on.
+      La votación está encendida.
     disable: |
-      Rating for quotes is off.
+      La votación está apagada.
 random:
   empty: |
-    There are no quotes with a positive rating in the group.
+    Ninguna de mis creaciones en el grupo tiene una valoración positiva.
   gab: |
-    The chance of random quotes is set to ${gab}
+    La probabilidad de generar imágenes aleatorias es de ${gab}
 hidden:
   settings:
     enable: |
-      Sender search is enabled.
+      La búsqueda de remitentes está activada.
     disable: |
-      Sender search is disabled.
+      La búsqueda de remitentes está desactivada.
 privacy:
   settings:
     enable: |
-      Privacy mode is enabled.
+      El modo privado está activado.
     disable: |
-      Privacy mode is disabled.
+      El modo privado está desactivado.
 top:
   info: |
-    <b>Top group quotes:</b>
-  pack: Sticker pack with top quotes
+    <b>Mejores creaciones:</b>
+  pack: Pack de stickers con las mejores creaciones
 donate:
-  info: I would be grateful for the bot support :)
+  info: Agradecería tu apoyo :)
   info_group: |
-    I would be grateful for the bot support :)
+    En serio agradecería mucho tu apoyo :)
 
-    You can support me at donate.lyo.su
-    And if you want to donate via Telegram, send the same command in the PM.
-  title: Donate ${botUsername}
-  description: Support bot development
+    Puedes donar en donate.lyo.su
+    Y si quieres donar vía Telegram, envía el mismo comando en mi chat privado.
+  title: Donar ${botUsername}
+  description: Apoya el desarrollo del bot
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>Gracias por tu apoyo 💜</b>
+  pay: '💜 Pagar vía Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: Otros
 only_admin: |
-  Only group administrator can use this command.
+  Solo el administrador puede usar este comando.
 only_group: |
-  This command can be used only in groups.
+  Este comando solo funciona en grupos.
