@@ -1,3 +1,4 @@
+const io = require('@pm2/io')
 const {
   db
 } = require('../database')
@@ -7,6 +8,10 @@ const stats = {
   responseTimeAvrg: 0,
   times: {}
 }
+
+const rpsIO = io.metric({
+  name: 'Realtime user'
+})
 
 setInterval(() => {
   if (Object.keys(stats.times).length > 0) {
@@ -22,6 +27,8 @@ setInterval(() => {
       console.log('rps avrg:', stats.rpsAvrg)
       console.log('response time avrg last:', lastResponseTimeAvrg)
       console.log('response time avrg total:', stats.responseTimeAvrg)
+
+      rpsIO.set(rps)
 
       db.Stats.create({
         rps,
