@@ -4,6 +4,7 @@ const Composer = require('telegraf/composer')
 const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
+const io = require('@pm2/io')
 const {
   db
 } = require('./database')
@@ -34,7 +35,6 @@ const {
   updateUser,
   updateGroup
 } = require('./helpers')
-const io = require('@pm2/io')
 
 const rpsIO = io.meter({
   name: 'req/sec',

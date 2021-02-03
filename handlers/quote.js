@@ -5,6 +5,12 @@ const {
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
+const io = require('@pm2/io')
+
+const quoteCountIO = io.meter({
+  name: 'quote count',
+  unit: 'quote'
+})
 
 const telegram = new Telegram(process.env.BOT_TOKEN)
 
@@ -47,6 +53,7 @@ function sleep (ms) {
 }
 
 module.exports = async (ctx) => {
+  quoteCountIO.mark()
   await ctx.replyWithChatAction('upload_photo')
   await sleep(100)
 
