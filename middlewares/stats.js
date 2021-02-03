@@ -20,7 +20,7 @@ const usersCountIO = io.metric({
 })
 
 const groupsCountIO = io.metric({
-  name: 'Users count',
+  name: 'Group count',
   unit: 'group'
 })
 
