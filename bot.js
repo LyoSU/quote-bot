@@ -34,6 +34,12 @@ const {
   updateUser,
   updateGroup
 } = require('./helpers')
+const io = require('@pm2/io')
+
+const rpsIO = io.meter({
+  name: 'req/sec',
+  unit: 'update'
+})
 
 const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
@@ -52,6 +58,7 @@ bot.use(require('./middlewares/metrics'))
 bot.use(stats)
 
 bot.use((ctx, next) => {
+  rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
     console.log(`start ${method}`)

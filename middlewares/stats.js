@@ -9,12 +9,9 @@ const stats = {
   times: {}
 }
 
-const rpsIO = io.metric({
-  name: 'RPS'
-})
-
 const rtOP = io.metric({
-  name: 'response time'
+  name: 'response time',
+  unit: 'ms'
 })
 
 setInterval(() => {
@@ -32,8 +29,7 @@ setInterval(() => {
       console.log('response time avrg last:', lastResponseTimeAvrg)
       console.log('response time avrg total:', stats.responseTimeAvrg)
 
-      rpsIO.set(rps)
-      rtOP.set(lastResponseTimeAvrg)
+      rtOP.set(stats.responseTimeAvrg)
 
       db.Stats.create({
         rps,
