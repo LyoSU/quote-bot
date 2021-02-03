@@ -33,7 +33,7 @@ setInterval(() => {
       console.log('response time avrg total:', stats.responseTimeAvrg)
 
       rpsIO.set(rps)
-      rtOP.set(stats.rpsAvrg)
+      rtOP.set(lastResponseTimeAvrg)
 
       db.Stats.create({
         rps,
