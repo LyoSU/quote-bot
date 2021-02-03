@@ -41,6 +41,11 @@ const rpsIO = io.meter({
   unit: 'update'
 })
 
+const messageCountIO = io.meter({
+  name: 'message count',
+  unit: 'message'
+})
+
 const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
@@ -128,6 +133,11 @@ bot.use(Composer.privateChat(async (ctx, next) => {
   await next(ctx)
   await ctx.session.userInfo.save().catch(() => {})
 }))
+
+bot.use((ctx, next) => {
+  messageCountIO.mark()
+  next()
+})
 
 bot.command('donate', handleDonate)
 bot.action(/(donate):(.*)/, handleDonate)
