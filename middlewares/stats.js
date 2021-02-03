@@ -14,6 +14,16 @@ const rtOP = io.metric({
   unit: 'ms'
 })
 
+const usersCountIO = io.metric({
+  name: 'Users count',
+  unit: 'user'
+})
+
+const groupsCountIO = io.metric({
+  name: 'Users count',
+  unit: 'group'
+})
+
 setInterval(() => {
   if (Object.keys(stats.times).length > 0) {
     Object.keys(stats.times).forEach(time => {
@@ -41,6 +51,23 @@ setInterval(() => {
     })
   }
 }, 1000)
+
+setInterval(async () => {
+  const usersCount = await db.User.count({
+    updatedAt: {
+      $gte: new Date(Date.now() - 24 * 60 * 60 * 1000)
+    }
+  })
+
+  const groupsCount = await db.Group.count({
+    updatedAt: {
+      $gte: new Date(Date.now() - 24 * 60 * 60 * 1000)
+    }
+  })
+
+  usersCountIO.set(usersCount)
+  groupsCountIO.set(groupsCount)
+}, 60 * 1000)
 
 module.exports = (ctx, next) => {
   const startMs = new Date()
