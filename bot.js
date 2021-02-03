@@ -41,6 +41,8 @@ const rpsIO = io.meter({
   unit: 'update'
 })
 
+io.init()
+
 const messageCountIO = io.meter({
   name: 'message count',
   unit: 'message'
