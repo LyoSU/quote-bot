@@ -25,7 +25,7 @@ const groupsCountIO = io.metric({
 })
 
 setInterval(() => {
-  if (Object.keys(stats.times).length > 1) {
+  if (Object.keys(stats.times).length > 5) {
     const time = Object.keys(stats.times).shift()
 
     const rps = stats.times[time].length
@@ -69,10 +69,10 @@ setInterval(async () => {
   groupsCountIO.set(groupsCount)
 }, 60 * 1000)
 
-module.exports = (ctx, next) => {
+module.exports = async (ctx, next) => {
   const startMs = new Date()
 
-  return next().then(async () => {
+  return next().then(() => {
     const now = Math.floor(new Date() / 1000)
     if (!stats.times[now]) stats.times[now] = []
     stats.times[now].push(new Date() - startMs)
