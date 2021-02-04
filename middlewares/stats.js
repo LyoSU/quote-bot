@@ -25,30 +25,30 @@ const groupsCountIO = io.metric({
 })
 
 setInterval(() => {
-  if (Object.keys(stats.times).length > 0) {
-    Object.keys(stats.times).forEach(time => {
-      const rps = stats.times[time].length
-      stats.rpsAvrg = (stats.rpsAvrg + rps) / 2
+  if (Object.keys(stats.times).length > 1) {
+    const time = Object.keys(stats.times).shift()
 
-      const sumResponseTime = stats.times[time].reduce((a, b) => a + b, 0)
-      const lastResponseTimeAvrg = (sumResponseTime / stats.times[time].length) || 0
-      stats.responseTimeAvrg = (stats.responseTimeAvrg + lastResponseTimeAvrg) / 2
+    const rps = stats.times[time].length
+    stats.rpsAvrg = (stats.rpsAvrg + rps) / 2
 
-      console.log('rps last:', rps)
-      console.log('rps avrg:', stats.rpsAvrg)
-      console.log('response time avrg last:', lastResponseTimeAvrg)
-      console.log('response time avrg total:', stats.responseTimeAvrg)
+    const sumResponseTime = stats.times[time].reduce((a, b) => a + b, 0)
+    const lastResponseTimeAvrg = (sumResponseTime / stats.times[time].length) || 0
+    stats.responseTimeAvrg = (stats.responseTimeAvrg + lastResponseTimeAvrg) / 2
 
-      rtOP.set(stats.responseTimeAvrg)
+    console.log('rps last:', rps)
+    console.log('rps avrg:', stats.rpsAvrg)
+    console.log('response time avrg last:', lastResponseTimeAvrg)
+    console.log('response time avrg total:', stats.responseTimeAvrg)
 
-      db.Stats.create({
-        rps,
-        responseTime: lastResponseTimeAvrg,
-        date: new Date()
-      })
+    rtOP.set(stats.responseTimeAvrg)
 
-      delete stats.times[time]
+    db.Stats.create({
+      rps,
+      responseTime: lastResponseTimeAvrg,
+      date: new Date()
     })
+
+    delete stats.times[time]
   }
 }, 1000)
 
