@@ -13,7 +13,7 @@ const client = new Client(new TDLib(`${tdDirectory}/${tdLibFile}`), {
   apiHash: process.env.TELEGRAM_API_HASH || '68875f756c9b437a8b916ca3de215815',
   databaseDirectory: `${tdDirectory}/db`,
   filesDirectory: tdDirectory,
-  logVerbosityLevel: 2
+  logVerbosityLevel: 0
 })
 
 client.on('error', console.error)
