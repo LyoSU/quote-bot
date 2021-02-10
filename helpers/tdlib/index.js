@@ -15,7 +15,9 @@ const client = new Client(new TDLib(`${tdDirectory}/${tdLibFile}`), {
   filesDirectory: tdDirectory,
   verbosityLevel: 0,
   tdlibParameters: {
-    use_file_database: false 
+    use_message_database: false,
+    use_chat_info_database: false,
+    use_file_database: false
   }
 })
 
