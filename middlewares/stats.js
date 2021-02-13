@@ -33,7 +33,8 @@ setInterval(() => {
 
     const sumResponseTime = stats.times[time].reduce((a, b) => a + b, 0)
     const lastResponseTimeAvrg = (sumResponseTime / stats.times[time].length) || 0
-    stats.responseTimeAvrg = (stats.responseTimeAvrg + lastResponseTimeAvrg) / 2
+    if (stats.responseTimeAvrg > 0) stats.responseTimeAvrg = (stats.responseTimeAvrg + lastResponseTimeAvrg) / 2
+    else stats.responseTimeAvrg = lastResponseTimeAvrg
 
     console.log('rps last:', rps)
     console.log('rps avrg:', stats.rpsAvrg)
