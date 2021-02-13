@@ -121,8 +121,10 @@ const updateGroupAndUser = async (ctx, next) => {
   await updateUser(ctx)
   await updateGroup(ctx)
   await next(ctx)
-  await ctx.session.userInfo.save().catch(() => {})
-  await ctx.group.info.save().catch(() => {})
+  if (ctx.state.emptyRequest === false) {
+    await ctx.session.userInfo.save().catch(() => {})
+    await ctx.group.info.save().catch(() => {})
+  }
 }
 
 bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
@@ -131,12 +133,13 @@ bot.action(() => true, Composer.groupChat(updateGroupAndUser))
 bot.use(Composer.privateChat(async (ctx, next) => {
   await updateUser(ctx)
   await next(ctx)
-  await ctx.session.userInfo.save().catch(() => {})
+  if (ctx.state.emptyRequest === false) await ctx.session.userInfo.save().catch(() => {})
 }))
 
-bot.use((ctx, next) => {
-  messageCountIO.mark()
-  next()
+bot.use(async (ctx, next) => {
+  ctx.state.emptyRequest = false
+  await next()
+  if (ctx.state.emptyRequest === false) messageCountIO.mark()
 })
 
 bot.command('donate', handleDonate)
@@ -180,25 +183,20 @@ bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
-bot.on('message', onlyGroup, rateLimit({
-  window: 1000 * 60,
-  limit: 1,
-  keyGenerator: (ctx) => {
-    return ctx.chat.id
-  }
-}), updateGroupAndUser, async (ctx, next) => {
+bot.on('message', onlyGroup, updateGroupAndUser, async (ctx, next) => {
   const gab = ctx.group.info.settings.randomQuoteGab
 
   if (gab > 0) {
-    const quoteCount = await ctx.db.Quote.count({
-      $and: [
-        { group: ctx.group.info._id },
-        { 'rate.score': { $gt: 0 } }
-      ]
-    })
-    if (randomInteger(quoteCount, gab) === gab || quoteCount >= gab) await handleRandomQuote(ctx)
-    else await next()
+    if (randomInteger(0, gab) === gab && (ctx.group.info.lastRandomQuote.getTime() / 1000) < Date.now() / 1000 - 60) {
+      ctx.group.info.lastRandomQuote = Date()
+      return handleRandomQuote(ctx)
+    } else return next()
   }
+})
+
+bot.use((ctx, next) => {
+  ctx.state.emptyRequest = true
+  return next()
 })
 
 db.connection.once('open', async () => {

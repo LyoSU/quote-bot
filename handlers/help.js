@@ -16,6 +16,7 @@ module.exports = async (ctx) => {
     await ctx.replyWithHTML(ctx.i18n.t('help_group', {
       username: ctx.options.username
     }), {
+      disable_web_page_preview: true,
       reply_to_message_id: ctx.message.message_id,
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
@@ -26,6 +27,7 @@ module.exports = async (ctx) => {
     })
   } else {
     await ctx.replyWithHTML(ctx.i18n.t('help'), {
+      disable_web_page_preview: true,
       reply_to_message_id: ctx.message.message_id,
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(

@@ -57,6 +57,10 @@ const groupSchema = mongoose.Schema({
       fileId: String,
       fileUniqueId: String
     }]
+  },
+  lastRandomQuote: {
+    type: Date,
+    default: Date()
   }
 }, {
   timestamps: true
