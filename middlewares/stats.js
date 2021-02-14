@@ -106,7 +106,6 @@ module.exports = async (ctx, next) => {
     const now = Math.floor(new Date() / 1000)
 
     if (ctx.state.emptyRequest === false) {
-      console.log('🏷', ctx.updateType, ctx.message?.text)
       if (!noEmptyStats.times[now]) noEmptyStats.times[now] = []
       noEmptyStats.times[now].push(new Date() - startMs)
     }
