@@ -66,10 +66,10 @@ bot.use((ctx, next) => {
   rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
-    console.log(`start ${method}`)
+    console.log(`send method ${method}`)
     const startMs = new Date()
     return ctx.telegram.oCallApi(method, data).then((result) => {
-      console.log(`end ${method}:`, new Date() - startMs)
+      console.log(`end method ${method}:`, new Date() - startMs)
       return result
     })
   }
@@ -191,7 +191,7 @@ bot.on('message', onlyGroup, updateGroupAndUser, async (ctx, next) => {
       ctx.group.info.lastRandomQuote = Date()
       return handleRandomQuote(ctx)
     } else return next()
-  }
+  } else return next()
 })
 
 bot.use((ctx, next) => {
