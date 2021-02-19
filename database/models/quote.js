@@ -11,7 +11,6 @@ const quoteSchema = mongoose.Schema({
   },
   file_id: {
     type: String,
-    index: true,
     unique: true,
     required: true
   },
