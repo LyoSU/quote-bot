@@ -20,8 +20,7 @@ const userSchema = mongoose.Schema({
     index: true
   },
   username: {
-    type: String,
-    index: true
+    type: String
   },
   settings: {
     locale: String,
