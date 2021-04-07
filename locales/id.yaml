@@ -1,6 +1,6 @@
 ---
 language_name: '🇮🇩 Indonesia'
-help: |
+help: |2
   <b>Halo!</b>
   Saya akan membantu Anda membuat kutipan dari sebuah pesan.
   Untuk itu cukup balas pesan dengan /q
@@ -29,13 +29,13 @@ help: |
   ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
   ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
 
-  <b>👨🏻‍💻 Blog pengembang:</b> @LyBlog
+  <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
   Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan
 
-  Anda dapat mempelajari lebih lanjut tentang perintah <a href="t.me/${username}?start=help">/bantuan</a> dalam pesan pribadi dengan saya
+  Anda dapat mempelajari lebih lanjut tentang perintah <a href="t.me/${username}?start=help">/ bantuan</a> dalam pesan pribadi dengan saya
 btn:
   add_group: Tambahkan ke Grup
   help: Bantuan
