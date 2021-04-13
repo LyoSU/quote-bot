@@ -7,6 +7,8 @@ const statsSchema = mongoose.Schema({
     type: Date,
     index: true
   }
+}, {
+  capped: { size: 1024 * 100, max: 100000 }
 })
 
 module.exports = statsSchema

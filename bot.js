@@ -15,6 +15,7 @@ const {
 } = require('./middlewares')
 const {
   handleHelp,
+  handleAdv,
   handleQuote,
   handleGetQuote,
   handleTopQuote,
@@ -142,6 +143,13 @@ bot.use(async (ctx, next) => {
   if (ctx.state.emptyRequest === false) messageCountIO.mark()
 })
 
+bot.use((ctx, next) => {
+  if (ctx.callbackQuery) ctx.state.answerCbQuery = []
+  return next(ctx).then(() => {
+    if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
+  })
+})
+
 bot.command('donate', handleDonate)
 bot.action(/(donate):(.*)/, handleDonate)
 bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) => answerPreCheckoutQuery(true))
@@ -149,7 +157,7 @@ bot.on('successful_payment', handleDonate)
 
 bot.command('qtop', onlyGroup, handleTopQuote)
 bot.command('qrand', onlyGroup, rateLimit({
-  window: 1000 * 60,
+  window: 1000 * 50,
   limit: 2,
   keyGenerator: (ctx) => {
     return ctx.chat.id
@@ -175,6 +183,7 @@ bot.on('new_chat_members', (ctx, next) => {
 
 bot.start(handleHelp)
 bot.command('help', handleHelp)
+bot.use(handleAdv)
 
 bot.command('privacy', onlyAdmin, handlePrivacy)
 

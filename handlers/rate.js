@@ -33,12 +33,15 @@ module.exports = async (ctx) => {
 
   await ctx.answerCbQuery(resultText)
 
+  const advKeyboard = ctx.callbackQuery.message.reply_markup.inline_keyboard.pop().pop()
+
   await ctx.editMessageReplyMarkup({
     inline_keyboard: [
       [
         { text: `👍 ${quoteDb.rate.votes[0].vote.length}`, callback_data: 'rate:👍' },
         { text: `👎 ${quoteDb.rate.votes[1].vote.length}`, callback_data: 'rate:👎' }
-      ]
+      ],
+      advKeyboard.url ? [advKeyboard] : []
     ]
   })
 }
