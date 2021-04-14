@@ -357,8 +357,6 @@ module.exports = async (ctx) => {
 
       let sendResult
 
-      flag.privacy = true
-
       if (flag.privacy) {
         sendResult = await ctx.replyWithDocument({
           source: image,
