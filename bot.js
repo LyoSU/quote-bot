@@ -74,6 +74,13 @@ bot.use((ctx, next) => {
       return result
     })
   }
+
+  if (ctx.update.message) {
+    const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
+
+    if (dif > 1) console.log('🚨 delay ', dif)
+  }
+
   return next()
 })
 
