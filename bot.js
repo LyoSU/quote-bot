@@ -63,26 +63,26 @@ bot.context.db = db
 // bot.use(require('./middlewares/metrics'))
 bot.use(stats)
 
-bot.use((ctx, next) => {
-  rpsIO.mark()
-  ctx.telegram.oCallApi = ctx.telegram.callApi
-  ctx.telegram.callApi = (method, data = {}) => {
-    console.log(`send method ${method}`)
-    const startMs = new Date()
-    return ctx.telegram.oCallApi(method, data).then((result) => {
-      console.log(`end method ${method}:`, new Date() - startMs)
-      return result
-    })
-  }
+// bot.use((ctx, next) => {
+//   rpsIO.mark()
+//   ctx.telegram.oCallApi = ctx.telegram.callApi
+//   ctx.telegram.callApi = (method, data = {}) => {
+//     console.log(`send method ${method}`)
+//     const startMs = new Date()
+//     return ctx.telegram.oCallApi(method, data).then((result) => {
+//       console.log(`end method ${method}:`, new Date() - startMs)
+//       return result
+//     })
+//   }
 
-  if (ctx.update.message) {
-    const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
+//   if (ctx.update.message) {
+//     const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
 
-    if (dif > 1) console.log('🚨 delay ', dif)
-  }
+//     if (dif > 1) console.log('🚨 delay ', dif)
+//   }
 
-  return next()
-})
+//   return next()
+// })
 
 bot.use(Composer.groupChat(Composer.command(rateLimit({
   window: 1000 * 20,
