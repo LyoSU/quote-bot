@@ -30,7 +30,8 @@ const {
   handlePrivacy,
   handleLanguage,
   handleFstik,
-  handleDonate
+  handleDonate,
+  handlePing
 } = require('./handlers')
 const {
   updateUser,
@@ -53,6 +54,10 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
   handlerTimeout: 1
 })
+
+;(async () => {
+  console.log(await bot.telegram.getMe())
+})()
 
 bot.catch((error) => {
   console.log('Oops', error)
@@ -158,6 +163,7 @@ bot.use((ctx, next) => {
 })
 
 bot.command('donate', handleDonate)
+bot.command('ping', handlePing)
 bot.action(/(donate):(.*)/, handleDonate)
 bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) => answerPreCheckoutQuery(true))
 bot.on('successful_payment', handleDonate)

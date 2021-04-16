@@ -102,6 +102,11 @@ setInterval(async () => {
 module.exports = async (ctx, next) => {
   const startMs = new Date()
 
+  ctx.stats = {
+    rps: stats.rpsAvrg,
+    rta: stats.responseTimeAvrg
+  }
+
   return next().then(() => {
     const now = Math.floor(new Date() / 1000)
 

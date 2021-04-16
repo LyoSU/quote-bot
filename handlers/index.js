@@ -15,5 +15,6 @@ module.exports = {
   handlePrivacy: require('./privacy-settings'),
   handleLanguage: require('./language'),
   handleFstik: require('./fstik'),
-  handleDonate: require('./donate')
+  handleDonate: require('./donate'),
+  handlePing: require('./ping')
 }
