@@ -321,7 +321,9 @@ module.exports = async (ctx) => {
       height,
       scale: flag.scale || scale,
       messages: quoteMessages
-    }
+    },
+    timeout: 1500,
+    retry: 1
   }).json().catch((error) => {
     if (error.response && error.response.body) {
       const errorMessage = JSON.parse(error.response.body).error.message
