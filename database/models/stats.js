@@ -8,7 +8,7 @@ const statsSchema = mongoose.Schema({
     index: true
   }
 }, {
-  capped: { size: 1024 * 100, max: 100000 }
+  capped: { size: 1000 * 1000 * 100, max: 100000 }
 })
 
 module.exports = statsSchema
