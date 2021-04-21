@@ -100,7 +100,7 @@ setInterval(async () => {
 }, 60 * 1000)
 
 module.exports = async (ctx, next) => {
-  ctx.state.emptyRequest = false
+  ctx.state.emptyRequest = true
   const startMs = new Date()
 
   ctx.stats = {
