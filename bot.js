@@ -71,6 +71,19 @@ bot.use((ctx, next) => {
 // bot.use(require('./middlewares/metrics'))
 bot.use(stats)
 
+bot.use(async (ctx, next) => {
+  ctx.state.emptyRequest = false
+  await next()
+  if (ctx.state.emptyRequest === false) messageCountIO.mark()
+})
+
+bot.use((ctx, next) => {
+  if (ctx.callbackQuery) ctx.state.answerCbQuery = []
+  return next(ctx).then(() => {
+    if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
+  })
+})
+
 bot.use((ctx, next) => {
   rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
@@ -156,19 +169,6 @@ bot.use(Composer.privateChat(async (ctx, next) => {
   await next(ctx)
   if (ctx.state.emptyRequest === false) await ctx.session.userInfo.save().catch(() => {})
 }))
-
-bot.use(async (ctx, next) => {
-  ctx.state.emptyRequest = false
-  await next()
-  if (ctx.state.emptyRequest === false) messageCountIO.mark()
-})
-
-bot.use((ctx, next) => {
-  if (ctx.callbackQuery) ctx.state.answerCbQuery = []
-  return next(ctx).then(() => {
-    if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
-  })
-})
 
 bot.command('donate', handleDonate)
 bot.command('ping', handlePing)
