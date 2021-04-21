@@ -10,6 +10,8 @@ module.exports = async (ctx) => {
 
   const quoteDb = await ctx.db.Quote.findOne({ file_unique_id: sticker.file_unique_id })
 
+  if (!quoteDb) return
+
   quoteDb.rate.votes.map((rate) => {
     const indexRate = rate.vote.indexOf(ctx.session.userInfo.id)
     if (indexRate > -1) rate.vote.splice(indexRate, 1)

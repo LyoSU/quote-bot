@@ -243,7 +243,12 @@ db.connection.once('open', async () => {
       console.log('bot start webhook')
     })
   } else {
-    bot.launch().then(() => {
+    const updates = await bot.telegram.callApi('getUpdates', { offset: -1 })
+    const offset = updates.length && updates[0].update_id + 1
+    if (offset) {
+      await bot.telegram.callApi('getUpdates', { offset })
+    }
+    await bot.launch().then(() => {
       console.log('bot start polling')
     })
   }
