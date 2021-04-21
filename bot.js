@@ -63,6 +63,11 @@ bot.catch((error) => {
   console.log('Oops', error)
 })
 
+bot.use((ctx, next) => {
+  next()
+  return true
+})
+
 // bot.use(require('./middlewares/metrics'))
 bot.use(stats)
 
@@ -85,11 +90,6 @@ bot.use((ctx, next) => {
   }
 
   return next()
-})
-
-bot.use((ctx, next) => {
-  next()
-  return true
 })
 
 bot.use(Composer.groupChat(Composer.command(rateLimit({
