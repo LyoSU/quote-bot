@@ -22,7 +22,11 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 //   emojis: '💜'
 // }).then(console.log)
 
-async function loopCLearStickerPack () {
+function sleep (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function loopClearStickerPack () {
   while (true) {
     await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
       for (const i in sticketSet.stickers) {
@@ -30,9 +34,10 @@ async function loopCLearStickerPack () {
         if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
       }
     })
+    await sleep(5000)
   }
 }
-loopCLearStickerPack()
+loopClearStickerPack()
 
 const hashCode = (s) => {
   let h = 0; var l = s.length; var i = 0
@@ -46,10 +51,6 @@ const generateRandomColor = () => {
   const rawColor = (Math.floor(Math.random() * 16777216)).toString(16)
   const color = '0'.repeat(6 - rawColor.length) + rawColor
   return `#${color}`
-}
-
-function sleep (ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 module.exports = async (ctx) => {
