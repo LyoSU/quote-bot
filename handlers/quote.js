@@ -55,7 +55,7 @@ function sleep (ms) {
 module.exports = async (ctx) => {
   quoteCountIO.mark()
   await ctx.replyWithChatAction('upload_photo')
-  await sleep(100)
+  if (ctx.chat.type === 'private') await sleep(100)
 
   const flag = {
     count: false,
@@ -129,9 +129,7 @@ module.exports = async (ctx) => {
 
   for (let index = 0; index < messageCount; index++) {
     try {
-      console.time(`get messgae ${startMessage}`)
       const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index])
-      console.timeEnd(`get messgae ${startMessage}`)
       if (getMessages.length > 0 && getMessages[0].message_id) {
         quoteMessage = getMessages[0]
       } else {
