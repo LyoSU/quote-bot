@@ -278,13 +278,13 @@ module.exports = async (ctx) => {
 
     console.log(`⏰ ${ctx.message.message_id} 3.4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
-    // if (!flag.privacy && message.from) {
-    //   if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
-    //   else {
-    //     const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
-    //     if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
-    //   }
-    // }
+    if (!flag.privacy && message.from) {
+      if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
+      else {
+        // const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
+        // if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
+      }
+    }
 
     console.log(`⏰ ${ctx.message.message_id} 3.5 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
@@ -481,5 +481,5 @@ module.exports = async (ctx) => {
     }
   }
 
-  console.log(`⏰ ${ctx.message.message_id} ⏰ 7 >>>`, new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} 7 >>>`, new Date() - timeStartGen, 'ms')
 }
