@@ -106,17 +106,18 @@ bot.use(Composer.groupChat(Composer.command(rateLimit({
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }))))
 
+bot.use(rateLimit({
+  window: 1000 * 2,
+  limit: 2,
+  keyGenerator: (ctx) => ctx.chat.id
+}))
+
 bot.use(Composer.mount('callback_query', rateLimit({
   window: 2000,
   limit: 1,
   keyGenerator: (ctx) => ctx.from.id,
   onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
 })))
-
-bot.use(rateLimit({
-  window: 3000,
-  limit: 1
-}))
 
 bot.on(['channel_post', 'edited_channel_post'], () => {})
 
