@@ -60,7 +60,7 @@ module.exports = async (ctx) => {
   await ctx.replyWithChatAction('upload_photo')
   if (ctx.chat.type === 'private') await sleep(100)
 
-  console.log('⏰ 0 >>>', new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} 0 >>>`, new Date() - timeStartGen, 'ms')
 
   const flag = {
     count: false,
@@ -132,10 +132,10 @@ module.exports = async (ctx) => {
   const startMessage = quoteMessage.message_id
   let lastMessage
 
-  console.log('⏰ 1 >>>', new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} ⏰ 1 >>>`, new Date() - timeStartGen, 'ms')
 
   for (let index = 0; index < messageCount; index++) {
-    console.log(`⏰ 2 + ${index} >>>`, new Date() - timeStartGen, 'ms')
+    console.log(`⏰ ${ctx.message.message_id} 2 + ${index} >>>`, new Date() - timeStartGen, 'ms')
     try {
       const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index])
       if (getMessages.length > 0 && getMessages[0].message_id) {
@@ -154,7 +154,7 @@ module.exports = async (ctx) => {
       console.error(error)
       quoteMessage = null
     }
-    console.log(`⏰ 3 + ${index} >>>`, new Date() - timeStartGen, 'ms')
+    console.log(`⏰ ${ctx.message.message_id} 3 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
     // if (index === 0) quoteMessage = ctx.message
 
@@ -323,7 +323,7 @@ module.exports = async (ctx) => {
   let format
   if (!flag.privacy && type === 'quote') format = 'png'
 
-  console.log('⏰ 5 >>>', new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} 5 >>>`, new Date() - timeStartGen, 'ms')
 
   const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
     json: {
@@ -357,7 +357,7 @@ module.exports = async (ctx) => {
     return false
   })
 
-  console.log('⏰ 6 >>>', new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} 6 >>>`, new Date() - timeStartGen, 'ms')
 
   if (generate.result.image) {
     // eslint-disable-next-line node/no-deprecated-api
@@ -472,5 +472,5 @@ module.exports = async (ctx) => {
     }
   }
 
-  console.log('⏰ 7 >>>', new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} ⏰ 7 >>>`, new Date() - timeStartGen, 'ms')
 }
