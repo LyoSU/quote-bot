@@ -132,7 +132,7 @@ module.exports = async (ctx) => {
   const startMessage = quoteMessage.message_id
   let lastMessage
 
-  console.log(`⏰ ${ctx.message.message_id} ⏰ 1 >>>`, new Date() - timeStartGen, 'ms')
+  console.log(`⏰ ${ctx.message.message_id} 1 >>>`, new Date() - timeStartGen, 'ms')
 
   for (let index = 0; index < messageCount; index++) {
     console.log(`⏰ ${ctx.message.message_id} 2 + ${index} >>>`, new Date() - timeStartGen, 'ms')
@@ -165,6 +165,8 @@ module.exports = async (ctx) => {
     }
 
     let messageFrom
+
+    quoteMessage.forward_sender_name = false
 
     if (quoteMessage.forward_sender_name) {
       if (flag.hidden) {
@@ -294,7 +296,7 @@ module.exports = async (ctx) => {
     // quoteImages.push(canvasQuote)
     lastMessage = quoteMessage
 
-    console.log(`⏰ 4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
+    console.log(`⏰ ${ctx.message.message_id} 4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
   }
 
   if (quoteMessages.length < 1) {
