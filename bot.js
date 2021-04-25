@@ -34,8 +34,8 @@ const {
   handlePing
 } = require('./handlers')
 const {
-  updateUser,
-  updateGroup
+  getUser,
+  getGroup
 } = require('./helpers')
 
 const rpsIO = io.meter({
@@ -82,7 +82,7 @@ bot.use((ctx, next) => {
   rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
-    console.log(`send method ${method}`)
+    // console.log(`send method ${method}`)
     const startMs = new Date()
     return ctx.telegram.oCallApi(method, data).then((result) => {
       console.log(`end method ${method}:`, new Date() - startMs)
@@ -129,7 +129,7 @@ const i18n = new I18n({
 
 bot.use(i18n.middleware())
 
-bot.use(session({ ttl: 60 * 5 }))
+bot.use(session())
 
 bot.use(async (ctx, next) => {
   ctx.state.emptyRequest = false
@@ -150,8 +150,8 @@ bot.use(Composer.groupChat(session({
 })))
 
 const updateGroupAndUser = async (ctx, next) => {
-  await updateUser(ctx)
-  await updateGroup(ctx)
+  await getUser(ctx)
+  await getGroup(ctx)
   return next(ctx).then(() => {
     if (ctx.state.emptyRequest === false) {
       ctx.session.userInfo.save().catch(() => {})
@@ -167,9 +167,9 @@ bot.use((ctx, next) => {
 bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
 
 bot.use(Composer.privateChat(async (ctx, next) => {
-  await updateUser(ctx)
+  await getUser(ctx)
   await next(ctx).then(() => {
-    if (ctx.state.emptyRequest === false) ctx.session.userInfo.save().catch(() => {})
+    ctx.session.userInfo.save().catch(() => {})
   })
 }))
 

@@ -326,24 +326,27 @@ module.exports = async (ctx) => {
     timeout: 3000,
     retry: 1
   }).json().catch((error) => {
-    if (error.response && error.response.body) {
-      const errorMessage = JSON.parse(error.response.body).error.message
+    return { error }
+  })
 
-      ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
+  if (generate.error) {
+    if (generate.error.response && generate.error.response.body) {
+      const errorMessage = JSON.parse(generate.error.response.body).error.message
+
+      return ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
         error: errorMessage
       }), {
         reply_to_message_id: ctx.message.message_id
       })
     } else {
-      console.error(error)
-      ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
+      console.error(generate.error)
+      return ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
         error: 'quote_api_down'
       }), {
         reply_to_message_id: ctx.message.message_id
       })
     }
-    return false
-  })
+  }
 
   if (generate.result.image) {
     // eslint-disable-next-line node/no-deprecated-api
