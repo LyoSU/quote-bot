@@ -232,6 +232,8 @@ module.exports = async (ctx) => {
       messageFrom = quoteMessage.from
     }
 
+    console.log(`⏰ ${ctx.message.message_id} 3.2 + ${index} >>>`, new Date() - timeStartGen, 'ms')
+
     if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
