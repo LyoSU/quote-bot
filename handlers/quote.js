@@ -261,6 +261,8 @@ module.exports = async (ctx) => {
       message.mediaType = 'sticker'
     }
 
+    console.log(`⏰ ${ctx.message.message_id} 3.3 + ${index} >>>`, new Date() - timeStartGen, 'ms')
+
     if (messageFrom.id) message.chatId = messageFrom.id
     else message.chatId = hashCode(quoteMessage.from.name)
 
@@ -273,6 +275,8 @@ module.exports = async (ctx) => {
     if (avatarImage) message.avatar = avatarImage
     if (messageFrom) message.from = messageFrom
     if (text) message.text = text
+
+    console.log(`⏰ ${ctx.message.message_id} 3.4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
     if (!flag.privacy && message.from) {
       if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
