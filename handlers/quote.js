@@ -281,8 +281,9 @@ module.exports = async (ctx) => {
     if (!flag.privacy && message.from) {
       if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
       else {
-        // const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
-        // if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
+        console.log('!!! quotedFind', message.from.id)
+        const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
+        if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
       }
     }
 
