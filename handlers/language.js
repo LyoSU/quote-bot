@@ -31,15 +31,13 @@ module.exports = async (ctx) => {
         )
 
         if (chatMember && ['creator', 'administrator'].includes(chatMember.status)) {
-          ctx.answerCbQuery(locales[ctx.match[1]])
+          ctx.state.answerCbQuery = [locales[ctx.match[1]]]
           ctx.group.info.settings.locale = ctx.match[1]
           ctx.i18n.locale(ctx.match[1])
           await handleHelp(ctx)
-        } else {
-          ctx.answerCbQuery()
         }
       } else {
-        ctx.answerCbQuery(locales[ctx.match[1]].flag)
+        ctx.state.answerCbQuery = [locales[ctx.match[1]].flag]
 
         ctx.session.userInfo.settings.locale = ctx.match[1]
         ctx.i18n.locale(ctx.match[1])

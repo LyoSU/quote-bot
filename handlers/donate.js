@@ -24,8 +24,6 @@ module.exports = async (ctx) => {
       await ctx.replyWithHTML(ctx.i18n.t('donate.info_group'))
     }
   } else if (ctx.updateType === 'callback_query') {
-    await ctx.answerCbQuery()
-
     const orderId = uuidv4()
 
     let amount = ctx.match[2] || 0

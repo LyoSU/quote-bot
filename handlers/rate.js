@@ -33,7 +33,7 @@ module.exports = async (ctx) => {
 
   updateTopPack(ctx.db, ctx.group.info, quoteDb)
 
-  await ctx.answerCbQuery(resultText)
+  ctx.state.answerCbQuery = [resultText]
 
   const advKeyboard = ctx.callbackQuery.message.reply_markup.inline_keyboard.pop().pop()
 

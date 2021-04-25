@@ -71,12 +71,6 @@ bot.use((ctx, next) => {
 // bot.use(require('./middlewares/metrics'))
 bot.use(stats)
 
-bot.use(async (ctx, next) => {
-  ctx.state.emptyRequest = false
-  await next()
-  if (ctx.state.emptyRequest === false) messageCountIO.mark()
-})
-
 bot.use((ctx, next) => {
   if (ctx.callbackQuery) ctx.state.answerCbQuery = []
   return next(ctx).then(() => {
@@ -136,6 +130,13 @@ bot.use(i18n.middleware())
 
 bot.use(session({ ttl: 60 * 5 }))
 
+bot.use(async (ctx, next) => {
+  ctx.state.emptyRequest = false
+  return next().then(() => {
+    if (ctx.state.emptyRequest === false) messageCountIO.mark()
+  })
+})
+
 bot.use(Composer.groupChat(session({
   property: 'group',
   getSessionKey: (ctx) => {
@@ -150,11 +151,12 @@ bot.use(Composer.groupChat(session({
 const updateGroupAndUser = async (ctx, next) => {
   await updateUser(ctx)
   await updateGroup(ctx)
-  await next(ctx)
-  if (ctx.state.emptyRequest === false) {
-    await ctx.session.userInfo.save().catch(() => {})
-    await ctx.group.info.save().catch(() => {})
-  }
+  return next(ctx).then(() => {
+    if (ctx.state.emptyRequest === false) {
+      ctx.session.userInfo.save().catch(() => {})
+      ctx.group.info.save().catch(() => {})
+    }
+  })
 }
 
 bot.use((ctx, next) => {
@@ -162,12 +164,12 @@ bot.use((ctx, next) => {
   return next()
 })
 bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
-bot.action(() => true, Composer.groupChat(updateGroupAndUser))
 
 bot.use(Composer.privateChat(async (ctx, next) => {
   await updateUser(ctx)
-  await next(ctx)
-  if (ctx.state.emptyRequest === false) await ctx.session.userInfo.save().catch(() => {})
+  await next(ctx).then(() => {
+    if (ctx.state.emptyRequest === false) ctx.session.userInfo.save().catch(() => {})
+  })
 }))
 
 bot.command('donate', handleDonate)
@@ -220,8 +222,9 @@ bot.on('message', onlyGroup, updateGroupAndUser, async (ctx, next) => {
     if (randomInteger(0, gab) === gab && (ctx.group.info.lastRandomQuote.getTime() / 1000) < Date.now() / 1000 - 60) {
       ctx.group.info.lastRandomQuote = Date()
       return handleRandomQuote(ctx)
-    } else return next()
-  } else return next()
+    }
+  }
+  return next()
 })
 
 bot.use((ctx, next) => {
