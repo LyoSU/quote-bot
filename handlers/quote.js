@@ -281,10 +281,12 @@ module.exports = async (ctx) => {
     if (!flag.privacy && message.from) {
       if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
       else {
-        const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
-        if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
+        // const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
+        // if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
       }
     }
+
+    console.log(`⏰ ${ctx.message.message_id} 3.5 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
@@ -299,7 +301,6 @@ module.exports = async (ctx) => {
 
     quoteMessages[index] = message
 
-    // quoteImages.push(canvasQuote)
     lastMessage = quoteMessage
 
     console.log(`⏰ ${ctx.message.message_id} 4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
