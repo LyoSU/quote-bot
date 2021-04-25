@@ -100,8 +100,8 @@ bot.use((ctx, next) => {
 })
 
 bot.use(Composer.groupChat(Composer.command(rateLimit({
-  window: 1000 * 20,
-  limit: 5,
+  window: 1000 * 5,
+  limit: 2,
   keyGenerator: (ctx) => ctx.chat.id,
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }))))
@@ -114,7 +114,7 @@ bot.use(Composer.mount('callback_query', rateLimit({
 })))
 
 bot.use(rateLimit({
-  window: 2500,
+  window: 3000,
   limit: 1
 }))
 

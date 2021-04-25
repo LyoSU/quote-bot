@@ -54,8 +54,6 @@ const generateRandomColor = () => {
 }
 
 module.exports = async (ctx) => {
-  const timeStartGen = new Date()
-
   quoteCountIO.mark()
   await ctx.replyWithChatAction('upload_photo')
   if (ctx.chat.type === 'private') await sleep(100)
