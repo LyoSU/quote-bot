@@ -60,8 +60,6 @@ module.exports = async (ctx) => {
   await ctx.replyWithChatAction('upload_photo')
   if (ctx.chat.type === 'private') await sleep(100)
 
-  console.log(`⏰ ${ctx.message.message_id} 0 >>>`, new Date() - timeStartGen, 'ms')
-
   const flag = {
     count: false,
     reply: false,
@@ -131,11 +129,7 @@ module.exports = async (ctx) => {
 
   const startMessage = quoteMessage.message_id
   let lastMessage
-
-  console.log(`⏰ ${ctx.message.message_id} 1 >>>`, new Date() - timeStartGen, 'ms')
-
   for (let index = 0; index < messageCount; index++) {
-    console.log(`⏰ ${ctx.message.message_id} 2 + ${index} >>>`, new Date() - timeStartGen, 'ms')
     try {
       const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index])
       if (getMessages.length > 0 && getMessages[0].message_id) {
@@ -154,7 +148,6 @@ module.exports = async (ctx) => {
       console.error(error)
       quoteMessage = null
     }
-    console.log(`⏰ ${ctx.message.message_id} 3 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
     // if (index === 0) quoteMessage = ctx.message
 
@@ -232,8 +225,6 @@ module.exports = async (ctx) => {
       messageFrom = quoteMessage.from
     }
 
-    console.log(`⏰ ${ctx.message.message_id} 3.2 + ${index} >>>`, new Date() - timeStartGen, 'ms')
-
     if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
@@ -261,8 +252,6 @@ module.exports = async (ctx) => {
       message.mediaType = 'sticker'
     }
 
-    console.log(`⏰ ${ctx.message.message_id} 3.3 + ${index} >>>`, new Date() - timeStartGen, 'ms')
-
     if (messageFrom.id) message.chatId = messageFrom.id
     else message.chatId = hashCode(quoteMessage.from.name)
 
@@ -276,18 +265,13 @@ module.exports = async (ctx) => {
     if (messageFrom) message.from = messageFrom
     if (text) message.text = text
 
-    console.log(`⏰ ${ctx.message.message_id} 3.4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
-
     if (!flag.privacy && message.from) {
       if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
       else {
-        console.log('!!! quotedFind', message.from.id)
         const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
         if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
       }
     }
-
-    console.log(`⏰ ${ctx.message.message_id} 3.5 + ${index} >>>`, new Date() - timeStartGen, 'ms')
 
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
@@ -303,8 +287,6 @@ module.exports = async (ctx) => {
     quoteMessages[index] = message
 
     lastMessage = quoteMessage
-
-    console.log(`⏰ ${ctx.message.message_id} 4 + ${index} >>>`, new Date() - timeStartGen, 'ms')
   }
 
   if (quoteMessages.length < 1) {
@@ -332,8 +314,6 @@ module.exports = async (ctx) => {
 
   let format
   if (!flag.privacy && type === 'quote') format = 'png'
-
-  console.log(`⏰ ${ctx.message.message_id} 5 >>>`, new Date() - timeStartGen, 'ms')
 
   const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
     json: {
@@ -366,8 +346,6 @@ module.exports = async (ctx) => {
     }
     return false
   })
-
-  console.log(`⏰ ${ctx.message.message_id} 6 >>>`, new Date() - timeStartGen, 'ms')
 
   if (generate.result.image) {
     // eslint-disable-next-line node/no-deprecated-api
@@ -481,6 +459,4 @@ module.exports = async (ctx) => {
       })
     }
   }
-
-  console.log(`⏰ ${ctx.message.message_id} 7 >>>`, new Date() - timeStartGen, 'ms')
 }
