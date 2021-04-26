@@ -217,13 +217,15 @@ bot.action(/set_language:(.*)/, handleLanguage)
 bot.on('message', Composer.privateChat(handleQuote))
 
 bot.on('message', onlyGroup, rateLimit({
-  window: 1000 * 25,
+  window: 1000 * 10,
   limit: 1,
   keyGenerator: (ctx) => ctx.chat.id
-}), updateGroupAndUser, async (ctx, next) => {
+}), async (ctx, next) => {
+  await getGroup(ctx)
   const gab = ctx.group.info.settings.randomQuoteGab
 
   if (gab > 0) {
+    await updateGroupAndUser()
     if (randomInteger(0, gab) === gab && (ctx.group.info.lastRandomQuote.getTime() / 1000) < Date.now() / 1000 - 60) {
       ctx.group.info.lastRandomQuote = Date()
       return handleRandomQuote(ctx)
