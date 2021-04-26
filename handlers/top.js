@@ -18,7 +18,7 @@ module.exports = async (ctx) => {
     resultText += `\n/q_${quote.id} (${quote.rate.votes[0].vote.length}/${quote.rate.votes[1].vote.length})`
   })
 
-  ctx.replyWithHTML(resultText, {
+  await ctx.replyWithHTML(resultText, {
     reply_to_message_id: ctx.message.message_id,
     reply_markup: Markup.inlineKeyboard([
       Markup.urlButton(

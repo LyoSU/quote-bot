@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const { Schema } = require('mongoose')
 
-const statsSchema = mongoose.Schema({
+const statsSchema = Schema({
   rps: Number,
   responseTime: Number,
   date: {

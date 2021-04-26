@@ -1,8 +1,8 @@
-const mongoose = require('mongoose')
+const { Schema } = require('mongoose')
 
-const advSchema = mongoose.Schema({
+const advSchema = Schema({
   creator: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   text: String,
@@ -15,7 +15,7 @@ const advSchema = mongoose.Schema({
     default: 0
   },
   moderator: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   stats: {

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const { Schema } = require('mongoose')
 
-const groupSchema = mongoose.Schema({
+const groupSchema = Schema({
   group_id: {
     type: Number,
     index: true,
@@ -51,7 +51,7 @@ const groupSchema = mongoose.Schema({
     lastUpdate: Date,
     stickers: [{
       quote: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Quote'
       },
       fileId: String,

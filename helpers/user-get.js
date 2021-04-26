@@ -1,8 +1,11 @@
 module.exports = async (ctx) => {
   let user
 
-  if (!ctx.session.userInfo) user = await ctx.db.User.findOne({ telegram_id: ctx.from.id })
-  else user = ctx.session.userInfo
+  if (!ctx.session.userInfo) {
+    user = await ctx.db.User.findOne({ telegram_id: ctx.from.id })
+  } else {
+    user = ctx.session.userInfo
+  }
 
   const now = Math.floor(new Date().getTime() / 1000)
 
@@ -18,8 +21,11 @@ module.exports = async (ctx) => {
   user.updatedAt = new Date()
 
   ctx.session.userInfo = user
-  if (ctx.session.userInfo.settings.locale) ctx.i18n.locale(ctx.session.userInfo.settings.locale)
-  else ctx.session.userInfo.settings.locale = ctx.i18n.languageCode
+  if (ctx.session.userInfo.settings.locale) {
+    ctx.i18n.locale(ctx.session.userInfo.settings.locale)
+  } else {
+    ctx.session.userInfo.settings.locale = ctx.i18n.languageCode
+  }
 
   return true
 }

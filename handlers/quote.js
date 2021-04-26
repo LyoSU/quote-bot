@@ -23,26 +23,33 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 // }).then(console.log)
 
 function sleep (ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 async function loopClearStickerPack () {
-  while (true) {
+  setInterval(async () => {
     await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
       for (const i in sticketSet.stickers) {
         const sticker = sticketSet.stickers[i]
-        if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+        if (i > config.globalStickerSet.save_sticker_count - 1) {
+          telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
+          })
+        }
       }
     })
-    await sleep(500)
-  }
+  }, 500)
 }
+
 loopClearStickerPack()
 
 const hashCode = (s) => {
-  let h = 0; var l = s.length; var i = 0
+  const l = s.length
+  let h = 0
+  let i = 0
   if (l > 0) {
-    while (i < l) { h = (h << 5) - h + s.charCodeAt(i++) | 0 }
+    while (i < l) {
+      h = (h << 5) - h + s.charCodeAt(i++) | 0
+    }
   }
   return h
 }
@@ -123,6 +130,8 @@ module.exports = async (ctx) => {
   }
 
   const quoteMessages = []
+
+  // FIXME: quoteImages never updated
   const quoteImages = []
 
   const startMessage = quoteMessage.message_id
@@ -250,8 +259,11 @@ module.exports = async (ctx) => {
       message.mediaType = 'sticker'
     }
 
-    if (messageFrom.id) message.chatId = messageFrom.id
-    else message.chatId = hashCode(quoteMessage.from.name)
+    if (messageFrom.id) {
+      message.chatId = messageFrom.id
+    } else {
+      message.chatId = hashCode(quoteMessage.from.name)
+    }
 
     let avatarImage = true
     if (!diffUser || (ctx.me === quoteMessage.from.username && index > 0)) {
@@ -264,8 +276,9 @@ module.exports = async (ctx) => {
     if (text) message.text = text
 
     if (!flag.privacy && message.from) {
-      if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) flag.privacy = true
-      else {
+      if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) {
+        flag.privacy = true
+      } else {
         const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
         if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
       }
@@ -276,8 +289,11 @@ module.exports = async (ctx) => {
       const replyMessageInfo = quoteMessage.reply_to_message
       if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
       if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
-      if (replyMessageInfo.from.id) message.replyMessage.chatId = replyMessageInfo.from.id
-      else message.replyMessage.chatId = hashCode(message.replyMessage.name)
+      if (replyMessageInfo.from.id) {
+        message.replyMessage.chatId = replyMessageInfo.from.id
+      } else {
+        message.replyMessage.chatId = hashCode(message.replyMessage.name)
+      }
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
     }
@@ -381,7 +397,8 @@ module.exports = async (ctx) => {
           const created = await telegram.createNewStickerSet(ctx.from.id, packName, packTitle, {
             png_sticker: { source: 'placeholder.png' },
             emojis: '💜'
-          }).catch(() => {})
+          }).catch(() => {
+          })
 
           ctx.session.userInfo.tempStickerSet.name = packName
           ctx.session.userInfo.tempStickerSet.create = created
@@ -398,7 +415,7 @@ module.exports = async (ctx) => {
         const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName, {
           png_sticker: { source: image },
           emojis: '💜'
-        }).catch((error) => {
+        }, true).catch((error) => {
           console.error(error)
           if (error.description === 'Bad Request: STICKERSET_INVALID') {
             ctx.session.userInfo.tempStickerSet.create = false
@@ -411,7 +428,10 @@ module.exports = async (ctx) => {
           if (ctx.session.userInfo.tempStickerSet.create) {
             for (const i in sticketSet.stickers) {
               const sticker = sticketSet.stickers[i]
-              if (i > config.globalStickerSet.save_sticker_count - 1) telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+              if (i > config.globalStickerSet.save_sticker_count - 1) {
+                telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
+                })
+              }
             }
           }
 

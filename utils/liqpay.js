@@ -39,7 +39,7 @@ class LiqPay {
     return sha1.digest('base64')
   }
 
-  formatingParams (params) {
+  formattingParams (params) {
     params.public_key = this.publicKey
 
     if (!params.version) throw new Error('version is null')
@@ -50,7 +50,7 @@ class LiqPay {
     return params
   }
 
-  formatingData (params) {
+  formattingData (params) {
     const data = Buffer.from(JSON.stringify(params)).toString('base64')
     const signature = this.strToSign(this.privateKey + data + this.privateKey)
 
@@ -61,20 +61,18 @@ class LiqPay {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  formatingLink (params) {
-    params = this.formatingParams(params)
-    const formatingData = this.formatingData(params)
+  formattingLink (params) {
+    params = this.formattingParams(params)
+    const formattingData = this.formattingData(params)
 
-    const link = `${this.config.host}${params.version}/checkout?data=${formatingData.data}&signature=${formatingData.signature}`
-
-    return link
+    return `${this.config.host}${params.version}/checkout?data=${formattingData.data}&signature=${formattingData.signature}`
   }
 
-  async formatingRequest (params) {
-    const formatingData = this.formatingData(params)
+  async formattingRequest (params) {
+    const formattingData = this.formattingData(params)
     const response = await this.api('request', {
-      data: formatingData.data,
-      signature: formatingData.signature
+      data: formattingData.data,
+      signature: formattingData.signature
     })
 
     console.log(response.body)
