@@ -11,7 +11,7 @@ const extend = got.extend({
 })
 
 const sendMethod = (method, parm) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     extend.post(`/${method}`, {
       body: parm
     }).then((postResult) => {
@@ -39,15 +39,11 @@ const updateUser = (user) => {
 }
 
 const saveAudio = (audio) => {
-  const parm = audio
-
-  return sendMethod('saveAudio', parm)
+  return sendMethod('saveAudio', audio)
 }
 
 const getAudio = (audio) => {
-  const parm = audio
-
-  return sendMethod('getAudio', parm)
+  return sendMethod('getAudio', audio)
 }
 
 module.exports = {

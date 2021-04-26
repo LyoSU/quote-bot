@@ -40,10 +40,10 @@ function sendMethod (method, parm) {
   })
 }
 
-function getUser (user_id) {
+function getUser (userID) {
   return new Promise((resolve, reject) => {
     sendMethod('getUser', {
-      user_id
+      user_id: userID
     }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
       const user = {
@@ -59,10 +59,10 @@ function getUser (user_id) {
   })
 }
 
-function getSupergroup (supergroup_id) {
+function getSupergroup (supergroupID) {
   return new Promise((resolve, reject) => {
     sendMethod('getSupergroup', {
-      supergroup_id
+      supergroup_id: supergroupID
     }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
       const supergroup = {
@@ -74,10 +74,10 @@ function getSupergroup (supergroup_id) {
   })
 }
 
-function getChat (chat_id) {
+function getChat (chatID) {
   return new Promise((resolve, reject) => {
     sendMethod('getChat', {
-      chat_id
+      chat_id: chatID
     }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
@@ -125,46 +125,46 @@ function getChat (chat_id) {
   })
 }
 
-function getMessages (chat_id, messageIds) {
+function getMessages (chatID, messageIds) {
   const tdlibMessageIds = messageIds.map((id) => id * Math.pow(2, 20))
 
   return new Promise((resolve, reject) => {
     sendMethod('getMessages', {
-      chat_id,
+      chat_id: chatID,
       message_ids: tdlibMessageIds
     }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
-      const messages = response.messages.map((message_info) => {
-        if (!message_info) return {}
+      const messages = response.messages.map((messageInfo) => {
+        if (!messageInfo) return {}
         return new Promise((resolve, reject) => {
           const message = {
-            message_id: message_info.id / Math.pow(2, 20),
-            date: message_info.date
+            message_id: messageInfo.id / Math.pow(2, 20),
+            date: messageInfo.date
           }
           const messagePromise = []
-          const reply_to_message_id = message_info.reply_to_message_id / Math.pow(2, 20)
+          const replyToMessageID = messageInfo.reply_to_message_id / Math.pow(2, 20)
 
-          if (message_info.reply_to_message_id) messagePromise.push(getMessages(chat_id, [reply_to_message_id]))
+          if (messageInfo.reply_to_message_id) messagePromise.push(getMessages(chatID, [replyToMessageID]))
           Promise.all(messagePromise).then((replyMessage) => {
             if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
-            const chat_ids = [
-              message_info.chat_id
+            const chatIds = [
+              messageInfo.chat_id
             ]
 
-            if (message_info.sender.user_id) chat_ids.push(message_info.sender.user_id)
+            if (messageInfo.sender.user_id) chatIds.push(messageInfo.sender.user_id)
 
             let forwarderId
 
-            if (message_info.forward_info && message_info.forward_info.origin.sender_user_id) forwarderId = message_info.forward_info.origin.sender_user_id
-            if (message_info.forward_info && message_info.forward_info.origin.sender_chat_id) forwarderId = message_info.forward_info.origin.sender_chat_id
-            if (message_info.forward_info && message_info.forward_info.origin.user_id) forwarderId = message_info.forward_info.origin.user_id
-            if (message_info.forward_info && message_info.forward_info.origin.chat_id) forwarderId = message_info.forward_info.origin.chat_id
+            if (messageInfo.forward_info && messageInfo.forward_info.origin.sender_user_id) forwarderId = messageInfo.forward_info.origin.sender_user_id
+            if (messageInfo.forward_info && messageInfo.forward_info.origin.sender_chat_id) forwarderId = messageInfo.forward_info.origin.sender_chat_id
+            if (messageInfo.forward_info && messageInfo.forward_info.origin.user_id) forwarderId = messageInfo.forward_info.origin.user_id
+            if (messageInfo.forward_info && messageInfo.forward_info.origin.chat_id) forwarderId = messageInfo.forward_info.origin.chat_id
 
-            if (forwarderId) chat_ids.push(forwarderId)
+            if (forwarderId) chatIds.push(forwarderId)
 
-            const chatInfoPromise = chat_ids.map(getChat)
+            const chatInfoPromise = chatIds.map(getChat)
 
             Promise.all(chatInfoPromise).then((chats) => {
               const chatInfo = {}
@@ -172,39 +172,42 @@ function getMessages (chat_id, messageIds) {
                 chatInfo[chat.id] = chat
               })
 
-              message.chat = chatInfo[message_info.chat_id]
-              message.from = chatInfo[message_info.sender.user_id]
+              message.chat = chatInfo[messageInfo.chat_id]
+              message.from = chatInfo[messageInfo.sender.user_id]
 
-              if (message_info.forward_info) {
+              if (messageInfo.forward_info) {
                 if (chatInfo[forwarderId]) {
-                  if (!chatInfo[forwarderId].type) message.forward_from = chatInfo[forwarderId]
-                  else message.forward_from_chat = chatInfo[forwarderId]
+                  if (!chatInfo[forwarderId].type) {
+                    message.forward_from = chatInfo[forwarderId]
+                  } else {
+                    message.forward_from_chat = chatInfo[forwarderId]
+                  }
                 }
-                if (message_info.forward_info.origin.sender_name) message.forward_sender_name = message_info.forward_info.origin.sender_name
+                if (messageInfo.forward_info.origin.sender_name) message.forward_sender_name = messageInfo.forward_info.origin.sender_name
               }
 
               let entities
 
-              if (message_info.content.text) {
-                message.text = message_info.content.text.text
-                entities = message_info.content.text.entities
+              if (messageInfo.content.text) {
+                message.text = messageInfo.content.text.text
+                entities = messageInfo.content.text.entities
               }
-              if (message_info.content) {
+              if (messageInfo.content) {
                 const mediaType = {
                   messagePhoto: 'photo',
                   messageSticker: 'sticker'
                   // messageVideo: 'video'
                 }
 
-                const type = mediaType[message_info.content._]
+                const type = mediaType[messageInfo.content._]
 
                 if (type) {
                   let media
-                  if (message_info.content[type].sizes) {
-                    media = message_info.content[type].sizes.map((size) => {
+                  if (messageInfo.content[type].sizes) {
+                    media = messageInfo.content[type].sizes.map((size) => {
                       return {
                         file_id: size[type].remote.id,
-                        file_unique_id: size[type].remote.uniqueId,
+                        file_unique_id: size[type].remote.unique_id,
                         file_size: size[type].size,
                         height: size.height,
                         width: size.width
@@ -212,22 +215,22 @@ function getMessages (chat_id, messageIds) {
                     })
                   } else {
                     media = {
-                      file_id: message_info.content[type][type].remote.id,
-                      file_unique_id: message_info.content[type][type].remote.uniqueId,
-                      file_size: message_info.content[type][type].size,
-                      height: message_info.content[type].height,
-                      width: message_info.content[type].width
+                      file_id: messageInfo.content[type][type].remote.id,
+                      file_unique_id: messageInfo.content[type][type].remote.unique_id,
+                      file_size: messageInfo.content[type][type].size,
+                      height: messageInfo.content[type].height,
+                      width: messageInfo.content[type].width
                     }
                   }
 
                   message[type] = media
                 } else {
-                  message_info.content.unsupportedMedia = {}
+                  messageInfo.content.unsupportedMedia = {}
                 }
 
-                if (message_info.content.caption) {
-                  message.caption = message_info.content.caption.text
-                  if (message_info.content.caption.entities) entities = message_info.content.caption.entities
+                if (messageInfo.content.caption) {
+                  message.caption = messageInfo.content.caption.text
+                  if (messageInfo.content.caption.entities) entities = messageInfo.content.caption.entities
                 }
               }
 
@@ -264,8 +267,11 @@ function getMessages (chat_id, messageIds) {
                   return entity
                 })
 
-                if (message.caption) message.caption_entities = entitiesFormat
-                else message.entities = entitiesFormat
+                if (message.caption) {
+                  message.caption_entities = entitiesFormat
+                } else {
+                  message.entities = entitiesFormat
+                }
               }
 
               resolve(message)
