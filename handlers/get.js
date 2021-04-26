@@ -6,7 +6,7 @@ module.exports = async (ctx) => {
   const quote = await ctx.db.Quote.findById(quoteId).catch(() => {})
 
   if (quote) {
-    ctx.replyWithDocument(quote.file_id, {
+    await ctx.replyWithDocument(quote.file_id, {
       reply_markup: Markup.inlineKeyboard([
         Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length}`, 'rate:👍'),
         Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length}`, 'rate:👎')

@@ -3,10 +3,13 @@ module.exports = async (ctx) => {
   if (ctx.match && ctx.match[2]) gab = ctx.match[2]
   console.log(ctx.match)
 
-  if (ctx.group) ctx.group.info.settings.randomQuoteGab = gab
-  else ctx.session.userInfo.randomQuoteGab = gab
+  if (ctx.group) {
+    ctx.group.info.settings.randomQuoteGab = gab
+  } else {
+    ctx.session.userInfo.randomQuoteGab = gab
+  }
 
-  ctx.replyWithHTML(ctx.i18n.t('random.gab', { gab }), {
+  await ctx.replyWithHTML(ctx.i18n.t('random.gab', { gab }), {
     reply_to_message_id: ctx.message.message_id
   })
 }

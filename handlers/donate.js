@@ -42,7 +42,10 @@ module.exports = async (ctx) => {
       description: ctx.i18n.t('donate.description'),
       currency,
       prices: [
-        { label: `Donate @${ctx.options.username}`, amount }
+        {
+          label: `Donate @${ctx.options.username}`,
+          amount
+        }
       ],
       payload: { orderId }
     }

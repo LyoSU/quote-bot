@@ -1,8 +1,8 @@
-const fs = require('fs')
+// const fs = require('fs')
 const path = require('path')
 const Composer = require('telegraf/composer')
 const Markup = require('telegraf/markup')
-const I18n = require('telegraf-i18n')
+const { I18n } = require('telegraf-i18n')
 const Scene = require('telegraf/scenes/base')
 const {
   scenes,
@@ -45,7 +45,7 @@ advSetText.on('text', async (ctx) => {
   }
 
   ctx.session.scenes.text = ctx.message.text
-  ctx.scene.enter('advSetLink')
+  await ctx.scene.enter('advSetLink')
 })
 
 const advSetLink = new Scene('advSetLink')
@@ -62,7 +62,7 @@ advSetLink.on('text', async (ctx) => {
   }
 
   ctx.session.scenes.link = ctx.message.text
-  ctx.scene.enter('advSetLocale')
+  await ctx.scene.enter('advSetLocale')
 })
 
 const advSetLocale = new Scene('advSetLocale')
@@ -70,7 +70,12 @@ const advSetLocale = new Scene('advSetLocale')
 advSetLocale.enter(async (ctx) => {
   const localeCount = await ctx.db.User.aggregate([
     { $match: { updatedAt: { $gte: new Date((new Date()).getTime() - (30 * 24 * 60 * 60 * 1000)) } } },
-    { $group: { _id: '$settings.locale', count: { $sum: 1 } } }
+    {
+      $group: {
+        _id: '$settings.locale',
+        count: { $sum: 1 }
+      }
+    }
   ])
 
   const localeCountSorted = localeCount.sort((a, b) => {
@@ -79,7 +84,9 @@ advSetLocale.enter(async (ctx) => {
 
   const localContByCode = {}
 
-  localeCountSorted.forEach(v => { localContByCode[v._id] = v.count })
+  localeCountSorted.forEach(v => {
+    localContByCode[v._id] = v.count
+  })
 
   const button = []
 
@@ -102,7 +109,7 @@ advSetLocale.action(/adv:locale:(.*)/, async (ctx) => {
     return ctx.scene.reenter()
   }
   ctx.session.scenes.locale = ctx.match[1]
-  ctx.scene.enter('advSetPrice')
+  await ctx.scene.enter('advSetPrice')
 })
 
 const advSetPrice = new Scene('advSetPrice')
@@ -121,7 +128,7 @@ advSetPrice.on('text', async (ctx) => {
   }
 
   ctx.session.scenes.price = price
-  ctx.scene.enter('advSetCount')
+  await ctx.scene.enter('advSetCount')
 })
 
 const advSetCount = new Scene('advSetCount')
@@ -140,7 +147,7 @@ advSetCount.on('text', async (ctx) => {
   }
 
   ctx.session.scenes.count = count
-  ctx.scene.enter('advSend')
+  await ctx.scene.enter('advSend')
 })
 
 const advSend = new Scene('advSend')
@@ -183,6 +190,8 @@ composer.action(/adv:create/, async (ctx, next) => {
   return ctx.scene.enter('advSetText')
 })
 
-composer.command('adv', onlyPm, ({ scene }) => scene.enter('advMain'))
+composer.command('adv', onlyPm, ({ scene }) => {
+  scene.enter('advMain')
+})
 
 module.exports = composer

@@ -1,24 +1,8 @@
-const https = require('https')
-const Stream = require('stream').Transform
 const sharp = require('sharp')
-
 const {
-  userName
+  userName,
+  downloadFileByUrl
 } = require('../utils')
-
-const downloadFileByUrl = (fileUrl) => new Promise((resolve, reject) => {
-  const data = new Stream()
-
-  https.get(fileUrl, (response) => {
-    response.on('data', (chunk) => {
-      data.push(chunk)
-    })
-
-    response.on('end', () => {
-      resolve(data)
-    })
-  }).on('error', reject)
-})
 
 module.exports = async (ctx) => {
   let result = ''
@@ -51,12 +35,18 @@ module.exports = async (ctx) => {
       const imageSharp = sharp(data.read())
       const imageMetadata = await imageSharp.metadata()
 
-      if (imageMetadata.height >= imageMetadata.width) imageSharp.resize({ height: 512 })
-      else imageSharp.resize({ width: 512 })
+      if (imageMetadata.height >= imageMetadata.width) {
+        imageSharp.resize({ height: 512 })
+      } else {
+        imageSharp.resize({ width: 512 })
+      }
 
-      const stickerPNG = await imageSharp.webp({ quality: 100 }).png({ compressionLevel: 9, force: false }).toBuffer()
+      const stickerPNG = await imageSharp.webp({ quality: 100 }).png({
+        compressionLevel: 9,
+        force: false
+      }).toBuffer()
 
-      let stickerAdd = false
+      let stickerAdd
       let emojis = ''
 
       if (ctx.match[1]) emojis += ctx.match[1]
@@ -97,7 +87,7 @@ module.exports = async (ctx) => {
         stickerAdd = await ctx.telegram.addStickerToSet(ctx.from.id, ctx.group.info.stickerSet.name, {
           png_sticker: { source: stickerPNG },
           emojis
-        }).catch((error) => {
+        }, false).catch((error) => {
           if (error.description.includes('STICKERSET_INVALID') || error.description.includes('TOO_MUCH')) {
             ctx.group.info.stickerSet = undefined
             delete ctx.group.info.stickerSet
@@ -123,7 +113,7 @@ module.exports = async (ctx) => {
   }
 
   if (result) {
-    ctx.replyWithHTML(result, {
+    await ctx.replyWithHTML(result, {
       reply_to_message_id: ctx.message.message_id
     })
   }

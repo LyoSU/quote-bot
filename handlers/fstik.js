@@ -9,7 +9,7 @@ module.exports = async (ctx, next) => {
       return next()
     }
   }
-  ctx.replyWithHTML(ctx.i18n.t('sticker.fstik'), {
+  await ctx.replyWithHTML(ctx.i18n.t('sticker.fstik'), {
     reply_to_message_id: ctx.message.message_id
   })
 }

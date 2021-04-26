@@ -26,7 +26,7 @@ module.exports = async (ctx) => {
   }
 
   if (result) {
-    ctx.replyWithHTML(result, {
+    await ctx.replyWithHTML(result, {
       reply_to_message_id: ctx.message.message_id
     })
   }
