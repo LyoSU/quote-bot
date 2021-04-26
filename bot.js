@@ -216,7 +216,11 @@ bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
-bot.on('message', onlyGroup, updateGroupAndUser, async (ctx, next) => {
+bot.on('message', onlyGroup, rateLimit({
+  window: 1000 * 25,
+  limit: 1,
+  keyGenerator: (ctx) => ctx.chat.id
+}), updateGroupAndUser, async (ctx, next) => {
   const gab = ctx.group.info.settings.randomQuoteGab
 
   if (gab > 0) {
