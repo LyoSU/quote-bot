@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const { Schema } = require('mongoose')
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
   telegram_id: {
     type: Number,
     index: true,

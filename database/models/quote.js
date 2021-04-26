@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
+const { Schema } = require('mongoose')
 
-const quoteSchema = mongoose.Schema({
+const quoteSchema = Schema({
   group: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Group'
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   file_id: {
@@ -25,7 +25,7 @@ const quoteSchema = mongoose.Schema({
       type: Object,
       name: String,
       vote: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
       }]
     }],
