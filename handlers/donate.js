@@ -47,7 +47,7 @@ module.exports = async (ctx) => {
       payload: { orderId }
     }
 
-    const liqpayLink = liqpay.formatingLink({
+    const liqpayLink = liqpay.formattingLink({
       action: 'pay',
       amount: amount / 100,
       currency,
