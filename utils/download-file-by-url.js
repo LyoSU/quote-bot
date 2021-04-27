@@ -15,4 +15,4 @@ const downloadFileByUrl = (fileUrl) => new Promise((resolve, reject) => {
   }).on('error', reject)
 })
 
-export default downloadFileByUrl
+module.exports = downloadFileByUrl

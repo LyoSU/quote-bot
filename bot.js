@@ -72,13 +72,6 @@ bot.use((ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
-  if (ctx.callbackQuery) ctx.state.answerCbQuery = []
-  return next(ctx).then(() => {
-    if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
-  })
-})
-
-bot.use((ctx, next) => {
   rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
@@ -160,10 +153,21 @@ const updateGroupAndUser = async (ctx, next) => {
   })
 }
 
+bot.use(async (ctx, next) => {
+  if (ctx.callbackQuery) {
+    await updateGroupAndUser()
+    ctx.state.answerCbQuery = []
+  }
+  return next(ctx).then(() => {
+    if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
+  })
+})
+
 bot.use((ctx, next) => {
   ctx.db = db
   return next()
 })
+
 bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
 
 bot.use(Composer.privateChat(async (ctx, next) => {
@@ -217,7 +221,7 @@ bot.action(/set_language:(.*)/, handleLanguage)
 bot.on('message', Composer.privateChat(handleQuote))
 
 bot.on('message', onlyGroup, rateLimit({
-  window: 1000 * 10,
+  window: 1000 * 5,
   limit: 1,
   keyGenerator: (ctx) => ctx.chat.id
 }), async (ctx, next) => {

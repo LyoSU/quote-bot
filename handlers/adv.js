@@ -2,7 +2,7 @@
 const path = require('path')
 const Composer = require('telegraf/composer')
 const Markup = require('telegraf/markup')
-const { I18n } = require('telegraf-i18n')
+const I18n = require('telegraf-i18n')
 const Scene = require('telegraf/scenes/base')
 const {
   scenes,

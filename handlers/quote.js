@@ -131,9 +131,6 @@ module.exports = async (ctx) => {
 
   const quoteMessages = []
 
-  // FIXME: quoteImages never updated
-  const quoteImages = []
-
   const startMessage = quoteMessage.message_id
   let lastMessage
   for (let index = 0; index < messageCount; index++) {
@@ -165,8 +162,6 @@ module.exports = async (ctx) => {
     }
 
     let messageFrom
-
-    quoteMessage.forward_sender_name = false
 
     if (quoteMessage.forward_sender_name) {
       if (flag.hidden) {
@@ -304,11 +299,9 @@ module.exports = async (ctx) => {
   }
 
   if (quoteMessages.length < 1) {
-    if (quoteImages.length === 0) {
-      return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-        reply_to_message_id: ctx.message.message_id
-      })
-    }
+    return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+      reply_to_message_id: ctx.message.message_id
+    })
   }
 
   let width = 512

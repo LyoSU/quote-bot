@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const Markup = require('telegraf/markup')
-const { I18n } = require('telegraf-i18n')
+const I18n = require('telegraf-i18n')
 const handleHelp = require('./help')
 
 const i18n = new I18n({
