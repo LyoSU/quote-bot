@@ -153,19 +153,19 @@ const updateGroupAndUser = async (ctx, next) => {
   })
 }
 
+bot.use((ctx, next) => {
+  ctx.db = db
+  return next()
+})
+
 bot.use(async (ctx, next) => {
   if (ctx.callbackQuery) {
-    await updateGroupAndUser()
+    await getUser(ctx)
     ctx.state.answerCbQuery = []
   }
   return next(ctx).then(() => {
     if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
   })
-})
-
-bot.use((ctx, next) => {
-  ctx.db = db
-  return next()
 })
 
 bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
@@ -229,7 +229,6 @@ bot.on('message', onlyGroup, rateLimit({
   const gab = ctx.group.info.settings.randomQuoteGab
 
   if (gab > 0) {
-    await updateGroupAndUser()
     if (randomInteger(0, gab) === gab && (ctx.group.info.lastRandomQuote.getTime() / 1000) < Date.now() / 1000 - 60) {
       ctx.group.info.lastRandomQuote = Date()
       return handleRandomQuote(ctx)

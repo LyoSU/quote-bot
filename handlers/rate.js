@@ -35,7 +35,6 @@ module.exports = async (ctx) => {
 
   ctx.state.answerCbQuery = [resultText]
 
-  // FIXME: reply_markup is a field of callbackQuery, not message
   const advKeyboard = ctx.callbackQuery.message.reply_markup.inline_keyboard.pop().pop()
 
   await ctx.editMessageReplyMarkup({
