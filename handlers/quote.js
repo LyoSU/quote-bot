@@ -332,7 +332,7 @@ module.exports = async (ctx) => {
       scale: flag.scale || scale,
       messages: quoteMessages
     },
-    timeout: 3000,
+    timeout: 1000 * 15,
     retry: 1
   }).json().catch((error) => {
     return { error }
