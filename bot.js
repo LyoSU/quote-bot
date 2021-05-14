@@ -59,12 +59,10 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   console.log(await bot.telegram.getMe())
 })()
 
-bot.catch((error) => {
-  console.log('Oops', error)
-})
-
 bot.use((ctx, next) => {
-  next()
+  next().catch((error) => {
+    console.log('Oops', error)
+  })
   return true
 })
 
@@ -83,11 +81,11 @@ bot.use((ctx, next) => {
     })
   }
 
-  if (ctx.update.message) {
-    const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
+  // if (ctx.update.message) {
+  //   const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
 
-    if (dif > 2) console.log('🚨 delay ', dif)
-  }
+  //   if (dif > 2) console.log('🚨 delay ', dif)
+  // }
 
   return next()
 })
