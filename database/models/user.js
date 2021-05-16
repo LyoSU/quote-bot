@@ -45,6 +45,12 @@ const userSchema = Schema({
       type: Boolean,
       default: false
     }
+  },
+  adv: {
+    credit: {
+      type: Number,
+      default: 0
+    }
   }
 }, {
   timestamps: true

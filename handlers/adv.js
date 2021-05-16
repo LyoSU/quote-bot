@@ -1,6 +1,8 @@
 // const fs = require('fs')
 const path = require('path')
+const mongoose = require('mongoose')
 const freekassa = require('freekassa-node')
+const enot = require('enot-node')
 const Composer = require('telegraf/composer')
 const Markup = require('telegraf/markup')
 const I18n = require('telegraf-i18n')
@@ -174,19 +176,31 @@ advSend.enter(async (ctx) => {
 const advPayAmount = new Scene('advPayAmount')
 
 advPayAmount.enter((ctx) => {
-  return ctx.replyWithHTML('Enter the amount in RUB:', {
+  return ctx.replyWithHTML('Enter the amount in USD:', {
     disable_web_page_preview: true
   })
 })
 
-advPayAmount.on('text', (ctx) => {
-  const fk = freekassa({
-    oa: parseInt(ctx.message.text),
-    o: 'pay',
-    m: process.env.FREEKASSA_ID
-  }, process.env.FREEKASSA_SECRET)
+advPayAmount.on('text', async (ctx) => {
+  // const fk = freekassa({
+  //   oa: parseInt(ctx.message.text),
+  //   o: 'pay',
+  //   m: process.env.FREEKASSA_ID
+  // }, process.env.FREEKASSA_SECRET)
 
-  return ctx.replyWithHTML(fk.url, {
+  const invoice = new ctx.db.Invoice()
+  invoice._id = mongoose.Types.ObjectId()
+  invoice.user = ctx.session.userInfo
+  invoice.amount = Math.floor(parseFloat(ctx.message.text) * 100)
+  await invoice.save()
+
+  const enotGen = enot({
+    oa: parseFloat(ctx.message.text),
+    o: invoice._id,
+    m: process.env.ENOT_ID
+  }, process.env.ENOT_SECRET)
+
+  return ctx.replyWithHTML(enotGen.url, {
     disable_web_page_preview: true
   })
 })

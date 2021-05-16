@@ -28,7 +28,8 @@ function sleep (ms) {
 
 async function loopClearStickerPack () {
   setInterval(async () => {
-    await telegram.getStickerSet(config.globalStickerSet.name).then(async (sticketSet) => {
+    const me = await telegram.getMe()
+    await telegram.getStickerSet(config.globalStickerSet.name + me.username).then(async (sticketSet) => {
       for (const i in sticketSet.stickers) {
         const sticker = sticketSet.stickers[i]
         if (i > config.globalStickerSet.save_sticker_count - 1) {
@@ -398,7 +399,7 @@ module.exports = async (ctx) => {
         }
 
         let packOwnerId = config.globalStickerSet.ownerId
-        let packName = config.globalStickerSet.name
+        let packName = config.globalStickerSet.name + ctx.me
 
         if (ctx.session.userInfo.tempStickerSet.create) {
           packOwnerId = ctx.from.id
