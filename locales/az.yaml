@@ -1,46 +1,46 @@
 ---
 language_name: '🇦🇿 Azərbaycanca'
 help: |2
-  <b>Salam!</b>
-  Mən mesajdan sitat yaratmaq üçün xidmət göstərirəm.
-  Bot həm şəxsi söhbətlərdə, həm də qruplarda işləyə bilər.
+  <b>Привет!</b>
+  Я помогу создать цитату из сообщения.
+  Бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Mövcud komandalar:</b>
-  /q <i>[mesaja cavab]</i> — mesajdan sitat yaratmaq.
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
 
-    <b>/q komandasının mövcud bayraqları :</b>
-      hex-kodu vəya ingilis dilində rəng adı: məsələn <code>#cbafff</code> vəya <code>indigo</code> — <b>#cbafff</b> rəngində sitat yaratmaq.
-      Rəqəm: <code>3</code> — mesajın aşağısında olan <b>3 mesajdan</b> sitat yaratmaq.
-      <code>random</code>: təsadüf seçilən rəngdə sitat.
-      <code>reply</code> vəya <code>r</code>: cavab saxlanılması ilə sitat yaratmaq.
-      <code>p</code> vəya <code>png</code> — PNG sitat yaratmaq.
-      <code>i</code> vəya <code>img</code> — sitatı şəkil kimi yaratmaq.
-      <code>rate</code> — sitata qiymətləndirmə sistemi əlavə etmək
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
+      <code>random</code>: случайный цвет цитаты
+      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> — сделать PNG цитату
+      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
+      <code>rate</code> — добавить оценку к цитате
 
-    <b>Bayraqların istifadə nümunələri:</b>
+    <b>Пример использования флагов:</b>
     <code>/q white r p</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — <b>green</b> rəngi standart eləmək və sitat yaratmaq. <i>(hex-kodu vəya ingilis dilində rəng adı)</i>
+  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
 
-  <code>/qs 🥰💜</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — 🥰💜 emoji ilə qrupun stikerpakında stikeri/şəkli/faylı saxlayır <i>(hər hansı bir emoji istənilən sayda ola bilər)</i>
-  <code>/qd</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — stikeri qrupun stikerpakdan silmək
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
+  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
 
-  <code>/qrate</code> <i>[yalnız admin üçün]</i> — Sitatların qiymətləndirməsini birləşdirmək/söndürmək.
-  /qrand — müsbət reytinqli təsadüfi seçilən sitat
-  /qtop — qrupun sitatlarının topu
+  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
+  /qrand — случайная цитата с положительным рейтингом
+  /qtop — топ цитат группы
+  /emoji - сменить эмодзи-суффикс для стикеров
 
-  /help vəya /start — bu mesajı almaq.
+  /help или /start — получить этот текст
 
   🇺🇸 /lang — change the language
   🇷🇺 /lang — изменить язык
 
-  <b>☕️ Botun yaradıcısına qəhvə fincanı almaq:</b> donate.lyo.su
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Bot yaradıcısının bloqu:</b> @LyBlog
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  <b>👨🏻‍💻 Tərcüməçinin GitHub-ı:</b> <a href="https://github.com/Sadykhzadeh">@Sadykhzadeh</a>
 help_group: |
   <b>salam!</b>
   Mesaja cavab olaraq /q əmrindən istifadə edərək qrupda təkliflər yaradacağam
@@ -121,6 +121,13 @@ donate:
   pay: '💜 Ödəniş etmək (Telegram)'
   liqpay: LiqPay (VISA, MasterCard)
   other: Digər yollar
+emoji:
+  info: |
+    Пожалуйста, укажите эмодзи.
+
+    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
+    Для случайного эмодзи <code>/emoji random</code>
+  done: Эмодзи-суффикс успешно изменен.
 only_admin: |
   Bu komandanı yalnız qrupun admini istifadə edə bilər.
 only_group: |

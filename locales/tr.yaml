@@ -1,39 +1,46 @@
 ---
 language_name: '🇹🇷 Türkçe'
 help: |2
-  <b>Merhaba!</b>
-  Bir mesajı alıntı oluşturup size gönderirim.
-  Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
+  <b>Привет!</b>
+  Я помогу создать цитату из сообщения.
+  Бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Kullanılabilir Komutlar:</b>
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
 
-  <code>/help</code> — Bu mesajı gösterir
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
+      <code>random</code>: случайный цвет цитаты
+      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> — сделать PNG цитату
+      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
+      <code>rate</code> — добавить оценку к цитате
 
-  <code>/q #1b1429</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#1b1429</b>
-  <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
-  <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
-  <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
+    <b>Пример использования флагов:</b>
+    <code>/q white r p</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
+  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
 
-  <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
-  <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
+  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
 
-    <b>❕ Ekstra Bilgiler:</b>
+  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
+  /qrand — случайная цитата с положительным рейтингом
+  /qtop — топ цитат группы
+  /emoji - сменить эмодзи-суффикс для стикеров
 
-  ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
-  ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
-  ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
-  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
-  ➖ Emoji belirtilmesi zorunlu değildir.
-  ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
-  ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
-  ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
-  ➖ Argümanların sırası önemli değildir.
+  /help или /start — получить этот текст
 
-  <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
+
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  <b>Çeviri:</b> @Holytotem, @By_Azade
 help_group: |
   <b>Merhaba!</b>
   /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
@@ -112,6 +119,13 @@ donate:
   pay: '💜 Telegram Üzerinden Ödeyin'
   liqpay: LiqPay (VISA, MasterCard)
   other: Diğer yöntemler
+emoji:
+  info: |
+    Пожалуйста, укажите эмодзи.
+
+    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
+    Для случайного эмодзи <code>/emoji random</code>
+  done: Эмодзи-суффикс успешно изменен.
 only_admin: |
   Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |

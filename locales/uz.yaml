@@ -1,44 +1,45 @@
 ---
 language_name: '🇺🇿 O''zbek'
 help: |2
-  <b>Assalomu alaykum! </b>
-  Men xabarlardan iqtibos yaratishga yordam beraman.
-  Bot shaxsiy xabarlardan ham guruhlarga ham ishlay oladi. 
+  <b>Привет!</b>
+  Я помогу создать цитату из сообщения.
+  Бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Mavjud bo'lgan buyruqlar:</b>
-  /q <i>[xabarga javoban]</i> — xabardan iqtibos qilish
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
 
-    <b>Buyruq uchun, mavjud bo'lgan bayroqlar/q:</b>
-      hex kodi yoki rang nomi: <code>#cbafff</code> yoki <code>indigo</code> — iqtibosni rangli qilish <b>#cbafff</b>
-      Raqam: <code>3</code> — <b>3ta xabardan</b>  pastga iqtibos qilish
-      <code>random</code>: iqtibosning tasodifiy ranglar birlashmasi
-      <code>reply</code> yoki <code>r</code>: javoblarni saqlagan holda iqtibos qilish
-      <code>p</code> yoki <code>png</code> — PNG iqtibos qilish
-      <code>i</code> yoki <code>img</code> — iqtibosni rasm sifatida qilish
-      <code>rate</code> — iqtibosni baholash
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
+      <code>random</code>: случайный цвет цитаты
+      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> — сделать PNG цитату
+      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
+      <code>rate</code> — добавить оценку к цитате
 
-    <b>Bayroqlardan foydalanish uchun qo'llanma:</b>
+    <b>Пример использования флагов:</b>
     <code>/q white r p</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — iqtibos rangini o'rnatish <b>green</b> sukut bo'yicha <i>(hex kodi yoki rangni nomi)</i>
+  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
 
-  <code>/qs 🥰💜</code> <i>[xabarga javoban] [faqat administratorlar uchun]</i> —  stiker/rasm/hujjatlarni rasm bilan birgalikda stikerlar to'plamini emoji guruhiga saqlaydi🥰💜 <i>(emoji har qanday va istagan raqamdan iborat bo'lishi mumkin)</i>
-  <code>/qd</code> <i>[xabarga javoban] [faqat administratorlar uchun]</i> — stikerni, stikerlar to'plamining guruhidan o'chirish
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
+  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
 
-  <code>/qrate</code> <i>[faqat administratorlar uchun]</i> — yoqish/o'chirish iqtiboslarni baholash
-  /qrand — tasodifiy ijobi baholi iqtibos
-  /qtop — top iqtibos guruhlari
+  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
+  /qrand — случайная цитата с положительным рейтингом
+  /qtop — топ цитат группы
+  /emoji - сменить эмодзи-суффикс для стикеров
 
-  /help yoki /start — ushbu matnni olish
+  /help или /start — получить этот текст
 
-  🇺🇸 /lang — tilni o'zgartirish
-  🇷🇺 /lang — tilni o'zgartirish
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
 
-  <b>☕️ Dasturchini kofe bilan mehmon qilish:</b> donate.lyo.su
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Dasturchini blogi:</b> @LyBlog
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
@@ -119,6 +120,13 @@ donate:
   pay: '💜 Telegram to''lov'
   liqpay: LiqPay (VISA, MasterCard)
   other: Boshqa usullar
+emoji:
+  info: |
+    Пожалуйста, укажите эмодзи.
+
+    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
+    Для случайного эмодзи <code>/emoji random</code>
+  done: Эмодзи-суффикс успешно изменен.
 only_admin: |
   Buyruqdan faqatgina guruhning administratori foydalanishni mumkin.
 only_group: |
