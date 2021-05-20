@@ -9,7 +9,9 @@ const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
-const emojiArray = Object.values(emojiDb.dbData)
+const emojiArray = Object.values(emojiDb.dbData).filter((data) => {
+  if (data.emoji) return true
+})
 
 const quoteCountIO = io.meter({
   name: 'quote count',
@@ -431,7 +433,6 @@ module.exports = async (ctx) => {
           emojis
         }, true).catch((error) => {
           console.error(error)
-          if (error.description === 'Bad Request: invalid sticker emojis') console.error(emojis)
           if (error.description === 'Bad Request: STICKERSET_INVALID') {
             ctx.session.userInfo.tempStickerSet.create = false
           }
