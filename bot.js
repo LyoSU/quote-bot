@@ -26,6 +26,7 @@ const {
   handleSave,
   handleDelete,
   handleRate,
+  handleEmoji,
   handleSettingsRate,
   handlePrivacy,
   handleLanguage,
@@ -59,12 +60,10 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   console.log(await bot.telegram.getMe())
 })()
 
-bot.catch((error) => {
-  console.log('Oops', error)
-})
-
 bot.use((ctx, next) => {
-  next()
+  next().catch((error) => {
+    console.log('Oops', error)
+  })
   return true
 })
 
@@ -83,11 +82,11 @@ bot.use((ctx, next) => {
     })
   }
 
-  if (ctx.update.message) {
-    const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
+  // if (ctx.update.message) {
+  //   const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
 
-    if (dif > 2) console.log('🚨 delay ', dif)
-  }
+  //   if (dif > 2) console.log('🚨 delay ', dif)
+  // }
 
   return next()
 })
@@ -200,6 +199,7 @@ bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
+bot.command('emoji', onlyAdmin, handleEmoji)
 bot.hears(/^\/(gab) (\d+)/, onlyAdmin, handleGabHidden)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
@@ -220,11 +220,16 @@ bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
-bot.on('message', onlyGroup, rateLimit({
+bot.on('message', rateLimit({
   window: 1000 * 5,
   limit: 1,
-  keyGenerator: (ctx) => ctx.chat.id
+  keyGenerator: (ctx) => ctx.chat.id,
+  onLimitExceeded: (ctx, next) => {
+    ctx.state.skip = true
+    return next()
+  }
 }), async (ctx, next) => {
+  if (ctx.state.skip) return next()
   await getGroup(ctx)
   const gab = ctx.group.info.settings.randomQuoteGab
 

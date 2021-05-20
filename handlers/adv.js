@@ -1,5 +1,8 @@
 // const fs = require('fs')
 const path = require('path')
+const mongoose = require('mongoose')
+const freekassa = require('freekassa-node')
+const enot = require('enot-node')
 const Composer = require('telegraf/composer')
 const Markup = require('telegraf/markup')
 const I18n = require('telegraf-i18n')
@@ -21,7 +24,8 @@ advMain.enter(async (ctx) => {
 
   const replyMarkup = Markup.inlineKeyboard([
     [Markup.callbackButton('Create link', 'adv:create')],
-    [Markup.callbackButton('Adv list', 'adv:list')]
+    [Markup.callbackButton('Adv list', 'adv:list')],
+    [Markup.callbackButton('Pay', 'adv:pay')]
   ])
 
   await ctx.replyWithHTML('You can buy advertising from us ', {
@@ -169,6 +173,38 @@ advSend.enter(async (ctx) => {
   })
 })
 
+const advPayAmount = new Scene('advPayAmount')
+
+advPayAmount.enter((ctx) => {
+  return ctx.replyWithHTML('Enter the amount in USD:', {
+    disable_web_page_preview: true
+  })
+})
+
+advPayAmount.on('text', async (ctx) => {
+  // const fk = freekassa({
+  //   oa: parseInt(ctx.message.text),
+  //   o: 'pay',
+  //   m: process.env.FREEKASSA_ID
+  // }, process.env.FREEKASSA_SECRET)
+
+  const invoice = new ctx.db.Invoice()
+  invoice._id = mongoose.Types.ObjectId()
+  invoice.user = ctx.session.userInfo
+  invoice.amount = Math.floor(parseFloat(ctx.message.text) * 100)
+  await invoice.save()
+
+  const enotGen = enot({
+    oa: parseFloat(ctx.message.text),
+    o: invoice._id,
+    m: process.env.ENOT_ID
+  }, process.env.ENOT_SECRET)
+
+  return ctx.replyWithHTML(enotGen.url, {
+    disable_web_page_preview: true
+  })
+})
+
 const composer = new Composer()
 
 composer.use(
@@ -179,7 +215,8 @@ composer.use(
     advSetLocale,
     advSetPrice,
     advSetCount,
-    advSend
+    advSend,
+    advPayAmount
   )
 )
 
@@ -188,6 +225,10 @@ composer.action(/adv:create/, async (ctx, next) => {
     new: true
   }
   return ctx.scene.enter('advSetText')
+})
+
+composer.action(/adv:pay/, async (ctx, next) => {
+  return ctx.scene.enter('advPayAmount')
 })
 
 composer.command('adv', onlyPm, ({ scene }) => {
