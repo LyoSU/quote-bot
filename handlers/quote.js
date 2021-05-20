@@ -431,6 +431,7 @@ module.exports = async (ctx) => {
           emojis
         }, true).catch((error) => {
           console.error(error)
+          if (error.description === 'Bad Request: invalid sticker emojis') console.error(emojis)
           if (error.description === 'Bad Request: STICKERSET_INVALID') {
             ctx.session.userInfo.tempStickerSet.create = false
           }
