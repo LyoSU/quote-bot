@@ -9,7 +9,7 @@ const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
-const emojiArray = Object.values(emojiDb.dbData).filter((data) => {
+const emojiArray = Object.values(emojiDb.dbData).filter(data => {
   if (data.emoji) return true
 })
 
@@ -142,7 +142,7 @@ module.exports = async (ctx) => {
 
   if (messageCount < 0) {
     messageCount = Math.abs(messageCount)
-    startMessage -= (messageCount - 1)
+    startMessage -= messageCount
   }
 
   let tryDeleted = 0
