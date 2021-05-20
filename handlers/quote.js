@@ -141,7 +141,7 @@ module.exports = async (ctx) => {
   let startMessage = quoteMessage.message_id
 
   if (messageCount < 0) {
-    messageCount = Math.abs(messageCount) + 1
+    messageCount = Math.abs(messageCount)
     startMessage -= messageCount - 1
   }
 
