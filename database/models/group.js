@@ -36,7 +36,7 @@ const groupSchema = Schema({
     },
     emojiSuffix: {
       type: String,
-      default: '💜'
+      default: 'random'
     }
   },
   stickerSet: {

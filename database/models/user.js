@@ -40,7 +40,7 @@ const userSchema = Schema({
     },
     emojiSuffix: {
       type: String,
-      default: '💜'
+      default: 'random'
     }
   },
   tempStickerSet: {
