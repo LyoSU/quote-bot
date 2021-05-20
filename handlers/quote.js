@@ -5,7 +5,11 @@ const {
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
+const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
+
+const emojiDb = new EmojiDbLib({ useDefaultDb: true })
+const emojiArray = Object.values(emojiDb.dbData)
 
 const quoteCountIO = io.meter({
   name: 'quote count',
@@ -64,7 +68,7 @@ const generateRandomColor = () => {
 module.exports = async (ctx) => {
   quoteCountIO.mark()
   await ctx.replyWithChatAction('upload_photo')
-  if (ctx.chat.type === 'private') await sleep(100)
+  if (ctx.chat.type === 'private') await sleep(500)
 
   const flag = {
     count: false,
@@ -132,7 +136,16 @@ module.exports = async (ctx) => {
 
   const quoteMessages = []
 
-  const startMessage = quoteMessage.message_id
+  let startMessage = quoteMessage.message_id
+
+  if (messageCount < 0) {
+    messageCount = Math.abs(messageCount)
+    startMessage -= (messageCount - 1)
+  }
+
+  let tryDeleted = 0
+  const maxTryDeleted = 50
+
   let lastMessage
   for (let index = 0; index < messageCount; index++) {
     try {
@@ -145,6 +158,10 @@ module.exports = async (ctx) => {
             const chatForward = process.env.GROUP_ID
             quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
           } else {
+            if (tryDeleted < maxTryDeleted) {
+              tryDeleted++
+              messageCount++
+            }
             quoteMessage = null
           }
         }
@@ -358,6 +375,9 @@ module.exports = async (ctx) => {
     }
   }
 
+  let emojis = ctx.group ? ctx.group.info.settings.emojiSuffix : ctx.session.userInfo.settings.emojiSuffix
+  if (emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
+
   if (generate.result.image) {
     // eslint-disable-next-line node/no-deprecated-api
     const image = new Buffer(generate.result.image, 'base64')
@@ -390,7 +410,7 @@ module.exports = async (ctx) => {
 
           const created = await telegram.createNewStickerSet(ctx.from.id, packName, packTitle, {
             png_sticker: { source: 'placeholder.png' },
-            emojis: '💜'
+            emojis
           }).catch(() => {
           })
 
@@ -408,7 +428,7 @@ module.exports = async (ctx) => {
 
         const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName, {
           png_sticker: { source: image },
-          emojis: '💜'
+          emojis
         }, true).catch((error) => {
           console.error(error)
           if (error.description === 'Bad Request: STICKERSET_INVALID') {

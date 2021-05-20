@@ -37,6 +37,10 @@ const userSchema = Schema({
     privacy: {
       type: Boolean,
       default: false
+    },
+    emojiSuffix: {
+      type: String,
+      default: '💜'
     }
   },
   tempStickerSet: {

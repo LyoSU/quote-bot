@@ -26,6 +26,7 @@ const {
   handleSave,
   handleDelete,
   handleRate,
+  handleEmoji,
   handleSettingsRate,
   handlePrivacy,
   handleLanguage,
@@ -198,6 +199,7 @@ bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
+bot.command('emoji', onlyAdmin, handleEmoji)
 bot.hears(/^\/(gab) (\d+)/, onlyAdmin, handleGabHidden)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
