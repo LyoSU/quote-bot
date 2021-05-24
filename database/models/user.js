@@ -22,6 +22,7 @@ const userSchema = Schema({
   username: {
     type: String
   },
+  status: String,
   settings: {
     locale: String,
     quote: {

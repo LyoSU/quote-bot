@@ -20,6 +20,8 @@ module.exports = async (ctx) => {
   user.username = ctx.from.username
   user.updatedAt = new Date()
 
+  if (ctx.chat.type === 'private') user.status = 'member'
+
   ctx.session.userInfo = user
 
   if (ctx.session.userInfo.settings.locale) {

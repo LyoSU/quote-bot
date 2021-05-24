@@ -17,5 +17,6 @@ module.exports = {
   handleLanguage: require('./language'),
   handleFstik: require('./fstik'),
   handleDonate: require('./donate'),
-  handlePing: require('./ping')
+  handlePing: require('./ping'),
+  handleChatMember: require('./chat-member')
 }

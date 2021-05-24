@@ -32,7 +32,8 @@ const {
   handleLanguage,
   handleFstik,
   handleDonate,
-  handlePing
+  handlePing,
+  handleChatMember
 } = require('./handlers')
 const {
   getUser,
@@ -90,6 +91,13 @@ bot.use((ctx, next) => {
 
   return next()
 })
+
+bot.use((ctx, next) => {
+  ctx.db = db
+  return next()
+})
+
+bot.use(handleChatMember)
 
 bot.use(Composer.groupChat(Composer.command(rateLimit({
   window: 1000 * 5,
@@ -151,11 +159,6 @@ const updateGroupAndUser = async (ctx, next) => {
     }
   })
 }
-
-bot.use((ctx, next) => {
-  ctx.db = db
-  return next()
-})
 
 bot.use(async (ctx, next) => {
   if (ctx.callbackQuery) {
