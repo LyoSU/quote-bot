@@ -70,7 +70,7 @@ const generateRandomColor = () => {
 module.exports = async (ctx) => {
   quoteCountIO.mark()
   await ctx.replyWithChatAction('upload_photo')
-  if (ctx.chat.type === 'private') await sleep(500)
+  if (ctx.chat.type === 'private') await sleep(700)
 
   const flag = {
     count: false,

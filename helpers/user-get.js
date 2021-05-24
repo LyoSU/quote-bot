@@ -21,10 +21,13 @@ module.exports = async (ctx) => {
   user.updatedAt = new Date()
 
   ctx.session.userInfo = user
+
   if (ctx.session.userInfo.settings.locale) {
     ctx.i18n.locale(ctx.session.userInfo.settings.locale)
-  } else {
+  } else if (ctx.i18n.languageCode !== '-' && ctx.chat.type === 'private') {
     ctx.session.userInfo.settings.locale = ctx.i18n.languageCode
+  } else if (ctx.i18n.languageCode === '-' && ctx.chat.type !== 'private') {
+    ctx.i18n.locale('en')
   }
 
   return true

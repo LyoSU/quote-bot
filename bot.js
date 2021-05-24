@@ -115,7 +115,7 @@ bot.on(['channel_post', 'edited_channel_post'], () => {})
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
-  defaultLanguage: 'ru',
+  defaultLanguage: '-',
   defaultLanguageOnMissing: true
 })
 
@@ -176,6 +176,11 @@ bot.use(Composer.privateChat(async (ctx, next) => {
   })
 }))
 
+bot.on('message', Composer.privateChat((ctx, next) => {
+  if (ctx.i18n.languageCode === '-') return handleLanguage(ctx, next)
+  return next()
+}))
+
 bot.command('donate', handleDonate)
 bot.command('ping', handlePing)
 bot.action(/(donate):(.*)/, handleDonate)
@@ -218,7 +223,10 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', Composer.privateChat(handleQuote))
+bot.on('message', rateLimit({
+  window: 700,
+  limit: 1
+}), Composer.privateChat(handleQuote))
 
 bot.on('message', rateLimit({
   window: 1000 * 5,
