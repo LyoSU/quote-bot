@@ -32,7 +32,7 @@ const userSchema = Schema({
     },
     hidden: {
       type: Boolean,
-      default: false
+      default: true
     },
     privacy: {
       type: Boolean,
