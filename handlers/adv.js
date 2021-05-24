@@ -95,7 +95,7 @@ advSetLocale.enter(async (ctx) => {
   const button = []
 
   Object.keys(localContByCode).forEach((key) => {
-    if (key && localContByCode[key] >= 1) button.push(Markup.callbackButton(i18n.t(key, 'language_name') + ' — ' + localContByCode[key], `adv:locale:${key}`))
+    if (i18n.repository[key] && localContByCode[key] >= 1) button.push(Markup.callbackButton(i18n.t(key, 'language_name') + ' — ' + localContByCode[key], `adv:locale:${key}`))
   })
 
   await ctx.replyWithHTML('Set locale', {

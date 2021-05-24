@@ -25,7 +25,7 @@ module.exports = async (ctx) => {
   if (ctx.session.userInfo.settings.locale) {
     ctx.i18n.locale(ctx.session.userInfo.settings.locale)
   } else if (ctx.i18n.languageCode !== '-' && ctx.chat.type === 'private') {
-    ctx.session.userInfo.settings.locale = ctx.i18n.languageCode
+    ctx.session.userInfo.settings.locale = ctx.i18n.shortLanguageCode
   } else if (ctx.i18n.languageCode === '-' && ctx.chat.type !== 'private') {
     ctx.i18n.locale('en')
   }
