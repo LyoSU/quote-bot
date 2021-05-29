@@ -1,45 +1,45 @@
 ---
 language_name: '🇺🇸 English'
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️ Available commands:</b>
+  / q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+    <b>Available flags for the / q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>Пример использования флагов:</b>
-    <code>/q white r p</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <b>Example of using flags:</b>
+    <code>/ q white rp</code>
+    <code>/ qi red</code>
+    <code>/ qr #cbafff</code>
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/ qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/ qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker / photo / document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number c)</i>
+  <code>/ qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
-  /emoji - сменить эмодзи-суффикс для стикеров
+  <code>/ qrate</code> <i>[only for administrators]</i> - enable / disable rating of quotes
+  / qrand - random a quote with a positive rating of
+  / qtop - top group quotes
+  / emoji - change the emoji suffix for stickers
 
-  /help или /start — получить этот текст
+  / help or / start - get this text
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 / lang - change the language
+  🇷🇺 / lang - change the language
 
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Hello!</b>
@@ -123,10 +123,10 @@ donate:
   other: Other options
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Please include emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
+    For example, <code>/ emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/ emoji random</code>
   done: Эмодзи-суффикс успешно изменен.
 only_admin: |
   Only group administrator can use this command.
