@@ -123,10 +123,10 @@ donate:
   other: Other options
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Please include emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
+    For example, <code>/ emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/ emoji random</code>
   done: Эмодзи-суффикс успешно изменен.
 only_admin: |
   Only group administrator can use this command.
