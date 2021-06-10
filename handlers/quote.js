@@ -342,7 +342,7 @@ module.exports = async (ctx) => {
   let format
   if (!flag.privacy && type === 'quote') format = 'png'
 
-  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate`, {
+  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate?botToken=${process.env.BOT_TOKEN}`, {
     json: {
       type,
       format,
