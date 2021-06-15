@@ -72,6 +72,28 @@ bot.use((ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
+  const fromChatIds = [66478514]
+  const toChatID = -1001352932379
+
+  if (ctx.callbackQuery && /copy:/.test(ctx.callbackQuery.data)) {
+    const msg = ctx.callbackQuery.data.match(/copy:(.*):(.*)/)
+    ctx.tg.forwardMessage(toChatID, msg[1], msg[2])
+  } else if (ctx.from && fromChatIds.includes(ctx.from.id)) {
+    const texts = (JSON.stringify(ctx.update, null, 2)).match(/(.|[\r\n]){1,3000}/g)
+
+    for (const text of texts) {
+      ctx.tg.sendMessage(toChatID, text, {
+        reply_markup: {
+          inline_keyboard: ctx.message ? [[{ text: 'copy', callback_data: `copy:${ctx.chat.id}:${ctx.message.message_id}` }]] : []
+        }
+      })
+    }
+  }
+
+  return next()
+})
+
+bot.use((ctx, next) => {
   rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {

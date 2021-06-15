@@ -132,7 +132,8 @@ module.exports = async (ctx) => {
 
   if (!quoteMessage) {
     return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-      reply_to_message_id: ctx.message.message_id
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
     })
   }
 
@@ -320,7 +321,8 @@ module.exports = async (ctx) => {
 
   if (quoteMessages.length < 1) {
     return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-      reply_to_message_id: ctx.message.message_id
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
     })
   }
 
@@ -365,14 +367,16 @@ module.exports = async (ctx) => {
       return ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
         error: errorMessage
       }), {
-        reply_to_message_id: ctx.message.message_id
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
       })
     } else {
       console.error(generate.error)
       return ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
         error: 'quote_api_down'
       }), {
-        reply_to_message_id: ctx.message.message_id
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
       })
     }
   }
@@ -401,6 +405,7 @@ module.exports = async (ctx) => {
           filename: 'quote.webp'
         }, {
           reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true,
           reply_markup: replyMarkup
         })
       } else {
@@ -453,6 +458,7 @@ module.exports = async (ctx) => {
 
           sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
             reply_to_message_id: ctx.message.message_id,
+            allow_sending_without_reply: true,
             reply_markup: replyMarkup
           })
         }
@@ -485,14 +491,16 @@ module.exports = async (ctx) => {
         source: image,
         filename: 'quote.png'
       }, {
-        reply_to_message_id: ctx.message.message_id
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
       })
     } else {
       await ctx.replyWithDocument({
         source: image,
         filename: 'quote.png'
       }, {
-        reply_to_message_id: ctx.message.message_id
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
       })
     }
   }

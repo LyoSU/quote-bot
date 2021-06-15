@@ -40,14 +40,16 @@ module.exports = async (ctx) => {
         ],
         advKeyboard ? [advKeyboard] : []
       ]),
-      reply_to_message_id: ctx.message.message_id
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
     })
 
     adv.stats.impressions += 1
     adv.save()
   } else {
     await ctx.replyWithHTML(ctx.i18n.t('random.empty'), {
-      reply_to_message_id: ctx.message.message_id
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
     })
   }
 }
