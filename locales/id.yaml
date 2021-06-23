@@ -1,36 +1,36 @@
 ---
 language_name: '🇮🇩 Indonesia'
 help: |2
-    <b>Halo!</b>
-    Saya akan membantu Anda membuat kutipan dari sebuah pesan.
-    Untuk itu cukup balas pesan dengan /q
+  <b>Halo!</b>
+  Saya akan membantu Anda membuat kutipan dari sebuah pesan.
+  Untuk itu cukup balas pesan dengan /q
 
-      <b>⚙️ Perintah yang tersedia:</b>
+    <b>⚙️ Perintah yang tersedia:</b>
 
-    <code>/help</code> — dapatkan teks ini
-    <code>/q #1b1429</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari pesan dengan warna<b>#1b1429</b>
-    <code>/q 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari <b>balasan dan turun dari itu menjadi 3 pesan</b>
-    <code>/q r</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan balasan
-    <code>/q white r 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan 3 pesan berwarna <b>white</b> dengan balasan
+  <code>/help</code> — dapatkan teks ini
+  <code>/q #1b1429</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari pesan dengan warna<b>#1b1429</b>
+  <code>/q 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari <b>balasan dan turun dari itu menjadi 3 pesan</b>
+  <code>/q r</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan balasan
+  <code>/q white r 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan 3 pesan berwarna <b>white</b> dengan balasan
 
-    <code>/qcolor green</code> — membuat warna <b>hijau</b> bawaan
+  <code>/qcolor green</code> — membuat warna <b>hijau</b> bawaan
 
-    <code>/qs 💜</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — menyimpan stiker/foto/dokumen dengan foto ke dalam paket stiker grup dengan 💜 emoji
-    <code>/qd</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — hapus stiker dari paket stiker grup
+  <code>/qs 💜</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — menyimpan stiker/foto/dokumen dengan foto ke dalam paket stiker grup dengan 💜 emoji
+  <code>/qd</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — hapus stiker dari paket stiker grup
 
-      <b>❕ Informasi tambahan:</b>
+    <b>❕ Informasi tambahan:</b>
 
-    ➖ Urutan argumen tidak penting
-    ➖ Warna kutipan harus berupa kode HEX, misalnya <b>#ffffff</b>, atau anda dapat menentukannya dengan nama: <b>white</b>.
-    ➖ Untuk warna acak, anda bisa menulis <b>acak</b> sebagai warna
-    ➖ Emoji apa pun untuk menyimpan stiker dapat digunakan.
-    ➖ Spesifikasi emoji tidak diperlukan.
-    ➖ Perintah awal <code>/qs</code> harus dijalankan oleh pembuat obrolan, sebelum itu menulis ke pesan langsung bot.
-    ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
-    ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
+  ➖ Urutan argumen tidak penting
+  ➖ Warna kutipan harus berupa kode HEX, misalnya <b>#ffffff</b>, atau anda dapat menentukannya dengan nama: <b>white</b>.
+  ➖ Untuk warna acak, anda bisa menulis <b>acak</b> sebagai warna
+  ➖ Emoji apa pun untuk menyimpan stiker dapat digunakan.
+  ➖ Spesifikasi emoji tidak diperlukan.
+  ➖ Perintah awal <code>/qs</code> harus dijalankan oleh pembuat obrolan, sebelum itu menulis ke pesan langsung bot.
+  ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
+  ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
 
-    <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
-    <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
   Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan

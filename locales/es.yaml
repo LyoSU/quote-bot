@@ -1,36 +1,36 @@
 ---
 language_name: '🇪🇸 Español'
 help: |2
-    <b>¡Hola!</b>
-    Te ayudaré a crear una imagen a partir de un mensaje.
-    Para eso solo responde al mensaje con /q
+  <b>¡Hola!</b>
+  Te ayudaré a crear una imagen a partir de un mensaje.
+  Para eso solo responde al mensaje con /q
 
-      <b>⚙️ Comandos disponibles:</b>
+    <b>⚙️ Comandos disponibles:</b>
 
-    <code>/help</code> — genera este texto.
-    <code>/q #1b1429</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con el color <b>#1b1429</b>.
-    <code>/q 3</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con <b>el mensaje objetivo y los 2 siguientes</b>.
-    <code>/q r</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con respuesta.
-    <code>/q white r 3</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con un fondo <b>blanco</b> con respuesta.
+  <code>/help</code> — genera este texto.
+  <code>/q #1b1429</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con el color <b>#1b1429</b>.
+  <code>/q 3</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con <b>el mensaje objetivo y los 2 siguientes</b>.
+  <code>/q r</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con respuesta.
+  <code>/q white r 3</code> <i>[respondiendo a un mensaje]</i> — genera una imagen con un fondo <b>blanco</b> con respuesta.
 
-    <code>/qcolor green</code> — hace el fondo <b>verde</b> por defecto.
+  <code>/qcolor green</code> — hace el fondo <b>verde</b> por defecto.
 
-    <code>/qs 💜</code> <i>[respondiendo a un mensaje] [solo para administradores]</i> — guarda un sticker/foto/documento con una foto en un pack de grupo con el emoji 💜
-    <code>/qd</code> <i>[respondiendo a un mensaje] [solo para administradores]</i> — borra el sticker del pack de grupo.
+  <code>/qs 💜</code> <i>[respondiendo a un mensaje] [solo para administradores]</i> — guarda un sticker/foto/documento con una foto en un pack de grupo con el emoji 💜
+  <code>/qd</code> <i>[respondiendo a un mensaje] [solo para administradores]</i> — borra el sticker del pack de grupo.
 
-      <b>❕ Información adicional:</b>
+    <b>❕ Información adicional:</b>
 
-    ➖ El orden de los argumentos no importa.
-    ➖ El color del fondo debe estar escrito en HEX, por ejemplo <b>#ffffff</b>, o puedes especificar por nombre: <b>white</b>.
-    ➖ Para obtener un color aleatorio, escribe <b>random</b> como color.
-    ➖ Puedes usar cualquier emoji para guardar en el pack.
-    ➖ Especificar un emoji no es necesario.
-    ➖ El comando <code>/qs</code> debe ser ejecutado la primera vez por el creador del grupo
-    ➖ El bot funciona tanto em grupos como en su chat privado.
-    ➖ Para añadir al bot a tu grupo, presiona el botón de abajo.
+  ➖ El orden de los argumentos no importa.
+  ➖ El color del fondo debe estar escrito en HEX, por ejemplo <b>#ffffff</b>, o puedes especificar por nombre: <b>white</b>.
+  ➖ Para obtener un color aleatorio, escribe <b>random</b> como color.
+  ➖ Puedes usar cualquier emoji para guardar en el pack.
+  ➖ Especificar un emoji no es necesario.
+  ➖ El comando <code>/qs</code> debe ser ejecutado la primera vez por el creador del grupo
+  ➖ El bot funciona tanto em grupos como en su chat privado.
+  ➖ Para añadir al bot a tu grupo, presiona el botón de abajo.
 
-    <b>👨🏻‍💻 Blog del creador</b> @LyBlog
-    <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Blog del creador</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>¡Hola!</b>
   Crearé imágenes con el comando / q en respuesta a mensajes

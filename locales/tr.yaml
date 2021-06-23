@@ -1,39 +1,39 @@
 ---
 language_name: '🇹🇷 Türkçe'
 help: |2
-    <b>Merhaba!</b>
-    Bir mesajı alıntı oluşturup size gönderirim.
-    Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
+  <b>Merhaba!</b>
+  Bir mesajı alıntı oluşturup size gönderirim.
+  Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
 
-      <b>⚙️ Kullanılabilir Komutlar:</b>
+    <b>⚙️ Kullanılabilir Komutlar:</b>
 
-    <code>/help</code> — Bu mesajı gösterir
+  <code>/help</code> — Bu mesajı gösterir
 
-    <code>/q #1b1429</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#1b1429</b>
-    <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
-    <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
-    <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
+  <code>/q #1b1429</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#1b1429</b>
+  <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
+  <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
+  <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
 
-    <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
+  <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
 
-    <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
-    <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
+  <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
+  <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
 
-      <b>❕ Ekstra Bilgiler:</b>
+    <b>❕ Ekstra Bilgiler:</b>
 
-    ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
-    ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
-    ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
-    ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
-    ➖ Emoji belirtilmesi zorunlu değildir.
-    ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
-    ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
-    ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
-    ➖ Argümanların sırası önemli değildir.
+  ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
+  ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
+  ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
+  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
+  ➖ Emoji belirtilmesi zorunlu değildir.
+  ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
+  ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
+  ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
+  ➖ Argümanların sırası önemli değildir.
 
-    <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
-    <b>GitHub:</b> github.com/LyoSU/quote-bot
-    <b>Çeviri:</b> @Holytotem, @By_Azade
+  <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>Çeviri:</b> @Holytotem, @By_Azade
 help_group: |
   <b>Merhaba!</b>
   /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
