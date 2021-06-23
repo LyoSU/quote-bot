@@ -1,6 +1,6 @@
 ---
 language_name: '🇺🇸 English'
-help: |2
+help: |
   <b>Hello!</b>
   I will help create a quote from a post.
   bot can work both in private messages and in groups
@@ -24,10 +24,10 @@ help: |2
 
   <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number c)</i>
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
   <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[only for administrators]</i> - enable / disable rating of quotes
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
   /qrand - random a quote with a positive rating of
   /qtop - top group quotes
   /emoji - change the emoji suffix for stickers
