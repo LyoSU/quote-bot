@@ -22,9 +22,9 @@ help: |2
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/ qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker / photo / document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number c)</i>
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number c)</i>
   <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
   <code>/qrate</code> <i>[only for administrators]</i> - enable / disable rating of quotes
@@ -35,7 +35,7 @@ help: |2
   /help or /start - get this text
 
   🇺🇸 /lang - change the language
-  🇷🇺 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
   <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
@@ -43,9 +43,9 @@ help: |2
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Hello!</b>
-  I will create quotes in the group using the / q command in response to message
+  I will create quotes in the group using the /q command in response to message
 
-  You can learn more about the command <a href="t.me/${username}?start=help">/ help</a> in private messages with me
+  You can learn more about the command <a href="t.me/${username}?start=help">/help</a> in private messages with me
 btn:
   add_group: Add to Group
   help: Help
@@ -125,9 +125,9 @@ emoji:
   info: |
     Please include emoji.
 
-    For example, <code>/ emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/ emoji random</code>
-  done: Emoji suffix successfully changed.
+    For example, <code>/emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/emoji random</code>
+  done: Emoji successfully changed.
 only_admin: |
   Only group administrator can use this command.
 only_group: |
