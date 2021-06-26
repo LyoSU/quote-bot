@@ -222,10 +222,10 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', rateLimit({
+bot.on('message', Composer.privateChat(rateLimit({
   window: 700,
   limit: 1
-}), Composer.privateChat(handleQuote))
+}), handleQuote))
 
 bot.on('message', rateLimit({
   window: 1000 * 5,
