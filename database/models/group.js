@@ -10,6 +10,7 @@ const groupSchema = Schema({
   title: String,
   username: String,
   invite_link: String,
+  memberCount: Number,
   settings: {
     locale: String,
     quote: {

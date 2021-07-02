@@ -148,10 +148,12 @@ bot.use(Composer.groupChat(session({
 const updateGroupAndUser = async (ctx, next) => {
   await getUser(ctx)
   await getGroup(ctx)
-  return next(ctx).then(() => {
+  return next(ctx).then(async () => {
     if (ctx.state.emptyRequest === false) {
       ctx.session.userInfo.save().catch(() => {})
-      ctx.group.info.save().catch(() => {})
+      const memberCount = await ctx.telegram.getChatMembersCount(ctx.chat.id)
+      if (memberCount) ctx.group.info.memberCount = memberCount
+      await ctx.group.info.save().catch(() => {})
     }
   })
 }
