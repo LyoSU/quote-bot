@@ -1,5 +1,6 @@
 module.exports = async (ctx) => {
   let user
+  let newUser = false
 
   if (!ctx.session.userInfo) {
     user = await ctx.db.User.findOne({ telegram_id: ctx.from.id })
@@ -10,6 +11,7 @@ module.exports = async (ctx) => {
   const now = Math.floor(new Date().getTime() / 1000)
 
   if (!user) {
+    newUser = true
     user = new ctx.db.User()
     user.telegram_id = ctx.from.id
     user.first_act = now
@@ -21,6 +23,8 @@ module.exports = async (ctx) => {
   user.updatedAt = new Date()
 
   if (ctx.chat.type === 'private') user.status = 'member'
+
+  if (newUser) await user.save()
 
   ctx.session.userInfo = user
 
