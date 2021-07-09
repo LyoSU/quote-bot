@@ -52,6 +52,7 @@ const userSchema = Schema({
     }
   },
   adv: {
+    moderator: Boolean,
     credit: {
       type: Number,
       default: 0

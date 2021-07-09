@@ -17,9 +17,19 @@ module.exports = async (ctx) => {
     // group.invite_link = await ctx.telegram.exportChatInviteLink(ctx.chat.id).catch(() => {})
   }
 
+  if (ctx.i18n.languageCode === '-') {
+    let lang = 'en'
+    if (ctx.from.language_code) lang = ctx.from.language_code
+    ctx.i18n.locale(lang)
+  }
+
   group.updatedAt = new Date()
   ctx.group.info = group
   if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
+  else {
+    ctx.group.info.settings.locale = ctx.i18n.shortLanguageCode
+    await group.save()
+  }
 
   return true
 }

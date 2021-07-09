@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 const Telegraf = require('telegraf')
 const Composer = require('telegraf/composer')
@@ -16,6 +17,7 @@ const {
 const {
   handleHelp,
   handleAdv,
+  handleModerateAdv,
   handleQuote,
   handleGetQuote,
   handleTopQuote,
@@ -72,6 +74,12 @@ bot.use((ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
+  const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+  ctx.config = config
+  return next()
+})
+
+bot.use((ctx, next) => {
   rpsIO.mark()
   ctx.telegram.oCallApi = ctx.telegram.callApi
   ctx.telegram.callApi = (method, data = {}) => {
@@ -119,8 +127,7 @@ bot.on(['channel_post', 'edited_channel_post'], () => {})
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
-  defaultLanguage: '-',
-  defaultLanguageOnMissing: true
+  defaultLanguage: '-'
 })
 
 bot.use(i18n.middleware())
@@ -218,6 +225,7 @@ bot.on('new_chat_members', (ctx, next) => {
 bot.start(handleHelp)
 bot.command('help', handleHelp)
 bot.use(handleAdv)
+bot.use(handleModerateAdv)
 
 bot.command('privacy', onlyAdmin, handlePrivacy)
 
