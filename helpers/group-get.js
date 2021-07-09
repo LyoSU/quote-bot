@@ -26,8 +26,8 @@ module.exports = async (ctx) => {
   group.updatedAt = new Date()
   ctx.group.info = group
   if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
-  else {
-    ctx.group.info.settings.locale = ctx.i18n.shortLanguageCode
+  else if (ctx.i18n.languageCode) {
+    ctx.group.info.settings.locale = ctx.i18n.shortLanguageCode ? ctx.i18n.shortLanguageCode : ctx.i18n.languageCode
     await group.save()
   }
 
