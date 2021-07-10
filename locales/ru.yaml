@@ -130,49 +130,57 @@ emoji:
   done: Эмодзи успешно изменен.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Вы можете купить рекламу у нас для большого числа активных пользователей и групп</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Наш бот состоит из более чем 30`000 активных групп, и каждый месяц более 70`000 пользователей используют бота.
+    Среди них пользователи из различных стран. Вы можете выбрать язык пользователей, для которых будет отображаться объявление
+    • Реклама отображается под котировкой в виде кнопки или текстового сообщения, в зависимости от пользовательского чата
+    • Вы сами укажете цену рекламы; в первую очередь, отображается объявление, для которого была назначена наибольшая сумма,
+    • Текст и содержание объявления должны соответствовать нашим правилам (/adv_rules) и перед публикацией вы должны пройти модерацию. Это может быть сделано перед внесением депозита
 
-    Balance: ${balance} RUB
+    баланса: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>В рекламе <u>запрещено</u></b>
+    • Использование нецензурной лексики или оскорблений
+    • Использование более 1 смайлика в тексте
+    • Информация, вводящая в заблуждение
+    • Информация, запрещенная законодательством Украины
+    • Контент для взрослых
+    • Азартные игры
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Мы также имеем право отклонить рекламу, если она нам просто не нравится без причины.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Создать объявление
+    list_btn: Список реклам
+    pay_btn: Пополнить баланс
   create:
     enter_text: |
-      Enter your ad text:
+      Введите текст рекламы:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Не более 70 символов и должен соответствовать нашим правилам (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Введите ссылку на рекламируемый ресурс:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Ссылка должна быть заполнена, если вы рекламируете что-нибудь в Telegram, ссылка должна начинаться с t.me.
+      Ресурс должен соответствовать нашим правилам (/adv_rules), если после прохождения модерации сайт будет заменен, ваш счет будет заблокирован, и деньги не будут возвращены.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Выберите язык для пользователей, которым будет показана реклама
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Номер — это число пользователей, которые потенциально будут видеть ваше объявление на этом языке.
+      Засчитываются только пользователи, которые используют бота. Но объявление можно увидеть также другими пользователями, которые находятся в группе, где была сделана цитата. таким образом эта цифра может быть выше
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Язык не соответствует стране
+      Вы можете выбрать только один язык, если вам нужно несколько языков, пожалуйста, создайте рекламу снова на другом языке.</i>
+    enter_price: |
+      Укажите цену за 1000 показов вашей рекламы в USD:
+
+      <u>Средняя цена активной рекламы:</u> ${averagePrice} USD
+
+      <i>Минимальная цена равна 0. США
+      Реклама показывается случайным образом, но при наибольшей вероятности показа реклама имеет более высокую цену на показы.
+      </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      Объявление было отправлено на модерацию. Пожалуйста, будьте терпеливы и подождите. Если модерация прошла успешно или не удалась, вы получите уведомление.
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
