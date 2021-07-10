@@ -1,133 +1,133 @@
 ---
 language_name: '🇫🇷 Français'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  bot can work both in private messages and in groups
+  <b>Привет!</b>
+  Я помогу создать цитату из сообщения.
+  Бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Available commands:</b>
-  /q <i>[in response to the message]</i> - make a quote from the message
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
-      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
-      <code>random</code>: random quote color
-      <code>reply</code> or <code>r</code>: make a quote with saving answers
-      <code>p</code> or <code>png</code> - make a PNG quote
-      <code>i</code> or <code>img</code> - make a quote as a picture
-      <code>rate</code> - add a rating to a quote
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
+      <code>random</code>: случайный цвет цитаты
+      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> — сделать PNG цитату
+      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
+      <code>rate</code> — добавить оценку к цитате
 
-    <b>Example of using flags:</b>
-    <code>/q white rp</code>
+    <b>Пример использования флагов:</b>
+    <code>/q white r p</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
 
-  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
-  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
+  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
 
-  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
-  /emoji - change the emoji suffix for stickers
+  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
+  /qrand — случайная цитата с положительным рейтингом
+  /qtop — топ цитат группы
+  /emoji - сменить эмодзи-суффикс для стикеров
 
-  /help or /start - get this text
+  /help или /start — получить этот текст
 
-  🇺🇸 /lang - change the language
-  🇷🇺 /lang - изменить язык
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Hello!</b>
-  I will create quotes in the group using the /q command in response to message
+  <b>Привет!</b>
+  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
 
-  You can learn more about the command <a href="t.me/${username}?start=help">/help</a> in private messages with me
+  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
-  add_group: Add to Group
-  help: Help
+  add_group: Добавить в группу
+  help: Справка
 quote:
   api_error: |
-    <b>😓 Failed to generate quote</b>
+    <b>😓 Не удалось сгенерировать цитату</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    Команду необходимо писать в ответ на сообщение.
   set_backgroun_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
+    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
     error:
-      animated: I can't add an animated sticker.
-      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
-      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
+      animated: Я не могу добавить анимированный стикер.
+      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
+      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
   delete:
-    suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
+    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
     error:
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Save the sticker
+      save_sticker: Сохранить стикер
   empty_forward: |
-    Command must be sent a reply to a sticker, photo or file with a picture.
+    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
   fstik: |
-    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
+    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
 rate:
   vote:
     rated: |
-      You ${rateName} this.
+      Вы ${rateName} это.
     back: |
-      You got your vote back.
+      Вы вернули свой голос.
   settings:
     enable: |
-      Quotes rating is on.
+      Оценка для цитат включена.
     disable: |
-      Rating for quotes is off.
+      Оценка для цитат выключена.
 random:
   empty: |
-    There are no quotes with a positive rating in the group.
+    В группе нет цитат с положительным рейтингом.
   gab: |
-    The chance of random quotes is set to ${gab}
+    Шанс случайных цитат установлен на ${gab}
 hidden:
   settings:
     enable: |
-      Sender search is enabled.
+      Поиск отправителя включен.
     disable: |
-      Sender search is disabled.
+      Поиск отправителя отключен.
 privacy:
   settings:
     enable: |
-      Privacy mode is enabled.
+      Режим приватности включен.
     disable: |
-      Privacy mode is disabled.
+      Режим приватности отключен.
 top:
   info: |
-    <b>Top group quotes:</b>
-  pack: Sticker pack with top quotes
+    <b>Топ цитат группы:</b>
+  pack: Стикерпак с топом цитат
 donate:
-  info: I would be grateful for the bot support :)
+  info: Буду благодарен за поддержку бота :)
   info_group: |
-    I would be grateful for the bot support :)
+    Буду благодарен за поддержку бота :)
 
-    You can support me at donate.lyo.su
-    And if you want to donate via Telegram, send the same command in the PM.
-  title: Donate ${botUsername}
-  description: Support bot development
+    Поддержать меня можно по ссылке donate.lyo.su
+    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
+  title: Донат ${botUsername}
+  description: Поддержка разработки бота
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>Спасибо за поддержку бота 💜</b>
+  pay: '💜 Оплатить Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: Другие способы
 emoji:
   info: |
-    Please include emoji.
+    Пожалуйста, укажите эмодзи.
 
-    For example, <code>/emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/emoji random</code>
-  done: Emoji successfully changed.
+    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
+    Для случайного эмодзи <code>/emoji random</code>
+  done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
@@ -138,7 +138,7 @@ adv:
     • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
     • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
 
-    Balance: ${balance} USD
+    Balance: ${balance} RUB
   rules: |
     <b>In advertisements it is <u>not</u> allowed:</b>
     • Using obscenities or insults
@@ -171,14 +171,6 @@ adv:
 
       <i>The language does not correspond to the country.
       You can choose only one language, if you need several, please create an advertisement again for another language.</i>
-    enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
-
-      <u>Average price of active ads:</u> ${averagePrice} USD
-
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
-      </i>
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
   moderate:
@@ -197,6 +189,6 @@ adv:
     accept_btn: Accept
     deny_btn: Deny
 only_admin: |
-  Only group administrator can use this command.
+  Команду может использовать только администратор группы.
 only_group: |
-  This command can be used only in groups.
+  Команду можно использовать только в группах.
