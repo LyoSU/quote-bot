@@ -1,6 +1,6 @@
 ---
 language_name: '🇮🇩 Indonesia'
-help: |2
+help: |
   <b>Halo!</b>
       Saya akan membantu Anda membuat kutipan dari sebuah pesan.
       Untuk itu cukup balas pesan dengan /q
@@ -120,49 +120,57 @@ emoji:
   done: Emoji berhasil diubah.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>Anda dapat membeli iklan dari kami untuk sejumlah besar pengguna dan grup aktif</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Bot kami ada di lebih dari 30.000 grup aktif dan lebih dari 70.000 pengguna menggunakan bot setiap bulan.
+    Diantaranya adalah pengguna dari berbagai negara. Anda dapat memilih bahasa pengguna yang akan menampilkan iklan
+    • Iklan ditampilkan di bawah kutipan dalam bentuk tombol atau pesan teks, tergantung pada obrolan pengguna
+    • Anda menentukan sendiri harga iklan; pertama-tama, iklan dengan jumlah tertinggi akan ditampilkan
+    • Teks dan konten iklan harus mematuhi aturan kami (/adv_rules) dan sebelum diposting, Anda harus melewati moderasi. Ini dapat dilakukan sebelum melakukan deposit
 
-    Balance: ${balance} RUB
+    Saldo: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Dalam iklan, <u>tidak diperbolehkan</u></b>
+    • Menggunakan kata-kata kotor atau hinaan
+    • Menggunakan lebih dari 1 emoji per teks
+    • Informasi yang menyesatkan
+    • Informasi yang dilarang oleh hukum Ukraina
+    • Konten dewasa
+    • Perjudian
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Kami juga berhak menolak iklan jika kita tidak menyukainya tanpa alasan.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Buat iklan
+    list_btn: Daftar iklan
+    pay_btn: Isi ulang saldo
   create:
     enter_text: |
-      Enter your ad text:
+      Masukkan teks iklan Anda:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Tidak lebih dari 70 karakter dan harus mematuhi aturan kami (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Masukkan tautan ke sumber yang diiklankan:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Tautan harus lengkap, jika Anda mengiklankan sesuatu di Telegram, tautannya harus dimulai dengan t.me.
+      Sumber daya harus mematuhi aturan kami (/adv_rules), jika setelah melewati moderasi situs diganti, akun Anda akan diblokir, dan uang tidak akan dikembalikan.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Pilih bahasa pengguna yang akan menampilkan iklan
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Angka adalah jumlah pengguna yang berpotensi melihat iklan Anda dalam bahasa tersebut.
+      Hanya pengguna yang benar-benar menggunakan bot yang dihitung. Namun iklan tersebut juga dapat dilihat oleh pengguna lain yang berada di grup tempat kutipan tersebut dibuat, sehingga angka ini bisa jauh lebih tinggi
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Bahasa tidak sesuai dengan negara.
+      Anda hanya dapat memilih satu bahasa, jika Anda membutuhkan beberapa, silakan buat iklan lagi untuk bahasa lain.</i>
+    enter_price: |
+      Tentukan harga per 1000 tayangan iklan Anda dalam USD:
+
+      <u>Harga rata-rata iklan aktif:</u> ${averagePrice} USD
+
+      <i>Harga minimum adalah 0,15 USD.
+      Iklan ditampilkan secara acak, tetapi peluang tertinggi untuk ditampilkan adalah iklan yang memiliki harga tayangan lebih tinggi.
+      </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      Iklan telah dikirim untuk moderasi. Harap bersabar dan menunggu. Jika moderasi berhasil atau tidak berhasil, Anda akan menerima pemberitahuan.
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
