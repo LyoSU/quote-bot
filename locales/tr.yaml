@@ -1,6 +1,6 @@
 ---
 language_name: '🇹🇷 Türkçe'
-help: |2
+help: |
   <b>Merhaba!</b>
   Bir mesajı alıntı oluşturup size gönderirim.
   Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
@@ -121,49 +121,57 @@ emoji:
   done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Çok sayıda aktif kullanıcı ve grup için bizden reklam satın alabilirsiniz</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Botumuz 30'000'den fazla aktif grupta ve her ay 70'000'den fazla kullanıcı botu kullanıyor.
+    Bunların arasında çeşitli ülkelerden kullanıcılar var. Reklamın gösterilmesi gereken kullanıcıların dilini seçebilirsiniz
+    • Reklam, kullanıcının sohbetine bağlı olarak bir buton veya metin mesajı şeklinde teklifin altında gösterilir
+    • Bir reklamın fiyatını kendiniz belirlersiniz; öncelikle en yüksek tutarın tahsis edildiği ilan görüntülenecektir
+    • İlanın metni ve içeriği kurallarımıza (/adv_rules) uygun olmalı ve yayınlanmadan önce moderasyondan geçmelisiniz. Bu, para yatırmadan önce yapılabilir
 
-    Balance: ${balance} RUB
+    Bakiye: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Reklamlarda <u>değil</u> izin verilmez:</b>
+    • Müstehcenlik veya hakaret kullanımı
+    • Metin başına 1'den fazla emoji kullanılması
+    • Yanıltıcı bilgi
+    • Ukrayna yasaları tarafından yasaklanmış bilgiler
+    • Yetişkinlere uygun içerik
+    • Kumar
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Biz de sebepsiz yere beğenmediğimiz bir reklamı reddetme hakkına sahibiz.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Reklam oluşturun
+    list_btn: Reklam listesi
+    pay_btn: Bakiyeyi tamamla
   create:
     enter_text: |
-      Enter your ad text:
+      Reklam metninizi girin:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>70 karakterden fazla olmamalı ve kurallarımıza uygun olmalıdır (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Reklamı yapılan kaynağa bir bağlantı girin:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Bağlantı tam olmalıdır, Telegram'da bir şeyin reklamını yapıyorsanız bağlantı t.me ile başlamalıdır.
+      Kaynak kurallarımıza (/adv_rules) uygun olmalıdır, moderasyonu geçtikten sonra site değiştirilirse hesabınız bloke edilir ve para iade edilmez.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Reklamın gösterileceği kullanıcıların dilini seçin
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Sayı, reklamınızı potansiyel olarak o dilde görecek kullanıcıların sayısıdır.
+      Yalnızca botu gerçekten kullanan kullanıcılar sayılır. Ancak reklam, alıntının yapıldığı gruptaki diğer kullanıcılar tarafından da görülebilmektedir, bu nedenle bu rakam çok daha yüksek olabilir
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Dil ülkeye karşılık gelmiyor.
+      Sadece bir dil seçebilirsiniz, eğer birden fazla dil ihtiyacınız varsa, lütfen başka bir dil için tekrar bir reklam oluşturun.</i>
+    enter_price: |
+      Reklamınızın 1000 gösterim başına fiyatını USD olarak belirtin:
+
+      <u>Aktif reklamların ortalama fiyatı:</u> ${averagePrice} USD
+
+      <i>Minimum fiyat 0.15 USD'dir.
+      Reklamlar rastgele bir şekilde gösterilir, ancak gösterilme olasılığı en yüksek olan reklam, gösterim fiyatı daha yüksek olan bir reklamdır.
+      </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      İlan moderasyona gönderilmiştir. Lütfen sabırlı olun ve bekleyin. Denetleme başarılı veya başarısız olursa bir bildirim alırsınız.
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
