@@ -1,125 +1,134 @@
 ---
-language_name: '🇹🇷 Türkçe'
+language_name: '🇷🇺 Русский'
 help: |2
-  <b>Merhaba!</b>
-  Bir mesajı alıntı oluşturup size gönderirim.
-  Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
+  <b>Привет!</b>
+  Я помогу создать цитату из сообщения.
+  Бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Kullanılabilir Komutlar:</b>
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
 
-  <code>/help</code> — Bu mesajı gösterir
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
+      <code>random</code>: случайный цвет цитаты
+      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> — сделать PNG цитату
+      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
+      <code>rate</code> — добавить оценку к цитате
 
-  <code>/q #1b1429</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#1b1429</b>
-  <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
-  <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
-  <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
+    <b>Пример использования флагов:</b>
+    <code>/q white r p</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
+  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
 
-  <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
-  <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
+  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
 
-    <b>❕ Ekstra Bilgiler:</b>
+  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
+  /qrand — случайная цитата с положительным рейтингом
+  /qtop — топ цитат группы
+  /emoji - сменить эмодзи-суффикс для стикеров
 
-  ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
-  ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
-  ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
-  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
-  ➖ Emoji belirtilmesi zorunlu değildir.
-  ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
-  ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
-  ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
-  ➖ Argümanların sırası önemli değildir.
+  /help или /start — получить этот текст
 
-  <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
+
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  <b>Çeviri:</b> @Holytotem, @By_Azade
 help_group: |
-  <b>Merhaba!</b>
-  /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
+  <b>Привет!</b>
+  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+
+  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
 btn:
-  add_group: Gruba Ekle
-  help: Dökümanlar
+  add_group: Добавить в группу
+  help: Справка
 quote:
   api_error: |
-    <b>😓 Fiyat teklifi oluşturulamadı</b>
+    <b>😓 Не удалось сгенерировать цитату</b>
     <pre>${error}</pre>
   empty_forward: |
-    Komut, bir mesajı yanıtlayarak kullanılmalıdır.
+    Команду необходимо писать в ответ на сообщение.
   set_backgroun_color: |
-    Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Çıkartma başarıyla pakete eklendi <a href="${link}">Grup Çıkartma Paketi</a>.
+    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
     error:
-      animated: Animasyonlu bir çıkartma ekleyemiyorum.
-      need_creator: <b>Bu çıkartmayı kaydedemedim..</b>\n${creator} bana özel mesajlarda herhangi bir mesaj yazmalı.
-      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+      animated: Я не могу добавить анимированный стикер.
+      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
+      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
   delete:
-    suc: Çıkartma, başarıyla çıkartma paketinden kaldırıldı <a href="${link}">Grup Çıkartma Paketi</a>.
+    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
     error:
-      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Çıkartmayı kaydet
+      save_sticker: Сохранить стикер
   empty_forward: |
-    Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
+    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
   fstik: |
-    Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
 rate:
   vote:
     rated: |
-      Sen ${rateName} bu.
+      Вы ${rateName} это.
     back: |
-      Oyunuzu geri aldınız.
+      Вы вернули свой голос.
   settings:
     enable: |
-      Teklifler için değerlendirme dahildir.
+      Оценка для цитат включена.
     disable: |
-      Teklifler için derecelendirme kapalı.
+      Оценка для цитат выключена.
 random:
   empty: |
-    Grupta olumlu derecelendirmeye sahip alıntı yok.
+    В группе нет цитат с положительным рейтингом.
   gab: |
-    Rastgele alıntı yapma şansı ${gab} olarak ayarlanmıştır
+    Шанс случайных цитат установлен на ${gab}
 hidden:
   settings:
     enable: |
-      Gönderen arama etkinleştirildi.
+      Поиск отправителя включен.
     disable: |
-      Gönderen arama devre dışı bırakıldı.
+      Поиск отправителя отключен.
 privacy:
   settings:
     enable: |
-      Gizlilik modu açık.
+      Режим приватности включен.
     disable: |
-      Gizlilik modu devre dışı bırakıldı.
+      Режим приватности отключен.
 top:
   info: |
-    <b>En iyi grup alıntıları:</b>
-  pack: En iyi alıntıları içeren çıkartma paketi
+    <b>Топ цитат группы:</b>
+  pack: Стикерпак с топом цитат
 donate:
-  info: Bot desteği için minnettar olurum :)
+  info: Буду благодарен за поддержку бота :)
   info_group: |
     Буду благодарен за поддержку бота :)
 
     Поддержать меня можно по ссылке donate.lyo.su
     А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
-  title: Bağış yap ${botUsername}
-  description: Bot geliştirme desteği
+  title: Донат ${botUsername}
+  description: Поддержка разработки бота
   successful: |
-    <b>Botu desteklediğiniz için teşekkürler 💜</b>
-  pay: '💜 Telegram Üzerinden Ödeyin'
+    <b>Спасибо за поддержку бота 💜</b>
+  pay: '💜 Оплатить Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Diğer yöntemler
+  other: Другие способы
 emoji:
   info: |
     Пожалуйста, укажите эмодзи.
 
     Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
     Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+  done: Эмодзи успешно изменен.
 only_admin: |
-  Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
+  Команду может использовать только администратор группы.
 only_group: |
-  Bu komut yalnızca gruplar içerisinde kullanılabilir.
+  Команду можно использовать только в группах.
