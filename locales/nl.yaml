@@ -1,133 +1,133 @@
 ---
 language_name: '🇳🇱 Nederlands'
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>Hallo!</b>
+  Ik zal helpen bij het maken van een citaat uit een bericht.
+  bot kan zowel in privéberichten als in groepen werken
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️ Beschikbare commando's:</b>
+  /q <i>[in reactie op het bericht]</i> - maak een citaat uit het bericht
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+    <b>Beschikbare vlaggen voor het /q-commando:</b>
+      hex code of kleur naam: <code>#cbafff</code> of <code>indigo</code> - maak een quote met kleur <b>#cbafff</b>
+      Cijfer: <code>3</code> - maak een quote van <b>3 posts</b> down
+      <code>random</code>: random quote kleur
+      <code>reply</code> of <code>r</code>: maak een citaat met het opslaan van antwoorden
+      <code>p</code> of <code>png</code> - maak een PNG-citaat
+      <code>i</code> of <code>img</code> - maak een citaat als afbeelding
+      <code>beoordeel</code> - voeg een beoordeling toe aan een quote
 
-    <b>Пример использования флагов:</b>
-    <code>/q white r p</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <b>Voorbeeld van het gebruik van vlaggen:</b>
+    <code>/q white rp</code>
+    <code>/qi red</code>
+    <code>/qr #cbafff</code>
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/qcolor green</code> - stel de kleur van quotes in <b>green</b> standaard <i>(hex code of kleurnaam)</i>
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/qs 🥰💜</code> <i>[in reactie op bericht] [alleen voor beheerders]</i> - slaat een sticker/foto/document met een foto op in een stickerpakket van een groep met emoji 🥰💜 <i>(emoji kan elk willekeurig getal zijn)</i>
+  <code>/qd</code> <i>[i n reactie op het bericht] [alleen voor beheerders]</i> - verwijder de sticker uit het stickerpakket van groep
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
-  /emoji - сменить эмодзи-суффикс для стикеров
+  <code>/qrate</code> <i>[alleen voor beheerders]</i> - schakel beoordeling van aanhalingstekens in/uit
+  /qrand - willekeurig een aanhalingsteken met een positieve beoordeling van
+  /qtop - beste groepscitaten
+  /emoji - verander het emoji-achtervoegsel voor stickers
 
-  /help или /start — получить этот текст
+  /help of /start - ontvang deze tekst
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - verander de taal
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+  <b>☕️ Koop koffie voor ontwikkelaar:</b> done.lyo.su
 
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
+  <b>👨🏻‍💻 Ontwikkelaarsblog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+  <b>Hallo!</b>
+  Ik maak citaten aan in de groep met behulp van de /q opdracht in reactie op bericht
 
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+  Je kunt meer te weten komen over de opdracht <a href="t.me/${username}?start=help">/help</a> in privéberichten met mij
 btn:
-  add_group: Добавить в группу
-  help: Справка
+  add_group: Voeg toe aan groep
+  help: Hulp
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Genereren van offerte mislukt</b>
     <pre>${error}</pre>
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение.
+    Commando moet worden verzonden als antwoord op een bericht.
   set_backgroun_color: |
-    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
+    Achtergrondkleur van de offertes is ingesteld op: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
+    suc: Sticker is met succes toegevoegd aan het <a href="${link}">groepssticker pakket</a>.
     error:
-      animated: Я не могу добавить анимированный стикер.
-      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
-      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
+      animated: Ik kan geen geanimeerde sticker toevoegen.
+      need_creator: <b>Het opslaan van deze sticker is mislukt.</b>\n${creator} moet me een bericht sturen in de PM.
+      telegram: <b>Het opslaan van de sticker is mislukt.</b>\n<pre>${error}</pre>
   delete:
-    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
+    suc: Sticker is met succes uit het <a href="${link}">groepssticker pakket</a> verwijderd.
     error:
-      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
+      telegram: <b>Ik kon die sticker niet opslaan.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Сохранить стикер
+      save_sticker: De sticker opslaan
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
+    Opdracht moet worden verzonden naar een sticker, foto of bestand met een foto.
   fstik: |
-    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
+    Om de sticker op te slaan naar je persoonlijke stickerpakket, stuur dit bericht door naar @fStikBot
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      Jij ${rateName} dit.
     back: |
-      Вы вернули свой голос.
+      Je krijgt je stem terug.
   settings:
     enable: |
-      Оценка для цитат включена.
+      Offertes beoordeling staat aan.
     disable: |
-      Оценка для цитат выключена.
+      Het beoordelen van offertes staat uit.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    Er zijn geen citaten met een positieve waardering in de groep.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    De kans op willekeurige aanhalingstekens is gezet op ${gab}
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      Zoeken door afzender is ingeschakeld.
     disable: |
-      Поиск отправителя отключен.
+      Zoekopdracht afzender is uitgeschakeld.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      Privacy modus is ingeschakeld.
     disable: |
-      Режим приватности отключен.
+      Privacy modus is uitgeschakeld.
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+    <b>Top groep aanhalingstekens:</b>
+  pack: Sticker pakket met top offertes
 donate:
-  info: Буду благодарен за поддержку бота :)
+  info: Ik zou dankbaar zijn voor de bot support :)
   info_group: |
-    Буду благодарен за поддержку бота :)
+    Ik zou dankbaar zijn voor bot support :)
 
-    Поддержать меня можно по ссылке donate.lyo.su
-    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+    Je kunt me steunen op donate.lyo. U
+    En als u wilt doneren via Telegram, stuur dan hetzelfde commando in de PM.
+  title: Doneren ${botUsername}
+  description: Steun bot ontwikkeling
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Bedankt voor het ondersteunen van de bot 💜</b>
+  pay: '💜 Betaal via Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Andere opties
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Voeg emoji toe.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+    Bijvoorbeeld, <code>/emoji 💜</code> zal het achtervoegsel veranderen in 💜 voor alle volgende nieuwe stickers.
+    Voor een willekeurige emoji <code>/emoji random</code>
+  done: Emoji succesvol veranderd.
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
@@ -138,7 +138,7 @@ adv:
     • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
     • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
 
-    Balance: ${balance} RUB
+    Balance: ${balance} USD
   rules: |
     <b>In advertisements it is <u>not</u> allowed:</b>
     • Using obscenities or insults
@@ -171,6 +171,14 @@ adv:
 
       <i>The language does not correspond to the country.
       You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+    enter_price: |
+      Specify the price per 1000 impressions of your ad in USD:
+
+      <u>Average price of active ads:</u> ${averagePrice} USD
+
+      <i>The minimum price is 0.15 USD.
+      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      </i>
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
   moderate:
@@ -189,6 +197,6 @@ adv:
     accept_btn: Accept
     deny_btn: Deny
 only_admin: |
-  Команду может использовать только администратор группы.
+  Alleen groepsbeheerder kan deze opdracht gebruiken.
 only_group: |
-  Команду можно использовать только в группах.
+  Dit commando kan alleen in groepen gebruikt worden.
