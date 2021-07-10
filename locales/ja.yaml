@@ -1,46 +1,46 @@
 ---
 language_name: '🇯🇵 日本人'
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>こんにちは！</b>
+  私は、ポストからの引用を作成するのに役立ちます。
+  ボットは、プライベートメッセージおよびグループの両方で動作することができる
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️利用可能なコマンド：</b>
+  /q <i>[メッセージに応答して]</i> -メッセージからの引用を行う
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+    <b>/qコマンド使用可能フラグ：</b>
+      ヘクスコードまたは色名： <code>#cbafff</code> 又は <code>藍</code> -色で引用する <b>#cbafff</b>
+      桁： <code>3</code> -から引用する <b>3ポスト</b> ダウン
+      <code>random</code>：ランダム引用色
+      <code>返信</code> または <code>R</code>：保存答えを引用する
+      <code>P</code> 又は <code>PNG</code> -作るPNG引用
+      <code>I</code> 又は <code>IMG</code> -画像として引用する
+      <code>速度</code> -に評価を追加しますquote
 
-    <b>Пример использования флагов:</b>
-    <code>/q white r p</code>
+    <b>フラグの使用例：</b>
+    <code>/q white rp</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/ qcolor green</code> 引用符の色を設定 <b>緑</b> デフォルト <i>（16進コードまたは色名）</i>
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/ QS🥰💜</code> <i>[管理者のみのために] [メッセージに応答した]</i> - 🥰💜絵文字のグループのステッカーパックの写真でステッカー/写真/文書を保存し <i>（絵文字任意の数にすることができます）</i>
+  <code>/ qd</code> <i>[i Nのみ管理者のメッセージに応答] []</i> -基のステッカーパックからシールを取り除く
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
-  /emoji - сменить эмодзи-суффикс для стикеров
+  <code>/qrate</code> <i>]管理者のみのために[</i> - /引用符の無効評価可能
+  /qrand - AとのランダムA引用ポジティブ評価
+  /qtop  -トップグループの引用符
+  /絵文字-ステッカーのための絵文字接尾辞を変更する
 
-  /help или /start — получить этот текст
+  /helpまたは/開始-このテキストを取得
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸/lang は-言語変更
+  🇷🇺/lang - изменить язык
 
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+  <b>☕️開発者のための購入コーヒー：</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻💻開発者ブログ：</b> @LyBlog
+  <b>GitHubの：</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>こんにちは！</b>
   私は、メッセージに応じて、/ qコマンドを使用して、グループ内の引用符を作成する
@@ -138,7 +138,7 @@ adv:
     • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
     • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
 
-    Balance: ${balance} RUB
+    Balance: ${balance} USD
   rules: |
     <b>In advertisements it is <u>not</u> allowed:</b>
     • Using obscenities or insults
@@ -171,6 +171,14 @@ adv:
 
       <i>The language does not correspond to the country.
       You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+    enter_price: |
+      Specify the price per 1000 impressions of your ad in USD:
+
+      <u>Average price of active ads:</u> ${averagePrice} USD
+
+      <i>The minimum price is 0.15 USD.
+      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      </i>
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
   moderate:
