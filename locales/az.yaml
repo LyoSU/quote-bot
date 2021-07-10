@@ -138,7 +138,7 @@ adv:
     • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
     • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
 
-    Balance: ${balance} RUB
+    Balance: ${balance} USD
   rules: |
     <b>In advertisements it is <u>not</u> allowed:</b>
     • Using obscenities or insults
@@ -171,6 +171,14 @@ adv:
 
       <i>The language does not correspond to the country.
       You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+    enter_price: |
+      Specify the price per 1000 impressions of your ad in USD:
+
+      <u>Average price of active ads:</u> ${averagePrice} USD
+
+      <i>The minimum price is 0.15 USD.
+      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      </i>
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
   moderate:
