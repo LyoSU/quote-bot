@@ -119,6 +119,74 @@ emoji:
     Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
     Для случайного эмодзи <code>/emoji random</code>
   done: Эмодзи-суффикс успешно изменен.
+adv:
+  about: |
+    <b>💫 Çok sayıda aktif kullanıcı ve grup için bizden reklam satın alabilirsiniz</b>
+
+    • Botumuz 30'000'den fazla aktif grupta ve her ay 70'000'den fazla kullanıcı botu kullanıyor.
+    Bunların arasında çeşitli ülkelerden kullanıcılar var. Reklamın gösterilmesi gereken kullanıcıların dilini seçebilirsiniz
+    • Reklam, kullanıcının sohbetine bağlı olarak bir buton veya metin mesajı şeklinde teklifin altında gösterilir
+    • Bir reklamın fiyatını kendiniz belirlersiniz; öncelikle en yüksek tutarın tahsis edildiği ilan görüntülenecektir
+    • İlanın metni ve içeriği kurallarımıza (/adv_rules) uygun olmalı ve yayınlanmadan önce moderasyondan geçmelisiniz. Bu, para yatırmadan önce yapılabilir
+
+    Bakiye: ${balance} USD
+  rules: |
+    <b>Reklamlarda <u>değil</u> izin verilmez:</b>
+    • Müstehcenlik veya hakaret kullanımı
+    • Metin başına 1'den fazla emoji kullanılması
+    • Yanıltıcı bilgi
+    • Ukrayna yasaları tarafından yasaklanmış bilgiler
+    • Yetişkinlere uygun içerik
+    • Kumar
+
+    <i>Biz de sebepsiz yere beğenmediğimiz bir reklamı reddetme hakkına sahibiz.</i>
+  main_menu:
+    create_btn: Reklam oluşturun
+    list_btn: Reklam listesi
+    pay_btn: Bakiyeyi tamamla
+  create:
+    enter_text: |
+      Reklam metninizi girin:
+
+      <i>70 karakterden fazla olmamalı ve kurallarımıza uygun olmalıdır (/adv_rules)</i>
+    enter_link: |
+      Reklamı yapılan kaynağa bir bağlantı girin:
+
+      <i>Bağlantı tam olmalıdır, Telegram'da bir şeyin reklamını yapıyorsanız bağlantı t.me ile başlamalıdır.
+      Kaynak kurallarımıza (/adv_rules) uygun olmalıdır, moderasyonu geçtikten sonra site değiştirilirse hesabınız bloke edilir ve para iade edilmez.</i>
+    select_locale: |
+      Reklamın gösterileceği kullanıcıların dilini seçin
+
+      Sayı, reklamınızı potansiyel olarak o dilde görecek kullanıcıların sayısıdır.
+      Yalnızca botu gerçekten kullanan kullanıcılar sayılır. Ancak reklam, alıntının yapıldığı gruptaki diğer kullanıcılar tarafından da görülebilmektedir, bu nedenle bu rakam çok daha yüksek olabilir
+
+      <i>Dil ülkeye karşılık gelmiyor.
+      Sadece bir dil seçebilirsiniz, eğer birden fazla dil ihtiyacınız varsa, lütfen başka bir dil için tekrar bir reklam oluşturun.</i>
+    enter_price: |
+      Reklamınızın 1000 gösterim başına fiyatını USD olarak belirtin:
+
+      <u>Aktif reklamların ortalama fiyatı:</u> ${averagePrice} USD
+
+      <i>Minimum fiyat 0.15 USD'dir.
+      Reklamlar rastgele bir şekilde gösterilir, ancak gösterilme olasılığı en yüksek olan reklam, gösterim fiyatı daha yüksek olan bir reklamdır.
+      </i>
+    sent_moderate: |
+      İlan moderasyona gönderilmiştir. Lütfen sabırlı olun ve bekleyin. Denetleme başarılı veya başarısız olursa bir bildirim alırsınız.
+  moderate:
+    adv: |
+      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+
+      Text: ${adv.text}
+      Link: ${adv.link}
+      Locale: ${adv.locale}
+      Price: ${adv.price}
+      Count ${adv.count}
+    accepted: |
+      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+    denied: |
+      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
+    accept_btn: Accept
+    deny_btn: Deny
 only_admin: |
   Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |

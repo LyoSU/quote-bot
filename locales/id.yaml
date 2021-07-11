@@ -2,35 +2,35 @@
 language_name: '🇮🇩 Indonesia'
 help: |2
   <b>Halo!</b>
-  Saya akan membantu Anda membuat kutipan dari sebuah pesan.
-  Untuk itu cukup balas pesan dengan /q
+      Saya akan membantu Anda membuat kutipan dari sebuah pesan.
+      Untuk itu cukup balas pesan dengan /q
 
-    <b>⚙️ Perintah yang tersedia:</b>
+        <b>⚙️ Perintah yang tersedia:</b>
 
-  <code>/help</code> — dapatkan teks ini
-  <code>/q #1b1429</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari pesan dengan warna<b>#1b1429</b>
-  <code>/q 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari <b>balasan dan turun dari itu menjadi 3 pesan</b>
-  <code>/q r</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan balasan
-  <code>/q white r 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan 3 pesan berwarna <b>white</b> dengan balasan
+      <code>/help</code> — dapatkan teks ini
+      <code>/q #1b1429</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari pesan dengan warna<b>#1b1429</b>
+      <code>/q 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari <b>balasan dan turun dari itu menjadi 3 pesan</b>
+      <code>/q r</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan balasan
+      <code>/q white r 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan 3 pesan berwarna <b>white</b> dengan balasan
 
-  <code>/qcolor green</code> — membuat warna <b>hijau</b> bawaan
+      <code>/qcolor green</code> — membuat warna <b>hijau</b> bawaan
 
-  <code>/qs 💜</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — menyimpan stiker/foto/dokumen dengan foto ke dalam paket stiker grup dengan 💜 emoji
-  <code>/qd</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — hapus stiker dari paket stiker grup
+      <code>/qs 💜</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — menyimpan stiker/foto/dokumen dengan foto ke dalam paket stiker grup dengan 💜 emoji
+      <code>/qd</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — hapus stiker dari paket stiker grup
 
-    <b>❕ Informasi tambahan:</b>
+        <b>❕ Informasi tambahan:</b>
 
-  ➖ Urutan argumen tidak penting
-  ➖ Warna kutipan harus berupa kode HEX, misalnya <b>#ffffff</b>, atau anda dapat menentukannya dengan nama: <b>white</b>.
-  ➖ Untuk warna acak, anda bisa menulis <b>acak</b> sebagai warna
-  ➖ Emoji apa pun untuk menyimpan stiker dapat digunakan.
-  ➖ Spesifikasi emoji tidak diperlukan.
-  ➖ Perintah awal <code>/qs</code> harus dijalankan oleh pembuat obrolan, sebelum itu menulis ke pesan langsung bot.
-  ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
-  ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
+      ➖ Urutan argumen tidak penting
+      ➖ Warna kutipan harus berupa kode HEX, misalnya <b>#ffffff</b>, atau anda dapat menentukannya dengan nama: <b>white</b>.
+      ➖ Untuk warna acak, anda bisa menulis <b>acak</b> sebagai warna
+      ➖ Emoji apa pun untuk menyimpan stiker dapat digunakan.
+      ➖ Spesifikasi emoji tidak diperlukan.
+      ➖ Perintah awal <code>/qs</code> harus dijalankan oleh pembuat obrolan, sebelum itu menulis ke pesan langsung bot.
+      ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
+      ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
 
-  <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+      <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
+      <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
   Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan
@@ -113,11 +113,79 @@ donate:
   other: Sebaliknya
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Harap sertakan emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+    Misalnya, <code>/emoji</code> akan mengubah akhiran menjadi untuk semua stiker baru berikutnya.
+    Untuk emoji acak <code>/emoji random</code>
+  done: Emoji berhasil diubah.
+adv:
+  about: |
+    <b>Anda dapat membeli iklan dari kami untuk sejumlah besar pengguna dan grup aktif</b>
+
+    • Bot kami ada di lebih dari 30.000 grup aktif dan lebih dari 70.000 pengguna menggunakan bot setiap bulan.
+    Diantaranya adalah pengguna dari berbagai negara. Anda dapat memilih bahasa pengguna yang akan menampilkan iklan
+    • Iklan ditampilkan di bawah kutipan dalam bentuk tombol atau pesan teks, tergantung pada obrolan pengguna
+    • Anda menentukan sendiri harga iklan; pertama-tama, iklan dengan jumlah tertinggi akan ditampilkan
+    • Teks dan konten iklan harus mematuhi aturan kami (/adv_rules) dan sebelum diposting, Anda harus melewati moderasi. Ini dapat dilakukan sebelum melakukan deposit
+
+    Saldo: ${balance} USD
+  rules: |
+    <b>Dalam iklan, <u>tidak diperbolehkan</u></b>
+    • Menggunakan kata-kata kotor atau hinaan
+    • Menggunakan lebih dari 1 emoji per teks
+    • Informasi yang menyesatkan
+    • Informasi yang dilarang oleh hukum Ukraina
+    • Konten dewasa
+    • Perjudian
+
+    <i>Kami juga berhak menolak iklan jika kita tidak menyukainya tanpa alasan.</i>
+  main_menu:
+    create_btn: Buat iklan
+    list_btn: Daftar iklan
+    pay_btn: Isi ulang saldo
+  create:
+    enter_text: |
+      Masukkan teks iklan Anda:
+
+      <i>Tidak lebih dari 70 karakter dan harus mematuhi aturan kami (/adv_rules)</i>
+    enter_link: |
+      Masukkan tautan ke sumber yang diiklankan:
+
+      <i>Tautan harus lengkap, jika Anda mengiklankan sesuatu di Telegram, tautannya harus dimulai dengan t.me.
+      Sumber daya harus mematuhi aturan kami (/adv_rules), jika setelah melewati moderasi situs diganti, akun Anda akan diblokir, dan uang tidak akan dikembalikan.</i>
+    select_locale: |
+      Pilih bahasa pengguna yang akan menampilkan iklan
+
+      Angka adalah jumlah pengguna yang berpotensi melihat iklan Anda dalam bahasa tersebut.
+      Hanya pengguna yang benar-benar menggunakan bot yang dihitung. Namun iklan tersebut juga dapat dilihat oleh pengguna lain yang berada di grup tempat kutipan tersebut dibuat, sehingga angka ini bisa jauh lebih tinggi
+
+      <i>Bahasa tidak sesuai dengan negara.
+      Anda hanya dapat memilih satu bahasa, jika Anda membutuhkan beberapa, silakan buat iklan lagi untuk bahasa lain.</i>
+    enter_price: |
+      Tentukan harga per 1000 tayangan iklan Anda dalam USD:
+
+      <u>Harga rata-rata iklan aktif:</u> ${averagePrice} USD
+
+      <i>Harga minimum adalah 0,15 USD.
+      Iklan ditampilkan secara acak, tetapi peluang tertinggi untuk ditampilkan adalah iklan yang memiliki harga tayangan lebih tinggi.
+      </i>
+    sent_moderate: |
+      Iklan telah dikirim untuk moderasi. Harap bersabar dan menunggu. Jika moderasi berhasil atau tidak berhasil, Anda akan menerima pemberitahuan.
+  moderate:
+    adv: |
+      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+
+      Text: ${adv.text}
+      Link: ${adv.link}
+      Locale: ${adv.locale}
+      Price: ${adv.price}
+      Count ${adv.count}
+    accepted: |
+      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+    denied: |
+      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
+    accept_btn: Accept
+    deny_btn: Deny
 only_admin: |
   Perintah ini hanya dapat dijalankan oleh administrator grup.
 only_group: |
