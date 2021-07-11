@@ -1,6 +1,6 @@
 ---
 language_name: '🇪🇸 Español'
-help: |2
+help: |
   <b>¡Hola!</b>
   Te ayudaré a crear una imagen a partir de un mensaje.
   Para eso solo responde al mensaje con /q
@@ -98,12 +98,14 @@ top:
     <b>Mejores creaciones:</b>
   pack: Pack de stickers con las mejores creaciones
 donate:
-  info: Agradecería tu apoyo :)
-  info_group: |
-    En serio agradecería mucho tu apoyo :)
+  info: |
+    You can buy the developer coffee or something more with the following details:
 
-    Puedes donar en donate.lyo.su
-    Y si quieres donar vía Telegram, envía el mismo comando en mi chat privado.
+    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+
+    More: donate.lyo.su
   title: Donar ${botUsername}
   description: Apoya el desarrollo del bot
   successful: |
