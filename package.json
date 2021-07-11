@@ -1,6 +1,6 @@
 {
   "name": "quote-bot",
-  "version": "0.28.10",
+  "version": "0.28.11",
   "description": "Telegram quote bot",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,6 @@
     "dotenv": "^8.2.0",
     "emoji-db": "^1.11.1",
     "enot-node": "^1.0.1",
-    "freekassa-node": "^1.0.1",
     "got": "^10.7.0",
     "mongoose": "^5.8.2",
     "prom-client": "^12.0.0",

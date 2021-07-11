@@ -24,7 +24,9 @@ module.exports = async (ctx) => {
     //   await ctx.replyWithHTML(ctx.i18n.t('donate.info_group'))
     // }
 
-    await ctx.replyWithHTML(ctx.i18n.t('donate.info_group'))
+    await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
+      disable_web_page_preview: true
+    })
   } else if (ctx.updateType === 'callback_query') {
     const orderId = uuidv4()
 

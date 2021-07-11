@@ -1,6 +1,5 @@
 const path = require('path')
 const mongoose = require('mongoose')
-const freekassa = require('freekassa-node')
 const enot = require('enot-node')
 const Composer = require('telegraf/composer')
 const Markup = require('telegraf/markup')
@@ -88,7 +87,7 @@ const checkPaymentStatus = async () => {
 
   session.endSession()
 }
-// setInterval(checkPaymentStatus, 1000 * 10)
+setInterval(checkPaymentStatus, 1000 * 10)
 
 const advMain = new Scene('advMain')
 
@@ -101,8 +100,10 @@ advMain.enter(async (ctx) => {
     [Markup.callbackButton(ctx.i18n.t('adv.main_menu.pay_btn'), 'adv:pay')]
   ])
 
+  const userInfo = await ctx.db.User.findById(ctx.session.userInfo)
+
   await ctx.replyWithHTML(ctx.i18n.t('adv.about', {
-    balance: (ctx.session.userInfo.adv.credit / 100).toFixed(2)
+    balance: (userInfo.adv.credit / 100).toFixed(2)
   }), {
     disable_web_page_preview: true,
     reply_to_message_id: ctx.message.message_id,
@@ -194,7 +195,9 @@ advSetLocale.action(/adv:locale:(.*)/, async (ctx) => {
 const advSetPrice = new Scene('advSetPrice')
 
 advSetPrice.enter(async (ctx) => {
-  await ctx.replyWithHTML('Enter price adv:', {
+  await ctx.replyWithHTML(ctx.i18n.t('adv.create.enter_price', {
+    averagePrice: 0.17
+  }), {
     disable_web_page_preview: true
   })
 })
@@ -268,13 +271,15 @@ advSend.enter(async (ctx) => {
 const advPayAmount = new Scene('advPayAmount')
 
 advPayAmount.enter((ctx) => {
-  return ctx.replyWithHTML('Enter the amount in RUB:', {
+  return ctx.replyWithHTML('Enter the amount in USD:', {
     disable_web_page_preview: true
   })
 })
 
 advPayAmount.on('text', async (ctx) => {
   const sum = parseFloat(ctx.message.text)
+
+  if (!sum) return ctx.scene.reenter()
 
   const invoice = new ctx.db.Invoice()
   invoice._id = mongoose.Types.ObjectId()
@@ -283,7 +288,7 @@ advPayAmount.on('text', async (ctx) => {
   await invoice.save()
 
   const fk = freeKassaGenerate({
-    oa: parseInt(ctx.message.text),
+    oa: sum,
     o: invoice._id,
     currency: 'USD',
     m: process.env.FREEKASSA_ID
@@ -292,17 +297,21 @@ advPayAmount.on('text', async (ctx) => {
   const enotGen = enot({
     oa: sum,
     o: invoice._id,
-    m: process.env.ENOT_ID
+    m: process.env.ENOT_ID,
+    cr: 'USD'
   }, process.env.ENOT_SECRET)
 
   const replyMarkup = Markup.inlineKeyboard([
-    [Markup.urlButton('Free-kassa', fk.url)]
+    [Markup.urlButton('Crypto (enot.io)', enotGen.url)],
+    [Markup.urlButton('FreeKassa', fk.url)]
   ])
 
-  return ctx.replyWithHTML('Link for payment:', {
+  await ctx.replyWithHTML('Link for payment:', {
     disable_web_page_preview: true,
     reply_markup: replyMarkup
   })
+
+  return ctx.scene.leave()
 })
 
 const advListTypes = new Scene('advListTypes')
