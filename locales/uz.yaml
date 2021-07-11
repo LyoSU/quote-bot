@@ -97,11 +97,14 @@ top:
     <b>Guruhdagi eng yaxshi iqtiboslar:</b>
   pack: Eng yaxshi iqtibosli stikerlar to'plami
 donate:
-  info: Botni qo'llab-quvvatlashiz uchun minnatdor bo'lar edim :)
-  info_group: |
-    Botni qo'llab-quvvatlasangiz minnatdor bo'lar edim :)
+  info: |
+    You can buy the developer coffee or something more with the following details:
 
-    donate.Iyo.su havolasidan o'tib meni qo'llab-quvatlashingiz mumkin. Agarda, Telegram orqali to'lov qilmoqchi bo'lsangiz, huddi shu buyruqni shaxsiy xabarda qoldiring.
+    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+
+    More: donate.lyo.su
   title: Xayriya ${botUsername}
   description: Botni rivojlanishini qo'llab-quvatlash
   successful: |
