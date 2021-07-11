@@ -107,12 +107,14 @@ top:
     <b>Топ цитат группы:</b>
   pack: Стикерпак с топом цитат
 donate:
-  info: Буду благодарен за поддержку бота :)
-  info_group: |
-    Буду благодарен за поддержку бота :)
+  info: |
+    You can buy the developer coffee or something more with the following details:
 
-    Поддержать меня можно по ссылке donate.lyo.su
-    А если хочешь платежом через Telegram, напиши эту же команду в ЛС.
+    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+
+    More: donate.lyo.su
   title: Донат ${botUsername}
   description: Поддержка разработки бота
   successful: |
