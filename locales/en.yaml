@@ -1,6 +1,6 @@
 ---
 language_name: '🇺🇸 English'
-help: |
+help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
   bot can work both in private messages and in groups
@@ -116,7 +116,6 @@ donate:
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
     More: donate.lyo.su
-
   title: Donate ${botUsername}
   description: Support bot development
   successful: |
@@ -142,7 +141,6 @@ adv:
     • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
 
     Balance: ${balance} USD
-
   rules: |
     <b>In advertisements it is <u>not</u> allowed:</b>
     • Using obscenities or insults
@@ -175,7 +173,6 @@ adv:
 
       <i>The language does not correspond to the country.
       You can choose only one language, if you need several, please create an advertisement again for another language.</i>
-
     enter_price: |
       Specify the price per 1000 impressions of your ad in USD:
 
@@ -184,7 +181,6 @@ adv:
       <i>The minimum price is 0.15 USD.
       Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
       </i>
-
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
   moderate:
