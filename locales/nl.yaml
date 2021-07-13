@@ -109,7 +109,7 @@ top:
   pack: Sticker pakket met top offertes
 donate:
   info: |
-    You can buy the developer coffee or something more with the following details:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
@@ -183,6 +183,14 @@ adv:
       </i>
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+  list:
+    select_list: |
+      select_list
+    wait_btn: wait_btn
+    ready_btn: ready_btn
+    end_btn: end_btn
+    selected_list: |
+      selected_list
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
