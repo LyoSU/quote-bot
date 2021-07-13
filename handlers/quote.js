@@ -73,7 +73,7 @@ module.exports = async (ctx, next) => {
   if (ctx.chat.type === 'private') {
     if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
     minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(800)
+    await sleep(1300)
     if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
     delete minIdsInChat[ctx.from.id]
   }
