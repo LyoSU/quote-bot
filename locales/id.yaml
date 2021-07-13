@@ -99,7 +99,7 @@ top:
   pack: Paket stiker dengan kutipan teratas
 donate:
   info: |
-    You can buy the developer coffee or something more with the following details:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
@@ -173,6 +173,14 @@ adv:
       </i>
     sent_moderate: |
       Iklan telah dikirim untuk moderasi. Harap bersabar dan menunggu. Jika moderasi berhasil atau tidak berhasil, Anda akan menerima pemberitahuan.
+  list:
+    select_list: |
+      select_list
+    wait_btn: wait_btn
+    ready_btn: ready_btn
+    end_btn: end_btn
+    selected_list: |
+      selected_list
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
