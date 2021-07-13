@@ -1,4 +1,4 @@
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   let backgroundColor = '#1b1429'
   if (ctx.match && ctx.match[1] === '#' && ctx.match[2]) {
     backgroundColor = `#${ctx.match[2]}`

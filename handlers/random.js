@@ -1,6 +1,6 @@
 const Markup = require('telegraf/markup')
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   const randomQuote = await ctx.db.Quote.aggregate(
     [
       {

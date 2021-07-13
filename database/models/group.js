@@ -33,7 +33,7 @@ const groupSchema = Schema({
     },
     randomQuoteGab: {
       type: Number,
-      default: 0
+      default: 200
     },
     emojiSuffix: {
       type: String,

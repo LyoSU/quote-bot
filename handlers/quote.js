@@ -67,10 +67,19 @@ const generateRandomColor = () => {
   return `#${color}`
 }
 
-module.exports = async (ctx) => {
+const minIdsInChat = {}
+
+module.exports = async (ctx, next) => {
   quoteCountIO.mark()
   await ctx.replyWithChatAction('upload_photo')
-  if (ctx.chat.type === 'private') await sleep(700)
+
+  if (ctx.chat.type === 'private') {
+    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
+    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
+    await sleep(700)
+    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
+    delete minIdsInChat[ctx.from.id]
+  }
 
   const flag = {
     count: false,

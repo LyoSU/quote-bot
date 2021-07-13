@@ -2,7 +2,7 @@ const {
   updateTopPack
 } = require('../helpers')
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   let resultText = ''
   const rateName = ctx.match[2]
 

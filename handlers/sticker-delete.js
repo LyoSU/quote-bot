@@ -1,4 +1,4 @@
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   const stickerLinkPrefix = 'https://t.me/addstickers/'
 
   let result

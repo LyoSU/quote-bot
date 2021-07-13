@@ -1,4 +1,4 @@
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   if (ctx.group) {
     if (ctx.group.info.settings.privacy === true) {
       ctx.group.info.settings.privacy = false

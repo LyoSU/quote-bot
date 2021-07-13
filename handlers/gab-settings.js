@@ -1,4 +1,4 @@
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   let gab = 0
   if (ctx.match && ctx.match[2]) gab = ctx.match[2]
   console.log(ctx.match)

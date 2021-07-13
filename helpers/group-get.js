@@ -1,4 +1,4 @@
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   let group
 
   if (!ctx.group.info) group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })

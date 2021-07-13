@@ -1,6 +1,6 @@
 const Markup = require('telegraf/markup')
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   if (ctx.updateType === 'callback_query') {
     await ctx.editMessageText(ctx.i18n.t('help'), {
       parse_mode: 'HTML',

@@ -91,7 +91,7 @@ setInterval(checkPaymentStatus, 1000 * 10)
 
 const advMain = new Scene('advMain')
 
-advMain.enter(async (ctx) => {
+advMain.enter(async ctx => {
   ctx.session.scenes = {}
 
   const replyMarkup = Markup.inlineKeyboard([
@@ -113,41 +113,41 @@ advMain.enter(async (ctx) => {
 
 const advSetText = new Scene('advSetText')
 
-advSetText.enter(async (ctx) => {
+advSetText.enter(async ctx => {
   await ctx.replyWithHTML(ctx.i18n.t('adv.create.enter_text'), {
     disable_web_page_preview: true
   })
 })
 
-advSetText.on('text', async (ctx) => {
+advSetText.on('text', async ctx => {
   if (ctx.message.text.length > 50) {
     return ctx.scene.reenter()
   }
 
   ctx.session.scenes.text = ctx.message.text
-  await ctx.scene.enter('advSetLink')
+  await ctx.scene.enter(advSetLink.id)
 })
 
 const advSetLink = new Scene('advSetLink')
 
-advSetLink.enter(async (ctx) => {
+advSetLink.enter(async ctx => {
   await ctx.replyWithHTML(ctx.i18n.t('adv.create.enter_link'), {
     disable_web_page_preview: true
   })
 })
 
-advSetLink.on('text', async (ctx) => {
+advSetLink.on('text', async ctx => {
   if (!ctx.message.entities || ctx.message.entities[0].type !== 'url' || /\s/.test(ctx.message.text)) {
     return ctx.scene.reenter()
   }
 
   ctx.session.scenes.link = ctx.message.text
-  await ctx.scene.enter('advSetLocale')
+  await ctx.scene.enter(advSetLocale.id)
 })
 
 const advSetLocale = new Scene('advSetLocale')
 
-advSetLocale.enter(async (ctx) => {
+advSetLocale.enter(async ctx => {
   const localeCount = await ctx.db.User.aggregate([
     { $match: { updatedAt: { $gte: new Date((new Date()).getTime() - (30 * 24 * 60 * 60 * 1000)) } } },
     {
@@ -182,19 +182,19 @@ advSetLocale.enter(async (ctx) => {
   })
 })
 
-advSetLocale.action(/adv:locale:(.*)/, async (ctx) => {
+advSetLocale.action(/adv:locale:(.*)/, async ctx => {
   try {
     i18n.t(ctx.match[1], 'language_name')
   } catch (e) {
     return ctx.scene.reenter()
   }
   ctx.session.scenes.locale = ctx.match[1]
-  await ctx.scene.enter('advSetPrice')
+  await ctx.scene.enter(advSetPrice.id)
 })
 
 const advSetPrice = new Scene('advSetPrice')
 
-advSetPrice.enter(async (ctx) => {
+advSetPrice.enter(async ctx => {
   await ctx.replyWithHTML(ctx.i18n.t('adv.create.enter_price', {
     averagePrice: 0.17
   }), {
@@ -202,7 +202,7 @@ advSetPrice.enter(async (ctx) => {
   })
 })
 
-advSetPrice.on('text', async (ctx) => {
+advSetPrice.on('text', async ctx => {
   const price = parseFloat(ctx.message.text) * 100
 
   if (!price || price <= 0) {
@@ -210,18 +210,18 @@ advSetPrice.on('text', async (ctx) => {
   }
 
   ctx.session.scenes.price = price
-  await ctx.scene.enter('advSetCount')
+  await ctx.scene.enter(advSetCount.id)
 })
 
 const advSetCount = new Scene('advSetCount')
 
-advSetCount.enter(async (ctx) => {
+advSetCount.enter(async ctx => {
   await ctx.replyWithHTML('Enter count adv:', {
     disable_web_page_preview: true
   })
 })
 
-advSetCount.on('text', async (ctx) => {
+advSetCount.on('text', async ctx => {
   const count = parseInt(ctx.message.text)
 
   if (!count || count <= 0) {
@@ -229,12 +229,12 @@ advSetCount.on('text', async (ctx) => {
   }
 
   ctx.session.scenes.count = count
-  await ctx.scene.enter('advSend')
+  await ctx.scene.enter(advSend.id)
 })
 
 const advSend = new Scene('advSend')
 
-advSend.enter(async (ctx) => {
+advSend.enter(async ctx => {
   console.log(ctx.session.scenes)
 
   const adv = new ctx.db.Adv()
@@ -270,13 +270,13 @@ advSend.enter(async (ctx) => {
 
 const advPayAmount = new Scene('advPayAmount')
 
-advPayAmount.enter((ctx) => {
+advPayAmount.enter(ctx => {
   return ctx.replyWithHTML('Enter the amount in USD:', {
     disable_web_page_preview: true
   })
 })
 
-advPayAmount.on('text', async (ctx) => {
+advPayAmount.on('text', async ctx => {
   const sum = parseFloat(ctx.message.text)
 
   if (!sum) return ctx.scene.reenter()
@@ -316,7 +316,7 @@ advPayAmount.on('text', async (ctx) => {
 
 const advListTypes = new Scene('advListTypes')
 
-advListTypes.enter(async (ctx) => {
+advListTypes.enter(async ctx => {
   const replyMarkup = Markup.inlineKeyboard([
     [Markup.callbackButton(ctx.i18n.t('adv.list.wait_btn'), 'adv:list:wait')],
     [Markup.callbackButton(ctx.i18n.t('adv.list.ready_btn'), 'adv:list:ready')],
@@ -329,7 +329,30 @@ advListTypes.enter(async (ctx) => {
   })
 })
 
+advListTypes.action(/adv:list:(.*)/, async ctx => {
+  const statusTypes = {
+    wait: { status: { $gte: 1 } },
+    ready: { status: 2 },
+    end: { status: 3 }
+  }
+
+  const advs = await ctx.db.Adv.find(statusTypes[ctx.match[1]])
+
+  const inlineKeyboard = []
+
+  advs.forEach(adv => {
+    inlineKeyboard.push([Markup.callbackButton(adv.text, `adv:about:${adv.id}`)])
+  })
+
+  await ctx.replyWithHTML(ctx.i18n.t('adv.list.selected_list'), {
+    disable_web_page_preview: true,
+    reply_markup: Markup.inlineKeyboard(inlineKeyboard)
+  })
+})
+
 const composer = new Composer()
+
+composer.command('adv_rules', onlyPm, ctx => ctx.replyWithHTML(ctx.i18n.t('adv.rules')))
 
 composer.use(
   scenes(
@@ -349,23 +372,19 @@ composer.action(/adv:create/, async (ctx, next) => {
   ctx.session.scenes = {
     new: true
   }
-  return ctx.scene.enter('advSetText')
+  return ctx.scene.enter(advSetText.id)
 })
 
 composer.action(/adv:list/, async (ctx, next) => {
-  return ctx.scene.enter('advListTypes')
+  return ctx.scene.enter(advListTypes.id)
 })
 
 composer.action(/adv:pay/, async (ctx, next) => {
-  return ctx.scene.enter('advPayAmount')
+  return ctx.scene.enter(advPayAmount.id)
 })
 
 composer.command('adv', onlyPm, ({ scene }) => {
-  return scene.enter('advMain')
-})
-
-composer.command('adv_rules', onlyPm, async (ctx) => {
-  await ctx.replyWithHTML(ctx.i18n.t('adv.rules'))
+  return scene.enter(advMain.id)
 })
 
 module.exports = composer

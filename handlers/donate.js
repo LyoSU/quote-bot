@@ -4,7 +4,7 @@ const { LiqPay } = require('../utils')
 
 const liqpay = new LiqPay(process.env.LIQPAY_PUBLIC, process.env.LIQPAY_PRIVATE)
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   if (ctx.updateType === 'message') {
     // if (ctx.chat.type === 'private') {
     //   await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
