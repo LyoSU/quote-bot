@@ -228,7 +228,7 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', handleQuote)
+bot.on('message', Composer.privateChat(handleQuote))
 
 bot.on('message', Composer.groupChat(rateLimit({
   window: 1000 * 5,
