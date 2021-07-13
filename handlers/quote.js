@@ -70,16 +70,16 @@ const generateRandomColor = () => {
 const minIdsInChat = {}
 
 module.exports = async (ctx, next) => {
-  quoteCountIO.mark()
-  await ctx.replyWithChatAction('upload_photo')
-
   if (ctx.chat.type === 'private') {
     if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
     minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(700)
+    await sleep(800)
     if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
     delete minIdsInChat[ctx.from.id]
   }
+
+  quoteCountIO.mark()
+  await ctx.replyWithChatAction('upload_photo')
 
   const flag = {
     count: false,
@@ -128,7 +128,7 @@ module.exports = async (ctx, next) => {
 
   if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
 
-  const maxQuoteMessage = 30
+  const maxQuoteMessage = 50
   let messageCount = flag.count || 1
 
   let quoteMessage = ctx.message.reply_to_message
