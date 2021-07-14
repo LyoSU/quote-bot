@@ -183,7 +183,6 @@ adv:
       </i>
     sent_moderate: |
       The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
-
   list:
     select_list: |
       select_list
