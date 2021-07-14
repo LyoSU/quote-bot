@@ -4,7 +4,7 @@ const {
   downloadFileByUrl
 } = require('../utils')
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   let result = ''
 
   if (ctx.message.reply_to_message) {

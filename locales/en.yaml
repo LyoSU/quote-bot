@@ -186,11 +186,14 @@ adv:
   list:
     select_list: |
       select_list
+
     wait_btn: wait_btn
     ready_btn: ready_btn
     end_btn: end_btn
+
     selected_list: |
       selected_list
+
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>

@@ -76,6 +76,7 @@ bot.use(stats)
 bot.use((ctx, next) => {
   const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
   ctx.config = config
+  ctx.db = db
   return next()
 })
 
@@ -100,26 +101,21 @@ bot.use((ctx, next) => {
   return next()
 })
 
-bot.command('json', ({ replyWithHTML, message }) => replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>'))
-
-bot.use((ctx, next) => {
-  ctx.db = db
-  return next()
-})
+// bot.command('json', ({ replyWithHTML, message }) => replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>'))
 
 bot.use(handleChatMember)
 
 bot.use(Composer.groupChat(Composer.command(rateLimit({
   window: 1000 * 5,
   limit: 2,
-  keyGenerator: (ctx) => ctx.chat.id,
+  keyGenerator: ctx => ctx.chat.id,
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
 }))))
 
 bot.use(Composer.mount('callback_query', rateLimit({
   window: 2000,
   limit: 1,
-  keyGenerator: (ctx) => ctx.from.id,
+  keyGenerator: ctx => ctx.from.id,
   onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
 })))
 
@@ -143,7 +139,7 @@ bot.use(async (ctx, next) => {
 
 bot.use(Composer.groupChat(session({
   property: 'group',
-  getSessionKey: (ctx) => {
+  getSessionKey: ctx => {
     if (ctx.from && ctx.chat && ['supergroup', 'group'].includes(ctx.chat.type)) {
       return `${ctx.chat.id}`
     }
@@ -199,7 +195,7 @@ bot.command('qtop', onlyGroup, handleTopQuote)
 bot.command('qrand', onlyGroup, rateLimit({
   window: 1000 * 50,
   limit: 2,
-  keyGenerator: (ctx) => {
+  keyGenerator: ctx => {
     return ctx.chat.id
   },
   onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
@@ -232,15 +228,12 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('message', Composer.privateChat(rateLimit({
-  window: 700,
-  limit: 1
-}), handleQuote))
+bot.on('message', Composer.privateChat(handleQuote))
 
-bot.on('message', rateLimit({
+bot.on('message', Composer.groupChat(rateLimit({
   window: 1000 * 5,
   limit: 1,
-  keyGenerator: (ctx) => ctx.chat.id,
+  keyGenerator: ctx => ctx.chat.id,
   onLimitExceeded: (ctx, next) => {
     ctx.state.skip = true
     return next()
@@ -257,7 +250,7 @@ bot.on('message', rateLimit({
     }
   }
   return next()
-})
+}))
 
 bot.use((ctx, next) => {
   ctx.state.emptyRequest = true

@@ -1,6 +1,6 @@
 const Markup = require('telegraf/markup')
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   let packLink = 'https://t.me/addstickers/'
   if (ctx.group.info.topSet && ctx.group.info.topSet.name) {
     packLink += ctx.group.info.topSet.name
