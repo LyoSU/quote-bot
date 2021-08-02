@@ -109,19 +109,19 @@ top:
   pack: Стикерпак с топом цитат
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Puoi acquistare un caffè o qualcos'altro allo sviluppatore usando questo dati:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
-    More: donate.lyo.su
+    Altro: donate.lyo.su
   title: Донат ${botUsername}
   description: Поддержка разработки бота
   successful: |
     <b>Спасибо за поддержку бота 💜</b>
   pay: '💜 Оплатить Telegram'
-  liqpay: LiqPay (VISA, MasterCard)
+  liqpay: Carta bancaria (VISA, MasterCard)
   other: Другие способы
 emoji:
   info: |
