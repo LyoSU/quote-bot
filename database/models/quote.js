@@ -3,11 +3,13 @@ const { Schema } = require('mongoose')
 const quoteSchema = Schema({
   group: {
     type: Schema.Types.ObjectId,
-    ref: 'Group'
+    ref: 'Group',
+    index: true
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    index: true
   },
   file_id: {
     type: String,
