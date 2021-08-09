@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     コマンドは、メッセージに応答して作成する必要があります。
   set_background_color: |
-    引用符の背景色は次のように設定されます： <code>${backgroundColor}</code>
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
