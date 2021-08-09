@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     O comando deve ser escrito em resposta a uma mensagem!
   set_background_color: |
-    A cor de fundo das citações é definida como: <code>${backgroundColor}</code>
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
