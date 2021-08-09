@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     Komandanı mesaja cavab olaraq yazmaq lazımdır.
   set_background_color: |
-    Sitatın standart rəngi <code>${backgroundColor}</code> oldu.
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
