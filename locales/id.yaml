@@ -45,7 +45,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     Perintah harus dijalankan dengan membalas pesan.
-  set_backgroun_color: |
+  set_background_color: |
     Warna latar belakang kutipan disetel ke: <code>${backgroundColor}</code>
   sticker:
 sticker:

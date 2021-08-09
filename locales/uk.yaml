@@ -54,7 +54,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     Команду необхідно писати у відповідь на повідомлення.
-  set_backgroun_color: |
+  set_background_color: |
     Колір фону цитат встановлений на: <code>${backgroundColor}</code>
   sticker:
 sticker:

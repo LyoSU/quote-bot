@@ -55,7 +55,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     Komandanı mesaja cavab olaraq yazmaq lazımdır.
-  set_backgroun_color: |
+  set_background_color: |
     Sitatın standart rəngi <code>${backgroundColor}</code> oldu.
   sticker:
 sticker:

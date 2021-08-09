@@ -55,7 +55,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     O comando deve ser escrito em resposta a uma mensagem!
-  set_backgroun_color: |
+  set_background_color: |
     A cor de fundo das citações é definida como: <code>${backgroundColor}</code>
   sticker:
 sticker:

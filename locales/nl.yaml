@@ -55,7 +55,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     Commando moet worden verzonden als antwoord op een bericht.
-  set_backgroun_color: |
+  set_background_color: |
     Achtergrondkleur van de offertes is ingesteld op: <code>${backgroundColor}</code>
   sticker:
 sticker:

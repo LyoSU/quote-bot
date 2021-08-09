@@ -55,7 +55,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     Command must be sent as a reply to a message.
-  set_backgroun_color: |
+  set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:

@@ -46,7 +46,7 @@ quote:
     <pre>${error}</pre>
   empty_forward: |
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
-  set_backgroun_color: |
+  set_background_color: |
     Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
   sticker:
 sticker:
