@@ -47,7 +47,7 @@ quote:
   empty_forward: |
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_background_color: |
-    Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:

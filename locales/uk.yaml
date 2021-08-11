@@ -55,7 +55,7 @@ quote:
   empty_forward: |
     Команду необхідно писати у відповідь на повідомлення.
   set_background_color: |
-    Колір фону цитат встановлений на: <code>${backgroundColor}</code>
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:

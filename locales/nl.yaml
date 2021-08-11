@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     Commando moet worden verzonden als antwoord op een bericht.
   set_background_color: |
-    Achtergrondkleur van de offertes is ingesteld op: <code>${backgroundColor}</code>
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
