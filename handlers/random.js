@@ -12,7 +12,7 @@ module.exports = async ctx => {
           ]
         }
       },
-      { $sample: { size: 15 } }
+      { $sample: { size: 100 } }
     ]
   )
   const quote = groupQuotes[randomInt(0, groupQuotes.length - 1))]
