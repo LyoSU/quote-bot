@@ -1,7 +1,8 @@
 const Markup = require('telegraf/markup')
+const { randomInt } = require('crypto')
 
 module.exports = async ctx => {
-  const randomQuote = await ctx.db.Quote.aggregate(
+  const groupQuotes = await ctx.db.Quote.aggregate(
     [
       {
         $match: {
@@ -14,7 +15,7 @@ module.exports = async ctx => {
       { $sample: { size: 15 } }
     ]
   )
-  const quote = randomQuote[Math.floor(Math.random() * randomQuote.length)]
+  const quote = groupQuotes[randomInt(0, groupQuotes.length - 1))]
 
   if (quote) {
     let advKeyboard
