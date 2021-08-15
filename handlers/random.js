@@ -15,7 +15,7 @@ module.exports = async ctx => {
       { $sample: { size: 100 } }
     ]
   )
-  const quote = groupQuotes[randomInt(0, groupQuotes.length - 1))]
+  const quote = groupQuotes[randomInt(0, groupQuotes.length - 1)]
 
   if (quote) {
     let advKeyboard

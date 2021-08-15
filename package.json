@@ -1,6 +1,6 @@
 {
   "name": "quote-bot",
-  "version": "0.28.16",
+  "version": "0.28.17",
   "description": "Telegram quote bot",
   "main": "index.js",
   "scripts": {
