@@ -15,9 +15,10 @@ module.exports = async ctx => {
       { $sample: { size: 100 } }
     ]
   )
-  const quote = groupQuotes[randomInt(0, groupQuotes.length - 1)]
 
-  if (quote) {
+  if (groupQuotes.length > 0) {
+    const quote = groupQuotes[randomInt(0, groupQuotes.length - 1)]
+
     let advKeyboard
 
     const adv = await ctx.db.Adv.aggregate(
