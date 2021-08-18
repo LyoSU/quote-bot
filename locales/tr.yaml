@@ -47,7 +47,7 @@ quote:
   empty_forward: |
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
@@ -100,13 +100,13 @@ top:
   pack: En iyi alıntıları içeren çıkartma paketi
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Geliştirici için kahve satın alabilir veya aşağıdaki ayrıntılarla başka bir şey satın alabilirsiniz:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+    monobank: 4441114453205 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
-    More: donate.lyo.su
+    Daha Fazlası: donate.lyo.su
   title: Bağış yap ${botUsername}
   description: Bot geliştirme desteği
   successful: |
@@ -184,13 +184,13 @@ adv:
       selected_list
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      İlan #id_${adv._id} <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Metin: ${adv.text}
+      Bağlantı: ${adv.link}
+      Yerel ${adv.locale}
+      Fiyat: ${adv.price}
+      Sayı ${adv.count}
     accepted: |
       The ad was successfully moderated. You can start showing it in the advertising section: /adv
     denied: |
