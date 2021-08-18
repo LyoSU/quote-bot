@@ -192,11 +192,11 @@ adv:
       Fiyat: ${adv.price}
       Sayı ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Reklam başarıyla yönetildi. Reklam bölümünde göstermeye başlayabilirsiniz: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Maalesef reklam denetlenmedi. Lütfen kurallarımızı okuyun (/adv_rules), bunun bir hata olduğundan eminseniz @Ly_OBot adresinden bize yazın ve sorunu açıklayan mesaja bu etiketi ekleyin: #qba_${adv.id}
+    accept_btn: Kabul
+    deny_btn: Reddet
 only_admin: |
   Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |
