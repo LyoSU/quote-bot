@@ -153,35 +153,35 @@ adv:
   main_menu:
     create_btn: Crea ads
     list_btn: Lista delle ads
-    pay_btn: Top up balance
+    pay_btn: Ricarica saldo
   create:
     enter_text: |
-      Enter your ad text:
+      Inserisci il testo del tuo annuncio:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Non più di 70 caratteri e deve rispettare le nostre regole (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Inserisci un link alla risorsa pubblicizzata:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Il link deve essere completo, se stai pubblicizzando qualcosa in Telegram, il link deve iniziare con t.me.
+      La risorsa deve rispettare le nostre regole (/adv_rules), se dopo aver superato la fase di moderazione il sito viene cambiato, il tuo account verrà bloccato e i soldi non verranno rimborsati.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Seleziona la lingua degli utenti a cui verrà mostrato l'annuncio
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Il numero rappresenta gli utenti che potenzialmente vedranno il tuo annuncio in quella lingua.
+      Vengono contati solo gli utenti che usano effettivamente il bot. Ma l'annuncio può essere visto anche da altri utenti che sono nel gruppo in cui è stata fatta la citazione, quindi questa cifra può essere molto più alta
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>La lingua non corrisponde al paese.
+      Puoi scegliere solo una lingua, se ne hai bisogno di più, crea di nuovo un annuncio per un'altra lingua.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Specifica il prezzo per 1000 visualizzazioni del tuo annuncio in USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Prezzo medio degli annunci attivi:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>Il prezzo minimo è 0,15 USD.
+      Gli annunci vengono mostrati in modo casuale, ma ci sono più probabilità che venga mostrato un annuncio che ha offerto un prezzo per visualizzazioni più alto.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      L'annuncio è stato inviato per la moderazione. Per favore, sii paziente e aspetta. Quando la fase di moderazione produrrà un esito, positivo o negativo che sia, riceverai una notifica.
   list:
     select_list: |
       select_list
@@ -192,17 +192,17 @@ adv:
       selected_list
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} da <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
+      Testo: ${adv.text}
       Link: ${adv.link}
       Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Prezzo: ${adv.price}
+      Numero ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      L'annuncio è stato approvato. Puoi vederlo nella sezione pubblicità: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
+      Purtroppo l'annuncio non è stato approvato. Per favore leggi le nostre regole (/adv_rules), se sei sicuro che ci sia stato un errore, scrivici a @Ly_OBot e includi questo tag nel messaggio descrivendo il problema: #qba_${adv.id}
     accept_btn: Accetta
     deny_btn: Rifiuta
 only_admin: |
