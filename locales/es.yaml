@@ -142,8 +142,8 @@ adv:
 
     <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
+    create_btn: Crear anuncios
+    list_btn: Lista de anuncios
     pay_btn: Top up balance
   create:
     enter_text: |
@@ -194,8 +194,8 @@ adv:
       The ad was successfully moderated. You can start showing it in the advertising section: /adv
     denied: |
       Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+    accept_btn: Aceptar
+    deny_btn: Rechazar
 only_admin: |
   Solo el administrador puede usar este comando.
 only_group: |
