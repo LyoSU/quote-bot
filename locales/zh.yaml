@@ -1,112 +1,111 @@
 ---
 language_name: '🇨🇳 簡體中文'
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>你好！</b>
+  我将帮助从帖子中创建引用。
+  bot 可以在私人消息和组中工作
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️ 可用命令：</b>
+  /q <i>[回复消息]</i> - 从消息中引用
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+    <b>/q 命令的可用参数：</b>
+      hex代码或颜色名称： <code>#cbafff</code> 或 <code>indigo</code> - 创建底色为 <b>#cbafff</b> 的引用
+      数字： <code>3</code> - 从以下 <b>3 条消息</b> 创建引用
+      <code>random</code>：随机引用底色
+      <code>reply</code> 或 <code>r</code>: 引用并保存回复
+      <code>p</code> 或 <code>png</code> - 创建 PNG 格式的引用
+      <code>i</code> 或 <code>img</code> - 创建图片类型的引用
+      <code>rate</code> - 为引用添加评价
+    <b>使用参数的例子：</b>
+    <code>/q white rp</code>
+    <code>/qi red</code>
+    <code>/qr #cbafff</code>
 
-    <b>Пример использования флагов:</b>
-    <code>/q white r p</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+  <code>/qcolor green</code> - 设置引用的底色默认为 <b>green</b>  <i>(十六进制代码或英文颜色名称)</i>
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/qs 🥰💜</code> <i>[回复消息] [仅适用于管理员]</i> - 将带有图片的贴纸/照片/文档使用 emoji 🥰💜保存到群组贴纸包中 <i> (emoji 可任意选用且数量不限)</i>
+  <code>/qd</code> <i>[i n 回复留言] [仅限管理员]</i> - 从群组贴纸包中删除指定贴纸
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/qrate</code> <i>[仅限管理员]</i> - 启用/禁用引用评价
+  /qrand - 随机发送一个正面评价的引用
+  /qtop - 热度最高的群组引用
+  /emoji - 更改贴纸对应的 emoji
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
-  /emoji - сменить эмодзи-суффикс для стикеров
+  /help 或 /start - 获取此说明
 
-  /help или /start — получить этот текст
+  ᴄɴ /lang - 更改语言
+  🇷🇺 /lang - изменить язык
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  ☕<b>为开发者买咖啡：</b> donate.lyo.su
 
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
-
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 开发者博客：</b> @LyBlog
+  <b>GitHub：</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+  <b>你好！</b>
+  在群组中使用 /q 命令回复消息时我将为您创建引用贴纸
 
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+  您可以在与我的私人消息中了解有关命令 <a href="t.me/${username}?start=help">/help</a>
 btn:
-  add_group: Добавить в группу
-  help: Справка
+  add_group: 添加到群组
+  help: 帮助
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 生成引用失败</b>
     <pre>${error}</pre>
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение.
+    命令必须在回复消息时发送。
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    引用贴纸的底色已设置为: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
+    suc: 贴纸已成功添加到 <a href="${link}">群组贴纸包</a>。
     error:
-      animated: Я не могу добавить анимированный стикер.
-      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
-      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
+      animated: 我无法添加动态贴纸。
+      need_creator: <b>我未能保存此贴纸。</b>\n${creator} 需要先私聊我发送任意消息。
+      telegram: <b>我未能保存该贴纸。</b>\n<pre>${error}</pre>
   delete:
-    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
+    suc: 贴纸已成功从 <a href="${link}">群组贴纸包</a> 中移除。
     error:
-      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
+      telegram: <b>我无法保存此贴纸。</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Сохранить стикер
+      save_sticker: 保存贴纸
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
+    命令必须发送回复给贴纸、照片或带有图片的文件。
   fstik: |
-    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
+    为了将贴纸保存到您的个人贴纸包，请将此消息转发到 @fStikBot。
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      您 ${rateName} 了它。
     back: |
-      Вы вернули свой голос.
+      您的评价已撤回。
   settings:
     enable: |
-      Оценка для цитат включена.
+      引用评价已启用。
     disable: |
-      Оценка для цитат выключена.
+      引用评价已关闭。
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    群组中没有带正面评价的引用贴纸。
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    随机引用的概率已设置为 ${gab}
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      发送者搜索已启用。
     disable: |
-      Поиск отправителя отключен.
+      发送者搜索已禁用。
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      隐私模式已开启。
     disable: |
-      Режим приватности отключен.
+      隐私模式已关闭。
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: 顶部引用的贴纸包
+    <b>热度最高的群组引用：</b>
+  pack: 热度最高引用的贴纸包
 donate:
   info: |
     You can buy coffee for the developer or something else with the following details:
