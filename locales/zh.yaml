@@ -116,19 +116,19 @@ donate:
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
     More: donate.lyo.su
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+  title: 捐赠 ${botUsername}
+  description: 支持此 bot 开发
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>感谢您支持此 bot 💜</b>
+  pay: '💜 通过 Telegram 支付'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: 其它选项
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    请添加 emoji。
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
+    例如， <code>/emoji 💜</code> 将以后所有新添加的贴纸 emoji 设置为 💜 。
+    使用随机 emoji ：<code>/emoji random</code>
   done: Emoji 添加成功！
 adv:
   about: |
