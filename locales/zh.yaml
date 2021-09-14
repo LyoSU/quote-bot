@@ -106,7 +106,7 @@ privacy:
 top:
   info: |
     <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+  pack: 顶部引用的贴纸包
 donate:
   info: |
     You can buy coffee for the developer or something else with the following details:
@@ -129,7 +129,7 @@ emoji:
 
     Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
     Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+  done: Emoji 添加成功！
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
@@ -207,6 +207,6 @@ adv:
     accept_btn: Accept
     deny_btn: Deny
 only_admin: |
-  Команду может использовать только администратор группы.
+  只有群组管理员可以使用此命令。
 only_group: |
-  Команду можно использовать только в группах.
+  此命令只能在群组中使用。
