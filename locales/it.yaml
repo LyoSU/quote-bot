@@ -1,188 +1,187 @@
 ---
 language_name: '🇮🇹'
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>Ciao!</b>
+  Ti aiuterò a creare delle citazioni utilizzando un messaggio.
+  Il bot funziona sia tramite messaggi privati e sia con i gruppi.
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️ Comandi disponibili:</b>
+  /q <i>[in risposta ad un messaggio]</i> — Crea una citazione utilizzando il messaggio
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+    <b>Impostazioni extra per il comando /q:</b>
+      Codice HEX o nome del colore: <code>#cbafff</code> oppure <code>indigo</code> — Crea una citazione di colore <b>#cbafff</b>
+      Digita: <code>3</code> — crea una citazione utilizzando gli ultimi <b>3 post</b> 
+      <code>random</code>: genera un colore random alla citazione
+      <code>reply</code> oppure <code>r</code>: crea una citazione salvando le risposte
+      <code>p</code> o <code>png</code> — crea un'immagine formato PNG della citazione
+      <code>i</code> o <code>img</code> — crea un'immagine della citazione
+      <code>rate</code> — Aggiunge alla citazione la possibilità di poter ricevere voti
 
-    <b>Пример использования флагов:</b>
+    <b>Esempi d'utilizzo delle opzioni extra:</b>
     <code>/q white r p</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/qcolor green</code> — setta il colore deille citazioni in <b>green</b> come impostazione predefinita <i>(bisogna utilizzare i colori in codice HEX o il nome dei colori in formato web)</i>
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/qs 🥰💜</code> <i>[in risposta ad un messaggio] [solo per gli amministratori]</i> — salva lo sticker/photo/documento con foto in uno sticker pack del gruppo con l'emoji 🥰💜 <i>(valido per tutte le emoji)</i>
+  <code>/qd</code> <i>[in risposta ad un messaggio] [solo per gli amministratori]</i> — rimuove lo sticker dallo stickers pack
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
-  /emoji - сменить эмодзи-суффикс для стикеров
+  <code>/qrate</code> <i>[solo per gli amministratori]</i> — abilita/disabilita la possibilità di votare le citazioni
+  /qrand — citazione random con punteggio positivo
+  /qtop — top citazioni del gruppo
+  /emoji - cambia il suffiso emoji degli stickers
 
-  /help или /start — получить этот текст
-
-  🇺🇸 /lang — change the language
+  /help o /start — elenco dei comandi
+  it /lang — cambia la lingua
   🇷🇺 /lang — изменить язык
 
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+  <b>☕️ Offri un caffè allo sviluppatore:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
+  <b>👨🏻‍💻 Blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+  <b>Ciao!</b>
+  Creerò delle citazioni nel gruppo usando il comando /q in risposta ad un messaggio
 
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+  Puoi scoprire di più usando il comando <a href="t.me/${username}?start=help">/help</a> in una conversazione privata con me
 btn:
-  add_group: Добавить в группу
-  help: Справка
+  add_group: Aggiungi al Gruppo
+  help: Aiuto
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Errore nella creazione della citazione</b>
     <pre>${error}</pre>
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение.
+    Il comando deve essere inviato come risposta a un messaggio.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Il colore di sfondo delle citazioni è impostato su: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
+    suc: Lo sticker è stato aggiunto con successo al <a href="${link}">pacchetto di adesivi del gruppo</a>.
     error:
-      animated: Я не могу добавить анимированный стикер.
-      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
-      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
+      animated: Non posso aggiungere uno sticker animato.
+      need_creator: <b>Non sono riuscito a salvare questo sticker.</b>\n${creator} scrivimi un messaggio in PM.
+      telegram: <b>Non sono riuscito a salvare questo sticker.</b>\n<pre>${error}</pre>
   delete:
-    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
+    suc: Lo sticker è stato rimosso correttamente dallo <a href="${link}">stickers pack del gruppo</a>.
     error:
-      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
+      telegram: <b>Non posso salvare questo sticker.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Сохранить стикер
+      save_sticker: Salva lo sticker
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
+    Il comando deve essere inviato una risposta ad uno sticker, una foto o ad un file immagine.
   fstik: |
-    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
+    Per salvare lo sticker nel tuo pacchetto personale di stickers, inoltra questo messaggio a @fStikBot
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      Tu ${rateName} questo.
     back: |
-      Вы вернули свой голос.
+      Hai riottenuto il tuo voto.
   settings:
     enable: |
-      Оценка для цитат включена.
+      La votazione delle citazioni è abilitata.
     disable: |
-      Оценка для цитат выключена.
+      La votazione delle citazioni è disabilitata.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    Non ci sono citazioni con una valutazione positiva nel gruppo.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    La possibilità di citazioni casuali è impostata su ${gab}
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      La ricerca del mittente è abilitata.
     disable: |
-      Поиск отправителя отключен.
+      La ricerca del mittente è disabilitata.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      La Privacy mode è abilitata.
     disable: |
-      Режим приватности отключен.
+      La Privacy mode è disabilitata.
 top:
   info: |
-    <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+    <b>Citazioni migliori del gruppo:</b>
+  pack: Sticker pack con le migliori citazioni
 donate:
   info: |
-    Puoi acquistare un caffè o qualcos'altro allo sviluppatore usando questo dati:
+    Offri un caffè allo sviluppatore del bot usando i seguenti dati:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
     Altro: donate.lyo.su
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+  title: Fai una donazione ${botUsername}
+  description: Sostieni lo sviluppo del bot
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
-  liqpay: Carta bancaria (VISA, MasterCard)
-  other: Другие способы
+    <b>Grazie per aver contribuito allo sviluppo del bot 💜</b>
+  pay: '💜 Paga con Telegram'
+  liqpay: LiqPay (VISA, MasterCard)
+  other: Altre opzioni
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Per favore inserisci un'emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+    Ad esempio, <code>/emoji 💜</code> cambierà il suffisso in 💜 a tutti i successivi nuovi stickers.
+    Per utilizzare un'emoji random bisogna usare il comando <code>/emoji random</code>
+  done: L'emoji è stata cambiata correttamente.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Puoi acquistare pubblicità da noi per un gran numero di utenti e gruppi attivi</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    - Il nostro bot è in più di 30.000 gruppi attivi e più di 70.000 utenti usano il bot ogni mese.
+    Tra questi ci sono utenti di vari nazioni. È possibile selezionare la lingua degli utenti per i quali la pubblicità deve essere visualizzata
+    - La pubblicità viene visualizzata sotto la citazione sotto forma di un pulsante o di un messaggio di testo, a seconda della chat dell'utente
+    - È possibile specificare il prezzo di un'inserzione; prima verrà visualizzata l'inserzione per la quale è stato assegnato l'importo più alto
+    - Il testo e il contenuto dell'annuncio devono essere conformi alle nostre regole (/adv_rules) e prima di essere pubblicato deve superare la fase di moderazione. Questo può essere fatto prima di effettuare un deposito
 
-    Balance: ${balance} USD
+    Saldo: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Nelle pubblicità <u>non</u> è permesso:</b>
+    - Usare oscenità o insulti
+    - Usare più di 1 emoji per testo
+    - Informazioni fuorvianti
+    - Informazioni proibite dalle leggi ucraine
+    - Contenuto per adulti
+    - Gioco d'azzardo
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Abbiamo anche il diritto di rifiutare un annuncio qualora non ci dovesse piacere, per qualsiasi ragione.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Crea ads
+    list_btn: Lista delle ads
+    pay_btn: Ricarica saldo
   create:
     enter_text: |
-      Enter your ad text:
+      Inserisci il testo del tuo annuncio:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Non più di 70 caratteri e deve rispettare le nostre regole (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Inserisci un link alla risorsa pubblicizzata:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Il link deve essere completo, se stai pubblicizzando qualcosa in Telegram, il link deve iniziare con t.me.
+      La risorsa deve rispettare le nostre regole (/adv_rules), se dopo aver superato la fase di moderazione il sito viene cambiato, il tuo account verrà bloccato e i soldi non verranno rimborsati.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Seleziona la lingua degli utenti a cui verrà mostrato l'annuncio
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Il numero rappresenta gli utenti che potenzialmente vedranno il tuo annuncio in quella lingua.
+      Vengono contati solo gli utenti che usano effettivamente il bot. Ma l'annuncio può essere visto anche da altri utenti che sono nel gruppo in cui è stata fatta la citazione, quindi questa cifra può essere molto più alta
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>La lingua non corrisponde al paese.
+      Puoi scegliere solo una lingua, se ne hai bisogno di più, crea di nuovo un annuncio per un'altra lingua.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Specifica il prezzo per 1000 visualizzazioni del tuo annuncio in USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Prezzo medio degli annunci attivi:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>Il prezzo minimo è 0,15 USD.
+      Gli annunci vengono mostrati in modo casuale, ma ci sono più probabilità che venga mostrato un annuncio che ha offerto un prezzo per visualizzazioni più alto.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      L'annuncio è stato inviato per la moderazione. Per favore, sii paziente e aspetta. Quando la fase di moderazione produrrà un esito, positivo o negativo che sia, riceverai una notifica.
   list:
     select_list: |
       select_list
@@ -193,20 +192,20 @@ adv:
       selected_list
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} da <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
+      Testo: ${adv.text}
       Link: ${adv.link}
       Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Prezzo: ${adv.price}
+      Numero ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      L'annuncio è stato approvato. Puoi vederlo nella sezione pubblicità: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Purtroppo l'annuncio non è stato approvato. Per favore leggi le nostre regole (/adv_rules), se sei sicuro che ci sia stato un errore, scrivici a @Ly_OBot e includi questo tag nel messaggio descrivendo il problema: #qba_${adv.id}
+    accept_btn: Accetta
+    deny_btn: Rifiuta
 only_admin: |
-  Команду может использовать только администратор группы.
+  Solo gli amministratori del gruppo possono utilizzare questo comando.
 only_group: |
-  Команду можно использовать только в группах.
+  Questo comando può essere utilizzato solo nei gruppi.
