@@ -51,7 +51,7 @@ btn:
   help: Даведка
 quote:
   api_error: |
-    <b>😓 Не атрымалася згенерыраваць цытату</b>
+    <b>😓 Не атрымалася стварыць цытату</b>
     <pre>${error}</pre>
   empty_forward: |
     Каманду трэба пісаць у адказ на паведамленне.
@@ -68,7 +68,7 @@ sticker:
   delete:
     suc: Стыкер паспешна выдалены з <a href="${link}">стыкерпака суполкі</a>.
     error:
-      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
+      telegram: <b>У мяне не атрымалася выдаліць гэты стыкер.</b>\n<pre>${error}</pre>
     btn:
       save_sticker: Захаваць стыкер
   empty_forward: |
@@ -88,7 +88,7 @@ rate:
       Ацэнка для цытат выключана.
 random:
   empty: |
-    У суполке няма цытат са станоўчым рэйтынгам.
+    У суполцы няма цытат са станоўчым рэйтынгам.
   gab: |
     Шанец выпадковых цытат усталяваны на ${gab}
 hidden:
@@ -109,7 +109,7 @@ top:
   pack: Стыкерпак з топам цытат
 donate:
   info: |
-    Вы можаце ахвяраваць грошы на каву распрацоўшчыку ці нешта такое наступным чынам:
+    Вы можаце ахвяраваць грошы на каву для распрацоўшчыка ці нешта такое наступным чынам:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
@@ -117,12 +117,12 @@ donate:
 
     More: donate.lyo.su
   title: Данат ${botUsername}
-  description: Поддержка разработки бота
+  description: Падтрымка распрацоўкі бота
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Дзякуй за падтрымку бота 💜</b>
+  pay: '💜 Аплаціць праз Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Іншыя спосабы
 emoji:
   info: |
     Калі ласка, вызначце эмодзі.
@@ -142,47 +142,47 @@ adv:
 
     Баланс: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>У рэкламе <u>не</u> дазваляецца:</b>
+    • Выкарыстанне нецэнзурнай лексікі або абраз
+    • Выкарыстанне больш за 1 эмодзі ў тэксце
+    • Падман
+    • Інфармацыя, забароненая заканадаўствам Украіны
+    • Змесціва для дарослых
+    • Азартныя гульні
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Мы таксама маем права адхіліць рэкламу без прычыны, калі яна нам проста не падабаецца.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Стварыць рэкламу
+    list_btn: Спіс рэклам
+    pay_btn: Папаўненне балансу
   create:
     enter_text: |
-      Enter your ad text:
+      Увядзіце тэкст аб'явы:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Не больш за 70 знакаў, адпаведна правілам (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Увядзіце спасылку на рэсурс, які рэкламіруецца:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Спасылка павінна быць поўнай, калі вы рэкламіруеце нешта ў Telegram, спасылка павінна пачынацца з t.me.
+      Рэсурс павінен адпавядаць нашым правілам (/adv_rules), калі пасля праходжання мадэрацыі сайт будзе заменены, ваш уліковы запіс будзе заблакаваны, а грошы не вернутыя.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Выберыце мову карыстальнікаў, якім будзе паказана аб'ява.
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Лік - гэта колькасць карыстальнікаў, якія патэнцыйна ўбачаць вашу рэкламу на гэтай мове.
+      Улічваюцца толькі карыстальнікі, якія сапраўды выкарыстоўваюць бота. Але рэкламу могуць бачыць і іншыя карыстальнікі, якія ўваходзяць у групу, дзе была зроблена цытата, таму гэтая лічба можа быць значна большай
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Мова не адпавядае краіне.
+      Вы можаце выбраць толькі адну мову, калі вам трэба некалькі, стварыце рэкламу яшчэ раз для іншай мовы</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Вызначце кошту за 1000 паказаў у USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Сярэдні кошт актыўных аб'яў:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>Мінімальны кошт 0,15 USD.
+      Рэклама паказваецца выпадкова, але найбольш верагодна што паказана будзе тая рэклама, што мае кошт вышэй.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      Рэклама адпраўлена на мадэрацыю. Калі ласка, набярыцеся цярпення і пачакайце. Калі мадэрацыя будзе скончана, вы атрымаеце паведамленне.
   list:
     select_list: |
       select_list
@@ -193,19 +193,19 @@ adv:
       selected_list
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} ад <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Тэкст: ${adv.text}
+      Спасылка: ${adv.link}
+      Мова: ${adv.locale}
+      Кошт: ${adv.price}
+      Колькасць ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Рэклама паспяхова прайшла мадэрацыю. Вы можаце пачаць паказваць яе ў раздзеле рэкламы: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      На жаль, рэклама не прайшла мадэрацыю. Прачытайце нашы правілы (/adv_rules), калі вы ўпэўненыя, што гэта памылка, напішыце нам праз @Ly_OBot і ўключыце гэты тэг у паведамленне, калі будзеце апісваць праблему: #qba_${adv.id}
+    accept_btn: Прыняць
+    deny_btn: Адхіліць
 only_admin: |
   Гэтай камандай можа карыстацца толькі адміністратар суполкі.
 only_group: |
