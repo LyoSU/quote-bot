@@ -1,16 +1,21 @@
-const {
-  updateTopPack
-} = require('../helpers')
-
 module.exports = async ctx => {
   let resultText = ''
-  const rateName = ctx.match[2]
+  const rateType = ctx.match[1]
 
-  const sticker = ctx.callbackQuery.message.sticker
+  let quoteDb, rateName
 
-  const quoteDb = await ctx.db.Quote.findOne({ file_unique_id: sticker.file_unique_id })
+  if (rateType === 'irate') {
+    rateName = ctx.match[3]
 
-  if (!quoteDb) return
+    quoteDb = await ctx.db.Quote.findById(ctx.match[2])
+
+    if (!quoteDb) return
+  } else {
+    const sticker = ctx.callbackQuery.message.sticker
+    quoteDb = await ctx.db.Quote.findOne({ file_unique_id: sticker.file_unique_id })
+
+    if (!quoteDb) return
+  }
 
   quoteDb.rate.votes.map((rate) => {
     const indexRate = rate.vote.indexOf(ctx.session.userInfo.id)
@@ -31,25 +36,41 @@ module.exports = async ctx => {
 
   await quoteDb.save()
 
-  // updateTopPack(ctx.db, ctx.group.info, quoteDb)
-
   ctx.state.answerCbQuery = [resultText]
 
-  const advKeyboard = ctx.callbackQuery.message.reply_markup.inline_keyboard.pop().pop()
+  if (rateType === 'irate') {
+    await ctx.editMessageReplyMarkup({
+      inline_keyboard: [
+        [
+          {
+            text: `👍 ${quoteDb.rate.votes[0].vote.length || ''}`,
+            callback_data: `irate:${quoteDb._id}:👍`
+          },
+          {
+            text: `👎 ${quoteDb.rate.votes[1].vote.length || ''}`,
+            callback_data: `irate:${quoteDb._id}:👎`
+          }
+        ]
+      ]
+    })
+  } else {
+    const advKeyboard = ctx.callbackQuery.message.reply_markup.inline_keyboard.pop().pop()
 
-  await ctx.editMessageReplyMarkup({
-    inline_keyboard: [
-      [
-        {
-          text: `👍 ${quoteDb.rate.votes[0].vote.length}`,
-          callback_data: 'rate:👍'
-        },
-        {
-          text: `👎 ${quoteDb.rate.votes[1].vote.length}`,
-          callback_data: 'rate:👎'
-        }
-      ],
-      advKeyboard.url ? [advKeyboard] : []
-    ]
-  })
+    await ctx.editMessageReplyMarkup({
+      inline_keyboard: [
+        [
+          {
+            text: `👍 ${quoteDb.rate.votes[0].vote.length || ''}`,
+            callback_data: 'rate:👍'
+          },
+          {
+            text: `👎 ${quoteDb.rate.votes[1].vote.length || ''}`,
+            callback_data: 'rate:👎'
+          }
+        ],
+        advKeyboard.url ? [advKeyboard] : []
+      ]
+    })
+  }
+
 }

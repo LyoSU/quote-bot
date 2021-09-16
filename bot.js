@@ -133,8 +133,8 @@ bot.use(session({
   getSessionKey: (ctx) => {
     if (ctx.from && ctx.chat) {
       return `${ctx.from.id}:${ctx.chat.id}`
-    } else if (ctx.from && ctx.inlineQuery) {
-      return `${ctx.from.id}:${ctx.from.id}`
+    } else if (ctx.from) {
+      return `user:${ctx.from.id}`
     }
     return null
   }
@@ -228,6 +228,7 @@ bot.command('emoji', onlyAdmin, handleEmoji)
 bot.hears(/^\/(gab) (\d+)/, onlyAdmin, handleGabHidden)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
+bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
 
 bot.on('new_chat_members', (ctx, next) => {
   if (ctx.message.new_chat_member.id === ctx.botInfo.id) return handleHelp(ctx)
