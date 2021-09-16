@@ -66,6 +66,10 @@ const groupSchema = Schema({
   lastRandomQuote: {
     type: Date,
     default: Date()
+  },
+  available: {
+    check: Boolean,
+    active: Boolean
   }
 }, {
   timestamps: true

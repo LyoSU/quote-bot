@@ -19,5 +19,6 @@ module.exports = {
   handleFstik: require('./fstik'),
   handleDonate: require('./donate'),
   handlePing: require('./ping'),
-  handleChatMember: require('./chat-member')
+  handleChatMember: require('./chat-member'),
+  handleInlineQuery: require('./inline-query')
 }

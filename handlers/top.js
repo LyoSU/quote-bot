@@ -1,10 +1,10 @@
 const Markup = require('telegraf/markup')
 
 module.exports = async ctx => {
-  let packLink = 'https://t.me/addstickers/'
-  if (ctx.group.info.topSet && ctx.group.info.topSet.name) {
-    packLink += ctx.group.info.topSet.name
-  }
+  // let packLink = 'https://t.me/addstickers/'
+  // if (ctx.group.info.topSet && ctx.group.info.topSet.name) {
+  //   packLink += ctx.group.info.topSet.name
+  // }
 
   let resultText = ctx.i18n.t('top.info')
 
@@ -21,9 +21,9 @@ module.exports = async ctx => {
   await ctx.replyWithHTML(resultText, {
     reply_to_message_id: ctx.message.message_id,
     reply_markup: Markup.inlineKeyboard([
-      Markup.urlButton(
+      Markup.switchToCurrentChatButton(
         ctx.i18n.t('top.pack'),
-        packLink
+        `top:${ctx.chat.id}`
       )
     ])
   })

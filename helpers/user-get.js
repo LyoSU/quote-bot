@@ -22,7 +22,7 @@ module.exports = async ctx => {
   user.username = ctx.from.username
   user.updatedAt = new Date()
 
-  if (ctx.chat.type === 'private') user.status = 'member'
+  if (ctx.chat && ctx.chat.type === 'private') user.status = 'member'
 
   if (newUser) await user.save()
 

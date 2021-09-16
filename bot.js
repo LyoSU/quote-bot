@@ -35,7 +35,8 @@ const {
   handleFstik,
   handleDonate,
   handlePing,
-  handleChatMember
+  handleChatMember,
+  handleInlineQuery
 } = require('./handlers')
 const {
   getUser,
@@ -128,7 +129,16 @@ const i18n = new I18n({
 
 bot.use(i18n.middleware())
 
-bot.use(session())
+bot.use(session({
+  getSessionKey: (ctx) => {
+    if (ctx.from && ctx.chat) {
+      return `${ctx.from.id}:${ctx.chat.id}`
+    } else if (ctx.from && ctx.inlineQuery) {
+      return `${ctx.from.id}:${ctx.from.id}`
+    }
+    return null
+  }
+}))
 
 bot.use(async (ctx, next) => {
   ctx.state.emptyRequest = false
@@ -162,11 +172,17 @@ const updateGroupAndUser = async (ctx, next) => {
 }
 
 bot.use(async (ctx, next) => {
+  if (ctx.inlineQuery) {
+    await getUser(ctx)
+    ctx.state.answerIQ = []
+  }
   if (ctx.callbackQuery) {
     await getUser(ctx)
     ctx.state.answerCbQuery = []
   }
+
   return next(ctx).then(() => {
+    if (ctx.inlineQuery) return ctx.answerInlineQuery(ctx.state.answerIQ)
     if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
   })
 })
@@ -222,6 +238,8 @@ bot.start(handleHelp)
 bot.command('help', handleHelp)
 bot.use(handleAdv)
 bot.use(handleModerateAdv)
+
+bot.use(handleInlineQuery)
 
 bot.command('privacy', onlyAdmin, handlePrivacy)
 
