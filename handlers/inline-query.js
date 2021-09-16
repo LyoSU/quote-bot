@@ -25,7 +25,10 @@ composer.on('inline_query', async (ctx) => {
         })
       })
 
-      ctx.state.answerIQ = stickersResult
+      ctx.state.answerIQ = [stickersResult, {
+        is_personal: false,
+        cache_time: 60 * 5
+      }]
     }
   }
 
@@ -42,7 +45,10 @@ composer.on('inline_query', async (ctx) => {
       })
     })
 
-    ctx.state.answerIQ = stickersResult
+    ctx.state.answerIQ = [stickersResult, {
+      is_personal: true,
+      cache_time: 60 * 5
+    }]
   }
 })
 

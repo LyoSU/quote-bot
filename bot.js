@@ -182,7 +182,7 @@ bot.use(async (ctx, next) => {
   }
 
   return next(ctx).then(() => {
-    if (ctx.inlineQuery) return ctx.answerInlineQuery(ctx.state.answerIQ)
+    if (ctx.inlineQuery) return ctx.answerInlineQuery(...ctx.state.answerIQ)
     if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
   })
 })
