@@ -8,7 +8,7 @@ module.exports = async ctx => {
     reply_to_message_id: ctx.message.message_id,
     reply_markup: Markup.inlineKeyboard([
       Markup.switchToCurrentChatButton(
-        ctx.i18n.t('top.pack'),
+        ctx.i18n.t('top.open'),
         `top:${ctx.chat.id}`
       )
     ])
