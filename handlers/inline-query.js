@@ -1,4 +1,5 @@
 const Composer = require('telegraf/composer')
+const Markup = require('telegraf/markup')
 
 const composer = new Composer()
 
@@ -21,7 +22,13 @@ composer.on('inline_query', async (ctx) => {
         stickersResult.push({
           type: 'sticker',
           id: quote._id,
-          sticker_file_id: quote.file_id
+          sticker_file_id: quote.file_id,
+          reply_markup: Markup.inlineKeyboard([
+            [
+              Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length || ''}`, 'rate:👍'),
+              Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length || ''}`, 'rate:👎')
+            ]
+          ])
         })
       })
 
@@ -41,7 +48,13 @@ composer.on('inline_query', async (ctx) => {
       stickersResult.push({
         type: 'sticker',
         id: quote._id,
-        sticker_file_id: quote.file_id
+        sticker_file_id: quote.file_id,
+        reply_markup: Markup.inlineKeyboard([
+          [
+            Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length || ''}`, 'rate:👍'),
+            Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length || ''}`, 'rate:👎')
+          ]
+        ])
       })
     })
 
