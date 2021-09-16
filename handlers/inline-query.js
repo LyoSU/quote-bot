@@ -47,7 +47,7 @@ composer.on('inline_query', async (ctx) => {
 
     ctx.state.answerIQ = [stickersResult, {
       is_personal: true,
-      cache_time: 60 * 5
+      cache_time: 5
     }]
   }
 })
