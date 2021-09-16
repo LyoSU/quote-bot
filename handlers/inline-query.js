@@ -33,7 +33,7 @@ composer.on('inline_query', async (ctx) => {
   }
 
   if (stickersResult.length === 0) {
-    const likedQuote = await ctx.db.Quote.find({ 'rate.votes.vote.0': ctx.session.userInfo._id.toString() }).sort({
+    const likedQuote = await ctx.db.Quote.find({ 'rate.votes.0.vote': ctx.session.userInfo._id.toString() }).sort({
       'rate.score': -1
     }).limit(50)
 

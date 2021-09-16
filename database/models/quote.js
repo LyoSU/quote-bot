@@ -28,7 +28,8 @@ const quoteSchema = Schema({
       name: String,
       vote: [{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        index: true
       }]
     }],
     score: {
