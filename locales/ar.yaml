@@ -105,7 +105,7 @@ privacy:
 top:
   info: |
     <b>Топ цитат группы:</b>
-  pack: Стикерпак с топом цитат
+  open: Open top
 donate:
   info: |
     You can buy coffee for the developer or something else with the following details:
