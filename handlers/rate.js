@@ -11,6 +11,8 @@ module.exports = async ctx => {
 
     if (!quoteDb) return
   } else {
+    rateName = ctx.match[2]
+
     const sticker = ctx.callbackQuery.message.sticker
     quoteDb = await ctx.db.Quote.findOne({ file_unique_id: sticker.file_unique_id })
 
