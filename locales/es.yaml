@@ -46,7 +46,7 @@ quote:
   empty_forward: |
     El comando debe usarse como respuesta a un mensaje.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    El color de fondo actual es: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
@@ -96,16 +96,16 @@ privacy:
 top:
   info: |
     <b>Mejores creaciones:</b>
-  open: Open top
+  open: Parte superior
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Puede comprar café para el desarrollador o algo más con los siguientes detalles:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+    ETH / BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    monobank320512014 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa / MasterCard</a>
 
-    More: donate.lyo.su
+    Más: donate.lyo.su
   title: Donar ${botUsername}
   description: Apoya el desarrollo del bot
   successful: |
@@ -115,22 +115,22 @@ donate:
   other: Otros
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Incluya emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+    Por ejemplo, <code>/ emoji 💜</code> cambiará el sufijo a 💜 para todas las pegatinas nuevas posteriores.
+    Para un emoji aleatorio <code>/ emoji aleatorio</code>
+  done: Emoji successfully changed.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Puede comprarnos publicidad para una gran cantidad de usuarios y grupos activos</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Nuestro bot está en más de 30`000 grupos activos y más de 70`000 usuarios usan el bot cada mes.
+    Entre ellos se encuentran usuarios de varios países. Puede seleccionar el idioma de los usuarios para los que se debe mostrar el anuncio
+    • La publicidad se muestra debajo de la cita en forma de botón o mensaje de texto, dependiendo del chat del usuario
+    • Usted mismo especifica el precio de un anuncio; en primer lugar, se mostrará el anuncio para el que se asignó la mayor cantidad.
+    • El texto y el contenido del anuncio deben cumplir con nuestras reglas (/ adv_rules) y antes de que se publique debe pasar la moderación. Esto se puede hacer antes de realizar un depósito
 
-    Balance: ${balance} USD
+    Saldo: ${balance} USD
   rules: |
     <b>In advertisements it is <u>not</u> allowed:</b>
     • Using obscenities or insults
