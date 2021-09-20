@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     Komandanı mesaja cavab olaraq yazmaq lazımdır.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Sitatın standart rəngi <code>${backgroundColor}</code> oldu
   sticker:
 sticker:
   save:
@@ -106,16 +106,16 @@ privacy:
 top:
   info: |
     <b>Qrupun top sitatları:</b>
-  open: Open top
+  open: Üstü açın
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Aşağıdakı detallarla geliştirici və ya başqa bir şey üçün qəhvə ala bilərsiniz:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+    mon144044 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
-    More: donate.lyo.su
+    Ətraflı: donate.lyo.su
   title: Maddi dəstək ${botUsername}
   description: Botun inkişafına dəstək
   successful: |
@@ -132,28 +132,28 @@ emoji:
   done: Emoji uğurla dəyişdirildi.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Çox sayda aktiv istifadəçi və qrup üçün reklam ala bilərsiniz</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Botumuz 30'000 -dən çox aktiv qrupdadır və hər ay 70'000 -dən çox istifadəçi botdan istifadə edir.
+    Onların arasında müxtəlif ölkələrdən olan istifadəçilər var. İstifadəçilərin dilini seçə bilərsiniz ki, reklam göstərilsin
+    • İstifadəçinin söhbətindən asılı olaraq reklam, təklifin altında düymə və ya mətn mesajı şəklində göstərilir
+    • Bir reklamın qiymətini özünüz təyin edirsiniz; hər şeydən əvvəl ən yüksək məbləğin təyin olunduğu reklam göstəriləcək
+    • Reklamın mətni və məzmunu qaydalarımıza (/adv_rules) uyğun olmalıdır və yerləşdirilməzdən əvvəl moderasiya keçməlisiniz. Bu depozit qoymadan əvvəl edilə bilər
 
-    Balance: ${balance} USD
+    Balans: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Reklamlarda <u></u> icazə verilmir:</b>
+    • Təhqir və təhqirdən
+    • Hər mətn üçün 1 -dən çox emoji istifadə etmək
+    • Yanıltıcı məlumatlar
+    • Ukrayna qanunları ilə qadağan edilmiş məlumatlar
+    • Böyüklər üçün
+    • Qumar
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Biz də Səbəbsiz bir reklamı sevməsək, onu rədd etmək hüququmuz var.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
+    create_btn: Reklam yarat
+    list_btn: Brendlərin siyahısı
     pay_btn: Top up balance
   create:
     enter_text: |

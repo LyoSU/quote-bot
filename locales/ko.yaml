@@ -1,111 +1,111 @@
 ---
 language_name: '🇰🇷 한국어'
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из сообщения.
-  Бот может работать как в личных сообщениях, так и в группах
+  <b>안녕하세요!</b>
+  나는 포스트에서 인용문을 만드는 것을 도와줄 것이다.
+  봇은 개인 메시지와 그룹 모두에서 작동할 수 있습니다.
 
-    <b>⚙️ Доступные команды:</b>
-  /q <i>[в ответ на сообщение]</i> — сделать цитату из сообщения
+    <b>⚙️ 사용 가능한 명령:</b>
+  /q <i>[메시지에 대한 응답으로]</i> - 메시지에서 인용하기
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделать цитату с цветом <b>#cbafff</b>
-      Цифра: <code>3</code> — сделать цитату из <b>3 сообщений</b> вниз
-      <code>random</code>: случайный цвет цитаты
-      <code>reply</code> или <code>r</code>: сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать PNG цитату
-      <code>i</code> или <code>img</code> — сделать цитату в виде картинки
-      <code>rate</code> — добавить оценку к цитате
+    <b>/q 명령에 사용 가능한 플래그:</b>
+      hex 코드 또는 색상 이름: <code>#cbafff</code> 또는 <code>남색</code> - 색상 <b>#cbafff</b>
+      자리수: <code>3</code> <b>3 게시물에서 인용하기</b> 아래로
+      <code>무작위</code>: 무작위 인용 색상
+      <code>회신</code> 또는 <code>r</code>: 답변을 저장하여 견적을 작성하십시오
+      <code>p</code> 또는 <code>png</code> - PNG 견적을 작성하십시오
+      <code>i</code> 또는 <code>img</code> - 그림으로 견적을 작성하십시오
+      <code>rate</code> - a에 등급 추가 따옴표
 
-    <b>Пример использования флагов:</b>
-    <code>/q white r p</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <b>플래그 사용 예:</b>
+    <code>/q 흰색 rp</code>
+    <code>/qi 빨간색</code>
+    <code>/qr #cbafff</code>
 
-  <code>/qcolor green</code> — установить цвет цитат <b>green</b> по умолчанию <i>(hex код или название цвета)</i>
+  <code>/qcolor 녹색</code> - 기본적으로 따옴표의 색상을 설정합니다. <b>녹색</b> <i>(16진수 코드 or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[в ответ на сообщение] [только для администраторов]</i> — сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмодзи может быть любым и любое количество)</i>
-  <code>/qd</code> <i>[в ответ на сообщение] [только для администраторов]</i> — удалить стикер из стикерпака группы
+  <code>/qs 🥰💜</code> <i>[메시지 답장] [관리자 전용]</i> - 사진이 포함된 스티커/사진/문서를 이모지가 있는 그룹의 스티커팩에 저장 🥰💜 <i>(이모지) 임의의 숫자일 수 있음)</i>
+  <code>/qd</code> <i>[i n 메시지에 대한 응답] [관리자 전용]</i> - 그룹의 스티커 팩에서 스티커 제거
 
-  <code>/qrate</code> <i>[только для администраторов]</i> — включить/выключить оценку цитат
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — топ цитат группы
-  /emoji - сменить эмодзи-суффикс для стикеров
+  <code>/qrate</code> <i>[관리자 전용]</i> - 따옴표 평가 활성화/비활성화
+  /qrand - 임의의 a가 있는 견적 긍정적인 평가
+  /qtop - 상위 그룹 인용
+  /emoji - 스티커의 이모티콘 접미사 변경
 
-  /help или /start — получить этот текст
+  /help 또는 /start - 이 텍스트 받기
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - 언어 변경
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
+  <b>개발자용 커피 구매:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
+  <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Привет!</b>
-  Я буду создавать цитаты в группе по команде /q в ответ на сообщение
+  <b>안녕하세요!</b>
 
-  Подробнее вы можете узнать по команде <a href="t.me/${username}?start=help">/help</a> в личных сообщениях со мной
+
+  에 대한 응답으로 /q 명령을 사용하여 그룹에 따옴표를 만들겠습니다. <a href="t.me/${username}?start=help">/help</a> 명령에 대한 자세한 내용은 저와 함께 개인 메시지를 참조하세요.
 btn:
-  add_group: Добавить в группу
-  help: Справка
+  add_group: 그룹에 추가
+  help: Help
 quote:
   api_error: |
-    <b>😓 Не удалось сгенерировать цитату</b>
+    <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение.
+    Command must be sent as a reply to a message.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
-    suc: Стикер успешно добавлен в <a href="${link}">стикерпак группы</a>.
+    suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
     error:
-      animated: Я не могу добавить анимированный стикер.
-      need_creator: <b>У меня не получилось сохранить этот стикер.</b>\n${creator} должен написать мне любое сообщение в личные сообщения.
-      telegram: <b>У меня не получилось сохранить этот стикер.</b>\n<pre>${error}</pre>
+      animated: I can't add an animated sticker.
+      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
+      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
   delete:
-    suc: Стикер успешно удален из <a href="${link}">стикерпака группы</a>.
+    suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
     error:
-      telegram: <b>У меня не получилось удалить этот стикер.</b>\n<pre>${error}</pre>
+      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Сохранить стикер
+      save_sticker: Save the sticker
   empty_forward: |
-    Команду необходимо писать в ответ на сообщение со стикером, фото или файлом фото.
+    Command must be sent a reply to a sticker, photo or file with a picture.
   fstik: |
-    Для сохранения стикера в личный стикерпак перешли сообщение боту @fStikBot
+    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
 rate:
   vote:
     rated: |
-      Вы ${rateName} это.
+      You ${rateName} this.
     back: |
-      Вы вернули свой голос.
+      You got your vote back.
   settings:
     enable: |
-      Оценка для цитат включена.
+      Quotes rating is on.
     disable: |
-      Оценка для цитат выключена.
+      Rating for quotes is off.
 random:
   empty: |
-    В группе нет цитат с положительным рейтингом.
+    There are no quotes with a positive rating in the group.
   gab: |
-    Шанс случайных цитат установлен на ${gab}
+    The chance of random quotes is set to ${gab}
 hidden:
   settings:
     enable: |
-      Поиск отправителя включен.
+      Sender search is enabled.
     disable: |
-      Поиск отправителя отключен.
+      Sender search is disabled.
 privacy:
   settings:
     enable: |
-      Режим приватности включен.
+      Privacy mode is enabled.
     disable: |
-      Режим приватности отключен.
+      Privacy mode is disabled.
 top:
   info: |
-    <b>Топ цитат группы:</b>
+    <b>Top group quotes:</b>
   open: Open top
 donate:
   info: |
@@ -116,20 +116,20 @@ donate:
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
     More: donate.lyo.su
-  title: Донат ${botUsername}
-  description: Поддержка разработки бота
+  title: Donate ${botUsername}
+  description: Support bot development
   successful: |
-    <b>Спасибо за поддержку бота 💜</b>
-  pay: '💜 Оплатить Telegram'
+    <b>Thank you for supporting the bot 💜</b>
+  pay: '💜 Pay via Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Другие способы
+  other: Other options
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Please include emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+    For example, <code>/emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/emoji random</code>
+  done: Emoji successfully changed.
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
@@ -207,6 +207,6 @@ adv:
     accept_btn: Accept
     deny_btn: Deny
 only_admin: |
-  Команду может использовать только администратор группы.
+  Only group administrator can use this command.
 only_group: |
-  Команду можно использовать только в группах.
+  This command can be used only in groups.
