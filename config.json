@@ -7,5 +7,9 @@
   },
   "adv": {
     "moderationChat": 66478514
+  },
+  "donate": {
+    "chatId": 66478514,
+    "messageId": 172634725
   }
 }
