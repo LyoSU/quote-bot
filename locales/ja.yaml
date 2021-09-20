@@ -125,11 +125,11 @@ donate:
   other: 他の方法
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    絵文字を含めてください。
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+    たとえば、 <code>/絵文字💜</code> 以降のすべての新しいステッカー用💜にサフィックスを変更します。
+    ランダム絵文字の場合 <code>/絵文字ランダム</code>
+  done: 絵文字が正常に変更されました。
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
