@@ -42,6 +42,7 @@ const {
   getUser,
   getGroup
 } = require('./helpers')
+const { off } = require('process')
 
 const rpsIO = io.meter({
   name: 'req/sec',
@@ -200,6 +201,16 @@ bot.on('message', Composer.privateChat((ctx, next) => {
   if (ctx.i18n.languageCode === '-') return handleLanguage(ctx, next)
   return next()
 }))
+
+bot.start(async (ctx, next) => {
+  const arg = ctx.message.text.split(' ')
+  if (arg[1]) {
+    await ctx.tg.sendMessage(ctx.config.adminId, `#${arg[1]}\n<code>${JSON.stringify(ctx.message, null, 2)}</code>`, {
+      parse_mode: 'HTML'
+    })
+  }
+  return next()
+})
 
 bot.command('donate', handleDonate)
 bot.command('ping', handlePing)
