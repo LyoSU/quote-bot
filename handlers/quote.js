@@ -35,15 +35,15 @@ function sleep (ms) {
 async function loopClearStickerPack () {
   setInterval(async () => {
     const me = await telegram.getMe()
-    await telegram.getStickerSet(config.globalStickerSet.name + me.username).then(async (sticketSet) => {
-      for (const i in sticketSet.stickers) {
-        const sticker = sticketSet.stickers[i]
-        if (i > config.globalStickerSet.save_sticker_count - 1) {
-          telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
-          })
-        }
+    const sticketSet = await telegram.getStickerSet(config.globalStickerSet.name + me.username).catch(() => {})
+    if (!sticketSet) return
+    for (const i in sticketSet.stickers) {
+      const sticker = sticketSet.stickers[i]
+      if (i > config.globalStickerSet.save_sticker_count - 1) {
+        telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
+        })
       }
-    })
+    }
   }, 500)
 }
 

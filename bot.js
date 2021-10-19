@@ -6,14 +6,8 @@ const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
 const io = require('@pm2/io')
-const {
-  db
-} = require('./database')
-const {
-  stats,
-  onlyGroup,
-  onlyAdmin
-} = require('./middlewares')
+const { db } = require('./database')
+const { stats, onlyGroup, onlyAdmin } = require('./middlewares')
 const {
   handleHelp,
   handleAdv,
@@ -38,11 +32,7 @@ const {
   handleChatMember,
   handleInlineQuery
 } = require('./handlers')
-const {
-  getUser,
-  getGroup
-} = require('./helpers')
-const { off } = require('process')
+const { getUser, getGroup } = require('./helpers')
 
 const rpsIO = io.meter({
   name: 'req/sec',
@@ -54,14 +44,15 @@ const messageCountIO = io.meter({
   unit: 'message'
 })
 
-const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+const randomInteger = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
   handlerTimeout: 1
-})
+});
 
-;(async () => {
+(async () => {
   console.log(await bot.telegram.getMe())
 })()
 
@@ -103,23 +94,36 @@ bot.use((ctx, next) => {
   return next()
 })
 
-bot.command('json', ({ replyWithHTML, message }) => replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>'))
+bot.command('json', ({ replyWithHTML, message }) =>
+  replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>')
+)
 
 bot.use(handleChatMember)
 
-bot.use(Composer.groupChat(Composer.command(rateLimit({
-  window: 1000 * 5,
-  limit: 2,
-  keyGenerator: ctx => ctx.chat.id,
-  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
-}))))
+bot.use(
+  Composer.groupChat(
+    Composer.command(
+      rateLimit({
+        window: 1000 * 5,
+        limit: 2,
+        keyGenerator: (ctx) => ctx.chat.id,
+        onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+      })
+    )
+  )
+)
 
-bot.use(Composer.mount('callback_query', rateLimit({
-  window: 2000,
-  limit: 1,
-  keyGenerator: ctx => ctx.from.id,
-  onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
-})))
+bot.use(
+  Composer.mount(
+    'callback_query',
+    rateLimit({
+      window: 2000,
+      limit: 1,
+      keyGenerator: (ctx) => ctx.from.id,
+      onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
+    })
+  )
+)
 
 bot.on(['channel_post', 'edited_channel_post'], () => {})
 
@@ -130,16 +134,18 @@ const i18n = new I18n({
 
 bot.use(i18n.middleware())
 
-bot.use(session({
-  getSessionKey: (ctx) => {
-    if (ctx.from && ctx.chat) {
-      return `${ctx.from.id}:${ctx.chat.id}`
-    } else if (ctx.from) {
-      return `user:${ctx.from.id}`
+bot.use(
+  session({
+    getSessionKey: (ctx) => {
+      if (ctx.from && ctx.chat) {
+        return `${ctx.from.id}:${ctx.chat.id}`
+      } else if (ctx.from) {
+        return `user:${ctx.from.id}`
+      }
+      return null
     }
-    return null
-  }
-}))
+  })
+)
 
 bot.use(async (ctx, next) => {
   ctx.state.emptyRequest = false
@@ -148,16 +154,24 @@ bot.use(async (ctx, next) => {
   })
 })
 
-bot.use(Composer.groupChat(session({
-  property: 'group',
-  getSessionKey: ctx => {
-    if (ctx.from && ctx.chat && ['supergroup', 'group'].includes(ctx.chat.type)) {
-      return `${ctx.chat.id}`
-    }
-    return null
-  },
-  ttl: 60 * 5
-})))
+bot.use(
+  Composer.groupChat(
+    session({
+      property: 'group',
+      getSessionKey: (ctx) => {
+        if (
+          ctx.from &&
+          ctx.chat &&
+          ['supergroup', 'group'].includes(ctx.chat.type)
+        ) {
+          return `${ctx.chat.id}`
+        }
+        return null
+      },
+      ttl: 60 * 5
+    })
+  )
+)
 
 const updateGroupAndUser = async (ctx, next) => {
   await getUser(ctx)
@@ -190,24 +204,33 @@ bot.use(async (ctx, next) => {
 
 bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
 
-bot.use(Composer.privateChat(async (ctx, next) => {
-  await getUser(ctx)
-  await next(ctx).then(() => {
-    ctx.session.userInfo.save().catch(() => {})
+bot.use(
+  Composer.privateChat(async (ctx, next) => {
+    await getUser(ctx)
+    await next(ctx).then(() => {
+      ctx.session.userInfo.save().catch(() => {})
+    })
   })
-}))
+)
 
-bot.on('message', Composer.privateChat((ctx, next) => {
-  if (ctx.i18n.languageCode === '-') return handleLanguage(ctx, next)
-  return next()
-}))
+bot.on(
+  'message',
+  Composer.privateChat((ctx, next) => {
+    if (ctx.i18n.languageCode === '-') return handleLanguage(ctx, next)
+    return next()
+  })
+)
 
 bot.start(async (ctx, next) => {
   const arg = ctx.message.text.split(' ')
   if (arg[1]) {
-    await ctx.tg.sendMessage(ctx.config.adminId, `#${arg[1]}\n<code>${JSON.stringify(ctx.message, null, 2)}</code>`, {
-      parse_mode: 'HTML'
-    })
+    await ctx.tg.sendMessage(
+      ctx.config.adminId,
+      `#${arg[1]}\n<code>${JSON.stringify(ctx.message, null, 2)}</code>`,
+      {
+        parse_mode: 'HTML'
+      }
+    )
   }
   return next()
 })
@@ -215,18 +238,25 @@ bot.start(async (ctx, next) => {
 bot.command('donate', handleDonate)
 bot.command('ping', handlePing)
 bot.action(/(donate):(.*)/, handleDonate)
-bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) => answerPreCheckoutQuery(true))
+bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) =>
+  answerPreCheckoutQuery(true)
+)
 bot.on('successful_payment', handleDonate)
 
 bot.command('qtop', onlyGroup, handleTopQuote)
-bot.command('qrand', onlyGroup, rateLimit({
-  window: 1000 * 50,
-  limit: 2,
-  keyGenerator: ctx => {
-    return ctx.chat.id
-  },
-  onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
-}), handleRandomQuote)
+bot.command(
+  'qrand',
+  onlyGroup,
+  rateLimit({
+    window: 1000 * 50,
+    limit: 2,
+    keyGenerator: (ctx) => {
+      return ctx.chat.id
+    },
+    onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+  }),
+  handleRandomQuote
+)
 
 bot.command('q', handleQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
@@ -260,27 +290,38 @@ bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
-bot.on('message', Composer.groupChat(rateLimit({
-  window: 1000 * 5,
-  limit: 1,
-  keyGenerator: ctx => ctx.chat.id,
-  onLimitExceeded: (ctx, next) => {
-    ctx.state.skip = true
-    return next()
-  }
-}), async (ctx, next) => {
-  if (ctx.state.skip) return next()
-  await getGroup(ctx)
-  const gab = ctx.group.info.settings.randomQuoteGab
+bot.on(
+  'message',
+  Composer.groupChat(
+    rateLimit({
+      window: 1000 * 5,
+      limit: 1,
+      keyGenerator: (ctx) => ctx.chat.id,
+      onLimitExceeded: (ctx, next) => {
+        ctx.state.skip = true
+        return next()
+      }
+    }),
+    async (ctx, next) => {
+      if (ctx.state.skip) return next()
+      await getGroup(ctx)
+      const gab = ctx.group.info.settings.randomQuoteGab
 
-  if (gab > 0) {
-    if (randomInteger(0, gab) === gab && (ctx.group.info.lastRandomQuote.getTime() / 1000) < Date.now() / 1000 - 60) {
-      ctx.group.info.lastRandomQuote = Date()
-      return handleRandomQuote(ctx)
+      if (gab > 0) {
+        if (
+          randomInteger(0, gab) === gab &&
+          ctx.group.info.lastRandomQuote.getTime() / 1000 <
+            Date.now() / 1000 - 60
+        ) {
+          ctx.group.info.lastRandomQuote = Date()
+          ctx.state.randomQuote = true
+          return handleRandomQuote(ctx)
+        }
+      }
+      return next()
     }
-  }
-  return next()
-}))
+  )
+)
 
 bot.use((ctx, next) => {
   ctx.state.emptyRequest = true
@@ -291,15 +332,17 @@ db.connection.once('open', async () => {
   console.log('Connected to MongoDB')
 
   if (process.env.BOT_DOMAIN) {
-    bot.launch({
-      webhook: {
-        domain: process.env.BOT_DOMAIN,
-        hookPath: `/QuoteBot:${process.env.BOT_TOKEN}`,
-        port: process.env.WEBHOOK_PORT || 2200
-      }
-    }).then(() => {
-      console.log('bot start webhook')
-    })
+    bot
+      .launch({
+        webhook: {
+          domain: process.env.BOT_DOMAIN,
+          hookPath: `/QuoteBot:${process.env.BOT_TOKEN}`,
+          port: process.env.WEBHOOK_PORT || 2200
+        }
+      })
+      .then(() => {
+        console.log('bot start webhook')
+      })
   } else {
     // const updates = await bot.telegram.callApi('getUpdates', { offset: -1 })
     // const offset = updates.length && updates[0].update_id + 1

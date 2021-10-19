@@ -49,9 +49,11 @@ module.exports = async ctx => {
     adv.stats.impressions += 1
     adv.save()
   } else {
-    await ctx.replyWithHTML(ctx.i18n.t('random.empty'), {
-      reply_to_message_id: ctx.message.message_id,
-      allow_sending_without_reply: true
-    })
+    if (!ctx.state.randomQuote) {
+      await ctx.replyWithHTML(ctx.i18n.t('random.empty'), {
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
+      })
+    }
   }
 }
