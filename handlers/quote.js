@@ -283,6 +283,13 @@ module.exports = async (ctx, next) => {
       message.media = [quoteMessage.sticker]
       message.mediaType = 'sticker'
     }
+    if (flag.media && (quoteMessage.animation || quoteMessage.video)) {
+      const { thumbnail } = quoteMessage.animation || quoteMessage.video
+      message.media = [thumbnail]
+    }
+    if (flag.media && quoteMessage.voice) {
+      message.voice = quoteMessage.voice
+    }
 
     if (messageFrom.id) {
       message.chatId = messageFrom.id

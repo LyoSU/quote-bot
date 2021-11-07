@@ -125,6 +125,32 @@ function getChat (chatID) {
   })
 }
 
+function decodeWaveform (wf) {
+  const bitsCount = wf.length * 8
+  const valuesCount = ~~(bitsCount / 5)
+
+  if (!valuesCount) return []
+
+  const lastIdx = valuesCount - 1
+
+  const result = []
+  for (let i = 0, j = 0; i < lastIdx; i++, j += 5) {
+    const byteIdx = ~~(j / 8)
+    const bitShift = j % 8
+    result[i] = (wf.readUInt16LE(byteIdx) >> bitShift) & 0b11111
+  }
+
+  const lastByteIdx = ~~((lastIdx * 5) / 8)
+  const lastBitShift = (lastIdx * 5) % 8
+  const lastValue =
+      lastByteIdx === wf.length - 1
+        ? wf[lastByteIdx]
+        : wf.readUInt16LE(lastByteIdx)
+  result[lastIdx] = (lastValue >> lastBitShift) & 0b11111
+
+  return result
+}
+
 function getMessages (chatID, messageIds) {
   const tdlibMessageIds = messageIds.map((id) => id * Math.pow(2, 20))
 
@@ -195,15 +221,25 @@ function getMessages (chatID, messageIds) {
               if (messageInfo.content) {
                 const mediaType = {
                   messagePhoto: 'photo',
-                  messageSticker: 'sticker'
-                  // messageVideo: 'video'
+                  messageSticker: 'sticker',
+                  messageVoiceNote: 'voice',
+                  messageVideo: 'video',
+                  messageAnimation: 'animation'
                 }
 
                 const type = mediaType[messageInfo.content._]
 
                 if (type) {
                   let media
-                  if (messageInfo.content[type].sizes) {
+                  if (messageInfo.content.voice_note) {
+                    const { voice_note } = messageInfo.content
+                    const waveform = decodeWaveform(Buffer.from(voice_note.waveform, 'base64'))
+
+                    media = {
+                      file_id: voice_note.voice.remote.id,
+                      waveform
+                    }
+                  } else if (messageInfo.content[type].sizes) {
                     media = messageInfo.content[type].sizes.map((size) => {
                       return {
                         file_id: size[type].remote.id,
@@ -213,6 +249,15 @@ function getMessages (chatID, messageIds) {
                         width: size.width
                       }
                     })
+                  } else if (messageInfo.content[type].thumbnail) {
+                    const { file } = messageInfo.content[type].thumbnail
+                    media = {
+                      thumbnail: {
+                        file_id: file.remote.id,
+                        file_unique_id: file.remote.unique_id,
+                        file_size: file.size
+                      }
+                    }
                   } else {
                     media = {
                       file_id: messageInfo.content[type][type].remote.id,
