@@ -79,7 +79,7 @@ module.exports = async (ctx, next) => {
   }
 
   quoteCountIO.mark()
-  await ctx.replyWithChatAction('upload_photo')
+  await ctx.replyWithChatAction('choose_sticker')
 
   const flag = {
     count: false,
