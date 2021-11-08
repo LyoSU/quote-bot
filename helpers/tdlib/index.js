@@ -249,7 +249,7 @@ function getMessages (chatID, messageIds) {
                         width: size.width
                       }
                     })
-                  } else if (messageInfo.content[type].thumbnail) {
+                  } else if (type === 'video' && type === 'animation' && messageInfo.content[type].thumbnail) {
                     const { file } = messageInfo.content[type].thumbnail
                     media = {
                       thumbnail: {
