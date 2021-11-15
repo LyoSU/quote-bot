@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     Command must be sent as a reply to a message.
   set_background_color: |
-    ${backgroundColor}
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
