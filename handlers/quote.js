@@ -245,13 +245,13 @@ module.exports = async (ctx, next) => {
       }
     } else if (quoteMessage.forward_from) {
       messageFrom = quoteMessage.forward_from
-    } else if (quoteMessage.from.id === 1087968824) {
+    } else if ([1087968824, 777000].includes(quoteMessage.from.id)) {
       /* 1087968824 is id of @GroupAnonymousBot. This part swaps anon bot data to the chat data */
       messageFrom = {
-        id: quoteMessage.chat.id,
-        name: quoteMessage.chat.title,
-        username: quoteMessage.chat.username || null,
-        photo: quoteMessage.chat.photo
+        id: quoteMessage.sender_chat.id,
+        name: quoteMessage.sender_chat.title,
+        username: quoteMessage.sender_chat.username || null,
+        photo: quoteMessage.sender_chat.photo
       }
     } else {
       messageFrom = quoteMessage.from
