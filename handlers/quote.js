@@ -257,6 +257,7 @@ module.exports = async (ctx, next) => {
       messageFrom = quoteMessage.from
     }
 
+    if (messageFrom.title) messageFrom.name = messageFrom.title
     if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
