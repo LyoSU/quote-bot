@@ -191,10 +191,6 @@ module.exports = async (ctx, next) => {
       continue
     }
 
-    if (!quoteMessage.from) {
-      console.log(quoteMessage)
-    }
-
     let messageFrom
 
     if (quoteMessage.forward_sender_name) {
