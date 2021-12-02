@@ -55,7 +55,7 @@ quote:
   empty_forward: |
     Команду необхідно писати у відповідь на повідомлення.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Колір фону цитат встановлений на: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
@@ -108,13 +108,13 @@ top:
   open: Open top
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Ви можете купити кави для розробника або що - то інше з наступними деталями:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    ETH / BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
-    More: donate.lyo.su
+    Більше: donate.lyo.su
   title: Донат ${botUsername}
   description: Підтримка розробки бота
   successful: |
