@@ -105,7 +105,7 @@ privacy:
 top:
   info: |
     <b>Топ цитат групи:</b>
-  open: Open top
+  open: відкрити топ
 donate:
   info: |
     Ви можете купити кави для розробника або що - то інше з наступними деталями:
@@ -131,80 +131,80 @@ emoji:
   done: Смайли успішно змінено.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Ви можете придбати рекламу в нас за велику кількість активних користувачів і груп</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Наш бот більш, ніж 30 "000 активних груп і більше ніж 70` 000 користувачів використовують бота щомісяця.
+    Серед них є користувачі з різних країн. Ви можете вибрати мову користувачів, за якими має бути відображена реклама
+    • Реклама відображається під цитатою у формі кнопки або текстового повідомлення, в залежності від чату користувача
+    • Ви вказуєте ціну реклами самостійно; Перш за все, реклама, для якої буде доставлена найвища сума, буде відображатись
+    • Текст і зміст реклами повинні відповідати нашим правилам (/adv_rules) і перед ним розміщенням Ви повинні пройти модерацію. Це можна зробити, перш ніж зробити депозит
 
-    Balance: ${balance} USD
+    Баланс: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>У рекламі <u>заборонено</u></b>
+    • Використання нецензурної ваги чи образи
+    • Використання більше 1 емодзі в тексті
+    • Оманлива інформація
+    • Інформація, заборонена законодавством України
+    • Контент для дорослих
+    • Азартні ігри
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Ми також маємо право відхилити рекламу, якщо вона нам просто не подобається без причини.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: "Створити оголошення\nСтворити рекламу\nСтворити рекламний ролик"
+    list_btn: Список оголошень
+    pay_btn: Поповнити баланс
   create:
     enter_text: |
-      Enter your ad text:
+      Введіть текст оголошення:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Не більше 70 символів і має відповідати нашим правилам (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Введіть посилання на рекламований ресурс:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Посилання має бути повним, якщо ви щось рекламуєте в Telegram, посилання має починатися з t.me.
+      Ресурс повинен відповідати нашим правилам (/adv_rules), якщо після проходження модерації сайт буде замінено, ваш аккаунт буде заблоковано, а гроші не повернуті.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Виберіть мову користувачів, яким відображатиметься оголошення
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Число – це кількість користувачів, які потенційно побачать вашу рекламу цією мовою.
+      Враховуються лише користувачі, які фактично використовують бота. Але рекламу можуть бачити й інші користувачі, які входять до групи, де була зроблена цитата, тому ця цифра може бути значно більшою
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Мова не відповідає країні.
+      Ви можете вибрати лише одну мову, якщо вам потрібно декілька, створіть оголошення ще раз іншою мовою.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Вкажіть ціну за 1000 показів вашої реклами в доларах США:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Середня ціна активних оголошень:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>Мінімальна ціна 0,15 USD.
+      Оголошення відображаються випадковим чином, але найвищий шанс на показ мають оголошення, які мають вищу ціну за покази.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      Оголошення відправлено на модерацію. Будь ласка, наберіться терпіння та зачекайте. Якщо модерація пройшла успішно або безуспішно, ви отримаєте сповіщення.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
+      вибрати_список
+    wait_btn: чекати_btn
     ready_btn: ready_btn
     end_btn: end_btn
     selected_list: |
-      selected_list
+      вибраний_список
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} з <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Текст: ${adv.text}
+      Посилання: ${adv.link}
+      Місцевість: ${adv.locale}
+      Ціна: ${adv.price}
+      Кількість ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Оголошення успішно модеровано. Ви можете почати його показ у рекламному розділі: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      На жаль, оголошення не було модеровано. Будь ласка, прочитайте наші правила (/adv_rules), якщо ви впевнені, що це була помилка, напишіть нам на @Ly_OBot і включіть цей тег у повідомлення, що описує проблему: #qba_${adv.id}
+    accept_btn: Прийняти
+    deny_btn: Відхилити
 only_admin: |
   Команду може використовувати тільки адміністратор групи.
 only_group: |
