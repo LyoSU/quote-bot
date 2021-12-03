@@ -56,7 +56,7 @@ quote:
   empty_forward: |
     Команду необходимо писать в ответ на сообщение.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   sticker:
 sticker:
   save:
@@ -106,16 +106,16 @@ privacy:
 top:
   info: |
     <b>Топ цитат группы:</b>
-  open: Open top
+  open: С открытым верхом
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Вы можете купить кофе для разработчика или что - то другое с следующими деталями:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+    ETH / BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa / MasterCard</a>
 
-    More: donate.lyo.su
+    Подробнее: donate.lyo.su
   title: Донат ${botUsername}
   description: Поддержка разработки бота
   successful: |
@@ -201,10 +201,10 @@ adv:
       Price: ${adv.price}
       Count ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Объявление успешно модерировано. Вы можете начать показывать его в разделе рекламы: / adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
+      К сожалению, объявление не прошло модерацию. Пожалуйста, ознакомьтесь с нашими правилами (/ adv_rules), если вы уверены, что это была ошибка, напишите нам на @Ly_OBot и включите этот тег в сообщение с описанием проблемы: #qba_${adv.id}
+    accept_btn: Принять
     deny_btn: Deny
 only_admin: |
   Команду может использовать только администратор группы.
