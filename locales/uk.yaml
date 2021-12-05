@@ -108,7 +108,7 @@ top:
   open: Відкрити топ
 donate:
   info: |
-    Ви можете купити кави для розробника або що - то інше з наступними деталями:
+    Ви можете купити кави для розробника або щось ще, за реквізитами:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH / BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
@@ -184,12 +184,12 @@ adv:
       Оголошення відправлено на модерацію. Будь ласка, наберіться терпіння та зачекайте. Якщо модерація пройшла успішно або безуспішно, ви отримаєте сповіщення.
   list:
     select_list: |
-      вибрати_список
-    wait_btn: чекати_btn
+      select_list
+    wait_btn: wait_btn
     ready_btn: ready_btn
     end_btn: end_btn
     selected_list: |
-      вибраний_список
+      selected_list
   moderate:
     adv: |
       Adv #id_${adv._id} з <a href="tg://user?id=${telegramId}">${name}</a>
