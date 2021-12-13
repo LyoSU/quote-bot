@@ -361,7 +361,7 @@ module.exports = async (ctx, next) => {
   let format
   if (!flag.privacy && type === 'quote') format = 'png'
 
-  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate?botToken=${process.env.BOT_TOKEN}`, {
+  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate.png?botToken=${process.env.BOT_TOKEN}`, {
     json: {
       type,
       format,
@@ -371,9 +371,10 @@ module.exports = async (ctx, next) => {
       scale: flag.scale || scale,
       messages: quoteMessages
     },
+    responseType: 'buffer',
     timeout: 1000 * 30,
     retry: 1
-  }).json().catch((error) => {
+  }).catch((error) => {
     return { error }
   })
 
@@ -401,10 +402,9 @@ module.exports = async (ctx, next) => {
   let emojis = ctx.group ? ctx.group.info.settings.emojiSuffix : ctx.session.userInfo.settings.emojiSuffix
   if (emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
 
-  if (generate.result.image) {
-    // eslint-disable-next-line node/no-deprecated-api
-    const image = new Buffer(generate.result.image, 'base64')
-    if (generate.result.type === 'quote') {
+  if (generate.body) {
+    const image = generate.body
+    if (generate.headers['quote-type'] === 'quote') {
       let replyMarkup = {}
 
       if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
@@ -503,7 +503,7 @@ module.exports = async (ctx, next) => {
 
         await quoteDb.save()
       }
-    } else if (generate.result.type === 'image') {
+    } else if (generate.headers['quote-type'] === 'image') {
       await ctx.replyWithPhoto({
         source: image,
         filename: 'quote.png'
