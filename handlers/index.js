@@ -8,7 +8,7 @@ module.exports = {
   handleRandomQuote: require('./random'),
   handleColorQuote: require('./color-settings'),
   handleSettingsHidden: require('./hidden-settings'),
-  handleGabHidden: require('./gab-settings'),
+  handleGabSettings: require('./gab-settings'),
   handleSave: require('./sticker-save'),
   handleDelete: require('./sticker-delete'),
   handleRate: require('./rate'),

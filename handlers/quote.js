@@ -329,6 +329,7 @@ module.exports = async (ctx, next) => {
       }
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
+      if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
     }
 
     quoteMessages[index] = message

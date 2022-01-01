@@ -18,7 +18,7 @@ const {
   handleRandomQuote,
   handleColorQuote,
   handleSettingsHidden,
-  handleGabHidden,
+  handleGabSettings,
   handleSave,
   handleDelete,
   handleRate,
@@ -266,7 +266,7 @@ bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
 bot.command('emoji', onlyAdmin, handleEmoji)
-bot.hears(/^\/(gab) (\d+)/, onlyAdmin, handleGabHidden)
+bot.hears(/^\/(gab) (\d+)/, onlyGroup, onlyAdmin, handleGabSettings)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
