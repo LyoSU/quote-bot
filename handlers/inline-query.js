@@ -8,7 +8,7 @@ composer.on('inline_query', async (ctx) => {
 
   if (ctx.inlineQuery.query.match(/top:(.*)/)) {
     const groupId = ctx.inlineQuery.query.match(/top:(.*)/)
-    const group = await ctx.db.Group.findOne({ group_id: groupId[1] })
+    const group = await ctx.db.Group.findById(groupId[1])
 
     if (group) {
       const topQuote = await ctx.db.Quote.find({
