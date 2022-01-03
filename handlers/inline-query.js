@@ -4,11 +4,13 @@ const Markup = require('telegraf/markup')
 const composer = new Composer()
 
 composer.on('inline_query', async (ctx) => {
+  const offset = parseInt(ctx.inlineQuery.offset) || 0
+  const limit = 50
   const stickersResult = []
 
   if (ctx.inlineQuery.query.match(/top:(.*)/)) {
     const groupId = ctx.inlineQuery.query.match(/top:(.*)/)
-    const group = await ctx.db.Group.findById(groupId[1])
+    const group = await ctx.db.Group.findById(groupId[1]).catch(() => {})
 
     if (group) {
       const topQuote = await ctx.db.Quote.find({
@@ -16,7 +18,7 @@ composer.on('inline_query', async (ctx) => {
         'rate.score': { $gt: 0 }
       }).sort({
         'rate.score': -1
-      }).limit(50)
+      }).limit(limit).skip(offset)
 
       topQuote.forEach(quote => {
         stickersResult.push({
@@ -34,7 +36,8 @@ composer.on('inline_query', async (ctx) => {
 
       ctx.state.answerIQ = [stickersResult, {
         is_personal: false,
-        cache_time: 60 * 5
+        cache_time: 60 * 5,
+        next_offset: offset + limit
       }]
     }
   }
@@ -42,7 +45,7 @@ composer.on('inline_query', async (ctx) => {
   if (stickersResult.length === 0) {
     const likedQuote = await ctx.db.Quote.find({ 'rate.votes.0.vote': ctx.session.userInfo._id.toString() }).sort({
       'rate.score': -1
-    }).limit(50)
+    }).limit(limit).skip(offset)
 
     likedQuote.forEach(quote => {
       stickersResult.push({
@@ -60,7 +63,8 @@ composer.on('inline_query', async (ctx) => {
 
     ctx.state.answerIQ = [stickersResult, {
       is_personal: true,
-      cache_time: 5
+      cache_time: 5,
+      next_offset: offset + limit,
     }]
   }
 })
