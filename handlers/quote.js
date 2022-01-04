@@ -89,6 +89,7 @@ module.exports = async (ctx, next) => {
     rate: false,
     color: false,
     scale: false,
+    crop: false,
     privacy: false
   }
 
@@ -104,6 +105,7 @@ module.exports = async (ctx, next) => {
     flag.hidden = args.find((arg) => ['h', 'hidden'].includes(arg))
     flag.media = args.find((arg) => ['m', 'media'].includes(arg))
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
+    flag.crop = args.find((arg) => ['c', 'crop'].includes(arg))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
@@ -278,7 +280,10 @@ module.exports = async (ctx, next) => {
       message.entities = quoteMessage.entities
     }
 
-    if (!text) flag.media = true
+    if (!text) {
+      flag.media = true
+      message.mediaCrop = flag.crop || false
+    }
     if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
     if (flag.media && quoteMessage.sticker) {
       message.media = [quoteMessage.sticker]
@@ -330,6 +335,15 @@ module.exports = async (ctx, next) => {
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
       if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
+    }
+
+    if (!message.text && !message.media) {
+      message.text = 'Unsupported message'
+      message.entities = [{
+        offset: 0,
+        length: 19,
+        type: 'italic'
+      }]
     }
 
     quoteMessages[index] = message
