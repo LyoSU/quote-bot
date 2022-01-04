@@ -70,16 +70,7 @@ const generateRandomColor = () => {
 const minIdsInChat = {}
 
 module.exports = async (ctx, next) => {
-  if (ctx.chat.type === 'private') {
-    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
-    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(1000)
-    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
-    delete minIdsInChat[ctx.from.id]
-  }
-
   quoteCountIO.mark()
-  await ctx.replyWithChatAction('choose_sticker')
 
   const flag = {
     count: false,
@@ -109,7 +100,15 @@ module.exports = async (ctx, next) => {
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
+  } else if (ctx.chat.type === 'private') {
+    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
+    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
+    await sleep(1000)
+    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
+    delete minIdsInChat[ctx.from.id]
   }
+
+  await ctx.replyWithChatAction('choose_sticker')
 
   // set background color
   let backgroundColor
