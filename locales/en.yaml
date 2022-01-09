@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
   /qrand - random a quote with a positive rating of
   /qtop - top group quotes
-  /emoji - change the emoji suffix for stickers
+  /qemoji- change the emoji suffix for stickers
 
   /help or /start - get this text
 
@@ -50,6 +50,7 @@ btn:
   add_group: Add to Group
   help: Help
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     Command must be sent as a reply to a message.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -127,8 +130,8 @@ emoji:
   info: |
     Please include emoji.
 
-    For example, <code>/emoji 💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/emoji random</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji successfully changed.
 adv:
   about: |
