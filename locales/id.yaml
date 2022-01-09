@@ -130,8 +130,8 @@ emoji:
   info: |
     Please include emoji.
 
-    Misalnya, <code>/emoji</code> akan mengubah akhiran menjadi untuk semua stiker baru berikutnya.
-    Untuk emoji acak <code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji berhasil diubah.
 adv:
   about: |
