@@ -27,10 +27,10 @@ help: |2
   <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
   <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-    <code>/qrate</code> <i>[тільки для адміністраторів]</i> - включити / вимкнути оцінку цитат
-    /qrand - випадкова цитата з позитивним рейтингом
-    /qtop - топ цитат групи
-    /qemoji- змінити емодзі-суфікс для стікерів
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
   /help or /start - get this text
 
@@ -130,8 +130,8 @@ emoji:
   info: |
     Please include emoji.
 
-    Наприклад, <code> /qemoji💜 </code> змінить емодзі на 💜 для всіх наступних нових наклейок.
-    Для випадкових смайлів <code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Смайли успішно змінено.
 adv:
   about: |
