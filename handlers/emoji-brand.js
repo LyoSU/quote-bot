@@ -2,13 +2,14 @@ module.exports = async ctx => {
   let emojiBrand = 'apple'
 
   const match = ctx.message.text.split(' ')
+  const setEmojiBrand = match[1].toLowerCase()
 
   if (match && [
     'apple',
     'google',
     'twitter'
-  ].includes(match[1].toLowerCase())) {
-    emojiBrand = match[1]
+  ].includes(setEmojiBrand)) {
+    emojiBrand = setEmojiBrand
   }
 
   if (ctx.group) {
