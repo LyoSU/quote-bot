@@ -1,24 +1,24 @@
 ---
 language_name: '🇮🇹'
 help: |2
-  <b>Ciao!</b>
-  Ti aiuterò a creare delle citazioni utilizzando un messaggio.
-  Il bot funziona sia tramite messaggi privati e sia con i gruppi.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Comandi disponibili:</b>
-  /q <i>[in risposta ad un messaggio]</i> — Crea una citazione utilizzando il messaggio
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>Impostazioni extra per il comando /q:</b>
-      Codice HEX o nome del colore: <code>#cbafff</code> oppure <code>indigo</code> — Crea una citazione di colore <b>#cbafff</b>
-      Digita: <code>3</code> — crea una citazione utilizzando gli ultimi <b>3 post</b>
-      <code>random</code>: genera un colore random alla citazione
-      <code>reply</code> oppure <code>r</code>: crea una citazione salvando le risposte
-      <code>p</code> o <code>png</code> — crea un'immagine formato PNG della citazione
-      <code>i</code> o <code>img</code> — crea un'immagine della citazione
-      <code>rate</code> — Aggiunge alla citazione la possibilità di poter ricevere voti
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>Esempi d'utilizzo delle opzioni extra:</b>
-    <code>/q white r p</code>
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
@@ -32,10 +32,7 @@ help: |2
   /qtop - top group quotes
   /qemoji- change the emoji suffix for stickers
 
-  <code>/qrate</code> <i>[solo per gli amministratori]</i> — abilita/disabilita la possibilità di votare le citazioni
-  /qrand — citazione random con punteggio positivo
-  /qtop — top citazioni del gruppo
-  /qemoji- cambia il suffiso emoji degli stickers
+  /help or /start - get this text
 
   🇺🇸 /lang - change the language
   🇷🇺 /lang - изменить язык
@@ -133,8 +130,8 @@ emoji:
   info: |
     Please include emoji.
 
-    Ad esempio, <code>/qemoji💜</code> cambierà il suffisso in 💜 a tutti i successivi nuovi stickers.
-    Per utilizzare un'emoji random bisogna usare il comando <code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: L'emoji è stata cambiata correttamente.
 adv:
   about: |
