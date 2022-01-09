@@ -1,39 +1,46 @@
 ---
 language_name: '🇹🇷 Türkçe'
 help: |2
-  <b>Merhaba!</b>
-  Bir mesajı alıntı oluşturup size gönderirim.
-  Bunu yapabilmem için bir mesajı /q komutu ile yanıtlayın.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Kullanılabilir Komutlar:</b>
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-  <code>/help</code> — Bu mesajı gösterir
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-  <code>/q #1b1429</code> <i>[bir mesajı yanıtlayarak]</i> — renkli bir alıntı mesajı oluşturur<b>#1b1429</b>
-  <code>/q 3</code> <i>[bir mesajı yanıtlayarak]</i> — son atılan <b>3 mesajdan</b> alıntı oluşturur
-  <code>/q r</code> <i>[bir mesajı yanıtlayarak]</i> — cevap verilmiş bir mesaj zincirinden alıntı oluşturur
-  <code>/q white r 3</code> <i>[bir mesajı yanıtlayarak]</i> — son 3 mesajı kaydedip <b>white</b> yani beyaz renkte alıntı oluşturur
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — varsayılan rengi <b>green</b> yani yeşil olarak ayarlar
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 💜</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan mesajı 💜 emojisiyle grup paketine kaydeder
-  <code>/qd</code> <i>[bir mesajı yanıtlayarak] [sadece yöneticiler için]</i> — alıntılanan çıkartmayı, grubun çıkartma paketinden kaldırır
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-    <b>❕ Ekstra Bilgiler:</b>
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-  ➖ Alıntı rengi bir HEX kodu olmalıdır. Örneğin: <b>#ffffff</b>, veya bir metin açıklaması ise: <b>white</b>.
-  ➖ Benzer şekilde, bunu başka herhangi bir renkle yapabilirsiniz.
-  ➖ Rastgele bir renk için <b>random</b> yazabilirsiniz.
-  ➖ Çıkartmayı kaydetmek için herhangi bir emoji kullanılabilir.
-  ➖ Emoji belirtilmesi zorunlu değildir.
-  ➖ <code>/qs</code> komutu, özel sohbetlerin dışında sadece grup yöneticileri tarafından kullanılabilir.
-  ➖ Bot hem grup sohbetinde hem de doğrudan mesajlarda çalışabilir.
-  ➖ Grubunuza botu eklemek için aşağıdaki butona tıklayın.
-  ➖ Argümanların sırası önemli değildir.
+  /help or /start - get this text
 
-  <b>👨🏻‍💻 Geliştiricinin Blogu:</b> @LyBlog
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
+
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
-  <b>Çeviri:</b> @Holytotem, @By_Azade
 help_group: |
   <b>Merhaba!</b>
   /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
@@ -41,6 +48,7 @@ btn:
   add_group: Gruba Ekle
   help: Dökümanlar
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Fiyat teklifi oluşturulamadı</b>
     <pre>${error}</pre>
@@ -48,6 +56,8 @@ quote:
     Komut, bir mesajı yanıtlayarak kullanılmalıdır.
   set_background_color: |
     Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -116,10 +126,10 @@ donate:
   other: Diğer yöntemler
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Please include emoji.
 
-    Например, <code>/qemoji💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |

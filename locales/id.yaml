@@ -1,36 +1,46 @@
 ---
 language_name: '🇮🇩 Indonesia'
 help: |2
-  <b>Halo!</b>
-      Saya akan membantu Anda membuat kutipan dari sebuah pesan.
-      Untuk itu cukup balas pesan dengan /q
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-        <b>⚙️ Perintah yang tersedia:</b>
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-      <code>/help</code> — dapatkan teks ini
-      <code>/q #1b1429</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari pesan dengan warna<b>#1b1429</b>
-      <code>/q 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dari <b>balasan dan turun dari itu menjadi 3 pesan</b>
-      <code>/q r</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan balasan
-      <code>/q white r 3</code> <i>[sebagai balasan atas sebuah pesan]</i> — membuat kutipan dengan 3 pesan berwarna <b>white</b> dengan balasan
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-      <code>/qcolor green</code> — membuat warna <b>hijau</b> bawaan
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-      <code>/qs 💜</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — menyimpan stiker/foto/dokumen dengan foto ke dalam paket stiker grup dengan 💜 emoji
-      <code>/qd</code> <i>[sebagai balasan atas sebuah pesan] [hanya untuk administrator]</i> — hapus stiker dari paket stiker grup
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-        <b>❕ Informasi tambahan:</b>
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-      ➖ Urutan argumen tidak penting
-      ➖ Warna kutipan harus berupa kode HEX, misalnya <b>#ffffff</b>, atau anda dapat menentukannya dengan nama: <b>white</b>.
-      ➖ Untuk warna acak, anda bisa menulis <b>acak</b> sebagai warna
-      ➖ Emoji apa pun untuk menyimpan stiker dapat digunakan.
-      ➖ Spesifikasi emoji tidak diperlukan.
-      ➖ Perintah awal <code>/qs</code> harus dijalankan oleh pembuat obrolan, sebelum itu menulis ke pesan langsung bot.
-      ➖ Bot dapat berfungsi baik dalam obrolan maupun dalam pesan langsung.
-      ➖ Untuk menambahkan bot ke grup Anda, klik tombol di bawah.
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-      <b>👨🏻‍💻 Pengembang blog:</b> @LyBlog
-      <b>GitHub:</b> github.com/LyoSU/quote-bot
+  /help or /start - get this text
+
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
+
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
   Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan
@@ -40,6 +50,7 @@ btn:
   add_group: Tambahkan ke Grup
   help: Bantuan
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Gagal menghasilkan kutipan</b>
     <pre>${error}</pre>
@@ -47,6 +58,8 @@ quote:
     Perintah harus dijalankan dengan membalas pesan.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -115,10 +128,10 @@ donate:
   other: Sebaliknya
 emoji:
   info: |
-    Harap sertakan emoji.
+    Please include emoji.
 
-    Misalnya, <code>/emoji</code> akan mengubah akhiran menjadi untuk semua stiker baru berikutnya.
-    Untuk emoji acak <code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji berhasil diubah.
 adv:
   about: |

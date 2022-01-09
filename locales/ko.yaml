@@ -1,45 +1,45 @@
 ---
 language_name: '🇰🇷 한국어'
 help: |2
-  <b>안녕하세요!</b>
-  나는 포스트에서 인용문을 만드는 것을 도와줄 것이다.
-  봇은 개인 메시지와 그룹 모두에서 작동할 수 있습니다.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ 사용 가능한 명령:</b>
-  /q <i>[메시지에 대한 응답으로]</i> - 메시지에서 인용하기
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>/q 명령에 사용 가능한 플래그:</b>
-      hex 코드 또는 색상 이름: <code>#cbafff</code> 또는 <code>남색</code> - 색상 <b>#cbafff</b>
-      자리수: <code>3</code> <b>3 게시물에서 인용하기</b> 아래로
-      <code>무작위</code>: 무작위 인용 색상
-      <code>회신</code> 또는 <code>r</code>: 답변을 저장하여 견적을 작성하십시오
-      <code>p</code> 또는 <code>png</code> - PNG 견적을 작성하십시오
-      <code>i</code> 또는 <code>img</code> - 그림으로 견적을 작성하십시오
-      <code>rate</code> - a에 등급 추가 따옴표
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>플래그 사용 예:</b>
-    <code>/q 흰색 rp</code>
-    <code>/qi 빨간색</code>
-    <code>/qr #cbafff</code>
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor 녹색</code> - 기본적으로 따옴표의 색상을 설정합니다. <b>녹색</b> <i>(16진수 코드 or color name)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[메시지 답장] [관리자 전용]</i> - 사진이 포함된 스티커/사진/문서를 이모지가 있는 그룹의 스티커팩에 저장 🥰💜 <i>(이모지) 임의의 숫자일 수 있음)</i>
-  <code>/qd</code> <i>[i n 메시지에 대한 응답] [관리자 전용]</i> - 그룹의 스티커 팩에서 스티커 제거
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[관리자 전용]</i> - 따옴표 평가 활성화/비활성화
-  /qrand - 임의의 a가 있는 견적 긍정적인 평가
-  /qtop - 상위 그룹 인용
-  /qemoji- 스티커의 이모티콘 접미사 변경
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-  /help 또는 /start - 이 텍스트 받기
+  /help or /start - get this text
 
-  🇺🇸 /lang - 언어 변경
+  🇺🇸 /lang - change the language
   🇷🇺 /lang - изменить язык
 
-  <b>개발자용 커피 구매:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>안녕하세요!</b>
@@ -50,6 +50,7 @@ btn:
   add_group: 그룹에 추가
   help: Help
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     Command must be sent as a reply to a message.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:

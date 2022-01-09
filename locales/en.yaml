@@ -51,7 +51,6 @@ btn:
   help: Help
 quote:
   unsupported_message: Unsupported message
-
   api_error: |
     <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>

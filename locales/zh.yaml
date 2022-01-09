@@ -1,45 +1,46 @@
 ---
 language_name: '🇨🇳 簡體中文'
 help: |2
-  <b>你好！</b>
-  我可以帮助你从帖子中创建引用贴纸。
-  此 bot 可以在私人消息和群组中使用
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ 可用命令：</b>
-  /q <i>[回复消息]</i> - 从消息中引用
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>/q 命令的可用参数：</b>
-      hex代码或颜色名称： <code>#cbafff</code> 或 <code>indigo</code> - 创建底色为 <b>#cbafff</b> 的引用
-      数字： <code>3</code> - 从以下 <b>3 条消息</b> 创建引用
-      <code>random</code>：随机引用底色
-      <code>reply</code> 或 <code>r</code>: 引用并保存回复
-      <code>p</code> 或 <code>png</code> - 创建 PNG 格式的引用
-      <code>i</code> 或 <code>img</code> - 创建图片类型的引用
-      <code>rate</code> - 为引用添加评价
-    <b>使用参数的例子：</b>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
+
+    <b>Example of using flags:</b>
     <code>/q white rp</code>
-    <code>/qi red</code>
-    <code>/qr #cbafff</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> - 设置引用的底色默认为 <b>green</b>  <i>(十六进制代码或英文颜色名称)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[回复消息] [仅适用于管理员]</i> - 将带有图片的贴纸/照片/文档使用 emoji 🥰💜保存到群组贴纸包中 <i> (emoji 可任意选用且数量不限)</i>
-  <code>/qd</code> <i>[i n 回复留言] [仅限管理员]</i> - 从群组贴纸包中删除指定贴纸
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[仅限管理员]</i> - 启用/禁用引用评价
-  /qrand - 随机发送一个正面评价的引用
-  /qtop - 热度最高的群组引用
-  /qemoji- 更改贴纸对应的 emoji
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-  /help 或 /start - 获取此说明
+  /help or /start - get this text
 
-  ᴄɴ /lang - 更改语言
+  🇺🇸 /lang - change the language
   🇷🇺 /lang - изменить язык
 
-  ☕<b>为开发者买咖啡：</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 开发者博客：</b> @LyBlog
-  <b>GitHub：</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>你好！</b>
   在群组中使用 /q 命令回复消息时我将为您创建引用贴纸
@@ -49,6 +50,7 @@ btn:
   add_group: 添加到群组
   help: 帮助
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 生成引用失败</b>
     <pre>${error}</pre>
@@ -56,6 +58,8 @@ quote:
     命令必须在回复消息时发送。
   set_background_color: |
     引用贴纸的底色已设置为: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -124,10 +128,10 @@ donate:
   other: 其它选项
 emoji:
   info: |
-    请添加 emoji。
+    Please include emoji.
 
-    例如， <code>/qemoji💜</code> 将以后所有新添加的贴纸 emoji 设置为 💜 。
-    使用随机 emoji ：<code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji 添加成功！
 adv:
   about: |
