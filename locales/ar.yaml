@@ -1,45 +1,46 @@
 ---
 language_name: '🇸🇦 عربي'
 help: |2
-  <b>مرحبا!</b>
-  سأساعد في إنشاء اقتباس من منشور.
-  يمكن أن يعمل الروبوت في كل من الرسائل الخاصة والمجموعات
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ الأوامر المتوفرة:</b>
-  / q <i>[ردًا على الرسالة]</i> - ضع اقتباسًا من الرسالة
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>العلامات المتاحة للأمر / q:</b>
-      الكود السداسي أو اسم اللون: <code>#cbafff</code> أو <code>نيلي</code> - قم بعمل اقتباس باللون <b>#cbafff</b>: <code>3</code> - قم بعمل اقتباس من <b>3</b> أسفل
-      <code>عشوائي</code>: لون اقتباس عشوائي
-      <code>الرد</code> أو <code>ص</code>: قدم عرض أسعار مع حفظ الإجابات
-      <code>ص</code> أو <code>بابوا نيو غينيا</code> - عمل عرض أسعار بصيغة PNG
-      <code>i</code> أو <code>img</code> - قدم عرض أسعار كصورة
-      <code>معدل</code> - أضف تصنيفًا إلى اقتباس
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>مثال على استخدام الأعلام:</b>
-    <code>/ q أبيض rp</code>
-    <code>/ qi أحمر</code>
-    <code>/ qr #cbafff</code>
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/ qcolor green</code> - تعيين لون علامات الاقتباس <b>أخضر</b> افتراضيًا <i>(ست عشري رمز أو اسم اللون)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/q s 🥰💜</code> <i>[ردًا على الرسالة] [للمسؤولين فقط]</i> - يحفظ ملصقًا / صورة / مستندًا مع صورة في حزمة ملصقات لمجموعة بها رموز تعبيرية 🥰💜 <i>( يمكن أن تكون الرموز التعبيرية أي رقم وأي رقم ج)</i>
-  <code>/q d</code> <i>[ردًا على الرسالة] [للمسؤولين فقط]</i> - إزالة الملصق من حزمة الملصقات الخاصة بالمجموعة
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[للمسؤولين فقط]</i> - تمكين / تعطيل تصنيف اقتباسات
-  / qrand - اقتباس عشوائي بتقييم إيجابي
-  / qtop - اقتباسات المجموعة العليا
-  / رمز تعبيري - تغيير لاحقة الرموز التعبيرية للملصقات
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-  / مساعدة أو / ابدأ - احصل على هذا النص
+  /help or /start - get this text
 
-  🇺🇸 / lang - تغيير اللغة
-  🇷🇺 / لانج - تغيير لغة
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ يبيع القهوة للمطور:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻💻 المطور بلوق:</b> LyBlog
-  <b>جيثب:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>مرحبا!</b>
   سأقوم بإنشاء علامات اقتباس في المجموعة باستخدام الأمر / q ردًا على الرسالة
@@ -49,6 +50,7 @@ btn:
   add_group: Добавить в группу
   help: Справка
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Не удалось сгенерировать цитату</b>
     <pre>${error}</pre>
@@ -56,6 +58,8 @@ quote:
     Команду необходимо писать в ответ на сообщение.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -124,10 +128,10 @@ donate:
   other: Другие способы
 emoji:
   info: |
-    Пожалуйста, укажите эмодзи.
+    Please include emoji.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
