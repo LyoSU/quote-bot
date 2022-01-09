@@ -1,45 +1,45 @@
 ---
 language_name: '🇧🇾 Беларуская'
 help: |2
-  <b>Вітаю!</b>
-  Я дапамагу стварыць цытату з паведамленняў.
-  Бот працуе як у асабістых паведамленнях, так і ў суполках
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Даступныя каманды:</b>
-  /q <i>[у адказ на паведамленне]</i> — зрабіць цытату з паведамлення
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>Даступныя параметры для каманды /q:</b>
-      HEX код ці назва колера: <code>#cbafff</code> ці <code>indigo</code> — зрабіць цытату колера <b>#cbafff</b>
-      Лічба: <code>3</code> — зрабіць цытату з <b>3 паведамленняў</b> уніз
-      <code>random</code>: выпадковы колер цытаты
-      <code>reply</code> ці <code>r</code>: зрабіць цытату з захаваннем адказаў
-      <code>p</code> ці <code>png</code> — зрабіць PNG цытату
-      <code>i</code> ці <code>img</code> — зрабіць цытату выявай
-      <code>rate</code> — дадаць рэйтынг да цытаты
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>Прыклады выкарыстоўвання флагаў:</b>
-    <code>/q white r p</code>
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — зрабіць колер цытат <b>green</b> па змаўчанні <i>(HEX ці назва колера)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[у адказ на паведамленне] [толькі для адміністратараў]</i> — захоўвае стыке/выяву/файл з выявай у стыкерпак суполкі з эмодзі 🥰💜 <i>(эмодзі могуць быць у любой колькасці)</i>
-  <code>/qd</code> <i>[у адказ на паведамленне] [толькі для адміністратараў]</i> — выдаліць стыкер са стыкерпака суполкі
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[толькі для адміністратараў]</i> — уключыць/выключыць рэйтынг цытат
-  /qrand — выпадковая цытата са станоўчым рэйтынгам
-  /qtop — топ цытат суполкі
-  /emoji - змяніць эмодзі-суфікс для стыкераў 
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-  /help ці /start — атрымаць гэтую даведку
+  /help or /start - get this text
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Купіць распрацоўшчыку каву:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог распрацоўшчыка:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Вітаю!</b>
@@ -50,6 +50,7 @@ btn:
   add_group: Дадаць у суполку
   help: Даведка
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Не атрымалася стварыць цытату</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     Каманду трэба пісаць у адказ на паведамленне.
   set_background_color: |
     Колер фона цытат зменены на: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -125,10 +128,10 @@ donate:
   other: Іншыя спосабы
 emoji:
   info: |
-    Калі ласка, вызначце эмодзі.
+    Please include emoji.
 
-    Напрыклад, <code>/emoji 💜</code> зменіць суфікс на 💜 для усіх наступных стыкераў.
-    Для выпадковага эмодзі выкарыстоўвайце <code>/emoji random</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Эмодзі-суфікс паспешна зменены.
 adv:
   about: |
