@@ -1,45 +1,45 @@
 ---
 language_name: '🇵🇱 Polskie'
 help: |2
-  <b>Witam!</b>
-  Pomogę stworzyć cytat z posta.
-  bot może pracować zarówno w wiadomościach prywatnych jak iw grupach
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Dostępne komendy:</b>
-  /q <i>[w odpowiedzi na wiadomość]</i> -
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>Dostępne flagi dla komendy /q:</b>
-      hex kod lub kolor nazwa: <code>#cbafff</code> lub <code>indygo</code> - cytuj <b></b>
-      Cyfra: <code>3</code> - <b>3 postów</b> dół
-      <code>losowo</code>: losowo cytuj kolor
-      <code>odpowiedz</code> lub <code>r</code>: wycenę z zapisaniem odpowiedzi
-      <code>p</code> lub <code>png</code> - wycenę PNG
-      <code>i</code> lub <code>img</code> - wycenę jako obrazek
-      <code>ocena</code> - dodaj ocenę do quote
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>Przykład użycia flag:</b>
+    <b>Example of using flags:</b>
     <code>/q white rp</code>
-    <code>/qi red</code>
-    <code>/qr #cbafff</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> - ustaw kolor cudzysłowów <b>green</b> domyślnie <i>(kod szesnastkowy lub nazwa koloru)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[w odpowiedzi na wiadomość] [tylko dla administratorów]</i> - zapisuje naklejkę/zdjęcie/dokument ze zdjęciem do paczki naklejek grupy z emotikonami 🥰💜 <i>(emotikony może być dowolną liczbą)</i>
-  <code>/qd</code> <i>[i n odpowiedź na wiadomość] [tylko dla administratorów]</i> - usuń naklejkę z pakietu naklejek grupy
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
   <code>/qrate</code> <i>[tylko dla administratorów]</i> - włącz/wyłącz ocenianie cytatów
   /qrand - losowy cytat z pozytywna ocena
   /qtop - cytaty z najlepszych grup
   /qemoji- zmień sufiks emoji dla naklejek
 
-  /help lub /start - pobierz ten tekst
+  /help or /start - get this text
 
-  dni /język - zmień język
-  dni /język - изменить язык
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Kup kawę dla programisty:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Blog programisty:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Witam!</b>
@@ -50,6 +50,7 @@ btn:
   add_group: Dodaj do Grupy
   help: Help
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     Command must be sent as a reply to a message.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:

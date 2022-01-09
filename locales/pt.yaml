@@ -1,45 +1,45 @@
 ---
 language_name: '🇧🇷'
 help: |2
-  <b>Olá!</b>
-  Ajudarei a criar uma citação de uma postagem.
-  bot pode trabalhar tanto em mensagens privadas quanto em grupos
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Comandos disponíveis:</b>
-  /q <i>[em resposta à mensagem]</i> - faça uma citação da mensagem
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>Sinalizadores disponíveis para o comando /q:</b>
-      código hexadecimal ou nome da cor: <code>#cbafff</code> ou <code>indigo</code> - faça uma citação com a cor <b>#cbafff</b>
-      Dígito: <code>3</code> - faça uma citação de <b>3 posts</b> para baixo
-      <code>aleatório</code>: citação aleatória cor
-      <code>responda</code> ou <code>r</code>: faça uma cotação com respostas salvando
-      <code>p</code> ou <code>png</code> - faça uma cotação PNG
-      <code>i</code> ou <code>img</code> - faça uma cotação como uma imagem
-      <code>taxa</code> - adicione uma classificação a uma citação
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>Exemplo de uso de sinalizadores:</b>
-    <code>/q branco rp</code>
-    <code>/q i vermelho</code>
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor verde</code> - definir a cor das citações <b>verde</b> por padrão <i>(hexadecimal código ou nome da cor)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[em resposta à mensagem] [somente para administradores]</i> - salva um adesivo / foto / documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>( emoji pode ser qualquer e qualquer número c)</i>
-  <code>/ qd</code> <i>[em resposta à mensagem] [apenas para administradores]</i> - remova o adesivo do pacote de adesivos do grupo
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
   <code>/qrate</code> <i>[apenas para administradores]</i> - habilite / desabilite a classificação de citações
   /qrand - uma citação aleatória com uma avaliação positiva de
   /qtop - as principais citações do grupo
   /qemoji- alterar o sufixo emoji para adesivos
 
-  /help ou /start - obter este texto
+  /help or /start - get this text
 
-  🇺🇸 /lang - alterar o idioma
-  🇷🇺 /lang - alterar o idioma
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Comprar café para o desenvolvedor:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>blog Blog do desenvolvedor:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>
@@ -50,6 +50,7 @@ btn:
   add_group: Adicionar ao grupo
   help: Referencia
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Falha ao gerar cotação (tente novamente)</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     O comando deve ser escrito em resposta a uma mensagem!
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -125,10 +128,10 @@ donate:
   other: Outros métodos
 emoji:
   info: |
-    Inclua emoji.
+    Please include emoji.
 
-    Por exemplo, <code>/ emoji 💜</code> mudará o sufixo para 💜 em todos os novos adesivos subsequentes.
-    Para um emoji aleatório <code>/ emoji aleatório</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji alterado com sucesso.
 adv:
   about: |

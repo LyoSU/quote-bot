@@ -1,46 +1,46 @@
 ---
 language_name: '🇦🇿 Azərbaycanca'
 help: |2
-  <b>Salam!</b>
-      Mən mesajdan sitat yaratmaq üçün xidmət göstərirəm.
-      Bot həm şəxsi söhbətlərdə, həm də qruplarda işləyə bilər.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-        <b>⚙️ Mövcud komandalar:</b>
-      /q <i>[mesaja cavab]</i> — mesajdan sitat yaratmaq.
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-        <b>/q komandasının mövcud bayraqları:</b>
-          hex-kodu vəya ingilis dilində rəng adı: məsələn <code>#cbafff</code> vəya <code>indigo</code> — <b>#cbafff</b> rəngində sitat yaratmaq.
-          Rəqəm: <code>3</code> — mesajın aşağısında olan <b>3 mesajdan</b> sitat yaratmaq.
-          <code>random</code>: təsadüf seçilən rəngdə sitat.
-          <code>reply</code> vəya <code>r</code>: cavab saxlanılması ilə sitat yaratmaq.
-          <code>p</code> vəya <code>png</code> — PNG sitat yaratmaq.
-          <code>i</code> vəya <code>img</code> — sitatı şəkil kimi yaratmaq.
-          <code>rate</code> — sitata qiymətləndirmə sistemi əlavə etmək
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-        <b>Bayraqların istifadə nümunələri:</b>
-        <code>/q white r p</code>
-        <code>/q i red</code>
-        <code>/q r #cbafff</code>
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-      <code>/qcolor green</code> — <b>green</b> rəngi standart eləmək və sitat yaratmaq. <i>(hex-kodu vəya ingilis dilində rəng adı)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-      <code>/qs 🥰💜</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — 🥰💜 emoji ilə qrupun stikerpakında stikeri/şəkli/faylı saxlayır <i>(hər hansı bir emoji istənilən sayda ola bilər)</i>
-      <code>/qd</code> <i>[mesaja cavab] [yalnız admin üçün]</i> — stikeri qrupun stikerpakdan silmək
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-      <code>/qrate</code> <i>[yalnız admin üçün]</i> — Sitatların qiymətləndirməsini birləşdirmək/söndürmək.
-      /qrand — müsbət reytinqli təsadüfi seçilən sitat
-      /qtop — qrupun sitatlarının topu
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
-      /help vəya /start — bu mesajı almaq.
+  /help or /start - get this text
 
-      🇺🇸 /lang — change the language
-      🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-      <b>☕️ Botun yaradıcısına qəhvə fincanı almaq:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-      <b>👨🏻‍💻 Bot yaradıcısının bloqu:</b> @LyBlog
-      <b>GitHub:</b> github.com/LyoSU/quote-bot
-      <b>👨🏻‍💻 Tərcüməçinin GitHub-ı:</b> <a href="https://github.com/Sadykhzadeh">@Sadykhzadeh</a>
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>salam!</b>
   Mesaja cavab olaraq /q əmrindən istifadə edərək qrupda təkliflər yaradacağam
@@ -50,6 +50,7 @@ btn:
   add_group: Qrupa əlavə etmək
   help: Istinad
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Sitatı yaratmaq alınmadı</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     Komandanı mesaja cavab olaraq yazmaq lazımdır.
   set_background_color: |
     Sitatın standart rəngi <code>${backgroundColor}</code> oldu
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -125,10 +128,11 @@ donate:
   other: Digər yollar
 emoji:
   info: |
-    Xahiş edirəm emoji əlavə edin.
+    Please include emoji.
 
     Məsələn, <code>/qemoji💜</code>, sonrakı bütün yeni stikerlər üçün şəkilçini 💜 olaraq dəyişdirəcəkdir.
     Təsadüfi bir emoji <code>/qemojitəsadüfi</code>
+
   done: Emoji uğurla dəyişdirildi.
 adv:
   about: |

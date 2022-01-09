@@ -1,46 +1,46 @@
 ---
 language_name: '🇫🇷 Français'
 help: |2
-  <b>Bonjour !</b>
-  Je vais aider à créer une citation à partir d'un message.
-  bot peut fonctionner aussi bien en messages privés qu'en groupes
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
 
-    <b>⚙️ Commandes disponibles :</b>
-  /q <i>[en réponse au message]</i> - faire une citation à partir du message
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
 
-    <b>Drapeaux disponibles pour la commande /q :</b>
-      hex code ou nom de la couleur : <code>#cbafff</code> ou <code>indigo</code> - faire un devis avec la couleur <b>#cbafff</b>
-      Chiffre : <code>3</code> - faire un devis à partir de <b>3 posts</b> down
-      <code>random</code>: devis aléatoire couleur
-      <code>répondre</code> ou <code>r</code>: faire une citation avec sauvegarde des réponses
-      <code>p</code> ou <code>png</code> - faire une citation PNG
-      <code>i</code> ou <code>img</code> - faire une citation sous forme d'image
-      <code>noter</code> - ajouter une note à un quote
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
 
-    <b>Exemple d'utilisation des drapeaux :</b>
+    <b>Example of using flags:</b>
     <code>/q white rp</code>
-    <code>/qi red</code>
-    <code>/qr #cbafff</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> - définir la couleur des quotes <b>green</b> par défaut <i>(code hexadécimal ou nom de la couleur)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[en réponse au message] [uniquement pour les administrateurs]</i> - enregistre un autocollant/photo/document avec une photo dans un pack d'autocollants d'un groupe avec emoji 🥰💜 <i>(emoji peut être n'importe quel nombre)</i>
-  <code>/qd</code> <i>[i n réponse au message] [uniquement pour les administrateurs]</i> - retirer l'autocollant du pack d'autocollants du groupe
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
   <code>/qrate</code> <i>[uniquement pour les administrateurs]</i> - activer/désactiver l'évaluation des citations
   /qrand - aléatoire une citation avec un note positive de
   /qtop - citations du groupe supérieur
   /qemoji- changer le suffixe emoji pour les autocollants
 
-  /help ou /start - obtenir ce texte
+  /help or /start - get this text
 
-  🇺🇸 /lang - changer la langue
+  🇺🇸 /lang - change the language
   🇷🇺 /lang - изменить язык
 
-  <b>☕️ Acheter du café pour développeur :</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Blog développeur :</b> @LyBlog
-  <b>GitHub :</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Bonjour !</b>
   Je vais créer des citations dans le groupe en utilisant la commande /q en réponse au message
@@ -50,6 +50,7 @@ btn:
   add_group: Ajouter au groupe
   help: Aide
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Échec de la génération du devis</b>
     <pre>${error}</pre>
@@ -57,6 +58,8 @@ quote:
     La commande doit être envoyée en réponse à un message.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:

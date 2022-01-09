@@ -22,23 +22,27 @@ help: |2
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
-  <code>/qcolor green</code> — setta il colore deille citazioni in <b>green</b> come impostazione predefinita <i>(bisogna utilizzare i colori in codice HEX o il nome dei colori in formato web)</i>
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
 
-  <code>/qs 🥰💜</code> <i>[in risposta ad un messaggio] [solo per gli amministratori]</i> — salva lo sticker/photo/documento con foto in uno sticker pack del gruppo con l'emoji 🥰💜 <i>(valido per tutte le emoji)</i>
-  <code>/qd</code> <i>[in risposta ad un messaggio] [solo per gli amministratori]</i> — rimuove lo sticker dallo stickers pack
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
+
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
   <code>/qrate</code> <i>[solo per gli amministratori]</i> — abilita/disabilita la possibilità di votare le citazioni
   /qrand — citazione random con punteggio positivo
   /qtop — top citazioni del gruppo
   /qemoji- cambia il suffiso emoji degli stickers
 
-  /help o /start — elenco dei comandi
-  it /lang — cambia la lingua
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Offri un caffè allo sviluppatore:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Blog:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Ciao!</b>
@@ -49,6 +53,7 @@ btn:
   add_group: Aggiungi al Gruppo
   help: Aiuto
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Errore nella creazione della citazione</b>
     <pre>${error}</pre>
@@ -56,6 +61,8 @@ quote:
     Il comando deve essere inviato come risposta a un messaggio.
   set_background_color: |
     Il colore di sfondo delle citazioni è impostato su: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -124,7 +131,7 @@ donate:
   other: Altre opzioni
 emoji:
   info: |
-    Per favore inserisci un'emoji.
+    Please include emoji.
 
     Ad esempio, <code>/qemoji💜</code> cambierà il suffisso in 💜 a tutti i successivi nuovi stickers.
     Per utilizzare un'emoji random bisogna usare il comando <code>/qemojirandom</code>

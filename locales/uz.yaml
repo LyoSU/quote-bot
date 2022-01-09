@@ -1,35 +1,46 @@
 ---
 language_name: '🇺🇿 O''zbek'
 help: |2
-  <b>Assalomu alaykum! </b>
-    Men xabarlardan iqtibos yaratishga yordam beraman.
-    Bot shaxsiy xabarlardan ham guruhlarga ham ishlay oladi.
-      <b>⚙️ Mavjud bo'lgan buyruqlar:</b>
-    /q <i>[xabarga javoban]</i> — xabardan iqtibos qilish
-      <b>Buyruq uchun, mavjud bo'lgan bayroqlar/q:</b>
-        hex kodi yoki rang nomi: <code>#cbafff</code> yoki <code>indigo</code> — iqtibosni rangli qilish <b>#cbafff</b>
-        Raqam: <code>3</code> — <b>3ta xabardan</b>  pastga iqtibos qilish
-        <code>random</code>: iqtibosning tasodifiy ranglar birlashmasi
-        <code>reply</code> yoki <code>r</code>: javoblarni saqlagan holda iqtibos qilish
-        <code>p</code> yoki <code>png</code> — PNG iqtibos qilish
-        <code>i</code> yoki <code>img</code> — iqtibosni rasm sifatida qilish
-        <code>rate</code> — iqtibosni baholash
-      <b>Bayroqlardan foydalanish uchun qo'llanma:</b>
-      <code>/q white r p</code>
-      <code>/q i red</code>
-      <code>/q r #cbafff</code>
-    <code>/qcolor green</code> — iqtibos rangini o'rnatish <b>green</b> sukut bo'yicha <i>(hex kodi yoki rangni nomi)</i>
-    <code>/qs 🥰💜</code> <i>[xabarga javoban] [faqat administratorlar uchun]</i> —  stiker/rasm/hujjatlarni rasm bilan birgalikda stikerlar to'plamini emoji guruhiga saqlaydi🥰💜 <i>(emoji har qanday va istagan raqamdan iborat bo'lishi mumkin)</i>
-    <code>/qd</code> <i>[xabarga javoban] [faqat administratorlar uchun]</i> — stikerni, stikerlar to'plamining guruhidan o'chirish
-    <code>/qrate</code> <i>[faqat administratorlar uchun]</i> — yoqish/o'chirish iqtiboslarni baholash
-    /qrand — tasodifiy ijobi baholi iqtibos
-    /qtop — top iqtibos guruhlari
-    /help yoki /start — ushbu matnni olish
-    🇺🇸 /lang — tilni o'zgartirish
-    🇷🇺 /lang — tilni o'zgartirish
-    <b>☕️ Dasturchini kofe bilan mehmon qilish:</b> donate.lyo.su
-    <b>👨🏻‍💻 Dasturchini blogi:</b> @LyBlog
-    <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  bot can work both in private messages and in groups
+
+    <b>⚙️ Available commands:</b>
+  /q <i>[in response to the message]</i> - make a quote from the message
+
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
+      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
+      <code>random</code>: random quote color
+      <code>reply</code> or <code>r</code>: make a quote with saving answers
+      <code>p</code> or <code>png</code> - make a PNG quote
+      <code>i</code> or <code>img</code> - make a quote as a picture
+      <code>rate</code> - add a rating to a quote
+
+    <b>Example of using flags:</b>
+    <code>/q white rp</code>
+    <code>/q i red</code>
+    <code>/q r #cbafff</code>
+
+  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+
+  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
+
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
+
+  /help or /start - get this text
+
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
+
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
   Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman.
@@ -39,6 +50,7 @@ btn:
   add_group: Guruhga qo'shish
   help: Ma'lumotnoma
 quote:
+  unsupported_message: Unsupported message
   api_error: |
     <b>😓 Iqtibosni hosil qilib bo'lmadi</b>
     <pre>${error}</pre>
@@ -46,6 +58,8 @@ quote:
     Buyruqni xabarga javoban yozish kerak.
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
+  set_emoji_brand: |
+    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -114,7 +128,7 @@ donate:
   other: Boshqa usullar
 emoji:
   info: |
-    Iltimos, kulgichlarni kiriting.
+    Please include emoji.
 
     Masalan, <code>/qemoji💜</code> keyingi barcha yangi stikerlar uchun qo'shimchani 💜 ga o'zgartiradi.
     Tasodifiy emoji <code>/qemojirandom</code>
