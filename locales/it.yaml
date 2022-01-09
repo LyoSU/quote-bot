@@ -10,7 +10,7 @@ help: |2
 
     <b>Impostazioni extra per il comando /q:</b>
       Codice HEX o nome del colore: <code>#cbafff</code> oppure <code>indigo</code> — Crea una citazione di colore <b>#cbafff</b>
-      Digita: <code>3</code> — crea una citazione utilizzando gli ultimi <b>3 post</b> 
+      Digita: <code>3</code> — crea una citazione utilizzando gli ultimi <b>3 post</b>
       <code>random</code>: genera un colore random alla citazione
       <code>reply</code> oppure <code>r</code>: crea una citazione salvando le risposte
       <code>p</code> o <code>png</code> — crea un'immagine formato PNG della citazione
@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[solo per gli amministratori]</i> — abilita/disabilita la possibilità di votare le citazioni
   /qrand — citazione random con punteggio positivo
   /qtop — top citazioni del gruppo
-  /emoji - cambia il suffiso emoji degli stickers
+  /qemoji- cambia il suffiso emoji degli stickers
 
   /help o /start — elenco dei comandi
   it /lang — cambia la lingua
@@ -126,8 +126,8 @@ emoji:
   info: |
     Per favore inserisci un'emoji.
 
-    Ad esempio, <code>/emoji 💜</code> cambierà il suffisso in 💜 a tutti i successivi nuovi stickers.
-    Per utilizzare un'emoji random bisogna usare il comando <code>/emoji random</code>
+    Ad esempio, <code>/qemoji💜</code> cambierà il suffisso in 💜 a tutti i successivi nuovi stickers.
+    Per utilizzare un'emoji random bisogna usare il comando <code>/qemojirandom</code>
   done: L'emoji è stata cambiata correttamente.
 adv:
   about: |

@@ -31,7 +31,7 @@ module.exports = async ctx => {
         )
 
         if (chatMember && ['creator', 'administrator'].includes(chatMember.status)) {
-          ctx.state.answerCbQuery = [locales[ctx.match[1]]]
+          ctx.state.answerCbQuery = [locales[ctx.match[1]].flag]
           ctx.group.info.settings.locale = ctx.match[1]
           ctx.i18n.locale(ctx.match[1])
           await handleHelp(ctx)

@@ -29,7 +29,7 @@ help: |2
   <code>/qrate</code> <i>[仅限管理员]</i> - 启用/禁用引用评价
   /qrand - 随机发送一个正面评价的引用
   /qtop - 热度最高的群组引用
-  /emoji - 更改贴纸对应的 emoji
+  /qemoji- 更改贴纸对应的 emoji
 
   /help 或 /start - 获取此说明
 
@@ -126,8 +126,8 @@ emoji:
   info: |
     请添加 emoji。
 
-    例如， <code>/emoji 💜</code> 将以后所有新添加的贴纸 emoji 设置为 💜 。
-    使用随机 emoji ：<code>/emoji random</code>
+    例如， <code>/qemoji💜</code> 将以后所有新添加的贴纸 emoji 设置为 💜 。
+    使用随机 emoji ：<code>/qemojirandom</code>
   done: Emoji 添加成功！
 adv:
   about: |

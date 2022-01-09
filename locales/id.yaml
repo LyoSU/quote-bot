@@ -118,7 +118,7 @@ emoji:
     Harap sertakan emoji.
 
     Misalnya, <code>/emoji</code> akan mengubah akhiran menjadi untuk semua stiker baru berikutnya.
-    Untuk emoji acak <code>/emoji random</code>
+    Untuk emoji acak <code>/qemojirandom</code>
   done: Emoji berhasil diubah.
 adv:
   about: |

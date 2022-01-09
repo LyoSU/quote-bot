@@ -27,8 +27,13 @@ const userSchema = Schema({
     locale: String,
     quote: {
       backgroundColor: {
-        type: String,
-        default: '#1b1429'
+        type: String
+      },
+      emojiSuffix: {
+        type: String
+      },
+      emojiBrand: {
+        type: String
       }
     },
     hidden: {
@@ -38,10 +43,6 @@ const userSchema = Schema({
     privacy: {
       type: Boolean,
       default: false
-    },
-    emojiSuffix: {
-      type: String,
-      default: 'random'
     }
   },
   tempStickerSet: {

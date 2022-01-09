@@ -7,6 +7,7 @@ module.exports = {
   handleTopQuote: require('./top'),
   handleRandomQuote: require('./random'),
   handleColorQuote: require('./color-settings'),
+  handleEmojiBrandQuote: require('./emoji-brand'),
   handleSettingsHidden: require('./hidden-settings'),
   handleGabSettings: require('./gab-settings'),
   handleSave: require('./sticker-save'),

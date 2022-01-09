@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[alleen voor beheerders]</i> - schakel beoordeling van aanhalingstekens in/uit
   /qrand - willekeurig een aanhalingsteken met een positieve beoordeling van
   /qtop - beste groepscitaten
-  /emoji - verander het emoji-achtervoegsel voor stickers
+  /qemoji- verander het emoji-achtervoegsel voor stickers
 
   /help of /start - ontvang deze tekst
 
@@ -127,8 +127,8 @@ emoji:
   info: |
     Voeg emoji toe.
 
-    Bijvoorbeeld, <code>/emoji 💜</code> zal het achtervoegsel veranderen in 💜 voor alle volgende nieuwe stickers.
-    Voor een willekeurige emoji <code>/emoji random</code>
+    Bijvoorbeeld, <code>/qemoji💜</code> zal het achtervoegsel veranderen in 💜 voor alle volgende nieuwe stickers.
+    Voor een willekeurige emoji <code>/qemojirandom</code>
   done: Emoji succesvol veranderd.
 adv:
   about: |

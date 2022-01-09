@@ -127,8 +127,8 @@ emoji:
   info: |
     Xahiş edirəm emoji əlavə edin.
 
-    Məsələn, <code>/emoji 💜</code>, sonrakı bütün yeni stikerlər üçün şəkilçini 💜 olaraq dəyişdirəcəkdir.
-    Təsadüfi bir emoji <code>/emoji təsadüfi</code>
+    Məsələn, <code>/qemoji💜</code>, sonrakı bütün yeni stikerlər üçün şəkilçini 💜 olaraq dəyişdirəcəkdir.
+    Təsadüfi bir emoji <code>/qemojitəsadüfi</code>
   done: Emoji uğurla dəyişdirildi.
 adv:
   about: |

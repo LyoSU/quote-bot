@@ -127,6 +127,13 @@ module.exports = async (ctx, next) => {
     backgroundColor = '#1b1429'
   }
 
+  let emojiBrand = 'apple'
+  if (ctx.group && ctx.group.info.settings.quote.emojiBrand) {
+    emojiBrand = ctx.group.info.settings.quote.emojiBrand
+  } else if (ctx.session.userInfo.settings.quote.emojiBrand) {
+    emojiBrand = ctx.session.userInfo.settings.quote.emojiBrand
+  }
+
   if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
 
   const maxQuoteMessage = 50
@@ -337,10 +344,10 @@ module.exports = async (ctx, next) => {
     }
 
     if (!message.text && !message.media) {
-      message.text = 'Unsupported message'
+      message.text = ctx.i18n.t('quote.unsupported_message')
       message.entities = [{
         offset: 0,
-        length: 19,
+        length: message.text.length,
         type: 'italic'
       }]
     }
@@ -383,7 +390,8 @@ module.exports = async (ctx, next) => {
       width,
       height,
       scale: flag.scale || scale,
-      messages: quoteMessages
+      messages: quoteMessages,
+      emojiBrand
     },
     responseType: 'buffer',
     timeout: 1000 * 30,
@@ -413,8 +421,10 @@ module.exports = async (ctx, next) => {
     }
   }
 
-  let emojis = ctx.group ? ctx.group.info.settings.emojiSuffix : ctx.session.userInfo.settings.emojiSuffix
+  let emojis = ctx.group ? ctx.group.info.settings.quote.emojiSuffix : ctx.session.userInfo.settings.quote.emojiSuffix
   if (emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
+
+  emojis = `${emojis}💜`
 
   if (generate.body) {
     const image = generate.body

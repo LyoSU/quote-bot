@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[nur für Administratoren]</i> - Aktivieren/deaktivieren Sie die Bewertung von Zitaten
   /qrand - Zufällig ein Zitat mit a positive Bewertung von
   /qtop - Top-Gruppenzitate
-  /emoji - Emoji-Suffix für Sticker ändern
+  /qemoji- Emoji-Suffix für Sticker ändern
 
   /help oder /start - diesen Text
 
@@ -127,8 +127,8 @@ emoji:
   info: |
     Пожалуйста, укажите эмодзи.
 
-    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
-    Для случайного эмодзи <code>/emoji random</code>
+    Например, <code>/qemoji💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
+    Для случайного эмодзи <code>/qemojirandom</code>
   done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |

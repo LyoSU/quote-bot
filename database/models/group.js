@@ -15,8 +15,13 @@ const groupSchema = Schema({
     locale: String,
     quote: {
       backgroundColor: {
-        type: String,
-        default: '#1b1429'
+        type: String
+      },
+      emojiSuffix: {
+        type: String
+      },
+      emojiBrand: {
+        type: String
       }
     },
     rate: {
@@ -34,10 +39,6 @@ const groupSchema = Schema({
     randomQuoteGab: {
       type: Number,
       default: 800
-    },
-    emojiSuffix: {
-      type: String,
-      default: 'random'
     }
   },
   stickerSet: {

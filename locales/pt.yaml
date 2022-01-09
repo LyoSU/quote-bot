@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[apenas para administradores]</i> - habilite / desabilite a classificação de citações
   /qrand - uma citação aleatória com uma avaliação positiva de
   /qtop - as principais citações do grupo
-  /emoji - alterar o sufixo emoji para adesivos
+  /qemoji- alterar o sufixo emoji para adesivos
 
   /help ou /start - obter este texto
 
