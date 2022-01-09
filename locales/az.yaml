@@ -130,9 +130,8 @@ emoji:
   info: |
     Please include emoji.
 
-    Məsələn, <code>/qemoji💜</code>, sonrakı bütün yeni stikerlər üçün şəkilçini 💜 olaraq dəyişdirəcəkdir.
-    Təsadüfi bir emoji <code>/qemojitəsadüfi</code>
-
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji uğurla dəyişdirildi.
 adv:
   about: |
