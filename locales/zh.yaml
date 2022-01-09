@@ -27,10 +27,10 @@ help: |2
   <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
   <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[仅限管理员]</i> - 启用/禁用引用评价
-  /qrand - 随机发送一个正面评价的引用
-  /qtop - 热度最高的群组引用
-  /qemoji- 更改贴纸对应的 emoji
+  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
+  /qrand - random a quote with a positive rating of
+  /qtop - top group quotes
+  /qemoji- change the emoji suffix for stickers
 
   /help or /start - get this text
 
@@ -130,8 +130,8 @@ emoji:
   info: |
     Please include emoji.
 
-    例如， <code>/qemoji💜</code> 将以后所有新添加的贴纸 emoji 设置为 💜 。
-    使用随机 emoji ：<code>/qemojirandom</code>
+    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
+    For a random emoji <code>/qemojirandom</code>
   done: Emoji 添加成功！
 adv:
   about: |
