@@ -422,7 +422,7 @@ module.exports = async (ctx, next) => {
   }
 
   let emojis = ctx.group ? ctx.group.info.settings.quote.emojiSuffix : ctx.session.userInfo.settings.quote.emojiSuffix
-  if (emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
+  if (!emojis || emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
 
   emojis = `${emojis}💜`
 

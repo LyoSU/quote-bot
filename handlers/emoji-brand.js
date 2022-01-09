@@ -7,7 +7,7 @@ module.exports = async ctx => {
     'apple',
     'google',
     'twitter'
-  ].includes(match[1])) {
+  ].includes(match[1].toLowerCase())) {
     emojiBrand = match[1]
   }
 
