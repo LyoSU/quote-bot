@@ -27,10 +27,10 @@ help: |2
   <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
   <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
-  /qemoji- change the emoji suffix for stickers
+  <code>/qrate</code> <i>[관리자 전용]</i> - 따옴표 평가 활성화/비활성화
+  /qrand - 임의의 a가 있는 견적 긍정적인 평가
+  /qtop - 상위 그룹 인용
+  /qemoji- 스티커의 이모티콘 접미사 변경
 
   /help or /start - get this text
 

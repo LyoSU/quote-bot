@@ -132,6 +132,7 @@ emoji:
 
     For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
     For a random emoji <code>/qemojirandom</code>
+
   done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |

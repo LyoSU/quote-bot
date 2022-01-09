@@ -27,10 +27,10 @@ help: |2
   <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
   <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
 
-  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
-  /qemoji- change the emoji suffix for stickers
+  <code>/qrate</code> <i>[tylko dla administratorów]</i> - włącz/wyłącz ocenianie cytatów
+  /qrand - losowy cytat z pozytywna ocena
+  /qtop - cytaty z najlepszych grup
+  /qemoji- zmień sufiks emoji dla naklejek
 
   /help or /start - get this text
 

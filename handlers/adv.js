@@ -87,7 +87,7 @@ const checkPaymentStatus = async () => {
 
   session.endSession()
 }
-setInterval(checkPaymentStatus, 1000 * 10)
+// setInterval(checkPaymentStatus, 1000 * 10)
 
 const advMain = new Scene('advMain')
 

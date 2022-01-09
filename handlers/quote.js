@@ -70,16 +70,7 @@ const generateRandomColor = () => {
 const minIdsInChat = {}
 
 module.exports = async (ctx, next) => {
-  if (ctx.chat.type === 'private') {
-    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
-    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(1000)
-    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
-    delete minIdsInChat[ctx.from.id]
-  }
-
   quoteCountIO.mark()
-  await ctx.replyWithChatAction('choose_sticker')
 
   const flag = {
     count: false,
@@ -89,6 +80,7 @@ module.exports = async (ctx, next) => {
     rate: false,
     color: false,
     scale: false,
+    crop: false,
     privacy: false
   }
 
@@ -104,10 +96,19 @@ module.exports = async (ctx, next) => {
     flag.hidden = args.find((arg) => ['h', 'hidden'].includes(arg))
     flag.media = args.find((arg) => ['m', 'media'].includes(arg))
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
+    flag.crop = args.find((arg) => ['c', 'crop'].includes(arg))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
+  } else if (ctx.chat.type === 'private') {
+    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
+    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
+    await sleep(1000)
+    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
+    delete minIdsInChat[ctx.from.id]
   }
+
+  await ctx.replyWithChatAction('choose_sticker')
 
   // set background color
   let backgroundColor
@@ -124,6 +125,13 @@ module.exports = async (ctx, next) => {
     backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
   } else {
     backgroundColor = '#1b1429'
+  }
+
+  let emojiBrand = 'apple'
+  if (ctx.group && ctx.group.info.settings.quote.emojiBrand) {
+    emojiBrand = ctx.group.info.settings.quote.emojiBrand
+  } else if (ctx.session.userInfo.settings.quote.emojiBrand) {
+    emojiBrand = ctx.session.userInfo.settings.quote.emojiBrand
   }
 
   if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
@@ -278,7 +286,10 @@ module.exports = async (ctx, next) => {
       message.entities = quoteMessage.entities
     }
 
-    if (!text) flag.media = true
+    if (!text) {
+      flag.media = true
+      message.mediaCrop = flag.crop || false
+    }
     if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
     if (flag.media && quoteMessage.sticker) {
       message.media = [quoteMessage.sticker]
@@ -329,6 +340,16 @@ module.exports = async (ctx, next) => {
       }
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
+      if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
+    }
+
+    if (!message.text && !message.media) {
+      message.text = ctx.i18n.t('quote.unsupported_message')
+      message.entities = [{
+        offset: 0,
+        length: message.text.length,
+        type: 'italic'
+      }]
     }
 
     quoteMessages[index] = message
@@ -361,7 +382,7 @@ module.exports = async (ctx, next) => {
   let format
   if (!flag.privacy && type === 'quote') format = 'png'
 
-  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate?botToken=${process.env.BOT_TOKEN}`, {
+  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate.png?botToken=${process.env.BOT_TOKEN}`, {
     json: {
       type,
       format,
@@ -369,11 +390,13 @@ module.exports = async (ctx, next) => {
       width,
       height,
       scale: flag.scale || scale,
-      messages: quoteMessages
+      messages: quoteMessages,
+      emojiBrand
     },
+    responseType: 'buffer',
     timeout: 1000 * 30,
     retry: 1
-  }).json().catch((error) => {
+  }).catch((error) => {
     return { error }
   })
 
@@ -398,13 +421,14 @@ module.exports = async (ctx, next) => {
     }
   }
 
-  let emojis = ctx.group ? ctx.group.info.settings.emojiSuffix : ctx.session.userInfo.settings.emojiSuffix
+  let emojis = ctx.group ? ctx.group.info.settings.quote.emojiSuffix : ctx.session.userInfo.settings.quote.emojiSuffix
   if (emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
 
-  if (generate.result.image) {
-    // eslint-disable-next-line node/no-deprecated-api
-    const image = new Buffer(generate.result.image, 'base64')
-    if (generate.result.type === 'quote') {
+  emojis = `${emojis}💜`
+
+  if (generate.body) {
+    const image = generate.body
+    if (generate.headers['quote-type'] === 'quote') {
       let replyMarkup = {}
 
       if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
@@ -503,7 +527,7 @@ module.exports = async (ctx, next) => {
 
         await quoteDb.save()
       }
-    } else if (generate.result.type === 'image') {
+    } else if (generate.headers['quote-type'] === 'image') {
       await ctx.replyWithPhoto({
         source: image,
         filename: 'quote.png'

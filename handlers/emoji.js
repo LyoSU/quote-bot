@@ -13,9 +13,9 @@ module.exports = async ctx => {
   const emoji = emojiSymbols.join('')
 
   if (ctx.group) {
-    ctx.group.info.settings.emojiSuffix = emoji
+    ctx.group.info.settings.quote.emojiSuffix = emoji
   } else {
-    ctx.session.userInfo.settings.emojiSuffix = emoji
+    ctx.session.userInfo.settings.quote.emojiSuffix = emoji
   }
 
   await ctx.replyWithHTML(ctx.i18n.t('emoji.done'), {

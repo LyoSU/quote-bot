@@ -179,8 +179,8 @@ function getMessages (chatID, messageIds) {
               messageInfo.chat_id
             ]
 
-            if (messageInfo.sender.user_id) chatIds.push(messageInfo.sender.user_id)
-            if (messageInfo.sender.chat_id) chatIds.push(messageInfo.sender.chat_id)
+            if (messageInfo.sender_id.user_id) chatIds.push(messageInfo.sender_id.user_id)
+            if (messageInfo.sender_id.chat_id) chatIds.push(messageInfo.sender_id.chat_id)
 
             let forwarderId
 
@@ -200,8 +200,8 @@ function getMessages (chatID, messageIds) {
               })
 
               message.chat = chatInfo[messageInfo.chat_id]
-              if (messageInfo.sender.user_id) message.from = chatInfo[messageInfo.sender.user_id]
-              else if (messageInfo.sender.chat_id) message.from = chatInfo[messageInfo.sender.chat_id]
+              if (messageInfo.sender_id.user_id) message.from = chatInfo[messageInfo.sender_id.user_id]
+              else if (messageInfo.sender_id.chat_id) message.from = chatInfo[messageInfo.sender_id.chat_id]
 
               if (messageInfo.forward_info) {
                 if (chatInfo[forwarderId]) {
@@ -272,7 +272,7 @@ function getMessages (chatID, messageIds) {
 
                   message[type] = media
                 } else {
-                  messageInfo.content.unsupportedMedia = {}
+                  message.unsupportedMessage = true
                 }
 
                 if (messageInfo.content.caption) {
@@ -299,7 +299,8 @@ function getMessages (chatID, messageIds) {
                     textEntityTypePreCode: 'pre_code',
                     textEntityTypeTextUrl: 'text_link',
                     textEntityTypeMentionName: 'text_mention',
-                    textEntityTypePhoneNumber: 'phone_number'
+                    textEntityTypePhoneNumber: 'phone_number',
+                    textEntityTypeSpoiler: 'spoiler'
                   }
 
                   const entity = {
