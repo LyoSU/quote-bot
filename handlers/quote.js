@@ -203,9 +203,7 @@ module.exports = async (ctx, next) => {
 
     if (quoteMessage.forward_sender_name) {
       if (flag.hidden) {
-        let sarchForwardName
-
-        sarchForwardName = await ctx.db.User.find({
+        const sarchForwardName = await ctx.db.User.find({
           full_name: quoteMessage.forward_sender_name
         })
 
@@ -213,13 +211,7 @@ module.exports = async (ctx, next) => {
         //   sarchForwardName = await ctx.db.User.find({
         //     $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
         //   })
-        // }
-
-        if (sarchForwardName.length === 0) {
-          sarchForwardName = await ctx.db.User.find({
-            first_name: quoteMessage.forward_sender_name
-          })
-        }
+        // }\
 
         if (sarchForwardName.length === 1) {
           messageFrom = {
