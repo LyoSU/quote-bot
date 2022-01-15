@@ -1,7 +1,46 @@
 ---
 language_name: '🇹🇷 Türkçe'
 help: |2
-  </code>
+  <b>Merhaba!</b>
+  Bir gönderiden alıntı oluşturmaya yardımcı olacağım.
+  bot hem özel mesajlarda hem de gruplarda
+
+    <b>⚙️ Kullanılabilir komutlar:</b>
+  /q <i>[mesajı yanıtlayarak]</i> - mesajdan alıntı yapın
+
+    <b>/q komutu için mevcut bayraklar:</b>
+      hex kod veya renk adı: <code>#cbafff</code> veya <code>indigo</code> - renkle alıntı yap <b>#cbafff</b>
+      Basamak: <code>3</code> <b>mesajdan alıntı yap 3 mesaj</b> aşağı
+      <code>rastgele</code>: rastgele alıntı renk
+      <code>cevap</code> veya <code>r</code>: cevapları kaydederek fiyat teklifi yapın
+      <code>p</code> veya <code>png</code> - PNG alıntısı yapın
+      <code>i</code> veya <code>img</code> - resim olarak alıntı yapın
+      <code>derece</code> - bir derecelendirme ekleyin alıntı
+
+    <b>Bayrak kullanma örneği:</b>
+    <code>/q beyaz rp</code>
+    <code>/qi kırmızı</code>
+    <code>/qr #cbafff</code>
+
+  <code>/qcolor green</code> - tırnakların rengini varsayılan olarak <b>yeşil</b> <i>(hex kodu veya renk adı)</i>
+
+  <code>/qs 🥰💜</code> <i>[mesaj yanıt olarak] [yalnızca yöneticiler için]</i> - fotoğraflı bir çıkartmayı/fotoğrafı/belgeyi emojili bir grubun çıkartma paketine kaydeder 🥰💜 <i>(emoji herhangi bir sayı olabilir)</i>
+  <code>/qd</code> <i>[i n mesaja yanıt] [yalnızca yöneticiler için]</i> - çıkartmayı grup
+
+  <code>/qrate</code> <i>[yalnızca yöneticiler için]</i> - tırnak derecelendirmesini etkinleştirme/devre dışı bırakma
+  /qrand - rastgele bir alıntı ile
+  pozitif derecelendirme /qtop - en iyi grup alıntıları
+  /qemoji- çıkartmalar için emoji son ekini değiştirin
+
+  /help veya /start - bu metni alın
+
+  🇺🇸 /lang - dili değiştirin
+  🇷🇺 /lang - изменить язык
+
+  <b>☕️ Geliştirici için kahve satın alın:</b> donate.lyo.su
+
+  <b>👨🏻‍💻 Geliştirici blogu:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Merhaba!</b>
   /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
@@ -68,7 +107,7 @@ privacy:
 top:
   info: |
     <b>En iyi grup alıntıları:</b>
-  open: "Türkçe\n"
+  open: Üstü açık
 donate:
   info: |
     Geliştirici için kahve satın alabilir veya aşağıdaki ayrıntılarla başka bir şey satın alabilirsiniz:
