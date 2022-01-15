@@ -9,7 +9,7 @@ btn:
   add_group: Gruba Ekle
   help: Dökümanlar
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Desteklenmeyen Cihaz
   api_error: |
     <b>😓 Fiyat teklifi oluşturulamadı</b>
     <pre>${error}</pre>
@@ -18,7 +18,7 @@ quote:
   set_background_color: |
     Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Kdjn
   sticker:
 sticker:
   save:
@@ -68,7 +68,7 @@ privacy:
 top:
   info: |
     <b>En iyi grup alıntıları:</b>
-  open: Open top
+  open: "Türkçe\n"
 donate:
   info: |
     Geliştirici için kahve satın alabilir veya aşağıdaki ayrıntılarla başka bir şey satın alabilirsiniz:
