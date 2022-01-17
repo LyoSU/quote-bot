@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
   /qrand - random a quote with a positive rating of
   /qtop - top group quotes
-  /qemoji- change the emoji suffix for stickers
+  /qemoji - change the emoji suffix for stickers
 
   /help or /start - get this text
 
@@ -131,7 +131,7 @@ emoji:
     Please include emoji.
 
     For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemojirandom</code>
+    For a random emoji <code>/qemoji random</code>
   done: Эмодзи успешно изменен.
 adv:
   about: |

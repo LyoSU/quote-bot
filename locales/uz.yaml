@@ -30,7 +30,7 @@ help: |2
   <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
   /qrand - random a quote with a positive rating of
   /qtop - top group quotes
-  /qemoji- change the emoji suffix for stickers
+  /qemoji - change the emoji suffix for stickers
 
   /help or /start - get this text
 
@@ -43,7 +43,7 @@ help: |2
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
-  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman. 
+  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman.
 
   Batafsil ushbu buyruq orqali <a href="t.me/${username}?start=help">/help</a> men bilan shaxsiy xabarlarda bilib olishingiz mumkin
 btn:
@@ -131,7 +131,7 @@ emoji:
     Please include emoji.
 
     For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemojirandom</code>
+    For a random emoji <code>/qemoji random</code>
   done: Emoji muvaffaqiyatli o'zgartirildi.
 adv:
   about: |
