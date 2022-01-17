@@ -1,46 +1,46 @@
 ---
 language_name: '🇷🇺 Русский'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  bot can work both in private messages and in groups
+  <b>Привет!</b>
+  Я помогу создать цитату из поста.
+  бот может работать как в личных сообщениях, так и в группах
 
-    <b>⚙️ Available commands:</b>
-  /q <i>[in response to the message]</i> - make a quote from the message
+    <b>⚙️ Доступные команды:</b>
+  /q <i>[в ответ на сообщение]</i> - сделать цитату из сообщения
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
-      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
-      <code>random</code>: random quote color
-      <code>reply</code> or <code>r</code>: make a quote with saving answers
-      <code>p</code> or <code>png</code> - make a PNG quote
-      <code>i</code> or <code>img</code> - make a quote as a picture
-      <code>rate</code> - add a rating to a quote
+    <b>Доступные флаги для команды /q:</b>
+      hex код или название цвета: <code>#cbafff</code> или <code>индиго</code> - сделать цитату с цветом <b>#cbafff</b>
+      Цифра: <code>3</code> - сделать цитату из <b>3 сообщений</b> вниз
+      <code>случайный</code>: случайный цвет цитаты
+      <code>ответить</code> или <code>r</code>: сделать цитату с сохранением ответов
+      <code>p</code> или <code>png</code> - сделать цитату PNG
+      <code>i</code> или <code>img</code> - сделать цитату картинкой
+      <code>оценить</code> - добавить оценку цитата
 
-    <b>Example of using flags:</b>
+    <b>Пример использования флагов:</b>
     <code>/q white rp</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <code>/qi red</code>
+    <code>/qr #cbafff</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> <i>[in response to message]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
-  <code>/qd</code> <i>[in response to the message]</i> - remove the sticker from the sticker pack of group
-  <code>/qb</code> - set emoji brand. Available: apple, google, twitter, joypixels, blob
-  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> - change the emoji suffix for stickers
-  <code>/qrate</code> - enable/disable rating of quotes
+  Только для администраторов:
+  <code>/qs 🥰💜</code> <i>[в ответ на сообщение]</i> - сохраняет стикер/фото/документ с фото в стикерпак группы с эмодзи 🥰💜 <i>(эмоджи может быть любым и любым числом)</i>
+  <code>/qd</code> <i>[в ответ на сообщение]</i> - удалить стикер из стикерпака группы
+  <code>/qb</code> - установить стиль эмодзи. Доступно: apple, google, twitter, joypixels, blob
+  <code>/qcolor green</code> - установить цвет кавычек <b>green</b> по умолчанию <i>(шестнадцатеричный код или название цвета)</i>
+  <code>/qemoji</code> - изменить суффикс эмодзи для стикеров
+  <code>/qrate</code> - включить/отключить рейтинг котировок
 
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
+  /qrand - случайная цитата с положительным рейтингом
+  /qtop - верхние цитаты группы
 
-  /help or /start - get this text
+  /help или /start - получить этот текст
 
-  🇺🇸 /lang - change the language
+  🇺🇸 /lang - изменить язык
   🇷🇺 /lang - изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Купить кофе разработчику:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Привет!</b>
@@ -60,7 +60,7 @@ quote:
   set_background_color: |
     Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Категория эмодзи смет установлена на: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -129,10 +129,10 @@ donate:
   other: Другие способы
 emoji:
   info: |
-    Please include emoji.
+    Пожалуйста, укажите эмодзи.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Например, <code>/emoji 💜</code> поменяет суффикс на 💜 для всех последующих новых стикеров.
+    Для случайного эмодзи <code>/emoji random</code>
   done: Эмодзи успешно изменен.
 adv:
   about: |
