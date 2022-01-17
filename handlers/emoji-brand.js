@@ -7,7 +7,9 @@ module.exports = async ctx => {
   if (match && [
     'apple',
     'google',
-    'twitter'
+    'twitter',
+    'joypixels',
+    'blob'
   ].includes(setEmojiBrand)) {
     emojiBrand = setEmojiBrand
   }
