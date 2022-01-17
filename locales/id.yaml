@@ -1,45 +1,46 @@
 ---
 language_name: '🇮🇩 Indonesia'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  bot can work both in private messages and in groups
+  <b>Halo!</b>
+  Saya akan membantu membuat kutipan dari sebuah postingan.
+  bot dapat bekerja baik dalam pesan pribadi maupun dalam grup
 
-    <b>⚙️ Available commands:</b>
-  /q <i>[in response to the message]</i> - make a quote from the message
+    <b>️ Perintah yang tersedia:</b>
+  /q <i>[sebagai tanggapan atas pesan]</i> - buat kutipan dari pesan
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
-      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
-      <code>random</code>: random quote color
-      <code>reply</code> or <code>r</code>: make a quote with saving answers
-      <code>p</code> or <code>png</code> - make a PNG quote
-      <code>i</code> or <code>img</code> - make a quote as a picture
-      <code>rate</code> - add a rating to a quote
+    <b>Bendera yang tersedia untuk perintah /q:</b>
+      hex kode atau nama warna: <code>#cbafff</code> atau <code>nila</code> - buat kutipan dengan warna <b>#cbafff</b>
+      Digit: <code>3</code> - buat kutipan dari <b>3 posting</b> ke bawah
+      <code>acak</code>: warna kutipan acak
+      <code>balasan</code> atau <code>r</code>: membuat kutipan dengan menyimpan jawaban
+      <code>p</code> atau <code>png</code> - membuat kutipan PNG
+      <code>i</code> atau <code>img</code> - membuat kutipan sebagai gambar
+      <code>menilai</code> - menambahkan peringkat ke kutipan
 
-    <b>Example of using flags:</b>
-    <code>/q white rp</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <b>Contoh penggunaan bendera:</b>
+    <code>/q putih rp</code>
+    <code>/qi merah</code>
+    <code>/qr #cbafff</code>
 
-  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  Hanya untuk administrator:
+  <code>/qs</code> <i>[dalam menanggapi pesan]</i> - menyimpan stiker/foto/dokumen dengan foto ke paket stiker grup dengan emoji <i>(emoji bisa apa saja dan nomor apa saja)</i>
+  <code>/qd</code> <i>[sebagai tanggapan atas pesan]</i> - hapus stiker dari paket stiker grup
+  <code>/qb</code> - set merek emoji. Tersedia: apple, google, twitter, joypixels, blob
+  <code>/qcolor green</code> - atur warna tanda kutip <b>green</b> secara default <i>(kode hex atau nama warna)</i>
+  <code>/qemoji</code> - ubah sufiks emoji untuk stiker
+  <code>/qrate</code> - aktifkan/nonaktifkan peringkat kutipan
 
-  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
-  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
+  /qrand - acak kutipan dengan peringkat positif
+  /qtop - kutipan grup teratas
 
-  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
-  /qemoji - change the emoji suffix for stickers
+  /help atau /start - dapatkan teks ini
 
-  /help or /start - get this text
+  /lang - ubah bahasa
+  /lang - енить
 
-  🇺🇸 /lang - change the language
-  🇷🇺 /lang - изменить язык
+  <b>️ Beli kopi untuk pengembang:</b> donate.lyo.su
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
-
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>Blog pengembang:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
@@ -50,16 +51,16 @@ btn:
   add_group: Tambahkan ke Grup
   help: Bantuan
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Jenis pesan tidak didukung
   api_error: |
     <b>😓 Gagal menghasilkan kutipan</b>
     <pre>${error}</pre>
   empty_forward: |
     Perintah harus dijalankan dengan membalas pesan.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Warna latar belakang kutipan disetel ke: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Merek emoji kutipan diatur ke: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -109,16 +110,16 @@ privacy:
 top:
   info: |
     <b>Kutipan grup teratas:</b>
-  open: Open top
+  open: Buka atas
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Anda dapat membeli kopi untuk developer atau yang lainnya dengan detail sebagai berikut:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
 
-    More: donate.lyo.su
+    Lainnya: donate.lyo.su
   title: Donasi ${botUsername}
   description: Dukungan pengembangan bot
   successful: |
@@ -128,10 +129,10 @@ donate:
   other: Sebaliknya
 emoji:
   info: |
-    Please include emoji.
+    Harap sertakan emoji.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Misalnya, <code>/qemoji💜</code> akan mengubah akhiran menjadi untuk semua stiker baru berikutnya.
+    Untuk emoji acak <code>/qemoji acak</code>
   done: Emoji berhasil diubah.
 adv:
   about: |
@@ -188,27 +189,27 @@ adv:
       Iklan telah dikirim untuk moderasi. Harap bersabar dan menunggu. Jika moderasi berhasil atau tidak berhasil, Anda akan menerima pemberitahuan.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
+      pilih_daftar
+    wait_btn: tunggu_btn
     ready_btn: ready_btn
-    end_btn: end_btn
+    end_btn: akhir_btn
     selected_list: |
-      selected_list
+      dipilih_daftar
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} dari <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Teks: ${adv.text}
+      Tautan: ${adv.link}
+      Lokal: ${adv.locale}
+      Harga: ${adv.price}
+      Hitungan ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Iklan berhasil dimoderasi. Anda dapat mulai menampilkannya di bagian iklan: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Sayangnya iklan belum dimoderasi. Harap baca aturan kami (/adv_rules), jika Anda yakin ini adalah kesalahan, tulis kepada kami di @Ly_OBot dan sertakan tag ini dalam pesan yang menjelaskan masalah: #qba_${adv.id}
+    accept_btn: Setuju
+    deny_btn: Menyangkal
 only_admin: |
   Perintah ini hanya dapat dijalankan oleh administrator grup.
 only_group: |

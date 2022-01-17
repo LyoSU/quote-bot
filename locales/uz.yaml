@@ -22,15 +22,16 @@ help: |2
     <code>/q i red</code>
     <code>/q r #cbafff</code>
 
+  Only for administrators:
+  <code>/qs 🥰💜</code> <i>[in response to message]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
+  <code>/qd</code> <i>[in response to the message]</i> - remove the sticker from the sticker pack of group
+  <code>/qb</code> - set emoji brand. Available: apple, google, twitter, joypixels, blob
   <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> - change the emoji suffix for stickers
+  <code>/qrate</code> - enable/disable rating of quotes
 
-  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
-  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
-
-  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
   /qrand - random a quote with a positive rating of
   /qtop - top group quotes
-  /qemoji - change the emoji suffix for stickers
 
   /help or /start - get this text
 
@@ -43,7 +44,7 @@ help: |2
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
-  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman.
+  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman. 
 
   Batafsil ushbu buyruq orqali <a href="t.me/${username}?start=help">/help</a> men bilan shaxsiy xabarlarda bilib olishingiz mumkin
 btn:

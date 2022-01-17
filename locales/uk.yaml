@@ -1,46 +1,47 @@
 ---
 language_name: '🇺🇦 Українська'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  bot can work both in private messages and in groups
+  <b>Привіт!</b>
+  Я допоможу створити цитату з публікації.
+  бот може працювати як в приватних повідомленнях, так і в групах
 
-    <b>⚙️ Available commands:</b>
-  /q <i>[in response to the message]</i> - make a quote from the message
+    <b>⚙️ Доступні команди:</b>
+  /q <i>[у відповідь на повідомлення]</i> - зробити цитату з повідомлення
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
-      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
-      <code>random</code>: random quote color
-      <code>reply</code> or <code>r</code>: make a quote with saving answers
-      <code>p</code> or <code>png</code> - make a PNG quote
-      <code>i</code> or <code>img</code> - make a quote as a picture
-      <code>rate</code> - add a rating to a quote
+    <b>Доступні прапорці для команди /q:</b>
+      hex код або кольорово ім'я: <code>#cbafff</code> або <code>індиго</code> - зробити кошторис з кольором <b>#cbafff</b>
+      Цифри: <code>-</code> - зробити цитату з <b>3 повідомлень у</b> до
+      <code>випадкових</code>: випадкова цитати кольору
+      <code>відповіді</code> або <code>r</code>: зробити цитату із збереженням відповідей
+      <code>p</code> або <code>png</code> - зробити цитату PNG
+      <code>i</code> або <code>img</code> - зробити цитату як картинку
+      <code></code> - додати оцінку до цитата
 
-    <b>Example of using flags:</b>
-    <code>/q white rp</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <b>Приклад використання прапорів:</b>
+    <code>/q білий rp</code>
+    <code>/qi червоний</code>
+    <code>/qr #cbafff</code>
 
-  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  Тільки для адміністраторів:
+  <code>/qs 🥰💜</code> <i>[у відповідь на повідомлення]</i> зберігає наклейку/фото/документ із фотографією до наклейки групи з смайликами 🥰💜 <i>(емодзі може бути будь-яким і будь-яким числом)</i>
+  <code>/qd</code> <i>[у відповідь на повідомлення]</i> - видалити наклейку з наклейки групи
+  <code>/qb</code> - обрати бренд emoji. Доступні: apple, google, twitter, joypixels, blob
+  <code>/qcolor зелений</code> - встановити колір лапок <b>зелений</b> за замовчуванням <i>(шістнадцятковий код або назва кольору)</i>
+  <code>/qemoji</code> - змінити суфікс
+  <code>/qrate</code> - увімкнути/вимкнути оцінку цитат
 
-  <code>/qs 🥰💜</code> <i>[in response to message] [only for administrators]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
-  <code>/qd</code> <i>[in response to the message] [only for administrators]</i> - remove the sticker from the sticker pack of group
+  /qrand - випадкова цитата з позитивним рейтингом
+  /qtop - цитати головної групи
 
-  <code>/qrate</code> <i>[only for administrators]</i> - enable/disable rating of quotes
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
-  /qemoji - change the emoji suffix for stickers
+  /допомога або /почати - отримати цей текст
 
-  /help or /start - get this text
+  🇺🇸 /lang - змінити мову
+  🇷🇺 /lang - змінити мову
 
-  🇺🇸 /lang - change the language
-  🇷🇺 /lang - изменить язык
+  <b>☕️ Купуйте каву для розробника:</b> donate.lyo.su
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
-
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Блог розробника:</b> @LyBlog
+  <b>GitHub:</b> Lyobot
 help_group: |
   <b>Привіт!</b>
   Я буду створювати цитати в групі по команді / q у відповідь на повідомлення
@@ -50,7 +51,7 @@ btn:
   add_group: Добавити в групу
   help: Довідка
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Непідтримуване повідомлення
   api_error: |
     <b>😓 Неможливо згенерувати цитату</b>
     <pre>${error}</pre>
@@ -59,7 +60,7 @@ quote:
   set_background_color: |
     Колір фону цитат встановлений на: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Бренд смайликів лапок встановлено: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -128,10 +129,10 @@ donate:
   other: Інші способи
 emoji:
   info: |
-    Please include emoji.
+    Будь ласка, додайте смайли.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Наприклад, <code> /emoji 💜 </code> змінить емодзі на 💜 для всіх наступних нових наклейок.
+    Для випадкових смайлів <code>/qemoji random</code>
   done: Смайли успішно змінено.
 adv:
   about: |
