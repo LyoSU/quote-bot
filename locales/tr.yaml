@@ -1,46 +1,46 @@
 ---
 language_name: '🇹🇷 Türkçe'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  bot can work both in private messages and in groups
+  <b>Merhaba!</b>
+  Bir gönderiden alıntı oluşturmaya yardımcı olacağım.
+  bot hem özel mesajlarda hem de gruplarda
 
-    <b>⚙️ Available commands:</b>
-  /q <i>[in response to the message]</i> - make a quote from the message
+    <b>⚙️ Kullanılabilir komutlar:</b>
+  /q <i>[mesajı yanıtlayarak]</i> - mesajdan alıntı yapın
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
-      Digit: <code>3</code> - make a quote from <b>3 posts</b> down
-      <code>random</code>: random quote color
-      <code>reply</code> or <code>r</code>: make a quote with saving answers
-      <code>p</code> or <code>png</code> - make a PNG quote
-      <code>i</code> or <code>img</code> - make a quote as a picture
-      <code>rate</code> - add a rating to a quote
+    <b>/q komutu için mevcut bayraklar:</b>
+      hex kod veya renk adı: <code>#cbafff</code> veya <code>indigo</code> - renkle alıntı yap <b>#cbafff</b>
+      Basamak: <code>3</code> <b>mesajdan alıntı yap 3 mesaj</b> aşağı
+      <code>rastgele</code>: rastgele alıntı renk
+      <code>cevap</code> veya <code>r</code>: cevapları kaydederek fiyat teklifi yapın
+      <code>p</code> veya <code>png</code> - PNG alıntısı yapın
+      <code>i</code> veya <code>img</code> - resim olarak alıntı yapın
+      <code>derece</code> - bir derecelendirme ekleyin alıntı
 
-    <b>Example of using flags:</b>
-    <code>/q white rp</code>
-    <code>/q i red</code>
-    <code>/q r #cbafff</code>
+    <b>Bayrak kullanma örneği:</b>
+    <code>/q beyaz rp</code>
+    <code>/qi kırmızı</code>
+    <code>/qr #cbafff</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> <i>[in response to message]</i> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i>
-  <code>/qd</code> <i>[in response to the message]</i> - remove the sticker from the sticker pack of group
-  <code>/qb</code> - set emoji brand. Available: apple, google, twitter, joypixels, blob
-  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> - change the emoji suffix for stickers
-  <code>/qrate</code> - enable/disable rating of quotes
+  Yalnızca yöneticiler için:
+  <code>/qs 🥰💜</code> <i>[mesaj yanıt olarak]</i> - fotoğraflı bir çıkartmayı/fotoğrafı/belgeyi emojili bir grubun çıkartma paketine kaydeder 🥰💜 <i>(emoji herhangi bir sayı olabilir)</i>
+  <code>/qd</code> <i>[mesajına yanıt olarak]</i> - çıkartmayı kaldır
+  <code>/qb</code> grubunun çıkartma paketinden - set emoji markası. Kullanılabilir: apple, google, twitter, joypixels, blob
+  <code>/qcolor green</code> - tırnakların rengini varsayılan olarak <b>green</b> <i>(hex kodu veya renk adı)</i>
+  <code>/qemoji</code> - çıkartmalar için emoji son ekini değiştirin
+  <code>/qrate</code> - alıntıların derecelendirmesini etkinleştirme/devre dışı bırakma
 
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
 
-  /help or /start - get this text
+  pozitif derecelendirmeli rastgele bir alıntı /qtop - en iyi grup alıntıları
 
-  🇺🇸 /lang - change the language
+  /help veya /start - bu metni al
+
+  🇺🇸 /lang - dili değiştir
   🇷🇺 /lang - изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Geliştirici için kahve satın alın:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Geliştirici blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Merhaba!</b>
@@ -127,10 +127,10 @@ donate:
   other: Diğer yöntemler
 emoji:
   info: |
-    Please include emoji.
+    Lütfen emoji ekleyin.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Örneğin, <code>/qemoji💜</code> , sonraki tüm yeni çıkartmalar için son eki 💜 olarak değiştirecektir.
+    Rastgele bir emoji için <code>/qemoji rastgele</code>
   done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
