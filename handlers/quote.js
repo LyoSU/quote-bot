@@ -155,6 +155,7 @@ module.exports = async (ctx, next) => {
   }
 
   const quoteMessages = []
+  let quoteEmojis = ''
 
   let startMessage = quoteMessage.message_id
 
@@ -344,6 +345,12 @@ module.exports = async (ctx, next) => {
       }]
     }
 
+    if (message.text) {
+      const searchEmojis = emojiDb.searchFromText({ input: message.text, fixCodePoints: true })
+
+      searchEmojis.forEach(v => { quoteEmojis += v.emoji })
+    }
+
     quoteMessages[index] = message
 
     lastMessage = quoteMessage
@@ -374,21 +381,24 @@ module.exports = async (ctx, next) => {
   let format
   if (!flag.privacy && type === 'quote') format = 'png'
 
-  const generate = await got.post(`${process.env.QUOTE_API_URI}/generate.png?botToken=${process.env.BOT_TOKEN}`, {
-    json: {
-      type,
-      format,
-      backgroundColor,
-      width,
-      height,
-      scale: flag.scale || scale,
-      messages: quoteMessages,
-      emojiBrand
-    },
-    responseType: 'buffer',
-    timeout: 1000 * 30,
-    retry: 1
-  }).catch((error) => {
+  const generate = await got.post(
+    `${process.env.QUOTE_API_URI}/generate.png?botToken=${process.env.BOT_TOKEN}`,
+    {
+      json: {
+        type,
+        format,
+        backgroundColor,
+        width,
+        height,
+        scale: flag.scale || scale,
+        messages: quoteMessages,
+        emojiBrand
+      },
+      responseType: 'buffer',
+      timeout: 1000 * 30,
+      retry: 1
+    }
+  ).catch((error) => {
     return { error }
   })
 
@@ -414,7 +424,11 @@ module.exports = async (ctx, next) => {
   }
 
   let emojis = ctx.group ? ctx.group.info.settings.quote.emojiSuffix : ctx.session.userInfo.settings.quote.emojiSuffix
-  if (!emojis || emojis === 'random') emojis = emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
+  if (!emojis || emojis === 'random') {
+    emojis = quoteEmojis + emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
+  } else {
+    emojis += quoteEmojis
+  }
 
   emojis = `${emojis}💜`
 
