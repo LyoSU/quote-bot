@@ -1,52 +1,52 @@
 ---
 language_name: '🇮🇩 Indonesia'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Halo!</b>
+  Saya akan membantu membuat kutipan dari sebuah postingan.
+  Bot dapat bekerja baik dalam pesan pribadi maupun dalam grup.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Perintah yang tersedia:</b>
+  /q - buat kutipan dari pesan <i>[membalas pesan]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Untuk membuat kutipan dari beberapa pesan, tulis sebagai parameter angka yang akan menunjukkan berapa banyak pesan yang harus ada dalam kutipan.
+  Dalam pesan pribadi, Anda dapat meneruskan beberapa pesan kepada saya sekaligus dan saya akan membuat kutipan dari mereka.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Tanda yang tersedia untuk perintah /q:</b>
+      kode hex atau nama warna: <code>#cbafff</code> atau <code>indigo</code> — buat kutipan dengan warna <b>#cbaff</b>
+      <code>random</code> --warna kutipan acak
+      <code>reply</code> atau <code>r</code> — buat kutipan dengan menyimpan jawaban
+      <code>p</code> atau <code>png</code> — buat kutipan PNG
+      <code>i</code> atau <code>img</code> — buat kutipan sebagai gambar
+      <code>rate</code> - tambahkan peringkat ke kutipan
+      <code>m</code> atau <code>media</code> --termasuk media
+      <code>c</code> atau <code>crop</code> - crop media
+      <code>s2.5</code> - kualitas gambar 2,5 kali lebih tinggi dari standar <i>(dapat mengatur nilai apapun)</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
+    <b>Contoh penggunaan bendera:</b>
+    <code>/q 3 rp putih</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+    <code>/q5rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
+  Hanya untuk administrator:
+  <code>/qs 🥰💜</code> — menyimpan stiker/foto/dokumen dengan foto ke paket stiker grup dengan emoji <i>(emoji bisa apa saja dan nomor berapa saja)</i> < i>[membalas pesan]</i>
+  <code>/qd</code> - hapus stiker dari paket stiker grup <i>[sebagai tanggapan atas pesan]</i>
+  <code>/qb</code> - setel merek emoji. Tersedia: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> - mengatur warna tanda kutip <b>hijau</b> secara default <i>(kode hex atau nama warna)</i>
+  <code>/qemoji</code> — mengubah akhiran emoji untuk stiker
+  <code>/qrate</code> - aktifkan/nonaktifkan peringkat kutipan
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand - acak kutipan dengan peringkat positif
+  /qtop - kutipan grup teratas
 
-  /help or /start — get this text
+  /help atau /start - dapatkan teks ini
 
   🇺🇸 /lang — change the language
   🇷🇺 /lang — изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Beli kopi untuk pengembang:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Blog pengembang:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
