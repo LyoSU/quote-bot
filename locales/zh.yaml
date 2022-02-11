@@ -1,53 +1,52 @@
 ---
-language_name: '🇨🇳 簡體中文'
+language_name: '🇨🇳 简体中文'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>你好！</b>
+  我將幫助從帖子中創建報價。
+  Bot 可以在私人消息和群組中工作。
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ 可用命令：</b>
+  /q - 引用消息<i>[回复消息]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  要從多條消息中創建報價，請將一個數字作為參數寫入，該數字將指示報價中應包含多少條消息。
+  在私信中，您可以一次將多條消息轉發給我，我將引用它們。
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>/q 命令的可用標誌：</b>
+      十六進制代碼或顏色名稱：<code>#cbafff</code> 或 <code>indigo</code> — 使用顏色 <b>#cbafff</b> 進行引用
+      <code>random</code> --隨機引用顏色
+      <code>reply</code> 或 <code>r</code> — 引用並保存答案
+      <code>p</code> 或 <code>png</code> — 製作 PNG 引用
+      <code>i</code> 或 <code>img</code> — 將引用作為圖片
+      <code>rate</code> - 為報價添加評級
+      <code>m</code> 或 <code>media</code> --包括媒體
+      <code>c</code> 或 <code>crop</code> - 裁剪媒體
+      <code>s2.5</code> - 畫質比標準高2.5倍<i>（可以設置任何值）</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
+    <b>使用標誌的示例：</b>
+    <code>/q 3 白色 rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+    <code>/q5rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
+  僅適用於管理員：
+  <code>/qs 🥰💜</code> - 將帶有照片的貼紙/照片/文檔保存到帶有表情符號🥰💜的組的貼紙包中 <i>（表情符號可以是任意數字）</i> < i>[回复消息]</i>
+  <code>/qd</code> - 從<i>組的貼紙包中移除貼紙[響應消息]</i>
+  <code>/qb</code> - 設置表情符號品牌。可用：<code>apple</code>、<code>google</code>、<code>twitter</code>、<code>joypixels</code>、<code>blob</code>
+  <code>/qcolor green</code> - 默認設置引號的顏色<b>green</b> <i>（十六進制代碼或顏色名稱）</i>
+  <code>/qemoji</code> — 更改貼紙的表情符號後綴
+  <code>/qrate</code> - 啟用/禁用報價評級
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand - 隨機引用一個正面評價為
+  /qtop - 頂級組引號
 
-  /help or /start — get this text
+  /help 或 /start - 獲取此文本
 
   🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ 為開發者買咖啡：</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 開發者博客：</b> @LyBlog
+  <b>GitHub：</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>你好！</b>
   在群组中使用 /q 命令回复消息时我将为您创建引用贴纸
@@ -57,7 +56,7 @@ btn:
   add_group: 添加到群组
   help: 帮助
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: 不支持的消息
   api_error: |
     <b>😓 生成引用失败</b>
     <pre>${error}</pre>
@@ -66,7 +65,7 @@ quote:
   set_background_color: |
     引用贴纸的底色已设置为: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    报价人的表情品牌已设置为： <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -116,7 +115,7 @@ privacy:
 top:
   info: |
     <b>热度最高的群组引用：</b>
-  open: Open top
+  open: 打开顶端
 donate:
   info: |
     您可以为开发者买杯咖啡以示支持，详细捐赠方式如下：
@@ -135,10 +134,10 @@ donate:
   other: 其它选项
 emoji:
   info: |
-    Please include emoji.
+    请包括表情符号。
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    例如， <code>/qemoji💜</code> 会将后缀更改为💜，用于所有后续的新贴纸。
+    对于随机表情符号 <code>/qemoji random</code>
   done: Emoji 添加成功！
 adv:
   about: |
