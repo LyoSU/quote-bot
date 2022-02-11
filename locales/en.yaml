@@ -5,7 +5,7 @@ help: |2
   I will help create a quote from a post.
   Bot can work both in private messages and in groups.
 
-  In private messages, you can forward several messages to me at once and I will make a quote from them. 
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
     <b>⚙️ Available commands:</b>
   /q - make a quote from the message <i>[reply to the message]</i>
