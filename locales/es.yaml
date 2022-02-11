@@ -6,21 +6,21 @@ help: |2
   Bot can work both in private messages and in groups.
 
     <b>⚙️ Available commands:</b>
-  /q - make a quote from the message <i>[reply to the message]</i>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
   To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
   In private messages, you can forward several messages to me at once and I will make a quote from them.
 
     <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
-      <code>random</code>: random quote color
-      <code>reply</code> or <code>r</code>: make a quote with saving answers
-      <code>p</code> or <code>png</code> - make a PNG quote
-      <code>i</code> or <code>img</code> - make a quote as a picture
-      <code>rate</code> - add a rating to a quote
-      <code>m</code> or <code>media</code> - include media
-      <code>c</code> or <code>crop</code> - crop media
-      <code>s2.5</code> - picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
     <b>Example of using flags:</b>
     <code>/q 3 white rp</code>
@@ -29,20 +29,20 @@ help: |2
     <code>/q 5 rm</code>
 
   Only for administrators:
-  <code>/qs 🥰💜</code> - saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> - remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> - set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> - set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> - change the emoji suffix for stickers
-  <code>/qrate</code> - enable/disable rating of quotes
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
 
-  /qrand - random a quote with a positive rating of
-  /qtop - top group quotes
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help or /start - get this text
+  /help or /start — get this text
 
-  🇺🇸 /lang - change the language
-  🇷🇺 /lang - изменить язык
+  🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
 
   <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
