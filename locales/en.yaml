@@ -5,12 +5,11 @@ help: |2
   I will help create a quote from a post.
   Bot can work both in private messages and in groups.
 
-  In private messages, you can forward several messages to me at once and I will make a quote from them. 
-
     <b>⚙️ Available commands:</b>
   /q - make a quote from the message <i>[reply to the message]</i>
 
   To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
     <b>Available flags for the /q command:</b>
       hex code or color name: <code>#cbafff</code> or <code>indigo</code> - make a quote with color <b>#cbafff</b>
