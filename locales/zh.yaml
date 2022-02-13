@@ -49,22 +49,22 @@ help: |2
   <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Hello!</b>
-  I will create quotes in the group using the /q command in response to message
+  <b>你好！</b>
+  在群组中使用 /q 指令回覆訊息時，我將為您建立引用貼圖
 
-  You can learn more about the command <a href="t.me/${username}?start=help">/help</a> in private messages with me
+  您可以與我私聊，了解相關指令 <a href="t.me/${username}?start=help">/help</a>
 btn:
   add_group: 新增到群組
   help: 幫助
 quote:
   unsupported_message: 不支援的訊息
   api_error: |
-    <b>😓 Failed to generate quote</b>
+    <b>😓 生成引用失敗</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    指令必須回覆一個訊息。
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    引用貼圖的底色已設定為：<code>${backgroundColor}</code>
   set_emoji_brand: |
     Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
@@ -127,9 +127,9 @@ donate:
 
     More: donate.lyo.su
   title: Donate ${botUsername}
-  description: Support bot development
+  description: 支持機器人開發者
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
+    <b>感謝您對機器人的支持💜</b>
   pay: '💜 Pay via Telegram'
   liqpay: LiqPay (VISA, MasterCard)
   other: 其他選項
@@ -171,10 +171,10 @@ adv:
 
       <i>不超過 70 個字元，並且必須符合我們的規則 (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      輸入廣告資源的網址：
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>網址必須完整，如果您在 Telegram 中做廣告，網址必須以 t.me 開頭。
+      資源必須符合我們的規則 (/adv_rules)，如果審核通過後修改網站，您的帳號將被封禁，款項不予退還。</i>
     select_locale: |
       Select the language of the users to whom the ad will be shown
 
@@ -217,6 +217,6 @@ adv:
     accept_btn: 接受
     deny_btn: 拒絕
 only_admin: |
-  Only group administrator can use this command.
+  只有群組管理員可以使用此指令。
 only_group: |
-  This command can be used only in groups.
+  此指令只能在群組使用。
