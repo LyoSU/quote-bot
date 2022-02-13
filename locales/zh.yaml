@@ -1,5 +1,5 @@
 ---
-language_name: '🇺🇸 English'
+language_name: '🇹🇼 繁體中文'
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -54,10 +54,10 @@ help_group: |
 
   You can learn more about the command <a href="t.me/${username}?start=help">/help</a> in private messages with me
 btn:
-  add_group: Add to Group
-  help: Help
+  add_group: 新增到群組
+  help: 幫助
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: 不支援的訊息
   api_error: |
     <b>😓 Failed to generate quote</b>
     <pre>${error}</pre>
@@ -72,7 +72,7 @@ sticker:
   save:
     suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
     error:
-      animated: I can't add an animated sticker.
+      animated: 我無法新增動態貼圖。
       need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
       telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
   delete:
@@ -80,9 +80,9 @@ sticker:
     error:
       telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Save the sticker
+      save_sticker: 儲存貼圖
   empty_forward: |
-    Command must be sent a reply to a sticker, photo or file with a picture.
+    指令必須為回覆：貼圖、或圖片、或用檔案傳送的圖片。 
   fstik: |
     In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
 rate:
@@ -132,7 +132,7 @@ donate:
     <b>Thank you for supporting the bot 💜</b>
   pay: '💜 Pay via Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: 其他選項
 emoji:
   info: |
     Please include emoji.
@@ -162,14 +162,14 @@ adv:
 
     <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: 建立廣告
+    list_btn: 廣告列表
+    pay_btn: 儲值餘額
   create:
     enter_text: |
-      Enter your ad text:
+      輸入您的廣告文字：
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>不超過 70 個字元，並且必須符合我們的規則 (/adv_rules)</i>
     enter_link: |
       Enter a link to the advertised resource:
 
@@ -214,8 +214,8 @@ adv:
       The ad was successfully moderated. You can start showing it in the advertising section: /adv
     denied: |
       Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+    accept_btn: 接受
+    deny_btn: 拒絕
 only_admin: |
   Only group administrator can use this command.
 only_group: |
