@@ -1,5 +1,5 @@
 ---
-language_name: '🇺🇸 English'
+language_name: '🇨🇳 简体中文'
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -35,6 +35,7 @@ help: |2
   <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
   <code>/qemoji</code> — change the emoji suffix for stickers
   <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
   /qrand — random a quote with a positive rating of
   /qtop — top group quotes
@@ -49,150 +50,150 @@ help: |2
   <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Hello!</b>
-  I will create quotes in the group using the /q command in response to message
+  <b>你好！</b>
+  在群组中使用 /q 命令回复消息时我将为您创建引用贴纸
 
-  You can learn more about the command <a href="t.me/${username}?start=help">/help</a> in private messages with me
+  您可以在与我的私人消息中了解有关命令 <a href="t.me/${username}?start=help">/help</a>
 btn:
-  add_group: Add to Group
-  help: Help
+  add_group: 添加到群组
+  help: 帮助
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: 不支持的消息
   api_error: |
-    <b>😓 Failed to generate quote</b>
+    <b>😓 生成引用失败</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    命令必须在回复消息时发送。
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    引用贴纸的底色已设置为: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    报价人的表情品牌已设置为： <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
-    suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
+    suc: 贴纸已成功添加到 <a href="${link}">群组贴纸包</a>。
     error:
-      animated: I can't add an animated sticker.
-      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
-      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
+      animated: 我无法添加动态贴纸。
+      need_creator: <b>我未能保存此贴纸。</b>\n${creator} 需要先私聊我发送任意消息。
+      telegram: <b>我未能保存该贴纸。</b>\n<pre>${error}</pre>
   delete:
-    suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
+    suc: 贴纸已成功从 <a href="${link}">群组贴纸包</a> 中移除。
     error:
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      telegram: <b>我无法保存此贴纸。</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Save the sticker
+      save_sticker: 保存贴纸
   empty_forward: |
-    Command must be sent a reply to a sticker, photo or file with a picture.
+    命令必须发送回复给贴纸、照片或带有图片的文件。
   fstik: |
-    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
+    为了将贴纸保存到您的个人贴纸包，请将此消息转发到 @fStikBot。
 rate:
   vote:
     rated: |
-      You ${rateName} this.
+      您 ${rateName} 了它。
     back: |
-      You got your vote back.
+      您的评价已撤回。
   settings:
     enable: |
-      Quotes rating is on.
+      引用评价已启用。
     disable: |
-      Rating for quotes is off.
+      引用评价已关闭。
 random:
   empty: |
-    There are no quotes with a positive rating in the group.
+    群组中没有带正面评价的引用贴纸。
   gab: |
-    The chance of random quotes is set to ${gab}
+    随机引用的概率已设置为 ${gab}
 hidden:
   settings:
     enable: |
-      Sender search is enabled.
+      发送者搜索已启用。
     disable: |
-      Sender search is disabled.
+      发送者搜索已禁用。
 privacy:
   settings:
     enable: |
-      Privacy mode is enabled.
+      隐私模式已开启。
     disable: |
-      Privacy mode is disabled.
+      隐私模式已关闭。
 top:
   info: |
-    <b>Top group quotes:</b>
-  open: Open top
+    <b>热度最高的群组引用：</b>
+  open: 打开顶端
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    您可以为开发者买杯咖啡以示支持，详细捐赠方式如下：
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    monobank: 4441114453205120 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+    BTC： <code>17QAN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    ETH/BUSD： <code>0x34007b7b75F8DAe005A4071416aA2fBa2740c</code>
+    monobank：4441114453205| <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCarterCard</a>
 
-    More: donate.lyo.su
-  title: Donate ${botUsername}
-  description: Support bot development
+    更多方式请查看：donate.lyo.su
+  title: 捐赠 ${botUsername}
+  description: 支持此 bot 开发
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>感谢您支持此 bot 💜</b>
+  pay: '💜 通过 Telegram 支付'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: 其它选项
 emoji:
   info: |
-    Please include emoji.
+    请包括表情符号。
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
-  done: Emoji successfully changed.
+    例如， <code>/qemoji💜</code> 会将后缀更改为💜，用于所有后续的新贴纸。
+    对于随机表情符号 <code>/qemoji random</code>
+  done: Emoji 添加成功！
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 您可以从我们这里购买广告投放到众多活跃用户和群组中</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    我们的机器人在超过 30000 个活跃群组中，每月超过 70000 个用户使用机器人。
+    其中包括来自不同国家的用户。 您可以选择向特定语言的用户投放广告
+    • 广告以按钮或文字信息形式显示在引用下方， 具体形式根据用户的聊天而异
+    • 您自己指定广告价格； 最高出价的广告将被首先显示
+    • 广告的文本和内容必须符合我们的规则 (/adv_rules) 并且在发布之前您必须通过审查。 这可以在支付前完成
 
-    Balance: ${balance} USD
+    余额: ${balance} 美元
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>在广告中，不允许 <u></u> ：</b>
+    • 使用淫秽或侮辱
+    • 使用超过1次的表情信息
+    • 误导信息
+    • 被乌克兰法律禁止的信息
+    • 成人内容
+    • 赌博
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>如果我们没有理由不喜欢广告，我们也有权拒绝广告。</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: 创建广告
+    list_btn: 广告列表
+    pay_btn: 充值余额
   create:
     enter_text: |
-      Enter your ad text:
+      输入您的广告文字：
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>不超过 70 个字符，并且必须符合我们的规则 (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      输入广告资源的链接：
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>链接必须完整，如果您在 Telegram 中做广告，链接必须以 t.me 开头。
+      资源必须符合我们的规则（/adv_rules），如果审核通过后更换网站，您的账号将被封禁，款项不予退还。</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      选择将向其展示广告的用户的语言
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      该数字是可能会看到该语言的广告的用户数量。
+      仅计算实际使用机器人的用户。但是该广告也可以被引用所在组中的其他用户看到，因此这个数字可能要高得多
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>语言与国家/地区不对应。
+      您只能选择一种语言，如果您需要多种语言，请重新制作另一种语言的广告。</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      以美元指定每 1000 次广告展示的价格：
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>活动广告的平均价格：</u> ${averagePrice} 美元
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>最低价格为 0.15 美元。
+      广告以随机方式展示，但价格较高的广告展示机会更高。
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      该广告已发送以供审核。请耐心等待。如果审核成功或不成功，您将收到通知。
   list:
     select_list: |
       select_list
@@ -211,12 +212,12 @@ adv:
       Price: ${adv.price}
       Count ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      广告已成功审核。您可以开始在广告部分展示它：/adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      不幸的是，该广告尚未经过审核。请阅读我们的规则 (/adv_rules)，如果您确定这是一个错误，请通过@Ly_OBot 写信给我们，并在描述问题的消息中包含此标签：#qba_${adv.id}
+    accept_btn: 批准
+    deny_btn: 拒绝
 only_admin: |
-  Only group administrator can use this command.
+  只有群组管理员可以使用此命令。
 only_group: |
-  This command can be used only in groups.
+  此命令只能在群组中使用。

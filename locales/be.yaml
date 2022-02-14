@@ -35,6 +35,7 @@ help: |2
   <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
   <code>/qemoji</code> — change the emoji suffix for stickers
   <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
   /qrand — random a quote with a positive rating of
   /qtop — top group quotes

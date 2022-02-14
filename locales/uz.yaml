@@ -1,51 +1,53 @@
 ---
 language_name: '🇺🇿 O''zbek'
 help: |2
-  <b>Salom!</b>
-  Men postdan iqtibos yaratishga yordam beraman.
-  Bot shaxsiy xabarlarda ham, guruhlarda ham ishlashi mumkin.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Mavjud buyruqlar:</b>
-  /q - <i>[xabarga javob berish]</i> xabaridan iqtibos keltiring
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Bir nechta xabarlardan iqtibos yaratish uchun kotirovkada qancha xabar bo'lishi kerakligini ko'rsatadigan raqamni parametr sifatida yozing.
-  Shaxsiy xabarlarda siz bir vaqtning o'zida menga bir nechta xabarlarni yuborishingiz mumkin va men ulardan iqtibos keltiraman.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>/q buyrug'i uchun mavjud bayroqlar:</b>
-      hex kodi yoki rang nomi: <code>#cbafff</code> yoki <code>indigo</code> — <b>#cbafff</b> rangi bilan taklif qiling
-      <code>tasodifiy</code> --tasodifiy tirnoq rangi
-      <code>reply</code> yoki <code>r</code> — javoblarni saqlash bilan taklif qiling
-      <code>p</code> yoki <code>png</code> — PNG iqtibos keltiring
-      <code>i</code> yoki <code>img</code> — rasm sifatida iqtibos keltiring
-      <code>rate</code> - taklifga baho qo'shing
-      <code>m</code> yoki <code>media</code> --mediani o'z ichiga oladi
-      <code>c</code> yoki <code>crop</code> - kesish media
-      <code>s2.5</code> - tasvir sifati standartdan 2,5 baravar yuqori <i>(istalgan qiymatni oʻrnatish mumkin)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Bayroqlardan foydalanishga misol:</b>
-    <code>/q 3 oq rp</code>
-    <code>/q i qizil s3.2</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
+    <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
-    <code>/q5rm</code>
+    <code>/q 5 rm</code>
 
-  Faqat administratorlar uchun:
-  <code>/qs 🥰💜</code> — suratli stiker/fotosurat/hujjatni emojili guruhning stikerlar to‘plamiga saqlaydi 🥰💜 <i>(emoji istalgan va istalgan raqam bo‘lishi mumkin)</i> < i>[xabarga javob berish]</i>
-  <code>/qd</code> - <i>[xabarga javoban]</i> guruhining stikerlar paketidan stikerni olib tashlang
-  <code>/qb</code> - emoji brendini o'rnating. Mavjud: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> - qo'shtirnoq rangini sukut bo'yicha <b>yashil</b> belgilang <i>(olti burchakli kod yoki rang nomi)</i>
-  <code>/qemoji</code> — stikerlar uchun emoji qo‘shimchasini o‘zgartiring
-  <code>/qrate</code> - qo'shtirnoqlar reytingini yoqish/o'chirish
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand - ijobiy baholi tasodifiy taklif
-  /qtop - yuqori guruh tirnoqlari
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help yoki /start - ushbu matnni oling
+  /help or /start — get this text
 
   🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
 
-  <b>☕️ Dasturchi uchun qahva sotib oling:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Dasturchilar blogi:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
