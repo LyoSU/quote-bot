@@ -29,7 +29,7 @@ help: |2
     <code>/q 5 rm</code>
 
   Hanya untuk administrator:
-  <code>/qs 🥰💜</code> — menyimpan stiker/foto/dokumen dengan foto ke paket stiker grup dengan emoji <i>(emoji bisa apa saja dan nomor berapa saja)</i> < i>[membalas pesan]</i>
+  <code>/qs 🥰💜</code> — menyimpan stiker/foto/dokumen dengan foto ke paket stiker grup dengan emoji <i>(emoji bisa apa saja dan nomor berapa saja)</i> <i>[membalas pesan]</i>
   <code>/qd</code> - hapus stiker dari paket stiker grup <i>[sebagai tanggapan atas pesan]</i>
   <code>/qb</code> - setel merek emoji. Tersedia: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
   <code>/qcolor green</code> - mengatur warna tanda kutip <b>hijau</b> secara default <i>(kode hex atau nama warna)</i>
