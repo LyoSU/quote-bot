@@ -212,7 +212,7 @@ module.exports = async (ctx, next) => {
         //   sarchForwardName = await ctx.db.User.find({
         //     $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
         //   })
-        // }\
+        // }
 
         if (sarchForwardName.length === 1) {
           messageFrom = {
