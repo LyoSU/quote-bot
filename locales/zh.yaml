@@ -29,7 +29,7 @@ help: |2
     <code>/q5rm</code>
 
   仅适用于管理员：
-  <code>/qs 🥰💜</code> - 将带有照片的贴纸/照片/文档保存到带有表情符号🥰💜的组的贴纸包中 <i>（表情符号可以是任意数字）</i> < i>[回复消息]</i>
+  <code>/qs 🥰💜</code> - 将带有照片的贴纸/照片/文档保存到带有表情符号🥰💜的组的贴纸包中 <i>（表情符号可以是任意数字）</i> <i>[回复消息]</i>
   <code>/qd</code> - 从<i>组的贴纸包中移除贴纸[响应消息]</i>
   <code>/qb</code> - 设置表情符号品牌。可用：<code>apple</code>、<code>google</code>、<code>twitter</code>、<code>joypixels</code>、<code>blob</code>
   <code>/qcolor green</code> - 默认设置引号的颜色<b>green</b> <i>（十六进制代码或颜色名称）</i>
@@ -43,6 +43,7 @@ help: |2
   /help 或 /start - 获取此文本
 
   🇺🇸 /lang — change the language
+  🇷🇺 /lang — изменить язык
 
   <b>☕️ 为开发者买咖啡：</b> donate.lyo.su
 
