@@ -100,7 +100,10 @@ module.exports = async (ctx, next) => {
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
-  } else if (ctx.chat.type === 'private') {
+  }
+
+  if (ctx.chat.type === 'private') {
+    flag.reply = true
     if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
     minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
     await sleep(1000)
@@ -336,7 +339,7 @@ module.exports = async (ctx, next) => {
       if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
     }
 
-    if (!message.text && !message.media) {
+    if (!message.text && !message.media && !message.voice) {
       message.text = ctx.i18n.t('quote.unsupported_message')
       message.entities = [{
         offset: 0,
