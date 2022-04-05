@@ -58,7 +58,7 @@ btn:
   add_group: Дадаць у суполку
   help: Даведка
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Паведамленне не падтрымліваецца
   api_error: |
     <b>😓 Не атрымалася стварыць цытату</b>
     <pre>${error}</pre>
