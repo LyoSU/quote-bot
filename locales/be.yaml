@@ -1,53 +1,52 @@
 ---
 language_name: '🇧🇾 Беларуская'
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Прывітанне!</b>
+  Я дапамагу стварыць цытату з паста.
+  Бот можа працаваць як у прыватных паведамленнях, так і ў чатах.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Даступныя каманды:</b>
+  /q — Зрабіць цытату з паведамлення <i>[адказаць на паведамленне]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Каб стварыць цытату з некалькіх паведамленняў, напішыце як параметр колькасць паведамленняў для цытаты.
+  У прыватных паведамленнях вы можаце проста прыслаць некалькі паведамленняў за раз, каб стварыць цытату з іх.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Магчымыя параметры каманды /q:</b>
+      hex код або назва колеру: <code>#cbafff</code> або <code>indigo</code> — зрабіць цытату з колерам <b>#cbafff</b>
+      <code>random</code> - выпадковы колер цытаты
+      <code>reply</code> або <code>r</code> — паказваць адказы ў цытаце
+      <code>p</code> або <code>png</code> — зрабіць цытату ў PNG
+      <code>i</code> або <code>img</code> — зрабіць цытату як фота
+      <code>rate</code> — дадаць адзнаку цытат
+      <code>m</code> або <code>media</code> — уключыць медыя
+      <code>c</code> або <code>crop</code> — абрэзаць медыя
+      <code>s2.5</code> — якасць выявы будзе ў 2.5 разы вышэй за звычайную <i>(можна задаць любое значэнне)</i>
 
-    <b>Example of using flags:</b>
+    <b>Прыклад выкарыстоўвання параметраў:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Толькі для адміністратараў:
+  <code>/qs 🥰💜</code> — захоўвае стыкер/фота/дакумент у набор стыкераў суполкі 🥰💜 <i>(любая колькасць эмодзі)</i> <i>[адказаць на паведамленне]</i >
+  <code>/qd</code> — выдаліць стыкер з набору стыкераў суполкі <i>[адказаць на паведамленне]</i>
+  <code>/qb</code> — Наладзіць брэнд эмодзі. Даступна: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — усталяваць колер цытат <b>зялёны</b> па змаўчанні <i>(hex код або назва колеру)</i>
+  <code>/qemoji</code> — змяніць суфікс эмодзі для стыкераў
+  <code>/qrate</code> — уключыць/выключыць рэйтынг цытат
+  <code>/qgab 300</code> — усталяваць шанс для выпадковай цытаты. Любое станоўчае чысло. Чым больш чысло, тым меней шанс. Усталяваўшы 300, шанс з'яўлення будзе прыкладна 1 раз на 300 паведамленняў. Каб выключыць, змяніце значэнне на 0
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand – выпадковая цытата са станоўчым рэйтынгам
+  /qtop - топ цытат суполкі
 
-  /help or /start — get this text
+  /help або /start - атрымаць гэты тэкст
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - змяніць мову
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Купіць каву рсапрацоўшчыку:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Блог распрацоўшчыка:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Вітаю!</b>
@@ -58,7 +57,7 @@ btn:
   add_group: Дадаць у суполку
   help: Даведка
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Паведамленне не падтрымліваецца
   api_error: |
     <b>😓 Не атрымалася стварыць цытату</b>
     <pre>${error}</pre>
@@ -67,7 +66,7 @@ quote:
   set_background_color: |
     Колер фона цытат зменены на: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Брэнд эмодзі зменены на: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -136,10 +135,10 @@ donate:
   other: Іншыя спосабы
 emoji:
   info: |
-    Please include emoji.
+    Калі ласка, дадайце эмодзі.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Напрыклад, <code> /emoji 💜 </code> зменіць эмодзі на 💜 для ўсіх наступных стыкераў.
+    Для выпадковых эмодзі выкарыстоўвайце <code>/qemoji random</code>
   done: Эмодзі-суфікс паспешна зменены.
 adv:
   about: |
