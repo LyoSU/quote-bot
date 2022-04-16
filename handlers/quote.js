@@ -41,9 +41,7 @@ async function loopClearStickerPack () {
       const sticker = stickerSet.stickers[i]
       if (i > config.globalStickerSet.save_sticker_count - 1) {
         console.log(`deleting sticker ${stickerSet.stickers[i].file_id}`)
-        telegram.deleteStickerFromSet(sticker.file_id).then((result) => {
-          console.log(result)
-        }).catch((error) => {
+        telegram.deleteStickerFromSet(sticker.file_id).catch((error) => {
           console.log('loopClearStickerPack deleteStickerFromSet error:', error)
         })
       }
