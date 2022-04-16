@@ -35,12 +35,15 @@ function sleep (ms) {
 async function loopClearStickerPack () {
   setInterval(async () => {
     const me = await telegram.getMe()
-    const sticketSet = await telegram.getStickerSet(config.globalStickerSet.name + me.username).catch(() => {})
-    if (!sticketSet) return
-    for (const i in sticketSet.stickers) {
-      const sticker = sticketSet.stickers[i]
+    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + me.username).catch(() => {})
+    if (!stickerSet) return
+    for (const i in stickerSet.stickers) {
+      const sticker = stickerSet.stickers[i]
       if (i > config.globalStickerSet.save_sticker_count - 1) {
-        telegram.deleteStickerFromSet(sticker.file_id).catch((error) => {
+        console.log(`deleting sticker ${stickerSet.stickers[i].file_id}`)
+        telegram.deleteStickerFromSet(sticker.file_id).then((result) => {
+          console.log(result)
+        }).catch((error) => {
           console.log('loopClearStickerPack deleteStickerFromSet error:', error)
         })
       }
