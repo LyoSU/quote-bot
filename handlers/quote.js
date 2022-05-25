@@ -32,10 +32,15 @@ function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+let botInfo
+
 async function loopClearStickerPack () {
+  if (!botInfo) botInfo = await telegram.getMe()
+
   setTimeout(async () => {
-    const me = await telegram.getMe()
-    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + me.username).catch(() => {})
+    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username).catch((error) => {
+      console.log('loopClearStickerPack getStickerSet error:', error)
+    })
     if (!stickerSet) return
     for (const i in stickerSet.stickers) {
       const sticker = stickerSet.stickers[i]
@@ -292,6 +297,9 @@ module.exports = async (ctx, next) => {
     if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
     if (flag.media && quoteMessage.sticker) {
       message.media = [quoteMessage.sticker]
+      if (quoteMessage.sticker.is_video) {
+        message.media = [quoteMessage.sticker.thumb]
+      }
       message.mediaType = 'sticker'
     }
     if (flag.media && (quoteMessage.animation || quoteMessage.video)) {

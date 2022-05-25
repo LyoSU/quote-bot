@@ -260,6 +260,16 @@ function getMessages (chatID, messageIds) {
                         file_size: file.size
                       }
                     }
+                  } else if (['sticker'].includes(type)) {
+                    const sticker = messageInfo.content[type]
+                    media = {
+                      file_id: sticker.sticker.remote.id,
+                      is_animated: sticker.type._ === 'stickerTypeAnimated',
+                      is_video: sticker.type._ === 'stickerTypeVideo',
+                      thumb: {
+                        file_id: sticker.thumbnail.file.remote.id
+                      }
+                    }
                   } else {
                     media = {
                       file_id: messageInfo.content[type][type].remote.id,
