@@ -25,7 +25,7 @@
     "got": "^10.7.0",
     "mongoose": "^5.13.2",
     "prom-client": "^12.0.0",
-    "sharp": "^0.28.3",
+    "sharp": "^0.30.5",
     "tdl": "^7.0.0",
     "tdl-tdlib-addon": "^1.0.1",
     "telegraf": "^3.39.0",
