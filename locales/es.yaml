@@ -120,13 +120,13 @@ top:
   open: Parte superior
 donate:
   info: |
-    Puede comprar café para el desarrollador o algo más con los siguientes detalles:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH / BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    monobank320512014 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa / MasterCard</a>
+    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    Más: donate.lyo.su
+    More: donate.lyo.su
   title: Donar ${botUsername}
   description: Apoya el desarrollo del bot
   successful: |
