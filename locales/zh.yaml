@@ -120,13 +120,13 @@ top:
   open: 打开顶端
 donate:
   info: |
-    您可以为开发者买杯咖啡以示支持，详细捐赠方式如下：
+    You can buy coffee for the developer or something else with the following details:
 
-    BTC： <code>17QAN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD： <code>0x34007b7b75F8DAe005A4071416aA2fBa2740c</code>
-    monobank：4441114453205| <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCarterCard</a>
+    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    更多方式请查看：donate.lyo.su
+    More: donate.lyo.su
   title: 捐赠 ${botUsername}
   description: 支持此 bot 开发
   successful: |
