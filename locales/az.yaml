@@ -120,13 +120,13 @@ top:
   open: Üstü açın
 donate:
   info: |
-    Aşağıdakı detallarla geliştirici və ya başqa bir şey üçün qəhvə ala bilərsiniz:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    mon144044 | <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCard</a>
+    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    Ətraflı: donate.lyo.su
+    More: donate.lyo.su
   title: Maddi dəstək ${botUsername}
   description: Botun inkişafına dəstək
   successful: |
