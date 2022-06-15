@@ -111,7 +111,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (ctx.chat.type === 'private') {
-    flag.reply = true
+    // flag.reply = true
     if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
     minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
     await sleep(1000)
