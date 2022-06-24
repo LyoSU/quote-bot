@@ -135,7 +135,7 @@ module.exports = async (ctx, next) => {
   } else if (ctx.session.userInfo.settings.quote.backgroundColor) {
     backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
   } else {
-    backgroundColor = '#1b1429E6'
+    backgroundColor = '#292232E6'
   }
 
   let emojiBrand = 'apple'
