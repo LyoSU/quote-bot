@@ -119,7 +119,7 @@ module.exports = async (ctx, next) => {
     delete minIdsInChat[ctx.from.id]
   }
 
-  await ctx.replyWithChatAction('choose_sticker')
+  ctx.replyWithChatAction('choose_sticker')
 
   // set background color
   let backgroundColor
@@ -134,7 +134,9 @@ module.exports = async (ctx, next) => {
     backgroundColor = ctx.group.info.settings.quote.backgroundColor
   } else if (ctx.session.userInfo.settings.quote.backgroundColor) {
     backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
-  } else {
+  }
+
+  if (!backgroundColor) {
     backgroundColor = '#292232'
   }
 
@@ -150,25 +152,11 @@ module.exports = async (ctx, next) => {
   const maxQuoteMessage = 50
   let messageCount = flag.count || 1
 
-  let quoteMessage = ctx.message.reply_to_message
-  if (!quoteMessage && ctx.chat.type === 'private') {
-    quoteMessage = ctx.message
-    messageCount = maxQuoteMessage
-  }
-
   messageCount = Math.min(messageCount, maxQuoteMessage)
 
-  if (!quoteMessage) {
-    return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-      reply_to_message_id: ctx.message.message_id,
-      allow_sending_without_reply: true
-    })
-  }
+  let quoteMessages = []
 
-  const quoteMessages = []
   let quoteEmojis = ''
-
-  let startMessage = quoteMessage.message_id
 
   if (messageCount < 0) {
     messageCount = Math.abs(messageCount)
@@ -178,38 +166,53 @@ module.exports = async (ctx, next) => {
   let tryDeleted = 0
   const maxTryDeleted = 50
 
-  let lastMessage
-  for (let index = 0; index < messageCount; index++) {
-    try {
-      const getMessages = await tdlib.getMessages(ctx.message.chat.id, [startMessage + index])
-      if (getMessages.length > 0 && getMessages[0].message_id) {
-        quoteMessage = getMessages[0]
-      } else {
-        if (index > 0) {
-          if (process.env.GROUP_ID) {
-            const chatForward = process.env.GROUP_ID
-            quoteMessage = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index)
-          } else {
-            if (tryDeleted < maxTryDeleted) {
-              tryDeleted++
-              messageCount++
-            }
-            quoteMessage = null
-          }
-        }
-      }
-    } catch (error) {
-      console.error(error)
-      quoteMessage = null
+  let messages = []
+
+  let fristMessage
+
+  if (messages && ctx.chat.type === 'private') {
+    fristMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
+    messageCount = maxQuoteMessage
+  } else {
+    fristMessage = ctx.message.reply_to_message
+  }
+
+  messages.push(fristMessage)
+
+  let startMessage = fristMessage.message_id
+
+
+  messages = await tdlib.getMessages(ctx.message.chat.id, (() => {
+    const messages = []
+    for (let i = 0; i < messageCount; i++) {
+      messages.push(startMessage + i)
     }
+    return messages
+  })())
 
-    // if (index === 0) quoteMessage = ctx.message
+  if (messages.length <= 1) {
+    messages = [ctx.message]
 
-    if (ctx.chat.type === 'private' && !quoteMessage) break
+    if (process.env.GROUP_ID) {
+      for (let index = 1; index < messageCount; index++) {
+        const chatForward = process.env.GROUP_ID
 
-    if (!quoteMessage) {
+        const message = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index).catch(() => {})
+        messages.push(message)
+      }
+    }
+  }
+
+  let lastMessage
+  for (const index in messages) {
+    const quoteMessage = messages[index]
+
+    if (quoteMessage?.message_id === undefined) {
+      tryDeleted++
       continue
     }
+
+    if (ctx.chat.type === 'private' && !quoteMessage) break
 
     let messageFrom
 
@@ -224,7 +227,6 @@ module.exports = async (ctx, next) => {
         //     $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
         //   })
         // }
-
         if (sarchForwardName.length === 1) {
           messageFrom = {
             id: sarchForwardName[0].telegram_id,
@@ -273,10 +275,8 @@ module.exports = async (ctx, next) => {
     if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
-    quoteMessage.from = messageFrom
-
     let diffUser = true
-    if (lastMessage && (quoteMessage.from.id === lastMessage.from.id)) diffUser = false
+    if (lastMessage && (messageFrom.id === lastMessage.from.id)) diffUser = false
 
     const message = {}
 
@@ -365,7 +365,7 @@ module.exports = async (ctx, next) => {
       searchEmojis.forEach(v => { quoteEmojis += v.emoji })
     }
 
-    quoteMessages[index] = message
+    quoteMessages.push(message)
 
     lastMessage = quoteMessage
   }
