@@ -149,50 +149,42 @@ module.exports = async (ctx, next) => {
 
   if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
 
+
   const maxQuoteMessage = 50
+  let fristMessage
   let messageCount = flag.count || 1
-
-  messageCount = Math.min(messageCount, maxQuoteMessage)
-
-  let quoteMessages = []
-
-  let quoteEmojis = ''
-
-  if (messageCount < 0) {
-    messageCount = Math.abs(messageCount)
-    startMessage -= messageCount - 1
-  }
-
-  let tryDeleted = 0
-  const maxTryDeleted = 50
 
   let messages = []
 
-  let fristMessage
-
-  if (messages && ctx.chat.type === 'private') {
+  if (ctx.chat.type === 'private') {
     fristMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
     fristMessage = ctx.message.reply_to_message
   }
 
-  messages.push(fristMessage)
+  messageCount = Math.min(messageCount, maxQuoteMessage)
 
   let startMessage = fristMessage.message_id
+  let quoteMessages = []
+  let quoteEmojis = ''
 
+  if (messageCount < 0) {
+    messageCount = Math.abs(messageCount) + 1
+    startMessage -= messageCount - 1
+  } else {
+    messages.push(fristMessage)
+  }
 
-  messages = await tdlib.getMessages(ctx.message.chat.id, (() => {
-    const messages = []
-    for (let i = 0; i < messageCount; i++) {
-      messages.push(startMessage + i)
+  messages.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
+    const m = []
+    for (let i = 1; i < messageCount; i++) {
+      m.push(startMessage + i)
     }
-    return messages
-  })())
+    return m
+  })()))
 
   if (messages.length <= 1) {
-    messages = [ctx.message]
-
     if (process.env.GROUP_ID) {
       for (let index = 1; index < messageCount; index++) {
         const chatForward = process.env.GROUP_ID
@@ -208,7 +200,6 @@ module.exports = async (ctx, next) => {
     const quoteMessage = messages[index]
 
     if (quoteMessage?.message_id === undefined) {
-      tryDeleted++
       continue
     }
 
