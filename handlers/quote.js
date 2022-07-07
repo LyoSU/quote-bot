@@ -319,7 +319,7 @@ module.exports = async (ctx, next) => {
     let avatarImage = true
     if (!diffUser || (ctx.me === quoteMessage.from.username && index > 0)) {
       avatarImage = false
-      quoteMessage.from.name = false
+      messageFrom.name = false
     }
 
     if (avatarImage) message.avatar = avatarImage
@@ -367,7 +367,7 @@ module.exports = async (ctx, next) => {
 
     quoteMessages.push(message)
 
-    lastMessage = quoteMessage
+    lastMessage = message
   }
 
   if (quoteMessages.length < 1) {
