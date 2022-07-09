@@ -151,48 +151,50 @@ module.exports = async (ctx, next) => {
 
 
   const maxQuoteMessage = 50
-  let fristMessage
+  let firstMessage
   let messageCount = flag.count || 1
 
   let messages = []
 
   if (ctx.chat.type === 'private') {
-    fristMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
+    firstMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
-    fristMessage = ctx.message.reply_to_message
+    firstMessage = ctx.message.reply_to_message
   }
 
   messageCount = Math.min(messageCount, maxQuoteMessage)
 
-  let startMessage = fristMessage.message_id
+  let startMessage = firstMessage.message_id
   let quoteMessages = []
   let quoteEmojis = ''
 
   if (messageCount < 0) {
     messageCount = Math.abs(messageCount) + 1
     startMessage -= messageCount - 1
-  } else {
-    messages.push(fristMessage)
   }
 
   messages.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
     const m = []
-    for (let i = 1; i < messageCount; i++) {
+    for (let i = 0; i < messageCount; i++) {
       m.push(startMessage + i)
     }
     return m
   })()))
 
-  if (messages.length <= 1) {
+  if (messages.length <= 0) {
     if (process.env.GROUP_ID) {
-      for (let index = 1; index < messageCount; index++) {
+      for (let index = 0; index < messageCount; index++) {
         const chatForward = process.env.GROUP_ID
 
         const message = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index).catch(() => {})
         messages.push(message)
       }
     }
+  }
+
+  if (messages.length <= 0) {
+    messages.push(firstMessage)
   }
 
   let lastMessage
