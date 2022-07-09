@@ -17,7 +17,7 @@ module.exports = async ctx => {
   )
 
   if (groupQuotes.length > 0) {
-    const quote = groupQuotes[randomInt(0, groupQuotes.length - 1)]
+    const quote = groupQuotes[randomInt(0, groupQuotes.length)]
 
     let advKeyboard
 
@@ -30,9 +30,9 @@ module.exports = async ctx => {
         },
         { $sample: { size: 1 } }
       ]
-    )
+    )[0]
 
-    if (adv.length > 0) advKeyboard = Markup.urlButton(adv[0].text, adv[0].link)
+    if (adv) advKeyboard = Markup.urlButton(adv.text, adv.link)
 
     await ctx.replyWithDocument(quote.file_id, {
       reply_markup: Markup.inlineKeyboard([
@@ -46,8 +46,10 @@ module.exports = async ctx => {
       allow_sending_without_reply: true
     })
 
-    adv.stats.impressions += 1
-    adv.save()
+    if (adv) {
+      adv.stats.impressions += 1
+      adv.save()
+    }
   } else {
     if (!ctx.state.randomQuote) {
       await ctx.replyWithHTML(ctx.i18n.t('random.empty'), {

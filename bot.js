@@ -45,8 +45,7 @@ const messageCountIO = io.meter({
   unit: 'message'
 })
 
-const randomInteger = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min
+const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
@@ -310,8 +309,9 @@ bot.on(
       const gab = ctx.group.info.settings.randomQuoteGab
 
       if (gab > 0) {
+        const random = randomIntegerInRange(1, gab)
         if (
-          randomInteger(0, gab) === gab &&
+          random === gab &&
           ctx.group.info.lastRandomQuote.getTime() / 1000 <
             Date.now() / 1000 - 60
         ) {
