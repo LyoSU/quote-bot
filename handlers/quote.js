@@ -92,7 +92,9 @@ module.exports = async (ctx, next) => {
     privacy: false
   }
 
-  if (ctx.message && ctx.message.text && ctx.message.text.match(/\/q/)) {
+  const isCommand = ctx.message.text.match(/\/q/)
+
+  if (ctx.message && ctx.message.text && isCommand) {
     const args = ctx.message.text.split(' ')
     args.splice(0, 1)
 
@@ -156,11 +158,18 @@ module.exports = async (ctx, next) => {
 
   let messages = []
 
-  if (ctx.chat.type === 'private') {
+  if (ctx.chat.type === 'private' && !isCommand) {
     firstMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
     firstMessage = ctx.message.reply_to_message
+  }
+
+  if (!firstMessage?.message_id) {
+    return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
+    })
   }
 
   messageCount = Math.min(messageCount, maxQuoteMessage)
@@ -170,7 +179,7 @@ module.exports = async (ctx, next) => {
   let quoteEmojis = ''
 
   if (messageCount < 0) {
-    messageCount = Math.abs(messageCount) + 1
+    messageCount = Math.abs(messageCount)
     startMessage -= messageCount - 1
   }
 
@@ -181,6 +190,8 @@ module.exports = async (ctx, next) => {
     }
     return m
   })()))
+
+  messages = messages.filter((message) => message && Object.keys(message).length !== 0)
 
   if (messages.length <= 0) {
     if (process.env.GROUP_ID) {
@@ -193,8 +204,14 @@ module.exports = async (ctx, next) => {
     }
   }
 
-  if (messages.length <= 0) {
-    messages.push(firstMessage)
+  if (!messages.find((message) => {
+    return message?.message_id === firstMessage?.message_id
+  })) {
+    if (parseInt(flag.count) < 0) {
+      messages.push(firstMessage)
+    } else {
+      messages.splice(0, 0, firstMessage)
+    }
   }
 
   let lastMessage
