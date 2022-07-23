@@ -92,7 +92,7 @@ module.exports = async (ctx, next) => {
     privacy: false
   }
 
-  const isCommand = ctx.message.text.match(/\/q/)
+  const isCommand = ctx.message.text ? ctx.message.text.match(/\/q/) : false
 
   if (ctx.message && ctx.message.text && isCommand) {
     const args = ctx.message.text.split(' ')
