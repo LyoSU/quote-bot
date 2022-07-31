@@ -504,7 +504,7 @@ module.exports = async (ctx, next) => {
           packName = ctx.session.userInfo.tempStickerSet.name
         }
 
-        const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName, {
+        const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
           png_sticker: { source: image },
           emojis
         }, true).catch((error) => {

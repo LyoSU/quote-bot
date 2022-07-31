@@ -84,7 +84,7 @@ module.exports = async ctx => {
           ctx.group.info.stickerSet.create = true
         }
       } else {
-        stickerAdd = await ctx.telegram.addStickerToSet(ctx.from.id, ctx.group.info.stickerSet.name, {
+        stickerAdd = await ctx.telegram.addStickerToSet(ctx.from.id, ctx.group.info.stickerSet.name.toLowerCase(), {
           png_sticker: { source: stickerPNG },
           emojis
         }, false).catch((error) => {

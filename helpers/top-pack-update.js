@@ -77,7 +77,7 @@ module.exports = async (db, group, quote) => {
         group.topSet.create = true
       }
     } else {
-      stickerAdd = await telegram.addStickerToSet(chatAdministrator.id, group.topSet.name, {
+      stickerAdd = await telegram.addStickerToSet(chatAdministrator.id, group.topSet.name.toLowerCase(), {
         png_sticker: { source: stickerPNG },
         emojis
       }).catch((error) => {
