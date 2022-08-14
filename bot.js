@@ -59,6 +59,10 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 bot.use((ctx, next) => {
   next().catch((error) => {
     console.log('Oops', error)
+
+    ctx.replyWithHTML('Oops, something went wrong!', {
+      reply_to_message_id: ctx?.message?.message_id
+    })
   })
   return true
 })
