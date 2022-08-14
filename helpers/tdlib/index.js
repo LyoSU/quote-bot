@@ -310,7 +310,8 @@ function getMessages (chatID, messageIds) {
                     textEntityTypeTextUrl: 'text_link',
                     textEntityTypeMentionName: 'text_mention',
                     textEntityTypePhoneNumber: 'phone_number',
-                    textEntityTypeSpoiler: 'spoiler'
+                    textEntityTypeSpoiler: 'spoiler',
+                    textEntityTypeCustomEmoji: 'custom_emoji'
                   }
 
                   const entity = {
@@ -321,6 +322,7 @@ function getMessages (chatID, messageIds) {
 
                   if (entity.type === 'text_link') entity.url = entityInfo.type.url
                   if (entity.type === 'text_mention') entity.user = entityInfo.type.user_id
+                  if (entity.type === 'custom_emoji') entity.custom_emoji_id = entityInfo.type.custom_emoji_id
 
                   return entity
                 })
