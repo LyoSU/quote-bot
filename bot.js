@@ -60,9 +60,11 @@ bot.use((ctx, next) => {
   next().catch((error) => {
     console.log('Oops', error)
 
-    ctx.replyWithHTML('Oops, something went wrong!', {
-      reply_to_message_id: ctx?.message?.message_id
-    })
+    if (ctx.state.emptyRequest === false) {
+      ctx.replyWithHTML('Oops, something went wrong!', {
+        reply_to_message_id: ctx?.message?.message_id
+      })
+    }
   })
   return true
 })
