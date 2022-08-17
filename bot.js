@@ -60,7 +60,10 @@ bot.use((ctx, next) => {
   next().catch((error) => {
     console.log('Oops', error)
 
-    if (ctx.state.emptyRequest === false) {
+    if (
+      ctx?.chat.type === 'private'
+      || (ctx.state.emptyRequest === false && ctx?.message?.entities?.[0].type === 'bot_command')
+    ) {
       ctx.replyWithHTML('Oops, something went wrong!', {
         reply_to_message_id: ctx?.message?.message_id
       })
