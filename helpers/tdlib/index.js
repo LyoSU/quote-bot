@@ -9,8 +9,8 @@ let tdLibFile = process.platform === 'win32' ? 'tdjson.dll' : 'libtdjson.so'
 if (process.platform === 'darwin') tdLibFile = 'libtdjson.dylib'
 
 const client = new Client(new TDLib(`${tdDirectory}/${tdLibFile}`), {
-  apiId: process.env.TELEGRAM_API_ID || 2834,
-  apiHash: process.env.TELEGRAM_API_HASH || '68875f756c9b437a8b916ca3de215815',
+  apiId: process.env.TELEGRAM_API_ID,
+  apiHash: process.env.TELEGRAM_API_HASH,
   databaseDirectory: `${tdDirectory}/db`,
   filesDirectory: tdDirectory,
   verbosityLevel: 0,
@@ -51,7 +51,8 @@ function getUser (userID) {
         first_name: response.first_name,
         last_name: response.last_name,
         username: response.username,
-        language_code: response.language_code
+        language_code: response.language_code,
+        emoji_status: response?.emoji_status?.custom_emoji_id
       }
 
       return resolve(user)
@@ -349,5 +350,6 @@ function getMessages (chatID, messageIds) {
 }
 
 module.exports = {
-  getMessages
+  getMessages,
+  getUser
 }

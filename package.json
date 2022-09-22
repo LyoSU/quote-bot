@@ -1,6 +1,6 @@
 {
   "name": "quote-bot",
-  "version": "0.35.3",
+  "version": "0.36.0",
   "description": "Telegram quote bot",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "mongoose": "^5.13.2",
     "prom-client": "^12.0.0",
     "sharp": "^0.30.5",
-    "tdl": "^7.0.0",
+    "tdl": "^7.1.0",
     "tdl-tdlib-addon": "^1.0.1",
     "telegraf": "^3.39.0",
     "telegraf-i18n": "^6.6.0",

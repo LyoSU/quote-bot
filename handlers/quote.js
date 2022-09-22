@@ -244,29 +244,29 @@ module.exports = async (ctx, next) => {
             username: sarchForwardName[0].username || null
           }
 
-          const getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
-          if (getHiddenChat) messageFrom.photo = getHiddenChat.photo
+          let getHiddenChat
+
+          getHiddenChat = await tdlib.getUser(messageFrom.id)
+
+          if (!getHiddenChat) {
+            getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
+          }
+
+          if (getHiddenChat) messageFrom = getHiddenChat
         } else {
           messageFrom = {
             id: hashCode(quoteMessage.forward_sender_name),
-            name: quoteMessage.forward_sender_name,
-            username: 'HiddenSender'
+            name: quoteMessage.forward_sender_name
           }
         }
       } else {
         messageFrom = {
           id: hashCode(quoteMessage.forward_sender_name),
-          name: quoteMessage.forward_sender_name,
-          username: 'HiddenSender'
+          name: quoteMessage.forward_sender_name
         }
       }
     } else if (quoteMessage.forward_from_chat) {
-      messageFrom = {
-        id: quoteMessage.forward_from_chat.id,
-        name: quoteMessage.forward_from_chat.title,
-        username: quoteMessage.forward_from_chat.username || null,
-        photo: quoteMessage.forward_from_chat.photo
-      }
+      messageFrom = quoteMessage.forward_from_chat
     } else if (quoteMessage.forward_from) {
       messageFrom = quoteMessage.forward_from
     } else if ([1087968824, 777000].includes(quoteMessage.from.id)) {
