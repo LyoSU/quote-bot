@@ -246,7 +246,7 @@ module.exports = async (ctx, next) => {
 
           let getHiddenChat
 
-          getHiddenChat = await tdlib.getUser(messageFrom.id)
+          getHiddenChat = await tdlib.getUser(messageFrom.id).catch(() => {})
 
           if (!getHiddenChat) {
             getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
