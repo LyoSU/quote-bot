@@ -28,6 +28,7 @@ const {
   handlePrivacy,
   handleLanguage,
   handleFstik,
+  handleSticker,
   handleDonate,
   handlePing,
   handleChatMember,
@@ -297,6 +298,8 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
+
+bot.on('sticker', handleSticker)
 
 bot.on('message', Composer.privateChat(handleQuote))
 

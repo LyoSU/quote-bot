@@ -18,6 +18,7 @@ module.exports = {
   handlePrivacy: require('./privacy-settings'),
   handleLanguage: require('./language'),
   handleFstik: require('./fstik'),
+  handleSticker: require('./sticker'),
   handleDonate: require('./donate'),
   handlePing: require('./ping'),
   handleChatMember: require('./chat-member'),
