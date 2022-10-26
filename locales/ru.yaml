@@ -120,13 +120,13 @@ top:
   open: Открыть топ
 donate:
   info: |
-    Вы можете купить кофе для разработчика или что-то ещё по реквизитам:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH / BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    Подробнее: donate.lyo.su
+    More: donate.lyo.su
   title: Донат ${botUsername}
   description: Поддержка разработки бота
   successful: |

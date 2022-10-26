@@ -2,14 +2,14 @@
 language_name: '🇨🇳 简体中文'
 help: |2
   <b>你好！</b>
-  我将帮助从帖子中创建报价。
-  Bot 可以在私人消息和群组中工作。
+  我将帮助从帖子中创建引用。
+  Bot 在私人消息和群组中均可以工作。
 
     <b>⚙️ 可用命令：</b>
-  /q - 引用消息<i>[回复消息]</i>
+  /q - 从<i>[回复消息]</i>中引用
 
-  要从多条消息中创建报价，请将一个数字作为参数写入，该数字将指示报价中应包含多少条消息。
-  在私信中，您可以一次将多条消息转发给我，我将引用它们。
+  要从多条消息中创建引用，请将一个数字作为参数写入，该数字将指示引用中应包含多少条消息。
+  在私人消息中，您可以一次将多条消息转发给我，我将一并引用它们。
 
     <b>/q 命令的可用标志：</b>
       十六进制代码或颜色名称：<code>#cbafff</code> 或 <code>indigo</code> — 使用颜色 <b>#cbafff</b> 进行引用
@@ -17,7 +17,7 @@ help: |2
       <code>reply</code> 或 <code>r</code> — 引用并保存答案
       <code>p</code> 或 <code>png</code> — 制作 PNG 引用
       <code>i</code> 或 <code>img</code> — 将引用作为图片
-      <code>rate</code> - 为报价添加评级
+      <code>rate</code> - 为引用添加评级
       <code>m</code> 或 <code>media</code> --包括媒体
       <code>c</code> 或 <code>crop</code> - 裁剪媒体
       <code>s2.5</code> - 画质比标准高2.5倍<i>（可以设置任何值）</i>
@@ -30,15 +30,15 @@ help: |2
 
   仅适用于管理员：
   <code>/qs 🥰💜</code> - 将带有照片的贴纸/照片/文档保存到带有表情符号🥰💜的组的贴纸包中 <i>（表情符号可以是任意数字）</i> <i>[回复消息]</i>
-  <code>/qd</code> - 从<i>组的贴纸包中移除贴纸[响应消息]</i>
+  <code>/qd</code> - 从<i>这一组</i>的贴纸包中移除贴纸[响应消息]
   <code>/qb</code> - 设置表情符号品牌。可用：<code>apple</code>、<code>google</code>、<code>twitter</code>、<code>joypixels</code>、<code>blob</code>
   <code>/qcolor green</code> - 默认设置引号的颜色<b>green</b> <i>（十六进制代码或颜色名称）</i>
   <code>/qemoji</code> — 更改贴纸的表情符号后缀
-  <code>/qrate</code> - 启用/禁用报价评级
+  <code>/qrate</code> - 启用/禁引用价评级
   <code>/qgab 300</code> - 设置随机出现引用的机会。从一到无穷大的任何数字。数字越高，出现报价的机会就越低。通过指定 300，一条消息出现的机会大约是 300 条消息中的 1 次。要禁用，请将值设置为 0
 
-  /qrand - 随机引用一个正面评价为
-  /qtop - 顶级组引号
+  /qrand - 随机引用一个正面评价为? 的消息
+  /qtop - 置顶该组引用
 
   /help 或 /start - 获取此文本
 
@@ -124,7 +124,7 @@ donate:
 
     BTC： <code>17QAN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD： <code>0x34007b7b75F8DAe005A4071416aA2fBa2740c</code>
-    monobank：4441114453205| <a href="https://send.monobank.ua/3cxwjqz4C2">Visa/MasterCarterCard</a>
+    monobank：4441114453205| <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa/MasterCarterCard</a>
 
     更多方式请查看：donate.lyo.su
   title: 捐赠 ${botUsername}
