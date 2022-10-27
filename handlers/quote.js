@@ -316,9 +316,6 @@ module.exports = async (ctx, next) => {
       const { thumbnail } = quoteMessage.animation || quoteMessage.video
       message.media = [thumbnail]
     }
-    if (flag.media && quoteMessage.voice) {
-      message.voice = quoteMessage.voice
-    }
 
     if (messageFrom.id) {
       message.chatId = messageFrom.id
@@ -360,7 +357,7 @@ module.exports = async (ctx, next) => {
       if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
     }
 
-    if (!message.text && !message.media && !message.voice) {
+    if (!message.text && !message.media) {
       message.text = ctx.i18n.t('quote.unsupported_message')
       message.entities = [{
         offset: 0,
