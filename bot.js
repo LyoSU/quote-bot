@@ -139,7 +139,8 @@ bot.on(['channel_post', 'edited_channel_post'], () => {})
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
-  defaultLanguage: 'en'
+  defaultLanguage: 'en',
+  defaultLanguageOnMissing: true,
 })
 
 bot.use(i18n.middleware())
