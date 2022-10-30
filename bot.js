@@ -139,7 +139,7 @@ bot.on(['channel_post', 'edited_channel_post'], () => {})
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, 'locales'),
-  defaultLanguage: '-'
+  defaultLanguage: 'en'
 })
 
 bot.use(i18n.middleware())
@@ -220,14 +220,6 @@ bot.use(
     await next(ctx).then(() => {
       ctx.session.userInfo.save().catch(() => {})
     })
-  })
-)
-
-bot.on(
-  'message',
-  Composer.privateChat((ctx, next) => {
-    if (ctx.i18n.languageCode === '-') return handleLanguage(ctx, next)
-    return next()
   })
 )
 
