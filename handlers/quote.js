@@ -348,6 +348,9 @@ module.exports = async (ctx, next) => {
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
       const replyMessageInfo = quoteMessage.reply_to_message
+      if (replyMessageInfo.forward_from) {
+        replyMessageInfo.from = replyMessageInfo.forward_from
+      }
       if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
       if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
       if (replyMessageInfo.from.id) {
