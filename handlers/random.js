@@ -19,18 +19,21 @@ module.exports = async ctx => {
   if (groupQuotes.length > 0) {
     const quote = groupQuotes[randomInt(0, groupQuotes.length)]
 
-    let advKeyboard
+    let adv, advKeyboard
 
-    const adv = await ctx.db.Adv.aggregate(
-      [
-        {
-          $match: {
-            status: 2
-          }
-        },
-        { $sample: { size: 1 } }
-      ]
-    )[0]
+    if (randomInt(0, 1) === 0) {
+      adv = (await ctx.db.Adv.aggregate(
+        [
+          {
+            $match: {
+              status: 2,
+              locale: ctx.i18n.locale() || 'en'
+            }
+          },
+          { $sample: { size: 1 } }
+        ]
+      ))[0]
+    }
 
     if (adv) advKeyboard = Markup.urlButton(adv.text, adv.link)
 
@@ -47,8 +50,7 @@ module.exports = async ctx => {
     })
 
     if (adv) {
-      adv.stats.impressions += 1
-      adv.save()
+      await ctx.db.Adv.updateOne({ _id: adv._id }, { $inc: { 'stats.impressions': 1 } })
     }
   } else {
     if (!ctx.state.randomQuote) {
