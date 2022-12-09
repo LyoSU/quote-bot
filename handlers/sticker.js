@@ -10,7 +10,7 @@ module.exports = async (ctx, next) => {
     return next()
   }
 
-  if (Math.random() > 0.01) {
+  if (Math.random() > 0.1) { // 10% chance
     return next()
   }
 
