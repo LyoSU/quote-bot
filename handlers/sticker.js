@@ -5,6 +5,10 @@ module.exports = async (ctx, next) => {
     return next()
   }
 
+  if (Math.random() > 0.01) {
+    return next()
+  }
+
   const { set_name } = ctx.message.sticker
 
   if (!set_name || set_name.match(/_by_(.*)bot$/gmi)) {
