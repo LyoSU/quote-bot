@@ -20,7 +20,7 @@ composer.action(/adv:moderate:deny:(.*)/, async ctx => {
 
 const onlyAdvMod = new Composer()
 onlyAdvMod.use(Composer.optional(ctx => {
-  return ctx.session.userInfo && ctx.session.userInfo.adv && ctx.session.userInfo.adv.moderator === true
+  return ctx.session?.userInfo && ctx.session.userInfo.adv && ctx.session.userInfo.adv.moderator === true
 }, composer))
 
 module.exports = onlyAdvMod
