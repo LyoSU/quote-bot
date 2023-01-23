@@ -29,7 +29,7 @@ help: |2
     <code>/q 5 rm</code>
 
   Yalnızca yöneticiler için:
-  <code>/qs 🥰💜</code> — fotoğraflı bir çıkartma/fotoğraf/belgeyi emojili bir grubun çıkartma paketine kaydeder 🥰💜 <i>(emoji herhangi bir sayı olabilir)</i> < i>[mesajı yanıtla]</i>
+  <code>/qs 🥰💜</code> — fotoğraflı bir çıkartma/fotoğraf/belgeyi emojili bir grubun çıkartma paketine kaydeder 🥰💜 <i>(emoji herhangi bir sayı olabilir)</i> <i>[mesajı yanıtla]</i>
   <code>/qd</code> — çıkartmayı <i>[mesajı yanıt olarak]</i> grubunun çıkartma paketinden çıkarın
   <code>/qb</code> — emoji markasını ayarlayın. Mevcut: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
   <code>/qcolor green</code> — varsayılan olarak <b>green</b> tırnak rengini ayarlayın <i>(hex kodu veya renk adı)</i>
