@@ -18,6 +18,7 @@ module.exports = async ctx => {
     }), {
       disable_web_page_preview: true,
       reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true,
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
           ctx.i18n.t('btn.help'),
@@ -29,6 +30,7 @@ module.exports = async ctx => {
     await ctx.replyWithHTML(ctx.i18n.t('help'), {
       disable_web_page_preview: true,
       reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true,
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
           ctx.i18n.t('btn.add_group'),

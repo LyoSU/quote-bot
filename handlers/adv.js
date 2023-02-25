@@ -107,6 +107,7 @@ advMain.enter(async ctx => {
   }), {
     disable_web_page_preview: true,
     reply_to_message_id: ctx.message.message_id,
+    allow_sending_without_reply: true,
     reply_markup: replyMarkup
   })
 })

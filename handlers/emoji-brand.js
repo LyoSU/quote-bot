@@ -21,6 +21,7 @@ module.exports = async ctx => {
   }
 
   await ctx.replyWithHTML(ctx.i18n.t('quote.set_emoji_brand', { emojiBrand }), {
-    reply_to_message_id: ctx.message.message_id
+    reply_to_message_id: ctx.message.message_id,
+    allow_sending_without_reply: true
   })
 }

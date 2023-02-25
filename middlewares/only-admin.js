@@ -9,7 +9,8 @@ module.exports = async (ctx, next) => {
       return next()
     } else {
       await ctx.replyWithHTML(ctx.i18n.t('only_admin'), {
-        reply_to_message_id: ctx.message.message_id
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
       })
     }
   } else {

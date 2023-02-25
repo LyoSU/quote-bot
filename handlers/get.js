@@ -11,7 +11,8 @@ module.exports = async ctx => {
         Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length}`, 'rate:👍'),
         Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length}`, 'rate:👎')
       ]),
-      reply_to_message_id: ctx.message.message_id
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
     })
   }
 }

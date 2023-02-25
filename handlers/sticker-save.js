@@ -114,7 +114,8 @@ module.exports = async ctx => {
 
   if (result) {
     await ctx.replyWithHTML(result, {
-      reply_to_message_id: ctx.message.message_id
+      reply_to_message_id: ctx.message.message_id,
+      allow_sending_without_reply: true
     })
   }
 }
