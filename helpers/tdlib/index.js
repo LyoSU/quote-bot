@@ -162,6 +162,8 @@ function getMessages (chatID, messageIds) {
     }).then((response) => {
       if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
 
+      if (!response.messages) return resolve([])
+
       const messages = response.messages.map((messageInfo) => {
         if (!messageInfo) return {}
         return new Promise((resolve, reject) => {
