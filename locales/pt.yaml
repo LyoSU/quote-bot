@@ -137,87 +137,87 @@ donate:
   other: Outros métodos
 emoji:
   info: |
-    Please include emoji.
+    Por favor, inclua emoticons.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Por exemplo, <code>/qemoji💜</code> mudará o sufixo para 💜 para todos os novos adesivos subsequentes.
+    Para um emoji aleatório <code>/qemoji random</code>
   done: Emoji alterado com sucesso.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Você pode comprar nossa publicidade para um grande número de usuários e grupos ativos</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Nosso bot está em mais de 30`000 grupos ativos e mais de 70`000 usuários usam o bot todos os meses.
+    Entre eles estão usuários de vários países. Você pode selecionar o idioma dos usuários para os quais o anúncio deve ser exibido
+    • A publicidade é exibida abaixo da citação na forma de um botão ou mensagem de texto, dependendo do chat do usuário
+    • Você mesmo especifica o preço de um anúncio; em primeiro lugar, o anúncio para o qual o maior valor foi atribuído será exibido
+    • O texto e o conteúdo do anúncio devem estar de acordo com nossas regras (/adv_rules) e antes de ser postado você deve passar pela moderação. Isso pode ser feito antes de fazer um depósito
 
-    Balance: ${balance} USD
+    Saldo: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Em anúncios <u>não</u> é permitido:</b>
+    • Usar obscenidades ou insultos
+    • Usar mais de 1 emoji por texto
+    • Informação enganosa
+    • Informações proibidas pelas leis da Ucrânia
+    •Conteúdo adulto
+    • Jogatina
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Também temos o direito de rejeitar um anúncio se simplesmente não gostarmos dele sem motivo.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Criar anúncios
+    list_btn: Lista de anúncios
+    pay_btn: Carregar saldo
   create:
     enter_text: |
-      Enter your ad text:
+      Insira o texto do anúncio:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Não mais que 70 caracteres e deve estar de acordo com nossas regras (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Insira um link para o recurso anunciado:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>O link deve estar completo, se você estiver anunciando algo no Telegram, o link deve começar com t.me.
+      O recurso deve estar de acordo com nossas regras (/adv_rules), se após passar na moderação o site for substituído, sua conta será bloqueada e o dinheiro não será devolvido.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Selecione o idioma dos usuários para quem o anúncio será exibido
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      O número é o número de usuários que provavelmente verão seu anúncio nesse idioma.
+      Somente os usuários que realmente usam o bot são contados. Mas o anúncio também pode ser visto por outros usuários que estão no grupo onde foi feita a cotação, então esse valor pode ser bem maior
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>O idioma não corresponde ao país.
+      Você pode escolher apenas um idioma, se precisar de vários, crie um anúncio novamente para outro idioma.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Especifique o preço por 1.000 impressões de seu anúncio em USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Preço médio dos anúncios ativos:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>O preço mínimo é de US$ 0,15.
+      Os anúncios são exibidos de forma aleatória, mas a maior chance de ser exibido é um anúncio que possui um preço mais alto por impressões.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      O anúncio foi enviado para moderação. Por favor, seja paciente e espere. Se a moderação for bem-sucedida ou malsucedida, você receberá uma notificação.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
+      selecionar_lista
+    wait_btn: espere_btn
+    ready_btn: pronto_btn
+    end_btn: fim_btn
     selected_list: |
-      selected_list
+      lista_selecionada
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} de <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
+      Texto: ${adv.text}
       Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Localidade: ${adv.locale}
+      Preço: ${adv.price}
+      Contagem ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      O anúncio foi moderado com sucesso. Você pode começar a exibi-lo na seção de publicidade: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Infelizmente, o anúncio não foi moderado. Leia nossas regras (/adv_rules), se tiver certeza de que isso foi um erro, escreva para @Ly_OBot e inclua esta tag na mensagem descrevendo o problema: #qba_${adv.id}
+    accept_btn: Aceitar
+    deny_btn: Negar
 only_admin: |
   Este comando só pode ser usado pelos administradores do grupo.
 only_group: |
