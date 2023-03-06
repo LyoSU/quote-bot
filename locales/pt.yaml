@@ -28,7 +28,6 @@ help: |2
      <código>/q r 2 #cbafff m</código>
      <código>/q 5 rm</código>
    
-   
     Somente para administradores:
     <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(emoji pode ser qualquer número)</i> < i>[resposta à mensagem]</i>
     <code>/qd</code> - remove o adesivo do pacote de adesivos do grupo <i>[em resposta à mensagem]</i>
@@ -190,7 +189,6 @@ adv:
       Especifique o preço por 1.000 impressões de seu anúncio em USD:
 
       <u>Preço médio dos anúncios ativos:</u> ${averagePrice} USD
-
       <i>O preço mínimo é de 0,15 USD.
       Os anúncios são exibidos de forma aleatória, mas a maior chance de ser exibido é um anúncio que possui um preço mais alto por impressões.
       </i>
