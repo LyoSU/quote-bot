@@ -5,31 +5,31 @@ help: |2
   Vou ajudar a criar uma citação de um post.
   O bot pode funcionar tanto em mensagens privadas quanto em grupos.
 
-      <b>⚙️ Comandos disponíveis:</b>
+  <b>⚙️ Comandos disponíveis:</b>
   /q - faz uma citação da mensagem <i>[resposta à mensagem]</i>
 
   Para criar uma citação a partir de várias mensagens, escreva como parâmetro um número que indicará quantas mensagens devem estar na citação.
   Nas mensagens privadas, você pode encaminhar várias mensagens para mim de uma só vez e eu farei uma cotação delas.
 
-      <b>Sinalizadores disponíveis para o comando /q:</b>
-        <code>o hexadecimal ou nome da cor: </code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
-        <code>random</code> --cor de citação aleatória
-        <code>reply</code> ou <code>r</code> — faça uma citação salvando as respostas
-        <code>p</code> ou <code>png</code> — faça uma citação PNG
-        <code>i</code> ou <code>img</code> — faça uma citação como uma imagem
-        <code>rate</code> - adiciona uma classificação a uma cotação
-        <code>m</code> ou <code>media</code> --include mídia
-        <code>c</code> ou <code>crop</code> - cortar mídia
-        <code>s2.5</code> - a qualidade da imagem é 2,5 vezes maior que o padrão <i>(pode definir qualquer valor)</i>
+  <b>Sinalizadores disponíveis para o comando /q:</b>
+  <code>o hexadecimal ou nome da cor: </code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
+  <code>random</code> --cor de citação aleatória
+  <code>reply</code> ou <code>r</code> — faça uma citação salvando as respostas
+  <code>p</code> ou <code>png</code> — faça uma citação PNG
+  <code>i</code> ou <code>img</code> — faça uma citação como uma imagem
+  <code>rate</code> - adiciona uma classificação a uma cotação
+  <code>m</code> ou <code>media</code> --include mídia
+  <code>c</code> ou <code>crop</code> - cortar mídia
+  <code>s2.5</code> - a qualidade da imagem é 2,5 vezes maior que o padrão <i>(pode definir qualquer valor)</i>
 
-      <b>Exemplo de uso de sinalizadores:</b>
-      <code>/q 3 white rp</code>
-      <code>/q i red s3.2</code>
-      <code>/q r 2 #cbafff m</code>
-      <code>/q 5 rm</code>
+  <b>Exemplo de uso de sinalizadores:</b>
+  <code>/q 3 white rp</code>
+  <code>/q i red s3.2</code>
+  <code>/q r 2 #cbafff m</code>
+  <code>/q 5 rm</code>
 
   Somente para administradores:
-  <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(emoji pode ser qualquer número)</i> < i>[resposta à mensagem]</i>
+  <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(emoji pode ser qualquer número)</i> <i>[resposta à mensagem]</i>
   <code>/qd</code> - remove o adesivo do pacote de adesivos do grupo <i>[em resposta à mensagem]</i>
   <code>/qb</code> - define a marca do emoji. Disponível: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
   <code>/qcolor green</code> - define a cor das aspas <b>verde</b> por padrão <i>(código hexadecimal ou nome da cor)</i>
