@@ -12,7 +12,7 @@ help: |2
   Nas mensagens privadas, você pode encaminhar várias mensagens para mim de uma só vez e eu farei uma cotação delas.
 
   <b>Sinalizadores disponíveis para o comando /q:</b>
-  <code>o hexadecimal ou nome da cor: </code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
+  o hexadecimal ou nome da cor: <code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
   <code>random</code> --cor de citação aleatória
   <code>reply</code> ou <code>r</code> — faça uma citação salvando as respostas
   <code>p</code> ou <code>png</code> — faça uma citação PNG
