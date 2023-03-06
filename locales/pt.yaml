@@ -1,55 +1,54 @@
 ---
-language_name: '🇧🇷 Português'
+language_name: '🇧🇷'
 help: |2
-    <b>Olá!</b>
-    Vou ajudar a criar uma citação de um post.
-    O bot pode funcionar tanto em mensagens privadas quanto em grupos.
+  <b>Olá!</b>
+  Vou ajudar a criar uma citação de um post.
+  O bot pode funcionar tanto em mensagens privadas quanto em grupos.
 
-       <b>⚙️ Comandos disponíveis:</b>
-    /q - faz uma citação da mensagem <i>[resposta à mensagem]</i>
+     <b>⚙️ Comandos disponíveis:</b>
+  /q - faz uma citação da mensagem <i>[resposta à mensagem]</i>
 
-    Para criar uma citação a partir de várias mensagens, escreva como parâmetro um número que indicará quantas mensagens devem estar na citação.
-    Nas mensagens privadas, você pode encaminhar várias mensagens para mim de uma só vez e eu farei uma cotação delas.
+  Para criar uma citação a partir de várias mensagens, escreva como parâmetro um número que indicará quantas mensagens devem estar na citação.
+  Nas mensagens privadas, você pode encaminhar várias mensagens para mim de uma só vez e eu farei uma cotação delas.
 
      <b>Sinalizadores disponíveis para o comando /q:</b>
-     código hexadecimal ou nome da cor: <code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
-     <code>random</code> --cor de citação aleatória
-     <code>reply</code> ou <code>r</code> — faça uma citação salvando as respostas
-     <code>p</code> ou <code>png</code> — faça uma citação PNG
-     <code>i</code> ou <code>img</code> — faça uma citação como uma imagem
-     <code>rate</code> - adiciona uma classificação a uma cotação
-     <code>m</code> ou <code>media</code> --include mídia
-     <code>c</code> ou <code>crop</code> - cortar mídia
-     <code>s2.5</code> - a qualidade da imagem é 2,5 vezes maior que o padrão <i>(pode definir qualquer valor)</i>
-     
+       código hexadecimal ou nome da cor: <code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
+       <code>random</code> --cor de citação aleatória
+       <code>reply</code> ou <code>r</code> — faça uma citação salvando as respostas
+       <code>p</code> ou <code>png</code> — faça uma citação PNG
+       <code>i</code> ou <code>img</code> — faça uma citação como uma imagem
+       <code>rate</code> - adiciona uma classificação a uma cotação
+       <code>m</code> ou <code>media</code> --include mídia
+       <code>c</code> ou <code>crop</code> - cortar mídia
+       <code>s2.5</code> - a qualidade da imagem é 2,5 vezes maior que o padrão <i>(pode definir qualquer valor)</i>
+
      <b>Exemplo de uso de sinalizadores:</b>
      <código>/q 3 white rp</código>
      <code>/q i red s3.2</code>
      <código>/q r 2 #cbafff m</código>
      <código>/q 5 rm</código>
-   
-    Somente para administradores:
-    <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(emoji pode ser qualquer número)</i> < i>[resposta à mensagem]</i>
-    <code>/qd</code> - remove o adesivo do pacote de adesivos do grupo <i>[em resposta à mensagem]</i>
-    <code>/qb</code> - define a marca do emoji. Disponível: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-    <code>/qcolor green</code> - define a cor das aspas <b>verde</b> por padrão <i>(código hexadecimal ou nome da cor)</i>
-    <code>/qemoji</code> — altere o sufixo de emoji para adesivos
-    <code>/qrate</code> - ativar/desativar classificação de cotações
-    <code>/qgab 300</code> - define a chance de ocorrência aleatória de uma citação. Qualquer número de um ao infinito. Quanto maior o número, menor a chance de aparecer citações. Especificando 300, a chance de uma mensagem aparecer será de aproximadamente 1 vez em 300 mensagens. Para desativar, defina o valor como 0
 
-    /qrand - uma citação aleatória com uma classificação positiva de
-    /qtop - aspas do grupo superior
+  Somente para administradores:
+  <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(emoji pode ser qualquer número)</i> < i>[resposta à mensagem]</i>
+  <code>/qd</code> - remove o adesivo do pacote de adesivos do grupo <i>[em resposta à mensagem]</i>
+  <code>/qb</code> - define a marca do emoji. Disponível: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> - define a cor das aspas <b>verde</b> por padrão <i>(código hexadecimal ou nome da cor)</i>
+  <code>/qemoji</code> — altere o sufixo de emoji para adesivos
+  <code>/qrate</code> - ativar/desativar classificação de cotações
+  <code>/qgab 300</code> - define a chance de ocorrência aleatória de uma citação. Qualquer número de um ao infinito. Quanto maior o número, menor a chance de aparecer citações. Especificando 300, a chance de uma mensagem aparecer será de aproximadamente 1 vez em 300 mensagens. Para desativar, defina o valor como 0
 
-    /help ou /start - pegue este texto
+  /qrand - uma citação aleatória com uma classificação positiva de
+  /qtop - aspas do grupo superior
 
+  /help ou /start - pegue este texto
 
-    🇧🇷 /lang — muda o idioma
-    🇺🇸 /lang - change the language
+  🇧🇷 /lang — muda o idioma
+  🇺🇸 /lang - change the language
 
-    <b>☕️ Compre café para o desenvolvedor:</b> donate.lyo.su
+  <b>☕️ Compre café para o desenvolvedor:</b> donate.lyo.su
 
-    <b>👨🏻‍💻 Blog do desenvolvedor:</b> @LyBlog
-    <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Blog do desenvolvedor:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>
   Vou criar cotações no grupo pelo comando /q em resposta à mensagem
@@ -57,9 +56,9 @@ help_group: |
   Você pode aprender mais pelo comando <a href="t.me/${username}?start=help">/ help</a> em mensagens privadas comigo
 btn:
   add_group: Adicionar ao grupo
-  help: Ajuda
+  help: Referencia
 quote:
-  unsupported_message: mensagem não suportada
+  unsupported_message: Mensagem não suportada
   api_error: |
     <b>😓 Falha ao gerar cotação (tente novamente)</b>
     <pre>${error}</pre>
@@ -118,10 +117,11 @@ privacy:
 top:
   info: |
     <b>principais citações do grupo:</b>
-  open: Destaque aberto
+  open: Abrir o destaque
 donate:
   info: |
     Você pode comprar café para o desenvolvedor ou outra coisa com os seguintes detalhes:
+
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
@@ -146,7 +146,7 @@ adv:
   about: |
     <b>💫 Você pode comprar nossa publicidade para um grande número de usuários e grupos ativos</b>
 
-    • Nosso bot está em mais de 30.000 grupos ativos e mais de 70.000 usuários usam o bot todos os meses.
+    • Nosso bot está em mais de 30`000 grupos ativos e mais de 70`000 usuários usam o bot todos os meses.
     Entre eles estão usuários de vários países. Você pode selecionar o idioma dos usuários para os quais o anúncio deve ser exibido
     • A publicidade é exibida abaixo da citação na forma de um botão ou mensagem de texto, dependendo do chat do usuário
     • Você mesmo especifica o preço de um anúncio; em primeiro lugar, o anúncio para o qual o maior valor foi atribuído será exibido
@@ -159,7 +159,7 @@ adv:
     • Usar mais de 1 emoji por texto
     • Informação enganosa
     • Informações proibidas pelas leis da Ucrânia
-    • Conteúdo adulto
+    •Conteúdo adulto
     • Jogatina
 
     <i>Também temos o direito de rejeitar um anúncio se simplesmente não gostarmos dele sem motivo.</i>
@@ -189,17 +189,18 @@ adv:
       Especifique o preço por 1.000 impressões de seu anúncio em USD:
 
       <u>Preço médio dos anúncios ativos:</u> ${averagePrice} USD
-      <i>O preço mínimo é de 0,15 USD.
+
+      <i>O preço mínimo é de US$ 0,15.
       Os anúncios são exibidos de forma aleatória, mas a maior chance de ser exibido é um anúncio que possui um preço mais alto por impressões.
       </i>
     sent_moderate: |
-     O anúncio foi enviado para moderação. Por favor, seja paciente e espere. Se a moderação for bem-sucedida ou malsucedida, você receberá uma notificação.
+      O anúncio foi enviado para moderação. Por favor, seja paciente e espere. Se a moderação for bem-sucedida ou malsucedida, você receberá uma notificação.
   list:
     select_list: |
-      lista_selecionar
+      selecionar_lista
     wait_btn: espere_btn
     ready_btn: pronto_btn
-    end_btn: finalizado_btn
+    end_btn: fim_btn
     selected_list: |
       lista_selecionada
   moderate:
@@ -210,7 +211,7 @@ adv:
       Link: ${adv.link}
       Localidade: ${adv.locale}
       Preço: ${adv.price}
-      Contagem  ${adv.count}
+      Contagem ${adv.count}
     accepted: |
       O anúncio foi moderado com sucesso. Você pode começar a exibi-lo na seção de publicidade: /adv
     denied: |
