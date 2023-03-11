@@ -44,9 +44,9 @@ help: |2
 
   🇺🇸 /lang - змяніць мову
 
-  <b>☕️ Купіць каву рсапрацоўшчыку:</b> donate.lyo.su
+  <b>☕️ Купіць каву рсапрацоўніку:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог распрацоўшчыка:</b> @LyBlog
+  <b>👨🏻‍💻 Блог распрацоўніка:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Вітаю!</b>
@@ -200,7 +200,7 @@ adv:
     ready_btn: гатовы_btn
     end_btn: канец_btn
     selected_list: |
-      selected_list
+      выбраны_спіс
   moderate:
     adv: |
       Adv #id_${adv._id} ад <a href="tg://user?id=${telegramId}">${name}</a>
