@@ -119,13 +119,13 @@ top:
   open: Адкрыты верх
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Вы можаце ахвяраваць грошы на каву для распрацоўніка ці нешта такое наступным чынам:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Монобанк:  | <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa/MasterCard</a>
 
-    More: donate.lyo.su
+    Больш: donate.lyo.su
   title: Данат ${botUsername}
   description: Падтрымка распрацоўкі бота
   successful: |
@@ -195,10 +195,10 @@ adv:
       Рэклама адпраўлена на мадэрацыю. Калі ласка, набярыцеся цярпення і пачакайце. Калі мадэрацыя будзе скончана, вы атрымаеце паведамленне.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
+      выбраць_спіс
+    wait_btn: пачакай_btn
+    ready_btn: гатовы_btn
+    end_btn: канец_btn
     selected_list: |
       selected_list
   moderate:
