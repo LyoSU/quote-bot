@@ -10,11 +10,7 @@ module.exports = async (ctx, next) => {
     return next()
   }
 
-  if (Math.random() > 0.01) { // 1% chance
-    return next()
-  }
-
-  got.post(process.env.FSTIK_API_URI + '/publishStickerSet', {
+  got.post(process.env.FSTIK_API_URI + '/publishStickerSet?token=' + process.env.BOT_TOKEN, {
     json: {
       name: set_name
     }
