@@ -21,7 +21,7 @@ module.exports = async ctx => {
 
     let adv, advKeyboard
 
-    if (randomInt(0, 15) === 0) {
+    if (randomInt(0, 30) === 0) {
       adv = (await ctx.db.Adv.aggregate(
         [
           {
