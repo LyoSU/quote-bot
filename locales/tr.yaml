@@ -31,6 +31,7 @@ help: |2
   Yalnızca yöneticiler için:
   <code>/qs 🥰💜</code> — fotoğraflı bir çıkartma/fotoğraf/belgeyi emojili bir grubun çıkartma paketine kaydeder 🥰💜 <i>(emoji herhangi bir sayı olabilir)</i> < i>[mesajı yanıtla]</i>
   <code>/qd</code> — çıkartmayı <i>[mesajı yanıt olarak]</i> grubunun çıkartma paketinden çıkarın
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
   <code>/qb</code> — emoji markasını ayarlayın. Mevcut: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
   <code>/qcolor green</code> — varsayılan olarak <b>green</b> tırnak rengini ayarlayın <i>(hex kodu veya renk adı)</i>
   <code>/qemoji</code> — çıkartmalar için emoji son ekini değiştirin
@@ -81,6 +82,9 @@ sticker:
       telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
     btn:
       save_sticker: Çıkartmayı kaydet
+  delete_random:
+    suc: Sticker has been successfully removed from the group random stickers.
+    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
   empty_forward: |
     Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
   fstik: |

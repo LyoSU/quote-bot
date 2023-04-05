@@ -32,7 +32,8 @@ const {
   handleDonate,
   handlePing,
   handleChatMember,
-  handleInlineQuery
+  handleInlineQuery,
+  handleDeleteRandom
 } = require('./handlers')
 const { getUser, getGroup } = require('./helpers')
 
@@ -267,6 +268,7 @@ bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
 bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
+bot.command('qdrand', onlyGroup, onlyAdmin, handleDeleteRandom)
 bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
 bot.command('qb', onlyAdmin, handleEmojiBrandQuote)
 bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)

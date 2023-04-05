@@ -31,6 +31,7 @@ help: |2
   仅适用于管理员：
   <code>/qs 🥰💜</code> - 将带有照片的贴纸/照片/文档保存到带有表情符号🥰💜的组的贴纸包中 <i>（表情符号可以是任意数字）</i> <i>[回复消息]</i>
   <code>/qd</code> - 从<i>这一组</i>的贴纸包中移除贴纸[响应消息]
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
   <code>/qb</code> - 设置表情符号品牌。可用：<code>apple</code>、<code>google</code>、<code>twitter</code>、<code>joypixels</code>、<code>blob</code>
   <code>/qcolor green</code> - 默认设置引号的颜色<b>green</b> <i>（十六进制代码或颜色名称）</i>
   <code>/qemoji</code> — 更改贴纸的表情符号后缀
@@ -82,6 +83,9 @@ sticker:
       telegram: <b>我无法保存此贴纸。</b>\n<pre>${error}</pre>
     btn:
       save_sticker: 保存贴纸
+  delete_random:
+    suc: Sticker has been successfully removed from the group random stickers.
+    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
   empty_forward: |
     命令必须发送回复给贴纸、照片或带有图片的文件。
   fstik: |
