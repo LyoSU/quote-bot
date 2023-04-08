@@ -294,6 +294,7 @@ bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('sticker', handleSticker)
+bot.on('text', handleSticker)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
