@@ -50,7 +50,7 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
-  handlerTimeout: 1
+  handlerTimeout: 500
 });
 
 (async () => {
@@ -58,20 +58,35 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 })()
 
 bot.use((ctx, next) => {
-  next().catch((error) => {
-    console.log('Oops', error)
-
-    if (
-      ctx?.chat?.type === 'private'
-      || (ctx.state.emptyRequest === false && ctx?.message?.entities?.[0].type === 'bot_command')
-    ) {
-      ctx.replyWithHTML('Oops, something went wrong!', {
-        reply_to_message_id: ctx?.message?.message_id,
-        allow_sending_without_reply: true
-      })
-    }
+  const timeoutPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error('timeout'))
+    }, 1000 * 5)
   })
-  return true
+
+  const nextPromise = next()
+
+  return Promise.race([timeoutPromise, nextPromise])
+    .catch((error) => {
+      if (error.message === 'timeout') {
+        console.error('timeout', ctx.update)
+        return false
+      }
+
+      console.log('Oops', error)
+
+      if (
+        ctx?.chat?.type === 'private'
+        || (ctx.state.emptyRequest === false && ctx?.message?.entities?.[0].type === 'bot_command')
+      ) {
+        ctx.replyWithHTML('Oops, something went wrong!', {
+          reply_to_message_id: ctx?.message?.message_id,
+          allow_sending_without_reply: true
+        })
+      }
+
+      return true
+    })
 })
 
 // bot.use(require('./middlewares/metrics'))
