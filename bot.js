@@ -69,7 +69,6 @@ bot.use((ctx, next) => {
   return Promise.race([timeoutPromise, nextPromise])
     .catch((error) => {
       if (error.message === 'timeout') {
-        console.error('timeout', ctx.update)
         return false
       }
 
