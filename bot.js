@@ -61,7 +61,7 @@ bot.use((ctx, next) => {
   const timeoutPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
       reject(new Error('timeout'))
-    }, 1000)
+    }, 100)
   })
 
   const nextPromise = next()
