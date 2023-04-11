@@ -1,5 +1,5 @@
 module.exports = async ctx => {
-  let backgroundColor = '#292232'
+  let backgroundColor = '//#292232'
   if (ctx.match && ctx.match[1] === '#' && ctx.match[2]) {
     backgroundColor = `#${ctx.match[2]}`
   } else if (ctx.match && ctx.match[2]) backgroundColor = `${ctx.match[2]}`

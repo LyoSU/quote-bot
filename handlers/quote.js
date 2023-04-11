@@ -128,7 +128,11 @@ module.exports = async (ctx, next) => {
 
   if (flag.color) {
     if (flag.color === 'random') {
-      backgroundColor = generateRandomColor()
+      backgroundColor = `${generateRandomColor()}/${generateRandomColor()}`
+    } else if (flag.color === '//random') {
+      backgroundColor = `//${generateRandomColor()}`
+    } else if (flag.color === 'transparent') {
+      backgroundColor = 'rgba(0,0,0,0)'
     } else {
       backgroundColor = flag.color
     }
@@ -139,7 +143,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (!backgroundColor) {
-    backgroundColor = '#292232'
+    backgroundColor = '//#292232'
   }
 
   let emojiBrand = 'apple'
