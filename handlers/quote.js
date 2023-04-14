@@ -400,7 +400,7 @@ module.exports = async (ctx, next) => {
   let scale = 2
 
   if (flag.png || flag.img) {
-    width *= 1.5
+    width *= 1.2
     height *= 5
     scale *= 1.5
   }
