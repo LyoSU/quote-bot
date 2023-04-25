@@ -547,13 +547,14 @@ module.exports = async (ctx, next) => {
           const sticketSet = await ctx.getStickerSet(packName)
 
           if (ctx.session.userInfo.tempStickerSet.create) {
-            for (const i in sticketSet.stickers) {
-              const sticker = sticketSet.stickers[i]
-              if (i > config.globalStickerSet.save_sticker_count - 1) {
-                telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
-                })
+            sticketSet.stickers.forEach(async (sticker, index) => {
+              // wait 3 seconds before delete sticker
+              await new Promise((resolve) => setTimeout(resolve, 3000))
+
+              if (index > config.globalStickerSet.save_sticker_count - 1) {
+                telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
               }
-            }
+            })
           }
 
           sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
