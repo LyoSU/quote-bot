@@ -504,48 +504,64 @@ module.exports = async (ctx, next) => {
           ctx.session.userInfo.tempStickerSet.create = created
         }
 
-        let packOwnerId = config.globalStickerSet.ownerId
-        let packName = config.globalStickerSet.name + ctx.me
+        let packOwnerId
+        let packName
+
+        if (ctx.update.update_id % 5 === 0) {
+          packOwnerId = config.globalStickerSet.ownerId
+          packName = config.globalStickerSet.name + ctx.me
+        }
 
         if (ctx.session.userInfo.tempStickerSet.create) {
           packOwnerId = ctx.from.id
           packName = ctx.session.userInfo.tempStickerSet.name
         }
 
-        const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
-          png_sticker: { source: image },
-          emojis
-        }, true).catch((error) => {
-          console.error(error)
-          if (error.description === 'Bad Request: STICKERSET_INVALID') {
-            ctx.session.userInfo.tempStickerSet.create = false
-          }
-        })
-
-        if (!addSticker) {
-          return ctx.replyWithHTML(ctx.i18n.t('quote.error'), {
+        if (!packOwnerId || !packName) {
+          sendResult = await ctx.replyWithDocument({
+            source: image,
+            filename: 'quote.webp'
+          }, {
             reply_to_message_id: ctx.message.message_id,
-            allow_sending_without_reply: true
+            allow_sending_without_reply: true,
+            reply_markup: replyMarkup
           })
-        }
+        } else {
+          const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
+            png_sticker: { source: image },
+            emojis
+          }, true).catch((error) => {
+            console.error(error)
+            if (error.description === 'Bad Request: STICKERSET_INVALID') {
+              ctx.session.userInfo.tempStickerSet.create = false
+            }
+          })
 
-        const sticketSet = await ctx.getStickerSet(packName)
+          if (!addSticker) {
+            return ctx.replyWithHTML(ctx.i18n.t('quote.error'), {
+              reply_to_message_id: ctx.message.message_id,
+              allow_sending_without_reply: true
+            })
+          }
 
-        if (ctx.session.userInfo.tempStickerSet.create) {
-          for (const i in sticketSet.stickers) {
-            const sticker = sticketSet.stickers[i]
-            if (i > config.globalStickerSet.save_sticker_count - 1) {
-              telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
-              })
+          const sticketSet = await ctx.getStickerSet(packName)
+
+          if (ctx.session.userInfo.tempStickerSet.create) {
+            for (const i in sticketSet.stickers) {
+              const sticker = sticketSet.stickers[i]
+              if (i > config.globalStickerSet.save_sticker_count - 1) {
+                telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
+                })
+              }
             }
           }
-        }
 
-        sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true,
-          reply_markup: replyMarkup
-        })
+          sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
+            reply_to_message_id: ctx.message.message_id,
+            allow_sending_without_reply: true,
+            reply_markup: replyMarkup
+          })
+        }
       }
 
       if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
