@@ -479,7 +479,7 @@ module.exports = async (ctx, next) => {
       let sendResult
 
       if (flag.privacy) {
-        sendResult = await ctx.replyWithDocument({
+        sendResult = await ctx.replyWithSticker({
           source: image,
           filename: 'quote.webp'
         }, {
@@ -518,7 +518,7 @@ module.exports = async (ctx, next) => {
         }
 
         if (!packOwnerId || !packName) {
-          sendResult = await ctx.replyWithDocument({
+          sendResult = await ctx.replyWithSticker({
             source: image,
             filename: 'quote.webp'
           }, {
