@@ -421,7 +421,7 @@ module.exports = async (ctx, next) => {
       presence_penalty: 0.6,
       stop: ['\n', ' Human:', ' AI:']
     }).catch(err => {
-      console.log(err.message)
+      console.error(err.message)
     })
 
     if (completion?.data?.choices && completion.data.choices[0]) {
