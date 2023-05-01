@@ -420,19 +420,23 @@ module.exports = async (ctx, next) => {
       frequency_penalty: 0.0,
       presence_penalty: 0.6,
       stop: ['\n', ' Human:', ' AI:']
+    }).catch(err => {
+      console.log(err)
     })
 
-    quoteMessages.push({
-      message_id: 1,
-      chatId: 6,
-      avatar: true,
-      from: {
-        id: 6,
-        name: 'AI',
-      },
-      text: completion.data.choices[0].message.content,
-      replyMessage: {}
-    })
+    if (completion?.data?.choices && completion.data.choices[0]) {
+      quoteMessages.push({
+        message_id: 1,
+        chatId: 6,
+        avatar: true,
+        from: {
+          id: 6,
+          name: 'AI',
+        },
+        text: completion.data.choices[0].message.content,
+        replyMessage: {}
+      })
+    }
   }
 
   if (quoteMessages.length < 1) {
