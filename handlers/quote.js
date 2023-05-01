@@ -5,6 +5,7 @@ const {
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
+const { Configuration, OpenAIApi } = require("openai")
 const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
 
@@ -19,6 +20,11 @@ const quoteCountIO = io.meter({
 })
 
 const telegram = new Telegram(process.env.BOT_TOKEN)
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+})
+const openai = new OpenAIApi(configuration)
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 
@@ -89,7 +95,8 @@ module.exports = async (ctx, next) => {
     color: false,
     scale: false,
     crop: false,
-    privacy: false
+    privacy: false,
+    ai: false,
   }
 
   const isCommand = ctx.message.text ? ctx.message.text.match(/\/q/) : false
@@ -107,6 +114,7 @@ module.exports = async (ctx, next) => {
     flag.media = args.find((arg) => ['m', 'media'].includes(arg))
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
     flag.crop = args.find((arg) => ['c', 'crop'].includes(arg))
+    flag.ai = args.find((arg) => ['*'].includes(arg))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
@@ -386,6 +394,45 @@ module.exports = async (ctx, next) => {
     quoteMessages.push(message)
 
     lastMessage = message
+  }
+
+  if (flag.ai) {
+    const messageForAI = [{
+      role: 'system',
+      content: `You are an active participant in a group chat. Write only in the language used by other chat members. Don't write like an AI. Write in the style of messages that you see. Don't ask a question in your message. Just write a funny message related to the situation that was mentioned. Keep it under 110 characters. You can also use emojis 😉.`
+    }]
+
+    for (const index in quoteMessages) {
+      const quoteMessage = quoteMessages[index]
+
+      messageForAI.push({
+        role: 'user',
+        content: quoteMessage?.text || quoteMessage.caption || ''
+      })
+    }
+
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: messageForAI,
+      max_tokens: 64,
+      temperature: 0.7,
+      top_p: 1,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.6,
+      stop: ['\n', ' Human:', ' AI:']
+    })
+
+    quoteMessages.push({
+      message_id: 1,
+      chatId: 6,
+      avatar: true,
+      from: {
+        id: 6,
+        name: 'AI',
+      },
+      text: completion.data.choices[0].message.content,
+      replyMessage: {}
+    })
   }
 
   if (quoteMessages.length < 1) {

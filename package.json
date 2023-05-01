@@ -1,6 +1,6 @@
 {
   "name": "quote-bot",
-  "version": "0.36.17",
+  "version": "0.37.0",
   "description": "Telegram quote bot",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "enot-node": "^1.0.1",
     "got": "^11.8.5",
     "mongoose": "^5.13.2",
+    "openai": "^3.2.1",
     "prom-client": "^12.0.0",
     "sharp": "^0.30.5",
     "tdl": "^7.1.0",
