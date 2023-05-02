@@ -431,7 +431,10 @@ module.exports = async (ctx, next) => {
         avatar: true,
         from: {
           id: 6,
-          name: 'AI',
+          name: 'QuotAI',
+          photo: {
+            url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
+          }
         },
         text: completion.data.choices[0].message.content,
         replyMessage: {}
