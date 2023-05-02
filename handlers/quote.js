@@ -439,6 +439,15 @@ module.exports = async (ctx, next) => {
         text: completion.data.choices[0].message.content,
         replyMessage: {}
       })
+    } else {
+      return ctx.replyWithHTML(`😓 Sorry, AI busy. Try again later.`, {
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
+      }).then((res) => {
+        setTimeout(() => {
+          ctx.deleteMessage(res.message_id)
+        }, 5000)
+      })
     }
   }
 
