@@ -367,13 +367,101 @@ db.connection.once('open', async () => {
         console.log('bot start webhook')
       })
   } else {
-    // const updates = await bot.telegram.callApi('getUpdates', { offset: -1 })
-    // const offset = updates.length && updates[0].update_id + 1
-    // if (offset) {
-    //   await bot.telegram.callApi('getUpdates', { offset })
-    // }
     await bot.launch().then(() => {
       console.log('bot start polling')
     })
+
+    const locales = fs.readdirSync(path.resolve(__dirname, 'locales'));
+
+    const enDescriptionLong = i18n.t('en', 'description.long');
+    const enDescriptionShort = i18n.t('en', 'description.short');
+
+    for (const locale of locales) {
+      const localeName = locale.split('.')[0];
+
+      const myDescription = await bot.telegram.callApi('getMyDescription', {
+        language_code: localeName,
+      });
+
+      const descriptionLong = i18n.t(localeName, 'description.long');
+      const newDescriptionLong = localeName === 'en' || descriptionLong !== enDescriptionLong
+        ? descriptionLong.replace(/[\r\n]/gm, '')
+        : '';
+
+      if (newDescriptionLong !== myDescription.description.replace(/[\r\n]/gm, '')) {
+        try {
+          const description = newDescriptionLong ? i18n.t(localeName, 'description.long') : '';
+          const response = await bot.telegram.callApi('setMyDescription', {
+            description,
+            language_code: localeName,
+          });
+          console.log('setMyDescription', localeName, response);
+        } catch (error) {
+          console.error('setMyDescription', localeName, error.description);
+        }
+      }
+
+      const myShortDescription = await bot.telegram.callApi('getMyShortDescription', {
+        language_code: localeName,
+      });
+
+      const descriptionShort = i18n.t(localeName, 'description.short');
+      const newDescriptionShort = localeName === 'en' || descriptionShort !== enDescriptionShort
+        ? descriptionShort.replace(/[\r\n]/gm, '')
+        : '';
+
+      if (newDescriptionShort !== myShortDescription.short_description.replace(/[\r\n]/gm, '')) {
+        try {
+          const shortDescription = newDescriptionShort ? i18n.t(localeName, 'description.short') : '';
+          const response = await bot.telegram.callApi('setMyShortDescription', {
+            short_description: shortDescription,
+            language_code: localeName,
+          });
+          console.log('setMyShortDescription', localeName, response);
+        } catch (error) {
+          console.error('setMyShortDescription', localeName, error.description);
+        }
+      }
+
+      const commands = [
+        { command: 'help', description: i18n.t(localeName, 'cmd.start.commands.help') },
+        { command: 'packs', description: i18n.t(localeName, 'cmd.start.commands.packs') },
+        { command: 'delete', description: i18n.t(localeName, 'cmd.start.commands.delete') },
+        { command: 'catalog', description: i18n.t(localeName, 'cmd.start.commands.catalog') },
+        { command: 'publish', description: i18n.t(localeName, 'cmd.start.commands.publish') },
+        { command: 'lang', description: i18n.t(localeName, 'cmd.start.commands.lang') },
+        { command: 'donate', description: i18n.t(localeName, 'cmd.start.commands.donate') }
+      ]
+
+      const myCommands = await bot.telegram.callApi('getMyCommands', {
+        language_code: localeName,
+        scope: JSON.stringify({
+          type: 'all_private_chats'
+        })
+      })
+
+      let needUpdate = false
+      if (myCommands.length !== commands.length) {
+        needUpdate = true
+      } else {
+        for (let i = 0; i < commands.length; i++) {
+          const myCommand = myCommands.find(c => c.command === commands[i].command)
+          if (!myCommand || myCommand.description !== commands[i].description) {
+            needUpdate = true
+            break
+          }
+        }
+      }
+
+      if (needUpdate) {
+        await bot.telegram.callApi('setMyCommands', {
+          commands,
+          language_code: localeName,
+          scope: JSON.stringify({
+            type: 'all_private_chats'
+          })
+        })
+      }
+    }
   }
 })
