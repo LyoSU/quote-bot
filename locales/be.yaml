@@ -1,5 +1,11 @@
 ---
 language_name: '🇧🇾 Беларуская'
+description:
+  short: |
+    I'll help create a quote from the message.
+    Just reply to the message with /q or forward it to me.
+  long: |
+    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
 help: |2
   <b>Прывітанне!</b>
   Я дапамагу стварыць цытату з паста.
