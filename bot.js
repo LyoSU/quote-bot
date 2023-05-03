@@ -422,46 +422,6 @@ db.connection.once('open', async () => {
           console.error('setMyShortDescription', localeName, error.description);
         }
       }
-
-      const commands = [
-        { command: 'help', description: i18n.t(localeName, 'cmd.start.commands.help') },
-        { command: 'packs', description: i18n.t(localeName, 'cmd.start.commands.packs') },
-        { command: 'delete', description: i18n.t(localeName, 'cmd.start.commands.delete') },
-        { command: 'catalog', description: i18n.t(localeName, 'cmd.start.commands.catalog') },
-        { command: 'publish', description: i18n.t(localeName, 'cmd.start.commands.publish') },
-        { command: 'lang', description: i18n.t(localeName, 'cmd.start.commands.lang') },
-        { command: 'donate', description: i18n.t(localeName, 'cmd.start.commands.donate') }
-      ]
-
-      const myCommands = await bot.telegram.callApi('getMyCommands', {
-        language_code: localeName,
-        scope: JSON.stringify({
-          type: 'all_private_chats'
-        })
-      })
-
-      let needUpdate = false
-      if (myCommands.length !== commands.length) {
-        needUpdate = true
-      } else {
-        for (let i = 0; i < commands.length; i++) {
-          const myCommand = myCommands.find(c => c.command === commands[i].command)
-          if (!myCommand || myCommand.description !== commands[i].description) {
-            needUpdate = true
-            break
-          }
-        }
-      }
-
-      if (needUpdate) {
-        await bot.telegram.callApi('setMyCommands', {
-          commands,
-          language_code: localeName,
-          scope: JSON.stringify({
-            type: 'all_private_chats'
-          })
-        })
-      }
     }
   }
 })
