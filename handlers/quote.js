@@ -399,7 +399,7 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     const messageForAI = [{
       role: 'system',
-      content: `You are an active participant in a group chat. Write only in the language used by other chat members. Don't write like an AI. Write in the style of messages that you see. Don't ask a question in your message. Just write a funny message related to the situation that was mentioned. Keep it under 110 characters. You can also use emojis 😉.`
+      content: `You must answer "%UNDEFINED" when you don't understand, don't know what to answer, or think that joking is inappropriate here. You are an active participant in a group chat.  Write only in the language used by other chat members. Don't write like an AI. Write in the style of messages that you see. Don't ask a question in your message. Just write a funny message related to the situation that was mentioned. Keep it under 128 characters. You can also use emojis 😉.`
     }]
 
     for (const index in quoteMessages) {
@@ -407,7 +407,7 @@ module.exports = async (ctx, next) => {
 
       messageForAI.push({
         role: 'user',
-        content: quoteMessage?.text || quoteMessage.caption || ''
+        content: quoteMessage?.text || quoteMessage.caption || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       })
     }
 
@@ -418,27 +418,41 @@ module.exports = async (ctx, next) => {
       temperature: 0.7,
       top_p: 1,
       frequency_penalty: 0.0,
-      presence_penalty: 0.6,
-      stop: ['\n', ' Human:', ' AI:']
-    }).catch(err => {
-      console.error(err.message)
+      presence_penalty: 0.6
+    }).catch((err) => {
+      console.error('OpenAI error:', err?.response?.statusText || err.message)
     })
 
     if (completion?.data?.choices && completion.data.choices[0]) {
-      quoteMessages.push({
-        message_id: 1,
-        chatId: 6,
-        avatar: true,
-        from: {
-          id: 6,
-          name: 'QuotAI',
-          photo: {
-            url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
-          }
-        },
-        text: completion.data.choices[0].message.content,
-        replyMessage: {}
-      })
+      const message = completion.data.choices[0].message.content
+
+      if (message.includes('%UNDEFINED')) {
+        if (flag.ai) {
+          return ctx.replyWithHTML(`🙅 Sorry, your message is not suitable for AI.`, {
+            reply_to_message_id: ctx.message.message_id,
+            allow_sending_without_reply: true
+          }).then((res) => {
+            setTimeout(() => {
+              ctx.deleteMessage(res.message_id)
+            }, 5000)
+          })
+        }
+      } else {
+        quoteMessages.push({
+          message_id: 1,
+          chatId: 6,
+          avatar: true,
+          from: {
+            id: 6,
+            name: 'QuotAI',
+            photo: {
+              url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
+            }
+          },
+          text: message,
+          replyMessage: {}
+        })
+      }
     } else {
       return ctx.replyWithHTML(`😓 Sorry, AI busy. Try again later.`, {
         reply_to_message_id: ctx.message.message_id,
