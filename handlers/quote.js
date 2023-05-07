@@ -426,33 +426,20 @@ module.exports = async (ctx, next) => {
     if (completion?.data?.choices && completion.data.choices[0]) {
       const message = completion.data.choices[0].message.content
 
-      if (message.includes('%UNDEFINED')) {
-        if (flag.ai) {
-          return ctx.replyWithHTML(`🙅 Sorry, your message is not suitable for AI.`, {
-            reply_to_message_id: ctx.message.message_id,
-            allow_sending_without_reply: true
-          }).then((res) => {
-            setTimeout(() => {
-              ctx.deleteMessage(res.message_id)
-            }, 5000)
-          })
-        }
-      } else {
-        quoteMessages.push({
-          message_id: 1,
-          chatId: 6,
-          avatar: true,
-          from: {
-            id: 6,
-            name: 'QuotAI',
-            photo: {
-              url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
-            }
-          },
-          text: message,
-          replyMessage: {}
-        })
-      }
+      quoteMessages.push({
+        message_id: 1,
+        chatId: 6,
+        avatar: true,
+        from: {
+          id: 6,
+          name: 'QuotAI',
+          photo: {
+            url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
+          }
+        },
+        text: message,
+        replyMessage: {}
+      })
     } else {
       return ctx.replyWithHTML(`😓 Sorry, AI busy. Try again later.`, {
         reply_to_message_id: ctx.message.message_id,
