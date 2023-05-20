@@ -475,10 +475,10 @@ module.exports = async (ctx, next) => {
   if (flag.png) type = 'png'
 
   let format
-  if (!flag.privacy && type === 'quote') format = 'png'
+  if (type === 'quote') format = 'webp'
 
   const generate = await got.post(
-    `${process.env.QUOTE_API_URI}/generate.png?botToken=${process.env.BOT_TOKEN}`,
+    `${process.env.QUOTE_API_URI}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
     {
       json: {
         type,
@@ -547,6 +547,7 @@ module.exports = async (ctx, next) => {
           source: image,
           filename: 'quote.webp'
         }, {
+          emoji: emojis,
           reply_to_message_id: ctx.message.message_id,
           allow_sending_without_reply: true,
           reply_markup: replyMarkup
@@ -586,6 +587,7 @@ module.exports = async (ctx, next) => {
             source: image,
             filename: 'quote.webp'
           }, {
+            emoji: emojis,
             reply_to_message_id: ctx.message.message_id,
             allow_sending_without_reply: true,
             reply_markup: replyMarkup
@@ -621,7 +623,7 @@ module.exports = async (ctx, next) => {
             })
           }
 
-          sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
+          sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
             reply_to_message_id: ctx.message.message_id,
             allow_sending_without_reply: true,
             reply_markup: replyMarkup
