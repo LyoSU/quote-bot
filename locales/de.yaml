@@ -69,11 +69,11 @@ quote:
     <b>😓 Zitat konnte nicht erstellt werden</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    Der Befehl muss als Antwort auf eine Nachricht gesendet werden.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Die Hintergrundfarbe von Zitaten ist auf <code>${backgroundColor}</code> gesetzt
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Die Emoji-Marke von Angeboten ist auf <code>${emojiBrand}</code> gesetzt
   sticker:
 sticker:
   save:
