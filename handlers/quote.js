@@ -97,6 +97,7 @@ module.exports = async (ctx, next) => {
     crop: false,
     privacy: false,
     ai: false,
+    html: false,
   }
 
   const isCommand = ctx.message.text ? ctx.message.text.match(/\/q/) : false
@@ -115,6 +116,7 @@ module.exports = async (ctx, next) => {
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
     flag.crop = args.find((arg) => ['c', 'crop'].includes(arg))
     flag.ai = args.find((arg) => ['*'].includes(arg))
+    flag.html = args.find((arg) => ['h', 'html'].includes(arg))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
@@ -477,8 +479,10 @@ module.exports = async (ctx, next) => {
   let format
   if (type === 'quote') format = 'webp'
 
+  const quoteApiUri = flag.html ? process.env.QUOTE_API_URI_HTML : process.env.QUOTE_API_URI
+
   const generate = await got.post(
-    `${process.env.QUOTE_API_URI}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
+    `${quoteApiUri}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
     {
       json: {
         type,
