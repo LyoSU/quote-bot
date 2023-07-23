@@ -194,7 +194,7 @@ module.exports = async (ctx, next) => {
   let quoteMessages = []
   let quoteEmojis = ''
 
-  if (isCommand) {
+  if (isCommand && !ctx.message.reply_to_message) {
     if (ctx.chat.type === 'private') {
       startMessage += 1
     }
