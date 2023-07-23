@@ -117,6 +117,7 @@ module.exports = async (ctx, next) => {
     flag.crop = args.find((arg) => ['c', 'crop'].includes(arg))
     flag.ai = args.find((arg) => ['*'].includes(arg))
     flag.html = args.find((arg) => ['h', 'html'].includes(arg))
+    flag.stories = args.find((arg) => ['s', 'stories'].includes(arg))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
@@ -172,19 +173,19 @@ module.exports = async (ctx, next) => {
 
   let messages = []
 
-  if (ctx.chat.type === 'private' && !isCommand) {
+  if (ctx.chat.type === 'private' && !ctx.message.reply_to_message) {
     firstMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
     firstMessage = ctx.message.reply_to_message
-  }
 
-  if (!firstMessage?.message_id) {
-    return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-      reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true,
-      allow_sending_without_reply: true
-    })
+    if (!firstMessage?.message_id) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+        reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true,
+        allow_sending_without_reply: true
+      })
+    }
   }
 
   messageCount = Math.min(messageCount, maxQuoteMessage)
@@ -192,6 +193,12 @@ module.exports = async (ctx, next) => {
   let startMessage = firstMessage.message_id
   let quoteMessages = []
   let quoteEmojis = ''
+
+  if (isCommand) {
+    if (ctx.chat.type === 'private') {
+      startMessage += 1
+    }
+  }
 
   if (messageCount < 0) {
     messageCount = Math.abs(messageCount)
@@ -221,7 +228,7 @@ module.exports = async (ctx, next) => {
 
   if (!messages.find((message) => {
     return message?.message_id === firstMessage?.message_id
-  })) {
+  }) && !isCommand) {
     if (parseInt(flag.count) < 0) {
       messages.push(firstMessage)
     } else {
@@ -476,6 +483,13 @@ module.exports = async (ctx, next) => {
   if (flag.img) type = 'image'
   if (flag.png) type = 'png'
 
+  if (flag.stories) {
+    width *= 1.2
+    height *= 15
+    scale = 3
+    type = 'stories'
+  }
+
   let format
   if (type === 'quote') format = 'webp'
 
@@ -657,7 +671,7 @@ module.exports = async (ctx, next) => {
 
         await quoteDb.save()
       }
-    } else if (generate.headers['quote-type'] === 'image') {
+    } else if (generate.headers['quote-type'] === 'image' || generate.headers['quote-type'] === 'stories') {
       await ctx.replyWithPhoto({
         source: image,
         filename: 'quote.png'
