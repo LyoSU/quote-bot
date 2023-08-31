@@ -6,7 +6,7 @@ class LiqPay {
   constructor (publicKey, privateKey, config = {}) {
     const configDefault = {
       host: 'https://www.liqpay.ua/api/',
-      language: 'ru'
+      language: 'en'
     }
 
     this.publicKey = publicKey

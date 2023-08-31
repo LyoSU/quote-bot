@@ -6,7 +6,7 @@ const handleHelp = require('./help')
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, '../locales'),
-  defaultLanguage: 'ru',
+  defaultLanguage: 'en',
   defaultLanguageOnMissing: true
 })
 
@@ -51,7 +51,7 @@ module.exports = async ctx => {
       button.push(Markup.callbackButton(locales[key].flag, `set_language:${key}`))
     })
 
-    ctx.reply('🇷🇺 Выберите язык\n🇺🇸 Choose language\n\nHelp with translation: https://crwd.in/QuotLyBot', {
+    ctx.reply('🇺🇸 Choose language\n\nHelp with translation: https://crwd.in/QuotLyBot', {
       reply_markup: Markup.inlineKeyboard(button, {
         columns: 2
       })

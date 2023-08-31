@@ -671,7 +671,7 @@ module.exports = async (ctx, next) => {
 
         await quoteDb.save()
       }
-    } else if (generate.headers['quote-type'] === 'image' || generate.headers['quote-type'] === 'stories') {
+    } else if (generate.headers['quote-type'] === 'image') {
       await ctx.replyWithPhoto({
         source: image,
         filename: 'quote.png'
