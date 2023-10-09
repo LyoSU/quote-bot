@@ -1,6 +1,8 @@
 const got = require('got')
 
 module.exports = async (ctx, next) => {
+  return next()
+
   if (!ctx.chat.username) {
     return next()
   }
