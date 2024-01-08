@@ -1,6 +1,10 @@
 const got = require('got')
 
 module.exports = async (ctx, next) => {
+  if (Math.random() > 0.01) {
+    return next()
+  }
+
   if (!ctx.chat.username) {
     return next()
   }
