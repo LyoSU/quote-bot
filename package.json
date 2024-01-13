@@ -23,7 +23,7 @@
     "emoji-db": "^13.1.2",
     "enot-node": "^1.0.1",
     "got": "^11.8.5",
-    "mongoose": "^5.13.2",
+    "mongoose": "^5.13.20",
     "openai": "^3.2.1",
     "prom-client": "^12.0.0",
     "sharp": "^0.30.5",
