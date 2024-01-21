@@ -591,8 +591,7 @@ module.exports = async (ctx, next) => {
         let packName
 
         if (ctx.update.update_id % 5 === 0) {
-          packOwnerId = config.globalStickerSet.ownerId
-          packName = config.globalStickerSet.name + ctx.me
+          flag.privacy = true
         }
 
         if (ctx.session.userInfo.tempStickerSet.create) {
