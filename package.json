@@ -20,7 +20,7 @@
   "dependencies": {
     "@pm2/io": "^5.0.0",
     "dotenv": "^8.6.0",
-    "emoji-db": "^13.1.2",
+    "emoji-db": "^14.0.1",
     "enot-node": "^1.0.1",
     "got": "^11.8.5",
     "mongoose": "^5.13.2",
