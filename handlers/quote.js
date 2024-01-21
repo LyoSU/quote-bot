@@ -590,11 +590,7 @@ module.exports = async (ctx, next) => {
         let packOwnerId
         let packName
 
-        if (ctx.update.update_id % 5 === 0) {
-          flag.privacy = true
-        }
-
-        if (ctx.session.userInfo.tempStickerSet.create) {
+        if (ctx.session.userInfo.tempStickerSet.create && ctx.update.update_id % 5 === 0) {
           packOwnerId = ctx.from.id
           packName = ctx.session.userInfo.tempStickerSet.name
         }
