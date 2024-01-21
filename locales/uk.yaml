@@ -37,6 +37,7 @@ help: |2
   Тільки для адміністраторів:
   <code>/qs 🥰💜</code> — зберігає стікер/фото/документ з фотографією в стікерпак групи з емодзи 🥰💜 <i>(будь-яка кількість емодзі)</i> <i>[відповісти на повідомлення]</i >
   <code>/qd</code> — видалити стікер із стикеру групи <i>[у відповідь на повідомлення]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
   <code>/qb</code> — встановити бренд емодзі. Доступно: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
   <code>/qcolor green</code> — встановити колір цитат <b>зелений</b> за замовчуванням <i>(hex код або назва кольору)</i>
   <code>/qemoji</code> — змінити суфікс емодзі для стікерів
@@ -87,6 +88,9 @@ sticker:
       telegram: <b>У мене не вийшло видалити цю наліпку.</b>\n<pre>${error}</pre>
     btn:
       save_sticker: Зберегти наліпку
+  delete_random:
+    suc: Sticker has been successfully removed from the group random stickers.
+    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
   empty_forward: |
     Команду необхідно писати у відповідь на повідомлення з наліпкою, фото або файлом фото.
   fstik: |
