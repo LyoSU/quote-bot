@@ -26,7 +26,7 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
-const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+const config = JSON.parse(fs.readFileSync('config/config.json', 'utf8'))
 
 // for create global sticker pack
 // telegram.createNewStickerSet(66478514, 'created_by_QuotLyBot', 'Created by @QuotLyBot', {

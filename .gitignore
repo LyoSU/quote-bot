@@ -109,6 +109,6 @@ helpers/tdlib/data
 
 !.gitkeep
 
-config.json
+config/config.json
 
 .DS_Store

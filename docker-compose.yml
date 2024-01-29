@@ -2,9 +2,8 @@ version: '3'
 
 services:
     bot:
-        build:
-            context: .
-        env_file: .env
+        image: ghcr.io/cielneko/quote-bot
+        env_file: .env-bot
         restart: always
         logging:
             driver: "json-file"
@@ -14,21 +13,30 @@ services:
         networks:
             - quotly
         command: node index.js
+        volumes:
+            - ./config:/app/config
     mongo:
         restart: always
-        image: mongo:4
+        image: mongo
         volumes:
-            - mongo-volume:/data/db
+            - ./data/db:/data/db
         ports:
             - 127.0.0.1:27017:27017
         networks:
             - quotly
-    
-volumes:
-    mongo-volume:
-        driver: 'local'
+    api:
+        image: ghcr.io/cielneko/quote-api
+        env_file: .env-api
+        restart: always
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+        networks:
+            - quotly
+        command: node index.js
 
 networks:
     quotly:
-        external: true
         

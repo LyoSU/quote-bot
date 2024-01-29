@@ -92,7 +92,7 @@ bot.use((ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
-  const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+  const config = JSON.parse(fs.readFileSync('config/config.json', 'utf8'))
   ctx.config = config
   ctx.db = db
   return next()
