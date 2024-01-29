@@ -1,0 +1,9 @@
+config
+node_modules
+.env.example
+.gitignore
+.github
+docker-compose.yml
+LICENSE
+README.md
+crowdin.yml

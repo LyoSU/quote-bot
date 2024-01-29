@@ -8,4 +8,4 @@ ADD . $NODE_WORKDIR
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN apt-get update && apt-get install -y build-essential gcc wget git libvips libssl1.1 && rm -rf /var/lib/apt/lists/*
 
-RUN npm install && npm install tdl-tdlib-addon --build-from-source
+RUN npm install
