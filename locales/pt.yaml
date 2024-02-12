@@ -2,10 +2,10 @@
 language_name: '🇧🇷'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Ajudarei a criar um quote a partir da mensagem.
+    Basta responder à mensagem com /q ou encaminhá-la para mim.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    Notou alguma mensagem engraçada ou inspiradora em seu bate-papo em grupo que gostaria de imortalizar? Basta encaminhá-los para mim ou digitar /q e eu os transformarei em um elegante adesivo de quote que você pode salvar e compartilhar com seus amigos. Seja para memórias pessoais ou para uso profissional, as possibilidades são infinitas. Experimente-me agora! 😎
 help: |2
   <b>Olá!</b>
   Vou ajudar a criar uma citação de um post.

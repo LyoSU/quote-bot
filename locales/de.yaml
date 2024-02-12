@@ -2,58 +2,58 @@
 language_name: '🇩🇪 Deutsche'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Ich werde Ihnen helfen, ein Zitat aus der Nachricht zu erstellen.
+    Antworten Sie einfach auf die Nachricht mit /q oder leiten Sie sie an mich weiter.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    Hast du in deinem Gruppenchat lustige oder inspirierende Nachrichten entdeckt, die du gerne verewigen möchtest? Leiten Sie sie einfach an mich weiter oder geben Sie /q ein und ich verwandle sie in einen eleganten Zitataufkleber, den Sie speichern und mit Ihren Freunden teilen können. Ob für persönliche Erinnerungen oder für den beruflichen Gebrauch, die Möglichkeiten sind endlos. Probiere mich jetzt aus! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Hallo!</b>
+  Ich werde helfen, ein Zitat aus einem Beitrag zu erstellen.
+  Bot kann sowohl in privaten Nachrichten als auch in Gruppen arbeiten.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Verfügbare Befehle:</b>
+  /q - erstellt ein Zitat aus der Nachricht <i>[Antwort auf die Nachricht]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Um ein Zitat aus mehreren Nachrichten zu erstellen, geben Sie als Parameter eine Zahl an, die angibt, wie viele Nachrichten im Zitat enthalten sein sollen.
+  In privaten Nachrichten können Sie mehrere Nachrichten auf einmal an mich weiterleiten und ich werde daraus ein Zitat erstellen.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Verfügbare Flags für den Befehl /q:</b>
+      Hex-Code oder Farbname: <code>#cbafff</code> oder <code>indigo</code> - mache ein Angebot mit der Farbe <b>#cbafff</b>
+      <code>zufällig</code> - zufällige Farbe für Anführungszeichen
+      <code>Antwort</code> oder <code>r</code> - ein Zitat mit gespeicherten Antworten erstellen
+      <code>p</code> oder <code>png</code> - ein PNG-Zitat erstellen
+      <code>i</code> oder <code>img</code> - ein Zitat als Bild erstellen
+      <code>Bewertung</code> - fügt eine Bewertung zu einem Zitat hinzu
+      <code>m</code> oder <code>media</code> - Medien einbeziehen
+      <code>c</code> oder <code>crop</code> - Medien zuschneiden
+      <code>s2.5</code> - Bildqualität ist 2,5 mal höher als Standard <i>(сann einen beliebigen Wert einstellen)</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
+    <b>Beispiel für die Verwendung von Flags:</b>
+    <code>/q 3 weiß rp</code>
+    <code>/q i rot s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Nur für Administratoren:
+  <code>/qs 🥰💜</code> - speichert einen Sticker/Foto/Dokument mit einem Foto in einem Sticker-Pack einer Gruppe mit Emoji 🥰💜 <i>(Emoji können beliebig sein und eine beliebige Zahl sein)</i> <i>[Antwort auf Nachricht]</i>
+  <code>/qd</code> - entferne den Aufkleber aus dem Aufkleberpaket der Gruppe <i>[als Antwort auf die Nachricht]</i>
+  <code>/qb</code> - Emoji-Marke setzen. Verfügbar: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> - legt die Farbe der Anführungszeichen <b>grün</b> als Standard fest <i>(Hex-Code oder Farbname)</i>
+  <code>/qemoji</code> - ändert das Emoji-Suffix für Sticker
+  <code>/qrate</code> - Bewertung von Zitaten aktivieren/deaktivieren
+  <code>/qgab 300</code> - legt die Wahrscheinlichkeit des zufälligen Auftretens eines Zitats fest. Jede Zahl von eins bis unendlich. Je höher die Zahl, desto geringer ist die Chance, dass ein Zitat erscheint. Wenn Sie 300 angeben, ist die Wahrscheinlichkeit, dass eine Nachricht erscheint, ungefähr 1 Mal in 300 Nachrichten. Um die Funktion zu deaktivieren, setzen Sie den Wert auf 0.
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand - zufällige Zitate mit einer positiven Bewertung von
+  /qtop - Zitate der Spitzengruppe
 
-  /help or /start — get this text
+  /help oder /start - diesen Text erhalten
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang - change the language
+  🇷🇺 /lang - изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Kaffee für Entwickler kaufen:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Entwicklerblog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Hallo!</b>
@@ -61,19 +61,19 @@ help_group: |
 
   Mehr über den Befehl <a href="t.me/${username}?start=help">/help</a> erfährst du in privaten Nachrichten mit mir
 btn:
-  add_group: Add to Group
-  help: Help
+  add_group: Zur Gruppe hinzufügen
+  help: Hilfe
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Nicht unterstützte Nachricht
   api_error: |
-    <b>😓 Failed to generate quote</b>
+    <b>😓 Zitat konnte nicht erstellt werden</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    Der Befehl muss als Antwort auf eine Nachricht gesendet werden.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Die Hintergrundfarbe von Zitaten ist auf <code>${backgroundColor}</code> gesetzt
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Die Emoji-Marke von Angeboten ist auf <code>${emojiBrand}</code> gesetzt
   sticker:
 sticker:
   save:
