@@ -7,10 +7,11 @@ Telegram quote bot
 # Docker installation
 1) Pull this repo
 
-2) Pull [quote_api](https://github.com/CielNeko/quote-api)
+2) Download `.env-example` from [quote_api](https://github.com/CielNeko/quote-api)
 
 3) Edit both `.env` files in repos
+   `.env-bot` for bot `.env-api` for api
 
-4) Edit `config/config.json`
+5) Edit `config/config.json`
 
 6) `docker-compose up -d`
