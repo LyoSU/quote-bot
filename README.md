@@ -10,7 +10,10 @@ Telegram quote bot
 2) Download `.env-example` from [quote_api](https://github.com/CielNeko/quote-api)
 
 3) Edit both `.env` files in repos
-   `.env-bot` for bot `.env-api` for api
+   
+   `.env-bot` for bot
+
+   `.env-api` for api
 
 5) Edit `config/config.json`
 
