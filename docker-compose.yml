@@ -20,8 +20,6 @@ services:
         image: mongo
         volumes:
             - ./data/db:/data/db
-        ports:
-            - 127.0.0.1:27017:27017
         networks:
             - quotly
     api:
@@ -34,7 +32,7 @@ services:
                 max-size: "10m"
                 max-file: "3"
         volumes:
-            - ./fonts:/usr/share/fonts
+            - /usr/share/fonts:/usr/share/fonts:ro
         networks:
             - quotly
         command: node index.js
