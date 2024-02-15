@@ -32,6 +32,8 @@ services:
                 max-size: "10m"
                 max-file: "3"
         volumes:
+            - ./fonts:/app/assets/fonts
+            - /usr/local/share/fonts:/usr/local/shre/fonts:ro
             - /usr/share/fonts:/usr/share/fonts:ro
         networks:
             - quotly
