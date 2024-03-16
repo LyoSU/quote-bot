@@ -1,11 +1,9 @@
-FROM archlinux:latest
+FROM node:16-alpine
 
 WORKDIR /app
 ADD . /app
 
-RUN \
-		pacman -Syu --noconfirm --needed --noprogressbar --noconfirm nodejs npm base-devel openssl-1.1 && \
-		cd /app && \
-		npm install && \
-		pacman -Rsc --noconfirm base-devel npm && \
-		rm -rf /var/cache /var/lib/pacman/sync/* /root/.npm /root/.cache /root/.node_repl_history
+RUN apk add python3 build-base
+RUN npm install
+
+CMD [ "index.js" ]
