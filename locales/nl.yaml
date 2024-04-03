@@ -2,59 +2,59 @@
 language_name: '🇳🇱 Nederlands'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Ik zal helpen een citaat te maken van het bericht.
+    Reageer gewoon op het bericht met /q of stuur het naar mij door.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    Heb je grappige of inspirerende berichten opgemerkt in je groepschat die je zou willen vereeuwigen? Stuur ze gewoon naar me door of typ /q en ik zal ze omzetten in een strak citaatsticker die je kunt opslaan en delen met je vrienden. Of het nu voor persoonlijke herinneringen is of voor professioneel gebruik, de mogelijkheden zijn eindeloos. Probeer me nu uit! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Hallo!</b>
+  Ik zal helpen een citaat te maken van een bericht.
+  De bot kan zowel in privéberichten als in groepen werken.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Beschikbare commando's:</b>
+  /q — maak een citaat van het bericht <i>[reageren op het bericht]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Om een citaat te maken van meerdere berichten, schrijf als parameter een getal dat aangeeft hoeveel berichten er in het citaat moeten zijn.
+  In privéberichten kunt u meerdere berichten tegelijk naar me doorsturen en ik zal er een citaat van maken.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Beschikbare vlaggen voor het /q-commando:</b>
+      hex-code of kleurnaam: <code>#cbafff</code> of <code>indigo</code> — maak een citaat met kleur <b>#cbafff</b>
+      <code>willekeurig</code> — willekeurige citaatkleur
+      <code>reactie</code> of <code>r</code> — maak een citaat met behoud van antwoorden
+      <code>p</code> of <code>png</code> — maak een PNG-citaat
+      <code>i</code> of <code>img</code> — maak een citaat als afbeelding
+      <code>beoordeling</code> — voeg een beoordeling toe aan een citaat
+      <code>m</code> of <code>media</code> — media toevoegen
+      <code>c</code> of <code>crop</code> — media bijsnijden
+      <code>s2.5</code> — beeldkwaliteit is 2,5 keer hoger dan standaard <i>(kan elke waarde instellen)</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
+    <b>Voorbeeld van het gebruik van vlaggen:</b>
+    <code>/q 3 wit rp</code>
+    <code>/q i rood s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Alleen voor beheerders:
+  <code>/qs 🥰💜</code> — slaat een sticker/foto/document met een foto op in een stickerpakket van een groep met emoji 🥰💜 <i>(emoji kan willekeurig en in elk aantal zijn)</i> <i>[reageren op bericht]</i>
+  <code>/qd</code> — verwijder de sticker uit het stickerpakket van de groep  <i>[als reactie op het bericht]</i>
+  <code>/qb</code> — stel het emoji-merk in. Beschikbaar: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qkleur groen</code> — stel de kleur van citaten in op <b>groen</b> standaard <i>(hex-code of kleurnaam)</i>
+  <code>/qemoji</code> — verander de emoji-suffix voor stickers
+  <code>/qbeoordeling</code> — beoordeling van citaten in- of uitschakelen
+  <code>/qgab 300</code> — stel de kans in van een willekeurig voorkomen van een citaat. Elk getal van één tot oneindig. Hoe hoger het getal, hoe lager de kans op het verschijnen van citaten. Door 300 te specificeren, zal de kans op een bericht ongeveer 1 keer in 300 berichten zijn. Om uit te schakelen, stelt u de waarde in op 0
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — willekeurig een citaat met een positieve beoordeling
+  /qtop — top groep citaten
 
-  /help or /start — get this text
+  /help of /start — krijg deze tekst
 
-  🇺🇸 /lang — change the language
+  🇺🇸 /lang — verander de taal
   🇷🇺 /lang — изменить язык
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Koop koffie voor de ontwikkelaar:</b> doneer.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Ontwikkelaarsblog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/citeerbot
 help_group: |
   <b>Hallo!</b>
   Ik maak citaten aan in de groep met behulp van de /q opdracht in reactie op bericht
@@ -64,16 +64,16 @@ btn:
   add_group: Voeg toe aan groep
   help: Hulp
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Niet ondersteund bericht
   api_error: |
     <b>😓 Genereren van offerte mislukt</b>
     <pre>${error}</pre>
   empty_forward: |
     Commando moet worden verzonden als antwoord op een bericht.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Achtergrondkleur van de offertes is ingesteld op: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Citaat-emoji-merk is ingesteld op: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -126,13 +126,13 @@ top:
   open: Open top
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    U kunt koffie kopen voor de ontwikkelaar of iets anders met de volgende gegevens:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Bankkaart: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
+    Meer: doneer.lyo.su
   title: Doneren ${botUsername}
   description: Steun bot ontwikkeling
   successful: |
@@ -142,87 +142,86 @@ donate:
   other: Andere opties
 emoji:
   info: |
-    Please include emoji.
+    Voeg emoji toe.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Bijvoorbeeld, <code>/qemoji💜</code> zal de suffix veranderen naar 💜 voor alle volgende nieuwe stickers.
+    Voor een willekeurige emoji <code>/qemoji willekeurig</code>
   done: Emoji succesvol veranderd.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 U kunt bij ons adverteren voor een groot aantal actieve gebruikers en groepen</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Onze bot bevindt zich in meer dan 30`000 actieve groepen en meer dan 70`000 gebruikers gebruiken de bot elke maand.
+    Onder hen zijn gebruikers uit verschillende landen. U kunt de taal van de gebruikers selecteren waarvoor de advertentie moet worden weergegeven
+    • De advertentie wordt onder het citaat weergegeven in de vorm van een knop of tekstbericht, afhankelijk van de chat van de gebruiker
+    • U bepaalt zelf de prijs van een advertentie; in de eerste plaats wordt de advertentie weergegeven waarvoor het hoogste bedrag is toegewezen
+    • De tekst en inhoud van de advertentie moeten voldoen aan onze regels (/adv_rules) en voordat deze wordt geplaatst moet u de moderatie doorlopen. Dit kan worden gedaan voordat u een storting doet
 
-    Balance: ${balance} USD
+    Saldo: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>In advertenties is het <u>niet</u> toegestaan:</b>
+    • Obsceniteiten of beledigingen gebruiken
+    • Meer dan 1 emoji per tekst gebruiken
+    • Misleidende informatie
+    • Informatie die verboden is door de wetten van Oekraïne
+    • Volwassen inhoud
+    • Gokken
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>We hebben ook het recht om een advertentie af te wijzen als we het gewoon niet leuk vinden om geen reden</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Maak advertenties
+    list_btn: Lijst van advertenties
+    pay_btn: Saldo opladen
   create:
     enter_text: |
-      Enter your ad text:
+      Voer uw advertentietekst in:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Niet meer dan 70 tekens en moet voldoen aan onze regels (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Voer een link naar de geadverteerde bron in:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>De link moet compleet zijn, als u iets adverteert in Telegram, moet de link beginnen met t.me.
+      De bron moet voldoen aan onze regels (/adv_rules), als na moderatie de site wordt vervangen, wordt uw account geblokkeerd en wordt het geld niet geretourneerd</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Selecteer de taal van de gebruikers aan wie de advertentie zal worden getoond
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Het nummer is het aantal gebruikers dat potentiëel uw advertentie in die taal zal zien.
+      Alleen gebruikers die daadwerkelijk de bot gebruiken worden geteld. Maar de advertentie kan ook worden gezien door andere gebruikers die in de groep zijn waar het citaat is gemaakt, dus dit cijfer kan veel hoger zijn
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>De taal komt niet overeen met het land.
+      U kunt slechts één taal kiezen, als u er meerdere nodig hebt, maak dan opnieuw een advertentie voor een andere taal</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Specificeer de prijs per 1000 vertoningen van uw advertentie in USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Gemiddelde prijs van actieve advertenties:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
-      </i>
+      <i>De minimumprijs is 0,15 USD.
+      Advertenties worden willekeurig weergegeven, maar de grootste kans om te worden weergegeven heeft een advertentie met een hogere prijs voor vertoningen.</i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      De advertentie is ter moderatie verzonden. Wees geduldig en wacht af. Als de moderatie succesvol of onsuccesvol is, ontvangt u een melding.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
+      selecteer_lijst
+    wait_btn: wacht_knop
+    ready_btn: klaar_knop
+    end_btn: einde_knop
     selected_list: |
-      selected_list
+      geselecteerde_lijst
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} van <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
+      Tekst: ${adv.text}
       Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Gebiedstaal: ${adv.locale}
+      Prijs: ${adv.price}
+      Tellen ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      De advertentie is succesvol gemodereerd. U kunt beginnen met het weergeven ervan in de advertentierubriek: /advertentie
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Helaas is de advertentie niet gemodereerd. Lees onze regels (/adv_rules), als u er zeker van bent dat dit een fout was, schrijf ons dan op @Ly_OBot en voeg deze tag toe in het bericht dat het probleem beschrijft: #qba_${adv.id}
+    accept_btn: Accepteer
+    deny_btn: Weiger
 only_admin: |
   Alleen groepsbeheerder kan deze opdracht gebruiken.
 only_group: |
