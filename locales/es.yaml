@@ -146,7 +146,7 @@ emoji:
 
     For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
     For a random emoji <code>/qemoji random</code>
-  done: Emoji successfully changed.
+  done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
     <b>💫 Puede comprarnos publicidad para una gran cantidad de usuarios y grupos activos</b>
