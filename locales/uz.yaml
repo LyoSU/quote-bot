@@ -71,7 +71,7 @@ quote:
   empty_forward: |
     Buyruqni xabarga javoban yozish kerak.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Iqtiboslar fon rangi: <code>${backgroundColor}</code> deya belgilandi
   set_emoji_brand: |
     Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
