@@ -2,58 +2,58 @@
 language_name: '🇦🇿 Azərbaycanca'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Messajdan alıntı yaratmağa kömək edəcəyəm.
+    Sadəcə yuxarıda mənimlə mesaja cavab verin və ya onu mənə yönəltin.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    Qrup çatdırmaq istədiyiniz məzmunlu qrup söhbətində əyləncəli və əlverişli mesajları gördünüzmü və onları əbədidaga salmaq istəyirsiniz? Sadəcə onları mənə yönəlt və ya /q yaz və onları təravətli bir alıntı stiker olaraq çevirəcəyəm, onları yaddaşa salıb dostlarınızla paylaşa biləcəyiniz. Şəxsi xatirələr üçün və ya peşəkar istifadə üçün, imkanlar sonsuzdur. Məni sınamaqda birisən! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Salam!</b>
+  Mən bir alıntı yaradacağam.
+  Bot həm gizli mesajlarda həm də qruplarda işləyə bilər.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Mövcud əmrlər:</b>
+  /q — messajdan alıntı yarat <i>[mesaj cavabı]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Bir neçə mesajdan alıntı yaratmaq üçün, alıntının içində olmalı olan mesajların sayını göstərən bir ədövət yazın.
+  Gizli mesajlarda bir addımlıda bir neçə mesajı birdənə mənə yönəltə bilərsiniz və mən onlardan alıntı yaradaram.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Alıntı əmrləri üçün mövcud bayraqlar:</b>
+      hex kod və ya rəng adı: <code>#cbafff</code> və ya <code>indigo</code> — alıntıda <b>#cbafff</b> rəngində alıntı yaradın
+      <code>təsadüfi</code> — təsadüfi alıntı rəngi
+      <code>cavab</code> və ya <code>qərq</code> — cavablama əməliyyatını saxlamaq üçün alıntı yaradın
+      <code>p</code> və ya <code>png</code> — PNG alıntısı yaradın
+      <code>i</code> və ya <code>img</code> — alıntını şəkildə yaradın
+      <code>qiymətləndir</code> — alıntıya reytinq əlavə edin
+      <code>m</code> və ya <code>media</code> — media daxil et
+      <code>kəs</code> və ya <code>crop</code> — media kəs
+      <code>s2.5</code> — şəkil keyfiyyəti standartın 2.5 dəfəsi yüksəkdir <i>(hər hansı bir dəyər təyin edə bilərsiniz)</i>
 
-    <b>Example of using flags:</b>
+    <b>Bayraqların istifadəsinə aid nümunə:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Yalnız idarəçilər üçün:
+  <code>/qs 🥰💜</code> — bir stikerə foto və ya sənəti yaddaş qrupunun stiker paketinə yaddaşa salır 🥰💜 <i>(emoji heç bir və hər hansı bir sayda ola bilər)</i> <i>[mesaj cavabı]</i>
+  <code>/qd</code> — sənəti qrupun stiker paketindən silin <i>[cavaba cavab olaraq]</i>
+  <code>/qb</code> — emoji brend təyin edin. Mümkündür: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — alıntı rəngini <b>yaşıl</b> təyin edin <i>(hex kod və ya rəng adı ilə)</i>
+  <code>/qemoji</code> — stikerlər üçün emoji əlavə edin
+  <code>/qrate</code> — reytinqi alıntıya icazə verin/çəkin
+  <code>/qgab 300</code> — alıntının təsadüfi bir halının ehtimalını təyin edin. Birindən sonsuzluğa qədər olan hər hansı bir rəqəm. Rəqəm neçə çox olarsa, mesajların görünmə ehtimalı o qədər aşağı olacaq. Edən 300 qeyd edərək, mesajın görünmə imkanı təxminən 300 mesajdan 1 dəfə olacaqdır. Söndərmək üçün dəyəri 0 təyin edin
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — müsbət rəyli təsadüfi bir alıntı
+  /qtop — ən yüksək qrup alıntıları
 
-  /help or /start — get this text
+  /help və ya /start — bu mətni qəbul edin
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang — dil dəyişdir
+  🇷🇺 /lang — dil dəyişdir
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ İxtisas üçün kofe alın:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 İnzibatçının blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>salam!</b>
@@ -64,7 +64,7 @@ btn:
   add_group: Qrupa əlavə etmək
   help: Istinad
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Dəstəklənməyən mesaj
   api_error: |
     <b>😓 Sitatı yaratmaq alınmadı</b>
     <pre>${error}</pre>
@@ -73,7 +73,7 @@ quote:
   set_background_color: |
     Sitatın standart rəngi <code>${backgroundColor}</code> oldu
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Alıntıların emoji markası ayarlanır: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -126,13 +126,13 @@ top:
   open: Üstü açın
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    İnzibatçı üçün kofe və digər nəsə ala bilərsiniz:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Bank kartı: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
+    Daha ətraflı: donate.lyo.su
   title: Maddi dəstək ${botUsername}
   description: Botun inkişafına dəstək
   successful: |
@@ -142,10 +142,10 @@ donate:
   other: Digər yollar
 emoji:
   info: |
-    Please include emoji.
+    Zəhmət olmasa emoji əlavə edin.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Məsələn, <code>/qemoji💜</code> əlavəsini 💜 olaraq dəyişdirəcəkdir bütün sonra gələn yeni stikerlər üçün.
+    Təsadüfi emoji üçün <code>/qemoji random</code>
   done: Emoji uğurla dəyişdirildi.
 adv:
   about: |
@@ -171,58 +171,57 @@ adv:
   main_menu:
     create_btn: Reklam yarat
     list_btn: Brendlərin siyahısı
-    pay_btn: Top up balance
+    pay_btn: Balans doldurmaq
   create:
     enter_text: |
-      Enter your ad text:
+      Reklam mətninizi daxil edin:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Ən çox 70 simvol və bizim qaydalarımıza əməl edin (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Elan olunan resursa link daxil edin:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Link tam olmalıdır, əgər bir şeyi Telegramda reklam edirsəniz, link t.me ilə başlamalıdır.
+      Resurs bizim qaydalarımıza uyğun olmalıdır (/adv_rules), əgər moderasiadan sonra sayt əvəzedilsə, hesabınız blok ediləcək və pul geri qaytarılmayacaq.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Reklamınızı göstərilmək istədiyiniz istifadəçilərin dilini seçin
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Rəqəm o dilə bazirə reklamınızı görmə ehtimalı olan istifadəçilərin sayını göstərir.
+      Yalnız botdan faktiki olaraq istifadə edən istifadəçilər sayılar. Ancaq reklam başqa bir yerdə göstərilə bilər və bu rəqəm daha yüksək ola bilər
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Dil ölkə ilə uyğun gəlmir.
+      Yalnız bir dil seçə bilərsiniz, əgər bir neçəyə ehtiyacınız varsa, lütfən digər dil üçün bir reklam yenidən yaradın.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Reklamınızın 1000 nüfuz üzərində qiymətini USD ilə göstər:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Faallı reyində ortalama qiymətlər:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
-      </i>
+      <i>Ən az 0.15 USD olmalıdır.
+      Reklamlar təsadüfi şəkildə göstərilir, lakin qiymətə görə ən yüksək nüfuz ehtimalı olan reklam daha çox göstərilir.</i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      Reklam moderasiyaya göndərildi. Xahiş edirik səbr edin və gözləyin. Əgər moderasiya uğurlu və ya uğursuz olarsa, sizə bir bildiri alacaqsınız.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
+      siyahı seçin
+    wait_btn: gözləyin
+    ready_btn: hazır
+    end_btn: son
     selected_list: |
-      selected_list
+      seçilmiş siyahı
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Reklam #id_${adv._id} buraxılmışdır <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
+      Mətn: ${adv.text}
       Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Yerli məlumatı: ${adv.locale}
+      Qiymət: ${adv.price}
+      Say ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Təsdiqlənməiş reklam. Onu reklam bölməsində göstərməyə başlaya bilərsiniz: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Təəssüf ki, reklam məsələni moderasiya olunmayıb. Əgər bu yanlış olduğunu düşünürsünüzsə, lütfən bizə @Ly_OBot adresində yazaraq və məsajı təsvir edərkən bu etiketi daxil etməyi unutmayın: #qba_${adv.id}
+    accept_btn: Təsdiq et
+    deny_btn: Rədd et
 only_admin: |
   Bu komandanı yalnız qrupun admini istifadə edə bilər.
 only_group: |
