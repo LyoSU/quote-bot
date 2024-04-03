@@ -71,7 +71,7 @@ quote:
   empty_forward: |
     Команду необходимо писать в ответ на сообщение.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   set_emoji_brand: |
     Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
