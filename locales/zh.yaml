@@ -2,10 +2,10 @@
 language_name: '🇨🇳 简体中文'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    我会从消息中创建报价。
+    只需回复消息并输入/q，或将其转发给我。
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    在您的群聊中是否注意到了有趣或鼓舞人心的消息，您想要使它们永存？只需将它们转发给我或输入/q，我将把它们变成一个时尚的报价贴纸，您可以保存并与朋友分享。无论是用于个人记忆还是职业用途，都有无限的可能性。现在就来试试吧！😎
 help: |2
   <b>你好！</b>
   我将帮助从帖子中创建引用。

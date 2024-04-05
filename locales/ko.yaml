@@ -2,58 +2,57 @@
 language_name: '🇰🇷 한국어'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    메시지에서 인용구를 만드는 데 도움이 됩니다. 간단히 메시지에 대답하여 또는 저에게 전달하십시오.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    그룹 채팅에서 재미나 영감을 줄 메시지들을 기억하셨나요? 저에게 전달하시거나 /q를 입력하여 저에게 보내주시면 멋진 인용구 스티커로 만들어 드립니다. 개인적인 추억으로나 전문적인 용도로, 가능성은 무한합니다. 지금 바로 저를 시험해보세요! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>안녕하세요!</b>
+  게시물에서 인용구를 만드는 데 도움을 드리겠습니다.
+  봇은 개인 메시지 및 그룹에서 모두 사용할 수 있습니다.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ 사용 가능한 명령어:</b>
+  /q — 메시지에서 인용구 만들기 <i>[메시지에 회신]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  여러 메시지에서 인용구를 만들려면 인용구에 몇 개의 메시지가 있어야 하는지를 나타내는 숫자를 매개변수로 작성하세요.
+  개인 메시지에서 한 번에 여러 메시지를 전달하면 해당 메시지에서 인용구를 만들어 드립니다.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>/q 명령에 대한 사용 가능한 플래그:</b>
+      hex 코드 또는 색 이름: <code>#cbafff</code> 또는 <code>indigo</code> — 색상이 <b>#cbafff</b>인 인용구 만들기
+      <code>random</code> — 랜덤한 인용구 색상
+      <code>reply</code> 또는 <code>r</code> — 답변 저장하여 인용구 만들기
+      <code>p</code> 또는 <code>png</code> — PNG 인용구 만들기
+      <code>i</code> 또는 <code>img</code> — 그림으로 인용구 만들기
+      <code>rate</code> — 인용구에 평점 추가
+      <code>m</code> 또는 <code>media</code> —미디어 포함
+      <code>c</code> 또는 <code>crop</code> — 미디어 자르기
+      <code>s2.5</code> — 그림 품질이 표준의 2.5배 높습니다 <i>(값 설정 가능)</i>
 
-    <b>Example of using flags:</b>
+    <b>플래그 사용 예:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  관리자용만:
+  <code>/qs 🥰💜</code> — 스티커/사진 및 사진이 포함된 스티커 그룹에 저장하기 🥰💜 <i>(이모티콘은 임의 및 임의 수 가능)</i> <i>[메시지에 회신]</i>
+  <code>/qd</code> — 스티커 그룹에서 스티커 제거  <i>[메시지에 회신]</i>
+  <code>/qb</code> — 이모지 브랜드 설정. 사용 가능: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — 인용구 색상 설정 <b>green</b> 기본 <i>(hex 코드 또는 색 이름)</i>
+  <code>/qemoji</code> — 스티커를 위한 이모지 접미사 변경
+  <code>/qrate</code> — 인용구 평점 활성화/비활성화
+  <code>/qgab 300</code> — 인용구 랜덤 발생 확률 설정. 1 이상의 숫자 모두 가능. 숫자가 높을수록 인용구가 나타날 확률이 낮아집니다. 300을 지정하면 메시지가 한 번 약 300회 나타납니다. 비활성화하려면 값은 0으로 설정하세요
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — 긍정적인 평점이 있는 인용구 랜덤 출력
+  /qtop — 최상위 그룹 인용구
 
-  /help or /start — get this text
+  /help 또는 /start — 이 텍스트 받기
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  🇺🇸 /lang — 언어 변경
+  🇷🇺 /lang — 언어 변경
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ 개발자에게 커피 구매하기:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>안녕하세요!</b>
@@ -62,144 +61,140 @@ help_group: |
   에 대한 응답으로 /q 명령을 사용하여 그룹에 따옴표를 만들겠습니다. <a href="t.me/${username}?start=help">/help</a> 명령에 대한 자세한 내용은 저와 함께 개인 메시지를 참조하세요.
 btn:
   add_group: 그룹에 추가
-  help: Help
+  help: 도와주세요
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: 지원되지 않는 메시지
   api_error: |
-    <b>😓 Failed to generate quote</b>
+    <b>😓 견적 생성에 실패했습니다.</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    명령은 메시지에 대한 응답으로 보내져야 합니다.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    인용구 이모지 브랜드가 설정되었습니다: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
-    suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
+    suc: 스티커가 <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다.
     error:
-      animated: I can't add an animated sticker.
-      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
-      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
+      animated: 애니메이션 스티커를 추가할 수 없습니다.
+      need_creator: <b>이 스티커를 저장하는 데 실패했습니다.</b>\n${creator}은(는) 개인 메시지에 어떤 메시지든 작성해야 합니다.
+      telegram: <b>그 스틭커를 저장하는 데 실패했습니다.</b>\n<pre>${error}</pre>
   delete:
-    suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
+    suc: 스티커가 <a href="${link}">그룹 스티커 팩</a>에서 성공적으로 제거되었습니다.
     error:
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      telegram: <b>그 스티커를 저장하는 데 실패했습니다.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Save the sticker
+      save_sticker: 스티커 저장
   empty_forward: |
-    Command must be sent a reply to a sticker, photo or file with a picture.
+    명령은 스티커, 사진 또는 그림 파일에 대한 응답으로 보내져야 합니다.
   fstik: |
-    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
+    개인 스티커 팩에 스티커를 저장하려면 이 메시지를 @fStikBot으로 전달하십시오.
 rate:
   vote:
     rated: |
-      You ${rateName} this.
+      당신은 ${rateName} 하셨습니다.
     back: |
-      You got your vote back.
+      투표를 받으셨습니다.
   settings:
     enable: |
-      Quotes rating is on.
+      견적 평가가 활성화되었습니다.
     disable: |
-      Rating for quotes is off.
+      견적 평가가 비활성화되었습니다.
 random:
   empty: |
-    There are no quotes with a positive rating in the group.
+    그룹에 긍정적인 평가가 없습니다.
   gab: |
-    The chance of random quotes is set to ${gab}
+    랜덤 견적의 기회가 ${gab}로 설정되었습니다.
 hidden:
   settings:
     enable: |
-      Sender search is enabled.
+      송신 찾기가 활성화되었습니다.
     disable: |
-      Sender search is disabled.
+      송신 찾기가 비활성화되었습니다.
 privacy:
   settings:
     enable: |
-      Privacy mode is enabled.
+      개인 정보 보호 모드가 활성화되었습니다.
     disable: |
-      Privacy mode is disabled.
+      개인 정보 보호 모드가 비활성화되었습니다.
 top:
   info: |
-    <b>Top group quotes:</b>
-  open: Open top
+    <b>상위 그룹 견적:</b>
+  open: 열린 상단
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    개발자에게 커피나 다른 것을 구입할 수 있습니다. 다음과 같은 세부 정보로 구입할 수 있습니다:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    은행 카드: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
-  title: Donate ${botUsername}
-  description: Support bot development
+    더 보기: donate.lyo.su
+  title: Донат ${botUsername}
+  description: 봇 개발 지원하기
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>봇 지원해 주셔서 감사합니다 💜</b>
+  pay: '💜 텔레그램으로 지불하기'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: 기타 옵션
 emoji:
   info: |
-    Please include emoji.
+    이모지를 포함해주세요.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
-  done: Emoji successfully changed.
+    예를 들어, <code>/qemoji💜</code>을 사용하여 이후의 새 스티커에 💜 접미사가 생깁니다.
+    랜덤 이모지를 위해 <code>/qemoji random</code>
+  done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 우리는 다수의 활발한 사용자와 그룹에게 광고를 구매할 수 있습니다.</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • 우리의 봇은 30,000개 이상의 활성 그룹에 위치하고 있으며 매월 70,000명 이상의 사용자가 봇을 사용합니다.
+    이들 중 다양한 국가의 사용자들이 있습니다. 광고할 사용자들의 언어를 선택할 수 있습니다
+    • 광고는 견적 아래에 버튼이나 텍스트 메시지 형태로 표시됩니다. 사용자의 채팅에 따라 다릅니다
+    • 광고 요금은 본인이 지정합니다; 먼저 가장 높은 금액이 할당된 광고가 표시됩니다
+    • 광고의 텍스트와 콘텐츠는 우리의 규칙을 준수해야 합니다 (/adv_rules) 그리고 게시되기 전에 심사를 통과해야 합니다. 이는 보증금을 지급하기 전에 수행할 수 있습니다
 
-    Balance: ${balance} USD
+    잔고: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b> 광고에서는 허용되지 않습니다:</b>
+    • 혐오나 모욕 사용
+    • 텍스트 당 더 많은 이모티콘 사용
+    • 오도 정보
+    • 우크라이나 법률에 금지된 정보
+    • 성인 콘텐츠
+    • 도박
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+     <i>우리는 이유 없이 광고를 거부할 권리도 갖고 있습니다.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: 광고 만들기
+    list_btn: 광고 목록
+    pay_btn: 잔고 충전
   create:
     enter_text: |
-      Enter your ad text:
+      광고 텍스트를 입력하십시오:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+       <i>70자를 초과하지 않아야 하며 규칙을 준수해야 합니다 (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      광고하려는 자원에 대한 링크를 입력하십시오:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+       <i>링크는 완전해야 하며, 텔레그램에서 광고하는 경우 링크는 t.me로 시작해야 합니다. 자료가 접수 후 대치되면 계정이 차단되고 비용은 환불되지 않습니다. 우리의 규칙을 준수해야 합니다 (/adv_rules), 게시하기 전에 심사를 통과해야 합니다.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      광고가 보여질 사용자들의 언어를 선택하십시오
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+       사용자의 숫자는 실제로 봇을 사용하는 사용자만 카운트됩니다. 그러나 그룹에서 견적이 작성된 사용자 외에도 광고를 볼 수 있으므로 이 숫자는 훨씬 더 높을 수 있습니다
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+       <i>언어는 국가에 해당하지 않습니다. 언어는 한 가지만 선택할 수 있으며 다른 언어에 대한 광고를 원하는 경우 다시 광고를 작성해야 합니다.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      1,000회 광고 노출당 가격을 USD 단위로 입력하십시오:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+       <u>활성 광고의 평균 가격:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
-      </i>
+       <i>최소 가격은 0.15 USD입니다.
+      광고는 무작위로 표시되지만 더 높은 노출 가격을 가진 광고가 나올 확률이 더 높습니다.</i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      광고가 심사로 전송되었습니다. 인내심을 가지고 기다려주십시오. 심사가 성공하거나 실패하면 알림을 받게 됩니다.
   list:
     select_list: |
       select_list
@@ -210,20 +205,20 @@ adv:
       selected_list
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      광고 #id_${adv._id} 님의 <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      텍스트: ${adv.text}
+      링크: ${adv.link}
+      로케일: ${adv.locale}
+      가격: ${adv.price}
+      카운트 ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      광고가 성공적으로 심사를 통과했습니다. 광고 섹션에서 표시를 시작할 수 있습니다: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      안타깝게도 광고가 심사를 통과하지 못했습니다. 우리의 규칙을 읽어보시고 (/adv_rules), 이것이 실수였다고 확신하는 경우 @Ly_OBot에 문의하여 문제를 설명하는 메시지에이 태그를 포함하여 필피해 주십시오: #qba_${adv.id}
+    accept_btn: 수락
+    deny_btn: 거부
 only_admin: |
-  Only group administrator can use this command.
+  이 명령은 그룹 관리자만 사용할 수 있습니다.
 only_group: |
-  This command can be used only in groups.
+  이 명령은 그룹에서만 사용할 수 있습니다.

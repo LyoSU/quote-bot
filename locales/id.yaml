@@ -2,10 +2,10 @@
 language_name: '🇮🇩 Indonesia'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Saya akan membantu membuat kutipan dari pesan tersebut.
+    Cukup balas pesannya dengan /q atau teruskan ke saya.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    Melihat pesan lucu atau inspiratif di obrolan grup Anda yang ingin Anda abadikan? Cukup teruskan kepada saya atau ketik /q dan saya akan mengubahnya menjadi stiker kutipan menarik yang dapat Anda simpan dan bagikan dengan teman-teman Anda. Baik untuk kenangan pribadi atau penggunaan profesional, kemungkinannya tidak terbatas. Coba aku sekarang! 😎
 help: |2
   <b>Halo!</b>
   Saya akan membantu membuat kutipan dari sebuah postingan.
@@ -125,13 +125,13 @@ top:
   open: Buka atas
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Anda dapat membeli kopi untuk pengembang atau sesuatu yang lain dengan rincian berikut:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Kartu bank: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
+    Lebih Lanjut: donate.lyo.su
   title: Donasi ${botUsername}
   description: Dukungan pengembangan bot
   successful: |

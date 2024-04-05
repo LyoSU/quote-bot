@@ -71,7 +71,7 @@ quote:
   empty_forward: |
     コマンドは、メッセージに応答して作成する必要があります。
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    引用符の背景色は次のように設定されます： <code>${backgroundColor}</code>
   set_emoji_brand: |
     Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:

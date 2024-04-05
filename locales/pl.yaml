@@ -71,7 +71,7 @@ quote:
   empty_forward: |
     Command must be sent as a reply to a message.
   set_background_color: |
-    Quotes' background color is set to: <code>${backgroundColor}</code>
+    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
   set_emoji_brand: |
     Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
@@ -133,7 +133,7 @@ donate:
     Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
     More: donate.lyo.su
-  title: Donate ${botUsername}
+  title: Донат ${botUsername}
   description: Support bot development
   successful: |
     <b>Thank you for supporting the bot 💜</b>
@@ -146,7 +146,7 @@ emoji:
 
     For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
     For a random emoji <code>/qemoji random</code>
-  done: Emoji successfully changed.
+  done: Эмодзи-суффикс успешно изменен.
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
