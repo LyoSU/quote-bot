@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Speichern Sie den Aufkleber
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Sticker wurde erfolgreich aus der Gruppe zufälligen Sticker entfernt.
+    error: <b>Ich konnte diesen Aufkleber nicht löschen.</b>\n<pre>${error}</pre>
   empty_forward: |
     Befehl muss als Antwort auf einen Aufkleber, ein Foto oder eine Datei mit einem Bild gesendet werden.
   fstik: |
@@ -125,7 +125,7 @@ privacy:
       Datenschutzmodus ist deaktiviert.
 top:
   info: |
-    <b>Top group quotes:</b>
+    <b>Top-Gruppenangaben:</b>
   open: Top öffnen
 donate:
   info: |
@@ -136,20 +136,20 @@ donate:
     Bankkarte: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
     Mehr: donate.lyo.su
-  title: Donate ${botUsername}
-  description: Support bot development
+  title: '${botUsername} spenden'
+  description: Unterstütze Bot-Entwicklung
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>Vielen Dank für die Unterstützung des Bots 💜</b>
+  pay: ':lila Herz: Zahlen Sie per Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: Andere Optionen
 emoji:
   info: |
     Bitte füge Emoji hinzu.
 
     Beispielweise wird <code>/qemoji💜</code> den Suffix für alle folgenden neuen Aufkleber in 💜 ändern.
     Für ein zufälliges Emoji <code>/qemoji random</code>
-  done: Emoji successfully changed.
+  done: Emoji erfolgreich geändert.
 adv:
   about: |
     <b>💫 Sie können Werbung von uns für eine große Anzahl aktiver Benutzer und Gruppen kaufen</b>
@@ -227,6 +227,6 @@ adv:
     accept_btn: Akzeptieren
     deny_btn: Ablehnen
 only_admin: |
-  Only group administrator can use this command.
+  Nur Gruppenadministrator kann diesen Befehl verwenden.
 only_group: |
-  This command can be used only in groups.
+  Dieser Befehl kann nur in Gruppen verwendet werden.
