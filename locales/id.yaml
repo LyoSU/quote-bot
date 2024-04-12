@@ -34,15 +34,15 @@ help: |2
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Hanya untuk administrator:
-  <code>/qs 🥰💜</code> — menyimpan stiker/foto/dokumen dengan foto ke paket stiker grup dengan emoji <i>(emoji bisa apa saja dan nomor berapa saja)</i> <i>[membalas pesan]</i>
-  <code>/qd</code> - hapus stiker dari paket stiker grup <i>[sebagai tanggapan atas pesan]</i>
-  <code>/qdrand</code> — hapus stiker dari random stiker grup  <i>[sebagai tanggapan atas pesan]</i>
-  <code>/qb</code> - setel merek emoji. Tersedia: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> - mengatur warna tanda kutip <b>hijau</b> secara default <i>(kode hex atau nama warna)</i>
-  <code>/qemoji</code> — mengubah akhiran emoji untuk stiker
-  <code>/qrate</code> - aktifkan/nonaktifkan peringkat kutipan
-  <code>/qgab 300</code> - mengatur peluang kemunculan kutipan secara acak. Setiap nomor dari satu hingga tak terbatas. Semakin tinggi angkanya, semakin rendah kemungkinan kutipan muncul. Dengan menentukan 300, peluang munculnya pesan kira-kira 1 kali dalam 300 pesan. Untuk menonaktifkan, atur nilainya ke 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
   /qrand — random a quote with a positive rating of
   /qtop — top group quotes
