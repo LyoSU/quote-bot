@@ -12,6 +12,7 @@ module.exports = {
   handleGabSettings: require('./gab-settings'),
   handleSave: require('./sticker-save'),
   handleDelete: require('./sticker-delete'),
+  handleDeleteRandom: require('./sticker-random-delete'),
   handleRate: require('./rate'),
   handleEmoji: require('./emoji'),
   handleSettingsRate: require('./rate-settings'),

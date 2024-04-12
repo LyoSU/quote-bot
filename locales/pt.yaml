@@ -7,52 +7,55 @@ description:
   long: |
     Notou alguma mensagem engraçada ou inspiradora em seu bate-papo em grupo que gostaria de imortalizar? Basta encaminhá-los para mim ou digitar /q e eu os transformarei em um elegante adesivo de quote que você pode salvar e compartilhar com seus amigos. Seja para memórias pessoais ou para uso profissional, as possibilidades são infinitas. Experimente-me agora! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Olá!</b>
+  Vou ajudar a criar uma citação de um post.
+  O bot pode funcionar tanto em mensagens privadas quanto em grupos.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+  <b>⚙️ Comandos disponíveis:</b>
+  /q - faz uma citação da mensagem <i>[resposta à mensagem]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Para criar uma citação a partir de várias mensagens, escreva como parâmetro um número que indicará quantas mensagens devem estar na citação.
+  Nas mensagens privadas, você pode encaminhar várias mensagens para mim de uma só vez e eu farei uma cotação delas.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+  <b>Sinalizadores disponíveis para o comando /q:</b>
+  o hexadecimal ou nome da cor: <code>#cbafff</code> ou <code>indigo</code> — faça uma citação com a cor <b>#cbafff</b>
+  <code>random</code> --cor de citação aleatória
+  <code>reply</code> ou <code>r</code> — faça uma citação salvando as respostas
+  <code>p</code> ou <code>png</code> — faça uma citação PNG
+  <code>i</code> ou <code>img</code> — faça uma citação como uma imagem
+  <code>rate</code> - adiciona uma classificação a uma cotação
+  <code>m</code> ou <code>media</code> --include mídia
+  <code>c</code> ou <code>crop</code> - cortar mídia
+  <code>s2.5</code> - a qualidade da imagem é 2,5 vezes maior que o padrão <i>(pode definir qualquer valor)</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>Exemplo de uso de sinalizadores:</b>
+  <code>/q 3 white rp</code>
+  <code>/q i red s3.2</code>
+  <code>/q r 2 #cbafff m</code>
+  <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Somente para administradores:
+  <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(emoji pode ser qualquer número)</i> <i>[resposta à mensagem]</i>
+  <code>/qd</code> - remove o adesivo do pacote de adesivos do grupo <i>[em resposta à mensagem]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
+  <code>/qb</code> - define a marca do emoji. Disponível: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> - define a cor das aspas <b>verde</b> por padrão <i>(código hexadecimal ou nome da cor)</i>
+  <code>/qemoji</code> — altere o sufixo de emoji para adesivos
+  <code>/qrate</code> - ativar/desativar classificação de cotações
+  <code>/qgab 300</code> - define a chance de ocorrência aleatória de uma citação. Qualquer número de um ao infinito. Quanto maior o número, menor a chance de aparecer citações. Especificando 300, a chance de uma mensagem aparecer será de aproximadamente 1 vez em 300 mensagens. Para desativar, defina o valor como 0
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand - uma citação aleatória com uma classificação positiva de
+  /qtop - aspas do grupo superior
 
-  /help or /start — get this text
+  /help ou /start - pegue este texto
 
-  /lang — change the language
+  🇧🇷 /lang — muda o idioma
+  🇺🇸 /lang - change the language
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Compre café para o desenvolvedor:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Blog do desenvolvedor:</b> @LyBlog
+  
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>
@@ -87,6 +90,9 @@ sticker:
       telegram: <b>Não consegui remover este adesivo.</b>\n<pre>${error}</pre>
     btn:
       save_sticker: Salvar adesivo
+  delete_random:
+    suc: Sticker has been successfully removed from the group random stickers.
+    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
   empty_forward: |
     O comando deve ser escrito em resposta a uma mensagem com um adesivo, foto ou arquivo de foto.
   fstik: |

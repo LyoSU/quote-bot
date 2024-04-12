@@ -37,6 +37,7 @@ help: |2
   Only for administrators:
   <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
   <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
   <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
   <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
   <code>/qemoji</code> — change the emoji suffix for stickers
@@ -87,6 +88,9 @@ sticker:
       telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
     btn:
       save_sticker: Save the sticker
+  delete_random:
+    suc: Sticker has been successfully removed from the group random stickers.
+    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
   empty_forward: |
     Command must be sent a reply to a sticker, photo or file with a picture.
   fstik: |
