@@ -1,5 +1,11 @@
 ---
 language_name: '🇧🇷'
+description:
+  short: |
+    Ajudarei a criar um quote a partir da mensagem.
+    Basta responder à mensagem com /q ou encaminhá-la para mim.
+  long: |
+    Notou alguma mensagem engraçada ou inspiradora em seu bate-papo em grupo que gostaria de imortalizar? Basta encaminhá-los para mim ou digitar /q e eu os transformarei em um elegante adesivo de quote que você pode salvar e compartilhar com seus amigos. Seja para memórias pessoais ou para uso profissional, as possibilidades são infinitas. Experimente-me agora! 😎
 help: |2
   <b>Olá!</b>
   Vou ajudar a criar uma citação de um post.
@@ -49,6 +55,7 @@ help: |2
   <b>☕️ Compre café para o desenvolvedor:</b> donate.lyo.su
 
   <b>👨🏻‍💻 Blog do desenvolvedor:</b> @LyBlog
+  
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>

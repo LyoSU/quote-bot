@@ -1,5 +1,11 @@
 ---
 language_name: '🇫🇷 Français'
+description:
+  short: |
+    Je vais aider à créer une citation à partir du message.
+    Il suffit de répondre au message avec /q ou de me le transférer.
+  long: |
+    Vous avez remarqué des messages drôles ou inspirants dans votre chat de groupe que vous aimeriez immortaliser? Il vous suffit de me les transférer ou de taper /q et je les transformerai en un élégant autocollant de citation que vous pourrez enregistrer et partager avec vos amis. Que ce soit pour des souvenirs personnels ou une utilisation professionnelle, les possibilités sont infinies. Essayez-moi maintenant! 😎
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -43,8 +49,7 @@ help: |2
 
   /help or /start — get this text
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  /lang — change the language
 
   <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
@@ -59,7 +64,7 @@ btn:
   add_group: Ajouter au groupe
   help: Aide
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Message non pris en charge
   api_error: |
     <b>😓 Échec de la génération du devis</b>
     <pre>${error}</pre>
@@ -68,160 +73,158 @@ quote:
   set_background_color: |
     Quotes' background color is set to: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    La marque emoji des citations est définie sur: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
     suc: L'autocollant a été ajouté avec succès au pack d'autocollants du groupe <a href="${link}"></a>.
     error:
-      animated: I can't add an animated sticker.
-      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
-      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
+      animated: Je ne peux pas ajouter un autocollant animé.
+      need_creator: <b>J'ai échoué à sauvegarder cet autocollant.</b>\n${creator} doit m'écrire un message en PV.
+      telegram: <b>J'ai échoué à sauvegarder cet autocollant.</b>\n<pre>${error}</pre>
   delete:
-    suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
+    suc: L'autocollant a été supprimé avec succès du <a href="${link}">pack d'autocollants de groupe</a>.
     error:
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      telegram: <b>Je n'ai pas pu sauvegarder cet autocollant.</b>\n<pre>${error}</pre>
     btn:
       save_sticker: Save the sticker
   delete_random:
     suc: Sticker has been successfully removed from the group random stickers.
     error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
   empty_forward: |
-    Command must be sent a reply to a sticker, photo or file with a picture.
+    La commande doit être envoyée en réponse à un autocollant, une photo ou un fichier avec une image.
   fstik: |
-    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
+    Pour enregistrer l'autocollant dans votre pack d'autocollants personnel, transférez ce message à @fStikBot
 rate:
   vote:
     rated: |
-      You ${rateName} this.
+      Vous ${rateName} ceci.
     back: |
-      You got your vote back.
+      Vous avez récupéré votre vote.
   settings:
     enable: |
-      Quotes rating is on.
+      La notation des citations est activée.
     disable: |
-      Rating for quotes is off.
+      La notation des citations est désactivée.
 random:
   empty: |
-    There are no quotes with a positive rating in the group.
+    Il n'y a pas de citations avec une note positive dans le groupe.
   gab: |
-    The chance of random quotes is set to ${gab}
+    La chance de citations aléatoires est fixée à ${gab}
 hidden:
   settings:
     enable: |
-      Sender search is enabled.
+      La recherche de l'expéditeur est activée.
     disable: |
-      Sender search is disabled.
+      La recherche de l'expéditeur est désactivée.
 privacy:
   settings:
     enable: |
-      Privacy mode is enabled.
+      Le mode confidentialité est activé.
     disable: |
-      Privacy mode is disabled.
+      Le mode confidentialité est désactivé.
 top:
   info: |
-    <b>Top group quotes:</b>
-  open: Open top
+    <b>Citations de groupe les plus populaires:</b>
+  open: Ouvrir le top
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Vous pouvez acheter un café pour le développeur ou autre chose avec les détails suivants:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Carte bancaire: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
-  title: Donate ${botUsername}
-  description: Support bot development
+    Plus d'informations: donate.lyo.su
+  title: Донат ${botUsername}
+  description: Soutenez le développement du bot
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>Merci de soutenir le bot 💜</b>
+  pay: '💜 Payer via Telegram'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: Autres options
 emoji:
   info: |
-    Please include emoji.
+    Veuillez inclure un emoji.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Par exemple, <code>/qemoji💜</code> changera le suffixe en 💜 pour tous les nouveaux autocollants ultérieurs.
+    Pour un emoji aléatoire <code>/qemoji random</code>
   done: Emoji successfully changed.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Vous pouvez acheter de la publicité auprès de nous pour un grand nombre d'utilisateurs actifs et de groupes</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Notre bot est présent dans plus de 30`000 groupes actifs et plus de 70`000 utilisateurs utilisent le bot chaque mois.
+    Parmi eux se trouvent des utilisateurs de différents pays. Vous pouvez sélectionner la langue des utilisateurs pour lesquels la publicité doit être affichée
+    • La publicité est affichée sous la citation sous forme de bouton ou de message texte, en fonction de la discussion de l'utilisateur
+    • Vous spécifiez vous-même le prix d'une annonce; tout d'abord, la publicité pour laquelle le montant le plus élevé a été attribué sera affichée
+    • Le texte et le contenu de la publicité doivent être conformes à nos règles (/adv_rules) et avant sa publication, vous devez passer par la modération. Cela peut être fait avant de faire un dépôt
 
-    Balance: ${balance} USD
+    Solde: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Dans les publicités il n'est pas permis d'utiliser:</b>
+    • Utiliser des obscénités ou des insultes
+    • Utiliser plus de 1 emoji par texte
+    • Des informations trompeuses
+    • Des informations interdites par les lois de l'Ukraine
+    • Contenu pour adultes
+    • Jeux de hasard
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Nous nous réservons également le droit de refuser une publicité si nous ne l'aimons tout simplement pas sans raison</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Créer des annonces
+    list_btn: Liste des annonces
+    pay_btn: Recharger le solde
   create:
     enter_text: |
-      Enter your ad text:
+      Entrez le texte de votre annonce:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>Pas plus de 70 caractères et doit être conforme à nos règles (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Entrez un lien vers la ressource annoncée:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Le lien doit être complet, si vous faites de la publicité pour quelque chose sur Telegram, le lien doit commencer par t.me.
+      La ressource doit être conforme à nos règles (/adv_rules), si après avoir passé la modération le site est remplacé, votre compte sera bloqué et l'argent ne sera pas remboursé</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Sélectionnez la langue des utilisateurs auxquels l'annonce sera affichée
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Le nombre est le nombre d'utilisateurs qui verront potentiellement votre annonce dans cette langue.
+      Seuls les utilisateurs qui utilisent réellement le bot sont comptés. Mais l'annonce peut également être vue par d'autres utilisateurs présents dans le groupe où la citation a été faite, donc ce chiffre peut être beaucoup plus élevé
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>La langue ne correspond pas au pays.<br>Vous ne pouvez choisir qu'une seule langue, si vous avez besoin de plusieurs langues, veuillez créer à nouveau une annonce pour une autre langue.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Indiquez le prix pour 1000 impressions de votre annonce en USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Prix moyen des annonces actives:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
-      </i>
+      <i>Le prix minimum est de 0,15 USD.
+      Les annonces sont affichées de manière aléatoire, mais la plus grande chance d'être affichée appartient à une annonce qui a un prix plus élevé pour les impressions</i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      La publicité a été envoyée pour modération. Veuillez patienter et attendre. Si la modération est réussie ou infructueuse, vous recevrez une notification.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
+      sélectionner
+    wait_btn: attendre
+    ready_btn: prêt
+    end_btn: terminé
     selected_list: |
-      selected_list
+      liste sélectionnée
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Annonce n°${adv._id} de <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
+      Texte: ${adv.text}
+      Lien: ${adv.link}
       Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Prix: ${adv.price}
+      Compte ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      La publicité a été modérée avec succès. Vous pouvez commencer à l'afficher dans la section publicitaire: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Malheureusement, la publicité n'a pas été modérée. Veuillez lire nos règles (/adv_rules), si vous êtes sûr qu'il s'agit d'une erreur, écrivez-nous à @Ly_OBot et incluez ce tag dans le message décrivant le problème: #qba_${adv.id}
+    accept_btn: Accepter
+    deny_btn: Refuser
 only_admin: |
-  Only group administrator can use this command.
+  Seul l'administrateur du groupe peut utiliser cette commande.
 only_group: |
-  This command can be used only in groups.
+  Cette commande ne peut être utilisée que dans les groupes.

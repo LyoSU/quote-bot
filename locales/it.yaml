@@ -1,5 +1,11 @@
 ---
 language_name: '🇮🇹'
+description:
+  short: |
+    Ti aiuterò a creare una citazione dal messaggio.
+    Basta rispondere al messaggio con /q o inoltrarlo a me.
+  long: |
+    Hai notato dei messaggi divertenti o ispiratori nella chat di gruppo che vorresti immortalare? Inoltrali semplicemente a me o digita /q e li trasformerò in uno sticker citazione elegante che potrai salvare e condividere con i tuoi amici. Che sia per ricordi personali o uso professionale, le possibilità sono infinite. Provalo adesso! 😎
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -43,8 +49,7 @@ help: |2
 
   /help or /start — get this text
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  /lang — change the language
 
   <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
@@ -59,7 +64,7 @@ btn:
   add_group: Aggiungi al Gruppo
   help: Aiuto
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Messaggio non supportato
   api_error: |
     <b>😓 Errore nella creazione della citazione</b>
     <pre>${error}</pre>
@@ -68,7 +73,7 @@ quote:
   set_background_color: |
     Il colore di sfondo delle citazioni è impostato su: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Il marchio emoji delle citazioni è impostato su: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -121,16 +126,16 @@ privacy:
 top:
   info: |
     <b>Citazioni migliori del gruppo:</b>
-  open: Open top
+  open: Aperto in alto
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Puoi comprare un caffè per lo sviluppatore o qualcos'altro con i seguenti dettagli:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Carta di credito: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
+    Di più: donate.lyo.su
   title: Fai una donazione ${botUsername}
   description: Sostieni lo sviluppo del bot
   successful: |
@@ -140,10 +145,10 @@ donate:
   other: Altre opzioni
 emoji:
   info: |
-    Please include emoji.
+    Si prega di includere un emoji.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Per esempio, <code>/qemoji💜</code> cambierà il suffisso in 💜 per tutti i successivi nuovi sticker.
+    Per un emoji casuale <code>/qemoji random</code>
   done: L'emoji è stata cambiata correttamente.
 adv:
   about: |

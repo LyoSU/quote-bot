@@ -1,32 +1,38 @@
 ---
 language_name: '🇨🇳 简体中文'
+description:
+  short: |
+    我会从消息中创建报价。
+    只需回复消息并输入/q，或将其转发给我。
+  long: |
+    在您的群聊中是否注意到了有趣或鼓舞人心的消息，您想要使它们永存？只需将它们转发给我或输入/q，我将把它们变成一个时尚的报价贴纸，您可以保存并与朋友分享。无论是用于个人记忆还是职业用途，都有无限的可能性。现在就来试试吧！😎
 help: |2
-  <b>你好！</b>
-  我将帮助从帖子中创建引用。
-  Bot 在私人消息和群组中均可以工作。
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ 可用命令：</b>
-  /q - 从<i>[回复消息]</i>中引用
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  要从多条消息中创建引用，请将一个数字作为参数写入，该数字将指示引用中应包含多少条消息。
-  在私人消息中，您可以一次将多条消息转发给我，我将一并引用它们。
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>/q 命令的可用标志：</b>
-      十六进制代码或颜色名称：<code>#cbafff</code> 或 <code>indigo</code> — 使用颜色 <b>#cbafff</b> 进行引用
-      <code>random</code> --随机引用颜色
-      <code>reply</code> 或 <code>r</code> — 引用并保存答案
-      <code>p</code> 或 <code>png</code> — 制作 PNG 引用
-      <code>i</code> 或 <code>img</code> — 将引用作为图片
-      <code>rate</code> - 为引用添加评级
-      <code>m</code> 或 <code>media</code> --包括媒体
-      <code>c</code> 或 <code>crop</code> - 裁剪媒体
-      <code>s2.5</code> - 画质比标准高2.5倍<i>（可以设置任何值）</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>使用标志的示例：</b>
-    <code>/q 3 白色 rp</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
-    <code>/q5rm</code>
+    <code>/q 5 rm</code>
 
   仅适用于管理员：
   <code>/qs 🥰💜</code> - 将带有照片的贴纸/照片/文档保存到带有表情符号🥰💜的组的贴纸包中 <i>（表情符号可以是任意数字）</i> <i>[回复消息]</i>
@@ -38,18 +44,17 @@ help: |2
   <code>/qrate</code> - 启用/禁引用价评级
   <code>/qgab 300</code> - 设置随机出现引用的机会。从一到无穷大的任何数字。数字越高，出现报价的机会就越低。通过指定 300，一条消息出现的机会大约是 300 条消息中的 1 次。要禁用，请将值设置为 0
 
-  /qrand - 随机引用一个正面评价为? 的消息
-  /qtop - 置顶该组引用
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help 或 /start - 获取此文本
+  /help or /start — get this text
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  /lang — change the language
 
-  <b>☕️ 为开发者买咖啡：</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 开发者博客：</b> @LyBlog
-  <b>GitHub：</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>你好！</b>
   在群组中使用 /q 命令回复消息时我将为您创建引用贴纸

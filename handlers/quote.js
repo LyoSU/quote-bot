@@ -5,6 +5,7 @@ const {
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
+const { Configuration, OpenAIApi } = require("openai")
 const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
 
@@ -19,6 +20,11 @@ const quoteCountIO = io.meter({
 })
 
 const telegram = new Telegram(process.env.BOT_TOKEN)
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+})
+const openai = new OpenAIApi(configuration)
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 
@@ -89,7 +95,9 @@ module.exports = async (ctx, next) => {
     color: false,
     scale: false,
     crop: false,
-    privacy: false
+    privacy: false,
+    ai: false,
+    html: false,
   }
 
   const isCommand = ctx.message.text ? ctx.message.text.match(/\/q/) : false
@@ -107,6 +115,9 @@ module.exports = async (ctx, next) => {
     flag.media = args.find((arg) => ['m', 'media'].includes(arg))
     flag.scale = args.find((arg) => arg.match(/s([+-]?(?:\d*\.)?\d+)/))
     flag.crop = args.find((arg) => ['c', 'crop'].includes(arg))
+    flag.ai = args.find((arg) => ['*'].includes(arg))
+    flag.html = args.find((arg) => ['h', 'html'].includes(arg))
+    flag.stories = args.find((arg) => ['s', 'stories'].includes(arg))
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
@@ -128,7 +139,11 @@ module.exports = async (ctx, next) => {
 
   if (flag.color) {
     if (flag.color === 'random') {
-      backgroundColor = generateRandomColor()
+      backgroundColor = `${generateRandomColor()}/${generateRandomColor()}`
+    } else if (flag.color === '//random') {
+      backgroundColor = `//${generateRandomColor()}`
+    } else if (flag.color === 'transparent') {
+      backgroundColor = 'rgba(0,0,0,0)'
     } else {
       backgroundColor = flag.color
     }
@@ -139,7 +154,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (!backgroundColor) {
-    backgroundColor = '#292232'
+    backgroundColor = '//#292232'
   }
 
   let emojiBrand = 'apple'
@@ -158,19 +173,19 @@ module.exports = async (ctx, next) => {
 
   let messages = []
 
-  if (ctx.chat.type === 'private' && !isCommand) {
+  if (ctx.chat.type === 'private' && !ctx.message.reply_to_message) {
     firstMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
     firstMessage = ctx.message.reply_to_message
-  }
 
-  if (!firstMessage?.message_id) {
-    return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
-      reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true,
-      allow_sending_without_reply: true
-    })
+    if (!firstMessage?.message_id) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
+        reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true,
+        allow_sending_without_reply: true
+      })
+    }
   }
 
   messageCount = Math.min(messageCount, maxQuoteMessage)
@@ -178,6 +193,12 @@ module.exports = async (ctx, next) => {
   let startMessage = firstMessage.message_id
   let quoteMessages = []
   let quoteEmojis = ''
+
+  if (isCommand && !ctx.message.reply_to_message) {
+    if (ctx.chat.type === 'private') {
+      startMessage += 1
+    }
+  }
 
   if (messageCount < 0) {
     messageCount = Math.abs(messageCount)
@@ -207,7 +228,7 @@ module.exports = async (ctx, next) => {
 
   if (!messages.find((message) => {
     return message?.message_id === firstMessage?.message_id
-  })) {
+  }) && !isCommand) {
     if (parseInt(flag.count) < 0) {
       messages.push(firstMessage)
     } else {
@@ -384,6 +405,62 @@ module.exports = async (ctx, next) => {
     lastMessage = message
   }
 
+  if (flag.ai) {
+    const messageForAI = [{
+      role: 'system',
+      content: `You are an active participant in a group chat.  Write only in the language used by other chat members. Don't write like an AI. Write in the style of messages that you see. Don't ask a question in your message. Just write a funny message related to the situation that was mentioned. Keep it under 128 characters. You can also use emojis 😉.`
+    }]
+
+    for (const index in quoteMessages) {
+      const quoteMessage = quoteMessages[index]
+
+      messageForAI.push({
+        role: 'user',
+        content: quoteMessage?.text || quoteMessage.caption || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
+      })
+    }
+
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: messageForAI,
+      max_tokens: 64,
+      temperature: 0.7,
+      top_p: 1,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.6
+    }).catch((err) => {
+      console.error('OpenAI error:', err?.response?.statusText || err.message)
+    })
+
+    if (completion?.data?.choices && completion.data.choices[0]) {
+      const message = completion.data.choices[0].message.content
+
+      quoteMessages.push({
+        message_id: 1,
+        chatId: 6,
+        avatar: true,
+        from: {
+          id: 6,
+          name: 'QuotAI',
+          photo: {
+            url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
+          }
+        },
+        text: message,
+        replyMessage: {}
+      })
+    } else {
+      return ctx.replyWithHTML(`😓 Sorry, AI busy. Try again later.`, {
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
+      }).then((res) => {
+        setTimeout(() => {
+          ctx.deleteMessage(res.message_id)
+        }, 5000)
+      })
+    }
+  }
+
   if (quoteMessages.length < 1) {
     return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
       reply_to_message_id: ctx.message.message_id,
@@ -396,8 +473,8 @@ module.exports = async (ctx, next) => {
   let scale = 2
 
   if (flag.png || flag.img) {
-    width *= 1.5
-    height *= 5
+    width *= 1.2
+    height *= 15
     scale *= 1.5
   }
 
@@ -406,11 +483,20 @@ module.exports = async (ctx, next) => {
   if (flag.img) type = 'image'
   if (flag.png) type = 'png'
 
+  if (flag.stories) {
+    width *= 1.2
+    height *= 15
+    scale = 3
+    type = 'stories'
+  }
+
   let format
-  if (!flag.privacy && type === 'quote') format = 'png'
+  if (type === 'quote') format = 'webp'
+
+  const quoteApiUri = flag.html ? process.env.QUOTE_API_URI_HTML : process.env.QUOTE_API_URI
 
   const generate = await got.post(
-    `${process.env.QUOTE_API_URI}/generate.png?botToken=${process.env.BOT_TOKEN}`,
+    `${quoteApiUri}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
     {
       json: {
         type,
@@ -475,10 +561,11 @@ module.exports = async (ctx, next) => {
       let sendResult
 
       if (flag.privacy) {
-        sendResult = await ctx.replyWithDocument({
+        sendResult = await ctx.replyWithSticker({
           source: image,
           filename: 'quote.webp'
         }, {
+          emoji: emojis,
           reply_to_message_id: ctx.message.message_id,
           allow_sending_without_reply: true,
           reply_markup: replyMarkup
@@ -500,48 +587,61 @@ module.exports = async (ctx, next) => {
           ctx.session.userInfo.tempStickerSet.create = created
         }
 
-        let packOwnerId = config.globalStickerSet.ownerId
-        let packName = config.globalStickerSet.name + ctx.me
+        let packOwnerId
+        let packName
 
-        if (ctx.session.userInfo.tempStickerSet.create) {
+        if (ctx.session.userInfo.tempStickerSet.create && ctx.update.update_id % 5 === 0) {
           packOwnerId = ctx.from.id
           packName = ctx.session.userInfo.tempStickerSet.name
         }
 
-        const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
-          png_sticker: { source: image },
-          emojis
-        }, true).catch((error) => {
-          console.error(error)
-          if (error.description === 'Bad Request: STICKERSET_INVALID') {
-            ctx.session.userInfo.tempStickerSet.create = false
-          }
-        })
-
-        if (!addSticker) {
-          return ctx.replyWithHTML(ctx.i18n.t('quote.error'), {
+        if (!packOwnerId || !packName) {
+          sendResult = await ctx.replyWithSticker({
+            source: image,
+            filename: 'quote.webp'
+          }, {
+            emoji: emojis,
             reply_to_message_id: ctx.message.message_id,
-            allow_sending_without_reply: true
+            allow_sending_without_reply: true,
+            reply_markup: replyMarkup
+          })
+        } else {
+          const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
+            png_sticker: { source: image },
+            emojis
+          }, true).catch((error) => {
+            console.error(error)
+            if (error.description === 'Bad Request: STICKERSET_INVALID') {
+              ctx.session.userInfo.tempStickerSet.create = false
+            }
+          })
+
+          if (!addSticker) {
+            return ctx.replyWithHTML(ctx.i18n.t('quote.error'), {
+              reply_to_message_id: ctx.message.message_id,
+              allow_sending_without_reply: true
+            })
+          }
+
+          const sticketSet = await ctx.getStickerSet(packName)
+
+          if (ctx.session.userInfo.tempStickerSet.create) {
+            sticketSet.stickers.forEach(async (sticker, index) => {
+              // wait 3 seconds before delete sticker
+              await new Promise((resolve) => setTimeout(resolve, 3000))
+
+              if (index > config.globalStickerSet.save_sticker_count - 1) {
+                telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+              }
+            })
+          }
+
+          sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
+            reply_to_message_id: ctx.message.message_id,
+            allow_sending_without_reply: true,
+            reply_markup: replyMarkup
           })
         }
-
-        const sticketSet = await ctx.getStickerSet(packName)
-
-        if (ctx.session.userInfo.tempStickerSet.create) {
-          for (const i in sticketSet.stickers) {
-            const sticker = sticketSet.stickers[i]
-            if (i > config.globalStickerSet.save_sticker_count - 1) {
-              telegram.deleteStickerFromSet(sticker.file_id).catch(() => {
-              })
-            }
-          }
-        }
-
-        sendResult = await ctx.replyWithDocument(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true,
-          reply_markup: replyMarkup
-        })
       }
 
       if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {

@@ -59,20 +59,34 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 })()
 
 bot.use((ctx, next) => {
-  next().catch((error) => {
-    console.log('Oops', error)
-
-    if (
-      ctx?.chat?.type === 'private'
-      || (ctx.state.emptyRequest === false && ctx?.message?.entities?.[0].type === 'bot_command')
-    ) {
-      ctx.replyWithHTML('Oops, something went wrong!', {
-        reply_to_message_id: ctx?.message?.message_id,
-        allow_sending_without_reply: true
-      })
-    }
+  const timeoutPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error('timeout'))
+    }, 100)
   })
-  return true
+
+  const nextPromise = next()
+
+  return Promise.race([timeoutPromise, nextPromise])
+    .catch((error) => {
+      if (error.message === 'timeout') {
+        return false
+      }
+
+      console.log('Oops', error)
+
+      if (
+        ctx?.chat?.type === 'private'
+        || (ctx.state.emptyRequest === false && ctx?.message?.entities?.[0].type === 'bot_command')
+      ) {
+        ctx.replyWithHTML('Oops, something went wrong!', {
+          reply_to_message_id: ctx?.message?.message_id,
+          allow_sending_without_reply: true
+        })
+      }
+
+      return true
+    })
 })
 
 // bot.use(require('./middlewares/metrics'))
@@ -296,6 +310,7 @@ bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.on('sticker', handleSticker)
+bot.on('text', handleSticker)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
@@ -354,13 +369,61 @@ db.connection.once('open', async () => {
         console.log('bot start webhook')
       })
   } else {
-    // const updates = await bot.telegram.callApi('getUpdates', { offset: -1 })
-    // const offset = updates.length && updates[0].update_id + 1
-    // if (offset) {
-    //   await bot.telegram.callApi('getUpdates', { offset })
-    // }
     await bot.launch().then(() => {
       console.log('bot start polling')
     })
+
+    const locales = fs.readdirSync(path.resolve(__dirname, 'locales'));
+
+    const enDescriptionLong = i18n.t('en', 'description.long');
+    const enDescriptionShort = i18n.t('en', 'description.short');
+
+    for (const locale of locales) {
+      const localeName = locale.split('.')[0];
+
+      const myDescription = await bot.telegram.callApi('getMyDescription', {
+        language_code: localeName,
+      });
+
+      const descriptionLong = i18n.t(localeName, 'description.long');
+      const newDescriptionLong = localeName === 'en' || descriptionLong !== enDescriptionLong
+        ? descriptionLong.replace(/[\r\n]/gm, '')
+        : '';
+
+      if (newDescriptionLong !== myDescription.description.replace(/[\r\n]/gm, '')) {
+        try {
+          const description = newDescriptionLong ? i18n.t(localeName, 'description.long') : '';
+          const response = await bot.telegram.callApi('setMyDescription', {
+            description,
+            language_code: localeName,
+          });
+          console.log('setMyDescription', localeName, response);
+        } catch (error) {
+          console.error('setMyDescription', localeName, error.description);
+        }
+      }
+
+      const myShortDescription = await bot.telegram.callApi('getMyShortDescription', {
+        language_code: localeName,
+      });
+
+      const descriptionShort = i18n.t(localeName, 'description.short');
+      const newDescriptionShort = localeName === 'en' || descriptionShort !== enDescriptionShort
+        ? descriptionShort.replace(/[\r\n]/gm, '')
+        : '';
+
+      if (newDescriptionShort !== myShortDescription.short_description.replace(/[\r\n]/gm, '')) {
+        try {
+          const shortDescription = newDescriptionShort ? i18n.t(localeName, 'description.short') : '';
+          const response = await bot.telegram.callApi('setMyShortDescription', {
+            short_description: shortDescription,
+            language_code: localeName,
+          });
+          console.log('setMyShortDescription', localeName, response);
+        } catch (error) {
+          console.error('setMyShortDescription', localeName, error.description);
+        }
+      }
+    }
   }
 })

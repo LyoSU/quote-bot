@@ -267,8 +267,8 @@ function getMessages (chatID, messageIds) {
                     const sticker = messageInfo.content[type]
                     media = {
                       file_id: sticker.sticker.remote.id,
-                      is_animated: sticker.type._ === 'stickerTypeAnimated',
-                      is_video: sticker.type._ === 'stickerTypeVideo',
+                      is_animated: sticker.format._ === 'stickerFormatTgs',
+                      is_video: sticker.format._ === 'stickerFormatWebm',
                       thumb: {
                         file_id: sticker.thumbnail.file.remote.id
                       }

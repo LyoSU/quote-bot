@@ -1,29 +1,35 @@
 ---
 language_name: '🇮🇩 Indonesia'
+description:
+  short: |
+    Saya akan membantu membuat kutipan dari pesan tersebut.
+    Cukup balas pesannya dengan /q atau teruskan ke saya.
+  long: |
+    Melihat pesan lucu atau inspiratif di obrolan grup Anda yang ingin Anda abadikan? Cukup teruskan kepada saya atau ketik /q dan saya akan mengubahnya menjadi stiker kutipan menarik yang dapat Anda simpan dan bagikan dengan teman-teman Anda. Baik untuk kenangan pribadi atau penggunaan profesional, kemungkinannya tidak terbatas. Coba aku sekarang! 😎
 help: |2
-  <b>Halo!</b>
-  Saya akan membantu membuat kutipan dari sebuah postingan.
-  Bot dapat bekerja baik dalam pesan pribadi maupun dalam grup.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Perintah yang tersedia:</b>
-  /q - buat kutipan dari pesan <i>[membalas pesan]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Untuk membuat kutipan dari beberapa pesan, tulis sebagai parameter angka yang akan menunjukkan berapa banyak pesan yang harus ada dalam kutipan.
-  Dalam pesan pribadi, Anda dapat meneruskan beberapa pesan kepada saya sekaligus dan saya akan membuat kutipan dari mereka.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Tanda yang tersedia untuk perintah /q:</b>
-      kode hex atau nama warna: <code>#cbafff</code> atau <code>indigo</code> — buat kutipan dengan warna <b>#cbaff</b>
-      <code>random</code> --warna kutipan acak
-      <code>reply</code> atau <code>r</code> — buat kutipan dengan menyimpan jawaban
-      <code>p</code> atau <code>png</code> — buat kutipan PNG
-      <code>i</code> atau <code>img</code> — buat kutipan sebagai gambar
-      <code>rate</code> - tambahkan peringkat ke kutipan
-      <code>m</code> atau <code>media</code> --termasuk media
-      <code>c</code> atau <code>crop</code> - crop media
-      <code>s2.5</code> - kualitas gambar 2,5 kali lebih tinggi dari standar <i>(dapat mengatur nilai apapun)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Contoh penggunaan bendera:</b>
-    <code>/q 3 rp putih</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
@@ -38,16 +44,16 @@ help: |2
   <code>/qrate</code> - aktifkan/nonaktifkan peringkat kutipan
   <code>/qgab 300</code> - mengatur peluang kemunculan kutipan secara acak. Setiap nomor dari satu hingga tak terbatas. Semakin tinggi angkanya, semakin rendah kemungkinan kutipan muncul. Dengan menentukan 300, peluang munculnya pesan kira-kira 1 kali dalam 300 pesan. Untuk menonaktifkan, atur nilainya ke 0
 
-  /qrand - acak kutipan dengan peringkat positif
-  /qtop - kutipan grup teratas
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help atau /start - dapatkan teks ini
+  /help or /start — get this text
 
-  🇺🇸 /lang — change the language
+  /lang — change the language
 
-  <b>☕️ Beli kopi untuk pengembang:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Blog pengembang:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
@@ -123,13 +129,13 @@ top:
   open: Buka atas
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Anda dapat membeli kopi untuk pengembang atau sesuatu yang lain dengan rincian berikut:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Kartu bank: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
-    More: donate.lyo.su
+    Lebih Lanjut: donate.lyo.su
   title: Donasi ${botUsername}
   description: Dukungan pengembangan bot
   successful: |
