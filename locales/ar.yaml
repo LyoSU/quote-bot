@@ -56,20 +56,20 @@ help: |2
   <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
-  <b>Hello!</b>
-  I will create quotes in the group using the /q command in response to message
+  <b>مرحبًا!</b>
+  سأقوم بإنشاء علامات اقتباس في المجموعة باستخدام الأمر /q ردًا على الرسالة
 
-  You can learn more about the command <a href="t.me/${username}?start=help">/help</a> in private messages with me
+  يمكنك معرفة المزيد حول الأمر <a href="t.me/${username}?start=help">/help</a> في الرسائل الخاصة معي
 btn:
-  add_group: Add to Group
-  help: Help
+  add_group: إضافة إلى المجموعة
+  help: مساعدة
 quote:
   unsupported_message: رسالة غير مدعومة
   api_error: |
-    <b>😓 Failed to generate quote</b>
+    <b>😓 فشل في توليد الاقتباس</b>
     <pre>${error}</pre>
   empty_forward: |
-    Command must be sent as a reply to a message.
+    يجب إرسال الأمر كرد على الرسالة.
   set_background_color: |
     يتم تعيين لون خلفية الاقتباسات إلى: <code>${backgroundColor}</code>
   set_emoji_brand: |
@@ -77,55 +77,55 @@ quote:
   sticker:
 sticker:
   save:
-    suc: Sticker has been successfully added to the <a href="${link}">group sticker pack</a>.
+    suc: تمت إضافة الملصق بنجاح إلى حزمة ملصقات المجموعة <a href="${link}"></a>.
     error:
-      animated: I can't add an animated sticker.
-      need_creator: <b>I failed saving this sticker.</b>\n${creator} must write me any message in PM.
-      telegram: <b>I failed saving that sticker.</b>\n<pre>${error}</pre>
+      animated: لا أستطيع إضافة ملصق متحرك.
+      need_creator: <b>فشلت في حفظ هذا الملصق.</b>\n${creator} يجب أن أكتب لي أي رسالة في PM.
+      telegram: <b>فشلت في حفظ هذا الملصق.</b>\n<pre>${error}</pre>
   delete:
-    suc: Sticker has been successfully removed from the <a href="${link}">group sticker pack</a>.
+    suc: تمت إزالة الملصق بنجاح من حزمة ملصقات المجموعة <a href="${link}"></a>.
     error:
-      telegram: <b>I wasn't able to save that sticker.</b>\n<pre>${error}</pre>
+      telegram: <b>لم أتمكن من حفظ هذا الملصق.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Save the sticker
+      save_sticker: حفظ الملصق
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: تمت إزالة الملصق بنجاح من ملصقات المجموعة العشوائية.
+    error: <b>لم أكن قادراً على حذف هذا الملصق.</b>\n<pre>${error}</pre>
   empty_forward: |
-    Command must be sent a reply to a sticker, photo or file with a picture.
+    يجب إرسال الأمر إلى ملصق أو صورة أو ملف مع صورة.
   fstik: |
-    In order to save the sticker to your personal sticker pack, forward this message to @fStikBot
+    من أجل حفظ الملصق إلى حزمة الملصقات الشخصية الخاصة بك، قم بتوجيه هذه الرسالة إلى @fStikbot
 rate:
   vote:
     rated: |
-      You ${rateName} this.
+      أنت ${rateName} هذا.
     back: |
-      You got your vote back.
+      لقد حصلت على تصويتك مرة أخرى.
   settings:
     enable: |
-      Quotes rating is on.
+      تقييم الأسعار قيد التشغيل.
     disable: |
-      Rating for quotes is off.
+      تم إيقاف تقييم الاقتباس.
 random:
   empty: |
-    There are no quotes with a positive rating in the group.
+    لا توجد أقتباس ذات تقييم إيجابي في المجموعة.
   gab: |
-    The chance of random quotes is set to ${gab}
+    تم تعيين فرصة الاقتباس العشوائي إلى ${gab}
 hidden:
   settings:
     enable: |
-      Sender search is enabled.
+      البحث عن المرسل مفعل.
     disable: |
-      Sender search is disabled.
+      البحث عن المرسل معطل.
 privacy:
   settings:
     enable: |
-      Privacy mode is enabled.
+      تم تمكين وضع الخصوصية.
     disable: |
-      Privacy mode is disabled.
+      وضع الخصوصية معطل.
 top:
   info: |
-    <b>Top group quotes:</b>
+    <b>أفضل اقتباسات المجموعة:</b>
   open: فتح الأعلى
 donate:
   info: |
@@ -136,76 +136,76 @@ donate:
     بطاقة البنك: <a href="https://send.monobank.ua/jar/2fpLioJzU8">فيزا، ماستركارد، أبل باي، جوجل باي</a>
 
     المزيد: donate.lyo.su
-  title: Donate ${botUsername}
-  description: Support bot development
+  title: تبرع ${botUsername}
+  description: دعم تطوير الروبوت
   successful: |
-    <b>Thank you for supporting the bot 💜</b>
-  pay: '💜 Pay via Telegram'
+    <b>شكراً لدعمكم البوت 💜</b>
+  pay: '💜 الدفع عبر تيليجرام'
   liqpay: LiqPay (VISA, MasterCard)
-  other: Other options
+  other: خيارات أخرى
 emoji:
   info: |
     يرجى تضمين الرموز التعبيرية.
 
     على سبيل المثال، <code>/qemoji💜</code> سيغير اللاصق ليصبح 💜 لجميع اللاصقات الجديدة التالية.
     للاسم التعبيري عشوائيًا <code>/qemoji random</code>
-  done: Emoji successfully changed.
+  done: تم تغيير الرموز التعبيرية بنجاح.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 يمكنك شراء إعلانات منا لعدد كبير من المستخدمين والمجموعات النشطة</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • البوت الخاص بنا موجود في أكثر من 30`000 مجموعة نشطة وأكثر من 70`000 مستخدم استخدم البوت كل شهر.
+    ومن بينهم مستخدمون من مختلف البلدان. يمكنك تحديد لغة المستخدمين التي سيتم عرض الإعلان لهم
+    • يتم عرض الإعلان أسفل الاقتباس على شكل زر أو رسالة نصية حسب دردشة المستخدم
+    • أنت تحدد سعر الإعلان بنفسك؛ بادئ ذي بدء، سيتم عرض الإعلان الذي تم تخصيص أعلى مبلغ له
+    • يجب أن يتوافق نص الإعلان ومحتواه مع قواعدنا (/adv_rules) وقبل نشره يجب عليك اجتياز الإشراف. يمكن القيام بذلك قبل إجراء الإيداع
 
-    Balance: ${balance} USD
+    الرصيد: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>في الإعلانات <u>غير مسموح</u> :</b>
+    • استخدام البذاءات أو الشتائم
+    • استخدام أكثر من رمز تعبيري واحد لكل نص
+    • معلومات مضللة
+    • معلومات محظورة بموجب قوانين أوكرانيا
+    • محتوى للبالغين
+    • المقامرة
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>لدينا أيضًا الحق في رفض الإعلان إذا لم يعجبنا ببساطة دون سبب.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: إنشاء إعلانات
+    list_btn: قائمة الإعلانات
+    pay_btn: رصيد شحن
   create:
     enter_text: |
-      Enter your ad text:
+      أدخل النص الإعلاني:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>لا أكثر من 70 حرفاً ويجب أن يمتثل لقواعدنا (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      أدخل رابطًا للمصدر المُعلن عنه:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>يجب أن يكون الرابط كاملاً، إذا كنت تعلن عن شيء ما في Telegram، فيجب أن يبدأ الرابط بـ t.me.
+      يجب أن يتوافق المورد مع قواعدنا (/adv_rules)، إذا تم استبدال الموقع بعد اجتياز الإشراف، فسيتم حظر حسابك ولن يتم استرداد الأموال.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      حدد لغة المستخدمين الذين سيتم عرض الإعلان لهم
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      الرقم هو عدد المستخدمين الذين يحتمل أن يشاهدوا إعلانك بتلك اللغة.
+      يتم حساب المستخدمين الذين يستخدمون البوت بالفعل. ولكن يمكن أيضا رؤية الإعلان من جانب مستخدمين آخرين من المجموعة التي تم فيها وضع الاقتباس، لذلك يمكن أن يكون هذا الرقم أعلى بكثير من
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>ولا تتوافق اللغة مع البلد.
+      يمكنك اختيار لغة واحدة فقط، إذا كنت بحاجة إلى عدة لغات، الرجاء إنشاء إعلان مرة أخرى بلغة أخرى.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      حدد السعر لكل 1000 انطباع من إعلاناتك بالدولار الأمريكي:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>متوسط سعر الإعلانات:</u> ${averagePrice} $
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>الحد الأدنى للسعر هو 0. 5 دولارات
+      يتم عرض الإعلانات بطريقة عشوائية، ولكن أعلى فرصة للعرض لديها إعلان له سعر أعلى للانطباعات.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      تم إرسال الإعلان للإشراف. يرجى التحلي بالصبر والانتظار. إذا كان الإشراف ناجحاً أو غير ناجح، فسوف تتلقى إشعار.
   list:
     select_list: |
-      select_list
+      قائمة_الاختيار
     wait_btn: انتظار
     ready_btn: جاهز
     end_btn: نهاية
@@ -213,20 +213,20 @@ adv:
       قائمة المختارة
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} من <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      النص: ${adv.text}
+      الرابط: ${adv.link}
+      المحلية: ${adv.locale}
+      السعر: ${adv.price}
+      العد ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      تم إدارة الإعلان بنجاح. يمكنك بدء عرضه في قسم الإعلان: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      ولسوء الحظ، لم يتم تخفيف الإعلان. الرجاء قراءة قواعدنا (/adv_rules)، إذا كنت متأكدا من أن هذا خطأ، كتابة إلينا على @Ly_OBot وإدراج هذه العلامة في الرسالة التي تصف المشكلة: #qba_${adv.id}
+    accept_btn: قبول
+    deny_btn: رفض
 only_admin: |
-  Only group administrator can use this command.
+  فقط مسؤول المجموعة يمكنه استخدام هذا الأمر.
 only_group: |
-  This command can be used only in groups.
+  لا يمكن استخدام هذا الأمر إلا في مجموعات.
