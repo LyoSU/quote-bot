@@ -7,54 +7,53 @@ description:
   long: |
     Heb je grappige of inspirerende berichten opgemerkt in je groepschat die je zou willen vereeuwigen? Stuur ze gewoon naar me door of typ /q en ik zal ze omzetten in een strak citaatsticker die je kunt opslaan en delen met je vrienden. Of het nu voor persoonlijke herinneringen is of voor professioneel gebruik, de mogelijkheden zijn eindeloos. Probeer me nu uit! 😎
 help: |2
-  <b>Hallo!</b>
-  Ik zal helpen een citaat te maken van een bericht.
-  De bot kan zowel in privéberichten als in groepen werken.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Beschikbare commando's:</b>
-  /q — maak een citaat van het bericht <i>[reageren op het bericht]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Om een citaat te maken van meerdere berichten, schrijf als parameter een getal dat aangeeft hoeveel berichten er in het citaat moeten zijn.
-  In privéberichten kunt u meerdere berichten tegelijk naar me doorsturen en ik zal er een citaat van maken.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Beschikbare vlaggen voor het /q-commando:</b>
-      hex-code of kleurnaam: <code>#cbafff</code> of <code>indigo</code> — maak een citaat met kleur <b>#cbafff</b>
-      <code>willekeurig</code> — willekeurige citaatkleur
-      <code>reactie</code> of <code>r</code> — maak een citaat met behoud van antwoorden
-      <code>p</code> of <code>png</code> — maak een PNG-citaat
-      <code>i</code> of <code>img</code> — maak een citaat als afbeelding
-      <code>beoordeling</code> — voeg een beoordeling toe aan een citaat
-      <code>m</code> of <code>media</code> — media toevoegen
-      <code>c</code> of <code>crop</code> — media bijsnijden
-      <code>s2.5</code> — beeldkwaliteit is 2,5 keer hoger dan standaard <i>(kan elke waarde instellen)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Voorbeeld van het gebruik van vlaggen:</b>
-    <code>/q 3 wit rp</code>
-    <code>/q i rood s3.2</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
+    <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Alleen voor beheerders:
-  <code>/qs 🥰💜</code> — slaat een sticker/foto/document met een foto op in een stickerpakket van een groep met emoji 🥰💜 <i>(emoji kan willekeurig en in elk aantal zijn)</i> <i>[reageren op bericht]</i>
-  <code>/qd</code> — verwijder de sticker uit het stickerpakket van de groep  <i>[als reactie op het bericht]</i>
-  <code>/qb</code> — stel het emoji-merk in. Beschikbaar: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qkleur groen</code> — stel de kleur van citaten in op <b>groen</b> standaard <i>(hex-code of kleurnaam)</i>
-  <code>/qemoji</code> — verander de emoji-suffix voor stickers
-  <code>/qbeoordeling</code> — beoordeling van citaten in- of uitschakelen
-  <code>/qgab 300</code> — stel de kans in van een willekeurig voorkomen van een citaat. Elk getal van één tot oneindig. Hoe hoger het getal, hoe lager de kans op het verschijnen van citaten. Door 300 te specificeren, zal de kans op een bericht ongeveer 1 keer in 300 berichten zijn. Om uit te schakelen, stelt u de waarde in op 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — willekeurig een citaat met een positieve beoordeling
-  /qtop — top groep citaten
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help of /start — krijg deze tekst
+  /help or /start — get this text
 
-  🇺🇸 /lang — verander de taal
-  🇷🇺 /lang — изменить язык
+  /lang — change the language
 
-  <b>☕️ Koop koffie voor de ontwikkelaar:</b> doneer.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Ontwikkelaarsblog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/citeerbot
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Hallo!</b>
   Ik maak citaten aan in de groep met behulp van de /q opdracht in reactie op bericht
