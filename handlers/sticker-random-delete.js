@@ -5,6 +5,8 @@ module.exports = async ctx => {
     const replyMessage = ctx.message.reply_to_message
     const groupId = ctx.message.chatId
 
+    const fileId = replyMessage.sticker.file_id
+
     if (replyMessage.sticker) {
       ctx.Quote.deleteOne({ group: groupId, file_id: fileId }, (error) => {
         if (error) {
