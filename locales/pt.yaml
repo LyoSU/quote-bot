@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Salvar adesivo
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Sticker foi removido com sucesso do grupo de adesivos aleatórios.
+    error: <b>Não fui capaz de excluir esse adesivo.</b>\n<pre>${error}</pre>
   empty_forward: |
     O comando deve ser escrito em resposta a uma mensagem com um adesivo, foto ou arquivo de foto.
   fstik: |
