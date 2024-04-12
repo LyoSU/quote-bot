@@ -7,53 +7,53 @@ description:
   long: |
     Zauważyłeś jakąkolwiek zabawną lub inspirującą wiadomość na czacie grupowym, że chciałbyś być nieśmiertelny? Po prostu przekaż je do mnie lub wpisz /q i zamienię je w śpiącą naklejkę z cytatem, którą możesz zapisać i podzielić się z przyjaciółmi. Bez względu na to, czy jest to dla osobistych wspomnień czy profesjonalne, możliwości są niekończące. Wypróbuj mnie teraz! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Cześć!</b>
+  Pomogę stworzyć cytat z posta.
+  Bot może pracować zarówno w wiadomościach prywatnych, jak i w grupach.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Dostępne polecenia:</b>
+  /q — zrób cytat z wiadomości <i>[odpowiedz na wiadomość]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Aby utworzyć cytat z kilku wiadomości, napisz jako parametr liczbę określającą ile wiadomości powinno być w cytacie.
+  W prywatnych wiadomościach możesz przekazać mi kilka wiadomości naraz, a ja zrobię z nich cytat.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Dostępne flagi dla polecenia /q:</b>
+      kod heksadecymalny lub nazwa koloru: <code>#cbafff</code> lub <code>indigo</code> — zrób cytat z kolorem <b>#cbafff</b>
+      <code>random</code> — losowy kolor cytatu
+      <code>reply</code> lub <code>r</code> — zrób cytat z zachowaniem odpowiedzi
+      <code>p</code> lub <code>png</code> — stwórz cytat w formacie PNG
+      <code>i</code> lub <code>img</code> — zrób cytat jako obrazek
+      <code>rate</code> — dodaj ocenę do cytatu
+      <code>m</code> lub <code>media</code> — dołącz media
+      <code>c</code> lub <code>crop</code> — przycięcie mediów
+      <code>s2.5</code> — jakość obrazka jest 2.5 raza wyższa niż standardowa <i>(można ustawić dowolną wartość)</i>
 
-    <b>Example of using flags:</b>
+    <b>Przykład użycia flag:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Tylko dla administratorów:
+  <code>/qs 🥰💜</code> — zapisuje naklejkę/zdjęcie/dokument z zdjęciem do pakietu naklejek grupy z emoji 🥰💜 <i>(emoji może być dowolne i dowolna ilość)</i> <i>[odpowiedz na wiadomość]</i>
+  <code>/qd</code> — usuń naklejkę z pakietu naklejek grupy  <i>[w odpowiedzi na wiadomość]</i>
+  <code>/qdrand</code> — usuń naklejkę z losowych naklejek grupy  <i>[w odpowiedzi na wiadomość]</i>
+  <code>/qb</code> — ustaw znak firmowy emoji. Dostępne: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — ustaw kolor cytatu <b>zielony</b> domyślnie <i>(kod heksadecymalny lub nazwa koloru)</i>
+  <code>/qemoji</code> — zmień sufiks emoji dla naklejek
+  <code>/qrate</code> — włącz/wyłącz ocenianie cytatów
+  <code>/qgab 300</code> — ustaw szansę losowego wystąpienia cytatu. Każda liczba od jeden do nieskończoności. Im wyższa liczba, tym mniejsza szansa pojawienia się cytatu. Podając 300, szansa na pojawienie się wiadomości będzie mniej więcej raz na 300 wiadomości. Aby wyłączyć, ustaw wartość na 0
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — losuj cytat z pozytywną oceną
+  /qtop — najlepsze cytaty grupy
 
-  /help or /start — get this text
+  /help lub /start — otrzymaj ten tekst
 
-  /lang — change the language
+  /lang — zmień język
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ Kup kawę dla dewelopera:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Blog dewelopera:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Witam!</b>
