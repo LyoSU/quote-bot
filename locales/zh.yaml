@@ -34,15 +34,15 @@ help: |2
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  仅适用于管理员：
-  <code>/qs 🥰💜</code> - 将带有照片的贴纸/照片/文档保存到带有表情符号🥰💜的组的贴纸包中 <i>（表情符号可以是任意数字）</i> <i>[回复消息]</i>
-  <code>/qd</code> - 从<i>这一组</i>的贴纸包中移除贴纸[响应消息]
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
   <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> - 设置表情符号品牌。可用：<code>apple</code>、<code>google</code>、<code>twitter</code>、<code>joypixels</code>、<code>blob</code>
-  <code>/qcolor green</code> - 默认设置引号的颜色<b>green</b> <i>（十六进制代码或颜色名称）</i>
-  <code>/qemoji</code> — 更改贴纸的表情符号后缀
-  <code>/qrate</code> - 启用/禁引用价评级
-  <code>/qgab 300</code> - 设置随机出现引用的机会。从一到无穷大的任何数字。数字越高，出现报价的机会就越低。通过指定 300，一条消息出现的机会大约是 300 条消息中的 1 次。要禁用，请将值设置为 0
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
   /qrand — random a quote with a positive rating of
   /qtop — top group quotes
