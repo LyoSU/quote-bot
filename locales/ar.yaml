@@ -7,53 +7,53 @@ description:
   long: |
     هل لاحظت أي رسائل مضحكة أو ملهمة في محادثة مجموعتك ترغب في تخليدها؟ ما عليك سوى إعادة توجيهها لي أو كتابة /q وسأحولها إلى لاصق اقتباس أنيق يمكنك حفظه ومشاركته مع أصدقائك. سواء كانت لذكريات شخصية أم استخدام مهني، الإمكانيات لا حدود لها. جربني الآن! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>مرحبا!</b>
+  سأساعد في إنشاء اقتباس من رسالة.
+  يمكن للروبوت العمل في الرسائل الخاصة والمجموعات.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ الأوامر المتاحة:</b>
+  /q — يصنع اقتباسًا من الرسالة <i>[الرد على الرسالة]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  لإنشاء اقتباس من عدة رسائل، اكتب كمعامل عدد سيشير إلى عدد الرسائل التي يجب أن تكون في الاقتباس.
+  في الرسائل الخاصة، يمكنك إعادة إرسال عدة رسائل لي وسأقوم بإنشاء اقتباس منها.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>العلامات المتاحة لأمر الـ /q:</b>
+      hex code أو اسم اللون: <code>#cbafff</code> أو <code>indigo</code> — اصنع اقتباس بلون <b>#cbafff</b>
+      <code>random</code> — لون اقتباس عشوائي
+      <code>reply</code> أو <code>r</code> — اصنع اقتباس مع حفظ الردود
+      <code>p</code> أو <code>png</code> — اصنع PNG اقتباس
+      <code>i</code> أو <code>img</code> — اصنع اقتباس كصورة
+      <code>rate</code> — أضف تقييمًا للاقتباس
+      <code>m</code> أو <code>media</code> — اضمن الوسائط
+      <code>c</code> أو <code>crop</code> — اقتصر في الوسائط
+      <code>s2.5</code> — جودة الصورة أعلى بمعدل 2.5 مرة من القياسي <i>(يمكن تحديد أي قيمة)</i>
 
-    <b>Example of using flags:</b>
+    <b>مثال على استخدام العلامات:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  فقط للمسؤولين:
+  <code>/qs 🥰💜</code> — يحفظ ملصقًا / صورة / وثيقة بصورة في حزمة ملصقات لمجموعة مع إيموجي 🥰💜 <i>(يمكن أن يكون إيموجي أي وأي عدد)</i> <i>[الرد على الرسالة]</i>
+  <code>/qd</code> — يزيل الملصق من حزمة ملصقات المجموعة <i>[ردًا على الرسالة]</i>
+  <code>/qdrand</code> — يزيل الملصق من ملصقات المجموعة بشكل عشوائي <i>[ردًا على الرسالة]</i>
+  <code>/qb</code> — تعيين علامة تجارية إيموجي. متوفر: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — تعيين لون الاقتباسات <b>الأخضر</b> افتراضيًا <i>(hex code أو اسم اللون)</i>
+  <code>/qemoji</code> — تغيير لاحقة الإيموجي للملصقات
+  <code>/qrate</code> — تمكين / تعطيل تقييم الاقتباسات
+  <code>/qgab 300</code> — تعيين فرصة حدوث عشوائي لاقتباس. أي رقم من واحد إلى اللانهاية. كلما زاد الرقم، انخفضت فرصة ظهور الاقتباسات. من خلال تحديد 300، ستكون فرصة ظهور الرسالة تقريبًا مرة واحدة في 300 رسالة. لتعطيله، ضع القيمة بصفر
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — اقتباس عشوائي بتقييم إيجابي
+  /qtop — أعلى اقتباسات المجموعة
 
-  /help or /start — get this text
+  /help or /start — احصل على هذا النص
 
-  /lang — change the language
+  /lang — تغيير اللغة
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ اشتر قهوة للمطور:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 مدونة المطور:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>مرحبًا!</b>
