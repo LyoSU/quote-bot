@@ -2,10 +2,10 @@
 language_name: '🇯🇵 日本人'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+
+    メッセージに/qで返信するか、転送してください。
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    グループチャットで不滅にしたい面白いメッセージや感動的なメッセージに気づいたことはありませんか？ 私にそれらを転送するか、/q と入力するだけで、私はそれらをあなたの友人と保存し、共有することができる洗練された引用ステッカーにします。 個人的な思い出のためでも、プロの使用のためでも、可能性は無限大です。今すぐ試してみてください！😎
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -64,7 +64,7 @@ btn:
   add_group: グループに追加：
   help: ヘルプ
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: 対応していないメッセージ
   api_error: |
     <b>😓見積りを生成できませんでした</b>
     <pre>${error}</pre>
@@ -73,7 +73,7 @@ quote:
   set_background_color: |
     引用符の背景色は次のように設定されます： <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    絵文字ブランドが <code>${emojiBrand}</code> に設定されています
   sticker:
 sticker:
   save:
@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: ステッカーを保存
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: グループランダムステッカーからステッカーを削除しました。
+    error: <b>そのステッカーを削除できませんでした。</b>\n<pre>${error}</pre>
   empty_forward: |
     コマンドは、ステッカー、写真、または写真ファイルを含むメッセージに応答して作成する必要があります。
   fstik: |
@@ -126,16 +126,16 @@ privacy:
 top:
   info: |
     <b>上位グループの引用：</b>
-  open: Open top
+  open: 上部を開く
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    以下の詳細を使用して、開発者のためにコーヒーやその他のものを購入できます。
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    銀行カード: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa、MasterCard、Apple Pay、Google Pay</a>
 
-    More: donate.lyo.su
+    詳細: donate.lyo.su
   title: '${botUsername} 寄付する'
   description: ボット開発サポート
   successful: |
@@ -145,64 +145,64 @@ donate:
   other: 他の方法
 emoji:
   info: |
-    Please include emoji.
+    絵文字を含めてください。
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    たとえば、 <code>/qemoji💜</code> は、以降のすべての新しいステッカーの接尾辞を💜に変更します。
+    ランダムな絵文字の場合 <code>/qemoji random</code>
   done: 絵文字が正常に変更されました。
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 多数のアクティブユーザーとグループの広告を当社から購入できます</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • 当社のボットは 30`000 を超えるアクティブグループに参加しており、毎月 70`000 人を超えるユーザーがボットを使用しています。
+    その中にはさまざまな国のユーザーがいます。広告を表示するユーザーの言語を選択できます
+    • 広告は、ユーザーのチャットに応じて、ボタンまたはテキストメッセージの形式で見積もりの下に表示されます
+    • 広告の価格は自分で指定します。まず、最も高い金額が割り当てられた広告が表示されます
+    • 広告のテキストとコンテンツは、当社の規則 (/adv_rules) に準拠する必要があり、投稿する前にモデレーションに合格する必要があります。これは入金前に行うことができます
 
-    Balance: ${balance} USD
+    残高: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>広告では以下のことは <u>許可されません</u> :</b>
+    • 卑猥な言葉や侮辱的な言葉の使用
+    • 1 つのテキストに 2 つ以上の絵文字の使用
+    • 誤解を招く情報
+    • ウクライナの法律で禁止されている情報
+    • アダルト コンテンツ
+    • ギャンブル
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>また、理由もなく広告が気に入らない場合は、広告を拒否する権利も有します。</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: 広告を作成
+    list_btn: 広告一覧
+    pay_btn: チャージ残高
   create:
     enter_text: |
-      Enter your ad text:
+      広告テキストを入力してください：
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>70文字以上で、ルール（/adv_rules）</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      宣伝するリソースへのリンクを入力してください:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>リンクは完全である必要があります。Telegram で何かを宣伝する場合、リンクは t.me で始まる必要があります。
+      リソースは当社のルール (/adv_rules) に準拠している必要があります。モデレーションに合格した後にサイトが置き換えられた場合、アカウントはブロックされ、お金は返金されません。</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      広告が表示されるユーザーの言語を選択します
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      数字は、その言語で広告が表示される可能性のあるユーザーの数です。
+      実際にボットを使用するユーザーのみがカウントされます。ただし、広告は引用が行われたグループ内の他のユーザーにも表示されるため、この数字ははるかに高くなる可能性があります
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>言語は国に対応していません。
+      選択できる言語は 1 つだけです。複数の言語が必要な場合は、別の言語で再度広告を作成してください。</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      広告の 1000 インプレッションあたりの価格を USD で指定します:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>アクティブな広告の平均価格:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>最小価格は 0.15 USD です。
+      広告はランダムに表示されますが、インプレッションの価格が高い広告の方が表示される可能性が高くなります。
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      The advertising has been sent for moderation. Please be persent and wait. If the moderation is successfully or unsuccess, you will receive a notification.
   list:
     select_list: |
       select_list
@@ -213,19 +213,19 @@ adv:
       selected_list
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Adv #id_${adv._id} から <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      テキスト: ${adv.text}
+      リンク: ${adv.link}
+      ロケール: ${adv.locale}
+      価格: ${adv.price}
+      カウント ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      広告は正常に管理されました。広告セクションで表示を開始できます: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      残念ながら広告はモデレートされていません。 ルール（/adv_rules）をお読みください。 @Ly_OBot に書いて、この問題を説明するメッセージにこのタグを含めてください: #qba_${adv.id}
+    accept_btn: 同意する
+    deny_btn: 拒否
 only_admin: |
   このコマンドは、グループ管理者のみが使用できます。
 only_group: |
