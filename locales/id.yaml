@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Simpan stikernya
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Stiker telah berhasil dihapus dari grup stiker acak.
+    error: <b>Saya tidak dapat menghapus stiker itu.</b>\n<pre>${error}</pre>
   empty_forward: |
     Perintah harus dijalankan dengan membalas stiker, foto atau file dengan gambar.
   fstik: |
