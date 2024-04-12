@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: De sticker opslaan
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Sticker is succesvol verwijderd uit de groep willekeurige stickers.
+    error: <b>Ik was niet in staat om die sticker te verwijderen.</b>\n<pre>${error}</pre>
   empty_forward: |
     Opdracht moet worden verzonden naar een sticker, foto of bestand met een foto.
   fstik: |
