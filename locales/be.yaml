@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Захаваць стыкер
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Стыкер быў паспяхова выдалены з групы выпадковых стыкераў.
+    error: <b>Я не змог выдаліць гэты стыкер.</b>\n<pre>${error}</pre>
   empty_forward: |
     Каманду трэба адпраўляць у адказ на стыкер, фота ці файл з выявай.
   fstik: |

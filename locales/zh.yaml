@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: 保存贴纸
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: 貼圖已成功从群組随動貼圖中移除。
+    error: <b>我无法删除该贴纸。</b>\n<pre>${error}</pre>
   empty_forward: |
     命令必须发送回复给贴纸、照片或带有图片的文件。
   fstik: |

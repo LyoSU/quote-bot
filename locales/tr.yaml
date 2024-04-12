@@ -2,8 +2,8 @@
 language_name: '🇹🇷 Türkçe'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Mesajdan bir alıntı oluşturmaya yardımcı olacağım.
+    Mesajı /q ile yanıtlayın veya bana iletin.
   long: |
 
 help: |2
@@ -87,8 +87,8 @@ sticker:
     btn:
       save_sticker: Çıkartmayı kaydet
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Çıkartma, rastgele çıkartmalar grubundan başarıyla kaldırıldı.
+    error: <b>O çıkartmayı silemedim.</b>\n<pre>${error}</pre>
   empty_forward: |
     Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
   fstik: |
@@ -147,7 +147,7 @@ emoji:
 
     Örneğin, <code>/qemoji💜</code>, sonraki tüm yeni çıkartmalar için son eki 💜 olarak değiştirecektir.
     Rastgele bir simge için <code>/qemoji rastgele</code>
-  done: Emoji successfully changed.
+  done: Emoji başarıyla değiştirildi.
 adv:
   about: |
     <b>💫 Çok sayıda aktif kullanıcı ve grup için bizden reklam satın alabilirsiniz</b>

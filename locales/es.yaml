@@ -2,10 +2,10 @@
 language_name: '🇪🇸 Español'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Ayudaré a crear una cita del mensaje.
+    Solo responda al mensaje con /q o envíame.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    ¿Has notificado algún mensaje divertido o inspirador en tu chat de grupo que te gustaría inmortalizar? Simplemente envíame o escriba /q y los convertiré en una comilla elegante que puedes guardar y compartir con tus amigos. Ya sea para recuerdos personales o para uso profesional, las posibilidades son infinitas. ¡Pruébalo ahora! 😎
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -64,7 +64,7 @@ btn:
   add_group: Añadir a un grupo
   help: Ayuda
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Mensaje no soportado
   api_error: |
     <b>😓 Tuve un pronlema al generar la imagen</b>
     <pre>${error}</pre>
@@ -73,7 +73,7 @@ quote:
   set_background_color: |
     El color de fondo actual es: <code>${backgroundColor}</code>
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    La marca emoji de las cotizaciones está establecida como: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Guardar sticker
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Sticker se ha eliminado con éxito de las etiquetas aleatorias del grupo.
+    error: <b>No pude eliminar esa pegatina.</b>\n<pre>${error}</pre>
   empty_forward: |
     Debes responder a un sticker, foto o documento con una imagen.
   fstik: |
@@ -145,11 +145,11 @@ donate:
   other: Otros
 emoji:
   info: |
-    Please include emoji.
+    Por favor incluya emoji.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
-  done: Emoji successfully changed.
+    Por ejemplo, <code>/qemoji💜</code> cambiará el sufijo a 💜 para todas las pegatinas nuevas posteriores.
+    Para un emoji aleatorio <code>/qemoji aleatorio</code>
+  done: Emoji cambió con éxito.
 adv:
   about: |
     <b>💫 Puede comprarnos publicidad para una gran cantidad de usuarios y grupos activos</b>
@@ -162,68 +162,68 @@ adv:
 
     Saldo: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>En anuncios <u>no</u> permitido:</b>
+    • Usar obscenidades o insultos
+    • Usar más de 1 emoji por texto
+    • Información engañosa
+    • Información prohibida por las leyes de Ucrania
+    • Contenido para adultos
+    • Apuestas
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>También tenemos la Derecho a rechazar un anuncio si simplemente no nos gusta sin motivo alguno.</i>
   main_menu:
     create_btn: Crear anuncios
     list_btn: Lista de anuncios
-    pay_btn: Top up balance
+    pay_btn: Saldo de recarga
   create:
     enter_text: |
-      Enter your ad text:
+      Introduzca el texto de su anuncio:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>No más de 70 caracteres y debe cumplir con nuestras reglas (/adv_rules)</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Ingresa un enlace al recurso anunciado:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>El enlace debe estar completo, si estás anunciando algo en Telegram, el enlace debe comenzar con t.me.
+      El recurso debe cumplir con nuestras reglas (/adv_rules), si después de pasar la moderación el sitio es reemplazado, su cuenta será bloqueada y no se reembolsará el dinero.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Seleccione el idioma de los usuarios a quienes se les mostrará el anuncio
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      El número es la cantidad de usuarios que potencialmente verán su anuncio en ese idioma.
+      Solo se cuentan los usuarios que realmente usan el bot. Pero el anuncio también puede ser visto por otros usuarios que estén en el grupo donde se realizó la cotización, por lo que esta cifra puede ser mucho mayor
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>El idioma no corresponde al país.
+      Puedes elegir solo un idioma, si necesitas varios, por favor crea un anuncio nuevamente para otro idioma.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      Especifique el precio por cada 1000 impresiones de su anuncio en USD:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Precio medio de los anuncios activos:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>El precio mínimo es 0. 5 USD.
+      Los anuncios se muestran de forma aleatoria, pero la mayor probabilidad de que se muestre tiene un anuncio que tiene un precio más alto para las impresiones.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      El anuncio ha sido enviado para su moderación. Por favor, tenga paciencia y espere. Si la moderación es exitosa o falla, recibirá una notificación.
   list:
     select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
+      seleccionar_lista
+    wait_btn: espera btn
+    ready_btn: lista_btn
+    end_btn: btn final
     selected_list: |
-      selected_list
+      lista seleccionada
   moderate:
     adv: |
-      Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
+      Av #id_${adv._id} de <a href="tg://user?id=${telegramId}">${name}</a>
 
-      Text: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Price: ${adv.price}
-      Count ${adv.count}
+      Texto: ${adv.text}
+      Enlace: ${adv.link}
+      Local: ${adv.locale}
+      Precio: ${adv.price}
+      Cuenta ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      El anuncio se ha moderado correctamente. Puedes empezar a mostrarlo en la sección de publicidad: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
+      Lamentablemente, el anuncio no ha sido moderado. Por favor, lea nuestras reglas (/adv_rules), si está seguro de que fue un error, escríbanos a @Ly_OBot e incluya esta etiqueta en el mensaje que describe el problema: #qba_${adv.id}
     accept_btn: Aceptar
     deny_btn: Rechazar
 only_admin: |

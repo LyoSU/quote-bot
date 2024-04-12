@@ -88,8 +88,8 @@ sticker:
     btn:
       save_sticker: 스티커 저장
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: 그룹 무작위 스티커에서 스티커가 성공적으로 제거되었습니다.
+    error: <b>해당 스티커를 삭제하지 못했습니다.</b>\n<pre>${error}</pre>
   empty_forward: |
     명령은 스티커, 사진 또는 그림 파일에 대한 응답으로 보내져야 합니다.
   fstik: |
@@ -148,7 +148,7 @@ emoji:
 
     예를 들어, <code>/qemoji💜</code>을 사용하여 이후의 새 스티커에 💜 접미사가 생깁니다.
     랜덤 이모지를 위해 <code>/qemoji random</code>
-  done: Emoji successfully changed.
+  done: 이모티콘이 성공적으로 변경되었습니다.
 adv:
   about: |
     <b>💫 우리는 다수의 활발한 사용자와 그룹에게 광고를 구매할 수 있습니다.</b>
