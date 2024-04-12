@@ -2,10 +2,10 @@
 language_name: '🇺🇿 O''zbek'
 description:
   short: |
-    I'll help create a quote from the message.
-    Just reply to the message with /q or forward it to me.
+    Men xabardan iqtibos yaratishga yordam beraman.
+    Xabarga /q bilan javob bering yoki uni menga yuboring.
   long: |
-    Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
+    Guruh chatida abadiylashtirmoqchi bo'lgan kulgili yoki ilhomlantiruvchi xabarlarni payqadingizmi? Ularni shunchaki menga yuboring yoki /q yozing va men ularni saqlashingiz va do‘stlaringiz bilan baham ko‘rishingiz mumkin bo‘lgan nafis tirnoq stikeriga aylantiraman. Shaxsiy xotiralar uchunmi yoki professional foydalanish uchunmi, imkoniyatlar cheksizdir. Meni hozir sinab ko'ring! 😎
 help: |2
   <b>Hello!</b>
   I will help create a quote from a post.
@@ -64,7 +64,7 @@ btn:
   add_group: Guruhga qo'shish
   help: Ma'lumotnoma
 quote:
-  unsupported_message: Unsupported message
+  unsupported_message: Qo'llab-quvvatlanmaydigan xabar
   api_error: |
     <b>😓 Iqtibosni hosil qilib bo'lmadi</b>
     <pre>${error}</pre>
@@ -73,7 +73,7 @@ quote:
   set_background_color: |
     Iqtiboslar fon rangi: <code>${backgroundColor}</code> deya belgilandi
   set_emoji_brand: |
-    Quotes' emoji brand is set to: <code>${emojiBrand}</code>
+    Quotes emoji brendi: <code>${emojiBrand}</code>
   sticker:
 sticker:
   save:
@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Stikerni saqlash
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: Stiker tasodifiy stikerlar guruhidan muvaffaqiyatli olib tashlandi.
+    error: <b>Men bu stikerni o‘chira olmadim.</b>\n<pre>${error}</pre>
   empty_forward: |
     Buyruqni xabarga javoban stiker, rasm yoki rasm fayli asosida yozish kerak.
   fstik: |
@@ -126,7 +126,7 @@ privacy:
 top:
   info: |
     <b>Guruhdagi eng yaxshi iqtiboslar:</b>
-  open: Open top
+  open: Yuqorini oching
 donate:
   info: |
     You can buy coffee for the developer or something else with the following details:
@@ -145,72 +145,72 @@ donate:
   other: Boshqa usullar
 emoji:
   info: |
-    Please include emoji.
+    Iltimos, emoji kiriting.
 
-    For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
-    For a random emoji <code>/qemoji random</code>
+    Masalan, <code>/qemoji💜</code> keyingi barcha yangi stikerlar uchun qoʻshimchani 💜 ga oʻzgartiradi.
+    Tasodifiy emoji uchun <code>/qemoji tasodifiy</code>
   done: Emoji muvaffaqiyatli o'zgartirildi.
 adv:
   about: |
-    <b>💫 You can buy advertising from us for a large number of active users and groups</b>
+    <b>💫 Ko'p sonli faol foydalanuvchilar va guruhlar uchun bizdan reklama xarid qilishingiz mumkin</b>
 
-    • Our bot is in more than 30`000 active groups and more than 70`000 users use the bot every month.
-    Among them are users from various countries. You can select the language of the users for which the advertisement should be displayed
-    • Advertising is displayed below the quote in the form of a button or text message, depending on the user's chat
-    • You specify the price of an advertisement yourself; first of all, the advertisement for which the highest amount was assigned will be displayed
-    • The text and content of the advertisement must comply with our rules (/adv_rules) and before it is posted you must pass moderation. This can be done before making a deposit
+    • Bizning botimiz 30`000 dan ortiq faol guruhlarda va 70` 000 dan ortiq foydalanuvchilarda har oy botdan foydalaning.
+    Ular orasida turli mamlakatlardan foydalanuvchilar ham bor. Siz reklama ko'rsatilishi kerak bo'lgan foydalanuvchilar tilini tanlashingiz mumkin
+    • Reklama kotirovka ostida tugma yoki matnli xabar ko'rinishida foydalanuvchining suhbatiga qarab ko'rsatiladi
+    • Siz belgilaysiz reklama narxini o'zingiz; birinchi navbatda eng yuqori summa belgilangan reklama ko'rsatiladi
+    • E'lon matni va mazmuni bizning qoidalarimizga (/adv_rules) mos kelishi kerak va uni joylashtirishdan oldin moderatsiyadan o'tishingiz kerak. Buni depozit qo'yishdan oldin qilish mumkin
 
-    Balance: ${balance} USD
+    Balans: ${balance} USD
   rules: |
-    <b>In advertisements it is <u>not</u> allowed:</b>
-    • Using obscenities or insults
-    • Using more than 1 emoji per text
-    • Misleading information
-    • Information prohibited by the laws of Ukraine
-    • Adult content
-    • Gambling
+    <b>Reklamalarda <u></u> ruxsat etilmaydi:</b>
+    • Behayo soʻzlar yoki haqoratlardan foydalanish
+    • Har bir matnda 1 ta kulgichdan foydalanish
+    • Chalg'ituvchi ma'lumotlar
+    • Ukraina qonunlari bilan taqiqlangan ma'lumotlar
+    • Kattalar uchun kontent
+    • Qimor
 
-    <i>We also have the right to reject an advertisement if we simply do not like it for no reason.</i>
+    <i>Bizda shuningdek Agar biron bir sababsiz reklama yoqmasa, uni rad etish huquqiga egamiz.</i>
   main_menu:
-    create_btn: Create ads
-    list_btn: List of ads
-    pay_btn: Top up balance
+    create_btn: Reklama yaratish
+    list_btn: E'lonlar ro'yxati
+    pay_btn: Balansni to'ldirish
   create:
     enter_text: |
-      Enter your ad text:
+      Reklama matnini kiriting:
 
-      <i>No more than 70 characters and must comply with our rules (/adv_rules)</i>
+      <i>70 belgidan oshmasligi kerak va bizning qoidalarimizga (/adv_rules) mos kelishi kerak</i>
     enter_link: |
-      Enter a link to the advertised resource:
+      Reklama qilingan resursga havolani kiriting:
 
-      <i>The link must be complete, if you are advertising something in Telegram, the link must begin with t.me.
-      The resource must comply with our rules (/adv_rules), if after passing the moderation the site is replaced, your account will be blocked, and the money will not be refunded.</i>
+      <i>Havola toʻliq boʻlishi kerak, agar siz Telegramda biror narsani reklama qilayotgan boʻlsangiz, havola t.me bilan boshlanishi kerak.
+      Resurs bizning qoidalarimizga (/adv_rules) mos kelishi kerak, agar moderatsiyadan o'tgandan so'ng sayt almashtirilsa, sizning hisobingiz bloklanadi va pul qaytarilmaydi.</i>
     select_locale: |
-      Select the language of the users to whom the ad will be shown
+      Reklama ko'rsatiladigan foydalanuvchilar tilini tanlang
 
-      The number is the number of users who will potentially see your ad in that language.
-      Only users who actually use the bot are counted. But the ad can also be seen by other users who are in the group where the quote was made, so this figure can be much higher
+      Raqam sizning reklamangizni shu tilda ko'rishi mumkin bo'lgan foydalanuvchilar soni.
+      Faqat haqiqatda botdan foydalanadigan foydalanuvchilar hisobga olinadi. Lekin e'lonni kotirovka qilingan guruhdagi boshqa foydalanuvchilar ham ko'rishlari mumkin, shuning uchun bu ko'rsatkich ancha yuqori bo'lishi mumkin
 
-      <i>The language does not correspond to the country.
-      You can choose only one language, if you need several, please create an advertisement again for another language.</i>
+      <i>Til mamlakatga mos kelmaydi.
+      Siz faqat bitta tilni tanlashingiz mumkin, agar sizga bir nechta kerak bo'lsa, boshqa til uchun yana reklama yarating.</i>
     enter_price: |
-      Specify the price per 1000 impressions of your ad in USD:
+      E'loningizning 1000 ta taassurotining narxini AQSh dollarida belgilang:
 
-      <u>Average price of active ads:</u> ${averagePrice} USD
+      <u>Faol e'lonlarning o'rtacha narxi:</u> ${averagePrice} USD
 
-      <i>The minimum price is 0.15 USD.
-      Ads are shown in a random way, but the highest chance of being shown has an ad that has a higher price for impressions.
+      <i>minimal narx - 0,15 AQSh dollari.
+      E'lonlar tasodifiy tarzda ko'rsatiladi, lekin ko'rsatishning eng yuqori imkoniyati taassurotlar uchun yuqori narxga ega reklamaga ega.
       </i>
     sent_moderate: |
-      The advertisement has been sent for moderation. Please be patient and wait. If moderation is successful or unsuccessful, you will receive a notification.
+      Reklama moderatsiyaga yuborildi. Iltimos, sabr qiling va kuting. Moderatsiya muvaffaqiyatli yoki muvaffaqiyatsiz bo'lsa, sizga bildirishnoma keladi.
   list:
     select_list: |
-      select_list
+      tanlash_roʻyxati
     wait_btn: wait_btn
-    ready_btn: ready_btn
+    ready_btn: tayyor_btn
     end_btn: end_btn
     selected_list: |
-      selected_list
+      tanlangan_roʻyxat
   moderate:
     adv: |
       Adv #id_${adv._id} from <a href="tg://user?id=${telegramId}">${name}</a>
@@ -221,11 +221,11 @@ adv:
       Price: ${adv.price}
       Count ${adv.count}
     accepted: |
-      The ad was successfully moderated. You can start showing it in the advertising section: /adv
+      Reklama muvaffaqiyatli moderatsiya qilindi. Siz uni reklama bo'limida ko'rsatishni boshlashingiz mumkin: /adv
     denied: |
-      Unfortunately the ad has not been moderated. Please read our rules (/adv_rules), if you are sure that this was a mistake, write to us at @Ly_OBot and include this tag in the message describing the problem: #qba_${adv.id}
-    accept_btn: Accept
-    deny_btn: Deny
+      Afsuski, reklama moderatsiya qilinmadi. Iltimos, bizning qoidalarimizni (/adv_rules) o'qing, agar bu xato ekanligiga ishonchingiz komil bo'lsa, @Ly_OBot manziliga yozing va muammoni tavsiflovchi xabarga ushbu tegni kiriting: #qba_${adv.id}
+    accept_btn: Qabul qiling
+    deny_btn: Rad etish
 only_admin: |
   Buyruqdan faqatgina guruhning administratori foydalanishni mumkin.
 only_group: |
