@@ -89,8 +89,8 @@ sticker:
     btn:
       save_sticker: Enregistrer l'autocollant
   delete_random:
-    suc: Sticker has been successfully removed from the group random stickers.
-    error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
+    suc: L'autocollant a été supprimé avec succès des autocollants aléatoires du groupe.
+    error: <b>Je n'ai pas pu supprimer cet autocollant.</b>\n<pre>${error}</pre>
   empty_forward: |
     La commande doit être envoyée en réponse à un autocollant, une photo ou un fichier avec une image.
   fstik: |
@@ -149,7 +149,7 @@ emoji:
 
     Par exemple, <code>/qemoji💜</code> changera le suffixe en 💜 pour tous les nouveaux autocollants ultérieurs.
     Pour un emoji aléatoire <code>/qemoji random</code>
-  done: Emoji successfully changed.
+  done: Emoji modifié avec succès.
 adv:
   about: |
     <b>💫 Vous pouvez acheter de la publicité auprès de nous pour un grand nombre d'utilisateurs actifs et de groupes</b>
