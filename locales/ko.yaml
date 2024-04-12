@@ -86,7 +86,7 @@ sticker:
     error:
       telegram: <b>그 스티커를 저장하는 데 실패했습니다.</b>\n<pre>${error}</pre>
     btn:
-      save_sticker: Save the sticker
+      save_sticker: 스티커 저장
   delete_random:
     suc: Sticker has been successfully removed from the group random stickers.
     error: <b>I wasn't able to delete that sticker.</b>\n<pre>${error}</pre>
