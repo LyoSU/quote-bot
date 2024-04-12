@@ -7,53 +7,52 @@ description:
   long: |
     Qrup çatdırmaq istədiyiniz məzmunlu qrup söhbətində əyləncəli və əlverişli mesajları gördünüzmü və onları əbədidaga salmaq istəyirsiniz? Sadəcə onları mənə yönəlt və ya /q yaz və onları təravətli bir alıntı stiker olaraq çevirəcəyəm, onları yaddaşa salıb dostlarınızla paylaşa biləcəyiniz. Şəxsi xatirələr üçün və ya peşəkar istifadə üçün, imkanlar sonsuzdur. Məni sınamaqda birisən! 😎
 help: |2
-  <b>Salam!</b>
-  Mən bir alıntı yaradacağam.
-  Bot həm gizli mesajlarda həm də qruplarda işləyə bilər.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Mövcud əmrlər:</b>
-  /q — messajdan alıntı yarat <i>[mesaj cavabı]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Bir neçə mesajdan alıntı yaratmaq üçün, alıntının içində olmalı olan mesajların sayını göstərən bir ədövət yazın.
-  Gizli mesajlarda bir addımlıda bir neçə mesajı birdənə mənə yönəltə bilərsiniz və mən onlardan alıntı yaradaram.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Alıntı əmrləri üçün mövcud bayraqlar:</b>
-      hex kod və ya rəng adı: <code>#cbafff</code> və ya <code>indigo</code> — alıntıda <b>#cbafff</b> rəngində alıntı yaradın
-      <code>təsadüfi</code> — təsadüfi alıntı rəngi
-      <code>cavab</code> və ya <code>qərq</code> — cavablama əməliyyatını saxlamaq üçün alıntı yaradın
-      <code>p</code> və ya <code>png</code> — PNG alıntısı yaradın
-      <code>i</code> və ya <code>img</code> — alıntını şəkildə yaradın
-      <code>qiymətləndir</code> — alıntıya reytinq əlavə edin
-      <code>m</code> və ya <code>media</code> — media daxil et
-      <code>kəs</code> və ya <code>crop</code> — media kəs
-      <code>s2.5</code> — şəkil keyfiyyəti standartın 2.5 dəfəsi yüksəkdir <i>(hər hansı bir dəyər təyin edə bilərsiniz)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Bayraqların istifadəsinə aid nümunə:</b>
+    <b>Example of using flags:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Yalnız idarəçilər üçün:
-  <code>/qs 🥰💜</code> — bir stikerə foto və ya sənəti yaddaş qrupunun stiker paketinə yaddaşa salır 🥰💜 <i>(emoji heç bir və hər hansı bir sayda ola bilər)</i> <i>[mesaj cavabı]</i>
-  <code>/qd</code> — sənəti qrupun stiker paketindən silin <i>[cavaba cavab olaraq]</i>
-  <code>/qb</code> — emoji brend təyin edin. Mümkündür: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — alıntı rəngini <b>yaşıl</b> təyin edin <i>(hex kod və ya rəng adı ilə)</i>
-  <code>/qemoji</code> — stikerlər üçün emoji əlavə edin
-  <code>/qrate</code> — reytinqi alıntıya icazə verin/çəkin
-  <code>/qgab 300</code> — alıntının təsadüfi bir halının ehtimalını təyin edin. Birindən sonsuzluğa qədər olan hər hansı bir rəqəm. Rəqəm neçə çox olarsa, mesajların görünmə ehtimalı o qədər aşağı olacaq. Edən 300 qeyd edərək, mesajın görünmə imkanı təxminən 300 mesajdan 1 dəfə olacaqdır. Söndərmək üçün dəyəri 0 təyin edin
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — müsbət rəyli təsadüfi bir alıntı
-  /qtop — ən yüksək qrup alıntıları
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help və ya /start — bu mətni qəbul edin
+  /help or /start — get this text
 
-  🇺🇸 /lang — dil dəyişdir
-  🇷🇺 /lang — dil dəyişdir
+  /lang — change the language
 
-  <b>☕️ İxtisas üçün kofe alın:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 İnzibatçının blogu:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>salam!</b>
