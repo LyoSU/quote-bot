@@ -48,8 +48,7 @@ help: |2
 
   /help or /start — get this text
 
-  🇺🇸 /lang — change the language
-  🇷🇺 /lang — изменить язык
+  /lang — change the language
 
   <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
@@ -71,7 +70,7 @@ quote:
   empty_forward: |
     Command must be sent as a reply to a message.
   set_background_color: |
-    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
+    Quotes' background color is set to: <code>${backgroundColor}</code>
   set_emoji_brand: |
     Quotes' emoji brand is set to: <code>${emojiBrand}</code>
   sticker:
@@ -133,7 +132,7 @@ donate:
     Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
 
     More: donate.lyo.su
-  title: Донат ${botUsername}
+  title: Donate ${botUsername}
   description: Support bot development
   successful: |
     <b>Thank you for supporting the bot 💜</b>
@@ -146,7 +145,7 @@ emoji:
 
     For example, <code>/qemoji💜</code> will change the suffix to 💜 for all subsequent new stickers.
     For a random emoji <code>/qemoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+  done: Emoji successfully changed.
 adv:
   about: |
     <b>💫 You can buy advertising from us for a large number of active users and groups</b>
