@@ -7,53 +7,52 @@ description:
   long: |
     Заметили какие-нибудь забавные или вдохновляющие сообщения в групповом чате, которые хотели бы увековечить? Просто перешлите их мне или введите /q, и я превращу их в стильную наклейку с цитатами, которую вы сможете сохранить и поделиться с друзьями. Будь то для личных воспоминаний или профессионального использования, возможности безграничны. Попробуйте меня прямо сейчас! 😎
 help: |2
-  <b>Привет!</b>
-  Я помогу создать цитату из поста.
-  Бот может работать как в личных сообщениях, так и в группах.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Доступные команды:</b>
-  /q — сделать цитату из сообщения <i>[ответить на сообщение]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Чтобы создать цитату из нескольких сообщений, напишите в качестве параметра число, которое будет указывать, сколько сообщений должно быть в цитате.
-  В личных сообщениях вы можете переслать мне сразу несколько сообщений и я сделаю из них цитату.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Доступные флаги для команды /q:</b>
-      hex код или название цвета: <code>#cbafff</code> или <code>indigo</code> — сделает цитату с цветом <b>#cbafff</b>
-      <code>random</code> — случайный цвет цитаты
-      <code>reply</code> или <code>r</code> — сделать цитату с сохранением ответов
-      <code>p</code> или <code>png</code> — сделать цитату PNG
-      <code>i</code> или <code>img</code> — сделать цитату картинкой
-      <code>rate</code> — добавить оценку цитат
-      <code>m</code> или <code>media</code> — включить медиа
-      <code>c</code> или <code>crop</code> — обрезать медиа
-      <code>s2.5</code> — качество изображения в 2,5 раза выше стандартного <i>(можно задать любое значение)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Пример использования флагов:</b>
+    <b>Example of using flags:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Только для администраторов:
-  <code>/qs 🥰💜</code> — сохраняет стикер/фото/документ с фотографией в стикерпак группы с эмодзи 🥰💜 <i>(любое количество эмодзи)</i> <i>[ответить на сообщение]</i>
-  <code>/qd</code> — удалить стикер из стикерпака группы <i>[в ответ на сообщение]</i>
-  <code>/qb</code> — установить бренд эмодзи. Доступно: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — установить цвет цитат <b>зеленый</b> по умолчанию <i>(hex код или название цвета)</i>
-  <code>/qemoji</code> — изменить суффикс эмодзи для стикеров
-  <code>/qrate</code> — включить/отключить рейтинг цитат
-  <code>/qgab 300</code> — установить шанс случайного появление цитата. Любое число от одного от бесконечноести. Чем выше число, тем ниже шанс появления цитат. Указав 300, шанс появления сообщение будет примерно 1 раз в 300 сообщений. Чтобы отключить, установите значение на 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — случайная цитата с положительным рейтингом
-  /qtop — лучшие цитаты группы
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help или /start — получить этот текст
+  /help or /start — get this text
 
-  🇺🇸 /lang — изменить язык
-  🇷🇺 /lang — изменить язык
+  /lang — change the language
 
-  <b>☕️Купить кофе разработчику:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Блог разработчика:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Привет!</b>

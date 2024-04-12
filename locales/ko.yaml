@@ -6,53 +6,52 @@ description:
   long: |
     그룹 채팅에서 재미나 영감을 줄 메시지들을 기억하셨나요? 저에게 전달하시거나 /q를 입력하여 저에게 보내주시면 멋진 인용구 스티커로 만들어 드립니다. 개인적인 추억으로나 전문적인 용도로, 가능성은 무한합니다. 지금 바로 저를 시험해보세요! 😎
 help: |2
-  <b>안녕하세요!</b>
-  게시물에서 인용구를 만드는 데 도움을 드리겠습니다.
-  봇은 개인 메시지 및 그룹에서 모두 사용할 수 있습니다.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ 사용 가능한 명령어:</b>
-  /q — 메시지에서 인용구 만들기 <i>[메시지에 회신]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  여러 메시지에서 인용구를 만들려면 인용구에 몇 개의 메시지가 있어야 하는지를 나타내는 숫자를 매개변수로 작성하세요.
-  개인 메시지에서 한 번에 여러 메시지를 전달하면 해당 메시지에서 인용구를 만들어 드립니다.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>/q 명령에 대한 사용 가능한 플래그:</b>
-      hex 코드 또는 색 이름: <code>#cbafff</code> 또는 <code>indigo</code> — 색상이 <b>#cbafff</b>인 인용구 만들기
-      <code>random</code> — 랜덤한 인용구 색상
-      <code>reply</code> 또는 <code>r</code> — 답변 저장하여 인용구 만들기
-      <code>p</code> 또는 <code>png</code> — PNG 인용구 만들기
-      <code>i</code> 또는 <code>img</code> — 그림으로 인용구 만들기
-      <code>rate</code> — 인용구에 평점 추가
-      <code>m</code> 또는 <code>media</code> —미디어 포함
-      <code>c</code> 또는 <code>crop</code> — 미디어 자르기
-      <code>s2.5</code> — 그림 품질이 표준의 2.5배 높습니다 <i>(값 설정 가능)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>플래그 사용 예:</b>
+    <b>Example of using flags:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  관리자용만:
-  <code>/qs 🥰💜</code> — 스티커/사진 및 사진이 포함된 스티커 그룹에 저장하기 🥰💜 <i>(이모티콘은 임의 및 임의 수 가능)</i> <i>[메시지에 회신]</i>
-  <code>/qd</code> — 스티커 그룹에서 스티커 제거  <i>[메시지에 회신]</i>
-  <code>/qb</code> — 이모지 브랜드 설정. 사용 가능: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — 인용구 색상 설정 <b>green</b> 기본 <i>(hex 코드 또는 색 이름)</i>
-  <code>/qemoji</code> — 스티커를 위한 이모지 접미사 변경
-  <code>/qrate</code> — 인용구 평점 활성화/비활성화
-  <code>/qgab 300</code> — 인용구 랜덤 발생 확률 설정. 1 이상의 숫자 모두 가능. 숫자가 높을수록 인용구가 나타날 확률이 낮아집니다. 300을 지정하면 메시지가 한 번 약 300회 나타납니다. 비활성화하려면 값은 0으로 설정하세요
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — 긍정적인 평점이 있는 인용구 랜덤 출력
-  /qtop — 최상위 그룹 인용구
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help 또는 /start — 이 텍스트 받기
+  /help or /start — get this text
 
-  🇺🇸 /lang — 언어 변경
-  🇷🇺 /lang — 언어 변경
+  /lang — change the language
 
-  <b>☕️ 개발자에게 커피 구매하기:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>안녕하세요!</b>
@@ -145,7 +144,7 @@ emoji:
 
     예를 들어, <code>/qemoji💜</code>을 사용하여 이후의 새 스티커에 💜 접미사가 생깁니다.
     랜덤 이모지를 위해 <code>/qemoji random</code>
-  done: Эмодзи-суффикс успешно изменен.
+  done: Emoji successfully changed.
 adv:
   about: |
     <b>💫 우리는 다수의 활발한 사용자와 그룹에게 광고를 구매할 수 있습니다.</b>

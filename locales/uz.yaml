@@ -48,7 +48,7 @@ help: |2
 
   /help or /start — get this text
 
-  🇺🇸 /lang — change the language
+  /lang — change the language
 
   <b>☕️ Buy coffee for developer:</b> donate.lyo.su
 
@@ -56,7 +56,7 @@ help: |2
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
-  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman.
+  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman. 
 
   Batafsil ushbu buyruq orqali <a href="t.me/${username}?start=help">/help</a> men bilan shaxsiy xabarlarda bilib olishingiz mumkin
 btn:
