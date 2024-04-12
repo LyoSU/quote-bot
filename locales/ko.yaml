@@ -6,53 +6,53 @@ description:
   long: |
     그룹 채팅에서 재미나 영감을 줄 메시지들을 기억하셨나요? 저에게 전달하시거나 /q를 입력하여 저에게 보내주시면 멋진 인용구 스티커로 만들어 드립니다. 개인적인 추억으로나 전문적인 용도로, 가능성은 무한합니다. 지금 바로 저를 시험해보세요! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>안녕하세요!</b>
+  나는 게시물에서 인용구를 만드는 데 도와드릴게요.
+  봇은 개인 메시지와 그룹에서 모두 작동할 수 있어요.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ 사용 가능한 명령어:</b>
+  /q — 메시지에서 인용구 작성 <i>[메시지에 답장]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  여러 메시지에서 인용구를 만들려면 인용구에 들어갈 메시지 수를 나타내는 숫자를 매개변수로 작성하세요.
+  개인 메시지에서는 한 번에 여러 메시지를 전달할 수 있고, 저는 이를 통해 인용구를 만들어 드릴 거예요.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>/q 명령에 대한 사용 가능한 플래그:</b>
+      헥스 코드 또는 색 이름: <code>#cbafff</code> 혹은 <code>indigo</code> — 색상이 <b>#cbafff</b>로 정해진 인용구 작성
+      <code>random</code> —랜덤 인용구 색상
+      <code>reply</code> 혹은 <code>r</code> — 답변 저장하면서 인용구 작성
+      <code>p</code> 혹은 <code>png</code> — PNG 인용구 작성
+      <code>i</code> 혹은 <code>img</code> — 사진으로 인용구 작성
+      <code>rate</code> — 인용구에 평가 추가
+      <code>m</code> 혹은 <code>media</code> — 미디어 포함
+      <code>c</code> 혹은 <code>crop</code> — 미디어 자르기
+      <code>s2.5</code> — 사진 품질은 표준보다 2.5배 높음 <i>(임의의 값을 설정할 수 있음)</i>
 
-    <b>Example of using flags:</b>
+    <b>플래그 사용 예시:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  관리자 전용:
+  <code>/qs 🥰💜</code> — 스티커/사진/사진이 포함된 문서를 이모지 🥰💜로 그룹 스티커 팩에 저장 <i>(이모지는 임의의 이모지이고, 임의의 숫자)</i> <i>[메시지에 답장]</i>
+  <code>/qd</code> — 그룹 스티커 팩에서 스티커 제거 <i>[메시지에 대한 응답]</i>
+  <code>/qdrand</code> — 그룹 임의 스티커에서 스티커 제거 <i>[메시지에 대한 응답]</i>
+  <code>/qb</code> — 이모티콘 브랜드 설정. 사용 가능한 것: <code>애플</code>, <code>구글</code>, <code>트위터</code>, <code>조이픽셀</code>, <code>블롭</code>
+  <code>/qcolor green</code> — 인용구 색상을 <b>녹색</b>으로 설정 <i>(헥스 코드 또는 색 이름)</i>
+  <code>/qemoji</code> — 스티커에 대한 이모지 접미사 변경
+  <code>/qrate</code> — 인용구 평가 활성화/비활성화
+  <code>/qgab 300</code> — 인용구의 랜덤 발생 확률을 설정. 하나부터 무한대까지임의의 숫자. 숫자가 높을수록 인용구 출현 확률이 낮아짐. 300을 지정하면 메시지가 출현할 확률은 대략 300개의 메시지 중 1회입니다. 비활성화하려면 값을 0으로 설정하세요
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — 긍정적인 평가가 있는 인용구 랜덤
+  /qtop — 상위 그룹 인용구
 
-  /help or /start — get this text
+  /help or /start — 이 텍스트 가져오기
 
-  /lang — change the language
+  /lang — 언어 변경
 
-  <b>☕️ Buy coffee for developer:</b> donate.lyo.su
+  <b>☕️ 개발자에게 커피 사주기:</b> donate.lyo.su
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>안녕하세요!</b>
