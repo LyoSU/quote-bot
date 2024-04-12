@@ -34,15 +34,15 @@ help: |2
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Yalnızca yöneticiler için:
-  <code>/qs 🥰💜</code> — fotoğraflı bir çıkartma/fotoğraf/belgeyi emojili bir grubun çıkartma paketine kaydeder 🥰💜 <i>(emoji herhangi bir sayı olabilir)</i> < i>[mesajı yanıtla]</i>
-  <code>/qd</code> — çıkartmayı <i>[mesajı yanıt olarak]</i> grubunun çıkartma paketinden çıkarın
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
   <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — emoji markasını ayarlayın. Mevcut: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — varsayılan olarak <b>green</b> tırnak rengini ayarlayın <i>(hex kodu veya renk adı)</i>
-  <code>/qemoji</code> — çıkartmalar için emoji son ekini değiştirin
-  <code>/qrate</code> — alıntıların derecelendirmesini etkinleştir/devre dışı bırak
-  <code>/qgab 300</code> — bir alıntının rastgele oluşma olasılığını ayarlayın. Birden sonsuza kadar herhangi bir sayı. Sayı ne kadar yüksek olursa, alıntıların görünme şansı o kadar düşük olur. 300 belirtildiğinde, bir mesajın görünme şansı 300 mesajda yaklaşık 1 kez olacaktır. Devre dışı bırakmak için değeri 0 olarak ayarlayın
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
   /qrand — random a quote with a positive rating of
   /qtop — top group quotes
