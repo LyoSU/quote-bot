@@ -160,7 +160,7 @@ function getMessages (chatID, messageIds) {
       chat_id: chatID,
       message_ids: tdlibMessageIds
     }).then((response) => {
-      if (response._ === 'error') reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      if (response._ === 'error') return resolve([])
 
       if (!response.messages) return resolve([])
 

@@ -168,6 +168,8 @@ bot.use(
         return `${ctx.from.id}:${ctx.chat.id}`
       } else if (ctx.from) {
         return `user:${ctx.from.id}`
+      } else if (ctx.update?.business_message) {
+        return `user:${ctx.update.business_message.from.id}`
       }
       return null
     }
@@ -277,6 +279,24 @@ bot.command(
   handleRandomQuote
 )
 
+// business_message
+bot.use((ctx, next) => {
+  if (!ctx.update?.business_message) {
+    return next()
+  }
+
+  if (ctx.update.business_message.text) {
+    ctx.update.message = ctx.update.business_message
+
+    if (ctx.update.business_message.text.startsWith('/q')) {
+      ctx.update.message.text = ctx.update.business_message.text
+
+      return handleQuote(ctx, next)
+    }
+  }
+  return next()
+})
+
 bot.command('q', handleQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
@@ -369,7 +389,27 @@ db.connection.once('open', async () => {
         console.log('bot start webhook')
       })
   } else {
-    await bot.launch().then(() => {
+    await bot.launch({
+      polling: {
+        allowedUpdates: [
+          "message",
+          "edited_message",
+          "channel_post",
+          "edited_channel_post",
+          "inline_query",
+          "chosen_inline_result",
+          "callback_query",
+          "shipping_query",
+          "pre_checkout_query",
+          "poll",
+          "poll_answer",
+          "my_chat_member",
+          "chat_member",
+          "chat_join_request",
+          "business_message"
+        ],
+      }
+    }).then(() => {
       console.log('bot start polling')
     })
 

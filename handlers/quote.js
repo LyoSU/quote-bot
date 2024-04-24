@@ -147,9 +147,9 @@ module.exports = async (ctx, next) => {
     } else {
       backgroundColor = flag.color
     }
-  } else if (ctx.group && ctx.group.info.settings.quote.backgroundColor) {
-    backgroundColor = ctx.group.info.settings.quote.backgroundColor
-  } else if (ctx.session.userInfo.settings.quote.backgroundColor) {
+  } else if (ctx.group && ctx?.group?.info?.settings?.quote?.backgroundColor) {
+    backgroundColor = ctx?.group?.info?.settings?.quote?.backgroundColor
+  } else if (ctx.session?.userInfo?.settings?.quote?.backgroundColor) {
     backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
   }
 
@@ -160,11 +160,11 @@ module.exports = async (ctx, next) => {
   let emojiBrand = 'apple'
   if (ctx.group && ctx.group.info.settings.quote.emojiBrand) {
     emojiBrand = ctx.group.info.settings.quote.emojiBrand
-  } else if (ctx.session.userInfo.settings.quote.emojiBrand) {
+  } else if (ctx.session?.userInfo?.settings?.quote?.emojiBrand) {
     emojiBrand = ctx.session.userInfo.settings.quote.emojiBrand
   }
 
-  if ((ctx.group && ctx.group.info.settings.hidden) || ctx.session.userInfo.settings.hidden) flag.hidden = true
+  if ((ctx.group && ctx.group?.info?.settings?.hidden) || ctx.session?.userInfo?.settings?.hidden) flag.hidden = true
 
 
   const maxQuoteMessage = 50
@@ -203,6 +203,13 @@ module.exports = async (ctx, next) => {
   if (messageCount < 0) {
     messageCount = Math.abs(messageCount)
     startMessage -= messageCount - 1
+  }
+
+  // if firstMessage exists, get messages
+  if (firstMessage && firstMessage.message_id === startMessage) {
+    messages.push(firstMessage)
+    startMessage += 1
+    messageCount -= 1
   }
 
   messages.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
@@ -537,7 +544,7 @@ module.exports = async (ctx, next) => {
     }
   }
 
-  let emojis = ctx.group ? ctx.group.info.settings.quote.emojiSuffix : ctx.session.userInfo.settings.quote.emojiSuffix
+  let emojis = ctx.group ? ctx.group?.info?.settings?.quote?.emojiSuffix : ctx?.session?.userInfo?.settings?.quote?.emojiSuffix
   if (!emojis || emojis === 'random') {
     emojis = quoteEmojis + emojiArray[Math.floor(Math.random() * emojiArray.length)].emoji
   } else {
@@ -571,7 +578,7 @@ module.exports = async (ctx, next) => {
           reply_markup: replyMarkup
         })
       } else {
-        if (!ctx.session.userInfo.tempStickerSet.create) {
+        if (ctx.session?.userInfo && !ctx.session?.userInfo?.tempStickerSet?.create) {
           const getMe = await telegram.getMe()
 
           const packName = `temp_${Math.random().toString(36).substring(5)}_${Math.abs(ctx.from.id)}_by_${getMe.username}`
@@ -590,7 +597,7 @@ module.exports = async (ctx, next) => {
         let packOwnerId
         let packName
 
-        if (ctx.session.userInfo.tempStickerSet.create && ctx.update.update_id % 5 === 0) {
+        if (ctx.session?.userInfo && ctx.session?.userInfo?.tempStickerSet?.create && ctx.update.update_id % 5 === 0) {
           packOwnerId = ctx.from.id
           packName = ctx.session.userInfo.tempStickerSet.name
         }
@@ -603,7 +610,8 @@ module.exports = async (ctx, next) => {
             emoji: emojis,
             reply_to_message_id: ctx.message.message_id,
             allow_sending_without_reply: true,
-            reply_markup: replyMarkup
+            reply_markup: replyMarkup,
+            business_connection_id: ctx.update?.business_message?.business_connection_id
           })
         } else {
           const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
