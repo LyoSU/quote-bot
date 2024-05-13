@@ -428,7 +428,7 @@ module.exports = async (ctx, next) => {
     }
 
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o",
       messages: messageForAI,
       max_tokens: 64,
       temperature: 0.7,
