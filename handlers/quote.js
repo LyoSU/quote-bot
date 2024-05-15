@@ -423,7 +423,7 @@ module.exports = async (ctx, next) => {
 
       let userMessage = {
         role: 'user',
-        content: quoteMessage.text.slice(0, 128) || quoteMessage.caption.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
+        content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
       if (quoteMessage.media) {
