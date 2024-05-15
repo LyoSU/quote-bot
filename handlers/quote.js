@@ -421,10 +421,34 @@ module.exports = async (ctx, next) => {
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
 
-      messageForAI.push({
+      let userMessage = {
         role: 'user',
-        content: quoteMessage?.text || quoteMessage.caption || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
-      })
+        content: quoteMessage.text || quoteMessage.caption || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
+      }
+
+      if (quoteMessage.media) {
+        const photo = quoteMessage.media[0]
+        const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
+
+        userMessage = {
+          role: 'user',
+          content: [
+            {
+              type: "text",
+              text: "[user sent a photo]"
+            },
+            {
+              type: "image_url",
+              image_url: {
+                url: photoUrl,
+                detail: 'low'
+              }
+            }
+          ]
+        }
+      }
+
+      messageForAI.push(userMessage)
     }
 
     const completion = await openai.createChatCompletion({
