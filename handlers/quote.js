@@ -427,7 +427,7 @@ module.exports = async (ctx, next) => {
       }
 
       if (quoteMessage.media) {
-        const photo = quoteMessage.media[0]
+        const photo = quoteMessage.media.slice(-1)[0]
         const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
 
         userMessage = {
