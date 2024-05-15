@@ -415,7 +415,7 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     const messageForAI = [{
       role: 'system',
-      content: `You are an active participant in a group chat.  Write only in the language used by other chat members, default language is ${ctx.i18n.locale()}. Don't write like an AI. Write in the style of messages that you see. Don't ask a question in your message. Just write a funny message related to the situation that was mentioned. Keep it under 128 characters. You can also use emojis 😉.`
+      content: `You are an active group chat participant. Write in the language others use, default language is ${ctx.i18n.locale()}. Don't write like an AI. Match the meme style you see. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters. Use emojis 😂.`
     }]
 
     for (const index in quoteMessages) {
@@ -423,7 +423,7 @@ module.exports = async (ctx, next) => {
 
       let userMessage = {
         role: 'user',
-        content: quoteMessage.text || quoteMessage.caption || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
+        content: quoteMessage.text.slice(0, 128) || quoteMessage.caption.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
       if (quoteMessage.media) {
