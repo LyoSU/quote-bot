@@ -6,6 +6,7 @@ const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
 const { Configuration, OpenAIApi } = require("openai")
+const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
 
@@ -423,6 +424,7 @@ module.exports = async (ctx, next) => {
 
       let userMessage = {
         role: 'user',
+        name: slug(quoteMessage.from.name, { separator: '_', maintainCase: true }),
         content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
@@ -432,11 +434,8 @@ module.exports = async (ctx, next) => {
 
         userMessage = {
           role: 'user',
+          name: slug(quoteMessage.from.name, { separator: '_', maintainCase: true }),
           content: [
-            {
-              type: "text",
-              text: "[user sent a photo]"
-            },
             {
               type: "image_url",
               image_url: {
