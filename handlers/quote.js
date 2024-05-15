@@ -424,7 +424,7 @@ module.exports = async (ctx, next) => {
 
       let userMessage = {
         role: 'user',
-        name: slug(quoteMessage.from.name, { separator: '_', maintainCase: true }),
+        name: quoteMessage?.from?.name ? slug(quoteMessage.from.name, { separator: '_', maintainCase: true }) : 'user',
         content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
