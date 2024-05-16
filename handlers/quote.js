@@ -416,7 +416,7 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     const messageForAI = [{
       role: 'system',
-      content: `You are an active group chat participant. Write in the language others use, default language is ${ctx.i18n.locale()}. Don't write like an AI. Match the meme style you see. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters. Use emojis 😂.`
+      content: `You are an active group chat participant. Write in the language others use, default language is ${ctx.i18n.locale()}. Don't write like an AI. Match the meme style you see. No pictures, just text. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters. Use emojis 😂.`
     }]
 
     for (const index in quoteMessages) {
