@@ -446,9 +446,8 @@ module.exports = async (ctx, next) => {
               }
             },
             {
-              role: 'user',
-              name: nameForAI,
-              content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
+              type: "text",
+              text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
             }
           ]
         }
