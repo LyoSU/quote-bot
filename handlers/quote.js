@@ -422,11 +422,11 @@ module.exports = async (ctx, next) => {
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
 
-      const nameForAI = slug(quoteMessage.from.name, { separator: '_', maintainCase: true }) || 'user'
+      const nameForAI = quoteMessage?.from?.name ? slug(quoteMessage?.from?.name, { separator: '_', maintainCase: true }) || 'user' : 'user'
 
       let userMessage = {
         role: 'user',
-        name: quoteMessage?.from?.name ? nameForAI : 'user',
+        name: nameForAI,
         content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
