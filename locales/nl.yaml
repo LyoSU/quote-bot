@@ -229,3 +229,5 @@ only_admin: |
   Alleen groepsbeheerder kan deze opdracht gebruiken.
 only_group: |
   Dit commando kan alleen in groepen gebruikt worden.
+rate_limit: |
+  You can't use this command more than once every ${seconds} seconds.
