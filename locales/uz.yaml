@@ -230,3 +230,5 @@ only_admin: |
   Buyruqdan faqatgina guruhning administratori foydalanishni mumkin.
 only_group: |
   Buyruq faqat guruhlarda ishlatilishi mumkin.
+rate_limit: |
+  You can't use this command more than once every ${seconds} seconds.
