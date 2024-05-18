@@ -229,4 +229,4 @@ only_admin: |
 only_group: |
   Bu komut yalnızca gruplar içerisinde kullanılabilir.
 rate_limit: |
-  You can't use this command more than once every ${seconds} seconds.
+  Bu komutu ${seconds} saniyeden daha sık kullanamazsınız.
