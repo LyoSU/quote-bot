@@ -230,3 +230,5 @@ only_admin: |
   Perintah ini hanya dapat dijalankan oleh administrator grup.
 only_group: |
   Perintah ini hanya dapat dijalankan dalam grup.
+rate_limit: |
+  You can't use this command more than once every ${seconds} seconds.
