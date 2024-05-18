@@ -230,3 +230,5 @@ only_admin: |
   Solo el administrador puede usar este comando.
 only_group: |
   Este comando solo funciona en grupos.
+rate_limit: |
+  You can't use this command more than once every ${seconds} seconds.
