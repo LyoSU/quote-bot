@@ -231,4 +231,4 @@ only_admin: |
 only_group: |
   此命令只能在群组中使用。
 rate_limit: |
-  You can't use this command more than once every ${seconds} seconds.
+  你不能在${seconds}秒内多次使用此命令。
