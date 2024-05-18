@@ -231,4 +231,4 @@ only_admin: |
 only_group: |
   Dieser Befehl kann nur in Gruppen verwendet werden.
 rate_limit: |
-  You can't use this command more than once every ${seconds} seconds.
+  Du kannst diesen Befehl nicht öfter als alle ${seconds} Sekunden verwenden.
