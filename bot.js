@@ -256,6 +256,23 @@ bot.start(async (ctx, next) => {
   return next()
 })
 
+bot.hears(/\/q(.*)\*(.*)/, rateLimit({
+  window: 1000 * 25,
+  limit: 1,
+  keyGenerator: (ctx) => ctx.from.id,
+  onLimitExceeded: (ctx) => {
+    return ctx.replyWithHTML(ctx.i18n.t('rate_limit', {
+      seconds: 25
+    }), {
+      reply_to_message_id: ctx.message.message_id
+    }).then(() => {
+      setTimeout(() => {
+        ctx.deleteMessage().catch(() => {})
+      }, 5000)
+    })
+  }
+}))
+
 bot.command('donate', handleDonate)
 bot.command('ping', handlePing)
 bot.action(/(donate):(.*)/, handleDonate)
