@@ -231,4 +231,4 @@ only_admin: |
 only_group: |
   Команду можна використовувати тільки в групах.
 rate_limit: |
-  You can't use this command more than once every ${seconds} seconds.
+  Ви не можете використовувати цю команду більше одного разу на кожні ${seconds} секунд.
