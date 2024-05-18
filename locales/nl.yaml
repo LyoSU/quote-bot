@@ -230,4 +230,4 @@ only_admin: |
 only_group: |
   Dit commando kan alleen in groepen gebruikt worden.
 rate_limit: |
-  You can't use this command more than once every ${seconds} seconds.
+  Je kunt dit commando niet vaker gebruiken dan eens per ${seconds} seconden.
