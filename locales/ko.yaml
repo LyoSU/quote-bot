@@ -226,4 +226,4 @@ only_admin: |
 only_group: |
   이 명령은 그룹에서만 사용할 수 있습니다.
 rate_limit: |
-  You can't use this command more than once every ${seconds} seconds.
+  이 명령은 ${seconds} 초마다 한 번 이상 사용할 수 없습니다.
