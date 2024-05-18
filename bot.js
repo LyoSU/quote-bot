@@ -265,9 +265,10 @@ bot.hears(/\/q(.*)\*(.*)/, rateLimit({
       seconds: 25
     }), {
       reply_to_message_id: ctx.message.message_id
-    }).then(() => {
+    }).then((msg) => {
       setTimeout(() => {
         ctx.deleteMessage().catch(() => {})
+        ctx.deleteMessage(msg.message_id).catch(() => {})
       }, 5000)
     })
   }
