@@ -228,3 +228,5 @@ only_admin: |
   Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
 only_group: |
   Bu komut yalnızca gruplar içerisinde kullanılabilir.
+rate_limit: |
+  Bu komutu ${seconds} saniyeden daha sık kullanamazsınız.

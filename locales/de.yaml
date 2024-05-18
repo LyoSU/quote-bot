@@ -230,3 +230,5 @@ only_admin: |
   Nur Gruppenadministrator kann diesen Befehl verwenden.
 only_group: |
   Dieser Befehl kann nur in Gruppen verwendet werden.
+rate_limit: |
+  Du kannst diesen Befehl nicht öfter als alle ${seconds} Sekunden verwenden.

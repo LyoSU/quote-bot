@@ -230,3 +230,5 @@ only_admin: |
   只有群组管理员可以使用此命令。
 only_group: |
   此命令只能在群组中使用。
+rate_limit: |
+  你不能在${seconds}秒内多次使用此命令。

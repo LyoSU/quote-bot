@@ -229,3 +229,5 @@ only_admin: |
   Bu komandanı yalnız qrupun admini istifadə edə bilər.
 only_group: |
   Bu komandanı yalnız qrupda istifadə etmək olar.
+rate_limit: |
+  Bir ${seconds} saniyədən çox istifadə edə bilməzsiniz ${seconds} saniyədən çoxdan.
