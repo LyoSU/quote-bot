@@ -1,7 +1,7 @@
 const got = require('got')
 
 module.exports = async (ctx, next) => {
-  if (Math.random() > 0.01) {
+  if (Math.random() > 0.1) {
     return next()
   }
 
