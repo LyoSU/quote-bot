@@ -719,7 +719,8 @@ module.exports = async (ctx, next) => {
         filename: 'quote.png'
       }, {
         reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true
+        allow_sending_without_reply: true,
+        business_connection_id: ctx.update?.business_message?.business_connection_id
       })
     }
   }
