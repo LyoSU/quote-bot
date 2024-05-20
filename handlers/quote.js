@@ -604,7 +604,8 @@ module.exports = async (ctx, next) => {
           emoji: emojis,
           reply_to_message_id: ctx.message.message_id,
           allow_sending_without_reply: true,
-          reply_markup: replyMarkup
+          reply_markup: replyMarkup,
+          business_connection_id: ctx.update?.business_message?.business_connection_id
         })
       } else {
         if (ctx.session?.userInfo && !ctx.session?.userInfo?.tempStickerSet?.create) {
@@ -676,7 +677,8 @@ module.exports = async (ctx, next) => {
           sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
             reply_to_message_id: ctx.message.message_id,
             allow_sending_without_reply: true,
-            reply_markup: replyMarkup
+            reply_markup: replyMarkup,
+            business_connection_id: ctx.update?.business_message?.business_connection_id
           })
         }
       }
