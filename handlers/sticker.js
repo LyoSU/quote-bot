@@ -36,7 +36,7 @@ const getTopStickerSets = async () => {
     }).catch((error) => {
       console.error('Error publishing sticker set:', error)
     }).then((response) => {
-      console.log('Sticker set published:', response.body)
+      console.log('Sticker set published:', stickerSet.name)
     })
   }
 
