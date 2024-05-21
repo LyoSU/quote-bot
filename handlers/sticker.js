@@ -19,7 +19,6 @@ const getTopStickerSets = async () => {
   // Сортуємо стікерпаки за кількістю згадок і беремо топ-10
   const sortedStickerSets = Object.entries(stickerCount)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 1000)
     .map(entry => {
       return {
         name: entry[0],
