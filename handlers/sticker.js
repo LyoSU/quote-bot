@@ -64,10 +64,6 @@ module.exports = async (ctx, next) => {
   if (ctx.message.sticker) {
     const { set_name } = ctx.message.sticker
 
-    if (!set_name || set_name.match(/_by_(.*)bot$/gmi)) {
-      return next()
-    }
-
     const key = `${PREFIX}:sticker_set:${set_name}:${Date.now()}`
     redis.zincrby(`${PREFIX}:sticker_sets`, 1, set_name)
     redis.set(key, 1, 'EX', 60)
