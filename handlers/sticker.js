@@ -1,13 +1,59 @@
 const got = require('got')
+const Redis = require('ioredis')
+
+const redis = new Redis()
+
+const PREFIX = 'quotly'
+
+const getTopStickerSets = async () => {
+  // Отримуємо всі стікерпаки з їхніми рахунками
+  const stickerSets = await redis.zrevrange(`${PREFIX}:sticker_sets`, 0, -1, 'WITHSCORES')
+  const stickerCount = {}
+
+  for (let i = 0; i < stickerSets.length; i += 2) {
+    const stickerSet = stickerSets[i]
+    const count = parseInt(stickerSets[i + 1], 10)
+    stickerCount[stickerSet] = count
+  }
+
+  // Сортуємо стікерпаки за кількістю згадок і беремо топ-10
+  const sortedStickerSets = Object.entries(stickerCount)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(entry => {
+      return {
+        name: entry[0],
+        count: entry[1]
+      }
+    })
+
+  for (const stickerSet of sortedStickerSets) {
+    await got.post(process.env.FSTIK_API_URI + '/publishStickerSet?token=' + process.env.BOT_TOKEN, {
+      json: {
+        name: stickerSet.name,
+        count: stickerSet.count
+      }
+    }).catch((error) => {
+      console.error('Error publishing sticker set:', error)
+    }).then((response) => {
+      console.log('Sticker set published:', response.body)
+    })
+  }
+
+  return sortedStickerSets
+}
+
+// Запускаємо підрахунок топ-10 стікерпаків кожну хвилину
+setInterval(async () => {
+  const topStickerSets = await getTopStickerSets()
+
+  console.log(`Top 10 sticker sets in the last minute: ${topStickerSets.map(set => `${set.name} (${set.count})`).join(', ')}`)
+}, 60000)
 
 module.exports = async (ctx, next) => {
-  if (Math.random() > 0.05) {
-    return next()
-  }
-
-  if (!ctx.chat.username) {
-    return next()
-  }
+  // if (!ctx.chat.username) {
+  //   return next()
+  // }
 
   if (ctx.message.sticker) {
     const { set_name } = ctx.message.sticker
@@ -16,11 +62,9 @@ module.exports = async (ctx, next) => {
       return next()
     }
 
-    got.post(process.env.FSTIK_API_URI + '/publishStickerSet?token=' + process.env.BOT_TOKEN, {
-      json: {
-        name: set_name
-      }
-    }).catch(() => {})
+    const key = `${PREFIX}:sticker_set:${set_name}:${Date.now()}`
+    redis.zincrby(`${PREFIX}:sticker_sets`, 1, set_name)
+    redis.set(key, 1, 'EX', 60)
   } else if (ctx.message.entities || ctx.message.entities) {
     const entities = ctx.message.entities || ctx.message.caption_entities
 
@@ -40,11 +84,9 @@ module.exports = async (ctx, next) => {
           return
         }
 
-        got.post(process.env.FSTIK_API_URI + '/publishStickerSet?token=' + process.env.BOT_TOKEN, {
-          json: {
-            name: sticker.set_name
-          }
-        }).catch(() => {})
+        const key = `${PREFIX}:sticker_set:${sticker.set_name}:${Date.now()}`
+        redis.zincrby(`${PREFIX}:sticker_sets`, 1, sticker.set_name)
+        redis.set(key, 1, 'EX', 60)
       })
     }
   }
