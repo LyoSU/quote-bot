@@ -19,7 +19,7 @@ const getTopStickerSets = async () => {
   // Сортуємо стікерпаки за кількістю згадок і беремо топ-10
   const sortedStickerSets = Object.entries(stickerCount)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 50)
+    .slice(0, 1000)
     .map(entry => {
       return {
         name: entry[0],
@@ -28,6 +28,10 @@ const getTopStickerSets = async () => {
     })
 
   for (const stickerSet of sortedStickerSets) {
+    if (stickerSet.count < 10) {
+      break
+    }
+
     await got.post(process.env.FSTIK_API_URI + '/publishStickerSet?token=' + process.env.BOT_TOKEN, {
       json: {
         name: stickerSet.name,
@@ -50,7 +54,7 @@ setInterval(async () => {
   const topStickerSets = await getTopStickerSets()
 
   console.log(`Top 10 sticker sets in the last minute: ${topStickerSets.map(set => `${set.name} (${set.count})`).join(', ')}`)
-}, 60000)
+}, 1000 * 60 * 10)
 
 module.exports = async (ctx, next) => {
   // if (!ctx.chat.username) {
