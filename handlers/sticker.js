@@ -38,8 +38,6 @@ const getTopStickerSets = async () => {
       }
     }).catch((error) => {
       console.error('Error publishing sticker set:', error)
-    }).then((response) => {
-      console.log('Sticker set published:', stickerSet.name)
     })
     redis.del(`${PREFIX}:sticker_set:${stickerSet.name}:*`)
     redis.zrem(`${PREFIX}:sticker_sets`, stickerSet.name)
