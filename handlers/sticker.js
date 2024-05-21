@@ -38,6 +38,8 @@ const getTopStickerSets = async () => {
     }).then((response) => {
       console.log('Sticker set published:', stickerSet.name)
     })
+    redis.del(`${PREFIX}:sticker_set:${stickerSet.name}:*`)
+    redis.zrem(`${PREFIX}:sticker_sets`, stickerSet.name)
   }
 
   return sortedStickerSets
