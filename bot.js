@@ -347,7 +347,14 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
 
-bot.on('sticker', handleSticker)
+bot.on('sticker', rateLimit({
+  window: 1000 * 60,
+  limit: 1,
+  keyGenerator: (ctx) => ctx.from.id,
+  onLimitExceeded: (ctx, next) => {
+    return next()
+  }
+}), handleSticker)
 bot.on('text', handleSticker)
 
 bot.on('message', Composer.privateChat(handleQuote))
