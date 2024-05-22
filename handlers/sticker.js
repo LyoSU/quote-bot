@@ -54,9 +54,9 @@ setInterval(async () => {
 }, 1000 * 60 * 10)
 
 module.exports = async (ctx, next) => {
-  if (!ctx.chat.username) {
-    return next()
-  }
+  // if (!ctx.chat.username) {
+  //   return next()
+  // }
 
   if (ctx.message.sticker) {
     const { set_name } = ctx.message.sticker
@@ -78,13 +78,11 @@ module.exports = async (ctx, next) => {
         custom_emoji_ids: customEmoji
       })
 
-      emojiStickers.forEach((sticker) => {
-        if (!sticker.set_name) {
-          return
-        }
+      const uniqueStickerSets = new Set(emojiStickers.map(sticker => sticker.set_name))
 
-        const key = `${PREFIX}:sticker_set:${sticker.set_name}:${Date.now()}`
-        redis.zincrby(`${PREFIX}:sticker_sets`, 1, sticker.set_name)
+      uniqueStickerSets.forEach(setName => {
+        const key = `${PREFIX}:sticker_set:${setName}:${Date.now()}`
+        redis.zincrby(`${PREFIX}:sticker_sets`, 1, setName)
         redis.set(key, 1, 'EX', 60)
       })
     }
