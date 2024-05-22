@@ -6,7 +6,6 @@ const redis = new Redis()
 const PREFIX = 'quotly'
 
 const getTopStickerSets = async () => {
-  // Отримуємо всі стікерпаки з їхніми рахунками
   const stickerSets = await redis.zrevrange(`${PREFIX}:sticker_sets`, 0, -1, 'WITHSCORES')
   const stickerCount = {}
 
@@ -16,21 +15,20 @@ const getTopStickerSets = async () => {
     stickerCount[stickerSet] = count
   }
 
-  // Сортуємо стікерпаки за кількістю згадок і беремо топ-10
   const sortedStickerSets = Object.entries(stickerCount)
     .sort((a, b) => b[1] - a[1])
     .map(entry => {
+      if (entry[1] <= 10) {
+        return null
+      }
       return {
         name: entry[0],
         count: entry[1]
       }
     })
+    .filter(entry => entry)
 
   for (const stickerSet of sortedStickerSets) {
-    if (stickerSet.count < 10) {
-      break
-    }
-
     await got.post(process.env.FSTIK_API_URI + '/publishStickerSet?token=' + process.env.BOT_TOKEN, {
       json: {
         name: stickerSet.name,
@@ -46,7 +44,6 @@ const getTopStickerSets = async () => {
   return sortedStickerSets
 }
 
-// Запускаємо підрахунок топ-10 стікерпаків кожну хвилину
 setInterval(async () => {
   const topStickerSets = await getTopStickerSets()
 
