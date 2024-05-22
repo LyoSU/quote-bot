@@ -54,9 +54,9 @@ setInterval(async () => {
 }, 1000 * 60 * 10)
 
 module.exports = async (ctx, next) => {
-  // if (!ctx.chat.username) {
-  //   return next()
-  // }
+  if (!ctx.chat.username) {
+    return next()
+  }
 
   if (ctx.message.sticker) {
     const { set_name } = ctx.message.sticker
