@@ -14,7 +14,12 @@ module.exports = async ctx => {
 - 🔄 *Pending Updates:* \`${webhookInfo.pending_update_count}\`
 `
 
-  await ctx.replyWithMarkdown(message, {
+  const response = await ctx.replyWithMarkdown(message, {
     reply_to_message_id: ctx.message.message_id
   })
+
+  // delete the message after 10 seconds
+  await new Promise(resolve => setTimeout(resolve, 10000))
+  await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id)
+  await ctx.deleteMessage()
 }
