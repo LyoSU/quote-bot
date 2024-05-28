@@ -91,7 +91,9 @@ module.exports = async (ctx, next) => {
 
   ctx.stats = {
     rps: stats.rpsAvrg,
-    rta: stats.responseTimeAvrg
+    rta: stats.responseTimeAvrg,
+    mps: noEmptyStats.rpsAvrg,
+    mrs: noEmptyStats.responseTimeAvrg
   }
 
   return next().then(() => {
