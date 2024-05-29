@@ -6,9 +6,9 @@ module.exports = async ctx => {
 
 ✨ *Performance Metrics:*
 - 🚀 *Requests per Second (RPS):* \`${rps.toFixed(0)}\`
-- ⏱️ *Response Time:* \`${rta.toFixed(0)} ms\`
+- ⏱️ *Average Response Time:* \`${rta.toFixed(0)} ms\`
 - 📈 *Messages per Second (MPS):* \`${mps.toFixed(0)}\`
-- 🕒 *Average Response Time:* \`${mrs.toFixed(0)} ms\`
+- 🕒 *Average Messages Response Time:* \`${mrs.toFixed(0)} ms\`
 
 📥 *Queue Status:*
 - 🔄 *Pending Updates:* \`${webhookInfo.pending_update_count}\`
