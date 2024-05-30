@@ -3,20 +3,21 @@ module.exports = async ctx => {
 
   if (ctx.message.reply_to_message) {
     const replyMessage = ctx.message.reply_to_message
-    const groupId = ctx.message.chatId
+    const group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
 
-    const fileId = replyMessage.sticker.file_id
+    const fileId = replyMessage.sticker.file_unique_id
 
     if (replyMessage.sticker) {
-      ctx.Quote.deleteOne({ group: groupId, file_id: fileId }, (error) => {
-        if (error) {
-          result = ctx.i18n.t('sticker.delete_random.error', {
-            error
-          })
-        } else {
-          result = ctx.i18n.t('sticker.delete_random.suc')
-        }
-      })
+      const quote = await ctx.db.Quote.findOne({ group: group, file_unique_id: fileId })
+
+      if (quote) {
+        await quote.delete()
+        result = ctx.i18n.t('sticker.delete_random.suc')
+      } else {
+        result = ctx.i18n.t('sticker.delete_random.error', {
+          error: 'quote not found'
+        })
+      }
     } else {
       result = ctx.i18n.t('sticker.empty_forward')
     }
