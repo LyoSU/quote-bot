@@ -416,7 +416,7 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     const messageForAI = [{
       role: 'system',
-      content: `Write in the language commonly used by others, the default language is ${ctx.i18n.locale()}. Don't write like an AI. Just write a meme in the style of the messages you see above, so if they are harsh and negative, roast them brutally. Keep it at least 128 characters long. Use emojis.`
+      content: `Write in the language commonly used by others, the default language is ${ctx.i18n.locale()}. Don't write like an AI. Just write a meme in the style of the messages you see above, so if they are harsh and negative, roast them brutally. Keep it at least 128 characters long. Use emojis. Don't use hashtags.`
     }]
 
     for (const index in quoteMessages) {
