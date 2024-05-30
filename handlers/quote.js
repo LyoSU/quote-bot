@@ -416,7 +416,7 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     const messageForAI = [{
       role: 'system',
-      content: `You are an active group chat participant. Write in the language others use, default language is ${ctx.i18n.locale()}. Don't write like an AI. Match the meme style you see. No pictures, just text. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters. Use emojis 😂.`
+      content: `You are a meme creator. The fire of the previous commenter is as harsh as possible. Default language is ${ctx.i18n.locale()}. Write like a person. Drop jokes under 128 characters. Also use emojis 🤡`
     }]
 
     for (const index in quoteMessages) {
@@ -460,10 +460,7 @@ module.exports = async (ctx, next) => {
       model: "gpt-4o",
       messages: messageForAI,
       max_tokens: 64,
-      temperature: 0.7,
-      top_p: 1,
-      frequency_penalty: 0.0,
-      presence_penalty: 0.6
+      temperature: 1
     }).catch((err) => {
       console.error('OpenAI error:', err?.response?.statusText || err.message)
     })
