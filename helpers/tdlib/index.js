@@ -1,19 +1,15 @@
 const path = require('path')
+const tdl = require('tdl')
 
 const tdDirectory = path.resolve(__dirname, 'data')
 
-const { Client } = require('tdl')
-const { TDLib } = require('tdl-tdlib-addon')
+tdl.configure({ libdir: tdDirectory, verbosityLevel: 0 })
 
-let tdLibFile = process.platform === 'win32' ? 'tdjson.dll' : 'libtdjson.so'
-if (process.platform === 'darwin') tdLibFile = 'libtdjson.dylib'
-
-const client = new Client(new TDLib(`${tdDirectory}/${tdLibFile}`), {
+const client = tdl.createClient({
   apiId: process.env.TELEGRAM_API_ID,
   apiHash: process.env.TELEGRAM_API_HASH,
-  databaseDirectory: `${tdDirectory}/db`,
+  databaseDirectory: path.join(tdDirectory, 'db'),
   filesDirectory: tdDirectory,
-  verbosityLevel: 0,
   tdlibParameters: {
     use_message_database: false,
     use_chat_info_database: false,
@@ -22,17 +18,7 @@ const client = new Client(new TDLib(`${tdDirectory}/${tdLibFile}`), {
 })
 
 client.on('error', console.error)
-
-async function main () {
-  await client.connectAndLogin(() => ({
-    type: 'bot',
-    getToken: retry => retry
-      ? Promise.reject('Token is not valid')
-      : Promise.resolve(process.env.BOT_TOKEN)
-  }))
-}
-
-main()
+client.loginAsBot(process.env.BOT_TOKEN)
 
 function sendMethod (method, parm) {
   return new Promise((resolve, reject) => {
