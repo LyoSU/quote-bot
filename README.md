@@ -13,6 +13,6 @@ Telegram quote bot
 
 4) Create network `docker network create quotly`
 
-5) Compile/Download tdlib for linux and place it to `helpers/tdlib/data/libtdjson/libtdjson.so`. To make it easier, check out [this builder](https://github.com/vlakam/tdlib.native) or [this AppVeyor CI](https://ci.appveyor.com/project/vlakam/tdlib-native) (ubuntu > Artifacts > linux)
+5) Compile/Download tdlib for linux and place it to `helpers/tdlib/data/libtdjson/libtdjson.so`. To make it easier, check out [this builder](https://github.com/vlakam/tdlib.native) or [this AppVeyor CI](https://ci.appveyor.com/project/vlakam/tdlib-native) (ubuntu > Artifacts > linux) or the [prebuilt-tdlib](https://npmjs.com/package/prebuilt-tdlib) npm package
 
 6) `docker-compose up -d` on both repos
