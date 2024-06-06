@@ -1,7 +1,7 @@
 const got = require('got')
 const Redis = require('ioredis')
 
-const redis = new Redis()
+const redis = new Redis(process.env.REDIS_URI)
 
 const PREFIX = 'quotly'
 

@@ -1,11 +1,12 @@
-FROM nikolaik/python-nodejs:python3.11-nodejs20 AS builder
+FROM node:alpine
 
-ENV NODE_WORKDIR /app
-WORKDIR $NODE_WORKDIR
+WORKDIR /app
+ADD . /app
 
-ADD . $NODE_WORKDIR
+RUN apk add --no-cache python3 make g++
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN apt-get update && apt-get install -y build-essential gcc wget git libvips && rm -rf /var/lib/apt/lists/*
+RUN npm install
 
-RUN npm install && npm install sharp@0.30.5 && npm install tdl-tdlib-addon --build-from-source
+RUN apk del python3 make g++
+
+CMD [ "index.js" ]
