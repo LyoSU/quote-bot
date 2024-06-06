@@ -33,7 +33,7 @@ jobs:
           - name: Prepare TDLib
             run: |
               mkdir -p ${GITHUB_WORKSPACE}/helpers/tdlib/data
-              unzip tdlib.linux.zip -d ${GITHUB_WORKSPACE}/helpers/tdlib/data
+              unzip tdlib.zip -d ${GITHUB_WORKSPACE}/helpers/tdlib/data
     
           - name: Set up Docker Buildx
             uses: docker/setup-buildx-action@v3
