@@ -207,7 +207,7 @@ module.exports = async (ctx, next) => {
   }
 
   // if firstMessage exists, get messages
-  if (!flag.reply && firstMessage && firstMessage.message_id === startMessage) {
+  if (!flag.reply && firstMessage && firstMessage.from.is_bot && firstMessage.message_id === startMessage) {
     messages.push(firstMessage)
     startMessage += 1
     messageCount -= 1
