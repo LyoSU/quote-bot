@@ -7,53 +7,53 @@ description:
   long: |
     Hast du in deinem Gruppenchat lustige oder inspirierende Nachrichten entdeckt, die du gerne verewigen möchtest? Leiten Sie sie einfach an mich weiter oder geben Sie /q ein und ich verwandle sie in einen eleganten Zitataufkleber, den Sie speichern und mit Ihren Freunden teilen können. Ob für persönliche Erinnerungen oder für den beruflichen Gebrauch, die Möglichkeiten sind endlos. Probiere mich jetzt aus! 😎
 help: |2
-  <b>Hallo!</b>
-  Ich werde dabei helfen, ein Zitat aus einem Beitrag zu erstellen.
-  Der Bot kann sowohl in privaten Nachrichten als auch in Gruppen arbeiten.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Verfügbare Befehle:</b>
-  /q — erstelle ein Zitat aus der Nachricht <i>[Antwort auf die Nachricht]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Um ein Zitat aus mehreren Nachrichten zu erstellen, schreiben Sie als Parameter eine Zahl, die angibt, wie viele Nachrichten im Zitat enthalten sein sollen.
-  In privaten Nachrichten können Sie mir gleichzeitig mehrere Nachrichten weiterleiten, und ich werde daraus ein Zitat machen.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Verfügbare Flaggen für den Befehl /q:</b>
-      Hex-Code oder Farbname: <code>#cbafff</code> oder <code>indigo</code> — erstellen Sie ein Zitat mit Farbe <b>#cbafff</b>
-      <code>random</code> — zufällige Zitatfarbe
-      <code>reply</code> oder <code>r</code> — erstellen Sie ein Zitat mit gespeicherten Antworten
-      <code>p</code> oder <code>png</code> — erstellen Sie ein PNG-Zitat
-      <code>i</code> oder <code>img</code> — erstellen Sie ein Zitat als Bild
-      <code>rate</code> — fügen Sie einem Zitat eine Bewertung hinzu
-      <code>m</code> oder <code>media</code> — Medien einbeziehen
-      <code>c</code> oder <code>crop</code> — Medienschnitt
-      <code>s2,5</code> — Bildqualität ist 2,5-mal höher als Standard <i>(kann jeden Wert festlegen)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Beispiel für die Verwendung von Flaggen:</b>
-    <code>/q 3 weiß rp</code>
-    <code>/q i rot s3,2</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
+    <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Nur für Administratoren:
-  <code>/qs 🥰💜</code> — speichert ein Sticker/Foto/Dokument mit einem Foto in einem Aufkleberpaket einer Gruppe mit Emoji 🥰💜 <i>(Emoji kann jedes und beliebige Anzahl sein)</i> <i>[Antwort auf die Nachricht]</i>
-  <code>/qd</code> — entfernt den Aufkleber aus dem Aufkleberpaket der Gruppe <i>[als Antwort auf die Nachricht]</i>
-  <code>/qdrand</code> — entfernt den Aufkleber aus den zufälligen Aufklebern der Gruppe <i>[als Antwort auf die Nachricht]</i>
-  <code>/qb</code> — setzt Emoji-Marke. Verfügbar: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor grün</code> — setzt die Farbe der Zitate <b>grün</b> standardmäßig <i>(Hex-Code oder Farbname)</i>
-  <code>/qemoji</code> — ändert das Emoji-Suffix für Aufkleber
-  <code>/qrate</code> — Aktivieren/Deaktivieren der Bewertung von Zitaten
-  <code>/qgab 300</code> — setzt die Chance eines zufälligen Auftretens eines Zitats. Jede Zahl von eins bis Unendlich. Je höher die Zahl, desto geringer ist die Wahrscheinlichkeit, dass Zitate erscheinen. Durch Angabe von 300 wird die Wahrscheinlichkeit, dass eine Nachricht erscheint, ungefähr 1-mal in 300 Nachrichten sein. Um zu deaktivieren, setzen Sie den Wert auf 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — zufälliges Zitat mit einer positiven Bewertung
-  /qtop — Top-Gruppenzitate
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help oder /start — erhalten Sie diesen Text
+  /help or /start — get this text
 
-  /lang — Sprache ändern
+  /lang — change the language
 
-  <b>☕️ Kaufe dem Entwickler Kaffee:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> /donate
 
-  <b>👨🏻‍💻 Entwicklerblog:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Hallo!</b>
@@ -129,13 +129,11 @@ top:
   open: Top öffnen
 donate:
   info: |
-    Sie können dem Entwickler Kaffee oder etwas anderes kaufen mit folgenden Details:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bankkarte: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-
-    Mehr: donate.lyo.su
+    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
   title: '${botUsername} spenden'
   description: Unterstütze Bot-Entwicklung
   successful: |
