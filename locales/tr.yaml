@@ -51,7 +51,7 @@ help: |2
 
   /dil — dili değiştir
 
-  <b>☕️ Geliştiriciye kahve al:</b> donate.lyo.su
+  <b>☕️ Geliştiriciye kahve al:</b> /donate
 
   <b>👨🏻‍💻 Geliştirici blogu:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
@@ -132,8 +132,6 @@ donate:
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     Banka kartı: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-
-    Daha fazlası: donate.lyo.su
   title: Bağış yap ${botUsername}
   description: Bot geliştirme desteği
   successful: |

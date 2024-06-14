@@ -51,7 +51,7 @@ help: |2
 
   /lang — 更改语言
 
-  <b>☕️ 为开发者买杯咖啡:</b> donate.lyo.su
+  <b>☕️ 为开发者买杯咖啡:</b> /donate
 
   <b>👨🏻‍💻 开发者博客:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
@@ -135,7 +135,7 @@ donate:
     ETH/BUSD： <code>0x34007b7b75F8DAe005A4071416aA2fBa2740c</code>
     monobank：4441114453205| <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa/MasterCarterCard</a>
 
-    更多方式请查看：donate.lyo.su
+    更多方式请查看：/donate
   title: 捐赠 ${botUsername}
   description: 支持此 bot 开发
   successful: |

@@ -281,6 +281,24 @@ bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) =>
   answerPreCheckoutQuery(true)
 )
 bot.on('successful_payment', handleDonate)
+bot.hears(/\/refund (.*)/, async (ctx) => {
+  if (ctx.config.adminId !== ctx.from.id) return
+
+  const [_, paymentId] = ctx.match
+
+  const userId = paymentId.match(/U(\d+)/)[1]
+
+  try {
+    await ctx.telegram.callApi('refundStarPayment', {
+      user_id: userId,
+      telegram_payment_charge_id: paymentId
+    })
+
+    await ctx.replyWithHTML(`Refund success: ${userId} ${paymentId}`)
+  } catch (error) {
+    await ctx.replyWithHTML(`Refund error: ${error.description}`)
+  }
+})
 
 bot.command('qtop', onlyGroup, handleTopQuote)
 bot.command(

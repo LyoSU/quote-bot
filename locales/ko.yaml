@@ -50,7 +50,7 @@ help: |2
 
   /lang — 언어 변경
 
-  <b>☕️ 개발자에게 커피 사주기:</b> donate.lyo.su
+  <b>☕️ 개발자에게 커피 사주기:</b> /donate
 
   <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
@@ -133,8 +133,6 @@ donate:
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     은행 카드: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-
-    더 보기: donate.lyo.su
   title: Донат ${botUsername}
   description: 봇 개발 지원하기
   successful: |

@@ -51,7 +51,7 @@ help: |2
 
   /lang — تغيير اللغة
 
-  <b>☕️ اشتر قهوة للمطور:</b> donate.lyo.su
+  <b>☕️ اشتر قهوة للمطور:</b> /donate
 
   <b>👨🏻‍💻 مدونة المطور:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
@@ -134,8 +134,6 @@ donate:
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     بطاقة البنك: <a href="https://send.monobank.ua/jar/2fpLioJzU8">فيزا، ماستركارد، أبل باي، جوجل باي</a>
-
-    المزيد: donate.lyo.su
   title: تبرع ${botUsername}
   description: دعم تطوير الروبوت
   successful: |

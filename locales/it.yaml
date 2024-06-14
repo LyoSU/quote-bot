@@ -51,7 +51,7 @@ help: |2
 
   /lang — cambia lingua
 
-  <b>☕️ Compra un caffè allo sviluppatore:</b> donate.lyo.su
+  <b>☕️ Compra un caffè allo sviluppatore:</b> /donate
 
   <b>👨🏻‍💻 Blog dello sviluppatore:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
@@ -134,8 +134,6 @@ donate:
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     Carta di credito: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-
-    Di più: donate.lyo.su
   title: Fai una donazione ${botUsername}
   description: Sostieni lo sviluppo del bot
   successful: |

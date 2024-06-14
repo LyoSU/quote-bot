@@ -5,73 +5,34 @@ const { LiqPay } = require('../utils')
 const liqpay = new LiqPay(process.env.LIQPAY_PUBLIC, process.env.LIQPAY_PRIVATE)
 
 module.exports = async ctx => {
-  if (ctx.updateType === 'message') {
-    // if (ctx.chat.type === 'private') {
-    //   await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
-    //     reply_markup: Markup.inlineKeyboard([
-    //       [
-    //         Markup.callbackButton('100 RUB', 'donate:100'),
-    //         Markup.callbackButton('150 RUB', 'donate:150'),
-    //         Markup.callbackButton('300 RUB', 'donate:300')
-    //       ],
-    //       [
-    //         Markup.callbackButton('500 RUB', 'donate:500'),
-    //         Markup.callbackButton('1000 RUB', 'donate:1000')
-    //       ]
-    //     ])
-    //   })
-    // } else {
-    //   await ctx.replyWithHTML(ctx.i18n.t('donate.info_group'))
-    // }
+  if (ctx.updateSubTypes[0] === 'successful_payment') {
+    await ctx.replyWithHTML(ctx.i18n.t('donate.successful'))
+  } else if (ctx.updateType === 'message') {
+    const donateStars = [
+      50, 250, 500, 1000, 1500, 2500
+    ]
 
-    await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
-      disable_web_page_preview: true
-    })
+    const invoces = []
 
-    if (ctx.config.donate) await ctx.tg.forwardMessage(ctx.chat.id, ctx.config.donate.chatId, ctx.config.donate.messageId)
-  } else if (ctx.updateType === 'callback_query') {
-    const orderId = uuidv4()
+    for (const amount of donateStars) {
+      const orderId = uuidv4()
 
-    let amount = ctx.match[2] || 0
-
-    if (amount < 100) amount = 100
-    amount *= 100
-
-    const currency = 'RUB'
-
-    const invoice = {
-      provider_token: process.env.PROVIDER_TOKEN,
-      start_parameter: 'donate',
-      title: ctx.i18n.t('donate.title', {
-        botUsername: ctx.options.username
-      }),
-      description: ctx.i18n.t('donate.description'),
-      currency,
-      prices: [
-        {
-          label: `Donate @${ctx.options.username}`,
-          amount
-        }
-      ],
-      payload: { orderId }
+      invoces.push(await ctx.tg.callApi('createInvoiceLink', {
+        title: `Donate ${amount} Stars`,
+        description: 'Donate to support the bot',
+        payload: orderId,
+        currency: 'XTR',
+        prices: [{ label: 'Stars', amount: amount }]
+      }))
     }
 
-    const liqpayLink = liqpay.formattingLink({
-      action: 'pay',
-      amount: amount / 100,
-      currency,
-      description: ctx.i18n.t('donate.description'),
-      order_id: orderId,
-      result_url: `https://t.me/${ctx.options.username}?start=liqpay_${orderId}`,
-      version: 3
+    await ctx.replyWithHTML(ctx.i18n.t('donate.info'), {
+      reply_markup: Markup.inlineKeyboard(invoces.map((invoice, index) =>
+        Markup.urlButton(`${donateStars[index]} Stars`, invoice)
+      ), {
+        columns: 2
+      }),
+      disable_web_page_preview: true
     })
-
-    await ctx.replyWithInvoice(invoice, Markup.inlineKeyboard([
-      [Markup.payButton(ctx.i18n.t('donate.pay'))],
-      [Markup.urlButton(ctx.i18n.t('donate.liqpay'), liqpayLink)],
-      [Markup.urlButton(ctx.i18n.t('donate.other'), 'donate.lyo.su')]
-    ]).extra())
-  } else if (ctx.updateSubTypes[0] === 'successful_payment') {
-    await ctx.replyWithHTML(ctx.i18n.t('donate.successful'))
   }
 }
