@@ -7,53 +7,53 @@ description:
   long: |
     Vous avez remarqué des messages drôles ou inspirants dans votre chat de groupe que vous aimeriez immortaliser? Il vous suffit de me les transférer ou de taper /q et je les transformerai en un élégant autocollant de citation que vous pourrez enregistrer et partager avec vos amis. Que ce soit pour des souvenirs personnels ou une utilisation professionnelle, les possibilités sont infinies. Essayez-moi maintenant! 😎
 help: |2
-  <b>Bonjour !</b>
-  Je vais aider à créer un devis à partir d'un message.
-  Bot peut fonctionner à la fois dans les messages privés et dans les groupes.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Commandes disponibles:</b>
-  /q — faire un devis à partir du message <i>[répondre au message]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Pour créer un devis à partir de plusieurs messages, écrivez en paramètre un nombre qui indiquera combien de messages devraient être dans le devis.
-  En messages privés, vous pouvez transférer plusieurs messages à la fois et je ferai un devis à partir d'eux.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Drapeaux disponibles pour la commande /q:</b>
-      code hexadécimal ou nom de couleur: <code>#cbafff</code> ou <code>indigo</code> — faire un devis avec la couleur <b>#cbafff</b>
-      <code>aléatoire</code> — couleur de devis aléatoire
-      <code>réponse</code> ou <code>r</code> — faire un devis en sauvegardant les réponses
-      <code>p</code> ou <code>png</code> — faire un devis PNG
-      <code>i</code> ou <code>img</code> — faire un devis comme une image
-      <code>taux</code> — ajouter une notation à un devis
-      <code>m</code> ou <code>média</code> —inclure des médias
-      <code>c</code> ou <code>recadrer</code> — recadrer les médias
-      <code>s2.5</code> — la qualité de l'image est 2,5 fois supérieure à la norme <i>(peut définir n'importe quelle valeur)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Exemple d'utilisation des drapeaux:</b>
-    <code>/q 3 blanc rp</code>
-    <code>/q i rouge s3.2</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
+    <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Uniquement pour les administrateurs:
-  <code>/qs 🥰💜</code> — enregistre un autocollant/photo/document avec une photo dans un pack d'autocollants d'un groupe avec l'emoji 🥰💜 <i>(l'emoji peut être n'importe lequel et en n'importe quel nombre)</i> <i>[répondre au message]</i>
-  <code>/qd</code> — supprimer l'autocollant du pack d'autocollants du groupe  <i>[en réponse au message]</i>
-  <code>/qdrand</code> — supprimer l'autocollant des autocollants aléatoires du groupe  <i>[en réponse au message]</i>
-  <code>/qb</code> — définir la marque emoji. Disponible : <code>pomme</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcouleur verte</code> — définir la couleur des devis <b>verte</b> par défaut <i>(code hexadécimal ou nom de couleur)</i>
-  <code>/qemoji</code> — changer le suffixe emoji pour les autocollants
-  <code>/qnotation</code> — activer/désactiver la notation des devis
-  <code>/qgab 300</code> — définir la chance d'une occurrence aléatoire d'un devis. N'importe quel nombre de un à l'infini. Plus le nombre est élevé, plus la probabilité d'apparition des devis est faible. En spécifiant 300, la probabilité d'apparition d'un message sera approximativement d'une fois sur 300 messages. Pour désactiver, régler la valeur à 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qalea — devis aléatoire avec une notation positive
-  /qtop — meilleurs devis de groupe
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /aide ou /démarrer — obtenir ce texte
+  /help or /start — get this text
 
-  /langue — changer de langue
+  /lang — change the language
 
-  <b>☕️ Acheter du café pour le développeur:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> /donate
 
-  <b>👨🏻‍💻 Blog du développeur:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Bonjour !</b>
@@ -129,13 +129,11 @@ top:
   open: Ouvrir le top
 donate:
   info: |
-    Vous pouvez acheter un café pour le développeur ou autre chose avec les détails suivants:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Carte bancaire: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-
-    Plus d'informations: donate.lyo.su
+    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
   title: Донат ${botUsername}
   description: Soutenez le développement du bot
   successful: |
