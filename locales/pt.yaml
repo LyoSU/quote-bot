@@ -7,53 +7,53 @@ description:
   long: |
     Notou alguma mensagem engraçada ou inspiradora em seu bate-papo em grupo que gostaria de imortalizar? Basta encaminhá-los para mim ou digitar /q e eu os transformarei em um elegante adesivo de quote que você pode salvar e compartilhar com seus amigos. Seja para memórias pessoais ou para uso profissional, as possibilidades são infinitas. Experimente-me agora! 😎
 help: |2
-  <b>Olá!</b>
-  Vou ajudar a criar uma citação a partir de uma postagem.
-  O Bot pode trabalhar tanto em mensagens privadas quanto em grupos.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Comandos disponíveis:</b>
-  /q — fazer uma citação a partir da mensagem <i>[responder à mensagem]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Para criar uma citação a partir de várias mensagens, escreva como parâmetro um número que indicará quantas mensagens devem estar na citação.
-  Em mensagens privadas, você pode encaminhar várias mensagens de uma vez para mim e eu farei uma citação a partir delas.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Flags disponíveis para o comando /q:</b>
-      código hex ou nome da cor: <code>#cbafff</code> ou <code>índigo</code> — fazer uma citação com a cor <b>#cbafff</b>
-      <code>aleatório</code> — cor de citação aleatória
-      <code>resposta</code> ou <code>r</code> — fazer uma citação com salvando respostas
-      <code>p</code> ou <code>png</code> — fazer uma citação PNG
-      <code>i</code> ou <code>img</code> — fazer uma citação como imagem
-      <code>avaliação</code> — adicionar uma avaliação a uma citação
-      <code>m</code> ou <code>mídia</code> — incluir mídia
-      <code>c</code> ou <code>corte</code> — cortar mídia
-      <code>s2.5</code> — a qualidade da imagem é 2,5 vezes maior que o padrão <i>(pode definir qualquer valor)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Exemplo de uso de flags:</b>
-    <code>/q 3 branco rp</code>
-    <code>/q i vermelho s3.2</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
+    <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Apenas para administradores:
-  <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(o emoji pode ser qualquer e qualquer número)</i> <i>[responder à mensagem]</i>
-  <code>/qd</code> — remover o adesivo do pacote de adesivos do grupo  <i>[em resposta à mensagem]</i>
-  <code>/qdrand</code> — remover o adesivo dos adesivos aleatórios do grupo  <i>[em resposta à mensagem]</i>
-  <code>/qb</code> — definir a marca de emoji. Disponível: <code>maçã</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor verde</code> — definir a cor das citações <b>verde</b> por padrão <i>(código hex ou nome da cor)</i>
-  <code>/qemoji</code> — alterar o sufixo de emoji para adesivos
-  <code>/qrate</code> — ativar/desativar avaliação de citações
-  <code>/qgab 300</code> — definir a chance de ocorrência aleatória de uma citação. Qualquer número de um ao infinito. Quanto maior o número, menor a chance de citações aparecerem. Ao especificar 300, a chance de uma mensagem aparecerá aproximadamente 1 vez a cada 300 mensagens. Para desativar, defina o valor como 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — uma citação aleatória com avaliação positiva
-  /qtop — citações principais de grupo
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help ou /start — obter este texto
+  /help or /start — get this text
 
-  /lang — mudar o idioma
+  /lang — change the language
 
-  <b>☕️ Compre café para o desenvolvedor:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> /donate
 
-  <b>👨🏻‍💻 Blog do desenvolvedor:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>
@@ -129,14 +129,11 @@ top:
   open: Abrir o destaque
 donate:
   info: |
-    Você pode comprar café para o desenvolvedor ou outra coisa com os seguintes detalhes:
-
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
     Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-
-    More: donate.lyo.su
   title: Doe ${botUsername}
   description: Suporte de desenvolvimento de bot
   successful: |
