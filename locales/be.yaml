@@ -7,53 +7,53 @@ description:
   long: |
     Заўважылі якія-небудзь смешныя або натхняльныя паведамленні ў вашым групавым чаце, якія вы хацелі б увекавечыць? Проста перашліце іх мне, або набярыце /q, і я ператвару іх у вытанчаны стыкер з цытатай, якую вы можаце захаваць і падзяліцца з сябрамі. Будзь гэта для асабістых успамінаў, або прафесійнага выкарыстання, магчымасці бязмежныя. Паспрабуйце мяне зараз! 😎
 help: |2
-  <b>Прывітанне!</b>
-  Я дапаможу стварыць цытату з паведамлення.
-  Бот можа працаваць як у прыватных паведамленнях, так і ў групах.
+  <b>Hello!</b>
+  I will help create a quote from a post.
+  Bot can work both in private messages and in groups.
 
-    <b>⚙️ Даступныя каманды:</b>
-  /q — стварыць цытату з паведамлення <i>[адказ на паведамленне]</i>
+    <b>⚙️ Available commands:</b>
+  /q — make a quote from the message <i>[reply to the message]</i>
 
-  Каб стварыць цытату з некалькіх паведамленняў, дадайце ў якасці параметра лік, які азначае колькасць паведамленняў у цытате.
-  У прыватных паведамленнях вы можаце перавесці адразу некалькі паведамленняў, і я ствару цытату з іх.
+  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
+  In private messages, you can forward several messages to me at once and I will make a quote from them.
 
-    <b>Даступныя сцягі для каманды /q:</b>
-      код каляра або імя каляра: <code>#cbafff</code> або <code>індыга</code> — стварыць цытату з калярам <b>#cbafff</b>
-      <code>random</code> — выпадковы каляр цытаты
-      <code>reply</code> або <code>р</code> — стварыць цытату з захаваннем адказаў
-      <code>p</code> або <code>png</code> — стварыць PNG-цытату
-      <code>i</code> або <code>імг</code> — стварыць цытату ў выглядзе малюнка
-      <code>rate</code> — дадаць адзнаку да цытаты
-      <code>м</code> або <code>медыя</code> — ўключыць медыяфайлы
-      <code>ц</code> або <code>аблапатка</code> — абмяжоўваць медыяфайл
-      <code>с2.5</code> — якасць карцінкі вышэйшая ў 2,5 разы, чым стандартная <i>(можна ўстанаўліць любое значэнне)</i>
+    <b>Available flags for the /q command:</b>
+      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
+      <code>random</code> —random quote color
+      <code>reply</code> or <code>r</code> — make a quote with saving answers
+      <code>p</code> or <code>png</code> — make a PNG quote
+      <code>i</code> or <code>img</code> — make a quote as a picture
+      <code>rate</code> — add a rating to a quote
+      <code>m</code> or <code>media</code> —include media
+      <code>c</code> or <code>crop</code> — crop media
+      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
 
-    <b>Прыклады выкарыстання сцягаў:</b>
-    <code>/q 3 бялы rp</code>
-    <code>/q i чырвоны s3,2</code>
-    <code>/q р 2 #cbafff м</code>
+    <b>Example of using flags:</b>
+    <code>/q 3 white rp</code>
+    <code>/q i red s3.2</code>
+    <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Толькі для адміністратараў:
-  <code>/рс 🥰💜</code> — захававаць стікер/фатаграфію/дакумент з фатаграфіяй у набор стікераў групы з эмодзі 🥰💜 <i>(эмодзі можа быць любы і любая колькасць)</i> <i>[адказ на паведамленне]</i>
-  <code>/qd</code> — выдаліць стікер з набору стікераў групы  <i>[у адказ на паведамленне]</i>
-  <code>/qdrand</code> — выдаліць стікер з набору адміністратараў групы  <i>[у адказ на паведамленне]</i>
-  <code>/qb</code> — ўстанаўціць брэнд эмодзі. Даступны: <code>яблоко</code>, <code>гугл</code>, <code>твітэр</code>, <code>joy pixels</code>, <code>blob</code>
-  <code>/qцвят зялёны</code> — ўстанаўціць колер цытатаў <b>зялёны</b> па змаўчанні <i>(код каляра або імя каляра)</i>
-  <code>/qemoji</code> — змена суфікса эмодзі для стікераў
-  <code>/qrate</code> — уключыць/адключыць адзнаку цытатаў
-  <code>/qgab 300</code> — ўстанавіць шанец выпадковага паявлення цытатаў. Любое лік ад адзін да несканчэннасці. Чым вышэй лік, тым ніжэй шанец паяўлення цытатаў. З указаннем 300 шанец паяўлення паведамлення будзе прыкладна адзін раз у 300 паведамленняў. Каб адключыць, ўстанавіце значэнне 0
+  Only for administrators:
+  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
+  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
+  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
+  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
+  <code>/qemoji</code> — change the emoji suffix for stickers
+  <code>/qrate</code> — enable/disable rating of quotes
+  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
 
-  /qrand — каваціруе цытату з пазітыўнай адзнакай
-  /qtop — гэтыя пазытыўныя цытатыўныя цытаты
+  /qrand — random a quote with a positive rating of
+  /qtop — top group quotes
 
-  /help ці /start — атрымаць гэты тэкст
+  /help or /start — get this text
 
-  /мова — змена мовы
+  /lang — change the language
 
-  <b>☕️ Набыць каву для распрацоўшчыка:</b> donate.lyo.su
+  <b>☕️ Buy coffee for developer:</b> /donate
 
-  <b>👨🏻‍💻 Блог распрацоўшчыка:</b> @LyBlog
+  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Вітаю!</b>
@@ -129,13 +129,11 @@ top:
   open: Адкрыты верх
 donate:
   info: |
-    Вы можаце ахвяраваць грошы на каву для распрацоўніка ці нешта такое наступным чынам:
+    You can buy coffee for the developer or something else with the following details:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Монобанк:  | <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa/MasterCard</a>
-
-    Больш: donate.lyo.su
+    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
   title: Данат ${botUsername}
   description: Падтрымка распрацоўкі бота
   successful: |
