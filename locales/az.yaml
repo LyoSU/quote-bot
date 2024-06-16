@@ -7,54 +7,54 @@ description:
   long: |
     Qrup çatdırmaq istədiyiniz məzmunlu qrup söhbətində əyləncəli və əlverişli mesajları gördünüzmü və onları əbədidaga salmaq istəyirsiniz? Sadəcə onları mənə yönəlt və ya /q yaz və onları təravətli bir alıntı stiker olaraq çevirəcəyəm, onları yaddaşa salıb dostlarınızla paylaşa biləcəyiniz. Şəxsi xatirələr üçün və ya peşəkar istifadə üçün, imkanlar sonsuzdur. Məni sınamaqda birisən! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Salam!</b>
+  Mən bir çatdırmatan təcili təklif yaratmağa kömək edəcəyəm.
+  Bot habelə şəxsi mesajlarda və qruplarda işləyə bilər.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Mövcud əmr:</b>
+  /t — mesajdan təklif götür <i>[mesajınıza cavab yazın]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Bir neçə mesajdan təklif tərtib etmək üçün, təklifi müəyyən edəcək bir nömrə parametr kimi yazın.
+  Şəxsi mesajda, bir neçə mesajı bir dəfəyə mənəba iletə və mən onlardan təklif göndərəcəyəm.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>/q əmr üçün mövcud bayraqlar:</b>
+      hex kod və ya rəng adı: <code>#cbafff</code> və ya <code>inşqldo</code> — rəng ilə təklif götürür <b>#cbafff</b>
+      <code>təsadüfi</code> — təsadüfi təklif rəngi
+      <code>vətəndash</code> və ya <code>rf</code> — cavabları saxlayaraq bir təklif edin
+      <code>p</code> və ya <code>pnq</code> — PNG təklif götür
+      <code>i</code> və ya <code>şək</code> — şəkil kimi bir təklif edin
+      <code>qiymət</code> — bir təklifə reytinq əlavə edin
+      <code>m</code> və ya <code>media</code> — media daxil edin
+      <code>c</code> və ya <code>kərp</code> — media kəsək
+      <code>ş2.5</code> — şəkil keyfiyyəti standartdan 2.5 dəfə yüksəkdir <i>(hər hansı bir dəyər qoyula bilər)</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+    <b>Bayraqlardan istifadə üsullarının nümunəsi:</b>
+    <code>/q 3 ağ rp</code>
+    <code>/t i qırmızı s3.2</code>
+    <code>/q rf 2 #cbafff m</code>
+    <code>/q 5 təsadüfi</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Yalnız idarəçilər üçün:
+  <code>/ts 🥰💜</code> — qrupun bir stiker/fotoşəkil/sənədindəki bir şəkli 🥰💜 emoji ilə qrupun bir azəyif paketinə qeyd et <i>(emoji hər hansı biri və hər hansı bir say ola bilər)</i> <i>[mesaja cavab]</i>
+  <code>/tç</code> — qrupun stiker paketindən stikeri silin <i>[cavaba cavab]</i>
+  <code>/tsrənd</code> — qrupun təsadüfi stikerlərindən stikeri silin <i>[cavaba cavab]</i>
+  <code>/tb</code> — emoji növünü təyin edin. Mövcuddur: <code>alma</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qrəng yaxşı</code> — təkliflərin rəngini <b>yaxşı</b> olaraq təyin edin <i>(hex kodu və ya rəng adı)</i>
+  <code>/temoçka</code> — stikerlər üçün emoji sonekini dəyişdirin
+  <code>/taliyyət</code> — təkliflərin qiymətlənməsini aktivləşdirin/deaktivləşdirin
+  <code>/tşəxsi 300</code> — təkliflərin təsadüfi görünmə ehtimalını təyin edin. Bir və sonsuzluq arasında hər hansı bir sayı. Hər ne qədər sayı böyük olarsa, təkliflərin görünmə ehtimalı o qədər aşağı olar. 300 göstərərək, mesajın görünmə ehtimalı təxminən 300 mesajdan biridir. Deaktivləşdirmək üçün dəyəri 0 edin
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /tsenaryo — müsbət qiymətlənmiş bir təklifdə təsadüfi
+  /tsrlar — qrupun yuxarı təklifləri
 
-  /help or /start — get this text
+  /kömək və ya /başla — bu mətni alın
 
-  /lang — change the language
+  /dil — dil dəyiş
 
-  <b>☕️ Buy coffee for developer:</b> /donate
+  <b>☕️ Proqramçıya koffe alın:</b> /donate
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  <b>👨🏻‍💻 Proqramçı saytı:</b> @LyBlog
+  <b>GitHub:</b> github.com/LyoSU/təklif-bot
 help_group: |
   <b>salam!</b>
   Mesaja cavab olaraq /q əmrindən istifadə edərək qrupda təkliflər yaradacağam
@@ -129,11 +129,11 @@ top:
   open: Üstü açın
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    İnzibatçı üçün kofe və digər nəsə ala bilərsiniz:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Bank kartı: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
   title: Maddi dəstək ${botUsername}
   description: Botun inkişafına dəstək
   successful: |
