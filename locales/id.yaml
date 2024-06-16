@@ -7,53 +7,53 @@ description:
   long: |
     Melihat pesan lucu atau inspiratif di obrolan grup Anda yang ingin Anda abadikan? Cukup teruskan kepada saya atau ketik /q dan saya akan mengubahnya menjadi stiker kutipan menarik yang dapat Anda simpan dan bagikan dengan teman-teman Anda. Baik untuk kenangan pribadi atau penggunaan profesional, kemungkinannya tidak terbatas. Coba aku sekarang! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Halo!</b>
+  Saya akan membantu membuat kutipan dari sebuah pesan.
+  Bot dapat bekerja baik dalam pesan pribadi maupun di grup.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Perintah yang tersedia:</b>
+  /q — buat kutipan dari pesan <i>[balas ke pesan]</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Untuk membuat kutipan dari beberapa pesan, tulis sebagai parameter sebuah angka yang akan menunjukkan berapa banyak pesan yang harus ada dalam kutipan tersebut.
+  Dalam pesan pribadi, Anda dapat meneruskan beberapa pesan kepada saya sekaligus dan saya akan membuat kutipan dari mereka.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>Bendera yang tersedia untuk perintah /q:</b>
+      kode heksa atau nama warna: <code>#cbafff</code> atau <code>indigo</code> — buat kutipan dengan warna <b>#cbafff</b>
+      <code>acak</code> — warna kutipan acak
+      <code>balas</code> atau <code>r</code> — buat kutipan dengan menyimpan jawaban
+      <code>p</code> atau <code>png</code> — buat kutipan PNG
+      <code>i</code> atau <code>img</code> — buat kutipan sebagai gambar
+      <code>rate</code> — tambahkan rating ke kutipan
+      <code>m</code> atau <code>media</code> — sertakan media
+      <code>c</code> atau <code>crop</code> — potong media
+      <code>s2.5</code> — kualitas gambar 2,5 kali lebih tinggi dari standar <i>(dapat menetapkan nilai apa pun)</i>
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
+    <b>Contoh penggunaan bendera:</b>
+    <code>/q 3 putih rp</code>
+    <code>/q i merah s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Hanya untuk administrator:
+  <code>/qs 🥰💜</code> — menyimpan stiker/foto/dokumen dengan foto ke paket stiker dari grup dengan emoji 🥰💜 <i>(emoji bisa apa saja dan berapa saja)</i> <i>[balas pesan]</i>
+  <code>/qd</code> — hapus stiker dari paket stiker grup  <i>[sebagai balasan pesan]</i>
+  <code>/qdrand</code> — hapus stiker dari stiker grup secara acak  <i>[sebagai balasan pesan]</i>
+  <code>/qb</code> — atur merek emoji. Tersedia: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor hijau</code> — atur warna kutipan <b>hijau</b> secara default <i>(kode heksa atau nama warna)</i>
+  <code>/qemoji</code> — ubah akhiran emoji untuk stiker
+  <code>/qrate</code> — aktifkan/nonaktifkan penilaian kutipan
+  <code>/qgab 300</code> — atur peluang terjadinya kutipan acak. Angka apa pun dari satu hingga tak terhingga. Semakin tinggi angka, semakin rendah kemungkinan kutipan muncul. Dengan menentukan 300, peluang pesan muncul sekitar 1 kali dalam 300 pesan. Untuk menonaktifkan, atur nilai menjadi 0
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand — acak sebuah kutipan dengan rating positif
+  /qtop — kutipan teratas grup
 
-  /help or /start — get this text
+  /bantuan atau /mulai — dapatkan teks ini
 
-  /lang — change the language
+  /bahasa — ubah bahasa
 
-  <b>☕️ Buy coffee for developer:</b> /donate
+  <b>☕️ Beli kopi untuk pengembang:</b> /donate
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Blog Pengembang:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
@@ -129,11 +129,11 @@ top:
   open: Buka atas
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Anda dapat membeli kopi untuk pengembang atau sesuatu yang lain dengan rincian berikut:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Kartu bank: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
   title: Donasi ${botUsername}
   description: Dukungan pengembangan bot
   successful: |
