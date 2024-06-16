@@ -7,53 +7,53 @@ description:
   long: |
     Guruh chatida abadiylashtirmoqchi bo'lgan kulgili yoki ilhomlantiruvchi xabarlarni payqadingizmi? Ularni shunchaki menga yuboring yoki /q yozing va men ularni saqlashingiz va do‘stlaringiz bilan baham ko‘rishingiz mumkin bo‘lgan nafis tirnoq stikeriga aylantiraman. Shaxsiy xotiralar uchunmi yoki professional foydalanish uchunmi, imkoniyatlar cheksizdir. Meni hozir sinab ko'ring! 😎
 help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+  <b>Salom</b>
+  Men matndan iqtibos yarataman.
+  Bot shaxsi xabarlarda va guruhda ishlay oladi.
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+    <b>⚙️ Mavjud buyruqlar:</b>
+  /q — xabardan iqtibos yaratish <i>[xabarga javob</i>]
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  Bir nechta xabardan iqtibos yaratish uchun, iqtibosda nechta xabarlar bo'lishini anglatadigan raqamni parametr sifatida yozing.
+  Shaxsi xabarlarda bir nechta xabrni birdan forward qiling va men ularni iqtibos qilaman.
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+    <b>/q buyruqlar uchun mavjud bayroqlar:</b>
+      rangning hex kodu yoki nomi: <code>#cbafff</code> yoki <code>indigo</code> — rangi <b>#cbafff</b> bo'lgan iqtibos
+      <code>random</code> —tasodifiy iqtibos rangi
+      <code>reply</code> yoki <code>r</code> —javoblarni saqlagan iqtibos yaratish
+      <code>p</code> yoki <code>png</code> —PNG iqtibos yaratish
+      <code>i</code> yoki <code>img</code> —rasim shaklida iqtibos yaratish
+      <code>rate</code> —iqtibosga reyting qo'shish
+      <code>m</code> yoki <code>media</code> —medialarni qo'shish
+      <code>c</code> yoki <code>crop</code> —mediani kesib olish
+      <code>s2.5</code> —rasim sifati standartning 2.5 marta yuqori <i>(hech qanday qiymatni sozlash mumkin)</i>
 
-    <b>Example of using flags:</b>
+    <b>Bayroqlar qo'llanishining misoli:</b>
     <code>/q 3 white rp</code>
     <code>/q i red s3.2</code>
     <code>/q r 2 #cbafff m</code>
     <code>/q 5 rm</code>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  Faqat administratorlar uchun:
+  <code>/qs 🥰💜</code> —stiker/foto/dok'tni stiker pakasiga saqlash 🥰💜 <i>(emoji boshqa va har qanday emojiga bo'lishi mumkin)</i> <i>[xabarga javob</i>]
+  <code>/qd</code> —guruh stiker pakasidan stikerni o'chirish  <i>[xabarga javob</i>]
+  <code>/qdrand</code> —guruh tasodifiy stikerlardan stikerni o'chirish  <i>[xabarga javob</i>]
+  <code>/qb</code> —emoji brendini sozlash. Mavjud: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
+  <code>/qcolor green</code> —iqtibos rangini <b>yashil</b>ga sozlash <i>(hex kod yoki rang nomi)</i>
+  <code>/qemoji</code> —stiker uchun emoji suffiksini o'zgartirish
+  <code>/qrate</code> —iqtibos reytingini yoqish/o'chirish
+  <code>/qgab 300</code> —tasodifiy iqtibos ko'rsatilishining ehtimoli. Bir dan infinitgacha bo'lgan har qanday son. Son ko'proq bo'ldikda xabar ko'rsatilish ehtimoli ko'proq. 300 ko'rsatilganda, xabar ko'rsatilishi ehtimoli yakka 300 xabarga 1 martaga teng. O'chirish uchun qiymatni 0 ga sozlang
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  /qrand —tasodifiy iqtibos muqobiliga ega bo'lgan reytingdagi
+  /qtop —top guruh iqtiboslari
 
-  /help or /start — get this text
+  /yordam yoki /bosh —ushbu matni olish
 
-  /lang — change the language
+  /til —tilni o'zgartirish
 
-  <b>☕️ Buy coffee for developer:</b> /donate
+  <b>☕️ Dasturchiga kofe sotib olish:</b> /donate
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
+  <b>👨🏻‍💻 Dasturchi blog:</b> @LyBlog
   <b>GitHub:</b> github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
@@ -129,11 +129,11 @@ top:
   open: Yuqorini oching
 donate:
   info: |
-    You can buy coffee for the developer or something else with the following details:
+    Dasturchiga kofe yoki bosh narsani quyidagi ma'lumotlar bilan sotib olishingiz mumkin:
 
     BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank card: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Bank kartasi: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
   title: Xayriya ${botUsername}
   description: Botni rivojlanishini qo'llab-quvatlash
   successful: |
