@@ -414,7 +414,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (flag.ai) {
-    return ctx.replyWithHTML(`🤖 The AI is temporarily down`)
+    // return ctx.replyWithHTML(`🤖 The AI is temporarily down`)
 
     const messageForAI = [{
       role: 'system',
@@ -459,7 +459,7 @@ module.exports = async (ctx, next) => {
     }
 
     const completion = await openai.createChatCompletion({
-      model: "gpt-4o",
+      model: "gpt-4o-mini",
       messages: messageForAI,
       max_tokens: 64,
       temperature: 1
