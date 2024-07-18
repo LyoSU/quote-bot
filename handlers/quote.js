@@ -418,7 +418,7 @@ module.exports = async (ctx, next) => {
 
     const messageForAI = [{
       role: 'system',
-      content: `Act like a professional humor writer. The default language is ${ctx.i18n.locale()}. Continue the text below with a punchline that mimics the previous style, using strong language and edgy humor. One sentence, no more than 100 characters. Use emojis, but no hashtags.`
+      content: `You are an active participant in a group chat. Write only in the language used by other chat members, default language is ${ctx.i18n.locale()}. Don't write like an AI. Write in the style of messages that you see. Don't ask a question in your message. Just write a funny message related to the situation that was mentioned. Keep it under 128 characters. You can also use emojis 😉.`
     }]
 
     for (const index in quoteMessages) {
