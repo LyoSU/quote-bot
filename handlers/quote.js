@@ -414,39 +414,58 @@ module.exports = async (ctx, next) => {
   }
 
   if (flag.ai) {
-    // return ctx.replyWithHTML(`🤖 The AI is temporarily down`)
+    let messageForAIContext = []
+
+    messageForAIContext.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
+      const m = []
+      for (let i = 1; i < 10; i++) {
+        m.push(startMessage - i)
+      }
+      return m
+    })()))
+
+    messageForAIContext = messageForAIContext.filter((message) => message && Object.keys(message).length !== 0)
+
+    messageForAIContext = messageForAIContext.map((message) => {
+      const name = message?.from?.title || message.from?.name || message?.from?.first_name + ' ' + message?.from?.last_name || message?.from?.username || 'user'
+      const nameForAI = name ? slug(name, { separator: '_', maintainCase: true }) || 'user' : 'user'
+
+      return {
+        role: 'user',
+        name: nameForAI,
+        content: (message.text || message.caption || (message.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')).slice(0, 128)
+      }
+    })
 
     const messageForAI = [{
       role: 'system',
-      content: `You're a savage member of a no-holds-barred group chat. Your job is to drop verbal bombs that'll make the chat explode.
+      content: `You're a chameleon in this group chat. Your mission:
 
-Vibe check:
-- Default language: ${ctx.i18n.locale()}
-- But seriously, read the room. Match the lingo, slang, and energy of the convo.
-- This ain't your grandma's chat. We're talking unfiltered, raw shit here.
+1. Absorb the last 3-5 messages. Notice:
+   - Exact words and phrases they use
+   - How they structure sentences
+   - Specific references or in-jokes
+   - Level of sarcasm, irony, or edginess
 
-Your mission:
-1. Scope the latest topic or drama
-2. Craft a killer response that'll make everyone go "DAMN!"
-3. Keep it tight - 128 chars max. Punch hard, punch fast.
-4. Emojis? Hell yeah, if they pack a punch 🖕😂
+2. Clone their vibe precisely:
+   - Match their casual/formal tone
+   - Use same slang, abbreviations, emoji style
+   - Copy quirks like ALL CAPS or ~weird punctuation~
 
-The art of the zinger:
-- Go dark: "I haven't seen something this dead since I forgot to feed my goldfish... for a month."
-- Get crude: "That plan's about as solid as my morning dump after taco night."
-- Embrace absurdity: "If life gives you lemons, squirt that juice in life's eye and run like hell."
-- Roast with style: "Your comeback was so weak, it needs a wheelchair and life support."
-- Self-deprecate: "My love life's like my bank account - empty and full of disappointment."
+3. Craft a zinger that could've come from them:
+   - Riff on the most recent topic or shared joke
+   - Aim for clever, not obvious
+   - If they're roasting, roast. If they're punning, pun.
+   - Don't explain the joke or add disclaimers
 
-Remember:
-- No questions. You're here to slay, not play 20 Questions.
-- Vary your style. Don't be a one-trick pony.
-- If someone's genuinely hurt, read the room and dial it back.
-- Inside jokes are gold. Use 'em if you got 'em.
-- Sometimes, a well-placed "fuck" is all you need.
+4. Length check:
+   - If they're brief, be brief
+   - If they write paragraphs, match that
 
-Now go forth and wreak havoc, you beautiful disaster.`
+Drop your message like you've been in this chat forever. No AI vibes, no questions, no explanations. Just pure, seamless banter.`
     }]
+
+    messageForAI.push(...messageForAIContext)
 
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
