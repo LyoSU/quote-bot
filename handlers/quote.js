@@ -299,8 +299,7 @@ module.exports = async (ctx, next) => {
       messageFrom = quoteMessage.forward_from_chat
     } else if (quoteMessage.forward_from) {
       messageFrom = quoteMessage.forward_from
-    } else if ([1087968824, 777000].includes(quoteMessage.from.id)) {
-      /* 1087968824 is id of @GroupAnonymousBot. This part swaps anon bot data to the chat data */
+    } else if (quoteMessage.sender_chat) {
       messageFrom = {
         id: quoteMessage.sender_chat.id,
         name: quoteMessage.sender_chat.title,
@@ -381,12 +380,21 @@ module.exports = async (ctx, next) => {
       if (replyMessageInfo.forward_from) {
         replyMessageInfo.from = replyMessageInfo.forward_from
       }
-      if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
-      if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
-      if (replyMessageInfo.from.id) {
-        message.replyMessage.chatId = replyMessageInfo.from.id
+      if (replyMessageInfo.sender_chat) {
+        message.replyMessage.name = replyMessageInfo.sender_chat.title
+        if (replyMessageInfo.sender_chat.id) {
+          message.replyMessage.chatId = replyMessageInfo.sender_chat.id
+        } else {
+          message.replyMessage.chatId = hashCode(message.replyMessage.name)
+        }
       } else {
-        message.replyMessage.chatId = hashCode(message.replyMessage.name)
+        if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
+        if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
+        if (replyMessageInfo.from.id) {
+          message.replyMessage.chatId = replyMessageInfo.from.id
+        } else {
+          message.replyMessage.chatId = hashCode(message.replyMessage.name)
+        }
       }
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
