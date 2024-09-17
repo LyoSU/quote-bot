@@ -51,43 +51,67 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
-  handlerTimeout: 1
+  handlerTimeout: 1000
 });
 
 (async () => {
   console.log(await bot.telegram.getMe())
 })()
 
-bot.use((ctx, next) => {
-  const timeoutPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(new Error('timeout'))
-    }, 100)
-  })
+bot.use(async (ctx, next) => {
+  const TIMEOUT = 1000 * 15;
 
-  const nextPromise = next()
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error('Timeout'));
+    }, TIMEOUT);
+  });
 
-  return Promise.race([timeoutPromise, nextPromise])
-    .catch((error) => {
-      if (error.message === 'timeout') {
-        return false
-      }
+  const clearTimeoutSafe = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  };
 
-      console.log('Oops', error)
+  try {
+    await Promise.race([
+      next().then((result) => {
+        clearTimeoutSafe();
+        return result;
+      }),
+      timeoutPromise
+    ]);
+  } catch (error) {
+    clearTimeoutSafe();
 
-      if (
-        ctx?.chat?.type === 'private'
-        || (ctx.state.emptyRequest === false && ctx?.message?.entities?.[0].type === 'bot_command')
-      ) {
-        ctx.replyWithHTML('Oops, something went wrong!', {
+    if (error.message === 'Timeout') {
+      return;
+    }
+
+    console.error('Error in middleware:', error);
+
+    if (
+      ctx?.chat?.type === 'private' ||
+      ctx?.message?.entities?.[0]?.type === 'bot_command'
+    ) {
+      try {
+        await ctx.replyWithHTML('Oops, something went wrong!', {
           reply_to_message_id: ctx?.message?.message_id,
           allow_sending_without_reply: true
-        })
+        });
+      } catch (replyError) {
+        console.error('Error while sending message:', replyError);
       }
+    }
 
-      return true
-    })
-})
+    // Додаткова логіка для обробки різних типів помилок
+    if (error.description && error.code) {
+      console.error('Помилка API Telegram:', error.description);
+      // Тут можна додати специфічну обробку для помилок API Telegram
+    }
+  }
+});
 
 // bot.use(require('./middlewares/metrics'))
 bot.use(stats)
