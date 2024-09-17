@@ -117,30 +117,11 @@ bot.use(async (ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
+  rpsIO.mark()
+
   const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
   ctx.config = config
   ctx.db = db
-  return next()
-})
-
-bot.use((ctx, next) => {
-  rpsIO.mark()
-  ctx.telegram.oCallApi = ctx.telegram.callApi
-  ctx.telegram.callApi = (method, data = {}) => {
-    // console.log(`send method ${method}`)
-    const startMs = new Date()
-    return ctx.telegram.oCallApi(method, data).then((result) => {
-      console.log(`end method ${method}:`, new Date() - startMs)
-      return result
-    })
-  }
-
-  // if (ctx.update.message) {
-  //   const dif = Math.round(new Date().getTime() / 1000) - ctx.update.message.date
-
-  //   if (dif > 2) console.log('🚨 delay ', dif)
-  // }
-
   return next()
 })
 
