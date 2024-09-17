@@ -59,7 +59,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 })()
 
 bot.use(async (ctx, next) => {
-  const TIMEOUT = 1000;
+  const TIMEOUT = 1000 * 3;
 
   let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
