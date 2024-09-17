@@ -89,7 +89,7 @@ bot.use(async (ctx, next) => {
       return;
     }
 
-    console.error('Error in middleware:', error);
+    console.error('Error:', error);
 
     if (
       ctx?.chat?.type === 'private' ||
