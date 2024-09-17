@@ -51,7 +51,7 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
-  handlerTimeout: 1000
+  handlerTimeout: 100
 });
 
 (async () => {
