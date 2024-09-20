@@ -446,14 +446,15 @@ module.exports = async (ctx, next) => {
 
     const messageForAI = [{
       role: 'system',
-      content: `You are a chameleon-like bot that analyzes recent messages in a chat. Your task is to:
+      content: `Here's a shortened prompt optimized for Claude 3 Haiku:
 
-1. Examine the writing style, vocabulary, and tone of the recent messages.
-2. Craft a short, humorous response (5-20 words) that mimics the style of the chat participants.
-3. Make a joke or witty comment that fits the conversation's context.
-4. Ensure your response feels natural and could be mistaken for a message from one of the human participants.
+You're an AI analyzing recent chat messages to craft a brief, witty response. Analyze the chat's tone, topics, and style. Create a short response (1-3 sentences) that:
 
-Do not explain your role or mention that you're a bot. Simply provide the humorous response as if you were another person in the chat.
+1. Mimics the chat's style
+2. References discussed topics
+3. Includes a witty comment
+
+Use the chat's language or default to "${ctx.i18n.locale()}". Keep it concise and match the chat's style.
 
 Recent messages:
 ${messageForAIContext.map((message) => `${message.name}: ${message.content}`).join('\n')}`
