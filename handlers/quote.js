@@ -6,7 +6,6 @@ const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
 const { Configuration, OpenAIApi } = require("openai")
-const Anthropic = require('@anthropic-ai/sdk')
 const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
@@ -23,15 +22,10 @@ const quoteCountIO = io.meter({
 
 const telegram = new Telegram(process.env.BOT_TOKEN)
 
-// const configuration = new Configuration({
-//   apiKey: process.env.OPENAI_API_KEY,
-// })
-// const openai = new OpenAIApi(configuration)
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-});
-
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+})
+const openai = new OpenAIApi(configuration)
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 
@@ -428,91 +422,111 @@ module.exports = async (ctx, next) => {
   }
 
   if (flag.ai) {
-    const systemPrompt = `You're an AI analyzing recent chat messages to craft a brief, witty response. Analyze the chat's tone, topics, and style. Create a very short response (1-2 sentences) that:
-1. Mimics the chat's style
-2. References discussed topics
-3. Includes a witty comment
+    let messageForAIContext = []
 
-Use the chat's language or default to "${ctx.i18n.locale()}". Keep it concise and match the chat's style.`
+    messageForAIContext.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
+      const m = []
+      for (let i = 1; i < 10; i++) {
+        m.push(startMessage - i)
+      }
+      return m
+    })()))
 
-    const userMessage = {
-      role: 'user',
-      content: []
-    }
+    messageForAIContext = messageForAIContext.filter((message) => message && Object.keys(message).length !== 0)
+
+    messageForAIContext = messageForAIContext.map((message) => {
+      const name = message?.from?.title || message.from?.name || message?.from?.first_name + ' ' + message?.from?.last_name || message?.from?.username || 'Anonymous'
+
+      return {
+        role: 'user',
+        name: name,
+        content: (message.text || message.caption || (message.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')).slice(0, 128)
+      }
+    })
+
+    const messageForAI = [{
+      role: 'system',
+      content: `You are a chameleon-like bot that analyzes recent messages in a chat. Your task is to:
+
+1. Examine the writing style, vocabulary, and tone of the recent messages.
+2. Craft a short, humorous response (5-20 words) that mimics the style of the chat participants.
+3. Make a joke or witty comment that fits the conversation's context.
+4. Ensure your response feels natural and could be mistaken for a message from one of the human participants.
+
+Do not explain your role or mention that you're a bot. Simply provide the humorous response as if you were another person in the chat.
+
+Recent messages:
+${messageForAIContext.map((message) => `${message.name}: ${message.content}`).join('\n')}`
+    }]
+
 
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
+
+      const nameForAI = quoteMessage?.from?.name ? slug(quoteMessage?.from?.name, { separator: '_', maintainCase: true }) || 'user' : 'user'
+
+      let userMessage = {
+        role: 'user',
+        name: nameForAI,
+        content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
+      }
 
       if (quoteMessage.media) {
         const photo = quoteMessage.media.slice(-1)[0]
         const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
         const extension = photoUrl.split('.').pop()
 
-        if (['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(extension)) {
-          const imageBuffer = await got(photoUrl).buffer().catch(() => {})
+        if (!['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(extension)) continue
 
-          if (!imageBuffer) {
-            continue
-          }
-
-          const base64Image = imageBuffer.toString('base64')
-
-          userMessage.content.unshift({
-            type: 'image',
-            source: {
-              type: 'base64',
-              media_type: `image/jpeg`,
-              data: base64Image
+        userMessage = {
+          role: 'user',
+          name: quoteMessage?.from?.name ? nameForAI : 'user',
+          content: [
+            {
+              type: "image_url",
+              image_url: {
+                url: photoUrl,
+                detail: 'low'
+              }
+            },
+            {
+              type: "text",
+              text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
             }
-          })
+          ]
         }
       }
 
-      const userMessageText = quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128)
-
-      if (userMessageText) {
-        userMessage.content.push({
-          type: "text",
-          text: userMessageText
-        })
-      }
+      messageForAI.push(userMessage)
     }
 
-    try {
-      const response = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307",
-        max_tokens: 64,
-        temperature: 1,
-        system: systemPrompt,
-        messages: [userMessage]
-      });
+    const completion = await openai.createChatCompletion({
+      model: "gpt-4o-mini",
+      messages: messageForAI,
+      max_tokens: 64,
+      temperature: 1
+    }).catch((err) => {
+      console.error('OpenAI error:', err?.response?.statusText || err.message)
+    })
 
-      if (response.content && response.content[0].text) {
-        const message = response.content[0].text
+    if (completion?.data?.choices && completion.data.choices[0]) {
+      const message = completion.data.choices[0].message.content
 
-        quoteMessages.push({
-          message_id: 1,
-          chatId: 6,
-          avatar: true,
-          from: {
-            id: 6,
-            name: 'QuotAI',
-            photo: {
-              url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
-            }
-          },
-          text: message,
-          replyMessage: {}
-        })
-
-        // Log cache performance
-        console.log('Cache creation tokens:', response.usage.cache_creation_input_tokens)
-        console.log('Cache read tokens:', response.usage.cache_read_input_tokens)
-      } else {
-        throw new Error('No content in Claude response')
-      }
-    } catch (err) {
-      console.error('Claude error:', err.message)
+      quoteMessages.push({
+        message_id: 1,
+        chatId: 6,
+        avatar: true,
+        from: {
+          id: 6,
+          name: 'QuotAI',
+          photo: {
+            url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
+          }
+        },
+        text: message,
+        replyMessage: {}
+      })
+    } else {
       return ctx.replyWithHTML(`😓 Sorry, AI busy. Try again later.`, {
         reply_to_message_id: ctx.message.message_id,
         allow_sending_without_reply: true
