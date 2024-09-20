@@ -506,7 +506,9 @@ ${messageForAIContext.map((message) => `<${message.role}_name><${message.role}_c
       model: "gpt-4o-mini",
       messages: messageForAI,
       max_tokens: 64,
-      temperature: 1
+      temperature: 1,
+      top_p: 1,
+      n: 1
     }).catch((err) => {
       console.error('OpenAI error:', err?.response?.statusText || err.message)
     })
