@@ -456,7 +456,9 @@ module.exports = async (ctx, next) => {
 Use the chat's language or default to "${ctx.i18n.locale()}". Keep it concise and match the chat's style.
 
 Recent messages:
-${messageForAIContext.map((message) => `${message.name}: ${message.content}`).join('\n')}`
+<chat_messages>
+${messageForAIContext.map((message) => `<${message.role}_name><${message.role}_content>${message.content.trim()}</${message.role}_content></${message.role}_name>`).join('\n')}
+</chat_messages>`
     }]
 
 
