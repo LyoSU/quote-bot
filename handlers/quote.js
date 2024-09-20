@@ -5,7 +5,9 @@ const {
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
-const { Configuration, OpenAIApi } = require("openai")
+const {
+  OpenAI
+} = require('openai')
 const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
 const io = require('@pm2/io')
@@ -22,10 +24,9 @@ const quoteCountIO = io.meter({
 
 const telegram = new Telegram(process.env.BOT_TOKEN)
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
-const openai = new OpenAIApi(configuration)
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 
@@ -499,7 +500,7 @@ ${messageForAIContext.map((message) => `${message.name}: ${message.content}`).jo
       messageForAI.push(userMessage)
     }
 
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: messageForAI,
       max_tokens: 64,
@@ -508,8 +509,8 @@ ${messageForAIContext.map((message) => `${message.name}: ${message.content}`).jo
       console.error('OpenAI error:', err?.response?.statusText || err.message)
     })
 
-    if (completion?.data?.choices && completion.data.choices[0]) {
-      const message = completion.data.choices[0].message.content
+    if (completion && completion.choices[0].message.content) {
+      const message = completion.choices[0].message.content
 
       quoteMessages.push({
         message_id: 1,
