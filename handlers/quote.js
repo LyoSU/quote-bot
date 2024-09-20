@@ -446,9 +446,7 @@ module.exports = async (ctx, next) => {
 
     const messageForAI = [{
       role: 'system',
-      content: `Here's a shortened prompt optimized for Claude 3 Haiku:
-
-You're an AI analyzing recent chat messages to craft a brief, witty response. Analyze the chat's tone, topics, and style. Create a short response (1-3 sentences) that:
+      content: `You're an AI analyzing recent chat messages to craft a brief, witty response. Analyze the chat's tone, topics, and style. Create a short response (1-2 sentences) that:
 
 1. Mimics the chat's style
 2. References discussed topics
