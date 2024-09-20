@@ -435,22 +435,23 @@ module.exports = async (ctx, next) => {
     messageForAIContext = messageForAIContext.filter((message) => message && Object.keys(message).length !== 0)
 
     messageForAIContext = messageForAIContext.map((message) => {
-      const name = message?.from?.title || message.from?.name || message?.from?.first_name + ' ' + message?.from?.last_name || message?.from?.username || 'user'
-      const nameForAI = name ? slug(name, { separator: '_', maintainCase: true }) || 'user' : 'user'
+      const name = message?.from?.title || message.from?.name || message?.from?.first_name + ' ' + message?.from?.last_name || message?.from?.username || 'Anonymous'
 
       return {
         role: 'user',
-        name: nameForAI,
+        name: name,
         content: (message.text || message.caption || (message.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')).slice(0, 128)
       }
     })
 
     const messageForAI = [{
       role: 'system',
-      content: `Analyze the user's previous messages in this conversation to understand their writing style, tone, and sense of humor. Based on this analysis, craft a joke or a humorous remark that imitates their style, as if you were the user. Ensure that the joke is appropriate, aligns with the context of the conversation, and reflects the user's personality. Disguise your response by adopting their writing style, blending seamlessly into the dialogue like a chameleon adapting to its surroundings.`
+      content: `You are a chatbot participating in a group conversation. Analyze the following recent messages from the chat and generate a short joke (5-20 words) that mimics the style, tone, and language of the participants. Your joke should be appropriate, contextually relevant if possible, and blend seamlessly into the conversation. Do not mention that you are a bot or an assistant.
+
+Recent messages:
+${messageForAIContext.map((message) => `${message.name}: ${message.content}`).join('\n')}`
     }]
 
-    messageForAI.push(...messageForAIContext)
 
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
@@ -466,6 +467,9 @@ module.exports = async (ctx, next) => {
       if (quoteMessage.media) {
         const photo = quoteMessage.media.slice(-1)[0]
         const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
+        const extension = photoUrl.split('.').pop()
+
+        if (!['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(extension)) continue
 
         userMessage = {
           role: 'user',
