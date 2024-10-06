@@ -104,11 +104,8 @@ bot.use(async (ctx, next) => {
         console.error('Error while sending message:', replyError);
       }
     }
-
-    // Додаткова логіка для обробки різних типів помилок
     if (error.description && error.code) {
-      console.error('Помилка API Telegram:', error.description);
-      // Тут можна додати специфічну обробку для помилок API Telegram
+      console.error('Telegram error:', error.description, error.code);
     }
   }
 });
