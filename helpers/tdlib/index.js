@@ -1,9 +1,17 @@
 const path = require('path')
 const tdl = require('tdl')
-
 const tdDirectory = path.resolve(__dirname, 'data')
 
-tdl.configure({ libdir: tdDirectory, verbosityLevel: 0 })
+try {
+  const { getTdjson } = require('prebuilt-tdlib')
+  tdl.configure({ tdjson: getTdjson(), verbosityLevel: 0 })
+} catch (err) {
+  if (err.code === 'MODULE_NOT_FOUND') {
+    tdl.configure({ libdir: tdDirectory, verbosityLevel: 0 })
+  } else {
+    throw err
+  }
+}
 
 const client = tdl.createClient({
   apiId: process.env.TELEGRAM_API_ID,
