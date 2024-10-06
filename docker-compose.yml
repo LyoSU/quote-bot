@@ -23,6 +23,13 @@ services:
             - 127.0.0.1:27017:27017
         networks:
             - quotly
+    redis:
+        image: redis:7.2.5-alpine
+        restart: unless-stopped
+        profiles:
+            - dev
+        networks:
+            - quotly
     
 volumes:
     mongo-volume:
