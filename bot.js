@@ -40,7 +40,7 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
-  handlerTimeout: 500
+  handlerTimeout: 100
 });
 
 (async () => {
@@ -48,7 +48,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 })()
 
 bot.use(async (ctx, next) => {
-  const TIMEOUT = 50;
+  const TIMEOUT = 1000;
   let timeoutId;
 
   const timeoutPromise = new Promise((_, reject) => {
@@ -98,14 +98,6 @@ bot.command('json', ({ replyWithHTML, message }) =>
 )
 
 bot.use(handleChatMember)
-
-bot.use(
-  rateLimit({
-    window: 1000,
-    limit: 5,
-    keyGenerator: (ctx) => ctx?.chat?.id || ctx?.from?.id || '0',
-  })
-)
 
 bot.use(
   Composer.groupChat(
