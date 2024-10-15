@@ -102,8 +102,8 @@ bot.use(handleChatMember)
 bot.use(
   rateLimit({
     window: 1000,
-    limit: 10,
-    keyGenerator: (ctx) => ctx?.chat?.id || ctx.from.id || '0',
+    limit: 5,
+    keyGenerator: (ctx) => ctx?.chat?.id || ctx?.from?.id || '0',
   })
 )
 
