@@ -51,7 +51,7 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: { webhookReply: false },
-  handlerTimeout: 100
+  handlerTimeout: 50
 });
 
 (async () => {
@@ -59,35 +59,18 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 })()
 
 bot.use(async (ctx, next) => {
-  const TIMEOUT = 1000;
-
+  const TIMEOUT = 500;
   let timeoutId;
+
   const timeoutPromise = new Promise((_, reject) => {
-    timeoutId = setTimeout(() => {
-      reject(new Error('Timeout'));
-    }, TIMEOUT);
+    timeoutId = setTimeout(() => reject(new Error('Timeout')), TIMEOUT);
   });
 
-  const clearTimeoutSafe = () => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-  };
-
   try {
-    await Promise.race([
-      next().then((result) => {
-        clearTimeoutSafe();
-        return result;
-      }),
-      timeoutPromise
-    ]);
+    await Promise.race([next(), timeoutPromise]);
   } catch (error) {
-    clearTimeoutSafe();
-
-    if (error.message === 'Timeout') {
-      return;
-    }
+    if (timeoutId) clearTimeout(timeoutId);
+    if (error.message === 'Timeout') return;
 
     console.error('Error:', error);
 
@@ -108,6 +91,7 @@ bot.use(async (ctx, next) => {
       console.error('Telegram error:', error.description, error.code);
     }
   }
+  if (timeoutId) clearTimeout(timeoutId);
 });
 
 // bot.use(require('./middlewares/metrics'))
@@ -163,20 +147,15 @@ const i18n = new I18n({
 
 bot.use(i18n.middleware())
 
-bot.use(
-  session({
-    getSessionKey: (ctx) => {
-      if (ctx.from && ctx.chat) {
-        return `${ctx.from.id}:${ctx.chat.id}`
-      } else if (ctx.from) {
-        return `user:${ctx.from.id}`
-      } else if (ctx.update?.business_message) {
-        return `user:${ctx.update.business_message.from.id}`
-      }
-      return null
-    }
-  })
-)
+bot.use(session({
+  getSessionKey: (ctx) => {
+    if (ctx.from && ctx.chat) return `${ctx.from.id}:${ctx.chat.id}`;
+    if (ctx.from) return `user:${ctx.from.id}`;
+    if (ctx.update?.business_message) return `user:${ctx.update.business_message.from.id}`;
+    return null;
+  },
+  ttl: 3600
+}));
 
 bot.use(async (ctx, next) => {
   ctx.state.emptyRequest = false
@@ -205,17 +184,15 @@ bot.use(
 )
 
 const updateGroupAndUser = async (ctx, next) => {
-  await getUser(ctx)
-  await getGroup(ctx)
-  return next(ctx).then(async () => {
-    if (ctx.state.emptyRequest === false) {
-      ctx.session.userInfo.save().catch(() => {})
-      const memberCount = await ctx.telegram.getChatMembersCount(ctx.chat.id)
-      if (memberCount) ctx.group.info.memberCount = memberCount
-      await ctx.group.info.save().catch(() => {})
-    }
-  })
-}
+  await Promise.all([getUser(ctx), getGroup(ctx)]);
+  await next(ctx);
+  if (ctx.state.emptyRequest === false) {
+    await Promise.all([
+      ctx.session.userInfo.save().catch(() => {}),
+      ctx.group.info.save().catch(() => {})
+    ]);
+  }
+};
 
 bot.use(async (ctx, next) => {
   if (ctx.inlineQuery) {
