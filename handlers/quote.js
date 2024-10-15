@@ -10,16 +10,10 @@ const {
 } = require('openai')
 const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
-const io = require('@pm2/io')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 const emojiArray = Object.values(emojiDb.dbData).filter(data => {
   if (data.emoji) return true
-})
-
-const quoteCountIO = io.meter({
-  name: 'quote count',
-  unit: 'quote'
 })
 
 const telegram = new Telegram(process.env.BOT_TOKEN)
@@ -86,8 +80,6 @@ const generateRandomColor = () => {
 const minIdsInChat = {}
 
 module.exports = async (ctx, next) => {
-  quoteCountIO.mark()
-
   const flag = {
     count: false,
     reply: false,

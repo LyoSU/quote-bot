@@ -1,4 +1,3 @@
-const io = require('@pm2/io')
 const {
   db
 } = require('../database')
