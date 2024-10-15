@@ -5,7 +5,6 @@ const Composer = require('telegraf/composer')
 const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
-const io = require('@pm2/io')
 const { db } = require('./database')
 const { stats, onlyGroup, onlyAdmin } = require('./middlewares')
 const {
@@ -36,16 +35,6 @@ const {
   handleDeleteRandom
 } = require('./handlers')
 const { getUser, getGroup } = require('./helpers')
-
-const rpsIO = io.meter({
-  name: 'req/sec',
-  unit: 'update'
-})
-
-const messageCountIO = io.meter({
-  name: 'message count',
-  unit: 'message'
-})
 
 const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
@@ -98,8 +87,6 @@ bot.use(async (ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
-  rpsIO.mark()
-
   const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
   ctx.config = config
   ctx.db = db
@@ -159,9 +146,7 @@ bot.use(session({
 
 bot.use(async (ctx, next) => {
   ctx.state.emptyRequest = false
-  return next().then(() => {
-    if (ctx.state.emptyRequest === false) messageCountIO.mark()
-  })
+  return next()
 })
 
 bot.use(
