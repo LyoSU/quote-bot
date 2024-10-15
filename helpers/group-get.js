@@ -1,28 +1,34 @@
 module.exports = async ctx => {
-  let group
+  const { db, chat, i18n } = ctx
 
-  if (!ctx.group.info) group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
-  else group = ctx.group.info
+  const group = await db.Group.findOneAndUpdate(
+    { group_id: chat.id },
+    {
+      $set: {
+        title: chat.title,
+        username: chat.username,
+        updatedAt: new Date()
+      },
+      $setOnInsert: {
+        settings: new db.Group().settings
+      }
+    },
+    {
+      new: true,
+      upsert: true,
+      setDefaultsOnInsert: true
+    }
+  )
 
-  if (!group) {
-    group = new ctx.db.Group()
-    group.group_id = ctx.chat.id
-  }
-
-  group.title = ctx.chat.title
-  group.username = ctx.chat.username
-  group.settings = group.settings || new ctx.db.Group().settings
-
-  if (!group.username && !group.invite_link) {
-    // group.invite_link = await ctx.telegram.exportChatInviteLink(ctx.chat.id).catch(() => {})
-  }
-
-  group.updatedAt = new Date()
   ctx.group.info = group
-  if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
-  else if (ctx.i18n.languageCode) {
-    ctx.group.info.settings.locale = ctx.i18n.shortLanguageCode ? ctx.i18n.shortLanguageCode : ctx.i18n.languageCode
-    await group.save()
+
+  const locale = group.settings.locale || i18n.shortLanguageCode || i18n.languageCode
+  if (locale) {
+    i18n.locale(locale)
+    if (!group.settings.locale) {
+      group.settings.locale = locale
+      await group.save()
+    }
   }
 
   return true
