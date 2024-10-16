@@ -1,18 +1,38 @@
 module.exports = async ctx => {
   const webhookInfo = await ctx.telegram.getWebhookInfo()
 
-  const { rps, rta, mps, mrs } = ctx.stats
-  const message = `🏓 pong
+  const { rps, rta, rt95p, mps, mrs, mr95p } = ctx.stats
 
-✨ *Performance Metrics:*
-- 🚀 *Requests per Second (RPS):* \`${rps.toFixed(0)}\`
-- ⏱️ *Average Response Time:* \`${rta.toFixed(0)} ms\`
-- 📈 *Messages per Second (MPS):* \`${mps.toFixed(0)}\`
-- 🕒 *Average Messages Response Time:* \`${mrs.toFixed(0)} ms\`
+  // Helper function to create a visual bar
+  const createBar = (value, max, size = 8) => {
+    const filledCount = Math.round((value / max) * size)
+    return '█'.repeat(filledCount) + '░'.repeat(size - filledCount)
+  }
 
-📥 *Queue Status:*
-- 🔄 *Pending Updates:* \`${webhookInfo.pending_update_count}\`
-`
+  // Assume some maximum values for the bars (adjust as needed)
+  const maxRps = 100; const maxRt = 1000; const maxMps = 50; const maxPending = 1000
+
+  const message = `🏓 *System Status*
+
+*Performance Metrics:*
+┌─ Requests
+│  • RPS:      ${createBar(rps, maxRps)} \`${rps.toFixed(2)}\`
+│  • Avg Time: ${createBar(rta, maxRt)} \`${rta.toFixed(2)} ms\`
+│  • 95p Time: ${createBar(rt95p, maxRt)} \`${rt95p.toFixed(2)} ms\`
+│
+├─ Messages
+│  • MPS:      ${createBar(mps, maxMps)} \`${mps.toFixed(2)}\`
+│  • Avg Time: ${createBar(mrs, maxRt)} \`${mrs.toFixed(2)} ms\`
+│  • 95p Time: ${createBar(mr95p, maxRt)} \`${mr95p.toFixed(2)} ms\`
+│
+└─ Queue
+   • Pending:  ${createBar(webhookInfo.pending_update_count, maxPending)} \`${webhookInfo.pending_update_count}\`
+
+📊 *Visual Summary:*
+Requests/sec   ${createBar(rps, maxRps, 16)}
+Messages/sec   ${createBar(mps, maxMps, 16)}
+Response Time  ${createBar(rta, maxRt, 16)}
+Queue Size     ${createBar(webhookInfo.pending_update_count, maxPending, 16)} `
 
   const response = await ctx.replyWithMarkdown(message, {
     reply_to_message_id: ctx.message.message_id

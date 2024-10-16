@@ -1,102 +1,89 @@
-const {
-  db
-} = require('../database')
+const { db } = require('../database');
 
 const stats = {
   rpsAvrg: 0,
   responseTimeAvrg: 0,
-  times: {}
-}
+  responseTime95p: 0,
+  times: new Map(),
+};
 
 const noEmptyStats = {
   rpsAvrg: 0,
   responseTimeAvrg: 0,
-  times: {}
+  responseTime95p: 0,
+  times: new Map(),
+};
+
+function calculatePercentile(arr, percentile) {
+  const sorted = arr.slice().sort((a, b) => a - b);
+  const index = Math.ceil((percentile / 100) * sorted.length) - 1;
+  return sorted[index];
+}
+
+function updateStats(statsObj) {
+  const now = Math.floor(Date.now() / 1000);
+  const cutoffTime = now - 60; // Keep data for the last minute
+
+  let totalRequests = 0;
+  let totalResponseTime = 0;
+  let allResponseTimes = [];
+
+  for (const [time, requests] of statsObj.times.entries()) {
+    if (time < cutoffTime) {
+      statsObj.times.delete(time);
+    } else {
+      totalRequests += requests.length;
+      totalResponseTime += requests.reduce((sum, duration) => sum + duration, 0);
+      allResponseTimes = allResponseTimes.concat(requests);
+    }
+  }
+
+  const timeRange = Math.min(60, now - Math.min(...statsObj.times.keys()));
+  statsObj.rpsAvrg = totalRequests / timeRange;
+  statsObj.responseTimeAvrg = totalRequests > 0 ? totalResponseTime / totalRequests : 0;
+  statsObj.responseTime95p = allResponseTimes.length > 0 ? calculatePercentile(allResponseTimes, 95) : 0;
+
+  console.log(`${statsObj === noEmptyStats ? '📩' : '🔄'} RPS (avg last minute):`, statsObj.rpsAvrg.toFixed(2));
+  console.log(`${statsObj === noEmptyStats ? '📩' : '🔄'} Average response time:`, statsObj.responseTimeAvrg.toFixed(2));
+  console.log(`${statsObj === noEmptyStats ? '📩' : '🔄'} 95th percentile response time:`, statsObj.responseTime95p.toFixed(2));
+
+  if (statsObj === stats) {
+    db.Stats.create({
+      rps: statsObj.rpsAvrg,
+      responseTime: statsObj.responseTimeAvrg,
+      responseTime95p: statsObj.responseTime95p,
+      date: new Date()
+    }).catch(err => console.error('Error saving stats:', err));
+  }
 }
 
 setInterval(() => {
-  if (Object.keys(noEmptyStats.times).length > 1) {
-    const time = Object.keys(noEmptyStats.times).shift()
-
-    const rps = noEmptyStats.times[time].length
-    if (noEmptyStats.rpsAvrg > 0) noEmptyStats.rpsAvrg = (noEmptyStats.rpsAvrg + rps) / 2
-    else noEmptyStats.rpsAvrg = rps
-
-    const sumResponseTime = noEmptyStats.times[time].reduce((a, b) => a + b, 0)
-    const lastResponseTimeAvrg = (sumResponseTime / noEmptyStats.times[time].length) || 0
-    if (noEmptyStats.responseTimeAvrg > 0) noEmptyStats.responseTimeAvrg = (noEmptyStats.responseTimeAvrg + lastResponseTimeAvrg) / 2
-    else noEmptyStats.responseTimeAvrg = lastResponseTimeAvrg
-
-    console.log('📩 rps last:', rps)
-    console.log('📩 rps avrg:', noEmptyStats.rpsAvrg)
-    console.log('📩 response time avrg last:', lastResponseTimeAvrg)
-    console.log('📩 response time avrg total:', noEmptyStats.responseTimeAvrg)
-
-    delete noEmptyStats.times[time]
-  }
-}, 1000)
-
-setInterval(() => {
-  if (Object.keys(stats.times).length > 1) {
-    const time = Object.keys(stats.times).shift()
-
-    const rps = stats.times[time].length
-    if (stats.rpsAvrg > 0) stats.rpsAvrg = (stats.rpsAvrg + rps) / 2
-    else stats.rpsAvrg = rps
-
-    const sumResponseTime = stats.times[time].reduce((a, b) => a + b, 0)
-    const lastResponseTimeAvrg = (sumResponseTime / stats.times[time].length) || 0
-    if (stats.responseTimeAvrg > 0) stats.responseTimeAvrg = (stats.responseTimeAvrg + lastResponseTimeAvrg) / 2
-    else stats.responseTimeAvrg = lastResponseTimeAvrg
-
-    console.log('🔄 rps last:', rps)
-    console.log('🔄 rps avrg:', stats.rpsAvrg)
-    console.log('🔄 response time avrg last:', lastResponseTimeAvrg)
-    console.log('🔄 response time avrg total:', stats.responseTimeAvrg)
-
-    db.Stats.create({
-      rps,
-      responseTime: lastResponseTimeAvrg,
-      date: new Date()
-    })
-
-    delete stats.times[time]
-  }
-}, 1000)
-
-// setInterval(async () => {
-//   const usersCount = await db.User.count({
-//     updatedAt: {
-//       $gte: new Date(Date.now() - 24 * 60 * 60 * 1000)
-//     }
-//   })
-
-//   const groupsCount = await db.Group.count({
-//     updatedAt: {
-//       $gte: new Date(Date.now() - 24 * 60 * 60 * 1000)
-//     }
-//   })
-// }, 60 * 1000 * 5)
+  updateStats(noEmptyStats);
+  updateStats(stats);
+}, 5000); // Update every 5 seconds
 
 module.exports = async (ctx, next) => {
-  const startMs = new Date()
+  const startMs = Date.now();
 
   ctx.stats = {
     rps: stats.rpsAvrg,
     rta: stats.responseTimeAvrg,
+    rt95p: stats.responseTime95p,
     mps: noEmptyStats.rpsAvrg,
-    mrs: noEmptyStats.responseTimeAvrg
+    mrs: noEmptyStats.responseTimeAvrg,
+    mr95p: noEmptyStats.responseTime95p
+  };
+
+  await next();
+
+  const now = Math.floor(Date.now() / 1000);
+  const duration = Date.now() - startMs;
+
+  if (!ctx.state.emptyRequest) {
+    if (!noEmptyStats.times.has(now)) noEmptyStats.times.set(now, []);
+    noEmptyStats.times.get(now).push(duration);
   }
 
-  return next().then(() => {
-    const now = Math.floor(new Date() / 1000)
-
-    if (ctx.state.emptyRequest === false) {
-      if (!noEmptyStats.times[now]) noEmptyStats.times[now] = []
-      noEmptyStats.times[now].push(new Date() - startMs)
-    }
-
-    if (!stats.times[now]) stats.times[now] = []
-    stats.times[now].push(new Date() - startMs)
-  })
-}
+  if (!stats.times.has(now)) stats.times.set(now, []);
+  stats.times.get(now).push(duration);
+};
