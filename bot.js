@@ -105,8 +105,7 @@ bot.use(
       rateLimit({
         window: 1000 * 5,
         limit: 2,
-        keyGenerator: (ctx) => ctx.chat.id,
-        onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+        keyGenerator: (ctx) => ctx.chat.id
       })
     )
   )
@@ -118,8 +117,7 @@ bot.use(
     rateLimit({
       window: 2000,
       limit: 1,
-      keyGenerator: (ctx) => ctx.from.id,
-      onLimitExceeded: ({ answerCbQuery }) => answerCbQuery('too fast', true)
+      keyGenerator: (ctx) => ctx.from.id
     })
   )
 )
