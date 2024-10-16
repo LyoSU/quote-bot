@@ -8,7 +8,7 @@ module.exports = async ctx => {
     return isNaN(num) ? 'N/A' : num.toFixed(2)
   }
 
-  const message = `🏓 *System Status*
+  const message = `🏓 *Pong*
 
 *Performance Metrics:*
 ┌─ Requests
