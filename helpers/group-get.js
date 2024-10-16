@@ -1,14 +1,16 @@
 module.exports = async ctx => {
   const { db, chat, i18n } = ctx
 
+  const updateData = {
+    title: chat.title,
+    username: chat.username,
+    updatedAt: new Date()
+  }
+
   const group = await db.Group.findOneAndUpdate(
     { group_id: chat.id },
     {
-      $set: {
-        title: chat.title,
-        username: chat.username,
-        updatedAt: new Date()
-      },
+      $set: updateData,
       $setOnInsert: {
         settings: new db.Group().settings
       }
@@ -16,7 +18,8 @@ module.exports = async ctx => {
     {
       new: true,
       upsert: true,
-      setDefaultsOnInsert: true
+      setDefaultsOnInsert: true,
+      returnDocument: 'after'
     }
   )
 
