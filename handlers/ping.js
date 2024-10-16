@@ -3,10 +3,17 @@ module.exports = async ctx => {
 
   const { rps, rta, rt95p, mps, mrs, mr95p } = ctx.stats
 
-  // Helper function to create a visual bar
+  // Helper function to create a visual bar with error handling
   const createBar = (value, max, size = 8) => {
-    const filledCount = Math.round((value / max) * size)
+    const safeValue = Math.max(0, Math.min(value, max))
+    const safeMax = Math.max(safeValue, max, 1)
+    const filledCount = Math.round((safeValue / safeMax) * size)
     return '█'.repeat(filledCount) + '░'.repeat(size - filledCount)
+  }
+
+  // Helper function to format numbers safely
+  const formatNumber = (num) => {
+    return isNaN(num) ? 'N/A' : num.toFixed(2)
   }
 
   // Assume some maximum values for the bars (adjust as needed)
@@ -16,14 +23,14 @@ module.exports = async ctx => {
 
 *Performance Metrics:*
 ┌─ Requests
-│  • RPS:      ${createBar(rps, maxRps)} \`${rps.toFixed(2)}\`
-│  • Avg Time: ${createBar(rta, maxRt)} \`${rta.toFixed(2)} ms\`
-│  • 95p Time: ${createBar(rt95p, maxRt)} \`${rt95p.toFixed(2)} ms\`
+│  • RPS:      ${createBar(rps, maxRps)} \`${formatNumber(rps)}\`
+│  • Avg Time: ${createBar(rta, maxRt)} \`${formatNumber(rta)} ms\`
+│  • 95p Time: ${createBar(rt95p, maxRt)} \`${formatNumber(rt95p)} ms\`
 │
 ├─ Messages
-│  • MPS:      ${createBar(mps, maxMps)} \`${mps.toFixed(2)}\`
-│  • Avg Time: ${createBar(mrs, maxRt)} \`${mrs.toFixed(2)} ms\`
-│  • 95p Time: ${createBar(mr95p, maxRt)} \`${mr95p.toFixed(2)} ms\`
+│  • MPS:      ${createBar(mps, maxMps)} \`${formatNumber(mps)}\`
+│  • Avg Time: ${createBar(mrs, maxRt)} \`${formatNumber(mrs)} ms\`
+│  • 95p Time: ${createBar(mr95p, maxRt)} \`${formatNumber(mr95p)} ms\`
 │
 └─ Queue
    • Pending:  ${createBar(webhookInfo.pending_update_count, maxPending)} \`${webhookInfo.pending_update_count}\`
