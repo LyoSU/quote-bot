@@ -1,35 +1,43 @@
 module.exports = async ctx => {
-  const webhookInfo = await ctx.telegram.getWebhookInfo()
+  try {
+    const webhookInfo = await ctx.telegram.getWebhookInfo();
 
-  const { rps, rta, rt95p, mps, mrs, mr95p } = ctx.stats
+    const stats = ctx.stats || {};
+    const requests = stats.requests || {};
+    const messages = stats.messages || {};
+    const queue = stats.queue || {};
 
-  // Helper function to format numbers safely
-  const formatNumber = (num) => {
-    return isNaN(num) ? 'N/A' : num.toFixed(2)
-  }
+    // Helper function to format numbers safely
+    const formatNumber = (num) => {
+      return (typeof num === 'number' && !isNaN(num)) ? num.toFixed(2) : 'N/A';
+    };
 
-  const message = `🏓 *Pong*
+    const message = `🏓 *Pong*
 
 *Performance Metrics:*
 ┌─ Requests
-│  • RPS:      \`${formatNumber(rps)}\`
-│  • Avg Time: \`${formatNumber(rta)} ms\`
-│  • 95p Time: \`${formatNumber(rt95p)} ms\`
+│  • RPS:      \`${formatNumber(requests.rps)}\`
+│  • Avg Time: \`${formatNumber(requests.avgTime)} ms\`
+│  • 95p Time: \`${formatNumber(requests.percentile95)} ms\`
 │
 ├─ Messages
-│  • MPS:      \`${formatNumber(mps)}\`
-│  • Avg Time: \`${formatNumber(mrs)} ms\`
-│  • 95p Time: \`${formatNumber(mr95p)} ms\`
+│  • MPS:      \`${formatNumber(messages.mps)}\`
+│  • Avg Time: \`${formatNumber(messages.avgTime)} ms\`
+│  • 95p Time: \`${formatNumber(messages.percentile95)} ms\`
 │
 └─ Queue
-   • Pending:  \`${webhookInfo.pending_update_count}\``
+   • Pending:  \`${webhookInfo.pending_update_count || queue.pending || 'N/A'}\``;
 
-  const response = await ctx.replyWithMarkdown(message, {
-    reply_to_message_id: ctx.message.message_id
-  })
+    const response = await ctx.replyWithMarkdown(message, {
+      reply_to_message_id: ctx.message.message_id
+    });
 
-  // delete the message after 10 seconds
-  await new Promise(resolve => setTimeout(resolve, 10000))
-  await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id)
-  await ctx.deleteMessage()
-}
+    // delete the message after 10 seconds
+    await new Promise(resolve => setTimeout(resolve, 10000));
+    await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id);
+    await ctx.deleteMessage();
+  } catch (error) {
+    console.error('Error in ping command:', error);
+    await ctx.reply('An error occurred while fetching statistics.');
+  }
+};
