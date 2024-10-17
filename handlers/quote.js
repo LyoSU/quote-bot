@@ -1,7 +1,4 @@
 const Markup = require('telegraf/markup')
-const {
-  tdlib
-} = require('../helpers')
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
 const got = require('got')
@@ -191,7 +188,7 @@ module.exports = async (ctx, next) => {
     messageCount -= 1
   }
 
-  messages.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
+  messages.push(...await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
     const m = []
     for (let i = 0; i < messageCount; i++) {
       m.push(startMessage + i)
@@ -254,7 +251,7 @@ module.exports = async (ctx, next) => {
 
           let getHiddenChat
 
-          getHiddenChat = await tdlib.getUser(messageFrom.id).catch(() => {})
+          getHiddenChat = await ctx.tdlib.getUser(messageFrom.id).catch(() => {})
 
           if (!getHiddenChat) {
             getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
@@ -402,7 +399,7 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     let messageForAIContext = []
 
-    messageForAIContext.push(...await tdlib.getMessages(ctx.message.chat.id, (() => {
+    messageForAIContext.push(...await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
       const m = []
       for (let i = 1; i < 10; i++) {
         m.push(startMessage - i)

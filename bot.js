@@ -8,6 +8,8 @@ const { stats } = require('./middlewares')
 const BOT_TOKEN = process.env.BOT_TOKEN
 
 if (cluster.isMaster) {
+  const { tdlib } = require('./helpers')
+
   console.log(`Master process ${process.pid} is running`)
 
   stats.startPeriodicUpdate()
@@ -83,7 +85,7 @@ if (cluster.isMaster) {
   })
 
   workers.forEach(({ worker }) => {
-    worker.on('message', msg => {
+    worker.on('message', async (msg) => {
       if (msg.type === 'TASK_COMPLETED') {
         const workerData = workers.find(w => w.worker === worker)
         if (workerData) {
@@ -91,6 +93,13 @@ if (cluster.isMaster) {
         }
       } else if (msg.type === 'SEND_MESSAGE') {
         bot.telegram.sendMessage(msg.chatId, msg.text)
+      } else if (msg.type === 'TDLIB_REQUEST') {
+        try {
+          const result = await tdlib[msg.method](...msg.args)
+          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, result })
+        } catch (error) {
+          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, error: error.message })
+        }
       }
     })
   })
@@ -103,12 +112,37 @@ if (cluster.isMaster) {
 
   console.log(`Worker ${process.pid} started`)
 
+  const tdlibProxy = new Proxy({}, {
+    get (target, prop) {
+      return (...args) => {
+        return new Promise((resolve, reject) => {
+          const id = Date.now() + Math.random()
+          process.send({ type: 'TDLIB_REQUEST', method: prop, args, id })
+
+          const handler = (msg) => {
+            if (msg.type === 'TDLIB_RESPONSE' && msg.id === id) {
+              process.removeListener('message', handler)
+              if (msg.error) {
+                reject(new Error(msg.error))
+              } else {
+                resolve(msg.result)
+              }
+            }
+          }
+
+          process.on('message', handler)
+        })
+      }
+    }
+  })
+
   const bot = new Telegraf(BOT_TOKEN)
 
   bot.use((ctx, next) => {
     const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
     ctx.config = config
     ctx.db = db
+    ctx.tdlib = tdlibProxy // Use the proxy instead of the actual tdlib
     return next()
   })
 
