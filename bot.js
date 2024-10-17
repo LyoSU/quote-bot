@@ -8,7 +8,7 @@ const { stats } = require('./middlewares')
 const BOT_TOKEN = process.env.BOT_TOKEN
 
 if (cluster.isMaster) {
-  const { tdlib } = require('./helpers')
+  const tdlib = require('./helpers/tdlib')
 
   console.log(`Master process ${process.pid} is running`)
 
