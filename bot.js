@@ -48,9 +48,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 })()
 
 bot.use(async (ctx, next) => {
-  const TIMEOUT = 1000;
-  let timeoutId;
+  const TIMEOUT = 5000; // Збільшено до 5 секунд
 
+  let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
     timeoutId = setTimeout(() => reject(new Error('Timeout')), TIMEOUT);
   });
@@ -58,8 +58,9 @@ bot.use(async (ctx, next) => {
   try {
     await Promise.race([next(), timeoutPromise]);
   } catch (error) {
-    if (timeoutId) clearTimeout(timeoutId);
-    if (error.message === 'Timeout') return;
+    if (error.message === 'Timeout') {
+      return;
+    }
 
     console.error('Error:', error);
 
@@ -79,12 +80,13 @@ bot.use(async (ctx, next) => {
     if (error.description && error.code) {
       console.error('Telegram error:', error.description, error.code);
     }
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
   }
-  if (timeoutId) clearTimeout(timeoutId);
 });
 
 // bot.use(require('./middlewares/metrics'))
-bot.use(stats)
+bot.use(stats.middleware())
 
 bot.use((ctx, next) => {
   const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
