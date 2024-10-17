@@ -48,18 +48,6 @@ bot.command('json', ({ replyWithHTML, message }) =>
 bot.use(handleChatMember)
 
 bot.use(
-  Composer.groupChat(
-    Composer.command(
-      rateLimit({
-        window: 1000 * 5,
-        limit: 2,
-        keyGenerator: (ctx) => ctx.chat.id
-      })
-    )
-  )
-)
-
-bot.use(
   Composer.mount(
     'callback_query',
     rateLimit({
