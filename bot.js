@@ -15,7 +15,7 @@ if (cluster.isMaster) {
   stats.startPeriodicUpdate()
 
   const bot = new Telegraf(BOT_TOKEN, {
-    handlerTimeout: 10
+    handlerTimeout: 100
   })
 
   const workers = []
@@ -45,7 +45,7 @@ if (cluster.isMaster) {
             distributeUpdate(updates[0])
             forwardGroups.delete(chatId)
           }
-        }, 1000)
+        }, 100)
       }
       forwardGroups.get(chatId).push(update)
     } else {
