@@ -331,7 +331,7 @@ module.exports = async (ctx, next) => {
     }
 
     let avatarImage = true
-    if (!diffUser || (ctx.me === quoteMessage.from.username && index > 0)) {
+    if (!diffUser || (ctx.me && ctx.me === quoteMessage.from.username && index > 0)) {
       avatarImage = false
       messageFrom.name = false
     }
