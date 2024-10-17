@@ -140,6 +140,5 @@ class HighLoadStats {
 }
 
 const statsInstance = new HighLoadStats()
-statsInstance.startPeriodicUpdate()
 
 module.exports = statsInstance

@@ -1,16 +1,15 @@
+const { stats } = require('../middlewares')
+
 module.exports = async ctx => {
   try {
-    const webhookInfo = await ctx.telegram.getWebhookInfo();
+    const webhookInfo = await ctx.telegram.getWebhookInfo()
 
-    const stats = ctx.stats || {};
-    const requests = stats.requests || {};
-    const messages = stats.messages || {};
-    const queue = stats.queue || {};
+    const { requests, messages, queue } = await stats.getStats()
 
     // Helper function to format numbers safely
     const formatNumber = (num) => {
-      return (typeof num === 'number' && !isNaN(num)) ? num.toFixed(2) : 'N/A';
-    };
+      return (typeof num === 'number' && !isNaN(num)) ? num.toFixed(2) : 'N/A'
+    }
 
     const message = `🏓 *Pong*
 
@@ -26,18 +25,18 @@ module.exports = async ctx => {
 │  • 95p Time: \`${formatNumber(messages.percentile95)} ms\`
 │
 └─ Queue
-   • Pending:  \`${webhookInfo.pending_update_count || queue.pending || 'N/A'}\``;
+   • Pending:  \`${webhookInfo.pending_update_count || queue.pending || 'N/A'}\``
 
     const response = await ctx.replyWithMarkdown(message, {
       reply_to_message_id: ctx.message.message_id
-    });
+    })
 
     // delete the message after 10 seconds
-    await new Promise(resolve => setTimeout(resolve, 10000));
-    await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id);
-    await ctx.deleteMessage();
+    await new Promise(resolve => setTimeout(resolve, 10000))
+    await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id)
+    await ctx.deleteMessage()
   } catch (error) {
-    console.error('Error in ping command:', error);
-    await ctx.reply('An error occurred while fetching statistics.');
+    console.error('Error in ping command:', error)
+    await ctx.reply('An error occurred while fetching statistics.')
   }
-};
+}

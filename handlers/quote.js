@@ -30,10 +30,6 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 //   emojis: '💜'
 // }).then(console.log)
 
-function sleep (ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
 let botInfo
 
 async function loopClearStickerPack () {
@@ -77,8 +73,6 @@ const generateRandomColor = () => {
   return `#${color}`
 }
 
-const minIdsInChat = {}
-
 module.exports = async (ctx, next) => {
   const flag = {
     count: false,
@@ -115,15 +109,6 @@ module.exports = async (ctx, next) => {
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
-  }
-
-  if (ctx.chat.type === 'private') {
-    // flag.reply = true
-    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
-    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(1000)
-    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
-    delete minIdsInChat[ctx.from.id]
   }
 
   ctx.replyWithChatAction('choose_sticker')
@@ -218,7 +203,7 @@ module.exports = async (ctx, next) => {
 
   if (messages.length <= 0) {
     if (process.env.GROUP_ID) {
-      for (let index = 0; index < messageCount; index++) {
+      for (let index = 1; index < messageCount; index++) {
         const chatForward = process.env.GROUP_ID
 
         const message = await ctx.telegram.forwardMessage(chatForward, ctx.message.chat.id, startMessage + index).catch(() => {})
