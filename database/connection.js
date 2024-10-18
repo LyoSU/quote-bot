@@ -1,17 +1,8 @@
 const mongoose = require('mongoose')
 
 const connectWithRetry = async () => {
-  const connectOptions = {
-    socketTimeoutMS: 45000,
-    connectTimeoutMS: 30000,
-    serverSelectionTimeoutMS: 5000,
-    heartbeatFrequencyMS: 10000,
-    retryWrites: true,
-    w: 'majority'
-  }
-
   try {
-    await mongoose.connect(process.env.MONGODB_URI, connectOptions)
+    await mongoose.connect(process.env.MONGODB_URI)
     console.log('Successfully connected to MongoDB')
   } catch (error) {
     console.error('MongoDB connection error:', error)
