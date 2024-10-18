@@ -6,7 +6,8 @@ const { db } = require('./database')
 const { stats } = require('./middlewares')
 
 const BOT_TOKEN = process.env.BOT_TOKEN
-const MAX_UPDATES_PER_WORKER = 20
+const MAX_UPDATES_PER_WORKER = 30
+const MAX_QUEUE_SIZE = 10000 // Maximum size of the queue
 
 if (cluster.isMaster) {
   const tdlib = require('./helpers/tdlib')
@@ -34,8 +35,12 @@ if (cluster.isMaster) {
     if (availableWorker) {
       availableWorker.worker.send({ type: 'UPDATE', payload: update })
       availableWorker.load++
-    } else {
+    } else if (updateQueue.length < MAX_QUEUE_SIZE) {
       updateQueue.push(update)
+      console.log(`Queue size: ${updateQueue.length}`)
+    } else {
+      console.warn('Update dropped: All workers busy and queue full')
+      // Add logic here for notifying admin or scaling the system
     }
   }
 
@@ -47,6 +52,7 @@ if (cluster.isMaster) {
         const update = updateQueue.shift()
         availableWorker.worker.send({ type: 'UPDATE', payload: update })
         availableWorker.load++
+        console.log(`Queue size after processing: ${updateQueue.length}`)
       } else {
         break
       }
@@ -125,16 +131,27 @@ if (cluster.isMaster) {
     })
   })
 
+  // Load monitoring
+  setInterval(() => {
+    const totalLoad = workers.reduce((sum, w) => sum + w.load, 0)
+    console.log(`Total worker load: ${totalLoad}, Queue size: ${updateQueue.length}`)
+    if (totalLoad === workers.length * MAX_UPDATES_PER_WORKER && updateQueue.length > 0) {
+      console.warn('System under high load: All workers at max capacity and queue not empty')
+      // Add logic here for notifying admin or auto-scaling
+    }
+  }, 60000) // Check every minute
+
   // Graceful stop
   process.once('SIGINT', () => bot.stop('SIGINT'))
   process.once('SIGTERM', () => bot.stop('SIGTERM'))
 } else {
+  // Worker code
   const handler = require('./handler')
 
   console.log(`Worker ${process.pid} started`)
 
   const tdlibProxy = new Proxy({}, {
-    get (target, prop) {
+    get(target, prop) {
       return (...args) => {
         return new Promise((resolve, reject) => {
           const id = Date.now() + Math.random()
