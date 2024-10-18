@@ -6,6 +6,7 @@ const { db } = require('./database')
 const { stats } = require('./middlewares')
 
 const BOT_TOKEN = process.env.BOT_TOKEN
+const MAX_UPDATES_PER_WORKER = 20
 
 if (cluster.isMaster) {
   const tdlib = require('./helpers/tdlib')
@@ -19,6 +20,7 @@ if (cluster.isMaster) {
   })
 
   const workers = []
+  const updateQueue = []
   const forwardGroups = new Map()
 
   for (let i = 0; i < numCPUs; i++) {
@@ -28,9 +30,27 @@ if (cluster.isMaster) {
 
   // eslint-disable-next-line no-inner-declarations
   function distributeUpdate (update) {
-    const leastLoadedWorker = workers.reduce((min, w) => w.load < min.load ? w : min, workers[0])
-    leastLoadedWorker.worker.send({ type: 'UPDATE', payload: update })
-    leastLoadedWorker.load++
+    const availableWorker = workers.find(w => w.load < MAX_UPDATES_PER_WORKER)
+    if (availableWorker) {
+      availableWorker.worker.send({ type: 'UPDATE', payload: update })
+      availableWorker.load++
+    } else {
+      updateQueue.push(update)
+    }
+  }
+
+  // eslint-disable-next-line no-inner-declarations
+  function processQueue () {
+    while (updateQueue.length > 0) {
+      const availableWorker = workers.find(w => w.load < MAX_UPDATES_PER_WORKER)
+      if (availableWorker) {
+        const update = updateQueue.shift()
+        availableWorker.worker.send({ type: 'UPDATE', payload: update })
+        availableWorker.load++
+      } else {
+        break
+      }
+    }
   }
 
   bot.use((ctx, next) => {
@@ -90,6 +110,7 @@ if (cluster.isMaster) {
         const workerData = workers.find(w => w.worker === worker)
         if (workerData) {
           workerData.load--
+          processQueue()
         }
       } else if (msg.type === 'SEND_MESSAGE') {
         bot.telegram.sendMessage(msg.chatId, msg.text)
@@ -142,7 +163,7 @@ if (cluster.isMaster) {
     const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
     ctx.config = config
     ctx.db = db
-    ctx.tdlib = tdlibProxy // Use the proxy instead of the actual tdlib
+    ctx.tdlib = tdlibProxy
     return next()
   })
 
@@ -150,13 +171,14 @@ if (cluster.isMaster) {
 
   bot.use(handler)
 
-  // Handle updates in the worker
   process.on('message', async (msg) => {
     if (msg.type === 'UPDATE') {
       try {
         await bot.handleUpdate(msg.payload)
       } catch (error) {
         console.error('Error processing update in worker:', error)
+      } finally {
+        process.send({ type: 'TASK_COMPLETED' })
       }
     }
   })
