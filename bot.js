@@ -1,220 +1,29 @@
-const fs = require('fs')
 const { Telegraf } = require('telegraf')
 const cluster = require('cluster')
-const numCPUs = require('os').cpus().length
-const { db } = require('./database')
-const { stats } = require('./middlewares')
+const { QueueManager } = require('./queueManager')
+const { setupMaster } = require('./master')
+const { setupWorker } = require('./worker')
 
 const BOT_TOKEN = process.env.BOT_TOKEN
 const MAX_UPDATES_PER_WORKER = 30
-const MAX_QUEUE_SIZE = 10000 // Maximum size of the queue
-const QUEUE_WARNING_THRESHOLD = 0.8 // 80% of MAX_QUEUE_SIZE
+const MAX_QUEUE_SIZE = 10000
+const QUEUE_WARNING_THRESHOLD = 0.8
+const PAUSE_THRESHOLD = 0.9
+const RESUME_THRESHOLD = 0.7
+const PAUSE_DURATION = 10000
 
 if (cluster.isMaster) {
-  const tdlib = require('./helpers/tdlib')
-
-  console.log(`Master process ${process.pid} is running`)
-
-  stats.startPeriodicUpdate()
-
   const bot = new Telegraf(BOT_TOKEN, {
     handlerTimeout: 100
   })
 
-  const workers = []
-  const updateQueue = []
-  const forwardGroups = new Map()
-  let lastWarningTime = 0
+  const queueManager = new QueueManager(MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD, PAUSE_DURATION)
 
-  for (let i = 0; i < numCPUs; i++) {
-    const worker = cluster.fork()
-    workers.push({ worker, load: 0 })
-  }
-
-  // eslint-disable-next-line no-inner-declarations
-  function distributeUpdate (update) {
-    const availableWorker = workers.find(w => w.load < MAX_UPDATES_PER_WORKER)
-    if (availableWorker) {
-      availableWorker.worker.send({ type: 'UPDATE', payload: update })
-      availableWorker.load++
-    } else if (updateQueue.length < MAX_QUEUE_SIZE) {
-      updateQueue.push(update)
-
-      // Check if queue size reaches the warning threshold
-      if (updateQueue.length >= MAX_QUEUE_SIZE * QUEUE_WARNING_THRESHOLD) {
-        const currentTime = Date.now()
-        // Limit warnings to once per minute
-        if (currentTime - lastWarningTime > 60000) {
-          console.warn(`Queue size warning: ${updateQueue.length} updates queued`)
-          lastWarningTime = currentTime
-        }
-      }
-    } else {
-      // Instead of dropping updates, implement a sliding window
-      updateQueue.shift() // Remove the oldest update
-      updateQueue.push(update) // Add the new update
-
-      const currentTime = Date.now()
-      // Limit warnings to once per minute
-      if (currentTime - lastWarningTime > 60000) {
-        console.warn(`Queue full, oldest update replaced. Current size: ${updateQueue.length}`)
-        lastWarningTime = currentTime
-      }
-    }
-  }
-
-  // eslint-disable-next-line no-inner-declarations
-  function processQueue () {
-    while (updateQueue.length > 0) {
-      const availableWorker = workers.find(w => w.load < MAX_UPDATES_PER_WORKER)
-      if (availableWorker) {
-        const update = updateQueue.shift()
-        availableWorker.worker.send({ type: 'UPDATE', payload: update })
-        availableWorker.load++
-      } else {
-        break
-      }
-    }
-  }
-
-  bot.use((ctx, next) => {
-    const update = ctx.update
-    if (update.message && update.message.forward_date) {
-      const chatId = update.message.chat.id
-      if (!forwardGroups.has(chatId)) {
-        forwardGroups.set(chatId, [])
-        setTimeout(() => {
-          const updates = forwardGroups.get(chatId)
-          if (updates && updates.length > 0) {
-            distributeUpdate(updates[0])
-            forwardGroups.delete(chatId)
-          }
-        }, 100)
-      }
-      forwardGroups.get(chatId).push(update)
-    } else {
-      distributeUpdate(update)
-    }
-    return next()
-  })
-
-  bot.launch({
-    polling: {
-      allowedUpdates: [
-        'message',
-        'edited_message',
-        'channel_post',
-        'edited_channel_post',
-        'inline_query',
-        'chosen_inline_result',
-        'callback_query',
-        'shipping_query',
-        'pre_checkout_query',
-        'poll',
-        'poll_answer',
-        'my_chat_member',
-        'chat_member',
-        'chat_join_request',
-        'business_message'
-      ]
-    }
-  }).then(() => {
-    console.log('Bot started polling')
-  })
-
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`Worker ${worker.process.pid} died`)
-    const newWorker = cluster.fork()
-    workers.splice(workers.findIndex(w => w.worker === worker), 1, { worker: newWorker, load: 0 })
-  })
-
-  workers.forEach(({ worker }) => {
-    worker.on('message', async (msg) => {
-      if (msg.type === 'TASK_COMPLETED') {
-        const workerData = workers.find(w => w.worker === worker)
-        if (workerData) {
-          workerData.load--
-          processQueue()
-        }
-      } else if (msg.type === 'SEND_MESSAGE') {
-        bot.telegram.sendMessage(msg.chatId, msg.text)
-      } else if (msg.type === 'TDLIB_REQUEST') {
-        try {
-          const result = await tdlib[msg.method](...msg.args)
-          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, result })
-        } catch (error) {
-          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, error: error.message })
-        }
-      }
-    })
-  })
-
-  // Load monitoring
-  setInterval(() => {
-    const totalLoad = workers.reduce((sum, w) => sum + w.load, 0)
-    console.log(`Total worker load: ${totalLoad}, Queue size: ${updateQueue.length}`)
-    if (totalLoad === workers.length * MAX_UPDATES_PER_WORKER && updateQueue.length > 0) {
-      console.warn('System under high load: All workers at max capacity and queue not empty')
-      // Add logic here for notifying admin or auto-scaling
-    }
-  }, 60000) // Check every minute
+  setupMaster(bot, queueManager, MAX_UPDATES_PER_WORKER)
 
   // Graceful stop
   process.once('SIGINT', () => bot.stop('SIGINT'))
   process.once('SIGTERM', () => bot.stop('SIGTERM'))
 } else {
-  // Worker code
-  const handler = require('./handler')
-
-  console.log(`Worker ${process.pid} started`)
-
-  const tdlibProxy = new Proxy({}, {
-    get (target, prop) {
-      return (...args) => {
-        return new Promise((resolve, reject) => {
-          const id = Date.now() + Math.random()
-          process.send({ type: 'TDLIB_REQUEST', method: prop, args, id })
-
-          const handler = (msg) => {
-            if (msg.type === 'TDLIB_RESPONSE' && msg.id === id) {
-              process.removeListener('message', handler)
-              if (msg.error) {
-                reject(new Error(msg.error))
-              } else {
-                resolve(msg.result)
-              }
-            }
-          }
-
-          process.on('message', handler)
-        })
-      }
-    }
-  })
-
-  const bot = new Telegraf(BOT_TOKEN)
-
-  bot.use((ctx, next) => {
-    const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
-    ctx.config = config
-    ctx.db = db
-    ctx.tdlib = tdlibProxy
-    return next()
-  })
-
-  bot.use(stats.middleware())
-
-  bot.use(handler)
-
-  process.on('message', async (msg) => {
-    if (msg.type === 'UPDATE') {
-      try {
-        await bot.handleUpdate(msg.payload)
-      } catch (error) {
-        console.error('Error processing update in worker:', error)
-      } finally {
-        process.send({ type: 'TASK_COMPLETED' })
-      }
-    }
-  })
+  setupWorker(BOT_TOKEN)
 }
