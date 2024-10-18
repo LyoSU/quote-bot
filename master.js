@@ -19,7 +19,6 @@ function setupMaster (bot, queueManager, maxUpdatesPerWorker) {
 
   function distributeUpdate (update) {
     if (queueManager.isPaused()) {
-      console.log('Update receiving is paused. Skipping this update.')
       return
     }
 
