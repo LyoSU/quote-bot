@@ -51,7 +51,6 @@ if (cluster.isMaster) {
         const update = updateQueue.shift()
         availableWorker.worker.send({ type: 'UPDATE', payload: update })
         availableWorker.load++
-        console.log(`Queue size after processing: ${updateQueue.length}`)
       } else {
         break
       }
