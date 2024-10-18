@@ -2,8 +2,6 @@ const mongoose = require('mongoose')
 
 const connectWithRetry = async () => {
   const connectOptions = {
-    maxPoolSize: 100,
-    minPoolSize: 10,
     socketTimeoutMS: 45000,
     connectTimeoutMS: 30000,
     serverSelectionTimeoutMS: 5000,
@@ -23,16 +21,18 @@ const connectWithRetry = async () => {
 
 connectWithRetry()
 
-mongoose.connection.on('error', (error) => {
+mongoose.connection.on('error', async (error) => {
   console.error('MongoDB connection error:', error)
   if (error.name === 'MongoNetworkError') {
     console.log('Network error detected. Attempting to reconnect...')
+    await new Promise((resolve) => setTimeout(resolve, 5000))
     connectWithRetry()
   }
 })
 
-mongoose.connection.on('disconnected', () => {
+mongoose.connection.on('disconnected', async () => {
   console.log('MongoDB disconnected. Attempting to reconnect...')
+  await new Promise((resolve) => setTimeout(resolve, 5000))
   connectWithRetry()
 })
 
