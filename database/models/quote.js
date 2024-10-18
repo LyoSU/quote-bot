@@ -40,7 +40,7 @@ const quoteSchema = Schema({
 }, {
   timestamps: true,
   indexes: [
-    { group: 1, 'rate.score': 1 }
+    { group: 1, 'rate.score': 1, _id: -1 }
   ]
 })
 

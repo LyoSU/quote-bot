@@ -1,29 +1,23 @@
 const Markup = require('telegraf/markup')
 const { randomInt } = require('crypto')
+const { ObjectId } = require('mongodb')
 
 module.exports = async ctx => {
-  const groupQuotes = await ctx.db.Quote.aggregate(
-    [
-      {
-        $match: {
-          $and: [
-            { group: ctx.group.info._id },
-            { 'rate.score': { $gt: 0 } }
-          ]
-        }
-      },
-      {
-        $sort: { _id: -1 }
-      },
-      {
-        $skip: randomInt(0, 1000),
-      },
-      {
-        $limit: randomInt(1, 1000)
-      },
-      { $sample: { size: 100 } }
-    ]
-  )
+  const maxId = await ctx.db.Quote.findOne({ group: ctx.group.info._id, 'rate.score': { $gt: 0 } }).sort({ _id: -1 })
+  const minId = await ctx.db.Quote.findOne({ group: ctx.group.info._id, 'rate.score': { $gt: 0 } }).sort({ _id: 1 })
+
+  const randomId = new ObjectId(Math.floor(Math.random() * (maxId._id.getTimestamp() - minId._id.getTimestamp()) + minId._id.getTimestamp()))
+
+  const groupQuotes = await ctx.db.Quote.aggregate([
+    {
+      $match: {
+        group: ctx.group.info._id,
+        'rate.score': { $gt: 0 },
+        _id: { $gte: randomId }
+      }
+    },
+    { $limit: 100 }
+  ])
 
   if (groupQuotes.length > 0) {
     const quote = groupQuotes[randomInt(0, groupQuotes.length)]
