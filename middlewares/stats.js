@@ -31,7 +31,7 @@ class HighLoadStats {
     }
   }
 
-  getKey(key) {
+  getKey (key) {
     return `${KEY_PREFIX}${key}`
   }
 
