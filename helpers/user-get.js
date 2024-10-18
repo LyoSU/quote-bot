@@ -1,50 +1,35 @@
 module.exports = async ctx => {
-  const { db, from, i18n, session, chat } = ctx
-  const now = Math.floor(Date.now() / 1000)
+  let user
+  let newUser = false
 
-  if (!session.userInfo) {
-    const updateData = {
-      first_name: from.first_name,
-      last_name: from.last_name,
-      full_name: `${from.first_name}${from.last_name ? ` ${from.last_name}` : ''}`,
-      username: from.username,
-      updatedAt: new Date()
-    }
-
-    const user = await db.User.findOneAndUpdate(
-      { telegram_id: from.id },
-      {
-        $set: updateData,
-        $setOnInsert: { first_act: now }
-      },
-      {
-        new: true,
-        upsert: true,
-        setDefaultsOnInsert: true
-      }
-    )
-
-    if (chat && chat.type === 'private') {
-      user.status = 'member'
-    }
-
-    session.userInfo = user
+  if (!ctx.session.userInfo) {
+    user = await ctx.db.User.findOne({ telegram_id: ctx.from.id })
   } else {
-    Object.assign(session.userInfo, {
-      first_name: from.first_name,
-      last_name: from.last_name,
-      full_name: `${from.first_name}${from.last_name ? ` ${from.last_name}` : ''}`,
-      username: from.username,
-      updatedAt: new Date()
-    })
-
-    if (chat && chat.type === 'private') {
-      session.userInfo.status = 'member'
-    }
+    user = ctx.session.userInfo
   }
 
-  if (session.userInfo.settings.locale) {
-    i18n.locale(session.userInfo.settings.locale)
+  const now = Math.floor(new Date().getTime() / 1000)
+
+  if (!user) {
+    newUser = true
+    user = new ctx.db.User()
+    user.telegram_id = ctx.from.id
+    user.first_act = now
+  }
+  user.first_name = ctx.from.first_name
+  user.last_name = ctx.from.last_name
+  user.full_name = `${ctx.from.first_name}${ctx.from.last_name ? ` ${ctx.from.last_name}` : ''}`
+  user.username = ctx.from.username
+  user.updatedAt = new Date()
+
+  if (ctx.chat && ctx.chat.type === 'private') user.status = 'member'
+
+  if (newUser) await user.save()
+
+  ctx.session.userInfo = user
+
+  if (ctx.session.userInfo.settings.locale) {
+    ctx.i18n.locale(ctx.session.userInfo.settings.locale)
   }
 
   return true
