@@ -47,11 +47,11 @@ const getTopStickerSets = async () => {
   return sortedStickerSets
 }
 
-setInterval(async () => {
-  const topStickerSets = await getTopStickerSets()
+// setInterval(async () => {
+//   const topStickerSets = await getTopStickerSets()
 
-  console.log(`Top 10 sticker sets in the last minute: ${topStickerSets.map(set => `${set.name} (${set.count})`).join(', ')}`)
-}, 1000 * 60 * 10)
+//   console.log(`Top 10 sticker sets in the last minute: ${topStickerSets.map(set => `${set.name} (${set.count})`).join(', ')}`)
+// }, 1000 * 60 * 10)
 
 module.exports = async (ctx, next) => {
   if (!ctx.chat.username || Math.random() < 0.8) {
