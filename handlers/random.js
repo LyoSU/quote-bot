@@ -14,7 +14,7 @@ module.exports = async (ctx, next) => {
   let groupQuotes
 
   if (count > 0) {
-    const skip = Math.floor(randomInt(0, Math.max(0, count - 100)))
+    const skip = randomInt(0, count)
 
     groupQuotes = await ctx.db.Quote.find({
       group: ctx.group.info._id,
