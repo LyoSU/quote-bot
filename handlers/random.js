@@ -1,27 +1,26 @@
 const Markup = require('telegraf/markup')
 const { randomInt } = require('crypto')
-const { ObjectId } = require('mongodb')
 
 module.exports = async (ctx, next) => {
   if (!ctx.group.info) {
     return next()
   }
 
-  const maxId = await ctx.db.Quote.findOne({ group: ctx.group.info._id, 'rate.score': { $gt: 0 } }).sort({ _id: -1 })
-  const minId = await ctx.db.Quote.findOne({ group: ctx.group.info._id, 'rate.score': { $gt: 0 } }).sort({ _id: 1 })
+  const count = await ctx.db.Quote.countDocuments({
+    group: ctx.group.info._id,
+    'rate.score': { $gt: 0 }
+  })
 
-  const randomId = new ObjectId(Math.floor(Math.random() * (maxId._id.getTimestamp() - minId._id.getTimestamp()) + minId._id.getTimestamp()))
+  if (count === 0) {
+    return []
+  }
 
-  const groupQuotes = await ctx.db.Quote.aggregate([
-    {
-      $match: {
-        group: ctx.group.info._id,
-        'rate.score': { $gt: 0 },
-        _id: { $gte: randomId }
-      }
-    },
-    { $limit: 100 }
-  ])
+  const skip = Math.floor(Math.random() * Math.max(0, count - 100))
+
+  const groupQuotes = await ctx.db.Quote.find({
+    group: ctx.group.info._id,
+    'rate.score': { $gt: 0 }
+  }).skip(skip).limit(100).toArray()
 
   if (groupQuotes.length > 0) {
     const quote = groupQuotes[randomInt(0, groupQuotes.length)]
