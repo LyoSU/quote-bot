@@ -2,7 +2,11 @@ const Markup = require('telegraf/markup')
 const { randomInt } = require('crypto')
 const { ObjectId } = require('mongodb')
 
-module.exports = async ctx => {
+module.exports = async (ctx, next) => {
+  if (!ctx.group.info) {
+    return next()
+  }
+
   const maxId = await ctx.db.Quote.findOne({ group: ctx.group.info._id, 'rate.score': { $gt: 0 } }).sort({ _id: -1 })
   const minId = await ctx.db.Quote.findOne({ group: ctx.group.info._id, 'rate.score': { $gt: 0 } }).sort({ _id: 1 })
 
