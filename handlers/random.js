@@ -12,6 +12,9 @@ module.exports = async ctx => {
           ]
         }
       },
+      {
+        $limit: 1000
+      },
       { $sample: { size: 100 } }
     ]
   )
