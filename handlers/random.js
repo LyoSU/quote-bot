@@ -16,7 +16,8 @@ module.exports = async ctx => {
         $sort: { _id: -1 }
       },
       {
-        $limit: 1000
+        $skip: randomInt(0, 1000),
+        $limit: randomInt(1, 1000)
       },
       { $sample: { size: 100 } }
     ]
