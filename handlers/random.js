@@ -13,6 +13,9 @@ module.exports = async ctx => {
         }
       },
       {
+        $sort: { _id: -1 }
+      },
+      {
         $limit: 1000
       },
       { $sample: { size: 100 } }
