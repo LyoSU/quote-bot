@@ -3,11 +3,11 @@ const { Telegraf } = require('telegraf')
 const { db } = require('./database')
 const { stats } = require('./middlewares')
 
-function setupWorker(botToken) {
+function setupWorker (botToken) {
   console.log(`Worker ${process.pid} started`)
 
   const tdlibProxy = new Proxy({}, {
-    get(target, prop) {
+    get (target, prop) {
       return (...args) => {
         return new Promise((resolve, reject) => {
           const id = Date.now() + Math.random()

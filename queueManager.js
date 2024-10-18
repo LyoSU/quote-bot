@@ -51,13 +51,17 @@ class QueueManager {
       this.isPausedFlag = true
       console.log('Pausing update receiving due to high load.')
 
+      if (this.bot && typeof this.bot.stop === 'function') {
+        this.bot.stop('pause')
+      }
+
       this.pauseTimeout = setTimeout(() => {
         this.resumeUpdates()
       }, this.pauseDuration)
     }
   }
 
-  resumeUpdates (bot) {
+  resumeUpdates () {
     if (this.isPausedFlag) {
       this.isPausedFlag = false
       if (this.pauseTimeout) {
@@ -65,29 +69,35 @@ class QueueManager {
         this.pauseTimeout = null
       }
       console.log('Resuming update receiving.')
-      bot.launch({
-        polling: {
-          allowedUpdates: [
-            'message',
-            'edited_message',
-            'channel_post',
-            'edited_channel_post',
-            'inline_query',
-            'chosen_inline_result',
-            'callback_query',
-            'shipping_query',
-            'pre_checkout_query',
-            'poll',
-            'poll_answer',
-            'my_chat_member',
-            'chat_member',
-            'chat_join_request',
-            'business_message'
-          ]
-        }
-      }).then(() => {
-        console.log('Bot resumed polling')
-      })
+      if (this.bot && typeof this.bot.launch === 'function') {
+        this.bot.launch({
+          polling: {
+            allowedUpdates: [
+              'message',
+              'edited_message',
+              'channel_post',
+              'edited_channel_post',
+              'inline_query',
+              'chosen_inline_result',
+              'callback_query',
+              'shipping_query',
+              'pre_checkout_query',
+              'poll',
+              'poll_answer',
+              'my_chat_member',
+              'chat_member',
+              'chat_join_request',
+              'business_message'
+            ]
+          }
+        }).then(() => {
+          console.log('Bot resumed polling')
+        }).catch((error) => {
+          console.error('Error resuming bot:', error)
+        })
+      } else {
+        console.warn('Bot instance is not available or does not have a launch method')
+      }
     }
   }
 
