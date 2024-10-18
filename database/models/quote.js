@@ -38,7 +38,10 @@ const quoteSchema = Schema({
     }
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  indexes: [
+    { group: 1, 'rate.score': 1 }
+  ]
 })
 
 module.exports = quoteSchema
