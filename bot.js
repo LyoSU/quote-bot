@@ -8,6 +8,7 @@ const { stats } = require('./middlewares')
 const BOT_TOKEN = process.env.BOT_TOKEN
 const MAX_UPDATES_PER_WORKER = 30
 const MAX_QUEUE_SIZE = 10000 // Maximum size of the queue
+const QUEUE_WARNING_THRESHOLD = 0.8 // 80% of MAX_QUEUE_SIZE
 
 if (cluster.isMaster) {
   const tdlib = require('./helpers/tdlib')
@@ -23,6 +24,7 @@ if (cluster.isMaster) {
   const workers = []
   const updateQueue = []
   const forwardGroups = new Map()
+  let lastWarningTime = 0
 
   for (let i = 0; i < numCPUs; i++) {
     const worker = cluster.fork()
@@ -37,9 +39,27 @@ if (cluster.isMaster) {
       availableWorker.load++
     } else if (updateQueue.length < MAX_QUEUE_SIZE) {
       updateQueue.push(update)
+
+      // Check if queue size reaches the warning threshold
+      if (updateQueue.length >= MAX_QUEUE_SIZE * QUEUE_WARNING_THRESHOLD) {
+        const currentTime = Date.now()
+        // Limit warnings to once per minute
+        if (currentTime - lastWarningTime > 60000) {
+          console.warn(`Queue size warning: ${updateQueue.length} updates queued`)
+          lastWarningTime = currentTime
+        }
+      }
     } else {
-      console.warn('Update dropped: All workers busy and queue full')
-      // Add logic here for notifying admin or scaling the system
+      // Instead of dropping updates, implement a sliding window
+      updateQueue.shift() // Remove the oldest update
+      updateQueue.push(update) // Add the new update
+
+      const currentTime = Date.now()
+      // Limit warnings to once per minute
+      if (currentTime - lastWarningTime > 60000) {
+        console.warn(`Queue full, oldest update replaced. Current size: ${updateQueue.length}`)
+        lastWarningTime = currentTime
+      }
     }
   }
 
@@ -149,7 +169,7 @@ if (cluster.isMaster) {
   console.log(`Worker ${process.pid} started`)
 
   const tdlibProxy = new Proxy({}, {
-    get(target, prop) {
+    get (target, prop) {
       return (...args) => {
         return new Promise((resolve, reject) => {
           const id = Date.now() + Math.random()
