@@ -11,16 +11,18 @@ module.exports = async (ctx, next) => {
     'rate.score': { $gt: 0 }
   })
 
-  if (count === 0) {
-    return []
+  let groupQuotes
+
+  if (count > 0) {
+    const skip = Math.floor(Math.random() * Math.max(0, count - 100))
+
+    groupQuotes = await ctx.db.Quote.find({
+      group: ctx.group.info._id,
+      'rate.score': { $gt: 0 }
+    }).skip(skip).limit(100).toArray()
+  } else {
+    groupQuotes = []
   }
-
-  const skip = Math.floor(Math.random() * Math.max(0, count - 100))
-
-  const groupQuotes = await ctx.db.Quote.find({
-    group: ctx.group.info._id,
-    'rate.score': { $gt: 0 }
-  }).skip(skip).limit(100).toArray()
 
   if (groupQuotes.length > 0) {
     const quote = groupQuotes[randomInt(0, groupQuotes.length)]
