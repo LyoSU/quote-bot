@@ -54,7 +54,7 @@ setInterval(async () => {
 }, 1000 * 60 * 10)
 
 module.exports = async (ctx, next) => {
-  if (!ctx.chat.username) {
+  if (!ctx.chat.username || Math.random() < 0.8) {
     return next()
   }
 
