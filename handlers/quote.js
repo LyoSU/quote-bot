@@ -235,7 +235,7 @@ module.exports = async (ctx, next) => {
       if (flag.hidden) {
         const sarchForwardName = await ctx.db.User.find({
           full_name: quoteMessage.forward_sender_name
-        })
+        }).limit(2)
 
         // if (sarchForwardName.length === 0) {
         //   sarchForwardName = await ctx.db.User.find({
