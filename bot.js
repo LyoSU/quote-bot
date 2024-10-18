@@ -37,7 +37,6 @@ if (cluster.isMaster) {
       availableWorker.load++
     } else if (updateQueue.length < MAX_QUEUE_SIZE) {
       updateQueue.push(update)
-      console.log(`Queue size: ${updateQueue.length}`)
     } else {
       console.warn('Update dropped: All workers busy and queue full')
       // Add logic here for notifying admin or scaling the system
