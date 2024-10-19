@@ -1,6 +1,8 @@
 const Markup = require('telegraf/markup')
 
 module.exports = async ctx => {
+  const getMe = await ctx.telegram.getMe()
+
   if (ctx.updateType === 'callback_query') {
     await ctx.editMessageText(ctx.i18n.t('help'), {
       parse_mode: 'HTML',
@@ -8,13 +10,13 @@ module.exports = async ctx => {
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
           ctx.i18n.t('btn.add_group'),
-          `https://t.me/${ctx.options.username}?startgroup=add`
+          `https://t.me/${getMe.username}?startgroup=add`
         )
       ])
     })
   } else if (ctx.group) {
     await ctx.replyWithHTML(ctx.i18n.t('help_group', {
-      username: ctx.options.username
+      username: getMe.username
     }), {
       disable_web_page_preview: true,
       reply_to_message_id: ctx.message.message_id,
@@ -22,7 +24,7 @@ module.exports = async ctx => {
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
           ctx.i18n.t('btn.help'),
-          `https://t.me/${ctx.options.username}?start=help`
+          `https://t.me/${getMe.username}?start=help`
         )
       ])
     })
@@ -34,7 +36,7 @@ module.exports = async ctx => {
       reply_markup: Markup.inlineKeyboard([
         Markup.urlButton(
           ctx.i18n.t('btn.add_group'),
-          `https://t.me/${ctx.options.username}?startgroup=add`
+          `https://t.me/${getMe.username}?startgroup=add`
         )
       ])
     })
