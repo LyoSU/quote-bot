@@ -1,8 +1,7 @@
 const cluster = require('cluster')
-const numCPUs = require('os').cpus().length
 const { stats } = require('./middlewares')
 
-function setupMaster (bot, queueManager, maxUpdatesPerWorker) {
+function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
 
   console.log(`Master process ${process.pid} is running`)
@@ -12,7 +11,7 @@ function setupMaster (bot, queueManager, maxUpdatesPerWorker) {
   const workers = []
   const forwardGroups = new Map()
 
-  for (let i = 0; i < numCPUs; i++) {
+  for (let i = 0; i < maxWorkers; i++) {
     const worker = cluster.fork()
     workers.push({ worker, load: 0 })
   }
