@@ -19,7 +19,7 @@ module.exports = async (ctx, next) => {
     groupQuotes = await ctx.db.Quote.find({
       group: ctx.group.info._id,
       'rate.score': { $gt: 0 }
-    }).skip(skip).limit(100)
+    }).skip(skip).limit(10)
   } else {
     groupQuotes = []
   }
