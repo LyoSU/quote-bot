@@ -213,7 +213,10 @@ function getMessages (chatID, messageIds) {
 
               let entities
 
-              if (messageInfo.content) {
+              if (messageInfo.content.text) {
+                message.text = messageInfo.content.text.text
+                entities = messageInfo.content.text.entities
+              } else if (messageInfo.content) {
                 const mediaType = {
                   messageText: 'text',
                   messagePhoto: 'photo',
