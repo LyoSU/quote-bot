@@ -8,13 +8,10 @@ const quoteSchema = Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    index: true
+    ref: 'User'
   },
   file_id: {
-    type: String,
-    unique: true,
-    required: true
+    type: String
   },
   file_unique_id: {
     type: String,
@@ -33,8 +30,7 @@ const quoteSchema = Schema({
       }]
     }],
     score: {
-      type: Number,
-      index: true
+      type: Number
     }
   }
 }, {
