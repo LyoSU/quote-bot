@@ -19,7 +19,7 @@ if (cluster.isMaster) {
     handlerTimeout: 100
   })
 
-  const queueManager = new QueueManager(MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD, PAUSE_DURATION)
+  const queueManager = new QueueManager(bot, MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD, PAUSE_DURATION)
 
   setupMaster(bot, queueManager, MAX_WORKERS, MAX_UPDATES_PER_WORKER)
 

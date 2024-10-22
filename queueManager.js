@@ -1,5 +1,6 @@
 class QueueManager {
-  constructor (maxQueueSize, warningThreshold, pauseThreshold, resumeThreshold, pauseDuration) {
+  constructor (bot, maxQueueSize, warningThreshold, pauseThreshold, resumeThreshold, pauseDuration) {
+    this.bot = bot
     this.maxQueueSize = maxQueueSize
     this.warningThreshold = warningThreshold
     this.pauseThreshold = pauseThreshold

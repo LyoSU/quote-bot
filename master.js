@@ -43,7 +43,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
 
     if (queueManager.shouldResume()) {
-      queueManager.resumeUpdates(bot)
+      queueManager.resumeUpdates()
     }
   }
 
@@ -129,7 +129,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       console.warn('System under high load: All workers at max capacity and queue not empty')
       // Add logic here for notifying admin or auto-scaling
     }
-  }, 60000) // Check every minute
+  }, 5000)
 }
 
 module.exports = { setupMaster }
