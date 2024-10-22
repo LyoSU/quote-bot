@@ -50,10 +50,14 @@ class QueueManager {
   pauseUpdates () {
     if (!this.isPausedFlag) {
       this.isPausedFlag = true
-      console.log('Pausing update receiving due to high load.')
+      console.log('Pause updates')
 
       if (this.bot && typeof this.bot.stop === 'function') {
-        this.bot.stop('pause')
+        this.bot.stop('pause').catch(error => {
+          console.error('Error stopping bot:', error)
+        })
+      } else {
+        console.warn('Bot instance is not available or stop method is not available')
       }
 
       this.pauseTimeout = setTimeout(() => {
@@ -69,7 +73,7 @@ class QueueManager {
         clearTimeout(this.pauseTimeout)
         this.pauseTimeout = null
       }
-      console.log('Resuming update receiving.')
+      console.log('Відновлення отримання оновлень.')
       if (this.bot && typeof this.bot.launch === 'function') {
         this.bot.launch({
           polling: {
@@ -92,12 +96,12 @@ class QueueManager {
             ]
           }
         }).then(() => {
-          console.log('Bot resumed polling')
+          console.log('Бот відновив опитування')
         }).catch((error) => {
-          console.error('Error resuming bot:', error)
+          console.error('Помилка відновлення бота:', error)
         })
       } else {
-        console.warn('Bot instance is not available or does not have a launch method')
+        console.warn('Екземпляр бота недоступний або не має методу launch')
       }
     }
   }
