@@ -22,14 +22,14 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   }
 
   function distributeUpdate (update) {
-    if (queueManager.isPaused()) {
-      return
-    }
-
-    const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
-    if (availableWorker) {
-      availableWorker.worker.send({ type: 'UPDATE', payload: update })
-      availableWorker.load++
+    if (!queueManager.isPaused()) {
+      const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
+      if (availableWorker) {
+        availableWorker.worker.send({ type: 'UPDATE', payload: update })
+        availableWorker.load++
+      } else {
+        queueManager.addToQueue(update)
+      }
     } else {
       queueManager.addToQueue(update)
     }
@@ -54,47 +54,8 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   bot.use((ctx, next) => {
     const update = ctx.update
-    if (update.message && update.message.forward_date) {
-      const chatId = update.message.chat.id
-      if (!forwardGroups.has(chatId)) {
-        forwardGroups.set(chatId, [])
-        setTimeout(() => {
-          const updates = forwardGroups.get(chatId)
-          if (updates && updates.length > 0) {
-            distributeUpdate(updates[0])
-            forwardGroups.delete(chatId)
-          }
-        }, 100)
-      }
-      forwardGroups.get(chatId).push(update)
-    } else {
-      distributeUpdate(update)
-    }
+    distributeUpdate(update)
     return next()
-  })
-
-  bot.launch({
-    polling: {
-      allowedUpdates: [
-        'message',
-        'edited_message',
-        'channel_post',
-        'edited_channel_post',
-        'inline_query',
-        'chosen_inline_result',
-        'callback_query',
-        'shipping_query',
-        'pre_checkout_query',
-        'poll',
-        'poll_answer',
-        'my_chat_member',
-        'chat_member',
-        'chat_join_request',
-        'business_message'
-      ]
-    }
-  }).then(() => {
-    console.log('Bot started polling')
   })
 
   cluster.on('exit', (worker, code, signal) => {

@@ -53,9 +53,9 @@ class QueueManager {
       console.log('Pause updates')
 
       if (this.bot && typeof this.bot.stop === 'function') {
-        this.bot.stop('pause').catch(error => {
-          console.error('Error stopping bot:', error)
-        })
+        this.bot.stop()
+          .then(() => console.log('Bot stopped'))
+          .catch(error => console.error('Error stopping bot:', error))
       } else {
         console.warn('Bot instance is not available or stop method is not available')
       }
@@ -73,35 +73,13 @@ class QueueManager {
         clearTimeout(this.pauseTimeout)
         this.pauseTimeout = null
       }
-      console.log('Відновлення отримання оновлень.')
+      console.log('Resume updates')
       if (this.bot && typeof this.bot.launch === 'function') {
-        this.bot.launch({
-          polling: {
-            allowedUpdates: [
-              'message',
-              'edited_message',
-              'channel_post',
-              'edited_channel_post',
-              'inline_query',
-              'chosen_inline_result',
-              'callback_query',
-              'shipping_query',
-              'pre_checkout_query',
-              'poll',
-              'poll_answer',
-              'my_chat_member',
-              'chat_member',
-              'chat_join_request',
-              'business_message'
-            ]
-          }
-        }).then(() => {
-          console.log('Бот відновив опитування')
-        }).catch((error) => {
-          console.error('Помилка відновлення бота:', error)
-        })
+        this.bot.launch()
+          .then(() => console.log('Bot launched'))
+          .catch(error => console.error('Error launching bot:', error))
       } else {
-        console.warn('Екземпляр бота недоступний або не має методу launch')
+        console.warn('Bot instance is not available or launch method is not available')
       }
     }
   }
@@ -116,7 +94,7 @@ class QueueManager {
 
   getStatus () {
     const queuePercentage = (this.updateQueue.length / this.maxQueueSize) * 100
-    return `Queue size: ${this.updateQueue.length} (${queuePercentage.toFixed(2)}%)`
+    return `Розмір черги: ${this.updateQueue.length} (${queuePercentage.toFixed(2)}%)`
   }
 }
 

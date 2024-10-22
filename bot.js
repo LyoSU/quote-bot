@@ -10,7 +10,6 @@ const MAX_QUEUE_SIZE = 1000
 const QUEUE_WARNING_THRESHOLD = 0.8
 const PAUSE_THRESHOLD = 0.9
 const RESUME_THRESHOLD = 0.7
-const PAUSE_DURATION = 5000
 
 if (cluster.isMaster) {
   const { setupMaster } = require('./master')
@@ -20,12 +19,14 @@ if (cluster.isMaster) {
   })
 
   if (!(bot instanceof Telegraf)) {
-    throw new Error('Failed to create Telegraf instance')
+    throw new Error('Не вдалося створити екземпляр Telegraf')
   }
 
-  const queueManager = new QueueManager(bot, MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD, PAUSE_DURATION)
+  const queueManager = new QueueManager(MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD)
 
   setupMaster(bot, queueManager, MAX_WORKERS, MAX_UPDATES_PER_WORKER)
+
+  bot.launch()
 
   // Graceful stop
   process.once('SIGINT', () => bot.stop('SIGINT'))
