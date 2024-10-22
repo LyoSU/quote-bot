@@ -19,6 +19,10 @@ if (cluster.isMaster) {
     handlerTimeout: 100
   })
 
+  if (!(bot instanceof Telegraf)) {
+    throw new Error('Failed to create Telegraf instance')
+  }
+
   const queueManager = new QueueManager(bot, MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD, PAUSE_DURATION)
 
   setupMaster(bot, queueManager, MAX_WORKERS, MAX_UPDATES_PER_WORKER)

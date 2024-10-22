@@ -1,7 +1,12 @@
 const cluster = require('cluster')
 const { stats } = require('./middlewares')
+const { Telegraf } = require('telegraf')
 
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
+  if (!(bot instanceof Telegraf)) {
+    throw new Error('Invalid bot instance provided to setupMaster')
+  }
+
   const tdlib = require('./helpers/tdlib')
 
   console.log(`Master process ${process.pid} is running`)
