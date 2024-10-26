@@ -11,8 +11,17 @@ module.exports = async ctx => {
       const quote = await ctx.db.Quote.findOne({ group: group, file_unique_id: fileId })
 
       if (quote) {
-        await quote.delete()
-        result = ctx.i18n.t('sticker.delete_random.suc')
+        const deleteResult = await ctx.db.Quote.deleteOne({ _id: quote._id }).catch(err => {
+          console.error('Error deleting sticker:', err)
+        })
+
+        if (deleteResult && deleteResult.deletedCount === 1) {
+          result = ctx.i18n.t('sticker.delete_random.suc')
+        } else {
+          result = ctx.i18n.t('sticker.delete_random.error', {
+            error: 'delete operation failed'
+          })
+        }
       } else {
         result = ctx.i18n.t('sticker.delete_random.error', {
           error: 'quote not found'
