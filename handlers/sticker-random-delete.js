@@ -5,7 +5,7 @@ module.exports = async ctx => {
     const replyMessage = ctx.message.reply_to_message
     const group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
 
-    const fileId = replyMessage.sticker.file_unique_id
+    const fileId = replyMessage?.sticker?.file_unique_id
 
     if (replyMessage.sticker) {
       const quote = await ctx.db.Quote.findOne({ group: group, file_unique_id: fileId })
