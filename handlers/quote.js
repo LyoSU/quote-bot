@@ -565,7 +565,7 @@ ${messageForAIContext.map((message) => `<${message.role}_name><${message.role}_c
       },
       responseType: 'buffer',
       timeout: 1000 * 30,
-      retry: 1
+      retry: 2
     }
   ).catch((error) => {
     return { error }
