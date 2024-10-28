@@ -54,8 +54,10 @@ module.exports = async ctx => {
       emojis += '🌟'
 
       if (!ctx.group.info.stickerSet.name) {
-        const packName = `g${Math.random().toString(36).substring(5)}_${Math.abs(ctx.group.info.group_id)}_by_${ctx.options.username}`
-        const packTitle = `${ctx.group.info.title.substring(0, 30)} pack by @${ctx.options.username}`
+        const getMe = await ctx.telegram.getMe()
+
+        const packName = `g${Math.random().toString(36).substring(5)}_${Math.abs(ctx.group.info.group_id)}_by_${getMe.username}`
+        const packTitle = `${ctx.group.info.title.substring(0, 30)} pack by @${getMe.username}`
 
         const chatAdministrators = await ctx.getChatAdministrators()
         let chatAdministrator = ctx.from

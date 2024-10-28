@@ -8,6 +8,8 @@ const redis = new Redis({
 
 const WINDOW_SIZE_SEC = 60
 const UPDATE_INTERVAL_MS = 1000 * 5
+const TTL_SECONDS = 120 // 2 minutes TTL for all Redis keys
+const KEY_PREFIX = 'quote:stats:' // Prefix for all Redis keys
 
 class HighLoadStats {
   constructor () {
@@ -29,22 +31,33 @@ class HighLoadStats {
     }
   }
 
+  getKey (key) {
+    return `${KEY_PREFIX}${key}`
+  }
+
   async recordRequest (duration, isMessage = false) {
     const now = Date.now()
     const bucket = Math.floor(now / 1000)
 
     const type = isMessage ? 'messages' : 'requests'
 
-    await Promise.all([
-      redis.zadd(`${type}:time`, bucket, bucket),
-      redis.hincrby(`${type}:${bucket}`, 'count', 1),
-      redis.hincrby(`${type}:${bucket}`, 'totalDuration', duration),
-      redis.zadd(`${type}:responseTimes`, duration, duration)
-    ])
+    const pipeline = redis.pipeline()
+
+    pipeline.zadd(this.getKey(`${type}:time`), bucket, bucket)
+    pipeline.expire(this.getKey(`${type}:time`), TTL_SECONDS)
+
+    pipeline.hincrby(this.getKey(`${type}:${bucket}`), 'count', 1)
+    pipeline.hincrby(this.getKey(`${type}:${bucket}`), 'totalDuration', duration)
+    pipeline.expire(this.getKey(`${type}:${bucket}`), TTL_SECONDS)
+
+    pipeline.zadd(this.getKey(`${type}:responseTimes`), duration, duration)
+    pipeline.expire(this.getKey(`${type}:responseTimes`), TTL_SECONDS)
+
+    await pipeline.exec()
   }
 
   async updateQueueSize (size) {
-    await redis.set('queue:pending', size)
+    await redis.set(this.getKey('queue:pending'), size, 'EX', TTL_SECONDS)
   }
 
   async getStats () {
@@ -55,15 +68,15 @@ class HighLoadStats {
 
     for (const type of ['requests', 'messages']) {
       const [timeBuckets, responseTimes] = await Promise.all([
-        redis.zrangebyscore(`${type}:time`, Math.floor(windowStart / 1000), '+inf'),
-        redis.zrangebyscore(`${type}:responseTimes`, '-inf', '+inf')
+        redis.zrangebyscore(this.getKey(`${type}:time`), Math.floor(windowStart / 1000), '+inf'),
+        redis.zrangebyscore(this.getKey(`${type}:responseTimes`), '-inf', '+inf')
       ])
 
       let totalCount = 0
       let totalDuration = 0
 
       await Promise.all(timeBuckets.map(async (bucket) => {
-        const [count, duration] = await redis.hmget(`${type}:${bucket}`, 'count', 'totalDuration')
+        const [count, duration] = await redis.hmget(this.getKey(`${type}:${bucket}`), 'count', 'totalDuration')
         totalCount += parseInt(count || 0)
         totalDuration += parseInt(duration || 0)
       }))
@@ -80,7 +93,7 @@ class HighLoadStats {
       }
     }
 
-    const queuePending = parseInt(await redis.get('queue:pending') || '0')
+    const queuePending = parseInt(await redis.get(this.getKey('queue:pending')) || '0')
 
     return {
       requests: {
@@ -121,7 +134,6 @@ class HighLoadStats {
     return async (ctx, next) => {
       const startMs = Date.now()
 
-      // Додаємо поточну статистику до контексту
       ctx.stats = JSON.parse(JSON.stringify(this.currentStats))
 
       try {
@@ -140,6 +152,5 @@ class HighLoadStats {
 }
 
 const statsInstance = new HighLoadStats()
-statsInstance.startPeriodicUpdate()
 
 module.exports = statsInstance

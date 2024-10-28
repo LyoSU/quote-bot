@@ -54,7 +54,7 @@ module.exports = async ctx => {
           }
         ]
       ]
-    })
+    }).catch(() => {})
   } else {
     const advKeyboard = ctx.callbackQuery.message.reply_markup.inline_keyboard.pop().pop()
 
@@ -72,7 +72,6 @@ module.exports = async ctx => {
         ],
         advKeyboard.url ? [advKeyboard] : []
       ]
-    })
+    }).catch(() => {})
   }
-
 }

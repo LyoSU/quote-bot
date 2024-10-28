@@ -3,18 +3,14 @@ const { Schema } = require('mongoose')
 const quoteSchema = Schema({
   group: {
     type: Schema.Types.ObjectId,
-    ref: 'Group',
-    index: true
+    ref: 'Group'
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    index: true
+    ref: 'User'
   },
   file_id: {
-    type: String,
-    unique: true,
-    required: true
+    type: String
   },
   file_unique_id: {
     type: String,
@@ -33,12 +29,14 @@ const quoteSchema = Schema({
       }]
     }],
     score: {
-      type: Number,
-      index: true
+      type: Number
     }
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  indexes: [
+    { group: 1, 'rate.score': -1, _id: -1 }
+  ]
 })
 
 module.exports = quoteSchema

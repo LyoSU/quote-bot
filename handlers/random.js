@@ -1,20 +1,28 @@
 const Markup = require('telegraf/markup')
 const { randomInt } = require('crypto')
 
-module.exports = async ctx => {
-  const groupQuotes = await ctx.db.Quote.aggregate(
-    [
-      {
-        $match: {
-          $and: [
-            { group: ctx.group.info._id },
-            { 'rate.score': { $gt: 0 } }
-          ]
-        }
-      },
-      { $sample: { size: 100 } }
-    ]
-  )
+module.exports = async (ctx, next) => {
+  if (!ctx.group.info) {
+    return next()
+  }
+
+  const count = await ctx.db.Quote.countDocuments({
+    group: ctx.group.info._id,
+    'rate.score': { $gt: 0 }
+  })
+
+  let groupQuotes
+
+  if (count > 0) {
+    const skip = randomInt(0, count)
+
+    groupQuotes = await ctx.db.Quote.find({
+      group: ctx.group.info._id,
+      'rate.score': { $gt: 0 }
+    }).skip(skip).limit(10)
+  } else {
+    groupQuotes = []
+  }
 
   if (groupQuotes.length > 0) {
     const quote = groupQuotes[randomInt(0, groupQuotes.length)]

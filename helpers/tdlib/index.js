@@ -166,9 +166,9 @@ function getMessages (chatID, messageIds) {
             date: messageInfo.date
           }
           const messagePromise = []
-          const replyToMessageID = messageInfo.reply_to_message_id / Math.pow(2, 20)
+          const replyToMessageID = messageInfo?.reply_to?.message_id / Math.pow(2, 20)
 
-          if (messageInfo.reply_to_message_id) messagePromise.push(getMessages(chatID, [replyToMessageID]))
+          if (messageInfo?.reply_to?.message_id) messagePromise.push(getMessages(chatID, [replyToMessageID]))
           Promise.all(messagePromise).then((replyMessage) => {
             if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
@@ -216,9 +216,9 @@ function getMessages (chatID, messageIds) {
               if (messageInfo.content.text) {
                 message.text = messageInfo.content.text.text
                 entities = messageInfo.content.text.entities
-              }
-              if (messageInfo.content) {
+              } else if (messageInfo.content) {
                 const mediaType = {
+                  messageText: 'text',
                   messagePhoto: 'photo',
                   messageSticker: 'sticker',
                   messageVoiceNote: 'voice',
@@ -230,7 +230,11 @@ function getMessages (chatID, messageIds) {
 
                 if (type) {
                   let media
-                  if (messageInfo.content.voice_note) {
+
+                  if (type === 'text') {
+                    message.text = messageInfo.content.text.text
+                    entities = messageInfo.content.text.entities
+                  } else if (messageInfo.content.voice_note) {
                     const { voice_note } = messageInfo.content
                     const waveform = decodeWaveform(Buffer.from(voice_note.waveform, 'base64'))
 

@@ -2,7 +2,7 @@ module.exports = {
   apps: [{
     name: 'QuoteBot',
     script: './index.js',
-    max_memory_restart: '1000M',
+    max_memory_restart: '5000M',
     // instances: 1,
     // exec_mode: 'cluster',
     watch: true,

@@ -8,12 +8,10 @@ const userSchema = Schema({
     required: true
   },
   first_name: {
-    type: String,
-    index: true
+    type: String
   },
   last_name: {
-    type: String,
-    index: true
+    type: String
   },
   full_name: {
     type: String,
