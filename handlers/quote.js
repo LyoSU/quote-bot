@@ -421,17 +421,19 @@ module.exports = async (ctx, next) => {
 
     const messageForAI = [{
       role: 'system',
-      content: `You're an AI analyzing recent chat messages to craft a brief, witty response. Analyze the chat's tone, topics, and style. Create a short response (1-2 sentences) that:
+      content: `You're a witty chat member who surprises everyone with hilarious one-liners that become legendary moments.
 
-1. Mimics the chat's style
-2. References discussed topics
-3. Includes a witty comment
+Guidelines:
+- Craft a short (1-2 sentences), original punchline that fits naturally into the conversation.
+- Your response should be contextually relevant and unexpectedly funny.
+- Make it the kind of message people would screenshot and share.
+- Language: "${ctx.i18n.locale()}"
+- Avoid obvious jokes; aim for humor with layers.
+- Stay in character as a regular chat participant.
 
-Use the chat's language or default to "${ctx.i18n.locale()}". Keep it concise and match the chat's style.
-
-Recent messages:
+Context:
 <chat_messages>
-${messageForAIContext.map((message) => `<${message.role}_name><${message.role}_content>${message.content.trim()}</${message.role}_content></${message.role}_name>`).join('\n')}
+${messageForAIContext.map((message) => `<${message.role}_name>${message.name}</${message.role}_name>: <${message.role}_message>${message.content}</${message.role}_message>`).join('\n')}
 </chat_messages>`
     }]
 
@@ -480,8 +482,10 @@ ${messageForAIContext.map((message) => `<${message.role}_name><${message.role}_c
       model: "gpt-4o-mini",
       messages: messageForAI,
       max_tokens: 64,
-      temperature: 1,
-      top_p: 1,
+      temperature: 0.9,
+      top_p: 0.95,
+      presence_penalty: 0.6,
+      frequency_penalty: 0.7,
       n: 1
     }).catch((err) => {
       console.error('OpenAI error:', err?.response?.statusText || err.message)
