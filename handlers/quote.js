@@ -5,6 +5,7 @@ const got = require('got')
 const {
   OpenAI
 } = require('openai')
+const Anthropic = require('@anthropic-ai/sdk')
 const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
 
@@ -17,6 +18,10 @@ const telegram = new Telegram(process.env.BOT_TOKEN)
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+})
+
+const anthropicClient = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
 })
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
@@ -419,76 +424,101 @@ module.exports = async (ctx, next) => {
       }
     })
 
-    const messageForAI = [{
-      role: 'system',
-      content: `You're an AI analyzing recent chat messages to craft a brief, witty response. Analyze the chat's tone, topics, and style. Create a short response (1-2 sentences) that:
+    const systemMessage = `You're a witty chat member who surprises everyone with hilarious one-liners that become legendary moments.
 
-1. Mimics the chat's style
-2. References discussed topics
-3. Includes a witty comment
+Guidelines:
+- Craft a short (1-2 sentences), original punchline that fits naturally into the conversation.
+- Your response should be contextually relevant and unexpectedly funny.
+- Make it the kind of message people would screenshot and share.
+- Language: "${ctx.i18n.locale()}"
+- Avoid obvious jokes; aim for humor with layers.
+- Stay in character as a regular chat participant.
 
-Use the chat's language or default to "${ctx.i18n.locale()}". Keep it concise and match the chat's style.
-
-Recent messages:
+Context:
 <chat_messages>
-${messageForAIContext.map((message) => `<${message.role}_name><${message.role}_content>${message.content.trim()}</${message.role}_content></${message.role}_name>`).join('\n')}
+${messageForAIContext.map((message) => `<${message.role}_name>${message.name}</${message.role}_name>: <${message.role}_message>${message.content}</${message.role}_message>`).join('\n')}
 </chat_messages>`
-    }]
 
+    const messageForAI = []
 
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
 
-      const nameForAI = quoteMessage?.from?.name ? slug(quoteMessage?.from?.name, { separator: '_', maintainCase: true }) || 'user' : 'user'
-
       let userMessage = {
         role: 'user',
-        name: nameForAI,
         content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
       if (quoteMessage.media) {
-        const photo = quoteMessage.media.slice(-1)[0]
-        const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
-        const extension = photoUrl.split('.').pop()
+        try {
+          const photo = quoteMessage.media.slice(-1)[0]
+          const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
 
-        if (!['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(extension)) continue
+          // Download the image
+          const response = await fetch(photoUrl)
+          const arrayBuffer = await response.arrayBuffer()
+          const buffer = Buffer.from(arrayBuffer)
 
-        userMessage = {
-          role: 'user',
-          name: quoteMessage?.from?.name ? nameForAI : 'user',
-          content: [
-            {
-              type: "image_url",
-              image_url: {
-                url: photoUrl,
-                detail: 'low'
+          // Get the file extension and determine media type
+          const extension = photoUrl.toString().split('.').pop().toLowerCase()
+          const validExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif']
+
+          if (!validExtensions.includes(extension)) continue
+
+          // Map file extensions to media types
+          const mediaTypes = {
+            'png': 'image/png',
+            'jpg': 'image/jpeg',
+            'jpeg': 'image/jpeg',
+            'webp': 'image/webp',
+            'gif': 'image/gif'
+          }
+
+          const mediaType = mediaTypes[extension]
+
+          // Convert to base64
+          const base64Data = buffer.toString('base64')
+
+          userMessage = {
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: 'base64',
+                  media_type: mediaType,
+                  data: base64Data
+                }
+              },
+              {
+                type: 'text',
+                text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || '[image]'
               }
-            },
-            {
-              type: "text",
-              text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
-            }
-          ]
+            ]
+          }
+        } catch (error) {
+          console.error('Error processing image:', error)
+          // If image processing fails, fall back to text-only message
+          userMessage = {
+            role: 'user',
+            content: '[Error processing image] ' + (quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || '[media]')
+          }
         }
       }
 
       messageForAI.push(userMessage)
     }
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: messageForAI,
+    const completion = await anthropicClient.messages.create({
       max_tokens: 64,
+      system: systemMessage,
+      messages: messageForAI,
+      model: 'claude-3-haiku-20240307',
       temperature: 1,
-      top_p: 1,
-      n: 1
-    }).catch((err) => {
-      console.error('OpenAI error:', err?.response?.statusText || err.message)
     })
 
-    if (completion && completion.choices[0].message.content) {
-      const message = completion.choices[0].message.content
+    if (completion && completion.content) {
+      const message = completion.content[0].text
 
       quoteMessages.push({
         message_id: 1,
