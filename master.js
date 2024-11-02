@@ -41,24 +41,31 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   }
 
   function processQueue() {
-    while (queueManager.hasUpdates()) {
-      const ctx = queueManager.peekNextUpdate()
-      const id = (ctx.from?.id ||
+    try {
+      while (queueManager.hasUpdates()) {
+        const ctx = queueManager.getNextUpdate()
+        if (!ctx) continue;
+
+        const id = (ctx.from?.id ||
                   ctx.chat?.id ||
                   Math.random() * 1000000)
 
-      const targetWorker = getConsistentWorker(id)
-      if (targetWorker.load < maxUpdatesPerWorker) {
-        queueManager.getNextUpdate()
-        targetWorker.worker.send({ type: 'UPDATE', payload: ctx.update })
-        targetWorker.load++
-      } else {
-        break
+        const targetWorker = getConsistentWorker(id)
+        if (targetWorker.load < maxUpdatesPerWorker) {
+          targetWorker.worker.send({ type: 'UPDATE', payload: ctx.update })
+          targetWorker.load++
+        } else {
+          // Put the update back in queue if worker is at capacity
+          queueManager.addToQueue(ctx)
+          break
+        }
       }
-    }
 
-    if (queueManager.shouldResume()) {
-      queueManager.resumeUpdates()
+      if (queueManager.shouldResume()) {
+        queueManager.resumeUpdates()
+      }
+    } catch (error) {
+      console.error('Error processing queue:', error)
     }
   }
 
