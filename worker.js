@@ -51,7 +51,7 @@ function setupWorker (botToken) {
         if (typeof bot.handleUpdate !== 'function') {
           throw new Error('bot.handleUpdate is not a function')
         }
-        await bot.handleUpdate(msg.payload)
+        await bot.handleUpdate(msg.payload.update)
       } catch (error) {
         console.error('Error processing update in worker:', error)
       } finally {

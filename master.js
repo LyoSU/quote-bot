@@ -1,43 +1,129 @@
 const cluster = require('cluster')
 const { stats } = require('./middlewares')
 
-function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
+function getUpdateId(ctx) {
+  return ctx.from?.id || ctx.chat?.id || null
+}
+
+function serializeContext(ctx) {
+  // Only send necessary data to workers
+  return {
+    update: ctx.update,
+    state: ctx.state,
+    chat: ctx.chat,
+    from: ctx.from,
+    message: ctx.message
+  }
+}
+
+function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
 
   console.log(`Master process ${process.pid} is running`)
-
   stats.startPeriodicUpdate()
 
   const workers = []
-  // eslint-disable-next-line no-unused-vars
-  const forwardGroups = new Map()
+  const activeTasks = new Map() // Track tasks being processed
 
   for (let i = 0; i < maxWorkers; i++) {
     const worker = cluster.fork()
     workers.push({ worker, load: 0 })
   }
 
-  function distributeUpdate (update) {
-    if (!queueManager.isPaused()) {
-      const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
-      if (availableWorker) {
-        availableWorker.worker.send({ type: 'UPDATE', payload: update })
-        availableWorker.load++
-      } else {
-        queueManager.addToQueue(update)
+  function getWorkerForId(id) {
+    if (!id) return null
+    // Simple but effective distribution - ensures same ID always goes to same worker
+    return Math.abs(id) % maxWorkers
+  }
+
+  function distributeUpdate(ctx) {
+    try {
+      const updateId = ctx.update.update_id
+      const timeoutId = setTimeout(() => {
+        if (activeTasks.has(updateId)) {
+          console.warn(`Task ${updateId} timed out, requeueing...`)
+          queueManager.addToQueue(ctx)
+          const { timeout } = activeTasks.get(updateId);
+          clearTimeout(timeout);
+          activeTasks.delete(updateId)
+        }
+      }, 30000) // 30 second timeout
+
+      if (queueManager.isPaused()) {
+        queueManager.addToQueue(ctx)
+        return
       }
-    } else {
-      queueManager.addToQueue(update)
+
+      const id = getUpdateId(ctx)
+      const workerIndex = getWorkerForId(id)
+      const serializedCtx = serializeContext(ctx)
+
+      // If we couldn't determine worker, use round-robin
+      if (workerIndex === null) {
+        const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
+        if (availableWorker) {
+          try {
+            availableWorker.worker.send({ type: 'UPDATE', payload: serializedCtx })
+            availableWorker.load++
+            activeTasks.set(serializedCtx.update.update_id, { worker: availableWorker.worker, timeout: timeoutId })
+          } catch (err) {
+            clearTimeout(timeoutId);
+            console.error('Failed to send update to worker:', err)
+            queueManager.addToQueue(ctx)
+          }
+          return
+        } else {
+          queueManager.addToQueue(ctx)
+        }
+        return
+      }
+
+      // Use designated worker if possible
+      const targetWorker = workers[workerIndex]
+      if (targetWorker.load < maxUpdatesPerWorker) {
+        try {
+          targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx })
+          targetWorker.load++
+          activeTasks.set(serializedCtx.update.update_id, { worker: targetWorker.worker, timeout: timeoutId })
+        } catch (err) {
+          clearTimeout(timeoutId);
+          console.error('Failed to send update to worker:', err)
+          queueManager.addToQueue(ctx)
+        }
+      } else {
+        clearTimeout(timeoutId);
+        queueManager.addToQueue(ctx)
+      }
+    } catch (err) {
+      console.error('Error in distributeUpdate:', err)
+      queueManager.addToQueue(ctx)
     }
   }
 
-  function processQueue () {
+  function processQueue() {
     while (queueManager.hasUpdates()) {
+      const ctx = queueManager.peekNextUpdate()
+      const id = getUpdateId(ctx)
+      const workerIndex = getWorkerForId(id)
+
+      if (workerIndex !== null) {
+        const targetWorker = workers[workerIndex]
+        if (targetWorker.load < maxUpdatesPerWorker) {
+          queueManager.getNextUpdate() // Remove from queue
+          targetWorker.worker.send({ type: 'UPDATE', payload: serializeContext(ctx) })
+          targetWorker.load++
+          activeTasks.set(ctx.update.update_id, targetWorker.worker)
+          continue
+        }
+      }
+
+      // Fallback to any available worker if can't use designated one
       const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
       if (availableWorker) {
-        const update = queueManager.getNextUpdate()
-        availableWorker.worker.send({ type: 'UPDATE', payload: update })
+        queueManager.getNextUpdate() // Remove from queue
+        availableWorker.worker.send({ type: 'UPDATE', payload: serializeContext(ctx) })
         availableWorker.load++
+        activeTasks.set(ctx.update.update_id, availableWorker.worker)
       } else {
         break
       }
@@ -49,37 +135,85 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   }
 
   bot.use((ctx, next) => {
-    const update = ctx.update
-    distributeUpdate(update)
+    distributeUpdate(ctx)
     return next()
   })
 
   cluster.on('exit', (worker, code, signal) => {
-    console.log(`Worker ${worker.process.pid} died`)
+    console.log(`Worker ${worker.process.pid} died with code ${code} and signal ${signal}`)
+
+    // Find unfinished tasks from dead worker
+    for (const [updateId, taskData] of activeTasks.entries()) {
+      if (taskData.worker === worker) {
+        clearTimeout(taskData.timeout);
+        const ctx = queueManager.findUpdateById(updateId)
+        if (ctx) {
+          console.log(`Requeueing unfinished task ${updateId}`)
+          queueManager.addToQueue(ctx)
+        }
+        activeTasks.delete(updateId)
+      }
+    }
+
     const newWorker = cluster.fork()
-    workers.splice(workers.findIndex(w => w.worker === worker), 1, { worker: newWorker, load: 0 })
+    const index = workers.findIndex(w => w.worker === worker)
+    if (index !== -1) {
+      workers[index] = { worker: newWorker, load: 0 }
+    }
   })
 
   workers.forEach(({ worker }) => {
     worker.on('message', async (msg) => {
-      if (msg.type === 'TASK_COMPLETED') {
-        const workerData = workers.find(w => w.worker === worker)
-        if (workerData) {
-          workerData.load--
-          processQueue()
+      try {
+        if (msg.type === 'TASK_COMPLETED') {
+          const workerData = workers.find(w => w.worker === worker)
+          if (workerData) {
+            workerData.load = Math.max(0, workerData.load - 1) // Prevent negative load
+            const taskData = activeTasks.get(msg.updateId);
+            if (taskData) {
+              clearTimeout(taskData.timeout);
+              activeTasks.delete(msg.updateId)
+            }
+            processQueue()
+          }
+        } else if (msg.type === 'SEND_MESSAGE') {
+          try {
+            await bot.telegram.sendMessage(msg.chatId, msg.text)
+          } catch (err) {
+            console.error('Failed to send message:', err)
+            worker.send({ type: 'SEND_MESSAGE_ERROR', error: err.message, messageId: msg.messageId })
+          }
+        } else if (msg.type === 'TDLIB_REQUEST') {
+          try {
+            const result = await tdlib[msg.method](...msg.args)
+            worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, result })
+          } catch (error) {
+            worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, error: error.message })
+          }
+        } else if (msg.type === 'SYNC_LOAD_RESPONSE') {
+          const workerData = workers.find(w => w.worker === worker)
+          if (workerData) {
+            workerData.load = msg.actualLoad
+          }
         }
-      } else if (msg.type === 'SEND_MESSAGE') {
-        bot.telegram.sendMessage(msg.chatId, msg.text)
-      } else if (msg.type === 'TDLIB_REQUEST') {
-        try {
-          const result = await tdlib[msg.method](...msg.args)
-          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, result })
-        } catch (error) {
-          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, error: error.message })
-        }
+      } catch (err) {
+        console.error('Error handling worker message:', err)
       }
     })
+
+    worker.on('error', (err) => {
+      console.error(`Worker ${worker.process.pid} error:`, err)
+    })
   })
+
+  // Add periodic load synchronization
+  setInterval(() => {
+    workers.forEach(workerData => {
+      workerData.worker.send({
+        type: 'SYNC_LOAD_REQUEST'
+      })
+    })
+  }, 60000) // Sync every minute
 
   // Load monitoring
   setInterval(() => {
@@ -92,6 +226,14 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       // Add logic here for notifying admin or auto-scaling
     }
   }, 5000)
+
+  // Add graceful shutdown
+  process.on('SIGTERM', async () => {
+    console.log('Master received SIGTERM, saving state...')
+    // Save active tasks and queue state
+    await queueManager.saveState()
+    process.exit(0)
+  })
 }
 
 module.exports = { setupMaster }

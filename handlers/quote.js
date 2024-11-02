@@ -29,6 +29,10 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 
 let botInfo
 
+function sleep (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 async function loopClearStickerPack () {
   if (!botInfo) botInfo = await telegram.getMe()
 
@@ -70,6 +74,8 @@ const generateRandomColor = () => {
   return `#${color}`
 }
 
+const minIdsInChat = {}
+
 module.exports = async (ctx, next) => {
   const flag = {
     count: false,
@@ -106,6 +112,15 @@ module.exports = async (ctx, next) => {
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
+  }
+
+  if (ctx.chat.type === 'private') {
+    // flag.reply = true
+    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
+    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
+    await sleep(1000)
+    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
+    delete minIdsInChat[ctx.from.id]
   }
 
   ctx.replyWithChatAction('choose_sticker')
