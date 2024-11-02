@@ -214,7 +214,89 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
   }
 
-  // Update processQueue to include more detailed logging
+  // Add queue monitoring state
+  const queueMonitoring = {
+    lastStallLog: 0,
+    lastPendingCount: 0,
+    stallStartTime: null,
+    logInterval: 30000, // Log every 30 seconds
+    significantChangeThreshold: 100 // Log if pending tasks change by this amount
+  };
+
+  function logQueueStall(pendingCount) {
+    const now = Date.now();
+
+    // Initialize stall start time if not set
+    if (!queueMonitoring.stallStartTime) {
+      queueMonitoring.stallStartTime = now;
+    }
+
+    const stallDuration = Math.floor((now - queueMonitoring.stallStartTime) / 1000);
+    const countDiff = Math.abs(pendingCount - queueMonitoring.lastPendingCount);
+
+    // Log if:
+    // 1. It's been more than logInterval since last log, or
+    // 2. Pending count changed significantly
+    if (now - queueMonitoring.lastStallLog > queueMonitoring.logInterval ||
+        countDiff > queueMonitoring.significantChangeThreshold) {
+
+      console.warn(
+        `Queue stalled for ${stallDuration}s: ${pendingCount} pending tasks` +
+        (countDiff > 0 ? ` (${countDiff > 0 ? '+' : ''}${countDiff} since last check)` : '')
+      );
+
+      queueMonitoring.lastStallLog = now;
+      queueMonitoring.lastPendingCount = pendingCount;
+
+      // Log worker status if queue is growing
+      if (countDiff > queueMonitoring.significantChangeThreshold) {
+        const workerStatus = workers.map(w => ({
+          pid: w.worker.process.pid,
+          load: w.load
+        }));
+        console.warn('Worker status:', JSON.stringify(workerStatus));
+      }
+    }
+  }
+
+  // Add monitoring state tracking
+  const monitoringState = {
+    lastLogTime: Date.now(),
+    logInterval: 5000, // Log every 5 seconds
+    lastPendingCount: 0,
+    lastWorkerLoad: 0,
+    significantChangeThreshold: 1000 // Only log if changed by 1000+ tasks
+  };
+
+  function shouldLog(pendingCount, totalLoad) {
+    const now = Date.now();
+    const timePassed = now - monitoringState.lastLogTime;
+    const countDiff = Math.abs(pendingCount - monitoringState.lastPendingCount);
+    const loadDiff = Math.abs(totalLoad - monitoringState.lastWorkerLoad);
+
+    return timePassed >= monitoringState.logInterval ||
+           countDiff >= monitoringState.significantChangeThreshold ||
+           loadDiff > maxWorkers;
+  }
+
+  function logSystemStatus(pendingCount, totalLoad) {
+    const now = Date.now();
+    if (!shouldLog(pendingCount, totalLoad)) return;
+
+    const countDiff = pendingCount - monitoringState.lastPendingCount;
+    const loadPercent = (totalLoad / (workers.length * maxUpdatesPerWorker) * 100).toFixed(1);
+
+    console.log(
+      `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
+      `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%)`
+    );
+
+    monitoringState.lastLogTime = now;
+    monitoringState.lastPendingCount = pendingCount;
+    monitoringState.lastWorkerLoad = totalLoad;
+  }
+
+  // Replace existing queue monitoring
   function processQueue() {
     try {
       // First process delayed tasks
@@ -233,9 +315,13 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
       if (!availableWorker) {
         const pendingCount = Array.from(activeTasks.values()).length;
-        console.log(`Queue stalled: ${pendingCount} pending tasks, all workers busy`);
+        const totalLoad = workers.reduce((sum, w) => sum + w.load, 0);
+        logSystemStatus(pendingCount, totalLoad);
         return;
       }
+
+      // Reset stall monitoring if we have an available worker
+      queueMonitoring.stallStartTime = null;
 
       // Get next task from queue considering priority
       const ctx = queueManager.getNextUpdate();
@@ -363,17 +449,19 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     })
   }, 60000) // Sync every minute
 
-  // Load monitoring
+  // Update load monitoring interval
   setInterval(() => {
-    const totalLoad = workers.reduce((sum, w) => sum + w.load, 0)
-    const queueStatus = queueManager.getStatus()
-    console.log(`Total worker load: ${totalLoad}, ${queueStatus}`)
+    const totalLoad = workers.reduce((sum, w) => sum + w.load, 0);
+    const pendingCount = Array.from(activeTasks.values()).length;
 
-    if (totalLoad === workers.length * maxUpdatesPerWorker && queueManager.hasUpdates()) {
-      console.warn('System under high load: All workers at max capacity and queue not empty')
-      // Add logic here for notifying admin or auto-scaling
+    logSystemStatus(pendingCount, totalLoad);
+
+    // Only log warnings for critical situations
+    if (totalLoad === workers.length * maxUpdatesPerWorker &&
+        pendingCount > monitoringState.significantChangeThreshold) {
+      console.warn('CRITICAL: System severely overloaded');
     }
-  }, 5000)
+  }, monitoringState.logInterval);
 
   // Clean up old requeue history periodically
   setInterval(() => {
