@@ -187,12 +187,37 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
   }
 
-  // Worker health monitoring
-  function checkWorkersHealth() {
-    workers.forEach(workerData => {
-      const responseTime = measureWorkerResponseTime(workerData.worker)
-      workerData.health = calculateWorkerHealth(responseTime, workerData.load)
+  // Add these functions before the checkWorkersHealth function
+
+  function measureWorkerResponseTime(worker) {
+    return new Promise((resolve) => {
+      const start = Date.now()
+      const timeoutId = setTimeout(() => resolve(5000), 5000) // Max response time 5s
+
+      worker.once('message', () => {
+        clearTimeout(timeoutId)
+        resolve(Date.now() - start)
+      })
+
+      worker.send({ type: 'HEALTH_CHECK' })
     })
+  }
+
+  function calculateWorkerHealth(responseTime, load) {
+    // Health score from 0 to 100
+    // Response time weight: 60%, Load weight: 40%
+    const responseScore = Math.max(0, 100 - (responseTime / 50)) // Penalize for response times over 50ms
+    const loadScore = Math.max(0, 100 - (load * 10)) // Penalize for high load
+
+    return Math.round((responseScore * 0.6) + (loadScore * 0.4))
+  }
+
+  // Modify checkWorkersHealth to be async
+  async function checkWorkersHealth() {
+    for (const workerData of workers) {
+      const responseTime = await measureWorkerResponseTime(workerData.worker)
+      workerData.health = calculateWorkerHealth(responseTime, workerData.load)
+    }
   }
 
   // Periodic checks

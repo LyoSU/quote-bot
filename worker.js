@@ -46,6 +46,10 @@ function setupWorker (botToken) {
   bot.use(handler)
 
   process.on('message', async (msg) => {
+    if (msg.type === 'HEALTH_CHECK') {
+      process.send({ type: 'HEALTH_RESPONSE' })
+    }
+
     if (msg.type === 'UPDATE') {
       try {
         if (typeof bot.handleUpdate !== 'function') {
