@@ -15,61 +15,65 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     workers.push({ worker, load: 0 })
   }
 
-  function getConsistentWorker(id) {
-    // Simple but effective way to map IDs to workers
-    const workerIndex = Math.abs(id) % workers.length
-    return workers[workerIndex]
+  function getUpdateIdentifier(update) {
+    // Priority: from user ID > chat ID > fallback to random
+    if (update.message?.from?.id) {
+      return `user_${update.message.from.id}`
+    }
+    if (update.message?.chat?.id) {
+      return `chat_${update.message.chat.id}`
+    }
+    return `random_${Math.random()}`
   }
 
-  function distributeUpdate(ctx) {
-    // Get ID directly from ctx
-    const id = (ctx.from?.id ||
-                ctx.chat?.id ||
-                Math.random() * 1000000) // fallback if neither exists
+  function getWorkerForId(identifier) {
+    // Simple but consistent hash function
+    const hash = String(identifier).split('').reduce((acc, char) => {
+      return acc + char.charCodeAt(0)
+    }, 0)
+    return workers[hash % workers.length]
+  }
 
+  function distributeUpdate (update) {
     if (!queueManager.isPaused()) {
-      const targetWorker = getConsistentWorker(id)
+      const identifier = getUpdateIdentifier(update)
+      const targetWorker = getWorkerForId(identifier)
+
       if (targetWorker.load < maxUpdatesPerWorker) {
-        targetWorker.worker.send({ type: 'UPDATE', payload: ctx.update })
+        targetWorker.worker.send({ type: 'UPDATE', payload: update })
         targetWorker.load++
       } else {
-        queueManager.addToQueue(ctx)
+        queueManager.addToQueue({ update, workerId: workers.indexOf(targetWorker) })
       }
     } else {
-      queueManager.addToQueue(ctx)
+      const identifier = getUpdateIdentifier(update)
+      const targetWorker = getWorkerForId(identifier)
+      queueManager.addToQueue({ update, workerId: workers.indexOf(targetWorker) })
     }
   }
 
-  function processQueue() {
-    if (!queueManager.hasUpdates()) return;
+  function processQueue () {
+    while (queueManager.hasUpdates()) {
+      const nextItem = queueManager.peekNextUpdate()
+      const targetWorker = workers[nextItem.workerId]
 
-    try {
-        const ctx = queueManager.getNextUpdate();
-        if (!ctx) return;
+      if (targetWorker && targetWorker.load < maxUpdatesPerWorker) {
+        const item = queueManager.getNextUpdate()
+        targetWorker.worker.send({ type: 'UPDATE', payload: item.update })
+        targetWorker.load++
+      } else {
+        break
+      }
+    }
 
-        const id = (ctx.from?.id ||
-                   ctx.chat?.id ||
-                   Math.random() * 1000000);
-
-        const targetWorker = getConsistentWorker(id);
-        if (targetWorker.load < maxUpdatesPerWorker) {
-            targetWorker.worker.send({ type: 'UPDATE', payload: ctx.update });
-            targetWorker.load++;
-        } else {
-            // Put the update back in queue if worker is busy
-            queueManager.addToQueue(ctx);
-        }
-
-        if (queueManager.shouldResume()) {
-            queueManager.resumeUpdates();
-        }
-    } catch (error) {
-        console.error('Error processing queue:', error);
+    if (queueManager.shouldResume()) {
+      queueManager.resumeUpdates()
     }
   }
 
   bot.use((ctx, next) => {
-    distributeUpdate(ctx)
+    const update = ctx.update
+    distributeUpdate(update)
     return next()
   })
 
