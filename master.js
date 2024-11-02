@@ -1,5 +1,6 @@
 const cluster = require('cluster')
 const { stats } = require('./middlewares')
+const os = require('os')
 
 // Update priorities
 const UPDATE_PRIORITIES = {
@@ -25,6 +26,10 @@ const MESSAGE_TYPES = {
 
 // Monitoring
 const LOAD_CHECK_INTERVAL = 5000
+const WORKER_HEALTH_CHECK_INTERVAL = 10000
+const ADAPTIVE_SCALING_INTERVAL = 30000
+const MIN_WORKERS = 2
+const CPU_THRESHOLD = 80 // percentage
 
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
@@ -37,7 +42,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   for (let i = 0; i < maxWorkers; i++) {
     const worker = cluster.fork()
-    workers.push({ worker, load: 0 })
+    workers.push({ worker, load: 0, health: 100 })
   }
 
   function getUpdateIdentifier(update) {
@@ -69,32 +74,21 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   // Modify distributeUpdate function
   function distributeUpdate (update) {
-    if (!queueManager.isPaused()) {
-      const identifier = getUpdateIdentifier(update)
-      const targetWorker = getWorkerForId(identifier)
-      const priority = getUpdatePriority(update) // Get priority
+    const identifier = getUpdateIdentifier(update)
+    const targetWorker = getWorkerForId(identifier)
+    const priority = getUpdatePriority(update)
 
-      if (targetWorker.load < maxUpdatesPerWorker) {
-        targetWorker.worker.send({ type: MESSAGE_TYPES.UPDATE, payload: update })
-        targetWorker.load++
-      } else {
-        // Add to queue with priority
-        queueManager.addToQueue({
-          update,
-          workerIndex: workers.indexOf(targetWorker),
-          priority
-        })
-      }
+    const updateItem = {
+      update,
+      workerIndex: workers.indexOf(targetWorker),
+      priority
+    }
+
+    if (!queueManager.isPaused() && targetWorker.load < maxUpdatesPerWorker) {
+      targetWorker.worker.send({ type: MESSAGE_TYPES.UPDATE, payload: update })
+      targetWorker.load++
     } else {
-      const identifier = getUpdateIdentifier(update)
-      const targetWorker = getWorkerForId(identifier)
-      const priority = getUpdatePriority(update) // Get priority
-      // Add to queue with priority
-      queueManager.addToQueue({
-        update,
-        workerIndex: workers.indexOf(targetWorker),
-        priority
-      })
+      queueManager.addToQueue(updateItem)
     }
   }
 
@@ -128,7 +122,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   cluster.on('exit', (worker, code, signal) => {
     console.log(`Worker ${worker.process.pid} died`)
     const newWorker = cluster.fork()
-    workers.splice(workers.findIndex(w => w.worker === worker), 1, { worker: newWorker, load: 0 })
+    workers.splice(workers.findIndex(w => w.worker === worker), 1, { worker: newWorker, load: 0, health: 100 })
   })
 
   workers.forEach(({ worker }) => {
@@ -162,6 +156,74 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       console.warn('System under high load: All workers at max capacity and queue not empty')
       // Add logic here for notifying admin or auto-scaling
     }
+  }, LOAD_CHECK_INTERVAL)
+
+  // Adaptive scaling
+  let optimalWorkerCount = maxWorkers
+
+  function adjustWorkersCount() {
+    const cpuUsage = os.loadavg()[0] * 100 / os.cpus().length
+    const currentQueueLoad = queueManager.updateQueue.size / queueManager.maxQueueSize * 100
+
+    if (cpuUsage > CPU_THRESHOLD || currentQueueLoad > 70) {
+      optimalWorkerCount = Math.min(maxWorkers, workers.length + 1)
+    } else if (cpuUsage < CPU_THRESHOLD / 2 && currentQueueLoad < 30) {
+      optimalWorkerCount = Math.max(MIN_WORKERS, workers.length - 1)
+    }
+
+    adjustWorkerPool()
+  }
+
+  function adjustWorkerPool() {
+    while (workers.length < optimalWorkerCount) {
+      const worker = cluster.fork()
+      workers.push({ worker, load: 0, health: 100 })
+    }
+
+    while (workers.length > optimalWorkerCount) {
+      const leastHealthyWorker = workers
+        .sort((a, b) => a.health - b.health)[0]
+      leastHealthyWorker.worker.kill()
+    }
+  }
+
+  // Worker health monitoring
+  function checkWorkersHealth() {
+    workers.forEach(workerData => {
+      const responseTime = measureWorkerResponseTime(workerData.worker)
+      workerData.health = calculateWorkerHealth(responseTime, workerData.load)
+    })
+  }
+
+  // Periodic checks
+  setInterval(checkWorkersHealth, WORKER_HEALTH_CHECK_INTERVAL)
+  setInterval(adjustWorkersCount, ADAPTIVE_SCALING_INTERVAL)
+
+  // Enhanced error handling
+  process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error)
+    // Recovery attempt
+    workers.forEach(({ worker }) => worker.kill())
+    process.exit(1)
+  })
+
+  setInterval(() => {
+    const metrics = queueManager.getMetrics()
+    const workerMetrics = workers.map(w => ({
+      pid: w.worker.process.pid,
+      load: w.load,
+      health: w.health
+    }))
+
+    console.log({
+      queue: metrics,
+      workers: workerMetrics,
+      system: {
+        cpu: os.loadavg()[0],
+        memory: process.memoryUsage(),
+        uptime: process.uptime()
+      }
+    })
   }, LOAD_CHECK_INTERVAL)
 }
 

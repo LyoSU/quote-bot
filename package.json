@@ -22,6 +22,7 @@
     "dotenv": "^8.6.0",
     "emoji-db": "^14.0.1",
     "enot-node": "^1.0.1",
+    "fastpriorityqueue": "^0.7.5",
     "got": "^11.8.5",
     "ioredis": "^5.4.1",
     "limax": "^4.1.0",
