@@ -240,15 +240,29 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       health: w.health
     }))
 
-    console.log({
-      queue: metrics,
-      workers: workerMetrics,
-      system: {
-        cpu: os.loadavg()[0],
-        memory: process.memoryUsage(),
-        uptime: process.uptime()
-      }
+    const memoryUsage = process.memoryUsage()
+
+    console.log('\n=== System Metrics ===')
+    console.log('Queue Status:')
+    Object.entries(metrics).forEach(([key, value]) => {
+      console.log(`  ${key}: ${value}`)
     })
+
+    console.log('\nWorkers Status:')
+    workerMetrics.forEach(worker => {
+      console.log(`  Worker PID ${worker.pid}:`)
+      console.log(`    Load: ${worker.load}`)
+      console.log(`    Health: ${worker.health}%`)
+    })
+
+    console.log('\nSystem Status:')
+    console.log(`  CPU Load: ${(os.loadavg()[0]).toFixed(2)}`)
+    console.log(`  Memory:`)
+    console.log(`    RSS: ${(memoryUsage.rss / 1024 / 1024).toFixed(2)} MB`)
+    console.log(`    Heap Total: ${(memoryUsage.heapTotal / 1024 / 1024).toFixed(2)} MB`)
+    console.log(`    Heap Used: ${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`)
+    console.log(`  Uptime: ${(process.uptime() / 60).toFixed(2)} minutes`)
+    console.log('==================\n')
   }, LOAD_CHECK_INTERVAL)
 }
 
