@@ -1,6 +1,30 @@
 const cluster = require('cluster')
 const { stats } = require('./middlewares')
 
+// System configuration constants
+const CONFIG = {
+  UPDATES: {
+    MAX_PER_WORKER: 100,
+    MAX_USER_TASKS_BEFORE_DELAY: 10,
+    TASK_DELAY_MIN: 5000,    // 5 seconds
+    TASK_DELAY_MAX: 10000,   // 10 seconds
+    HIGH_PRIORITY_TIMEOUT: 15000,
+    NORMAL_PRIORITY_TIMEOUT: 30000
+  },
+  QUEUE: {
+    MAX_REQUEUE_ATTEMPTS: 2,
+    INITIAL_TIMEOUT: 5000,
+    MAX_TIMEOUT: 300000      // 5 minutes
+  },
+  MONITORING: {
+    LOG_INTERVAL: 5000,      // 5 seconds
+    STALL_LOG_INTERVAL: 30000,
+    SIGNIFICANT_CHANGE: 1000,
+    LOAD_SYNC_INTERVAL: 60000,
+    CLEANUP_INTERVAL: 10000
+  }
+};
+
 // Constants for priorities
 const PRIORITY = {
   HIGH: 0,
@@ -23,7 +47,7 @@ function serializeContext(ctx) {
   }
 }
 
-function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
+function setupMaster(bot, queueManager, maxWorkers) {
   const tdlib = require('./helpers/tdlib')
 
   console.log(`Master process ${process.pid} is running`)
@@ -115,11 +139,6 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
   }
 
-  // Remove other verbose logging functions
-  timeoutLogs = null;
-  function logTimeouts() {} // Empty function to disable timeout logs
-  function logQueueStall() {} // Empty function to disable stall logs
-
   function getPriority(ctx) {
     // Determine priority based on update type
     if (ctx.message?.text?.startsWith('/')) return PRIORITY.HIGH; // Commands
@@ -130,7 +149,7 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   function shouldDelay(ctx) {
     const userId = getUpdateId(ctx);
     const userTaskCount = userTasks.get(userId)?.size || 0;
-    return userTaskCount > 10; // Delay if user has too many tasks
+    return userTaskCount > CONFIG.UPDATES.MAX_USER_TASKS_BEFORE_DELAY;
   }
 
   for (let i = 0; i < maxWorkers; i++) {
@@ -151,7 +170,8 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
       // Check if task should be delayed
       if (shouldDelay(ctx)) {
-        const delay = 5000 + Math.random() * 5000; // 5-10 seconds delay
+        const delay = CONFIG.UPDATES.TASK_DELAY_MIN +
+                     Math.random() * (CONFIG.UPDATES.TASK_DELAY_MAX - CONFIG.UPDATES.TASK_DELAY_MIN);
         delayedTasks.set(updateId, {
           ctx,
           executeAt: Date.now() + delay
@@ -186,7 +206,7 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
       // If we couldn't determine worker, use round-robin
       if (workerIndex === null) {
-        const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
+        const availableWorker = workers.find(w => w.load < CONFIG.UPDATES.MAX_PER_WORKER)
         if (availableWorker) {
           try {
             availableWorker.worker.send({ type: 'UPDATE', payload: serializedCtx })
@@ -206,7 +226,7 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
       // Use designated worker if possible
       const targetWorker = workers[workerIndex]
-      if (targetWorker.load < maxUpdatesPerWorker) {
+      if (targetWorker.load < CONFIG.UPDATES.MAX_PER_WORKER) {
         try {
           targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx })
           targetWorker.load++
@@ -285,7 +305,7 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
       // Find available worker with lowest load
       const availableWorker = workers
-        .filter(w => w.load < maxUpdatesPerWorker)
+        .filter(w => w.load < CONFIG.UPDATES.MAX_PER_WORKER)
         .sort((a, b) => a.load - b.load)[0];
 
       if (!availableWorker) {
@@ -314,7 +334,9 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         availableWorker.load++;
 
         // Set timeout based on priority
-        const timeoutDuration = getPriority(ctx) === PRIORITY.HIGH ? 15000 : 30000;
+        const timeoutDuration = getPriority(ctx) === PRIORITY.HIGH
+          ? CONFIG.UPDATES.HIGH_PRIORITY_TIMEOUT
+          : CONFIG.UPDATES.NORMAL_PRIORITY_TIMEOUT;
         const timeoutId = setTimeout(() => handleTaskTimeout(ctx, ctx.update.update_id), timeoutDuration);
 
         activeTasks.set(ctx.update.update_id, {
@@ -422,7 +444,7 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         type: 'SYNC_LOAD_REQUEST'
       })
     })
-  }, 60000) // Sync every minute
+  }, CONFIG.MONITORING.LOAD_SYNC_INTERVAL) // Sync every minute
 
   // Update load monitoring interval
   setInterval(() => {
@@ -432,11 +454,11 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     logSystemStatus(pendingCount, totalLoad);
 
     // Only log warnings for critical situations
-    if (totalLoad === workers.length * maxUpdatesPerWorker &&
+    if (totalLoad === workers.length * CONFIG.UPDATES.MAX_PER_WORKER &&
         pendingCount > monitoringState.significantChangeThreshold) {
       console.warn('CRITICAL: System severely overloaded');
     }
-  }, monitoringState.logInterval);
+  }, CONFIG.MONITORING.LOG_INTERVAL);
 
   // Clean up old requeue history periodically
   setInterval(() => {
