@@ -52,29 +52,38 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     return true;
   }
 
-  // Add new tracking for timeout logs
-  const timeoutLogs = {
-    lastBatch: [],
+  // Update monitoring state
+  const monitoringState = {
     lastLogTime: Date.now(),
-    batchSize: 0
+    logInterval: 5000, // Log every 5 seconds
+    lastPendingCount: 0,
+    lastWorkerLoad: 0,
+    significantChangeThreshold: 1000 // Only log if changed by 1000+ tasks
   };
 
-  function logTimeouts() {
+  function logSystemStatus(pendingCount, totalLoad) {
     const now = Date.now();
-    if (timeoutLogs.batchSize > 0) {
-      if (timeoutLogs.batchSize > 10) {
-        console.warn(`Multiple tasks timed out (${timeoutLogs.batchSize} total)`);
-        console.warn(`Last 5 task IDs: ${timeoutLogs.lastBatch.slice(-5).join(', ')}`);
-      } else {
-        console.warn(`Tasks timed out: ${timeoutLogs.lastBatch.join(', ')}`);
-      }
-      timeoutLogs.batchSize = 0;
-      timeoutLogs.lastBatch = [];
-      timeoutLogs.lastLogTime = now;
+    if (now - monitoringState.lastLogTime < monitoringState.logInterval) return;
+
+    const loadPercent = (totalLoad / (workers.length * maxUpdatesPerWorker) * 100).toFixed(1);
+    const countDiff = pendingCount - monitoringState.lastPendingCount;
+
+    console.log(
+      `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
+      `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%)`
+    );
+
+    monitoringState.lastLogTime = now;
+    monitoringState.lastPendingCount = pendingCount;
+    monitoringState.lastWorkerLoad = totalLoad;
+
+    // Only log critical warnings when severely overloaded
+    if (totalLoad === workers.length * maxUpdatesPerWorker && pendingCount > 1000) {
+      console.warn('CRITICAL: System severely overloaded');
     }
   }
 
-  // Update existing handleTaskTimeout function
+  // Remove or modify other logging functions
   function handleTaskTimeout(ctx, updateId) {
     if (activeTasks.has(updateId)) {
       const history = requeueHistory.get(updateId) || { attempts: 0, lastRequeue: 0 };
@@ -84,18 +93,6 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         history.attempts++;
         history.lastRequeue = now;
         requeueHistory.set(updateId, history);
-
-        if (history.attempts > 1) {
-          // Batch timeout logs
-          timeoutLogs.lastBatch.push(updateId);
-          timeoutLogs.batchSize++;
-
-          // Log every 5 seconds or when batch gets too large
-          if (now - timeoutLogs.lastLogTime > 5000 || timeoutLogs.batchSize >= 50) {
-            logTimeouts();
-          }
-        }
-
         queueManager.addToQueue(ctx);
       }
 
@@ -105,8 +102,10 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
   }
 
-  // Add periodic timeout log flushing
-  setInterval(logTimeouts, 5000);
+  // Remove other verbose logging functions
+  timeoutLogs = null;
+  function logTimeouts() {} // Empty function to disable timeout logs
+  function logQueueStall() {} // Empty function to disable stall logs
 
   function getPriority(ctx) {
     // Determine priority based on update type
@@ -257,43 +256,6 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         console.warn('Worker status:', JSON.stringify(workerStatus));
       }
     }
-  }
-
-  // Add monitoring state tracking
-  const monitoringState = {
-    lastLogTime: Date.now(),
-    logInterval: 5000, // Log every 5 seconds
-    lastPendingCount: 0,
-    lastWorkerLoad: 0,
-    significantChangeThreshold: 1000 // Only log if changed by 1000+ tasks
-  };
-
-  function shouldLog(pendingCount, totalLoad) {
-    const now = Date.now();
-    const timePassed = now - monitoringState.lastLogTime;
-    const countDiff = Math.abs(pendingCount - monitoringState.lastPendingCount);
-    const loadDiff = Math.abs(totalLoad - monitoringState.lastWorkerLoad);
-
-    return timePassed >= monitoringState.logInterval ||
-           countDiff >= monitoringState.significantChangeThreshold ||
-           loadDiff > maxWorkers;
-  }
-
-  function logSystemStatus(pendingCount, totalLoad) {
-    const now = Date.now();
-    if (!shouldLog(pendingCount, totalLoad)) return;
-
-    const countDiff = pendingCount - monitoringState.lastPendingCount;
-    const loadPercent = (totalLoad / (workers.length * maxUpdatesPerWorker) * 100).toFixed(1);
-
-    console.log(
-      `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
-      `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%)`
-    );
-
-    monitoringState.lastLogTime = now;
-    monitoringState.lastPendingCount = pendingCount;
-    monitoringState.lastWorkerLoad = totalLoad;
   }
 
   // Replace existing queue monitoring
