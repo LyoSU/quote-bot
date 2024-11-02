@@ -101,36 +101,64 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   }
 
   function processQueue() {
-    while (queueManager.hasUpdates()) {
-      const ctx = queueManager.peekNextUpdate()
-      const id = getUpdateId(ctx)
-      const workerIndex = getWorkerForId(id)
+    try {
+      const updates = queueManager.getUpdates();
+      if (!updates || updates.length === 0) return;
 
-      if (workerIndex !== null) {
-        const targetWorker = workers[workerIndex]
-        if (targetWorker.load < maxUpdatesPerWorker) {
-          queueManager.getNextUpdate() // Remove from queue
-          targetWorker.worker.send({ type: 'UPDATE', payload: serializeContext(ctx) })
-          targetWorker.load++
-          activeTasks.set(ctx.update.update_id, targetWorker.worker)
-          continue
+      for (const ctx of updates) {
+        const id = getUpdateId(ctx);
+        const workerIndex = getWorkerForId(id);
+
+        if (workerIndex !== null) {
+          const targetWorker = workers[workerIndex];
+          if (targetWorker.load < maxUpdatesPerWorker) {
+            queueManager.removeUpdate(ctx.update.update_id); // Remove from queue
+            const serializedCtx = serializeContext(ctx);
+            targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
+            targetWorker.load++;
+
+            const timeoutId = setTimeout(() => {
+              if (activeTasks.has(ctx.update.update_id)) {
+                console.warn(`Task ${ctx.update.update_id} timed out, requeueing...`);
+                queueManager.addToQueue(ctx);
+                const { timeout } = activeTasks.get(ctx.update.update_id);
+                clearTimeout(timeout);
+                activeTasks.delete(ctx.update.update_id);
+              }
+            }, 30000);
+
+            activeTasks.set(ctx.update.update_id, { worker: targetWorker.worker, timeout: timeoutId });
+            continue;
+          }
+        }
+
+        // Fallback to any available worker
+        const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker);
+        if (availableWorker) {
+          queueManager.removeUpdate(ctx.update.update_id);
+          const serializedCtx = serializeContext(ctx);
+          availableWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
+          availableWorker.load++;
+
+          const timeoutId = setTimeout(() => {
+            if (activeTasks.has(ctx.update.update_id)) {
+              console.warn(`Task ${ctx.update.update_id} timed out, requeueing...`);
+              queueManager.addToQueue(ctx);
+              const { timeout } = activeTasks.get(ctx.update.update_id);
+              clearTimeout(timeout);
+              activeTasks.delete(ctx.update.update_id);
+            }
+          }, 30000);
+
+          activeTasks.set(ctx.update.update_id, { worker: availableWorker.worker, timeout: timeoutId });
         }
       }
 
-      // Fallback to any available worker if can't use designated one
-      const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker)
-      if (availableWorker) {
-        queueManager.getNextUpdate() // Remove from queue
-        availableWorker.worker.send({ type: 'UPDATE', payload: serializeContext(ctx) })
-        availableWorker.load++
-        activeTasks.set(ctx.update.update_id, availableWorker.worker)
-      } else {
-        break
+      if (queueManager.shouldResume()) {
+        queueManager.resumeUpdates();
       }
-    }
-
-    if (queueManager.shouldResume()) {
-      queueManager.resumeUpdates()
+    } catch (err) {
+      console.error('Error in processQueue:', err);
     }
   }
 
