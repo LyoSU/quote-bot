@@ -90,21 +90,21 @@ function setupMaster(bot, queueManager, maxWorkers) {
     const now = Date.now();
     if (now - monitoringState.lastLogTime < monitoringState.logInterval) return;
 
-    const loadPercent = (totalLoad / (workers.length * maxUpdatesPerWorker) * 100).toFixed(1);
+    const loadPercent = (totalLoad / (workers.length * CONFIG.UPDATES.MAX_PER_WORKER) * 100).toFixed(1);
     const countDiff = pendingCount - monitoringState.lastPendingCount;
 
     // Report dropped tasks along with regular status
     if (monitoringState.droppedTasks > 0) {
       console.log(
         `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
-        `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%), ` +
+        `Load: ${totalLoad}/${workers.length * CONFIG.UPDATES.MAX_PER_WORKER} (${loadPercent}%), ` +
         `Dropped: ${monitoringState.droppedTasks} tasks`
       );
       monitoringState.droppedTasks = 0; // Reset counter
     } else {
       console.log(
         `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
-        `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%)`
+        `Load: ${totalLoad}/${workers.length * CONFIG.UPDATES.MAX_PER_WORKER} (${loadPercent}%)`
       );
     }
 
@@ -113,7 +113,7 @@ function setupMaster(bot, queueManager, maxWorkers) {
     monitoringState.lastWorkerLoad = totalLoad;
 
     // Only log critical warnings when severely overloaded
-    if (totalLoad === workers.length * maxUpdatesPerWorker && pendingCount > 1000) {
+    if (totalLoad === workers.length * CONFIG.UPDATES.MAX_PER_WORKER && pendingCount > 1000) {
       console.warn('CRITICAL: System severely overloaded');
     }
   }
