@@ -43,25 +43,33 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         targetWorker.worker.send({ type: 'UPDATE', payload: update })
         targetWorker.load++
       } else {
-        queueManager.addToQueue({ update, workerId: workers.indexOf(targetWorker) })
+        // Store worker index with update
+        queueManager.addToQueue({
+          update,
+          workerIndex: workers.indexOf(targetWorker)
+        })
       }
     } else {
       const identifier = getUpdateIdentifier(update)
       const targetWorker = getWorkerForId(identifier)
-      queueManager.addToQueue({ update, workerId: workers.indexOf(targetWorker) })
+      queueManager.addToQueue({
+        update,
+        workerIndex: workers.indexOf(targetWorker)
+      })
     }
   }
 
   function processQueue () {
     while (queueManager.hasUpdates()) {
-      const nextItem = queueManager.peekNextUpdate()
-      const targetWorker = workers[nextItem.workerId]
+      const nextItem = queueManager.getNextUpdate()
+      const targetWorker = workers[nextItem.workerIndex]
 
       if (targetWorker && targetWorker.load < maxUpdatesPerWorker) {
-        const item = queueManager.getNextUpdate()
-        targetWorker.worker.send({ type: 'UPDATE', payload: item.update })
+        targetWorker.worker.send({ type: 'UPDATE', payload: nextItem.update })
         targetWorker.load++
       } else {
+        // Put the update back in queue if worker is busy
+        queueManager.addToQueue(nextItem)
         break
       }
     }
