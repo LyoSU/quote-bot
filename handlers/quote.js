@@ -515,6 +515,10 @@ ${messageForAIContext.map((message) =>
       console.error('OpenAI error:', err?.response?.statusText || err.message)
     })
 
+    if (messageForAIContext) {
+      messageForAIContext.length = 0
+    }
+
     if (completion && completion.choices[0].message.content) {
       const message = completion.choices[0].message.content
 
@@ -770,11 +774,6 @@ ${messageForAIContext.map((message) =>
         business_connection_id: ctx.update?.business_message?.business_connection_id
       })
     }
-  }
-
-  // Cleanup temporary data
-  if (messageForAIContext) {
-    messageForAIContext.length = 0
   }
 }
 
