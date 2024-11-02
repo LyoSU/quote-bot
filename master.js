@@ -158,9 +158,9 @@ function setupMaster(bot, queueManager, maxWorkers) {
   }
 
   function getWorkerForId(id) {
-    if (!id) return null
-    // Simple but effective distribution - ensures same ID always goes to same worker
-    return Math.abs(id) % maxWorkers
+    if (!id) return null;
+    // Ensure positive number and consistent distribution
+    return Math.abs(id) % maxWorkers;
   }
 
   function distributeUpdate(ctx) {
@@ -200,49 +200,36 @@ function setupMaster(bot, queueManager, maxWorkers) {
         return;
       }
 
-      const id = getUpdateId(ctx)
-      const workerIndex = getWorkerForId(id)
-      const serializedCtx = serializeContext(ctx)
+      const workerIndex = getWorkerForId(userId);
+      const serializedCtx = serializeContext(ctx);
 
-      // If we couldn't determine worker, use round-robin
-      if (workerIndex === null) {
-        const availableWorker = workers.find(w => w.load < CONFIG.UPDATES.MAX_PER_WORKER)
-        if (availableWorker) {
+      // Always try to use the designated worker first
+      if (workerIndex !== null) {
+        const targetWorker = workers[workerIndex];
+        if (targetWorker.load < CONFIG.UPDATES.MAX_PER_WORKER) {
           try {
-            availableWorker.worker.send({ type: 'UPDATE', payload: serializedCtx })
-            availableWorker.load++
-            activeTasks.set(serializedCtx.update.update_id, { worker: availableWorker.worker, timeout: timeoutId })
+            targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
+            targetWorker.load++;
+            activeTasks.set(serializedCtx.update.update_id, {
+              worker: targetWorker.worker,
+              timeout: timeoutId,
+              userId
+            });
+            return;
           } catch (err) {
             clearTimeout(timeoutId);
-            console.error('Failed to send update to worker:', err)
-            queueManager.addToQueue(ctx, priority)
+            console.error('Failed to send update to designated worker:', err);
+            // Fall through to queue
           }
-          return
-        } else {
-          queueManager.addToQueue(ctx, priority)
         }
-        return
       }
 
-      // Use designated worker if possible
-      const targetWorker = workers[workerIndex]
-      if (targetWorker.load < CONFIG.UPDATES.MAX_PER_WORKER) {
-        try {
-          targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx })
-          targetWorker.load++
-          activeTasks.set(serializedCtx.update.update_id, { worker: targetWorker.worker, timeout: timeoutId })
-        } catch (err) {
-          clearTimeout(timeoutId);
-          console.error('Failed to send update to worker:', err)
-          queueManager.addToQueue(ctx, priority)
-        }
-      } else {
-        clearTimeout(timeoutId);
-        queueManager.addToQueue(ctx, priority)
-      }
+      // If designated worker is busy or error occurred, add to queue
+      queueManager.addToQueue(ctx, priority);
+
     } catch (err) {
-      console.error('Error in distributeUpdate:', err)
-      queueManager.addToQueue(ctx, PRIORITY.LOW)
+      console.error('Error in distributeUpdate:', err);
+      queueManager.addToQueue(ctx, PRIORITY.LOW);
     }
   }
 
@@ -323,34 +310,51 @@ function setupMaster(bot, queueManager, maxWorkers) {
       if (!ctx) return;
 
       const userId = getUpdateId(ctx);
-      const serializedCtx = serializeContext(ctx);
+      const workerIndex = getWorkerForId(userId);
 
-      try {
-        availableWorker.worker.send({
-          type: 'UPDATE',
-          payload: serializedCtx,
-          priority: getPriority(ctx)
-        });
-        availableWorker.load++;
-
-        // Set timeout based on priority
-        const timeoutDuration = getPriority(ctx) === PRIORITY.HIGH
-          ? CONFIG.UPDATES.HIGH_PRIORITY_TIMEOUT
-          : CONFIG.UPDATES.NORMAL_PRIORITY_TIMEOUT;
-        const timeoutId = setTimeout(() => handleTaskTimeout(ctx, ctx.update.update_id), timeoutDuration);
-
-        activeTasks.set(ctx.update.update_id, {
-          worker: availableWorker.worker,
-          timeout: timeoutId,
-          userId
-        });
-
-      } catch (err) {
-        console.error('Failed to send to worker:', err);
-        queueManager.addToQueue(ctx, PRIORITY.LOW);
+      // Try designated worker first
+      if (workerIndex !== null) {
+        const targetWorker = workers[workerIndex];
+        if (targetWorker.load < CONFIG.UPDATES.MAX_PER_WORKER) {
+          processUpdateWithWorker(ctx, targetWorker);
+          return;
+        }
       }
+
+      // If designated worker is busy, wait for next cycle
+      queueManager.addToQueue(ctx, getPriority(ctx));
+
     } catch (err) {
       console.error('Error in processQueue:', err);
+    }
+  }
+
+  // Helper function to process update with specific worker
+  function processUpdateWithWorker(ctx, workerData) {
+    const serializedCtx = serializeContext(ctx);
+    const userId = getUpdateId(ctx);
+
+    try {
+      workerData.worker.send({
+        type: 'UPDATE',
+        payload: serializedCtx,
+        priority: getPriority(ctx)
+      });
+      workerData.load++;
+
+      const timeoutDuration = getPriority(ctx) === PRIORITY.HIGH
+        ? CONFIG.UPDATES.HIGH_PRIORITY_TIMEOUT
+        : CONFIG.UPDATES.NORMAL_PRIORITY_TIMEOUT;
+      const timeoutId = setTimeout(() => handleTaskTimeout(ctx, ctx.update.update_id), timeoutDuration);
+
+      activeTasks.set(ctx.update.update_id, {
+        worker: workerData.worker,
+        timeout: timeoutId,
+        userId
+      });
+    } catch (err) {
+      console.error('Failed to send to worker:', err);
+      queueManager.addToQueue(ctx, PRIORITY.LOW);
     }
   }
 
