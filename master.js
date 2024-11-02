@@ -1,6 +1,13 @@
 const cluster = require('cluster')
 const { stats } = require('./middlewares')
 
+// Constants for priorities
+const PRIORITY = {
+  HIGH: 0,
+  NORMAL: 1,
+  LOW: 2
+};
+
 function getUpdateId(ctx) {
   return ctx.from?.id || ctx.chat?.id || null
 }
@@ -24,6 +31,62 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   const workers = []
   const activeTasks = new Map() // Track tasks being processed
+  const requeueHistory = new Map(); // Track requeue attempts
+  const MAX_REQUEUE_ATTEMPTS = 3;
+  const INITIAL_TIMEOUT = 30000; // 30 seconds
+
+  const userTasks = new Map(); // Map for grouping user tasks
+  const delayedTasks = new Map(); // Map for delayed tasks
+
+  function getBackoffTimeout(attempts) {
+    return Math.min(INITIAL_TIMEOUT * Math.pow(2, attempts), 300000); // Max 5 minutes
+  }
+
+  function shouldRequeue(updateId) {
+    const history = requeueHistory.get(updateId) || { attempts: 0, lastRequeue: 0 };
+    if (history.attempts >= MAX_REQUEUE_ATTEMPTS) {
+      console.warn(`Task ${updateId} exceeded max requeue attempts, dropping`);
+      requeueHistory.delete(updateId);
+      return false;
+    }
+    return true;
+  }
+
+  function handleTaskTimeout(ctx, updateId) {
+    if (activeTasks.has(updateId)) {
+      const history = requeueHistory.get(updateId) || { attempts: 0, lastRequeue: 0 };
+      const now = Date.now();
+
+      if (shouldRequeue(updateId)) {
+        history.attempts++;
+        history.lastRequeue = now;
+        requeueHistory.set(updateId, history);
+
+        if (history.attempts > 1) { // Only log after first attempt
+          console.warn(`Task ${updateId} timed out (attempt ${history.attempts}/${MAX_REQUEUE_ATTEMPTS})`);
+        }
+
+        queueManager.addToQueue(ctx);
+      }
+
+      const { timeout } = activeTasks.get(updateId);
+      clearTimeout(timeout);
+      activeTasks.delete(updateId);
+    }
+  }
+
+  function getPriority(ctx) {
+    // Determine priority based on update type
+    if (ctx.message?.text?.startsWith('/')) return PRIORITY.HIGH; // Commands
+    if (ctx.message?.reply_to_message) return PRIORITY.HIGH; // Replies
+    return PRIORITY.NORMAL;
+  }
+
+  function shouldDelay(ctx) {
+    const userId = getUpdateId(ctx);
+    const userTaskCount = userTasks.get(userId)?.size || 0;
+    return userTaskCount > 10; // Delay if user has too many tasks
+  }
 
   for (let i = 0; i < maxWorkers; i++) {
     const worker = cluster.fork()
@@ -38,20 +101,38 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   function distributeUpdate(ctx) {
     try {
-      const updateId = ctx.update.update_id
+      const updateId = ctx.update.update_id;
+      const userId = getUpdateId(ctx);
+
+      // Check if task should be delayed
+      if (shouldDelay(ctx)) {
+        const delay = 5000 + Math.random() * 5000; // 5-10 seconds delay
+        delayedTasks.set(updateId, {
+          ctx,
+          executeAt: Date.now() + delay
+        });
+        return;
+      }
+
+      // Group tasks by user
+      if (!userTasks.has(userId)) {
+        userTasks.set(userId, new Set());
+      }
+      userTasks.get(userId).add(updateId);
+
+      // Set priority
+      const priority = getPriority(ctx);
+
+      const history = requeueHistory.get(updateId) || { attempts: 0, lastRequeue: 0 };
+      const timeoutDuration = getBackoffTimeout(history.attempts);
+
       const timeoutId = setTimeout(() => {
-        if (activeTasks.has(updateId)) {
-          console.warn(`Task ${updateId} timed out, requeueing...`)
-          queueManager.addToQueue(ctx)
-          const { timeout } = activeTasks.get(updateId);
-          clearTimeout(timeout);
-          activeTasks.delete(updateId)
-        }
-      }, 30000) // 30 second timeout
+        handleTaskTimeout(ctx, updateId);
+      }, timeoutDuration);
 
       if (queueManager.isPaused()) {
-        queueManager.addToQueue(ctx)
-        return
+        queueManager.addToQueue(ctx, priority);
+        return;
       }
 
       const id = getUpdateId(ctx)
@@ -69,11 +150,11 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
           } catch (err) {
             clearTimeout(timeoutId);
             console.error('Failed to send update to worker:', err)
-            queueManager.addToQueue(ctx)
+            queueManager.addToQueue(ctx, priority)
           }
           return
         } else {
-          queueManager.addToQueue(ctx)
+          queueManager.addToQueue(ctx, priority)
         }
         return
       }
@@ -88,80 +169,77 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         } catch (err) {
           clearTimeout(timeoutId);
           console.error('Failed to send update to worker:', err)
-          queueManager.addToQueue(ctx)
+          queueManager.addToQueue(ctx, priority)
         }
       } else {
         clearTimeout(timeoutId);
-        queueManager.addToQueue(ctx)
+        queueManager.addToQueue(ctx, priority)
       }
     } catch (err) {
       console.error('Error in distributeUpdate:', err)
-      queueManager.addToQueue(ctx)
+      queueManager.addToQueue(ctx, PRIORITY.LOW)
     }
   }
 
   function processQueue() {
     try {
-      // Process queue while we have updates and available workers
-      while (queueManager.hasUpdates()) {
-        const ctx = queueManager.getNextUpdate(); // Assuming this is the correct method name
-        if (!ctx) break;
-
-        const id = getUpdateId(ctx);
-        const workerIndex = getWorkerForId(id);
-
-        if (workerIndex !== null) {
-          const targetWorker = workers[workerIndex];
-          if (targetWorker.load < maxUpdatesPerWorker) {
-            const serializedCtx = serializeContext(ctx);
-            targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
-            targetWorker.load++;
-
-            const timeoutId = setTimeout(() => {
-              if (activeTasks.has(ctx.update.update_id)) {
-                console.warn(`Task ${ctx.update.update_id} timed out, requeueing...`);
-                queueManager.addToQueue(ctx);
-                const { timeout } = activeTasks.get(ctx.update.update_id);
-                clearTimeout(timeout);
-                activeTasks.delete(ctx.update.update_id);
-              }
-            }, 30000);
-
-            activeTasks.set(ctx.update.update_id, { worker: targetWorker.worker, timeout: timeoutId });
-            continue;
-          }
-        }
-
-        // Fallback to any available worker
-        const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker);
-        if (availableWorker) {
-          const serializedCtx = serializeContext(ctx);
-          availableWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
-          availableWorker.load++;
-
-          const timeoutId = setTimeout(() => {
-            if (activeTasks.has(ctx.update.update_id)) {
-              console.warn(`Task ${ctx.update.update_id} timed out, requeueing...`);
-              queueManager.addToQueue(ctx);
-              const { timeout } = activeTasks.get(ctx.update.update_id);
-              clearTimeout(timeout);
-              activeTasks.delete(ctx.update.update_id);
-            }
-          }, 30000);
-
-          activeTasks.set(ctx.update.update_id, { worker: availableWorker.worker, timeout: timeoutId });
-        } else {
-          // If no worker is available, put the update back in queue
-          queueManager.addToQueue(ctx);
-          break;
+      // First process delayed tasks
+      const now = Date.now();
+      for (const [updateId, task] of delayedTasks.entries()) {
+        if (task.executeAt <= now) {
+          distributeUpdate(task.ctx);
+          delayedTasks.delete(updateId);
         }
       }
 
-      if (queueManager.shouldResume()) {
-        queueManager.resumeUpdates();
+      // Find available worker with lowest load
+      const availableWorker = workers
+        .filter(w => w.load < maxUpdatesPerWorker)
+        .sort((a, b) => a.load - b.load)[0];
+
+      if (!availableWorker) return;
+
+      // Get next task from queue considering priority
+      const ctx = queueManager.getNextUpdate();
+      if (!ctx) return;
+
+      const userId = getUpdateId(ctx);
+      const serializedCtx = serializeContext(ctx);
+
+      try {
+        availableWorker.worker.send({
+          type: 'UPDATE',
+          payload: serializedCtx,
+          priority: getPriority(ctx)
+        });
+        availableWorker.load++;
+
+        // Set timeout based on priority
+        const timeoutDuration = getPriority(ctx) === PRIORITY.HIGH ? 15000 : 30000;
+        const timeoutId = setTimeout(() => handleTaskTimeout(ctx, ctx.update.update_id), timeoutDuration);
+
+        activeTasks.set(ctx.update.update_id, {
+          worker: availableWorker.worker,
+          timeout: timeoutId,
+          userId
+        });
+
+      } catch (err) {
+        console.error('Failed to send to worker:', err);
+        queueManager.addToQueue(ctx, PRIORITY.LOW);
       }
     } catch (err) {
       console.error('Error in processQueue:', err);
+    }
+  }
+
+  // Cleanup user tasks data
+  function cleanupUserTasks(userId, updateId) {
+    if (userTasks.has(userId)) {
+      userTasks.get(userId).delete(updateId);
+      if (userTasks.get(userId).size === 0) {
+        userTasks.delete(userId);
+      }
     }
   }
 
@@ -203,9 +281,10 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
             const taskData = activeTasks.get(msg.updateId);
             if (taskData) {
               clearTimeout(taskData.timeout);
+              cleanupUserTasks(taskData.userId, msg.updateId);
               activeTasks.delete(msg.updateId)
             }
-            processQueue()
+            setImmediate(processQueue); // Immediately process the next task
           }
         } else if (msg.type === 'SEND_MESSAGE') {
           try {
@@ -257,6 +336,28 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       // Add logic here for notifying admin or auto-scaling
     }
   }, 5000)
+
+  // Clean up old requeue history periodically
+  setInterval(() => {
+    const now = Date.now();
+    for (const [updateId, history] of requeueHistory.entries()) {
+      if (now - history.lastRequeue > 300000) { // 5 minutes
+        requeueHistory.delete(updateId);
+      }
+    }
+  }, 60000);
+
+  // Periodic cleanup of delayed tasks
+  setInterval(() => {
+    const now = Date.now();
+    const maxDelay = 30000; // 30 seconds max delay
+
+    for (const [updateId, task] of delayedTasks.entries()) {
+      if (now - task.executeAt > maxDelay) {
+        delayedTasks.delete(updateId);
+      }
+    }
+  }, 10000);
 
   // Add graceful shutdown
   process.on('SIGTERM', async () => {

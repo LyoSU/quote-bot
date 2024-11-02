@@ -37,6 +37,5 @@ module.exports = async ctx => {
     await ctx.deleteMessage()
   } catch (error) {
     console.error('Error in ping command:', error)
-    await ctx.reply('An error occurred while fetching statistics.')
   }
 }
