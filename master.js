@@ -1,6 +1,31 @@
 const cluster = require('cluster')
 const { stats } = require('./middlewares')
 
+// Update priorities
+const UPDATE_PRIORITIES = {
+  COMMAND: 1,
+  DEFAULT: 0
+}
+
+// Update identifier prefixes
+const ID_PREFIXES = {
+  USER: 'user_',
+  CHAT: 'chat_',
+  RANDOM: 'random_'
+}
+
+// Message types
+const MESSAGE_TYPES = {
+  UPDATE: 'UPDATE',
+  TASK_COMPLETED: 'TASK_COMPLETED',
+  SEND_MESSAGE: 'SEND_MESSAGE',
+  TDLIB_REQUEST: 'TDLIB_REQUEST',
+  TDLIB_RESPONSE: 'TDLIB_RESPONSE'
+}
+
+// Monitoring
+const LOAD_CHECK_INTERVAL = 5000
+
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
 
@@ -18,12 +43,20 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   function getUpdateIdentifier(update) {
     // Priority: from user ID > chat ID > fallback to random
     if (update.message?.from?.id) {
-      return `user_${update.message.from.id}`
+      return `${ID_PREFIXES.USER}${update.message.from.id}`
     }
     if (update.message?.chat?.id) {
-      return `chat_${update.message.chat.id}`
+      return `${ID_PREFIXES.CHAT}${update.message.chat.id}`
     }
-    return `random_${Math.random()}`
+    return `${ID_PREFIXES.RANDOM}${Math.random()}`
+  }
+
+  // Add update priority determination
+  function getUpdatePriority(update) {
+    if (update.message?.text?.startsWith('/')) {
+      return UPDATE_PRIORITIES.COMMAND
+    }
+    return UPDATE_PRIORITIES.DEFAULT
   }
 
   function getWorkerForId(identifier) {
@@ -34,41 +67,48 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     return workers[hash % workers.length]
   }
 
+  // Modify distributeUpdate function
   function distributeUpdate (update) {
     if (!queueManager.isPaused()) {
       const identifier = getUpdateIdentifier(update)
       const targetWorker = getWorkerForId(identifier)
+      const priority = getUpdatePriority(update) // Get priority
 
       if (targetWorker.load < maxUpdatesPerWorker) {
-        targetWorker.worker.send({ type: 'UPDATE', payload: update })
+        targetWorker.worker.send({ type: MESSAGE_TYPES.UPDATE, payload: update })
         targetWorker.load++
       } else {
-        // Store worker index with update
+        // Add to queue with priority
         queueManager.addToQueue({
           update,
-          workerIndex: workers.indexOf(targetWorker)
+          workerIndex: workers.indexOf(targetWorker),
+          priority
         })
       }
     } else {
       const identifier = getUpdateIdentifier(update)
       const targetWorker = getWorkerForId(identifier)
+      const priority = getUpdatePriority(update) // Get priority
+      // Add to queue with priority
       queueManager.addToQueue({
         update,
-        workerIndex: workers.indexOf(targetWorker)
+        workerIndex: workers.indexOf(targetWorker),
+        priority
       })
     }
   }
 
+  // Modify processQueue function to consider priorities
   function processQueue () {
     while (queueManager.hasUpdates()) {
-      const nextItem = queueManager.getNextUpdate()
+      const nextItem = queueManager.getNextUpdate() // Returns update with highest priority
       const targetWorker = workers[nextItem.workerIndex]
 
       if (targetWorker && targetWorker.load < maxUpdatesPerWorker) {
-        targetWorker.worker.send({ type: 'UPDATE', payload: nextItem.update })
+        targetWorker.worker.send({ type: MESSAGE_TYPES.UPDATE, payload: nextItem.update })
         targetWorker.load++
       } else {
-        // Put the update back in queue if worker is busy
+        // Return update back to queue
         queueManager.addToQueue(nextItem)
         break
       }
@@ -93,20 +133,20 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   workers.forEach(({ worker }) => {
     worker.on('message', async (msg) => {
-      if (msg.type === 'TASK_COMPLETED') {
+      if (msg.type === MESSAGE_TYPES.TASK_COMPLETED) {
         const workerData = workers.find(w => w.worker === worker)
         if (workerData) {
           workerData.load--
           processQueue()
         }
-      } else if (msg.type === 'SEND_MESSAGE') {
+      } else if (msg.type === MESSAGE_TYPES.SEND_MESSAGE) {
         bot.telegram.sendMessage(msg.chatId, msg.text)
-      } else if (msg.type === 'TDLIB_REQUEST') {
+      } else if (msg.type === MESSAGE_TYPES.TDLIB_REQUEST) {
         try {
           const result = await tdlib[msg.method](...msg.args)
-          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, result })
+          worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, result })
         } catch (error) {
-          worker.send({ type: 'TDLIB_RESPONSE', id: msg.id, error: error.message })
+          worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, error: error.message })
         }
       }
     })
@@ -122,7 +162,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       console.warn('System under high load: All workers at max capacity and queue not empty')
       // Add logic here for notifying admin or auto-scaling
     }
-  }, 5000)
+  }, LOAD_CHECK_INTERVAL)
 }
 
 module.exports = { setupMaster }
