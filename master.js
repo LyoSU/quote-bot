@@ -32,8 +32,8 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const workers = []
   const activeTasks = new Map() // Track tasks being processed
   const requeueHistory = new Map(); // Track requeue attempts
-  const MAX_REQUEUE_ATTEMPTS = 3;
-  const INITIAL_TIMEOUT = 30000; // 30 seconds
+  const MAX_REQUEUE_ATTEMPTS = 2;
+  const INITIAL_TIMEOUT = 5000; // 5 seconds
 
   const userTasks = new Map(); // Map for grouping user tasks
   const delayedTasks = new Map(); // Map for delayed tasks
