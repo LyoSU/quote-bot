@@ -5,7 +5,7 @@ const numCPUs = require('os').cpus().length
 
 const BOT_TOKEN = process.env.BOT_TOKEN
 const MAX_WORKERS = process.env.MAX_WORKERS || numCPUs
-const MAX_UPDATES_PER_WORKER = 30
+const MAX_UPDATES_PER_WORKER = 10
 const MAX_QUEUE_SIZE = 1000
 const QUEUE_WARNING_THRESHOLD = 0.8
 const PAUSE_THRESHOLD = 0.9
