@@ -244,13 +244,34 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
     console.log('\n=== System Metrics ===')
     console.log('Queue Status:')
-    Object.entries(metrics).forEach(([key, value]) => {
-      console.log(`  ${key}: ${value}`)
-    })
+    const queueMetrics = metrics
+    const hasNonZeroValues = Object.values(queueMetrics).some(value =>
+      value !== 0 && value !== false && !(Array.isArray(value) && value.length === 0)
+    )
+
+    if (!hasNonZeroValues) {
+      console.log('  Empty queue')
+    } else {
+      const metricsToShow = {
+        'Total Processed': queueMetrics.totalProcessed,
+        'Errors': queueMetrics.errors,
+        'Average Processing Time': queueMetrics.avgProcessingTime ? `${queueMetrics.avgProcessingTime.toFixed(2)}ms` : '0ms',
+        'Current Size': queueMetrics.currentSize,
+        'Status': queueMetrics.isPaused ? 'Paused' : 'Active',
+        'Cache Items': queueMetrics.cacheSize
+      }
+
+      Object.entries(metricsToShow).forEach(([key, value]) => {
+        if (value && value !== '0ms' && value !== 0) {
+          console.log(`  ${key}: ${value}`)
+        }
+      })
+    }
 
     console.log('\nWorkers Status:')
     workerMetrics.forEach(worker => {
       console.log(`  Worker PID ${worker.pid}:`)
+
       console.log(`    Load: ${worker.load}`)
       console.log(`    Health: ${worker.health}%`)
     })
