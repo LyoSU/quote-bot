@@ -45,7 +45,6 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   function shouldRequeue(updateId) {
     const history = requeueHistory.get(updateId) || { attempts: 0, lastRequeue: 0 };
     if (history.attempts >= MAX_REQUEUE_ATTEMPTS) {
-      console.warn(`Task ${updateId} exceeded max requeue attempts, dropping`);
       requeueHistory.delete(updateId);
       return false;
     }
@@ -58,7 +57,9 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     logInterval: 5000, // Log every 5 seconds
     lastPendingCount: 0,
     lastWorkerLoad: 0,
-    significantChangeThreshold: 1000 // Only log if changed by 1000+ tasks
+    significantChangeThreshold: 1000, // Only log if changed by 1000+ tasks
+    droppedTasks: 0,  // Add counter for dropped tasks
+    lastDropReport: Date.now()
   };
 
   function logSystemStatus(pendingCount, totalLoad) {
@@ -68,10 +69,20 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     const loadPercent = (totalLoad / (workers.length * maxUpdatesPerWorker) * 100).toFixed(1);
     const countDiff = pendingCount - monitoringState.lastPendingCount;
 
-    console.log(
-      `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
-      `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%)`
-    );
+    // Report dropped tasks along with regular status
+    if (monitoringState.droppedTasks > 0) {
+      console.log(
+        `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
+        `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%), ` +
+        `Dropped: ${monitoringState.droppedTasks} tasks`
+      );
+      monitoringState.droppedTasks = 0; // Reset counter
+    } else {
+      console.log(
+        `Status: ${pendingCount} pending (${countDiff >= 0 ? '+' : ''}${countDiff}), ` +
+        `Load: ${totalLoad}/${workers.length * maxUpdatesPerWorker} (${loadPercent}%)`
+      );
+    }
 
     monitoringState.lastLogTime = now;
     monitoringState.lastPendingCount = pendingCount;
@@ -94,6 +105,8 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         history.lastRequeue = now;
         requeueHistory.set(updateId, history);
         queueManager.addToQueue(ctx);
+      } else {
+        monitoringState.droppedTasks++; // Increment dropped tasks counter
       }
 
       const { timeout } = activeTasks.get(updateId);
