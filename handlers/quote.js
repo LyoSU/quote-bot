@@ -28,33 +28,34 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 // }).then(console.log)
 
 let botInfo
+let clearStickerPackTimer
 
 function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-async function loopClearStickerPack () {
-  if (!botInfo) botInfo = await telegram.getMe()
+// Cleans old stickers from the sticker pack periodically
+async function startClearStickerPack() {
+  if (clearStickerPackTimer) return
 
-  setTimeout(async () => {
-    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username).catch((error) => {
-      console.log('loopClearStickerPack getStickerSet error:', error)
-    })
+  clearStickerPackTimer = setInterval(async () => {
+    if (!botInfo) botInfo = await telegram.getMe()
+
+    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username)
+      .catch((error) => {
+        console.log('clearStickerPack error:', error)
+      })
+
     if (!stickerSet) return
-    for (const i in stickerSet.stickers) {
-      const sticker = stickerSet.stickers[i]
-      if (i > config.globalStickerSet.save_sticker_count - 1) {
-        console.log(`deleting sticker ${stickerSet.stickers[i].file_id}`)
-        await telegram.deleteStickerFromSet(sticker.file_id).catch((error) => {
-          console.log('loopClearStickerPack deleteStickerFromSet error:', error)
-        })
-      }
-    }
-    loopClearStickerPack()
-  }, 500)
-}
 
-loopClearStickerPack()
+    const stickersToDelete = stickerSet.stickers.slice(config.globalStickerSet.save_sticker_count)
+
+    for (const sticker of stickersToDelete) {
+      await telegram.deleteStickerFromSet(sticker.file_id)
+        .catch(console.error)
+    }
+  }, 1000)
+}
 
 const hashCode = (s) => {
   const l = s.length
@@ -455,7 +456,7 @@ Response Parameters:
 Context:
 <chat_history>
 ${messageForAIContext.map((message) =>
-  `<${message.role}_name>${message.name}</${message.role}_name>: ${message.content}`
+  `<${message.role}_name>${message.name}</${message.role}_name}: ${message.content}`
 ).join('\n')}
 </chat_history>`
     }]
@@ -770,4 +771,11 @@ ${messageForAIContext.map((message) =>
       })
     }
   }
+
+  // Cleanup temporary data
+  if (messageForAIContext) {
+    messageForAIContext.length = 0
+  }
 }
+
+startClearStickerPack()
