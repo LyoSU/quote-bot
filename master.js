@@ -52,6 +52,29 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     return true;
   }
 
+  // Add new tracking for timeout logs
+  const timeoutLogs = {
+    lastBatch: [],
+    lastLogTime: Date.now(),
+    batchSize: 0
+  };
+
+  function logTimeouts() {
+    const now = Date.now();
+    if (timeoutLogs.batchSize > 0) {
+      if (timeoutLogs.batchSize > 10) {
+        console.warn(`Multiple tasks timed out (${timeoutLogs.batchSize} total)`);
+        console.warn(`Last 5 task IDs: ${timeoutLogs.lastBatch.slice(-5).join(', ')}`);
+      } else {
+        console.warn(`Tasks timed out: ${timeoutLogs.lastBatch.join(', ')}`);
+      }
+      timeoutLogs.batchSize = 0;
+      timeoutLogs.lastBatch = [];
+      timeoutLogs.lastLogTime = now;
+    }
+  }
+
+  // Update existing handleTaskTimeout function
   function handleTaskTimeout(ctx, updateId) {
     if (activeTasks.has(updateId)) {
       const history = requeueHistory.get(updateId) || { attempts: 0, lastRequeue: 0 };
@@ -62,8 +85,15 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         history.lastRequeue = now;
         requeueHistory.set(updateId, history);
 
-        if (history.attempts > 1) { // Only log after first attempt
-          console.warn(`Task ${updateId} timed out (attempt ${history.attempts}/${MAX_REQUEUE_ATTEMPTS})`);
+        if (history.attempts > 1) {
+          // Batch timeout logs
+          timeoutLogs.lastBatch.push(updateId);
+          timeoutLogs.batchSize++;
+
+          // Log every 5 seconds or when batch gets too large
+          if (now - timeoutLogs.lastLogTime > 5000 || timeoutLogs.batchSize >= 50) {
+            logTimeouts();
+          }
         }
 
         queueManager.addToQueue(ctx);
@@ -74,6 +104,9 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       activeTasks.delete(updateId);
     }
   }
+
+  // Add periodic timeout log flushing
+  setInterval(logTimeouts, 5000);
 
   function getPriority(ctx) {
     // Determine priority based on update type
@@ -181,6 +214,7 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
   }
 
+  // Update processQueue to include more detailed logging
   function processQueue() {
     try {
       // First process delayed tasks
@@ -197,7 +231,11 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         .filter(w => w.load < maxUpdatesPerWorker)
         .sort((a, b) => a.load - b.load)[0];
 
-      if (!availableWorker) return;
+      if (!availableWorker) {
+        const pendingCount = Array.from(activeTasks.values()).length;
+        console.log(`Queue stalled: ${pendingCount} pending tasks, all workers busy`);
+        return;
+      }
 
       // Get next task from queue considering priority
       const ctx = queueManager.getNextUpdate();
