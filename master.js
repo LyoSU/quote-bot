@@ -102,17 +102,17 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   function processQueue() {
     try {
-      const updates = queueManager.getUpdates();
-      if (!updates || updates.length === 0) return;
+      // Process queue while we have updates and available workers
+      while (queueManager.hasUpdates()) {
+        const ctx = queueManager.getNextUpdate(); // Assuming this is the correct method name
+        if (!ctx) break;
 
-      for (const ctx of updates) {
         const id = getUpdateId(ctx);
         const workerIndex = getWorkerForId(id);
 
         if (workerIndex !== null) {
           const targetWorker = workers[workerIndex];
           if (targetWorker.load < maxUpdatesPerWorker) {
-            queueManager.removeUpdate(ctx.update.update_id); // Remove from queue
             const serializedCtx = serializeContext(ctx);
             targetWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
             targetWorker.load++;
@@ -135,7 +135,6 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         // Fallback to any available worker
         const availableWorker = workers.find(w => w.load < maxUpdatesPerWorker);
         if (availableWorker) {
-          queueManager.removeUpdate(ctx.update.update_id);
           const serializedCtx = serializeContext(ctx);
           availableWorker.worker.send({ type: 'UPDATE', payload: serializedCtx });
           availableWorker.load++;
@@ -151,6 +150,10 @@ function setupMaster(bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
           }, 30000);
 
           activeTasks.set(ctx.update.update_id, { worker: availableWorker.worker, timeout: timeoutId });
+        } else {
+          // If no worker is available, put the update back in queue
+          queueManager.addToQueue(ctx);
+          break;
         }
       }
 
