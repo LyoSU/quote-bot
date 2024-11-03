@@ -230,3 +230,5 @@ only_group: |
   This command can be used only in groups.
 rate_limit: |
   You can't use this command more than once every ${seconds} seconds.
+
+error_admin_check: Error checking administrator rights

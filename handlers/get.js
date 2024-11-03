@@ -1,4 +1,4 @@
-const Markup = require('telegraf/markup')
+const { InlineKeyboard } = require('grammy')
 
 module.exports = async ctx => {
   const quoteId = ctx.match[1].split('@')[0]
@@ -7,11 +7,10 @@ module.exports = async ctx => {
 
   if (quote) {
     await ctx.replyWithDocument(quote.file_id, {
-      reply_markup: Markup.inlineKeyboard([
-        Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length}`, 'rate:👍'),
-        Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length}`, 'rate:👎')
-      ]),
-      reply_to_message_id: ctx.message.message_id,
+      reply_markup: new InlineKeyboard()
+        .text(`👍 ${quote.rate.votes[0].vote.length}`, 'rate:👍')
+        .text(`👎 ${quote.rate.votes[1].vote.length}`, 'rate:👎'),
+      reply_to_message_id: ctx.msg.message_id,
       allow_sending_without_reply: true
     })
   }

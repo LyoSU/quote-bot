@@ -132,6 +132,10 @@ class HighLoadStats {
 
   middleware () {
     return async (ctx, next) => {
+      // Ensure state exists
+      ctx.state = ctx.state || {}
+      ctx.state.emptyRequest = ctx.state.emptyRequest ?? false
+
       const startMs = Date.now()
 
       ctx.stats = JSON.parse(JSON.stringify(this.currentStats))

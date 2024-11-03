@@ -1,12 +1,15 @@
-const stats = require('./stats')
-const onlyGroup = require('./only-group')
-const onlyAdmin = require('./only-admin')
-const scenes = require('./scenes')
+const { rateLimit } = require('./rateLimit')
+const { isGroup, groupFilter, privateFilter } = require('./filters')
+const { onlyGroup, onlyAdmin } = require('./permissions')
 
 module.exports = {
-  stats,
+  rateLimit,
+  isGroup,
+  groupFilter,
+  privateFilter,
+  stats: require('./stats'),
   onlyPm: require('./only-pm'),
   onlyGroup,
-  onlyAdmin,
-  scenes
+  scenes: require('./scenes'),
+  onlyAdmin
 }

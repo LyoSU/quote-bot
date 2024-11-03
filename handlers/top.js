@@ -1,16 +1,13 @@
-const Markup = require('telegraf/markup')
+const { InlineKeyboard } = require('grammy')
 
 module.exports = async ctx => {
   const resultText = ctx.i18n.t('top.info')
 
-  await ctx.replyWithHTML(resultText, {
-    reply_to_message_id: ctx.message.message_id,
+  await ctx.api.sendMessage(ctx.chat.id, resultText, {
+    parse_mode: 'HTML',
+    reply_to_message_id: ctx.msg.message_id,
     allow_sending_without_reply: true,
-    reply_markup: Markup.inlineKeyboard([
-      Markup.switchToCurrentChatButton(
-        ctx.i18n.t('top.open'),
-        `top:${ctx.group.info.id}`
-      )
-    ])
+    reply_markup: new InlineKeyboard()
+      .switchInline(ctx.i18n.t('top.open'), `top:${ctx.group.info.id}`)
   })
 }

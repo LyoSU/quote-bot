@@ -1,14 +1,11 @@
-const Composer = require('telegraf/composer')
+const { Composer } = require('grammy')
 const composer = new Composer()
 
-composer.use(async (ctx, next) => {
-  if (ctx.update.my_chat_member) {
-    if (ctx.update.my_chat_member.chat.id === ctx.update.my_chat_member.from.id) {
-      const user = await ctx.db.User.findOne({ telegram_id: ctx.update.my_chat_member.from.id })
-
-      user.status = ctx.update.my_chat_member.new_chat_member.status
-      await user.save()
-    }
+composer.on('my_chat_member', async (ctx, next) => {
+  if (ctx.myChatMember.chat.id === ctx.myChatMember.from.id) {
+    const user = await ctx.db.User.findOne({ telegram_id: ctx.myChatMember.from.id })
+    user.status = ctx.myChatMember.new_chat_member.status
+    await user.save()
   } else return next()
 })
 

@@ -25,3 +25,22 @@ module.exports = {
   handleChatMember: require('./chat-member'),
   handleInlineQuery: require('./inline-query')
 }
+
+// Приклад оновлення одного з хендлерів
+async function handleQuote(ctx, next) {
+  // Замість ctx.replyWithHTML використовуємо ctx.reply
+  await ctx.reply('Message', {
+    parse_mode: 'HTML',
+    reply_to_message_id: ctx.message.message_id
+  })
+
+  // Замість ctx.telegram використовуємо ctx.api
+  await ctx.api.sendMessage(chatId, text, options)
+
+  // Замість ctx.answerCbQuery використовуємо ctx.answerCallbackQuery
+  if (ctx.callbackQuery) {
+    await ctx.answerCallbackQuery()
+  }
+}
+
+// ...інші хендлери...

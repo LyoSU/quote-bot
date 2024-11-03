@@ -1,13 +1,11 @@
 require('dotenv').config({ path: './.env' })
-const {
-  db
-} = require('./database')
-const Telegram = require('telegraf/telegram')
+const { Bot } = require('grammy')
+const { db } = require('./database')
 
-const telegram = new Telegram(process.env.BOT_TOKEN)
+const bot = new Bot(process.env.BOT_TOKEN)
 
 const checkGroup = async (group) => {
-  const result = await telegram.sendChatAction(group.group_id, 'typing').catch(error => {
+  const result = await bot.api.sendChatAction(group.group_id, 'typing').catch(error => {
     return error.response
   })
   if (result) {
@@ -21,10 +19,9 @@ const checkGroup = async (group) => {
 
 const checkGroups = async () => {
   const groups = await db.Group.find({ 'available.check': { $ne: true } }).limit(100)
-
   const checkArray = groups.map(checkGroup)
-
   console.log(await Promise.all(checkArray))
   await checkGroups()
 }
+
 checkGroups()

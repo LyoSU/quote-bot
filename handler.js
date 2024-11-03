@@ -1,10 +1,8 @@
-const fs = require('fs')
+const { Composer } = require('grammy')  // Remove session import
+const { conversations } = require('@grammyjs/conversations')
 const path = require('path')
-const Composer = require('telegraf/composer')
-const session = require('telegraf/session')
-const rateLimit = require('telegraf-ratelimit')
-const I18n = require('telegraf-i18n')
 const { onlyGroup, onlyAdmin } = require('./middlewares')
+const { rateLimit } = require('./middlewares/rateLimit')
 const {
   handleHelp,
   handleAdv,
@@ -36,113 +34,162 @@ const { getUser, getGroup } = require('./helpers')
 
 const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-const bot = new Composer();
+const composer = new Composer()
 
-// bot.use(require('./middlewares/metrics'))
+// Remove session initialization from handler.js
 
-bot.command('json', ({ replyWithHTML, message }) =>
+// Keep the conversations middleware
+composer.use(conversations())
+
+composer.command('json', ({ replyWithHTML, message }) =>
   replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>')
 )
 
-bot.use(handleChatMember)
+composer.use(handleChatMember)
 
-bot.use(
-  Composer.mount(
-    'callback_query',
-    rateLimit({
-      window: 2000,
-      limit: 1,
-      keyGenerator: (ctx) => ctx.from.id
-    })
-  )
+// Rate limiter middleware
+composer.use(rateLimit({
+  window: 1000,
+  limit: 3,
+  keyGenerator: (ctx) => ctx.from?.id,
+  onLimitExceeded: async (ctx) => {
+    await ctx.reply('Too many requests, please slow down')
+  }
+}))
+
+// Replace Composer.mount with .on('callback_query')
+composer.on('callback_query',
+  rateLimit({
+    window: 1000,
+    limit: 3,
+    keyGenerator: (ctx) => ctx.from?.id,
+    onLimitExceeded: async (ctx) => {
+      await ctx.reply('Too many requests, please slow down')
+    }
+  })
 )
 
-bot.on(['channel_post', 'edited_channel_post'], () => {})
+composer.on(['channel_post', 'edited_channel_post'], () => {})
 
-const i18n = new I18n({
-  directory: path.resolve(__dirname, 'locales'),
-  defaultLanguage: 'en',
-  defaultLanguageOnMissing: true,
-})
+// Helper function to filter group chats
+const groupChat = (middleware) => {
+  return async (ctx, next) => {
+    if (ctx.chat?.type === 'group' || ctx.chat?.type === 'supergroup') {
+      return middleware(ctx, next)
+    }
+    return next()
+  }
+}
 
-bot.use(i18n.middleware())
-
-bot.use(session({
-  getSessionKey: (ctx) => {
-    if (ctx.from && ctx.chat) return `${ctx.from.id}:${ctx.chat.id}`;
-    if (ctx.from) return `user:${ctx.from.id}`;
-    if (ctx.update?.business_message) return `user:${ctx.update.business_message.from.id}`;
-    return null;
-  },
-  ttl: 3600
-}));
-
-bot.use(async (ctx, next) => {
-  ctx.state.emptyRequest = false
-  return next()
-})
-
-bot.use(
-  Composer.groupChat(
-    session({
-      property: 'group',
-      getSessionKey: (ctx) => {
-        if (
-          ctx.from &&
-          ctx.chat &&
-          ['supergroup', 'group'].includes(ctx.chat.type)
-        ) {
-          return `${ctx.chat.id}`
-        }
-        return null
-      },
-      ttl: 60 * 5
-    })
-  )
+// Remove the session middleware for groups and replace with direct group chat filter
+composer.use(
+  groupChat(async (ctx, next) => {
+    if (
+      ctx.from &&
+      ctx.chat &&
+      ['supergroup', 'group'].includes(ctx.chat.type)
+    ) {
+      // Initialize group session data if needed
+      ctx.session.group = ctx.session.group || {}
+      return next()
+    }
+    return next()
+  })
 )
 
 const updateGroupAndUser = async (ctx, next) => {
-  await Promise.all([getUser(ctx), getGroup(ctx)]);
-  await next(ctx);
-  if (ctx.state.emptyRequest === false) {
-    await Promise.all([
-      ctx.session.userInfo.save().catch(() => {}),
-      ctx.group.info.save().catch(() => {})
-    ]);
-  }
-};
+  try {
+    if (!ctx.session) return next()
 
-bot.use(async (ctx, next) => {
-  if (ctx.inlineQuery) {
-    await getUser(ctx)
-    ctx.state.answerIQ = []
+    await Promise.all([getUser(ctx), getGroup(ctx)])
+    await next()
+
+    if (!ctx.state.emptyRequest) {
+      await Promise.all([
+        ctx.session?.userInfo?.save?.()?.catch(() => {}),
+        ctx.group?.info?.save?.()?.catch(() => {})
+      ])
+    }
+  } catch (error) {
+    console.error('Error in updateGroupAndUser:', error)
+    await next()
   }
-  if (ctx.callbackQuery) {
-    await getUser(ctx)
-    ctx.state.answerCbQuery = []
+}
+
+composer.use(async (ctx, next) => {
+  if (ctx.inlineQuery || ctx.callbackQuery) {
+    ctx.state = {
+      ...ctx.state,
+      answerIQ: ctx.inlineQuery ? [] : undefined,
+      answerCbQuery: ctx.callbackQuery ? [] : undefined
+    }
   }
 
-  return next(ctx).then(() => {
-    if (ctx.inlineQuery) return ctx.answerInlineQuery(...ctx.state.answerIQ).catch(() => { })
-    if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery).catch(() => { })
-  })
+  try {
+    await next()
+
+    if (ctx.inlineQuery && ctx.state.answerIQ?.length) {
+      await ctx.answerInlineQuery(...ctx.state.answerIQ).catch(() => {})
+    }
+    if (ctx.callbackQuery && ctx.state.answerCbQuery?.length) {
+      await ctx.answerCbQuery(...ctx.state.answerCbQuery).catch(() => {})
+    }
+  } catch (error) {
+    console.error('Error in middleware:', error)
+  }
 })
 
-bot.use(Composer.groupChat(Composer.command(updateGroupAndUser)))
+// Update this section
+composer.use(groupChat(async (ctx, next) => {
+  if (ctx.message?.entities?.[0]?.type === 'bot_command') {
+    await updateGroupAndUser(ctx, next)
+  } else {
+    return next()
+  }
+}))
 
-bot.use(
-  Composer.privateChat(async (ctx, next) => {
-    await getUser(ctx)
-    await next(ctx).then(() => {
-      ctx.session.userInfo.save().catch(() => {})
-    })
+// Replace Composer.privateChat with filter
+const privateChat = (middleware) => {
+  return async (ctx, next) => {
+    if (ctx.chat?.type === 'private') {
+      return middleware(ctx, next)
+    }
+    return next()
+  }
+}
+
+composer.use(
+  privateChat(async (ctx, next) => {
+    if (!ctx.session) {
+      ctx.session = {
+        locale: ctx.from?.language_code || 'en',
+        userInfo: {},
+        group: {},
+        __language_code: ctx.from?.language_code || 'en'
+      }
+    }
+
+    try {
+      // Ensure i18n is available
+      if (!ctx.i18n) {
+        console.error('i18n not available in context')
+        return next()
+      }
+
+      await getUser(ctx)
+      await next()
+      await ctx.session?.userInfo?.save?.()?.catch(() => {})
+    } catch (error) {
+      console.error('Error in private chat handler:', error)
+      return next()
+    }
   })
 )
 
-bot.start(async (ctx, next) => {
+composer.command('start', async (ctx, next) => {
   const arg = ctx.message.text.split(' ')
   if (arg[1] && ctx.config.logChatId) {
-    await ctx.tg.sendMessage(
+    await ctx.api.sendMessage(
       ctx.config.logChatId,
       `#${arg[1]}\n<code>${JSON.stringify(ctx.message, null, 2)}</code>`,
       {
@@ -150,15 +197,16 @@ bot.start(async (ctx, next) => {
       }
     )
   }
-  return next()
+  // Handle start command with help handler
+  await handleHelp(ctx, next)
 })
 
-bot.hears(/\/q(.*)\*(.*)/, rateLimit({
-  window: 1000 * 25,
-  limit: 1,
-  keyGenerator: (ctx) => ctx.from.id,
-  onLimitExceeded: (ctx) => {
-    return ctx.replyWithHTML(ctx.i18n.t('rate_limit', {
+composer.hears(/\/q(.*)\*(.*)/, rateLimit({
+  window: 1000,
+  limit: 3,
+  keyGenerator: (ctx) => ctx.from?.id,
+  onLimitExceeded: async (ctx) => {
+    await ctx.replyWithHTML(ctx.i18n.t('rate_limit', {
       seconds: 25
     }), {
       reply_to_message_id: ctx.message.message_id
@@ -171,14 +219,25 @@ bot.hears(/\/q(.*)\*(.*)/, rateLimit({
   }
 }))
 
-bot.command('donate', handleDonate)
-bot.command('ping', handlePing)
-bot.action(/(donate):(.*)/, handleDonate)
-bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) =>
-  answerPreCheckoutQuery(true)
-)
-bot.on('successful_payment', handleDonate)
-bot.hears(/\/refund (.*)/, async (ctx) => {
+composer.command('donate', handleDonate)
+composer.command('ping', handlePing)
+composer.callbackQuery(/(donate):(.*)/, handleDonate)
+
+// Replace these payment handlers with the correct grammY syntax
+composer.on('pre_checkout_query', (ctx) => {
+  return ctx.answerPreCheckoutQuery(true)
+})
+
+// Use message.successful_payment filter instead
+composer.on('message', (ctx, next) => {
+  if (ctx.message?.successful_payment) {
+    return handleDonate(ctx)
+  }
+
+  return next()
+})
+
+composer.hears(/\/refund (.*)/, async (ctx) => {
   if (ctx.config.adminId !== ctx.from.id) return
 
   const [_, paymentId] = ctx.match
@@ -197,23 +256,23 @@ bot.hears(/\/refund (.*)/, async (ctx) => {
   }
 })
 
-bot.command('qtop', onlyGroup, handleTopQuote)
-bot.command(
+composer.command('qtop', onlyGroup, handleTopQuote)
+composer.command(
   'qrand',
   onlyGroup,
   rateLimit({
-    window: 1000 * 50,
-    limit: 2,
-    keyGenerator: (ctx) => {
-      return ctx.chat.id
-    },
-    onLimitExceeded: ({ deleteMessage }) => deleteMessage().catch(() => {})
+    window: 1000,
+    limit: 3,
+    keyGenerator: (ctx) => ctx.from?.id,
+    onLimitExceeded: async (ctx) => {
+      await ctx.reply('Too many requests, please slow down')
+    }
   }),
   handleRandomQuote
 )
 
 // business_message
-bot.use((ctx, next) => {
+composer.use((ctx, next) => {
   if (!ctx.update?.business_message) {
     return next()
   }
@@ -230,68 +289,63 @@ bot.use((ctx, next) => {
   return next()
 })
 
-bot.command('q', handleQuote)
-bot.hears(/\/q_(.*)/, handleGetQuote)
-bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
-bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
-bot.command('qd', onlyGroup, onlyAdmin, handleDelete)
-bot.command('qdrand', onlyGroup, onlyAdmin, handleDeleteRandom)
-bot.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
-bot.command('qb', onlyAdmin, handleEmojiBrandQuote)
-bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
-bot.command('qemoji', onlyAdmin, handleEmoji)
-bot.hears(/^\/(qgab) (\d+)/, onlyGroup, onlyAdmin, handleGabSettings)
-bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
-bot.action(/^(rate):(👍|👎)/, handleRate)
-bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
+composer.command('q', handleQuote)
+composer.hears(/\/q_(.*)/, handleGetQuote)
+composer.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
+composer.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
+composer.command('qd', onlyGroup, onlyAdmin, handleDelete)
+composer.command('qdrand', onlyGroup, onlyAdmin, handleDeleteRandom)
+composer.hears(/^\/qcolor(?:(?:\s(?:(#?))([^\s]+))?)/, onlyAdmin, handleColorQuote)
+composer.command('qb', onlyAdmin, handleEmojiBrandQuote)
+composer.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
+composer.command('qemoji', onlyAdmin, handleEmoji)
+composer.hears(/^\/(qgab) (\d+)/, onlyGroup, onlyAdmin, handleGabSettings)
+composer.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
+composer.callbackQuery(/^(rate):(👍|👎)/, handleRate)  // Changed from action to callbackQuery
+composer.callbackQuery(/^(irate):(.*):(👍|👎)/, handleRate)  // Changed from action to callbackQuery
 
-// bot.on('new_chat_members', (ctx, next) => {
-//   if (ctx.message.new_chat_member.id === ctx.botInfo.id) return handleHelp(ctx)
-//   else return next()
-// })
+composer.command('help', handleHelp)
+composer.use(handleAdv)
 
-bot.start(handleHelp)
-bot.command('help', handleHelp)
-bot.use(handleAdv)
+composer.use(handleModerateAdv)
 
-bot.use(handleModerateAdv)
+composer.use(handleInlineQuery)
 
-bot.use(handleInlineQuery)
+composer.command('privacy', onlyAdmin, handlePrivacy)
 
-bot.command('privacy', onlyAdmin, handlePrivacy)
+composer.command('lang', handleLanguage)
+composer.callbackQuery(/set_language:(.*)/, handleLanguage)  // Changed from action to callbackQuery
 
-bot.command('lang', handleLanguage)
-bot.action(/set_language:(.*)/, handleLanguage)
-
-bot.on('sticker', rateLimit({
-  window: 1000 * 60,
-  limit: 1,
-  keyGenerator: (ctx) => ctx.from.id,
-  onLimitExceeded: (ctx, next) => {
-    return next()
-  }
-}), handleSticker)
-bot.on('text', rateLimit({
-  window: 1000 * 60,
-  limit: 1,
-  keyGenerator: (ctx) => ctx.from.id,
-  onLimitExceeded: (ctx, next) => {
-    return next()
+// Replace direct sticker/text handlers with message filter
+composer.on('message:sticker', rateLimit({
+  window: 1000,
+  limit: 3,
+  keyGenerator: (ctx) => ctx.from?.id,
+  onLimitExceeded: async (ctx) => {
+    await ctx.reply('Too many requests, please slow down')
   }
 }), handleSticker)
 
-bot.on('message', Composer.privateChat(handleQuote))
+composer.on('message:text', rateLimit({
+  window: 1000,
+  limit: 3,
+  keyGenerator: (ctx) => ctx.from?.id,
+  onLimitExceeded: async (ctx) => {
+    await ctx.reply('Too many requests, please slow down')
+  }
+}), handleSticker)
 
-bot.on(
+composer.on('message', privateChat(handleQuote))
+
+composer.on(
   'message',
-  Composer.groupChat(
+  groupChat(
     rateLimit({
-      window: 1000 * 5,
-      limit: 1,
-      keyGenerator: (ctx) => ctx.chat.id,
-      onLimitExceeded: (ctx, next) => {
-        ctx.state.skip = true
-        return next()
+      window: 1000,
+      limit: 3,
+      keyGenerator: (ctx) => ctx.from?.id,
+      onLimitExceeded: async (ctx) => {
+        await ctx.reply('Too many requests, please slow down')
       }
     }),
     async (ctx, next) => {
@@ -316,9 +370,9 @@ bot.on(
   )
 )
 
-bot.use((ctx, next) => {
+composer.use((ctx, next) => {
   ctx.state.emptyRequest = true
   return next()
 })
 
-module.exports = bot
+module.exports = composer

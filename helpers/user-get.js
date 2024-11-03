@@ -1,4 +1,4 @@
-module.exports = async ctx => {
+module.exports = async (ctx) => {
   let user
   let newUser = false
 
@@ -28,9 +28,16 @@ module.exports = async ctx => {
 
   ctx.session.userInfo = user
 
-  if (ctx.session.userInfo.settings.locale) {
-    ctx.i18n.locale(ctx.session.userInfo.settings.locale)
+  const userLocale = ctx.from?.language_code || 'en'
+
+  // Set user's locale in session
+  if (!ctx.session.locale) {
+    ctx.session.locale = userLocale
   }
 
-  return true
+  if (ctx.session.userInfo.settings.locale) {
+    ctx.i18n.locale = ctx.session.userInfo.settings.locale
+  }
+
+  return ctx.session.userInfo
 }

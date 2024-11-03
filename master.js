@@ -31,7 +31,7 @@ const ADAPTIVE_SCALING_INTERVAL = 30000
 const MIN_WORKERS = 2
 const CPU_THRESHOLD = 80 // percentage
 
-function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
+function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker, botInfo) {
   const tdlib = require('./helpers/tdlib')
 
   console.log(`Master process ${process.pid} is running`)
@@ -42,6 +42,8 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   for (let i = 0; i < maxWorkers; i++) {
     const worker = cluster.fork()
+    // Send bot info to worker
+    worker.send({ type: 'BOT_INFO', botInfo })
     workers.push({ worker, load: 0, health: 100 })
   }
 
