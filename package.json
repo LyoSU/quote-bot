@@ -24,6 +24,7 @@
     "enot-node": "^1.0.1",
     "fastpriorityqueue": "^0.7.5",
     "got": "^11.8.5",
+    "grammy": "^1.31.0",
     "ioredis": "^5.4.1",
     "limax": "^4.1.0",
     "mongoose": "^8.7.1",

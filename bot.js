@@ -1,4 +1,4 @@
-const { Telegraf } = require('telegraf')
+const { Bot } = require('grammy')
 const cluster = require('cluster')
 const { QueueManager } = require('./queueManager')
 const numCPUs = require('os').cpus().length
@@ -14,23 +14,22 @@ const RESUME_THRESHOLD = 0.7
 if (cluster.isMaster) {
   const { setupMaster } = require('./master')
 
-  const bot = new Telegraf(BOT_TOKEN, {
-    handlerTimeout: 100
-  })
+  const bot = new Bot(BOT_TOKEN)
 
-  if (!(bot instanceof Telegraf)) {
-    throw new Error('Не вдалося створити екземпляр Telegraf')
+  if (!(bot instanceof Bot)) {
+    throw new Error('Bot must be an instance of Bot')
   }
 
   const queueManager = new QueueManager(MAX_QUEUE_SIZE, QUEUE_WARNING_THRESHOLD, PAUSE_THRESHOLD, RESUME_THRESHOLD)
 
   setupMaster(bot, queueManager, MAX_WORKERS, MAX_UPDATES_PER_WORKER)
 
-  bot.launch()
+  bot.start()
 
   // Graceful stop
-  process.once('SIGINT', () => bot.stop('SIGINT'))
-  process.once('SIGTERM', () => bot.stop('SIGTERM'))
+  const stopBot = () => bot.stop()
+  process.once('SIGINT', stopBot)
+  process.once('SIGTERM', stopBot)
 } else {
   const { setupWorker } = require('./worker')
 

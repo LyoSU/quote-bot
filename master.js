@@ -113,7 +113,8 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
   }
 
-  bot.use((ctx, next) => {
+  // Update middleware to use grammY context
+  bot.use(async (ctx, next) => {
     const update = ctx.update
     distributeUpdate(update)
     return next()
@@ -134,7 +135,8 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
           processQueue()
         }
       } else if (msg.type === MESSAGE_TYPES.SEND_MESSAGE) {
-        bot.telegram.sendMessage(msg.chatId, msg.text)
+        // Update to grammY API call
+        await bot.api.sendMessage(msg.chatId, msg.text)
       } else if (msg.type === MESSAGE_TYPES.TDLIB_REQUEST) {
         try {
           const result = await tdlib[msg.method](...msg.args)
