@@ -513,7 +513,7 @@ ${messageForAIContext.map((message) => `<${message.role}_name>${message.name}</$
       max_tokens: 64,
       system: systemMessage,
       messages: messageForAI,
-      model: 'claude-3-haiku-20240307',
+      model: 'claude-3-5-haiku-20241022',
       temperature: 1,
     })
 
