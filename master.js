@@ -34,6 +34,24 @@ const CPU_THRESHOLD = 80 // percentage
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
 
+  // Add request tracking
+  let requestCounts = []
+  const RPS_WINDOW = 10 // Window size in seconds
+
+  function trackRequest() {
+    const now = Date.now()
+    requestCounts.push(now)
+    // Keep only requests within the window
+    requestCounts = requestCounts.filter(time => now - time < RPS_WINDOW * 1000)
+  }
+  
+  function calculateRPS() {
+    const now = Date.now()
+    // Clean old requests first
+    requestCounts = requestCounts.filter(time => now - time < RPS_WINDOW * 1000)
+    return (requestCounts.length / RPS_WINDOW).toFixed(2)
+  }
+
   console.log(`Master process ${process.pid} is running`)
 
   stats.startPeriodicUpdate()
@@ -115,6 +133,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   bot.use((ctx, next) => {
     const update = ctx.update
+    trackRequest() // Track each request
     distributeUpdate(update)
     return next()
   })
@@ -243,7 +262,10 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     const memoryUsage = process.memoryUsage()
 
     console.log('\n=== System Metrics ===')
-    console.log('Queue Status:')
+    console.log('Performance:')
+    console.log(`  Requests/sec: ${calculateRPS()}`) // Add RPS to metrics
+
+    console.log('\nQueue Status:')
     const queueMetrics = metrics
     const hasNonZeroValues = Object.values(queueMetrics).some(value =>
       value !== 0 && value !== false && !(Array.isArray(value) && value.length === 0)
