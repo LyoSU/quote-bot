@@ -5,6 +5,7 @@ const got = require('got')
 const {
   OpenAI
 } = require('openai')
+const Anthropic = require('@anthropic-ai/sdk')
 const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
 
@@ -17,6 +18,10 @@ const telegram = new Telegram(process.env.BOT_TOKEN)
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+})
+
+const anthropicClient = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
 })
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
@@ -461,66 +466,86 @@ ${messageForAIContext.map((message) =>
 </chat_history>`
     }]
 
+    const messageForAI = []
 
     for (const index in quoteMessages) {
       const quoteMessage = quoteMessages[index]
 
-      const nameForAI = quoteMessage?.from?.name ? slug(quoteMessage?.from?.name, { separator: '_', maintainCase: true }) || 'user' : 'user'
-
       let userMessage = {
         role: 'user',
-        name: nameForAI,
         content: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
       }
 
       if (quoteMessage.media) {
-        const photo = quoteMessage.media.slice(-1)[0]
-        const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
-        const extension = photoUrl.split('.').pop()
+        try {
+          const photo = quoteMessage.media.slice(-1)[0]
+          const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
 
-        if (!['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(extension)) continue
+          // Download the image
+          const response = await fetch(photoUrl)
+          const arrayBuffer = await response.arrayBuffer()
+          const buffer = Buffer.from(arrayBuffer)
 
-        userMessage = {
-          role: 'user',
-          name: quoteMessage?.from?.name ? nameForAI : 'user',
-          content: [
-            {
-              type: "image_url",
-              image_url: {
-                url: photoUrl,
-                detail: 'low'
+          // Get the file extension and determine media type
+          const extension = photoUrl.toString().split('.').pop().toLowerCase()
+          const validExtensions = ['png', 'jpg', 'jpeg', 'webp', 'gif']
+
+          if (!validExtensions.includes(extension)) continue
+
+          // Map file extensions to media types
+          const mediaTypes = {
+            'png': 'image/png',
+            'jpg': 'image/jpeg',
+            'jpeg': 'image/jpeg',
+            'webp': 'image/webp',
+            'gif': 'image/gif'
+          }
+
+          const mediaType = mediaTypes[extension]
+
+          // Convert to base64
+          const base64Data = buffer.toString('base64')
+
+          userMessage = {
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: 'base64',
+                  media_type: mediaType,
+                  data: base64Data
+                }
+              },
+              {
+                type: 'text',
+                text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || '[image]'
               }
-            },
-            {
-              type: "text",
-              text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || (quoteMessage.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')
-            }
-          ]
+            ]
+          }
+        } catch (error) {
+          console.error('Error processing image:', error)
+          // If image processing fails, fall back to text-only message
+          userMessage = {
+            role: 'user',
+            content: '[Error processing image] ' + (quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || '[media]')
+          }
         }
       }
 
       messageForAI.push(userMessage)
     }
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: messageForAI,
+    const completion = await anthropicClient.messages.create({
       max_tokens: 64,
-      temperature: 0.9,
-      top_p: 0.95,
-      presence_penalty: 0.6,
-      frequency_penalty: 0.7,
-      n: 1
-    }).catch((err) => {
-      console.error('OpenAI error:', err?.response?.statusText || err.message)
+      system: systemMessage,
+      messages: messageForAI,
+      model: 'claude-3-5-haiku-20241022',
+      temperature: 1,
     })
 
-    if (messageForAIContext) {
-      messageForAIContext.length = 0
-    }
-
-    if (completion && completion.choices[0].message.content) {
-      const message = completion.choices[0].message.content
+    if (completion && completion.content) {
+      const message = completion.content[0].text
 
       quoteMessages.push({
         message_id: 1,
