@@ -440,9 +440,7 @@ module.exports = async (ctx, next) => {
       }
     })
 
-    const messageForAI = [{
-      role: 'system',
-      content: `You're a clever chat participant known for perfectly-timed witty responses that make everyone laugh.
+    const systemMessage = `You're a clever chat participant known for perfectly-timed witty responses that make everyone laugh.
 
 Guidelines:
 - Create a single sharp, witty response (max 2 sentences, 128 characters)
@@ -464,7 +462,6 @@ ${messageForAIContext.map((message) =>
   `<${message.role}_name>${message.name}</${message.role}_name}: ${message.content}`
 ).join('\n')}
 </chat_history>`
-    }]
 
     const messageForAI = []
 
