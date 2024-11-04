@@ -4,7 +4,7 @@ const Composer = require('telegraf/composer')
 const session = require('telegraf/session')
 const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
-const { stats, onlyGroup, onlyAdmin } = require('./middlewares')
+const { onlyGroup, onlyAdmin } = require('./middlewares')
 const {
   handleHelp,
   handleAdv,
@@ -39,7 +39,6 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 const bot = new Composer();
 
 // bot.use(require('./middlewares/metrics'))
-// bot.use(stats.middleware())
 
 bot.command('json', ({ replyWithHTML, message }) =>
   replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>')

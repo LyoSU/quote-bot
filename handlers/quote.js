@@ -33,29 +33,34 @@ const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 // }).then(console.log)
 
 let botInfo
+let clearStickerPackTimer
 
-async function loopClearStickerPack () {
-  if (!botInfo) botInfo = await telegram.getMe()
-
-  setTimeout(async () => {
-    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username).catch((error) => {
-      console.log('loopClearStickerPack getStickerSet error:', error)
-    })
-    if (!stickerSet) return
-    for (const i in stickerSet.stickers) {
-      const sticker = stickerSet.stickers[i]
-      if (i > config.globalStickerSet.save_sticker_count - 1) {
-        console.log(`deleting sticker ${stickerSet.stickers[i].file_id}`)
-        await telegram.deleteStickerFromSet(sticker.file_id).catch((error) => {
-          console.log('loopClearStickerPack deleteStickerFromSet error:', error)
-        })
-      }
-    }
-    loopClearStickerPack()
-  }, 500)
+function sleep (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-loopClearStickerPack()
+// Cleans old stickers from the sticker pack periodically
+async function startClearStickerPack() {
+  if (clearStickerPackTimer) return
+
+  clearStickerPackTimer = setInterval(async () => {
+    if (!botInfo) botInfo = await telegram.getMe()
+
+    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username)
+      .catch((error) => {
+        console.log('clearStickerPack error:', error)
+      })
+
+    if (!stickerSet) return
+
+    const stickersToDelete = stickerSet.stickers.slice(config.globalStickerSet.save_sticker_count)
+
+    for (const sticker of stickersToDelete) {
+      await telegram.deleteStickerFromSet(sticker.file_id)
+        .catch(console.error)
+    }
+  }, 1000)
+}
 
 const hashCode = (s) => {
   const l = s.length
@@ -74,6 +79,8 @@ const generateRandomColor = () => {
   const color = '0'.repeat(6 - rawColor.length) + rawColor
   return `#${color}`
 }
+
+const minIdsInChat = {}
 
 module.exports = async (ctx, next) => {
   const flag = {
@@ -111,6 +118,15 @@ module.exports = async (ctx, next) => {
     flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
+  }
+
+  if (ctx.chat.type === 'private') {
+    // flag.reply = true
+    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
+    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
+    await sleep(1000)
+    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
+    delete minIdsInChat[ctx.from.id]
   }
 
   ctx.replyWithChatAction('choose_sticker')
@@ -424,20 +440,31 @@ module.exports = async (ctx, next) => {
       }
     })
 
-    const systemMessage = `You're a witty chat member who surprises everyone with hilarious one-liners that become legendary moments.
+    const messageForAI = [{
+      role: 'system',
+      content: `You're a clever chat participant known for perfectly-timed witty responses that make everyone laugh.
 
 Guidelines:
-- Craft a short (1-2 sentences), original punchline that fits naturally into the conversation.
-- Your response should be contextually relevant and unexpectedly funny.
-- Make it the kind of message people would screenshot and share.
+- Create a single sharp, witty response (max 2 sentences, 128 characters)
+- Ensure humor is contextual and builds on the ongoing conversation
+- Aim for clever wordplay, puns, or unexpected connections
+- Keep responses natural and conversational, not forced
+- Focus on intelligent humor rather than slapstick
 - Language: "${ctx.i18n.locale()}"
-- Avoid obvious jokes; aim for humor with layers.
-- Stay in character as a regular chat participant.
+
+Response Parameters:
+- Timing: Use conversation context to find the perfect moment
+- Originality: Avoid common jokes or memes
+- Relevance: Reference only topics from the current discussion
+- Style: Casual but clever, like a quick-witted friend
 
 Context:
-<chat_messages>
-${messageForAIContext.map((message) => `<${message.role}_name>${message.name}</${message.role}_name>: <${message.role}_message>${message.content}</${message.role}_message>`).join('\n')}
-</chat_messages>`
+<chat_history>
+${messageForAIContext.map((message) =>
+  `<${message.role}_name>${message.name}</${message.role}_name}: ${message.content}`
+).join('\n')}
+</chat_history>`
+    }]
 
     const messageForAI = []
 
@@ -774,3 +801,5 @@ ${messageForAIContext.map((message) => `<${message.role}_name>${message.name}</$
     }
   }
 }
+
+startClearStickerPack()
