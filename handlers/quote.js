@@ -20,6 +20,24 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
+const describeImage = async (image) => {
+  const result = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: 'Please describe the image in a sentence.'
+      },
+      {
+        role: 'user',
+        content: image
+      }
+    ]
+  })
+
+  return result.choices[0].message.content
+}
+
 const anthropicClient = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
@@ -503,20 +521,19 @@ ${messageForAIContext.map((message) =>
           // Convert to base64
           const base64Data = buffer.toString('base64')
 
+          const imageDescription = await describeImage([{
+            type: 'image_url',
+            image_url: {
+              url: `data:${mediaType};base64,${base64Data}`
+            }
+          }])
+
           userMessage = {
             role: 'user',
             content: [
               {
-                type: 'image',
-                source: {
-                  type: 'base64',
-                  media_type: mediaType,
-                  data: base64Data
-                }
-              },
-              {
                 type: 'text',
-                text: quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || '[image]'
+                text: (quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128)) + '\n[image]: ' + imageDescription
               }
             ]
           }
