@@ -20,13 +20,13 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-const describeImage = async (image) => {
+const describeImage = async (image, language = 'en') => {
   const result = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [
       {
         role: 'system',
-        content: 'Please describe the image in a sentence.'
+        content: `Describe the image in ${language} language.`
       },
       {
         role: 'user',
@@ -524,9 +524,10 @@ ${messageForAIContext.map((message) =>
           const imageDescription = await describeImage([{
             type: 'image_url',
             image_url: {
-              url: `data:${mediaType};base64,${base64Data}`
+              url: `data:${mediaType};base64,${base64Data}`,
+              detail: 'low'
             }
-          }])
+          }], ctx.i18n.locale())
 
           userMessage = {
             role: 'user',
