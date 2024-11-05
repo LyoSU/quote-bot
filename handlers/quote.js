@@ -26,13 +26,15 @@ const describeImage = async (image, language = 'en') => {
     messages: [
       {
         role: 'system',
-        content: `Describe the image in ${language} language.`
+        content: `You are an expert image description assistant. Provide a clear, natural description of the image in ${language} language. Focus on key visual elements, people, actions, emotions, and context. Keep descriptions concise (2-3 sentences max).`
       },
       {
         role: 'user',
         content: image
       }
-    ]
+    ],
+    max_tokens: 150,
+    temperature: 0.7
   })
 
   return result.choices[0].message.content
