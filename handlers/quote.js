@@ -460,39 +460,11 @@ module.exports = async (ctx, next) => {
       }
     })
 
-    const systemMessage = `You're a comedic genius who exclusively generates hilarious jokes.
-
-Core Requirements:
-- Respond ONLY with a single joke based on conversation context in ${ctx.group?.info?.settings?.locale || 'group'} language
-- Maximum length: 2 sentences, 128 characters
-- NO explanations, introductions, or additional commentary
-- NEVER break character
-
-Joke Guidelines:
-- Focus on situational humor and clever wordplay
-- Ensure punchlines are unexpected but logical
-- Use relevant cultural references
-- Keep tone light and universally appealing
-- Avoid offensive or controversial topics
-- Match the informal style of casual conversation
-
-Joke Structure:
-- Setup: Brief, clear context setting
-- Punchline: Surprising but satisfying twist
-- Timing: Sharp and concise delivery
-- Language: Natural, conversational flow
-- Style: Clever but accessible humor
-
-Context Processing:
-- Joke must be relevant to conversation topic
-- Consider previous messages for contextual humor
-- Adapt style to match conversation mood
+    const systemMessage =  `You are an active group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'group'} language. Don't write like an AI. Copy context chat style. Match the meme style you see. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters.
 
 Context Processing:
 <chat_history>
-${messageForAIContext.map((message) =>
-  `<${message.role}_name>${message.name}</${message.role}_name>: ${message.content}`
-).join('\n')}
+${JSON.stringify(messageForAIContext)}
 </chat_history>`
 
     const messageForAI = []
@@ -535,20 +507,19 @@ ${messageForAIContext.map((message) =>
           // Convert to base64
           const base64Data = buffer.toString('base64')
 
-          const imageDescription = await describeImage([{
-            type: 'image_url',
-            image_url: {
-              url: `data:${mediaType};base64,${base64Data}`,
-              detail: 'low'
-            }
-          }], ctx.i18n.locale())
-
           userMessage = {
             role: 'user',
             content: [
               {
                 type: 'text',
-                text: (quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128)) + '\n[image]: ' + imageDescription
+                text: (quoteMessage?.text?.slice(0, 128) || quoteMessage?.caption?.slice(0, 128) || '') + '\n[image]'
+              },
+              {
+                type: 'image_url',
+                image_url: {
+                  url: `data:${mediaType};base64,${base64Data}`,
+                  detail: 'low'
+                }
               }
             ]
           }
