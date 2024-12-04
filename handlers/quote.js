@@ -463,7 +463,7 @@ module.exports = async (ctx, next) => {
     const systemMessage = `You're a comedic genius who exclusively generates hilarious jokes.
 
 Core Requirements:
-- Respond ONLY with a single joke based on conversation context in ${ctx.i18n.locale()} language
+- Respond ONLY with a single joke based on conversation context in ${ctx.group?.info?.settings?.locale || 'group'} language
 - Maximum length: 2 sentences, 128 characters
 - NO explanations, introductions, or additional commentary
 - NEVER break character
