@@ -565,17 +565,21 @@ ${messageForAIContext.map((message) =>
       messageForAI.push(userMessage)
     }
 
-    const completion = await anthropicClient.messages.create({
-      max_tokens: 64,
-      system: systemMessage,
-      messages: messageForAI,
-      model: 'claude-3-5-haiku-20241022',
-      temperature: 0.7,
-      top_p: 1
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        {
+          role: 'system',
+          content: systemMessage
+        },
+        ...messageForAI
+      ],
+      max_tokens: 150,
+      temperature: 0.7
     })
 
-    if (completion && completion.content) {
-      const message = completion.content[0].text
+    if (completion?.choices?.length > 0 && completion.choices[0].message?.content) {
+      const message = completion.choices[0].message.content
 
       quoteMessages.push({
         message_id: 1,
