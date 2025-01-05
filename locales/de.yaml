@@ -15,28 +15,21 @@ description:
 
     Fang jetzt an - leite einfach eine Nachricht weiter oder benutze /q!
 start: |
-  <b>✨ Erstellen Sie schöne Zitat-Sticker!</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Verwandeln Sie Chat-Nachrichten in elegante Sticker, atemberaubende Story-Karten und teilbare Kunstwerke.
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>🎨 Schauen Sie, was Sie erstellen können:</b>
-  • Bunte Farbverlaufszitate
-  • Konversationen mit mehreren Nachrichten
-  • Fotozitate mit Effekten
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>🚀 In 3 einfachen Schritten starten:</b>
-  1. Finden Sie eine beliebige Nachricht, die Ihnen gefällt
-  2. Antworten Sie mit <code>/q</code>
-  3. Ihr Zitat ist fertig zum Teilen!
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like 'blue' or 'red') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  <b>💫 Schnelle Ideen zum Ausprobieren:</b>
-  • Machen Sie ein pinkes Zitat: <code>/q pink</code>
-  • Ein Foto hinzufügen: <code>/q media</code>
-  • Zitat-Chat-Thread: <code>/q 3 r</code>
-
-  ✨ Probieren Sie es jetzt aus - suchen Sie eine Nachricht und antworten Sie mit /q!
-
-  Möchten Sie alle Funktionen erkunden? Geben Sie /help für eine kurze Anleitung ein 📚
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ QuotLyBot Schnellstart-Anleitung</b>
 
