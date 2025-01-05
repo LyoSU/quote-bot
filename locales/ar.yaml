@@ -6,55 +6,70 @@ description:
     ما عليك سوى الرد على الرسالة بـ /q أو إعادة توجيهها إلي.
   long: |
     هل لاحظت أي رسائل مضحكة أو ملهمة في محادثة مجموعتك ترغب في تخليدها؟ ما عليك سوى إعادة توجيهها لي أو كتابة /q وسأحولها إلى لاصق اقتباس أنيق يمكنك حفظه ومشاركته مع أصدقائك. سواء كانت لذكريات شخصية أم استخدام مهني، الإمكانيات لا حدود لها. جربني الآن! 😎
-help: |2
-  <b>مرحبا!</b>
-  سأساعد في إنشاء اقتباس من رسالة.
-  يمكن للروبوت العمل في الرسائل الخاصة والمجموعات.
+help: |
+  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
 
-    <b>⚙️ الأوامر المتاحة:</b>
-  /q — يصنع اقتباسًا من الرسالة <i>[الرد على الرسالة]</i>
+  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
 
-  لإنشاء اقتباس من عدة رسائل، اكتب كمعامل عدد سيشير إلى عدد الرسائل التي يجب أن تكون في الاقتباس.
-  في الرسائل الخاصة، يمكنك إعادة إرسال عدة رسائل لي وسأقوم بإنشاء اقتباس منها.
+  <b>🎯 Basic Usage:</b>
 
-    <b>العلامات المتاحة لأمر الـ /q:</b>
-      hex code أو اسم اللون: <code>#cbafff</code> أو <code>indigo</code> — اصنع اقتباس بلون <b>#cbafff</b>
-      <code>random</code> — لون اقتباس عشوائي
-      <code>reply</code> أو <code>r</code> — اصنع اقتباس مع حفظ الردود
-      <code>p</code> أو <code>png</code> — اصنع PNG اقتباس
-      <code>i</code> أو <code>img</code> — اصنع اقتباس كصورة
-      <code>rate</code> — أضف تقييمًا للاقتباس
-      <code>m</code> أو <code>media</code> — اضمن الوسائط
-      <code>c</code> أو <code>crop</code> — اقتصر في الوسائط
-      <code>s2.5</code> — جودة الصورة أعلى بمعدل 2.5 مرة من القياسي <i>(يمكن تحديد أي قيمة)</i>
+  • Single message: reply to it with <code>/q</code>
+  • Multiple messages: add a number, like <code>/q 3</code>
+  • In private chats: simply forward messages to me
 
-    <b>مثال على استخدام العلامات:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Quote Customization:</b>
 
-  فقط للمسؤولين:
-  <code>/qs 🥰💜</code> — يحفظ ملصقًا / صورة / وثيقة بصورة في حزمة ملصقات لمجموعة مع إيموجي 🥰💜 <i>(يمكن أن يكون إيموجي أي وأي عدد)</i> <i>[الرد على الرسالة]</i>
-  <code>/qd</code> — يزيل الملصق من حزمة ملصقات المجموعة <i>[ردًا على الرسالة]</i>
-  <code>/qdrand</code> — يزيل الملصق من ملصقات المجموعة بشكل عشوائي <i>[ردًا على الرسالة]</i>
-  <code>/qb</code> — تعيين علامة تجارية إيموجي. متوفر: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — تعيين لون الاقتباسات <b>الأخضر</b> افتراضيًا <i>(hex code أو اسم اللون)</i>
-  <code>/qemoji</code> — تغيير لاحقة الإيموجي للملصقات
-  <code>/qrate</code> — تمكين / تعطيل تقييم الاقتباسات
-  <code>/qgab 300</code> — تعيين فرصة حدوث عشوائي لاقتباس. أي رقم من واحد إلى اللانهاية. كلما زاد الرقم، انخفضت فرصة ظهور الاقتباسات. من خلال تحديد 300، ستكون فرصة ظهور الرسالة تقريبًا مرة واحدة في 300 رسالة. لتعطيله، ضع القيمة بصفر
+  <b>1. Color:</b>
+  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Custom color: <code>/q #cbafff</code>
+  • Random color: <code>/q random</code>
 
-  /qrand — اقتباس عشوائي بتقييم إيجابي
-  /qtop — أعلى اقتباسات المجموعة
+  <b>2. Appearance:</b>
+  • Image instead of sticker: add <code>img</code>
+  • High quality: add <code>png</code>
+  • Preserve conversation: add <code>reply</code>
 
-  /help or /start — احصل على هذا النص
+  <b>3. Media:</b>
+  • Include photo/sticker: add <code>media</code>
 
-  /lang — تغيير اللغة
+  <b>4. Quality:</b>
+  Add <code>s</code> and a number for enhanced quality:
+  • <code>s2</code> - 2x quality
+  • <code>s3</code> - 3x quality
 
-  <b>☕️ اشتر قهوة للمطور:</b> /donate
+  <b>💫 Useful Combinations:</b>
 
-  <b>👨🏻‍💻 مدونة المطور:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Beautiful quote with photo:
+  <code>/q 2 red media</code> - red quote with 2 messages and photo
+
+  • High-quality conversation screenshot:
+  <code>/q 3 reply png</code> - 3-message dialog in PNG
+
+  • Stylish colored quote:
+  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+
+  <b>🌟 Special Features:</b>
+
+  • Quote rating: add <code>rate</code> to enable voting
+  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+
+  <b>👨‍💼 Admin Commands:</b>
+
+  • <code>/qcolor</code> - set default group color
+  • <code>/qrate</code> - enable rating system
+  • <code>/qgab</code> - configure random quote appearance
+  • <code>/qs</code> - save to group sticker pack
+
+  <b>🌐 Other Commands:</b>
+
+  • <code>/lang</code> - change language
+  • <code>/donate</code> - support the developer
+
+  <b>📱 Contact Us:</b>
+  • Developer's Blog: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>مرحبًا!</b>
   سأقوم بإنشاء علامات اقتباس في المجموعة باستخدام الأمر /q ردًا على الرسالة
