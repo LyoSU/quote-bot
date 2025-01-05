@@ -14,6 +14,22 @@ description:
     ✍️ Muhim eslatmalar go'zal formatda
 
     Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
+start: |
+  <b>Salom! 👋 Men QuotLyBot</b>
+
+  Men sizga sevimli chat lahzalaringizni chiroyli iqtibos stikerlariga aylantirib ulashishda yordam beraman. Oddiy, shaxsiy va foydalanish uchun qulay!
+
+  <b>Birinchi iqtibosingizni yaratishga tayyormisiz?</b>
+  Sizga yoqadigan har qanday xabarni toping va <code>/q</code> ni javob sifatida yuboring - men uni maxsus narsaga aylantiraman ✨
+
+  <b>✨ Pro Maslahatlar:</b>
+  • Tezda uslubni qo‘llash uchun har qanday rang nomini (masalan, 'ko‘k' yoki 'qizil') yozing
+  • Xabar suratini qo‘shish uchun <code>media</code> qo‘shing
+  • Butun suhbatni iqtiboslash uchun <code>/q 3</code> dan foydalaning
+  • Qaysi xabar iqtiboslanayotganini ko‘rsatish uchun <code>r</code> qo‘shing
+  • Mukammal emasmi? Yana qayta yaratish uchun shunchaki <code>/q</code> ni javob sifatida yuboring
+
+  Yaratuvchanlik imkoniyatlarini kashf qilishga tayyor bo‘lsangiz, /help ni kiriting! 🎨
 help: |
   <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
 

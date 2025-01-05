@@ -14,6 +14,22 @@ description:
     ✍️ Ważne notatki w pięknym formacie
 
     Zacznij teraz - wystarczy przesłać wiadomość lub użyć /q!
+start: |
+  <b>Cześć! 👋 Jestem QuotLyBot</b>
+
+  Pomogę Ci uchwycić i udostępnić Twoje ulubione chwile z czata jako piękne cytowanie naklejek. Prosty, prywatny i przyjemny w użyciu!
+
+  <b>Gotowy na stworzenie pierwszego cytatu?</b>
+  Wystarczy znaleźć dowolną wiadomość, która Ci się podoba, i odpowiedzieć z <code>/q</code> - zamienię ją w coś wyjątkowego ✨
+
+  <b>✨ Pro Tips:</b>
+  • Wpisz dowolną nazwę koloru (np. 'niebieski' lub 'czerwony') dla natychmiastowego stylu
+  • Dodaj <code>media</code>, aby dołączyć zdjęcie wiadomości
+  • Użyj <code>/q 3</code>, aby zacytować całą rozmowę
+  • Dodaj <code>r</code>, aby pokazać, którą wiadomość cytujesz
+  • Nie idealny? Po prostu odpowiedz <code>/q</code> ponownie, aby to zrobić jeszcze raz
+
+  Napisz /help, gdy będziesz gotowy, aby odkryć wszystkie kreatywne możliwości! 🎨
 help: |
   <b>✨ Krótki przewodnik QuotLyBot</b>
 

@@ -14,6 +14,22 @@ description:
     ✍️ Güzel formatta önemli notlar
 
     Hemen başlayın - sadece bir mesaj yönlendirin veya /q kullanın!
+start: |
+  <b>Merhaba! 👋 Ben QuotLyBot</b>
+
+  Favori sohbet anlarınızı güzel alıntı çıkartmaları olarak yakalamanıza ve paylaşmanıza yardımcı oluyorum. Basit, özel ve kullanımı eğlenceli!
+
+  <b>İlk alıntınızı yaratmaya hazır mısınız?</b>
+  Beğendiğiniz herhangi bir mesaj bulun ve <code>/q</code> ile yanıtlayın - onu özel bir şeye dönüştüreyim ✨
+
+  <b>✨ Profesyonel İpuçları:</b>
+  • Anında stil için herhangi bir renk ismi yazın ("mavi" veya "kırmızı" gibi)
+  • Mesajın fotoğrafını eklemek için <code>media</code> ekleyin
+  • Tüm bir konuşmayı alıntılamak için <code>/q 3</code> kullanın
+  • Hangi mesajın alıntılandığını göstermek için <code>r</code> ekleyin
+  • Kusursuz değil mi? Yalnızca <code>/q</code> yanıtlayarak tekrar yapın
+
+  Tüm yaratıcı olasılıkları keşfetmeye hazır olduğunuzda /help yazın! 🎨
 help: |
   <b>✨ QuotLyBot Hızlı Rehber</b>
 

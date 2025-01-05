@@ -14,6 +14,22 @@ description:
     ✍️ Belangrijke notities in een mooie vorm
 
     Begin nu - stuur een bericht door of gebruik /q!
+start: |
+  <b>Hoi! 👋 Ik ben QuotLyBot</b>
+
+  Ik help je favoriete chatmomenten vast te leggen en te delen als mooie citaatstickers. Eenvoudig, privé en leuk om te gebruiken!
+
+  <b>Klaar om je eerste citaat te maken?</b>
+  Zoek gewoon een bericht dat je leuk vindt en antwoord met <code>/q</code> - ik maak er iets bijzonders van ✨
+
+  <b>✨ Pro Tips:</b>
+  • Typ een kleurnaam (zoals 'blauw' of 'rood') voor een instant stijl
+  • Voeg <code>media</code> toe om de foto van het bericht op te nemen
+  • Gebruik <code>/q 3</code> om een hele conversatie te citeren
+  • Voeg <code>r</code> toe om te laten zien welk bericht wordt geciteerd
+  • Niet perfect? Antwoord gewoon nog een keer met <code>/q</code> om het opnieuw te maken
+
+  Typ /help wanneer je klaar bent om alle creatieve mogelijkheden te ontdekken! 🎨
 help: |
   <b>✨ QuotLyBot Snelle Gids</b>
 

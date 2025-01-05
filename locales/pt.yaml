@@ -14,6 +14,22 @@ description:
     ✍️ Notas importantes em formato bonito
 
     Comece agora - basta encaminhar uma mensagem ou usar /q!
+start: |
+  <b>Oi! 👋 Eu sou o QuotLyBot</b>
+
+  Eu ajudo você a capturar e compartilhar seus momentos favoritos do chat como lindos adesivos de citação. Simples, privado e divertido de usar!
+
+  <b>Pronto para criar sua primeira citação?</b>
+  Basta encontrar qualquer mensagem que você goste e responder com <code>/q</code> - Eu transformarei isso em algo especial ✨
+
+  <b>✨ Dicas Pro:</b>
+  • Digite o nome de qualquer cor (como 'azul' ou 'vermelho') para um estilo instantâneo
+  • Adicione <code>media</code> para incluir a foto da mensagem
+  • Use <code>/q 3</code> para citar toda uma conversa
+  • Adicione <code>r</code> para mostrar qual mensagem está sendo citada
+  • Não ficou perfeito? Basta responder <code>/q</code> novamente para refazê-lo
+
+  Digite /help quando estiver pronto para descobrir todas as possibilidades criativas! 🎨
 help: |
   <b>✨ Guia Rápido do QuotLyBot</b>
 

@@ -14,6 +14,22 @@ description:
     ✍️ Notes importantes dans un format magnifique
 
     Commencez maintenant - transférez simplement un message ou utilisez /q !
+start: |
+  <b>Salut ! 👋 Je suis QuotLyBot</b>
+
+  Je vous aide à capturer et partager vos moments de discussion préférés sous forme de magnifiques autocollants de citation. Simple, privé et amusant à utiliser !
+
+  <b>Prêt à créer votre première citation ?</b>
+  Trouvez simplement n'importe quel message que vous aimez et répondez avec <code>/q</code> - je le transformerai en quelque chose de spécial ✨
+
+  <b>✨ Conseils Pro :</b>
+  • Tapez n'importe quel nom de couleur (comme 'bleu' ou 'rouge') pour un style instantané
+  • Ajoutez <code>media</code> pour inclure la photo du message
+  • Utilisez <code>/q 3</code> pour citer une conversation entière
+  • Ajoutez <code>r</code> pour montrer quel message est cité
+  • Pas parfait ? Répondez simplement <code>/q</code> à nouveau pour le refaire
+
+  Tapez /help quand vous êtes prêt à découvrir toutes les possibilités créatives ! 🎨
 help: |
   <b>✨ Guide Rapide QuotLyBot</b>
 

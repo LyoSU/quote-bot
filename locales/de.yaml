@@ -14,6 +14,22 @@ description:
     ✍️ Wichtigen Notizen im schönen Format
 
     Fang jetzt an - leite einfach eine Nachricht weiter oder benutze /q!
+start: |
+  <b>Hi! 👋 Ich bin QuotLyBot</b>
+
+  Ich helfe Ihnen, Ihre Lieblingschats als schöne Zitatsticker festzuhalten und zu teilen. Einfach, privat und macht Spaß!
+
+  <b>Sind Sie bereit, Ihr erstes Zitat zu erstellen?</b>
+  Suchen Sie einfach eine Nachricht, die Ihnen gefällt, und antworten Sie mit <code>/q</code> - Ich mache daraus etwas Besonderes ✨
+
+  <b>✨ Profi-Tipps:</b>
+  • Geben Sie einen Farbnamen ein (wie 'blau' oder 'rot') für einen sofortigen Stil
+  • Fügen Sie <code>media</code> hinzu, um das Foto der Nachricht einzuschließen
+  • Verwenden Sie <code>/q 3</code>, um eine ganze Konversation zu zitieren
+  • Fügen Sie <code>r</code> hinzu, um anzuzeigen, welche Nachricht zitiert wird
+  • Nicht perfekt? Antworten Sie einfach erneut mit <code>/q</code>, um es nochmals zu erstellen
+
+  Geben Sie /help ein, wenn Sie bereit sind, alle kreativen Möglichkeiten zu entdecken! 🎨
 help: |
   <b>✨ QuotLyBot Schnellstart-Anleitung</b>
 

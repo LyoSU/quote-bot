@@ -14,6 +14,22 @@ description:
     ✍️ Gözəl formatda vacib qeydlər
 
     İndi başlayın - sadəcə mesajı yönləndirin və ya /q istifadə edin!
+start: |
+  <b>Salam! 👋 Mən QuotLyBot</b>
+
+  Mən sizə ən sevdiyiniz söhbət anlarını gözəl sitat stikerləri kimi tutmağa və paylaşmağa kömək edirəm. Sadədir, məxfidir və istifadə etmək əyləncəlidir!
+
+  <b>İlk sitatınızı yaratmağa hazırsınız?</b>
+  Sadəcə bəyəndiyiniz hər hansı mesajı tapın və <code>/q</code> ilə cavab verin - Mən onu xüsusi bir şeyə çevirəcəyəm ✨
+
+  <b>✨ Peşəkar Məsləhətlər:</b>
+  • Ani üslub üçün hər hansı bir rəng adını (məsələn, 'göy' və ya 'qırmızı') yazın
+  • Mesajın şəklini daxil etmək üçün <code>media</code> əlavə edin
+  • Bütün söhbəti sitat gətirmək üçün <code>/q 3</code> istifadə edin
+  • Hangi mesajın sitatlandığını göstərmək üçün <code>r</code> əlavə edin
+  • Mükəmməl deyil? Yenidən yaratmaq üçün <code>/q</code> ilə yenidən cavab verin
+
+  Bütün yaradıcı imkanları kəşf etməyə hazır olduğunuzda, /help yazın! 🎨
 help: |
   <b>✨ QuotLyBot Tez Təlimat</b>
 
