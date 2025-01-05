@@ -2,196 +2,196 @@
 language_name: '🇯🇵 日本人'
 description:
   short: |
-    Turn any message into a beautiful quote sticker! ✨
-    Reply with /q or forward the message to me
+    メッセージを美しい引用ステッカーに変えましょう！✨
+    /qで返信するか、メッセージを転送してください
   long: |
-    Create stunning quote stickers and preserve your favorite chat moments! ✨
+    驚くほど美しい引用ステッカーを作成して、お気に入りのチャットの瞬間を保存しましょう！✨
 
-    Simply reply /q to any message or forward it to me. Perfect for saving:
-    🌟 Best chat highlights and memories
-    💭 Inspiring thoughts and conversations
-    🎨 Creative messages with custom styles
-    ✍️ Important notes in beautiful format
+    どんなメッセージにも/qで返信するか、転送してください。以下に最適:
+    🌟 チャットのハイライトや思い出
+    💭 心に残る思いや会話
+    🎨 カスタムスタイルのクリエイティブなメッセージ
+    ✍️ 美しい形式の重要なメモ
 
-    Get started now - just forward a message or use /q!
+    今すぐ始めましょう - メッセージを転送するか、/qを使って！
 help: |
-  <b>✨ QuotLyBot Quick Guide</b>
+  <b>✨ QuotLyBot クイックガイド</b>
 
-  <b>📱 Basic Commands</b>
-  • <code>/q</code> - Quote replied message
-  • <code>/q 3</code> - Quote several messages
-  • Forward message - Quote directly
+  <b>📱 基本コマンド</b>
+  • <code>/q</code> - 引用返信メッセージ
+  • <code>/q 3</code> - 複数メッセージを引用
+  • メッセージを転送 - ダイレクト引用
 
-  <b>🎨 Styles</b>
+  <b>🎨 スタイル</b>
 
-  Colors:
-  • Basic: <code>/q red</code>
-  • Custom: <code>/q #ff69b4</code>
-  • Gradient: <code>/q red//#blue</code>
-  • Random: <code>/q random</code>
+  色:
+  • ベーシック: <code>/q red</code>
+  • カスタム: <code>/q #ff69b4</code>
+  • グラデーション: <code>/q red//#blue</code>
+  • ランダム: <code>/q random</code>
 
-  Media:
-  • Add photo: <code>/q media</code>
-  • Crop image: <code>/q crop</code>
-  • Keep thread: <code>/q reply</code>
-  • Voice preview: Automatic
+  メディア:
+  • 写真を追加: <code>/q media</code>
+  • 画像をトリミング: <code>/q crop</code>
+  • スレッドを保持: <code>/q reply</code>
+  • ボイスプレビュー: 自動
 
-  Format:
-  • Sticker: <code>/q</code>
-  • Image: <code>/q img</code>
+  フォーマット:
+  • ステッカー: <code>/q</code>
+  • 画像: <code>/q img</code>
   • HD: <code>/q png</code>
-  • Story: <code>/q stories</code>
+  • ストーリー: <code>/q stories</code>
 
-  Quality:
-  • Normal: <code>/q</code>
+  品質:
+  • ノーマル: <code>/q</code>
   • 2x: <code>/q s2</code>
   • 3x: <code>/q s3</code>
 
-  <b>💫 Popular Combinations</b>
-  • <code>/q red media</code> - Red quote with photo
-  • <code>/q 3 reply</code> - Quote with context
-  • <code>/q img s2</code> - High-quality image
-  • <code>/q stories media</code> - Story with photo
+  <b>💫 人気の組み合わせ</b>
+  • <code>/q red media</code> - 赤引用と写真
+  • <code>/q 3 reply</code> - コンテキストで引用
+  • <code>/q img s2</code> - 高画質画像
+  • <code>/q stories media</code> - ストーリーと写真
 
-  <b>⚙️ Extra Features</b>
-  • Rating: <code>/q rate</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
-  • Language: <code>/lang</code>
+  <b>⚙️ 追加機能</b>
+  • レーティング: <code>/q rate</code>
+  • ランダム引用: <code>/qrand</code>
+  • トップ引用: <code>/qtop</code>
+  • 言語: <code>/lang</code>
 
-  <b>🎯 Group Settings</b>
-  • Default color: <code>/qcolor</code>
-  • Enable rating: <code>/qrate</code>
-  • Save to pack: <code>/qs</code>
+  <b>🎯 グループ設定</b>
+  • デフォルト色: <code>/qcolor</code>
+  • レーティングを有効にする: <code>/qrate</code>
+  • パックに保存: <code>/qs</code>
 
-  <b>🌈 Emoji Styles</b>
-  Classic: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  <b>🌈 絵文字スタイル</b>
+  クラシック: <code>/qb apple</code>, <code>/qb google</code>
+  代替: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  レトロ: <code>/qb blob</code>
 
-  <b>📱 Need Help?</b>
-  • Blog: @LyBlog
+  <b>📱 ヘルプが必要ですか?</b>
+  • ブログ: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
-  • Support: <code>/donate</code>
+  • サポート: <code>/donate</code>
 help_group: |
-  <b>Hello! 👋</b>
-  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
+  <b>こんにちは！👋</b>
+  このグループで美しい引用を作成します。どんなメッセージにも<code>/q</code>を使って返信してください！
 
-  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
+  プライベートで全機能を学びましょう: <a href="t.me/${username}?start=help">ヘルプを取得</a> ✨
 btn:
   add_group: グループに追加：
   help: ヘルプ
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
+    申し訳ありませんが、このメッセージタイプはまだサポートしていません 😅
 
-    Try text, photos, stickers, or voice messages!
+    テキスト、写真、ステッカー、ボイスメッセージを試してみてください！
   api_error: |
-    <b>Oops! Something went wrong 😅</b>
+    <b>おっと！何かがうまくいかなかったようです 😅</b>
     <pre>${error}</pre>
-    Please try again in a moment!
+    もう一度試してみてください！
   empty_forward: |
-    Please reply to or forward the message you'd like to quote ✨
+    引用したいメッセージに返信するか、転送してください ✨
   set_background_color: |
-    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
+    <b>完璧です!</b> 引用背景が変更されました: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
+    <b>完了!</b> 絵文字スタイルが変更されました: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
+    suc: 正常に<a href="${link}">グループステッカーパック</a>に追加されました ✨
     error:
-      animated: Sorry, I can't save animated stickers yet 😅
-      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
-      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
+      animated: 申し訳ないですが、アニメーションステッカーはまだ保存できません 😅
+      need_creator: <b>もう少し!</b> まず最初に${creator}が私にメッセージを送る必要があります
+      telegram: <b>おっと！</b> 何かがうまくいかなかったようです:\n<pre>${error}</pre>
   delete:
-    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    suc: <a href="${link}">グループステッカーパック</a>から削除されました 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+      telegram: <b>おっと！</b> ステッカーを削除できませんでした:\n<pre>${error}</pre>
     btn:
-      save_sticker: Save Sticker
+      save_sticker: ステッカーを保存
   delete_random:
-    suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    suc: ランダムなコレクションから削除されました 🗑
+    error: <b>おっと！</b> ステッカーを削除できませんでした:\n<pre>${error}</pre>
   empty_forward: |
-    Please reply to a sticker, photo, or image you'd like to save ✨
+    保存したいステッカー、写真、画像に返信してください ✨
   fstik: |
-    To save this to your personal sticker pack, forward to @fStikBot 🎨
+    個人用ステッカーパックに保存するには、@fStikBot に転送してください 🎨
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      あなたはこの引用を${rateName}しました！評価ありがとうございます ⭐
     back: |
-      Your vote has been removed 🔄
+      あなたの投票は削除されました 🔄
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      引用評価が有効になりました！⭐で評価してください
     disable: |
-      Quote rating has been disabled 🔄
+      引用評価が無効になりました 🔄
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    このグループにはまだ高評価の引用はありません！いくつかのメッセージを評価し始めてください ⭐
   gab: |
-    Random quote frequency set to ${gab} ✨
+    ランダム引用の頻度が${gab}に設定されました ✨
 hidden:
   settings:
     enable: |
-      Sender search enabled 🔍
+      送信者検索が有効になります 🔍
     disable: |
-      Sender search disabled 🔄
+      送信者検索は無効になっています 🔄
 privacy:
   settings:
     enable: |
-      Privacy mode activated 🔒 Your info will be hidden in quotes
+      プライバシーモードが有効になりました 🔒 引用からあなたの情報が隠されます
     disable: |
-      Privacy mode deactivated 🔓
+      プライバシーモードは無効になっています 🔓
 top:
   info: |
-    <b>✨ Top Quoted Messages</b>
-  open: View Top Quotes
+    <b>✨ トップ引用メッセージ</b>
+  open: トップ引用を見る
 donate:
   info: |
-    <b>Support QuotLyBot's Development! ☕</b>
+    <b>QuotLyBotの開発をサポートしよう！☕</b>
 
-    Your support helps us:
-    • Keep the servers running 24/7
-    • Add new features and styles
-    • Improve quote quality
-    • Make the bot faster
+    あなたのサポートで私たちが:
+    • サーバーを24/7稼働で維持
+    • 新機能とスタイルを追加
+    • 引用の品質を向上
+    • ボットを高速化
 
-    <b>💳 Easy Payment Options</b>
-    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    <b>💳 簡単な支払いオプション</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">カード支払い</a> (Visa/Mastercard)
     • Apple Pay / Google Pay
 
-    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    <b>🔒 暗号通貨 (技術の得意な方向け)</b>
     • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
 
-    Every contribution helps make QuotLyBot better for everyone! 💜
-  title: Support ${botUsername}
-  description: Help keep the magic going ✨
+    すべての貢献はQuotLyBotをより良くする手助けになります！💜
+  title: '${botUsername}をサポート'
+  description: 魔法を持続させる手助けを ✨
   successful: |
-    <b>Thank you for your support! 💜</b>
-    You're helping make QuotLyBot even better!
+    <b>サポートありがとうございます！💜</b>
+    QuotLyBotのさらなる進化を支援いただけて嬉しいです！
   pay: '💜 ペイテレグラム'
-  liqpay: 'Pay with Card 💳'
-  other: 'Other Options'
+  liqpay: 'カードで支払う 💳'
+  other: '他の方法'
 emoji:
   info: |
-    <b>Choose Your Quote Emoji!</b>
+    <b>引用絵文字を選ぼう！</b>
 
-    • Set custom emoji: <code>/qemoji</code>💜
-    • Use random emoji: <code>/qemoji random</code>
-    • Clear emoji: <code>/qemoji clear</code>
+    • カスタム絵文字を設定: <code>/qemoji</code>💜
+    • ランダム絵文字を使用: <code>/qemoji random</code>
+    • 絵文字をクリア: <code>/qemoji clear</code>
 
-    Your emoji will be added to all new quotes ✨
-  done: Emoji style updated! ✨
+    新しい引用に絵文字が追加されます ✨
+  done: 絵文字スタイルが更新されました！✨
 only_admin: |
-  <b>⚠️ Admin Access Needed</b>
-  This command can only be used by group administrators.
+  <b>⚠️ 管理者アクセスが必要です</b>
+  このコマンドはグループ管理者のみが使用できます。
 only_group: |
-  <b>⚠️ Group Command</b>
-  This feature works in group chats only.
+  <b>⚠️ グループコマンド</b>
+  この機能はグループチャットでのみ動作します。
 rate_limit: |
-  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+  <i>ちょっとしたブレイク...</i> このコマンドは${seconds}秒後に再度使用できます ⏳
 
-  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+  <i>プロのヒント: 待機中に、最後の引用をカスタマイズするのに </i><code>/q color</code> <i>または</i> <code>/q media</code>をお試しください
