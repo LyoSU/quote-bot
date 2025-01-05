@@ -7,68 +7,68 @@ description:
   long: |
     グループチャットで不滅にしたい面白いメッセージや感動的なメッセージに気づいたことはありませんか？ 私にそれらを転送するか、/q と入力するだけで、私はそれらをあなたの友人と保存し、共有することができる洗練された引用ステッカーにします。 個人的な思い出のためでも、プロの使用のためでも、可能性は無限大です。今すぐ試してみてください！😎
 help: |
-  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
+  <b>📝 こんにちは！私は美しい引用を作成するためのボットです</b>
 
-  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
+  <i>重要なチャットの瞬間を保存するために、任意のメッセージを魅力的な引用に変えることができます。私はプライベートメッセージとグループの両方で動作します！</i>
 
-  <b>🎯 Basic Usage:</b>
+  <b>🎯 基本の使い方:</b>
 
-  • Single message: reply to it with <code>/q</code>
-  • Multiple messages: add a number, like <code>/q 3</code>
-  • In private chats: simply forward messages to me
+  • 単一メッセージ: そのメッセージに<code>/q</code>で返信
+  • 複数メッセージ: 数字を追加, 例: <code>/q 3</code>
+  • プライベートチャット: メッセージを私に転送するだけ
 
-  <b>🎨 Quote Customization:</b>
+  <b>🎨 引用のカスタマイズ:</b>
 
-  <b>1. Color:</b>
-  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Custom color: <code>/q #cbafff</code>
-  • Random color: <code>/q random</code>
+  <b>1. 色:</b>
+  • 名前: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • カスタムカラー: <code>/q #cbafff</code>
+  • ランダムカラー: <code>/q random</code>
 
-  <b>2. Appearance:</b>
-  • Image instead of sticker: add <code>img</code>
-  • High quality: add <code>png</code>
-  • Preserve conversation: add <code>reply</code>
+  <b>2. 外観:</b>
+  • ステッカーの代わりに画像: <code>img</code>を追加
+  • 高品質: <code>png</code>を追加
+  • 会話を保存: <code>reply</code>を追加
 
-  <b>3. Media:</b>
-  • Include photo/sticker: add <code>media</code>
+  <b>3. メディア:</b>
+  • 写真/ステッカーを含む: <code>media</code>を追加
 
-  <b>4. Quality:</b>
-  Add <code>s</code> and a number for enhanced quality:
-  • <code>s2</code> - 2x quality
-  • <code>s3</code> - 3x quality
+  <b>4. 品質:</b>
+  品質を高めるために<code>s</code>と数字を追加:
+  • <code>s2</code> - 2x品質
+  • <code>s3</code> - 3x品質
 
-  <b>💫 Useful Combinations:</b>
+  <b>💫 便利な組み合わせ:</b>
 
-  • Beautiful quote with photo:
-  <code>/q 2 red media</code> - red quote with 2 messages and photo
+  • 写真付きの美しい引用:
+  <code>/q 2 red media</code> - 2メッセージと写真付きの赤い引用
 
-  • High-quality conversation screenshot:
-  <code>/q 3 reply png</code> - 3-message dialog in PNG
+  • 高品質の会話スクリーンショット:
+  <code>/q 3 reply png</code> - PNG形式で3メッセージのダイアログ
 
-  • Stylish colored quote:
-  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+  • スタイリッシュなカラフル引用:
+  <code>/q #ff69b4 img s2</code> - 高品質のピンクの引用
 
-  <b>🌟 Special Features:</b>
+  <b>🌟 特別機能:</b>
 
-  • Quote rating: add <code>rate</code> to enable voting
-  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
+  • 引用の評価: <code>rate</code>で投票を有効化
+  • 絵文字スタイル: <code>/qb apple</code> または <code>/qb google</code>
+  • ランダム引用: <code>/qrand</code>
+  • トップ引用: <code>/qtop</code>
 
-  <b>👨‍💼 Admin Commands:</b>
+  <b>👨‍💼 管理者コマンド:</b>
 
-  • <code>/qcolor</code> - set default group color
-  • <code>/qrate</code> - enable rating system
-  • <code>/qgab</code> - configure random quote appearance
-  • <code>/qs</code> - save to group sticker pack
+  • <code>/qcolor</code> - デフォルトのグループカラーを設定
+  • <code>/qrate</code> - 評価システムを有効化
+  • <code>/qgab</code> - ランダム引用の外観を設定
+  • <code>/qs</code> - グループステッカーパックに保存
 
-  <b>🌐 Other Commands:</b>
+  <b>🌐 その他のコマンド:</b>
 
-  • <code>/lang</code> - change language
-  • <code>/donate</code> - support the developer
+  • <code>/lang</code> - 言語を変更
+  • <code>/donate</code> - 開発者をサポート
 
-  <b>📱 Contact Us:</b>
-  • Developer's Blog: @LyBlog
+  <b>📱 お問い合わせ:</b>
+  • 開発者のブログ: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>こんにちは！</b>
