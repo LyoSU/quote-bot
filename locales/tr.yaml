@@ -6,55 +6,70 @@ description:
     Mesajı /q ile yanıtlayın veya bana iletin.
   long: |
 
-help: |2
-  <b>Merhaba!</b>
-  Bir alıntı oluşturmak için yardımcı olacağım.
-  Bot hem özel mesajlarda hem de gruplarda çalışabilir.
+help: |
+  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
 
-    <b>⚙️ Kullanılabilir komutlar:</b>
-  /q — mesajdan alıntı yap <i>[mesaja cevap ver]</i>
+  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
 
-  Birden fazla mesajdan alıntı yapmak için, alıntıda kaç mesaj olması gerektiğini belirten bir sayı olarak yazın.
-  Özel mesajlarda birkaç mesajı birden bana iletin ve onlardan bir alıntı yapayım.
+  <b>🎯 Basic Usage:</b>
 
-    <b>/q komutu için kullanılabilir bayraklar:</b>
-      hex kodu veya renk adı: <code>#cbafff</code> veya <code>indigo</code> — rengi <b>#cbafff</b> olan bir alıntı yap
-      <code>rastgele</code> —rastgele alıntı rengi
-      <code>cevap</code> veya <code>c</code> — cevapları kaydederek bir alıntı yap
-      <code>p</code> veya <code>png</code> — PNG alıntı yap
-      <code>i</code> veya <code>img</code> — bir resim olarak bir alıntı yap
-      <code>puan</code> — bir alıntıya puan ekle
-      <code>m</code> veya <code>medya</code> — medyayı dahil et
-      <code>k</code> veya <code>kırp</code> — medyayı kırp
-      <code>s2.5</code> — resim kalitesi standarttan 2.5 kat daha yüksektir <i>(herhangi bir değer belirlenebilir)</i>
+  • Single message: reply to it with <code>/q</code>
+  • Multiple messages: add a number, like <code>/q 3</code>
+  • In private chats: simply forward messages to me
 
-    <b>Bayrakların kullanım örneği:</b>
-    <code>/q 3 beyaz rp</code>
-    <code>/q i kırmızı s3.2</code>
-    <code>/q c 2 #cbafff m</code>
-    <code>/q 5 rastgele</code>
+  <b>🎨 Quote Customization:</b>
 
-  Yalnızca yöneticiler için:
-  <code>/qs 🥰💜</code> — emoji 🥰💜 ile bir grubun etiket paketine bir çıkartma/fotoğraf/döküman kaydeder <i>(emoji herhangi bir sayıda olabilir)</i> <i>[mesaja cevap ver]</i>
-  <code>/qd</code> — grubun etiket paketinden çıkartmayı kaldırır <i>[mesaja cevap ver]</i>
-  <code>/qdrand</code> — grubun rastgele çıkartmalarından birini kaldırır <i>[mesaja cevap ver]</i>
-  <code>/qb</code> — emoji markası belirle. Mevcut: <code>elma</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qrenk yeşil</code> — alıntıların rengini varsayılan olarak <b>yeşil</b> yap <i>(hex kodu veya renk adı)</i>
-  <code>/qemojisi</code> — çıkartmalar için emoji sonekini değiştir
-  <code>/qpuan</code> — alıntılara puan ekleyerek devre dışı bırak/aç
-  <code>/qgab 300</code> — rastgele bir alıntının rastgele bir şekilde görünme olasılığını ayarlar. Bir ile sonsuz arasında herhangi bir sayı. Sayı ne kadar yüksek olursa, alıntıların görünme olasılığı o kadar düşer. 300 belirterek, bir mesajın görünme olasılığının yaklaşık olarak 300 mesajda bir olmasını sağlar. Devre dışı bırakmak için değeri 0 olarak ayarlayın
+  <b>1. Color:</b>
+  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Custom color: <code>/q #cbafff</code>
+  • Random color: <code>/q random</code>
 
-  /qrand — pozitif bir puan alıntısı rastgele bir alıntı
-  /qtop — en iyi grup alıntıları
+  <b>2. Appearance:</b>
+  • Image instead of sticker: add <code>img</code>
+  • High quality: add <code>png</code>
+  • Preserve conversation: add <code>reply</code>
 
-  /yardım veya /başla — bu metni al
+  <b>3. Media:</b>
+  • Include photo/sticker: add <code>media</code>
 
-  /dil — dili değiştir
+  <b>4. Quality:</b>
+  Add <code>s</code> and a number for enhanced quality:
+  • <code>s2</code> - 2x quality
+  • <code>s3</code> - 3x quality
 
-  <b>☕️ Geliştiriciye kahve al:</b> /donate
+  <b>💫 Useful Combinations:</b>
 
-  <b>👨🏻‍💻 Geliştirici blogu:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Beautiful quote with photo:
+  <code>/q 2 red media</code> - red quote with 2 messages and photo
+
+  • High-quality conversation screenshot:
+  <code>/q 3 reply png</code> - 3-message dialog in PNG
+
+  • Stylish colored quote:
+  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+
+  <b>🌟 Special Features:</b>
+
+  • Quote rating: add <code>rate</code> to enable voting
+  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+
+  <b>👨‍💼 Admin Commands:</b>
+
+  • <code>/qcolor</code> - set default group color
+  • <code>/qrate</code> - enable rating system
+  • <code>/qgab</code> - configure random quote appearance
+  • <code>/qs</code> - save to group sticker pack
+
+  <b>🌐 Other Commands:</b>
+
+  • <code>/lang</code> - change language
+  • <code>/donate</code> - support the developer
+
+  <b>📱 Contact Us:</b>
+  • Developer's Blog: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Merhaba!</b>
   /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
