@@ -16,7 +16,7 @@ const MIN_UNIQUE_USERS = 5
 const MIN_UNIQUE_STICKERS = 3
 const MIN_GROUPS = 3
 const MAX_USES_PER_USER = 10
-const DATA_EXPIRE_TIME = 60 // seconds
+const DATA_EXPIRE_TIME = 60 * 60 // 1 hour
 
 // Track last publish time to implement delay
 let lastPublishTime = 0
