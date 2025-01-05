@@ -2,196 +2,196 @@
 language_name: '🇺🇿 O''zbek'
 description:
   short: |
-    Turn any message into a beautiful quote sticker! ✨
-    Reply with /q or forward the message to me
+    Har qanday xabarni chiroyli sitata stikeriga aylantiring! ✨
+    /q buyrug'i bilan javob bering yoki xabarni menga yuboring
   long: |
-    Create stunning quote stickers and preserve your favorite chat moments! ✨
+    Ajoyib sitata stikeri yaratng va sevimli suhbat vaqtlari saqlang! ✨
 
-    Simply reply /q to any message or forward it to me. Perfect for saving:
-    🌟 Best chat highlights and memories
-    💭 Inspiring thoughts and conversations
-    🎨 Creative messages with custom styles
-    ✍️ Important notes in beautiful format
+    Faqat /q ga har qanday xabar bilan javob bering yoki uni menga yuboring. Saqlash uchun ideal:
+    🌟 Eng yaxshi suhbat xotiralari
+    💭 Ilhomlantiruvchi fikrlar va suhbatlar
+    🎨 Custom uslublardagi ijodiy xabarlar
+    ✍️ Muhim eslatmalar go'zal formatda
 
-    Get started now - just forward a message or use /q!
+    Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
 help: |
-  <b>✨ QuotLyBot Quick Guide</b>
+  <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
 
-  <b>📱 Basic Commands</b>
-  • <code>/q</code> - Quote replied message
-  • <code>/q 3</code> - Quote several messages
-  • Forward message - Quote directly
+  <b>📱 Asosiy Buyruqlar</b>
+  • <code>/q</code> - Javob qilingan xabarni sitata qilish
+  • <code>/q 3</code> - Bir nechta xabarlarni sitata qilish
+  • Xabarni yuborish - To'g'ridan-to'g'ri sitata qilish
 
-  <b>🎨 Styles</b>
+  <b>🎨 Uslublar</b>
 
-  Colors:
-  • Basic: <code>/q red</code>
-  • Custom: <code>/q #ff69b4</code>
-  • Gradient: <code>/q red//#blue</code>
-  • Random: <code>/q random</code>
+  Ranglar:
+  • Asosiy: <code>/q qizil</code>
+  • O'zgartirilgan: <code>/q #ff69b4</code>
+  • Gradiyent: <code>/q qizil//#ko'k</code>
+  • Tasodifiy: <code>/q tasodifiy</code>
 
   Media:
-  • Add photo: <code>/q media</code>
-  • Crop image: <code>/q crop</code>
-  • Keep thread: <code>/q reply</code>
-  • Voice preview: Automatic
+  • Foto qo'shish: <code>/q media</code>
+  • Rasmni kesish: <code>/q crop</code>
+  • Treadni saqlash: <code>/q javob</code>
+  • Ovoz preview: Avtomatik
 
   Format:
-  • Sticker: <code>/q</code>
-  • Image: <code>/q img</code>
+  • Stiker: <code>/q</code>
+  • Rasm: <code>/q img</code>
   • HD: <code>/q png</code>
-  • Story: <code>/q stories</code>
+  • Hikoya: <code>/q stories</code>
 
-  Quality:
-  • Normal: <code>/q</code>
+  Sifat:
+  • Oddiy: <code>/q</code>
   • 2x: <code>/q s2</code>
   • 3x: <code>/q s3</code>
 
-  <b>💫 Popular Combinations</b>
-  • <code>/q red media</code> - Red quote with photo
-  • <code>/q 3 reply</code> - Quote with context
-  • <code>/q img s2</code> - High-quality image
-  • <code>/q stories media</code> - Story with photo
+  <b>💫 Mashhur Kombinatsiyalar</b>
+  • <code>/q qizil media</code> - Qizil sitata foto bilan
+  • <code>/q 3 javob</code> - Kontekst bilan sitata
+  • <code>/q img s2</code> - Yuqori sifatli rasm
+  • <code>/q stories media</code> - Foto bilan hikoya
 
-  <b>⚙️ Extra Features</b>
-  • Rating: <code>/q rate</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
-  • Language: <code>/lang</code>
+  <b>⚙️ Qo'shimcha Xususiyatlar</b>
+  • Reyting: <code>/q rate</code>
+  • Tasodifiy sitatalar: <code>/qrand</code>
+  • Eng yuqori sitatalar: <code>/qtop</code>
+  • Til: <code>/lang</code>
 
-  <b>🎯 Group Settings</b>
-  • Default color: <code>/qcolor</code>
-  • Enable rating: <code>/qrate</code>
-  • Save to pack: <code>/qs</code>
+  <b>🎯 Guruh Sozlamalari</b>
+  • Standart rang: <code>/qcolor</code>
+  • Reytingni yoqish: <code>/qrate</code>
+  • To'plamga saqlash: <code>/qs</code>
 
-  <b>🌈 Emoji Styles</b>
-  Classic: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  <b>🌈 Emoji Uslublar</b>
+  Klassik: <code>/qb olma</code>, <code>/qb google</code>
+  Alternativ: <code>/qb twitter</code>, <code>/qb joypixels</code>
   Retro: <code>/qb blob</code>
 
-  <b>📱 Need Help?</b>
+  <b>📱 Yordam Kerakmi?</b>
   • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
-  • Support: <code>/donate</code>
+  • Yordam: <code>/donate</code>
 help_group: |
-  <b>Hello! 👋</b>
-  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
+  <b>Salom! 👋</b>
+  Men bu guruhda chiroyli sitatalar yarataman - vaqtincha biron-bir xabar bilan <code>/q</code> buyrug'idan foydalaning!
 
-  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
+  Barcha xususiyatlarimni shaxsiyda bilib oling: <a href="t.me/${username}?start=help">Yordam Olish</a> ✨
 btn:
   add_group: Guruhga qo'shish
   help: Ma'lumotnoma
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
+    Kechirasiz, hozircha bu xabar turini qo'llab-quvvatlamayman 😅
 
-    Try text, photos, stickers, or voice messages!
+    Matn, foto, stiker yoki ovozli xabarlarni sinab ko'ring!
   api_error: |
-    <b>Oops! Something went wrong 😅</b>
+    <b>Oops! Nimadir xato ketdi 😅</b>
     <pre>${error}</pre>
-    Please try again in a moment!
+    Iltimos, ozgina vaqt o'tgach yana urinib ko'ring!
   empty_forward: |
-    Please reply to or forward the message you'd like to quote ✨
+    Iltimos, sitata qilish uchun fikringizni yoki xabarni yuboring ✨
   set_background_color: |
-    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
+    <b>Mukammal!</b> Sitataning fon rangi almashtirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
+    <b>Tayyor!</b> Emoji uslubi almashtirildi: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
+    suc: Stiker muvaffaqiyatli ravishda <a href="${link}">stikerlar to'plami guruhiga qo'shildi</a> ✨
     error:
-      animated: Sorry, I can't save animated stickers yet 😅
-      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
-      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
+      animated: Kechirasiz, hozirda animatsiyali stikerlarni saqlay olmayman 😅
+      need_creator: <b>Yaqinlashmoqdamiz!</b> Stikerlarni saqlash uchun ${creator} menga birinchi xabar yozishi kerak
+      telegram: <b>Oops!</b> Nimadir xato ketdi:\n<pre>${error}</pre>
   delete:
-    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    suc: <a href="${link}">Guruh stikerlari to'plamidan</a> olib tashlandi 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Stikerni olib tashlashning iloji bo'lmadi:\n<pre>${error}</pre>
     btn:
-      save_sticker: Save Sticker
+      save_sticker: Stikerni saqlang
   delete_random:
-    suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    suc: Tasodifiy to'plamdan olib tashlandi 🗑
+    error: <b>Oops!</b> Stikerni olib tashlashning iloji bo'lmadi:\n<pre>${error}</pre>
   empty_forward: |
-    Please reply to a sticker, photo, or image you'd like to save ✨
+    Iltimos, saqlamoqchi bo'lgan stiker, foto yoki rasmga javob bering ✨
   fstik: |
-    To save this to your personal sticker pack, forward to @fStikBot 🎨
+    Buni shaxsiy stikerlar to'plamingizga saqlab qo'yish uchun, @fStikBot ga forward qiling 🎨
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      Siz ${rateName} bu sitatani! Reyting berish uchun rahmat ⭐
     back: |
-      Your vote has been removed 🔄
+      Sizning ovozingiz olib tashlandi 🔄
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      Sitataga reyting berish imkoniyati endi yoqilgan! Reyting berishda ishtirok eting ⭐
     disable: |
-      Quote rating has been disabled 🔄
+      Sitataga reyting berish o'chirildi 🔄
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    Bu guruhda hali yuqori baholangan sitatalar yo'q! Ba'zi xabarlarga reyting berishni boshlang ⭐
   gab: |
-    Random quote frequency set to ${gab} ✨
+    Tasodifiy sitata chastotasi ${gab} ga o'rnatildi ✨
 hidden:
   settings:
     enable: |
-      Sender search enabled 🔍
+      Yuboruvchi qidiruvi yoqilgan 🔍
     disable: |
-      Sender search disabled 🔄
+      Yuboruvchi qidiruvi o'chirilgan 🔄
 privacy:
   settings:
     enable: |
-      Privacy mode activated 🔒 Your info will be hidden in quotes
+      Maxfiylik rejimi yoqildi 🔒 Sitatada sizning ma'lumotlaringiz yashirinadi
     disable: |
-      Privacy mode deactivated 🔓
+      Maxfiylik rejimi o'chirilgan 🔓
 top:
   info: |
-    <b>✨ Top Quoted Messages</b>
-  open: View Top Quotes
+    <b>✨ Eng Ko'p Sitatasi Keltirilgan Xabarlar</b>
+  open: Eng Yuqori Sitatalarni Ko'rish
 donate:
   info: |
-    <b>Support QuotLyBot's Development! ☕</b>
+    <b>QuotLyBot rivojlanishini qo'llab-quvvatlang! ☕</b>
 
-    Your support helps us:
-    • Keep the servers running 24/7
-    • Add new features and styles
-    • Improve quote quality
-    • Make the bot faster
+    Sizning qo'llab-quvvatlashingiz bizga quyidagilarni amalga oshirishga yordam beradi:
+    • Serverlarni 24/7 ishlashda ushlab turish
+    • Yangi xususiyatlar va uslublarni qo'shish
+    • Sitatlar sifatini yaxshilash
+    • Botni tezroq ishlashiga ishontirish
 
-    <b>💳 Easy Payment Options</b>
-    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    <b>💳 Oson To'lov Tanlovlari</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Karta orqali to'lov</a> (Visa/Mastercard)
     • Apple Pay / Google Pay
 
-    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    <b>🔒 Kriptovalyuta (texnik jihatdan o'qimishli foydalanuvchilar uchun)</b>
     • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
 
-    Every contribution helps make QuotLyBot better for everyone! 💜
-  title: Support ${botUsername}
-  description: Help keep the magic going ✨
+    Har bir hissangiz QuotLyBot ni yaxshiroq qilishga yordam beradi! 💜
+  title: Xayriya ${botUsername}
+  description: Sehrning davom etishini ta'minlashga yordam bering ✨
   successful: |
-    <b>Thank you for your support! 💜</b>
-    You're helping make QuotLyBot even better!
+    <b>Qo'llab quvvatlaganingiz uchun rahmat! 💜</b>
+    Siz QuotLyBot ni yanada yaxshilashga xizmat ko'rsatmoqda!
   pay: '💜 Telegram to''lov'
-  liqpay: 'Pay with Card 💳'
-  other: 'Other Options'
+  liqpay: 'Karta orqali to''lov 💳'
+  other: 'Boshqa usullar'
 emoji:
   info: |
-    <b>Choose Your Quote Emoji!</b>
+    <b>O'zingizning Sitate Emojisini Tanlang!</b>
 
-    • Set custom emoji: <code>/qemoji</code>💜
-    • Use random emoji: <code>/qemoji random</code>
-    • Clear emoji: <code>/qemoji clear</code>
+    • Maxsus emoji o'rnating: <code>/qemoji</code>💜
+    • Tasodifiy emoji qo'llang: <code>/qemoji random</code>
+    • Emojini tozalang: <code>/qemoji clear</code>
 
-    Your emoji will be added to all new quotes ✨
-  done: Emoji style updated! ✨
+    Emojingiz barcha yangi sitatalarga qo'shiladi ✨
+  done: Emoji uslubi yangilandi! ✨
 only_admin: |
-  <b>⚠️ Admin Access Needed</b>
-  This command can only be used by group administrators.
+  <b>⚠️ Administrator Hujjatiga Ega Bo'lish Kerak</b>
+  Bu buyruq faqat guruh administratorlari tomonidan ishlatilishi mumkin.
 only_group: |
-  <b>⚠️ Group Command</b>
-  This feature works in group chats only.
+  <b>⚠️ Guruh uchun Boshqarish</b>
+  Bu xususiyat faqat guruh chatlarida ishlaydi.
 rate_limit: |
-  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+  <i>Qisqa tanaffus...</i> ${seconds} soniyadan so'ng yana bu buyruqni ishlatishingiz mumkin ⏳
 
-  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+  <i>Pro maslahat: Kutayotgan vaqtingizda o'tgan sitatani </i><code>/q color</code> <i>yoki</i> <code>/q media</code> <i>bilan sozlashga harakat qiling</i>
