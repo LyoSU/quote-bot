@@ -2,246 +2,196 @@
 language_name: '🇮🇹'
 description:
   short: |
-    Ti aiuterò a creare una citazione dal messaggio.
-    Basta rispondere al messaggio con /q o inoltrarlo a me.
+    Turn any message into a beautiful quote sticker! ✨
+    Reply with /q or forward the message to me
   long: |
-    Hai notato dei messaggi divertenti o ispiratori nella chat di gruppo che vorresti immortalare? Inoltrali semplicemente a me o digita /q e li trasformerò in uno sticker citazione elegante che potrai salvare e condividere con i tuoi amici. Che sia per ricordi personali o uso professionale, le possibilità sono infinite. Provalo adesso! 😎
+    Create stunning quote stickers and preserve your favorite chat moments! ✨
+
+    Simply reply /q to any message or forward it to me. Perfect for saving:
+    🌟 Best chat highlights and memories
+    💭 Inspiring thoughts and conversations
+    🎨 Creative messages with custom styles
+    ✍️ Important notes in beautiful format
+
+    Get started now - just forward a message or use /q!
 help: |
-  <b>📝 Ciao! Sono un bot per creare bellissime citazioni</b>
+  <b>✨ QuotLyBot Quick Guide</b>
 
-  <i>Posso trasformare qualsiasi messaggio in una citazione attraente per preservare momenti importanti della chat. Funziono sia nei messaggi privati che nei gruppi!</i>
+  <b>📱 Basic Commands</b>
+  • <code>/q</code> - Quote replied message
+  • <code>/q 3</code> - Quote several messages
+  • Forward message - Quote directly
 
-  <b>🎯 Uso Base:</b>
+  <b>🎨 Styles</b>
 
-  • Messaggio singolo: rispondi con <code>/q</code>
-  • Più messaggi: aggiungi un numero, come <code>/q 3</code>
-  • Nelle chat private: inoltra semplicemente i messaggi a me
+  Colors:
+  • Basic: <code>/q red</code>
+  • Custom: <code>/q #ff69b4</code>
+  • Gradient: <code>/q red//#blue</code>
+  • Random: <code>/q random</code>
 
-  <b>🎨 Personalizzazione della Citazione:</b>
+  Media:
+  • Add photo: <code>/q media</code>
+  • Crop image: <code>/q crop</code>
+  • Keep thread: <code>/q reply</code>
+  • Voice preview: Automatic
 
-  <b>1. Colore:</b>
-  • Nome: <code>/q rosso</code>, <code>/q blu</code>, <code>/q verde</code>
-  • Colore personalizzato: <code>/q #cbafff</code>
-  • Colore casuale: <code>/q random</code>
+  Format:
+  • Sticker: <code>/q</code>
+  • Image: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • Story: <code>/q stories</code>
 
-  <b>2. Aspetto:</b>
-  • Immagine invece di sticker: aggiungi <code>img</code>
-  • Alta qualità: aggiungi <code>png</code>
-  • Preserva conversazione: aggiungi <code>reply</code>
+  Quality:
+  • Normal: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>3. Media:</b>
-  • Includi foto/sticker: aggiungi <code>media</code>
+  <b>💫 Popular Combinations</b>
+  • <code>/q red media</code> - Red quote with photo
+  • <code>/q 3 reply</code> - Quote with context
+  • <code>/q img s2</code> - High-quality image
+  • <code>/q stories media</code> - Story with photo
 
-  <b>4. Qualità:</b>
-  Aggiungi <code>s</code> e un numero per una qualità migliorata:
-  • <code>s2</code> - qualità 2x
-  • <code>s3</code> - qualità 3x
+  <b>⚙️ Extra Features</b>
+  • Rating: <code>/q rate</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+  • Language: <code>/lang</code>
 
-  <b>💫 Combinazioni Utili:</b>
+  <b>🎯 Group Settings</b>
+  • Default color: <code>/qcolor</code>
+  • Enable rating: <code>/qrate</code>
+  • Save to pack: <code>/qs</code>
 
-  • Bella citazione con foto:
-  <code>/q 2 rosso media</code> - citazione rossa con 2 messaggi e foto
+  <b>🌈 Emoji Styles</b>
+  Classic: <code>/qb apple</code>, <code>/qb google</code>
+  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  Retro: <code>/qb blob</code>
 
-  • Screenshot di conversazione di alta qualità:
-  <code>/q 3 reply png</code> - dialogo di 3 messaggi in PNG
-
-  • Citazione stilosa colorata:
-  <code>/q #ff69b4 img s2</code> - citazione rosa in alta qualità
-
-  <b>🌟 Funzionalità Speciali:</b>
-
-  • Valutazione citazioni: aggiungi <code>rate</code> per abilitare il voto
-  • Stile emoji: <code>/qb apple</code> o <code>/qb google</code>
-  • Citazioni casuali: <code>/qrand</code>
-  • Citazioni migliori: <code>/qtop</code>
-
-  <b>👨‍💼 Comandi Admin:</b>
-
-  • <code>/qcolor</code> - imposta colore di default del gruppo
-  • <code>/qrate</code> - abilita il sistema di valutazione
-  • <code>/qgab</code> - configura l'aspetto delle citazioni casuali
-  • <code>/qs</code> - salva nel pacchetto sticker del gruppo
-
-  <b>🌐 Altri Comandi:</b>
-
-  • <code>/lang</code> - cambia lingua
-  • <code>/donate</code> - supporta lo sviluppatore
-
-  <b>📱 Contattaci:</b>
-  • Blog dello Sviluppatore: @LyBlog
+  <b>📱 Need Help?</b>
+  • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • Support: <code>/donate</code>
 help_group: |
-  <b>Ciao!</b>
-  Creerò delle citazioni nel gruppo usando il comando /q in risposta ad un messaggio
+  <b>Hello! 👋</b>
+  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
 
-  Puoi scoprire di più usando il comando <a href="t.me/${username}?start=help">/help</a> in una conversazione privata con me
+  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
 btn:
   add_group: Aggiungi al Gruppo
   help: Aiuto
 quote:
-  unsupported_message: Messaggio non supportato
+  unsupported_message: |
+    Sorry, I don't support this message type yet 😅
+
+    Try text, photos, stickers, or voice messages!
   api_error: |
-    <b>😓 Errore nella creazione della citazione</b>
+    <b>Oops! Something went wrong 😅</b>
     <pre>${error}</pre>
+    Please try again in a moment!
   empty_forward: |
-    Il comando deve essere inviato come risposta a un messaggio.
+    Please reply to or forward the message you'd like to quote ✨
   set_background_color: |
-    Il colore di sfondo delle citazioni è impostato su: <code>${backgroundColor}</code>
+    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    Il marchio emoji delle citazioni è impostato su: <code>${emojiBrand}</code>
-  sticker:
+    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Lo sticker è stato aggiunto con successo al <a href="${link}">pacchetto di adesivi del gruppo</a>.
+    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
     error:
-      animated: Non posso aggiungere uno sticker animato.
-      need_creator: <b>Non sono riuscito a salvare questo sticker.</b>\n${creator} scrivimi un messaggio in PM.
-      telegram: <b>Non sono riuscito a salvare questo sticker.</b>\n<pre>${error}</pre>
+      animated: Sorry, I can't save animated stickers yet 😅
+      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
+      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
   delete:
-    suc: Lo sticker è stato rimosso correttamente dallo <a href="${link}">stickers pack del gruppo</a>.
+    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
     error:
-      telegram: <b>Non posso salvare questo sticker.</b>\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
     btn:
-      save_sticker: Salva lo sticker
+      save_sticker: Save Sticker
   delete_random:
-    suc: L'adesivo è stato rimosso con successo dagli adesivi casuali del gruppo.
-    error: <b>Non ho potuto eliminare quell'adesivo.</b>\n<pre>${error}</pre>
+    suc: Removed from random collection 🗑
+    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
   empty_forward: |
-    Il comando deve essere inviato una risposta ad uno sticker, una foto o ad un file immagine.
+    Please reply to a sticker, photo, or image you'd like to save ✨
   fstik: |
-    Per salvare lo sticker nel tuo pacchetto personale di stickers, inoltra questo messaggio a @fStikBot
+    To save this to your personal sticker pack, forward to @fStikBot 🎨
 rate:
   vote:
     rated: |
-      Tu ${rateName} questo.
+      You ${rateName} this quote! Thanks for rating ⭐
     back: |
-      Hai riottenuto il tuo voto.
+      Your vote has been removed 🔄
   settings:
     enable: |
-      La votazione delle citazioni è abilitata.
+      Quote rating is now enabled! Rate with ⭐
     disable: |
-      La votazione delle citazioni è disabilitata.
+      Quote rating has been disabled 🔄
 random:
   empty: |
-    Non ci sono citazioni con una valutazione positiva nel gruppo.
+    No highly-rated quotes in this group yet! Start rating some messages ⭐
   gab: |
-    La possibilità di citazioni casuali è impostata su ${gab}
+    Random quote frequency set to ${gab} ✨
 hidden:
   settings:
     enable: |
-      La ricerca del mittente è abilitata.
+      Sender search enabled 🔍
     disable: |
-      La ricerca del mittente è disabilitata.
+      Sender search disabled 🔄
 privacy:
   settings:
     enable: |
-      La Privacy mode è abilitata.
+      Privacy mode activated 🔒 Your info will be hidden in quotes
     disable: |
-      La Privacy mode è disabilitata.
+      Privacy mode deactivated 🔓
 top:
   info: |
-    <b>Citazioni migliori del gruppo:</b>
-  open: Aperto in alto
+    <b>✨ Top Quoted Messages</b>
+  open: View Top Quotes
 donate:
   info: |
-    Puoi comprare un caffè per lo sviluppatore o qualcos'altro con i seguenti dettagli:
+    <b>Support QuotLyBot's Development! ☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Carta di credito: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-  title: Fai una donazione ${botUsername}
-  description: Sostieni lo sviluppo del bot
+    Your support helps us:
+    • Keep the servers running 24/7
+    • Add new features and styles
+    • Improve quote quality
+    • Make the bot faster
+
+    <b>💳 Easy Payment Options</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    Every contribution helps make QuotLyBot better for everyone! 💜
+  title: Support ${botUsername}
+  description: Help keep the magic going ✨
   successful: |
-    <b>Grazie per aver contribuito allo sviluppo del bot 💜</b>
+    <b>Thank you for your support! 💜</b>
+    You're helping make QuotLyBot even better!
   pay: '💜 Paga con Telegram'
-  liqpay: LiqPay (VISA, MasterCard)
-  other: Altre opzioni
+  liqpay: 'Pay with Card 💳'
+  other: 'Other Options'
 emoji:
   info: |
-    Si prega di includere un emoji.
+    <b>Choose Your Quote Emoji!</b>
 
-    Per esempio, <code>/qemoji💜</code> cambierà il suffisso in 💜 per tutti i successivi nuovi sticker.
-    Per un emoji casuale <code>/qemoji random</code>
-  done: L'emoji è stata cambiata correttamente.
-adv:
-  about: |
-    <b>💫 Puoi acquistare pubblicità da noi per un gran numero di utenti e gruppi attivi</b>
+    • Set custom emoji: <code>/qemoji</code>💜
+    • Use random emoji: <code>/qemoji random</code>
+    • Clear emoji: <code>/qemoji clear</code>
 
-    - Il nostro bot è in più di 30.000 gruppi attivi e più di 70.000 utenti usano il bot ogni mese.
-    Tra questi ci sono utenti di vari nazioni. È possibile selezionare la lingua degli utenti per i quali la pubblicità deve essere visualizzata
-    - La pubblicità viene visualizzata sotto la citazione sotto forma di un pulsante o di un messaggio di testo, a seconda della chat dell'utente
-    - È possibile specificare il prezzo di un'inserzione; prima verrà visualizzata l'inserzione per la quale è stato assegnato l'importo più alto
-    - Il testo e il contenuto dell'annuncio devono essere conformi alle nostre regole (/adv_rules) e prima di essere pubblicato deve superare la fase di moderazione. Questo può essere fatto prima di effettuare un deposito
-
-    Saldo: ${balance} USD
-  rules: |
-    <b>Nelle pubblicità <u>non</u> è permesso:</b>
-    - Usare oscenità o insulti
-    - Usare più di 1 emoji per testo
-    - Informazioni fuorvianti
-    - Informazioni proibite dalle leggi ucraine
-    - Contenuto per adulti
-    - Gioco d'azzardo
-
-    <i>Abbiamo anche il diritto di rifiutare un annuncio qualora non ci dovesse piacere, per qualsiasi ragione.</i>
-  main_menu:
-    create_btn: Crea ads
-    list_btn: Lista delle ads
-    pay_btn: Ricarica saldo
-  create:
-    enter_text: |
-      Inserisci il testo del tuo annuncio:
-
-      <i>Non più di 70 caratteri e deve rispettare le nostre regole (/adv_rules)</i>
-    enter_link: |
-      Inserisci un link alla risorsa pubblicizzata:
-
-      <i>Il link deve essere completo, se stai pubblicizzando qualcosa in Telegram, il link deve iniziare con t.me.
-      La risorsa deve rispettare le nostre regole (/adv_rules), se dopo aver superato la fase di moderazione il sito viene cambiato, il tuo account verrà bloccato e i soldi non verranno rimborsati.</i>
-    select_locale: |
-      Seleziona la lingua degli utenti a cui verrà mostrato l'annuncio
-
-      Il numero rappresenta gli utenti che potenzialmente vedranno il tuo annuncio in quella lingua.
-      Vengono contati solo gli utenti che usano effettivamente il bot. Ma l'annuncio può essere visto anche da altri utenti che sono nel gruppo in cui è stata fatta la citazione, quindi questa cifra può essere molto più alta
-
-      <i>La lingua non corrisponde al paese.
-      Puoi scegliere solo una lingua, se ne hai bisogno di più, crea di nuovo un annuncio per un'altra lingua.</i>
-    enter_price: |
-      Specifica il prezzo per 1000 visualizzazioni del tuo annuncio in USD:
-
-      <u>Prezzo medio degli annunci attivi:</u> ${averagePrice} USD
-
-      <i>Il prezzo minimo è 0,15 USD.
-      Gli annunci vengono mostrati in modo casuale, ma ci sono più probabilità che venga mostrato un annuncio che ha offerto un prezzo per visualizzazioni più alto.
-      </i>
-    sent_moderate: |
-      L'annuncio è stato inviato per la moderazione. Per favore, sii paziente e aspetta. Quando la fase di moderazione produrrà un esito, positivo o negativo che sia, riceverai una notifica.
-  list:
-    select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
-    selected_list: |
-      selected_list
-  moderate:
-    adv: |
-      Adv #id_${adv._id} da <a href="tg://user?id=${telegramId}">${name}</a>
-
-      Testo: ${adv.text}
-      Link: ${adv.link}
-      Locale: ${adv.locale}
-      Prezzo: ${adv.price}
-      Numero ${adv.count}
-    accepted: |
-      L'annuncio è stato approvato. Puoi vederlo nella sezione pubblicità: /adv
-    denied: |
-      Purtroppo l'annuncio non è stato approvato. Per favore leggi le nostre regole (/adv_rules), se sei sicuro che ci sia stato un errore, scrivici a @Ly_OBot e includi questo tag nel messaggio descrivendo il problema: #qba_${adv.id}
-    accept_btn: Accetta
-    deny_btn: Rifiuta
+    Your emoji will be added to all new quotes ✨
+  done: Emoji style updated! ✨
 only_admin: |
-  Solo gli amministratori del gruppo possono utilizzare questo comando.
+  <b>⚠️ Admin Access Needed</b>
+  This command can only be used by group administrators.
 only_group: |
-  Questo comando può essere utilizzato solo nei gruppi.
+  <b>⚠️ Group Command</b>
+  This feature works in group chats only.
 rate_limit: |
-  Non puoi usare questo comando più di una volta ogni ${seconds} secondi.
+  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+
+  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
