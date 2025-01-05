@@ -6,6 +6,7 @@ const rateLimit = require('telegraf-ratelimit')
 const I18n = require('telegraf-i18n')
 const { onlyGroup, onlyAdmin } = require('./middlewares')
 const {
+  handleStart,
   handleHelp,
   handleAdv,
   handleModerateAdv,
@@ -250,7 +251,7 @@ bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
 //   else return next()
 // })
 
-bot.start(handleHelp)
+bot.start(handleStart)
 bot.command('help', handleHelp)
 bot.use(handleAdv)
 

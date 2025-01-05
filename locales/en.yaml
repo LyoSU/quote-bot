@@ -14,6 +14,29 @@ description:
     ✍️ Important notes in beautiful format
 
     Get started now - just forward a message or use /q!
+start: |
+  <b>✨ Create Beautiful Quote Stickers!</b>
+
+  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+
+  <b>🎨 Look What You Can Create:</b>
+  • Colorful gradient quotes
+  • Multi-message conversations
+  • Photo quotes with effects
+
+  <b>🚀 Get Started in 3 Simple Steps:</b>
+  1. Find any message you like
+  2. Reply with <code>/q</code>
+  3. Your quote is ready to share!
+
+  <b>💫 Quick Ideas to Try:</b>
+  • Make a pink quote: <code>/q pink</code>
+  • Add a photo: <code>/q media</code>
+  • Quote chat thread: <code>/q 3 r</code>
+
+  ✨ Try it now - find a message and reply with /q!
+
+  Want to explore all features? Type /help for a quick guide 📚
 help: |
   <b>✨ QuotLyBot Quick Guide</b>
 

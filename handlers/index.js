@@ -1,4 +1,5 @@
 module.exports = {
+  handleStart: require('./start'),
   handleHelp: require('./help'),
   handleAdv: require('./adv'),
   handleModerateAdv: require('./adv-moderate'),
