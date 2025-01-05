@@ -15,28 +15,28 @@ description:
 
     今すぐ始めましょう - メッセージを転送するか、/qを使って！
 start: |
-  <b>✨ Create Beautiful Quote Stickers!</b>
+  <b>✨ 美しい引用ステッカーを作成しましょう！</b>
 
-  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+  チャットメッセージをエレガントなステッカー、魅力的なストーリーカード、共有アートに変えましょう。
 
-  <b>🎨 Look What You Can Create:</b>
-  • Colorful gradient quotes
-  • Multi-message conversations
-  • Photo quotes with effects
+  <b>🎨 作れるものを見てみましょう：</b>
+  • カラフルなグラデーションの引用
+  • 複数メッセージの会話
+  • 効果付きの写真引用
 
-  <b>🚀 Get Started in 3 Simple Steps:</b>
-  1. Find any message you like
-  2. Reply with <code>/q</code>
-  3. Your quote is ready to share!
+  <b>🚀 3つの簡単なステップで始めましょう：</b>
+  1. 気に入ったメッセージを見つける
+  2. <code>/q</code>で返信する
+  3. 引用がシェアする準備が整いました！
 
-  <b>💫 Quick Ideas to Try:</b>
-  • Make a pink quote: <code>/q pink</code>
-  • Add a photo: <code>/q media</code>
-  • Quote chat thread: <code>/q 3 r</code>
+  <b>💫 試してみるアイデア：</b>
+  • ピンクの引用を作る: <code>/q pink</code>
+  • 写真を追加: <code>/q media</code>
+  • チャットスレッドを引用: <code>/q 3 r</code>
 
-  ✨ Try it now - find a message and reply with /q!
+  ✨ 今すぐ試してみましょう - メッセージを見つけて/qで返信！
 
-  Want to explore all features? Type /help for a quick guide 📚
+  すべての機能を探索したいですか？ クイックガイドを知りたい場合は、/helpを入力してください📚
 help: |
   <b>✨ QuotLyBot クイックガイド</b>
 
