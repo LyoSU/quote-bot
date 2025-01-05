@@ -7,68 +7,68 @@ description:
   long: |
     Vous avez remarqué des messages drôles ou inspirants dans votre chat de groupe que vous aimeriez immortaliser? Il vous suffit de me les transférer ou de taper /q et je les transformerai en un élégant autocollant de citation que vous pourrez enregistrer et partager avec vos amis. Que ce soit pour des souvenirs personnels ou une utilisation professionnelle, les possibilités sont infinies. Essayez-moi maintenant! 😎
 help: |
-  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
+  <b>📝 Salut! Je suis un bot pour créer de belles citations</b>
 
-  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
+  <i>Je peux transformer n'importe quel message en une citation attrayante pour préserver les moments importants de la discussion. Je travaille aussi bien dans les messages privés que dans les groupes !</i>
 
-  <b>🎯 Basic Usage:</b>
+  <b>🎯 Utilisation de base :</b>
 
-  • Single message: reply to it with <code>/q</code>
-  • Multiple messages: add a number, like <code>/q 3</code>
-  • In private chats: simply forward messages to me
+  • Message unique : répondez-y avec <code>/q</code>
+  • Messages multiples : ajoutez un nombre, comme <code>/q 3</code>
+  • Dans les chats privés : transférez simplement les messages vers moi
 
-  <b>🎨 Quote Customization:</b>
+  <b>🎨 Personnalisation des citations :</b>
 
-  <b>1. Color:</b>
-  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Custom color: <code>/q #cbafff</code>
-  • Random color: <code>/q random</code>
+  <b>1. Couleur :</b>
+  • Nom : <code>/q rouge</code>, <code>/q bleu</code>, <code>/q vert</code>
+  • Couleur personnalisée : <code>/q #cbafff</code>
+  • Couleur aléatoire : <code>/q aléatoire</code>
 
-  <b>2. Appearance:</b>
-  • Image instead of sticker: add <code>img</code>
-  • High quality: add <code>png</code>
-  • Preserve conversation: add <code>reply</code>
+  <b>2. Apparence :</b>
+  • Image au lieu de sticker : ajoutez <code>img</code>
+  • Haute qualité : ajoutez <code>png</code>
+  • Préserver la conversation : ajoutez <code>reply</code>
 
-  <b>3. Media:</b>
-  • Include photo/sticker: add <code>media</code>
+  <b>3. Médias :</b>
+  • Inclure photo/sticker : ajoutez <code>media</code>
 
-  <b>4. Quality:</b>
-  Add <code>s</code> and a number for enhanced quality:
-  • <code>s2</code> - 2x quality
-  • <code>s3</code> - 3x quality
+  <b>4. Qualité :</b>
+  Ajoutez <code>s</code> et un numéro pour améliorer la qualité :
+  • <code>s2</code> - qualité 2x
+  • <code>s3</code> - qualité 3x
 
-  <b>💫 Useful Combinations:</b>
+  <b>💫 Combinaisons utiles :</b>
 
-  • Beautiful quote with photo:
-  <code>/q 2 red media</code> - red quote with 2 messages and photo
+  • Belle citation avec photo :
+  <code>/q 2 rouge media</code> - citation rouge avec 2 messages et photo
 
-  • High-quality conversation screenshot:
-  <code>/q 3 reply png</code> - 3-message dialog in PNG
+  • Capture d'écran de conversation de haute qualité :
+  <code>/q 3 reply png</code> - dialogue de 3 messages en PNG
 
-  • Stylish colored quote:
-  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+  • Citation colorée élégante :
+  <code>/q #ff69b4 img s2</code> - citation rose en haute qualité
 
-  <b>🌟 Special Features:</b>
+  <b>🌟 Fonctionnalités spéciales :</b>
 
-  • Quote rating: add <code>rate</code> to enable voting
-  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
+  • Classement de la citation : ajoutez <code>rate</code> pour activer le vote
+  • Style emoji : <code>/qb apple</code> ou <code>/qb google</code>
+  • Citations aléatoires : <code>/qrand</code>
+  • Meilleures citations : <code>/qtop</code>
 
-  <b>👨‍💼 Admin Commands:</b>
+  <b>👨‍💼 Commandes Admin :</b>
 
-  • <code>/qcolor</code> - set default group color
-  • <code>/qrate</code> - enable rating system
-  • <code>/qgab</code> - configure random quote appearance
-  • <code>/qs</code> - save to group sticker pack
+  • <code>/qcolor</code> - définir la couleur de groupe par défaut
+  • <code>/qrate</code> - activer le système de notation
+  • <code>/qgab</code> - configurer l'apparence des citations aléatoires
+  • <code>/qs</code> - enregistrer dans le paquet de stickers du groupe
 
-  <b>🌐 Other Commands:</b>
+  <b>🌐 Autres Commandes :</b>
 
-  • <code>/lang</code> - change language
-  • <code>/donate</code> - support the developer
+  • <code>/lang</code> - changer la langue
+  • <code>/donate</code> - soutenir le développeur
 
-  <b>📱 Contact Us:</b>
-  • Developer's Blog: @LyBlog
+  <b>📱 Contactez-nous :</b>
+  • Blog du développeur: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Bonjour !</b>
