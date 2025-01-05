@@ -2,246 +2,196 @@
 language_name: '🇯🇵 日本人'
 description:
   short: |
-
-    メッセージに/qで返信するか、転送してください。
+    メッセージを美しい引用ステッカーに変えましょう！✨
+    /qで返信するか、メッセージを転送してください
   long: |
-    グループチャットで不滅にしたい面白いメッセージや感動的なメッセージに気づいたことはありませんか？ 私にそれらを転送するか、/q と入力するだけで、私はそれらをあなたの友人と保存し、共有することができる洗練された引用ステッカーにします。 個人的な思い出のためでも、プロの使用のためでも、可能性は無限大です。今すぐ試してみてください！😎
+    驚くほど美しい引用ステッカーを作成して、お気に入りのチャットの瞬間を保存しましょう！✨
+
+    どんなメッセージにも/qで返信するか、転送してください。以下に最適:
+    🌟 チャットのハイライトや思い出
+    💭 心に残る思いや会話
+    🎨 カスタムスタイルのクリエイティブなメッセージ
+    ✍️ 美しい形式の重要なメモ
+
+    今すぐ始めましょう - メッセージを転送するか、/qを使って！
 help: |
-  <b>📝 こんにちは！私は美しい引用を作成するためのボットです</b>
+  <b>✨ QuotLyBot クイックガイド</b>
 
-  <i>重要なチャットの瞬間を保存するために、任意のメッセージを魅力的な引用に変えることができます。私はプライベートメッセージとグループの両方で動作します！</i>
+  <b>📱 基本コマンド</b>
+  • <code>/q</code> - 引用返信メッセージ
+  • <code>/q 3</code> - 複数メッセージを引用
+  • メッセージを転送 - ダイレクト引用
 
-  <b>🎯 基本の使い方:</b>
+  <b>🎨 スタイル</b>
 
-  • 単一メッセージ: そのメッセージに<code>/q</code>で返信
-  • 複数メッセージ: 数字を追加, 例: <code>/q 3</code>
-  • プライベートチャット: メッセージを私に転送するだけ
+  色:
+  • ベーシック: <code>/q red</code>
+  • カスタム: <code>/q #ff69b4</code>
+  • グラデーション: <code>/q red//#blue</code>
+  • ランダム: <code>/q random</code>
 
-  <b>🎨 引用のカスタマイズ:</b>
+  メディア:
+  • 写真を追加: <code>/q media</code>
+  • 画像をトリミング: <code>/q crop</code>
+  • スレッドを保持: <code>/q reply</code>
+  • ボイスプレビュー: 自動
 
-  <b>1. 色:</b>
-  • 名前: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • カスタムカラー: <code>/q #cbafff</code>
-  • ランダムカラー: <code>/q random</code>
+  フォーマット:
+  • ステッカー: <code>/q</code>
+  • 画像: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • ストーリー: <code>/q stories</code>
 
-  <b>2. 外観:</b>
-  • ステッカーの代わりに画像: <code>img</code>を追加
-  • 高品質: <code>png</code>を追加
-  • 会話を保存: <code>reply</code>を追加
+  品質:
+  • ノーマル: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>3. メディア:</b>
-  • 写真/ステッカーを含む: <code>media</code>を追加
+  <b>💫 人気の組み合わせ</b>
+  • <code>/q red media</code> - 赤引用と写真
+  • <code>/q 3 reply</code> - コンテキストで引用
+  • <code>/q img s2</code> - 高画質画像
+  • <code>/q stories media</code> - ストーリーと写真
 
-  <b>4. 品質:</b>
-  品質を高めるために<code>s</code>と数字を追加:
-  • <code>s2</code> - 2x品質
-  • <code>s3</code> - 3x品質
-
-  <b>💫 便利な組み合わせ:</b>
-
-  • 写真付きの美しい引用:
-  <code>/q 2 red media</code> - 2メッセージと写真付きの赤い引用
-
-  • 高品質の会話スクリーンショット:
-  <code>/q 3 reply png</code> - PNG形式で3メッセージのダイアログ
-
-  • スタイリッシュなカラフル引用:
-  <code>/q #ff69b4 img s2</code> - 高品質のピンクの引用
-
-  <b>🌟 特別機能:</b>
-
-  • 引用の評価: <code>rate</code>で投票を有効化
-  • 絵文字スタイル: <code>/qb apple</code> または <code>/qb google</code>
+  <b>⚙️ 追加機能</b>
+  • レーティング: <code>/q rate</code>
   • ランダム引用: <code>/qrand</code>
   • トップ引用: <code>/qtop</code>
+  • 言語: <code>/lang</code>
 
-  <b>👨‍💼 管理者コマンド:</b>
+  <b>🎯 グループ設定</b>
+  • デフォルト色: <code>/qcolor</code>
+  • レーティングを有効にする: <code>/qrate</code>
+  • パックに保存: <code>/qs</code>
 
-  • <code>/qcolor</code> - デフォルトのグループカラーを設定
-  • <code>/qrate</code> - 評価システムを有効化
-  • <code>/qgab</code> - ランダム引用の外観を設定
-  • <code>/qs</code> - グループステッカーパックに保存
+  <b>🌈 絵文字スタイル</b>
+  クラシック: <code>/qb apple</code>, <code>/qb google</code>
+  代替: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  レトロ: <code>/qb blob</code>
 
-  <b>🌐 その他のコマンド:</b>
-
-  • <code>/lang</code> - 言語を変更
-  • <code>/donate</code> - 開発者をサポート
-
-  <b>📱 お問い合わせ:</b>
-  • 開発者のブログ: @LyBlog
+  <b>📱 ヘルプが必要ですか?</b>
+  • ブログ: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • サポート: <code>/donate</code>
 help_group: |
-  <b>こんにちは！</b>
-  私は、メッセージに応じて、/ qコマンドを使用して、グループ内の引用符を作成する
+  <b>こんにちは！👋</b>
+  このグループで美しい引用を作成します。どんなメッセージにも<code>/q</code>を使って返信してください！
 
-  あなたはより多くのコマンドについて学ぶことができます <a href="t.me/${username}?start=help">/ヘルプ</a> 私と一緒にプライベートメッセージで
+  プライベートで全機能を学びましょう: <a href="t.me/${username}?start=help">ヘルプを取得</a> ✨
 btn:
   add_group: グループに追加：
   help: ヘルプ
 quote:
-  unsupported_message: 対応していないメッセージ
+  unsupported_message: |
+    申し訳ありませんが、このメッセージタイプはまだサポートしていません 😅
+
+    テキスト、写真、ステッカー、ボイスメッセージを試してみてください！
   api_error: |
-    <b>😓見積りを生成できませんでした</b>
+    <b>おっと！何かがうまくいかなかったようです 😅</b>
     <pre>${error}</pre>
+    もう一度試してみてください！
   empty_forward: |
-    コマンドは、メッセージに応答して作成する必要があります。
+    引用したいメッセージに返信するか、転送してください ✨
   set_background_color: |
-    引用符の背景色は次のように設定されます： <code>${backgroundColor}</code>
+    <b>完璧です!</b> 引用背景が変更されました: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    絵文字ブランドが <code>${emojiBrand}</code> に設定されています
-  sticker:
+    <b>完了!</b> 絵文字スタイルが変更されました: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: ステッカーは、グループ</a><a href="${link}">ステッカーパックに正常に追加されました。
+    suc: 正常に<a href="${link}">グループステッカーパック</a>に追加されました ✨
     error:
-      animated: アニメーションステッカーを追加できません。
-      need_creator: <b>このステッカーを保存できませんでした。</b>\n${creator} は、プライベートメッセージにメッセージを書き込む必要があります。
-      telegram: <b>このステッカーを保存できませんでした。</b>\n<pre>${error}</pre>
+      animated: 申し訳ないですが、アニメーションステッカーはまだ保存できません 😅
+      need_creator: <b>もう少し!</b> まず最初に${creator}が私にメッセージを送る必要があります
+      telegram: <b>おっと！</b> 何かがうまくいかなかったようです:\n<pre>${error}</pre>
   delete:
-    suc: <a href="${link}">ステッカーは、グループ</a>ステッカーパックから正常に削除されました。
+    suc: <a href="${link}">グループステッカーパック</a>から削除されました 🗑
     error:
-      telegram: <b>このステッカーを剥がすことができませんでした。</b>\n<pre>${error}</pre>
+      telegram: <b>おっと！</b> ステッカーを削除できませんでした:\n<pre>${error}</pre>
     btn:
       save_sticker: ステッカーを保存
   delete_random:
-    suc: グループランダムステッカーからステッカーを削除しました。
-    error: <b>そのステッカーを削除できませんでした。</b>\n<pre>${error}</pre>
+    suc: ランダムなコレクションから削除されました 🗑
+    error: <b>おっと！</b> ステッカーを削除できませんでした:\n<pre>${error}</pre>
   empty_forward: |
-    コマンドは、ステッカー、写真、または写真ファイルを含むメッセージに応答して作成する必要があります。
+    保存したいステッカー、写真、画像に返信してください ✨
   fstik: |
-    ステッカーを個人用ステッカーパックに保存するには、@fStikBot にメッセージを転送してください
+    個人用ステッカーパックに保存するには、@fStikBot に転送してください 🎨
 rate:
   vote:
     rated: |
-      あなたはこれを ${rateName} します。
+      あなたはこの引用を${rateName}しました！評価ありがとうございます ⭐
     back: |
-      あなたはあなたの投票を取り戻しました。
+      あなたの投票は削除されました 🔄
   settings:
     enable: |
-      見積もりの評価が含まれています。
+      引用評価が有効になりました！⭐で評価してください
     disable: |
-      見積もりの評価はオフです。
+      引用評価が無効になりました 🔄
 random:
   empty: |
-    グループ内に肯定的な評価の引用はありません。
+    このグループにはまだ高評価の引用はありません！いくつかのメッセージを評価し始めてください ⭐
   gab: |
-    ランダム引用の可能性は ${gab} 設定され
+    ランダム引用の頻度が${gab}に設定されました ✨
 hidden:
   settings:
     enable: |
-      送信者検索が有効になります。
+      送信者検索が有効になります 🔍
     disable: |
-      送信者検索は無効になっています。
+      送信者検索は無効になっています 🔄
 privacy:
   settings:
     enable: |
-      プライバシーモードがオンになっています。
+      プライバシーモードが有効になりました 🔒 引用からあなたの情報が隠されます
     disable: |
-      プライバシーモードは無効になっています。
+      プライバシーモードは無効になっています 🔓
 top:
   info: |
-    <b>上位グループの引用：</b>
-  open: 上部を開く
+    <b>✨ トップ引用メッセージ</b>
+  open: トップ引用を見る
 donate:
   info: |
-    以下の詳細を使用して、開発者のためにコーヒーやその他のものを購入できます。
+    <b>QuotLyBotの開発をサポートしよう！☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    銀行カード: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa、MasterCard、Apple Pay、Google Pay</a>
-  title: '${botUsername} 寄付する'
-  description: ボット開発サポート
+    あなたのサポートで私たちが:
+    • サーバーを24/7稼働で維持
+    • 新機能とスタイルを追加
+    • 引用の品質を向上
+    • ボットを高速化
+
+    <b>💳 簡単な支払いオプション</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">カード支払い</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 暗号通貨 (技術の得意な方向け)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    すべての貢献はQuotLyBotをより良くする手助けになります！💜
+  title: '${botUsername}をサポート'
+  description: 魔法を持続させる手助けを ✨
   successful: |
-    <b>ボットを支援してくれてありがとう💜</b>
+    <b>サポートありがとうございます！💜</b>
+    QuotLyBotのさらなる進化を支援いただけて嬉しいです！
   pay: '💜 ペイテレグラム'
-  liqpay: LiqPay（VISA、MasterCard）
-  other: 他の方法
+  liqpay: 'カードで支払う 💳'
+  other: '他の方法'
 emoji:
   info: |
-    絵文字を含めてください。
+    <b>引用絵文字を選ぼう！</b>
 
-    たとえば、 <code>/qemoji💜</code> は、以降のすべての新しいステッカーの接尾辞を💜に変更します。
-    ランダムな絵文字の場合 <code>/qemoji random</code>
-  done: 絵文字が正常に変更されました。
-adv:
-  about: |
-    <b>💫 多数のアクティブユーザーとグループの広告を当社から購入できます</b>
+    • カスタム絵文字を設定: <code>/qemoji</code>💜
+    • ランダム絵文字を使用: <code>/qemoji random</code>
+    • 絵文字をクリア: <code>/qemoji clear</code>
 
-    • 当社のボットは 30`000 を超えるアクティブグループに参加しており、毎月 70`000 人を超えるユーザーがボットを使用しています。
-    その中にはさまざまな国のユーザーがいます。広告を表示するユーザーの言語を選択できます
-    • 広告は、ユーザーのチャットに応じて、ボタンまたはテキストメッセージの形式で見積もりの下に表示されます
-    • 広告の価格は自分で指定します。まず、最も高い金額が割り当てられた広告が表示されます
-    • 広告のテキストとコンテンツは、当社の規則 (/adv_rules) に準拠する必要があり、投稿する前にモデレーションに合格する必要があります。これは入金前に行うことができます
-
-    残高: ${balance} USD
-  rules: |
-    <b>広告では以下のことは <u>許可されません</u> :</b>
-    • 卑猥な言葉や侮辱的な言葉の使用
-    • 1 つのテキストに 2 つ以上の絵文字の使用
-    • 誤解を招く情報
-    • ウクライナの法律で禁止されている情報
-    • アダルト コンテンツ
-    • ギャンブル
-
-    <i>また、理由もなく広告が気に入らない場合は、広告を拒否する権利も有します。</i>
-  main_menu:
-    create_btn: 広告を作成
-    list_btn: 広告一覧
-    pay_btn: チャージ残高
-  create:
-    enter_text: |
-      広告テキストを入力してください：
-
-      <i>70文字以上で、ルール（/adv_rules）</i>
-    enter_link: |
-      宣伝するリソースへのリンクを入力してください:
-
-      <i>リンクは完全である必要があります。Telegram で何かを宣伝する場合、リンクは t.me で始まる必要があります。
-      リソースは当社のルール (/adv_rules) に準拠している必要があります。モデレーションに合格した後にサイトが置き換えられた場合、アカウントはブロックされ、お金は返金されません。</i>
-    select_locale: |
-      広告が表示されるユーザーの言語を選択します
-
-      数字は、その言語で広告が表示される可能性のあるユーザーの数です。
-      実際にボットを使用するユーザーのみがカウントされます。ただし、広告は引用が行われたグループ内の他のユーザーにも表示されるため、この数字ははるかに高くなる可能性があります
-
-      <i>言語は国に対応していません。
-      選択できる言語は 1 つだけです。複数の言語が必要な場合は、別の言語で再度広告を作成してください。</i>
-    enter_price: |
-      広告の 1000 インプレッションあたりの価格を USD で指定します:
-
-      <u>アクティブな広告の平均価格:</u> ${averagePrice} USD
-
-      <i>最小価格は 0.15 USD です。
-      広告はランダムに表示されますが、インプレッションの価格が高い広告の方が表示される可能性が高くなります。
-      </i>
-    sent_moderate: |
-      The advertising has been sent for moderation. Please be persent and wait. If the moderation is successfully or unsuccess, you will receive a notification.
-  list:
-    select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
-    selected_list: |
-      selected_list
-  moderate:
-    adv: |
-      Adv #id_${adv._id} から <a href="tg://user?id=${telegramId}">${name}</a>
-
-      テキスト: ${adv.text}
-      リンク: ${adv.link}
-      ロケール: ${adv.locale}
-      価格: ${adv.price}
-      カウント ${adv.count}
-    accepted: |
-      広告は正常に管理されました。広告セクションで表示を開始できます: /adv
-    denied: |
-      残念ながら広告はモデレートされていません。 ルール（/adv_rules）をお読みください。 @Ly_OBot に書いて、この問題を説明するメッセージにこのタグを含めてください: #qba_${adv.id}
-    accept_btn: 同意する
-    deny_btn: 拒否
+    新しい引用に絵文字が追加されます ✨
+  done: 絵文字スタイルが更新されました！✨
 only_admin: |
-  このコマンドは、グループ管理者のみが使用できます。
+  <b>⚠️ 管理者アクセスが必要です</b>
+  このコマンドはグループ管理者のみが使用できます。
 only_group: |
-  このコマンドはグループでのみ使用できます。
+  <b>⚠️ グループコマンド</b>
+  この機能はグループチャットでのみ動作します。
 rate_limit: |
-  コマンドを ${seconds} 秒ごとに1回しか使用できません。
+  <i>ちょっとしたブレイク...</i> このコマンドは${seconds}秒後に再度使用できます ⏳
+
+  <i>プロのヒント: 待機中に、最後の引用をカスタマイズするのに </i><code>/q color</code> <i>または</i> <code>/q media</code>をお試しください

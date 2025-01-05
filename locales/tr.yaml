@@ -2,244 +2,196 @@
 language_name: '🇹🇷 Türkçe'
 description:
   short: |
-    Mesajdan bir alıntı oluşturmaya yardımcı olacağım.
-    Mesajı /q ile yanıtlayın veya bana iletin.
+    Herhangi bir mesajı güzel bir alıntı çıkartmasına dönüştürün! ✨
+    /q ile yanıtlayın ya da mesajı bana yönlendirin
   long: |
+    Çarpıcı alıntı çıkartmaları oluşturun ve favori sohbet anlarınızı koruyun! ✨
 
+    Sadece herhangi bir mesaja /q ile yanıt verin veya bana yönlendirin. Kaydetmek için mükemmel:
+    🌟 En iyi sohbet anları ve anıları
+    💭 İlham verici düşünceler ve konuşmalar
+    🎨 Özel stillerle yaratıcı mesajlar
+    ✍️ Güzel formatta önemli notlar
+
+    Hemen başlayın - sadece bir mesaj yönlendirin veya /q kullanın!
 help: |
-  <b>📝 Merhaba! Güzel alıntılar oluşturmak için bir botum</b>
+  <b>✨ QuotLyBot Hızlı Rehber</b>
 
-  <i>Herhangi bir mesajı, önemli sohbet anlarını korumak için çekici bir alıntıya dönüştürebilirim. Hem özel mesajlarda hem de gruplarda çalışıyorum!</i>
+  <b>📱 Temel Komutlar</b>
+  • <code>/q</code> - Yanıtladığınız mesajı alıntıla
+  • <code>/q 3</code> - Birden fazla mesajı alıntıla
+  • Mesaj yönlendir - Doğrudan alıntıla
 
-  <b>🎯 Temel Kullanım:</b>
+  <b>🎨 Stiller</b>
 
-  • Tek mesaj: ona <code>/q</code> ile yanıt verin
-  • Birden fazla mesaj: bir sayı ekleyin, örneğin <code>/q 3</code>
-  • Özel sohbetlerde: mesajları bana iletmeniz yeterli
+  Renkler:
+  • Temel: <code>/q red</code>
+  • Özel: <code>/q #ff69b4</code>
+  • Gradyan: <code>/q red//#blue</code>
+  • Rastgele: <code>/q random</code>
 
-  <b>🎨 Alıntı Özelleştirme:</b>
+  Medya:
+  • Fotoğraf ekle: <code>/q media</code>
+  • Resmi kırp: <code>/q crop</code>
+  • İleti dizisi koru: <code>/q reply</code>
+  • Sesli önizleme: Otomatik
 
-  <b>1. Renk:</b>
-  • İsim: <code>/q kırmızı</code>, <code>/q mavi</code>, <code>/q yeşil</code>
-  • Özel renk: <code>/q #cbafff</code>
-  • Rastgele renk: <code>/q rastgele</code>
+  Format:
+  • Çıkartma: <code>/q</code>
+  • Görüntü: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • Hikaye: <code>/q stories</code>
 
-  <b>2. Görünüm:</b>
-  • Çıkartma yerine resim: <code>img</code> ekleyin
-  • Yüksek kalite: <code>png</code> ekleyin
-  • Konuşmayı koru: <code>reply</code> ekleyin
+  Kalite:
+  • Normal: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>3. Medya:</b>
-  • Fotoğraf/çıkartma dahil et: <code>media</code> ekleyin
+  <b>💫 Popüler Kombinasyonlar</b>
+  • <code>/q red media</code> - Fotoğraflı kırmızı alıntı
+  • <code>/q 3 reply</code> - Bağlamla alıntı
+  • <code>/q img s2</code> - Yüksek kaliteli görüntü
+  • <code>/q stories media</code> - Fotoğraflı hikaye
 
-  <b>4. Kalite:</b>
-  Gelişmiş kalite için <code>s</code> ve bir sayı ekleyin:
-  • <code>s2</code> - 2x kalite
-  • <code>s3</code> - 3x kalite
-
-  <b>💫 Yararlı Kombinasyonlar:</b>
-
-  • Fotoğraflı güzel alıntı:
-  <code>/q 2 kırmızı media</code> - 2 mesaj ve fotoğraflı kırmızı alıntı
-
-  • Yüksek kaliteli sohbet ekran görüntüsü:
-  <code>/q 3 reply png</code> - PNG formatında 3 mesajlı diyalog
-
-  • Şık renkli alıntı:
-  <code>/q #ff69b4 img s2</code> - yüksek kalitede pembe alıntı
-
-  <b>🌟 Özel Özellikler:</b>
-
-  • Alıntı puanlaması: oylamayı etkinleştirmek için <code>rate</code> ekleyin
-  • Emoji stili: <code>/qb apple</code> veya <code>/qb google</code>
+  <b>⚙️ Ekstra Özellikler</b>
+  • Puanlama: <code>/q rate</code>
   • Rastgele alıntılar: <code>/qrand</code>
   • En iyi alıntılar: <code>/qtop</code>
+  • Dil: <code>/lang</code>
 
-  <b>👨‍💼 Yönetici Komutları:</b>
+  <b>🎯 Grup Ayarları</b>
+  • Varsayılan renk: <code>/qcolor</code>
+  • Puanlama etkinleştir: <code>/qrate</code>
+  • Pakete kaydet: <code>/qs</code>
 
-  • <code>/qcolor</code> - varsayılan grup rengini ayarla
-  • <code>/qrate</code> - puanlama sistemini etkinleştir
-  • <code>/qgab</code> - rastgele alıntı görünümünü yapılandır
-  • <code>/qs</code> - grup çıkartma paketine kaydet
+  <b>🌈 Emoji Stilleri</b>
+  Klasik: <code>/qb apple</code>, <code>/qb google</code>
+  Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  Retro: <code>/qb blob</code>
 
-  <b>🌐 Diğer Komutlar:</b>
-
-  • <code>/lang</code> - dili değiştir
-  • <code>/donate</code> - geliştiriciyi destekle
-
-  <b>📱 Bize Ulaşın:</b>
-  • Geliştirici Blogu: @LyBlog
+  <b>📱 Yardıma mı ihtiyacınız var?</b>
+  • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • Destek: <code>/donate</code>
 help_group: |
-  <b>Merhaba!</b>
-  /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
+  <b>Merhaba! 👋</b>
+  Bu grupta güzel alıntılar oluşturacağım - herhangi bir mesajın yanıtına <code>/q</code> kullanın!
+
+  Tüm özelliklerimi özelde öğrenin: <a href="t.me/${username}?start=help">Yardım Alın</a> ✨
 btn:
   add_group: Gruba Ekle
   help: Dökümanlar
 quote:
-  unsupported_message: Desteklenmeyen Cihaz
+  unsupported_message: |
+    Üzgünüm, bu mesaj türünü henüz desteklemiyorum 😅
+
+    Metin, fotoğraf, çıkartma veya sesli mesajları deneyin!
   api_error: |
-    <b>😓 Fiyat teklifi oluşturulamadı</b>
+    <b>Oops! Bir şeyler ters gitti 😅</b>
     <pre>${error}</pre>
+    Lütfen bir dakika sonra tekrar deneyin!
   empty_forward: |
-    Komut, bir mesajı yanıtlayarak kullanılmalıdır.
+    Lütfen alıntılamak istediğiniz mesaja yanıt verin veya onu iletin ✨
   set_background_color: |
-    Alıntıların arka plan rengi şu şekilde ayarlandı: <code>${backgroundColor}</code>
+    <b>Mükemmel!</b> Alıntı arka planı değiştirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    Kdjn
-  sticker:
+    <b>Tamam!</b> Emoji stili değiştirildi: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Çıkartma başarıyla pakete eklendi <a href="${link}">Grup Çıkartma Paketi</a>.
+    suc: Başarıyla <a href="${link}">grup çıkartma paketinize</a> eklendi ✨
     error:
-      animated: Animasyonlu bir çıkartma ekleyemiyorum.
-      need_creator: <b>Bu çıkartmayı kaydedemedim..</b>\n${creator} bana özel mesajlarda herhangi bir mesaj yazmalı.
-      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+      animated: Üzgünüm, henüz animasyonlu çıkartmaları kaydedemiyorum 😅
+      need_creator: <b>Az kaldı!</b> ${creator} çıkartmaları kaydetmek için önce bana bir mesaj göndermeli
+      telegram: <b>Oops!</b> Bir şeyler ters gitti:\n<pre>${error}</pre>
   delete:
-    suc: Çıkartma, başarıyla çıkartma paketinden kaldırıldı <a href="${link}">Grup Çıkartma Paketi</a>.
+    suc: <a href="${link}">Grup çıkartma paketinizden</a> kaldırıldı 🗑
     error:
-      telegram: <b>Bu çıkartmayı kaydedemedim.</b>\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Çıkartma kaldırılamadı:\n<pre>${error}</pre>
     btn:
-      save_sticker: Çıkartmayı kaydet
+      save_sticker: Çıkartmayı Kaydet
   delete_random:
-    suc: Çıkartma, rastgele çıkartmalar grubundan başarıyla kaldırıldı.
-    error: <b>O çıkartmayı silemedim.</b>\n<pre>${error}</pre>
+    suc: Rastgele koleksiyondan kaldırıldı 🗑
+    error: <b>Oops!</b> Çıkartma kaldırılamadı:\n<pre>${error}</pre>
   empty_forward: |
-    Komut, bir çıkartmaya, fotoğrafa veya resme sahip bir dosyaya yanıt vererek kullanılmalıdır.
+    Lütfen kaydetmek istediğiniz çıkartma, fotoğraf veya görüntüye yanıt verin ✨
   fstik: |
-    Çıkartmayı, kişisel çıkartma paketinize kaydetmek için bu mesajı @fStikBot'a iletin
+    Bunu kişisel çıkartma paketinize kaydetmek için @fStikBot'a iletin 🎨
 rate:
   vote:
     rated: |
-      Sen ${rateName} bu.
+      Bu alıntıyı ${rateName} olarak derecelendirdiniz! Puanladığınız için teşekkür ederiz ⭐
     back: |
-      Oyunuzu geri aldınız.
+      Oyunuz kaldırıldı 🔄
   settings:
     enable: |
-      Teklifler için değerlendirme dahildir.
+      Alıntı derecelendirmesi artık etkin! ⭐ ile derecelendirin
     disable: |
-      Teklifler için derecelendirme kapalı.
+      Alıntı derecelendirmesi devre dışı bırakıldı 🔄
 random:
   empty: |
-    Grupta olumlu derecelendirmeye sahip alıntı yok.
+    Bu grupta henüz yüksek puanlı alıntı yok! Bazı mesajları derecelendirin ⭐
   gab: |
-    Rastgele alıntı yapma şansı ${gab} olarak ayarlanmıştır
+    Rastgele alıntı sıklığı ${gab} olarak ayarlandı ✨
 hidden:
   settings:
     enable: |
-      Gönderen arama etkinleştirildi.
+      Gönderen arama etkinleştirildi 🔍
     disable: |
-      Gönderen arama devre dışı bırakıldı.
+      Gönderen arama devre dışı bırakıldı 🔄
 privacy:
   settings:
     enable: |
-      Gizlilik modu açık.
+      Gizlilik modu etkinleştirildi 🔒 Bilgileriniz alıntılarda gizlenecek
     disable: |
-      Gizlilik modu devre dışı bırakıldı.
+      Gizlilik modu devre dışı bırakıldı 🔓
 top:
   info: |
-    <b>En iyi grup alıntıları:</b>
-  open: Üstü açık
+    <b>✨ En Çok Alıntılanan Mesajlar</b>
+  open: En İyi Alıntıları Gör
 donate:
   info: |
-    Geliştiriciye kahve veya başka bir şey satın alabilirsiniz:
+    <b>QuotLyBot'un Gelişimini Destekleyin! ☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Banka kartı: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-  title: Bağış yap ${botUsername}
-  description: Bot geliştirme desteği
+    Desteğiniz bize şunları sağlar:
+    • Sunucuların 24/7 çalışmasını
+    • Yeni özellikler ve stiller eklemeyi
+    • Alıntı kalitesini iyileştirmeyi
+    • Botu daha hızlı hale getirmeyi
+
+    <b>💳 Kolay Ödeme Seçenekleri</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Kart ile Ödeme</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 Kripto Para (Teknoloji meraklıları için)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    Her katkı, QuotLyBot'u herkes için daha iyi hale getirmeye yardımcı olur! 💜
+  title: '${botUsername} Bağış Yap'
+  description: Büyüyü sürdürebilmek için yardım edin ✨
   successful: |
-    <b>Botu desteklediğiniz için teşekkürler 💜</b>
+    <b>Desteğiniz için teşekkür ederiz! 💜</b>
+    QuotLyBot'u daha da iyi hale getiriyorsunuz!
   pay: '💜 Telegram Üzerinden Ödeyin'
-  liqpay: LiqPay (VISA, MasterCard)
-  other: Diğer yöntemler
+  liqpay: 'Kart ile Öde 💳'
+  other: 'Diğer Yöntemler'
 emoji:
   info: |
-    Lütfen emoji ekleyin.
+    <b>Alıntı Emojinizi Seçin!</b>
 
-    Örneğin, <code>/qemoji💜</code>, sonraki tüm yeni çıkartmalar için son eki 💜 olarak değiştirecektir.
-    Rastgele bir simge için <code>/qemoji rastgele</code>
-  done: Emoji başarıyla değiştirildi.
-adv:
-  about: |
-    <b>💫 Çok sayıda aktif kullanıcı ve grup için bizden reklam satın alabilirsiniz</b>
+    • Özel emoji ayarla: <code>/qemoji</code>💜
+    • Rastgele emoji kullan: <code>/qemoji random</code>
+    • Emoji temizle: <code>/qemoji clear</code>
 
-    • Botumuz 30'000'den fazla aktif grupta ve her ay 70'000'den fazla kullanıcı botu kullanıyor.
-    Bunların arasında çeşitli ülkelerden kullanıcılar var. Reklamın gösterilmesi gereken kullanıcıların dilini seçebilirsiniz
-    • Reklam, kullanıcının sohbetine bağlı olarak bir buton veya metin mesajı şeklinde teklifin altında gösterilir
-    • Bir reklamın fiyatını kendiniz belirlersiniz; öncelikle en yüksek tutarın tahsis edildiği ilan görüntülenecektir
-    • İlanın metni ve içeriği kurallarımıza (/adv_rules) uygun olmalı ve yayınlanmadan önce moderasyondan geçmelisiniz. Bu, para yatırmadan önce yapılabilir
-
-    Bakiye: ${balance} USD
-  rules: |
-    <b>Reklamlarda <u>değil</u> izin verilmez:</b>
-    • Müstehcenlik veya hakaret kullanımı
-    • Metin başına 1'den fazla emoji kullanılması
-    • Yanıltıcı bilgi
-    • Ukrayna yasaları tarafından yasaklanmış bilgiler
-    • Yetişkinlere uygun içerik
-    • Kumar
-
-    <i>Biz de sebepsiz yere beğenmediğimiz bir reklamı reddetme hakkına sahibiz.</i>
-  main_menu:
-    create_btn: Reklam oluşturun
-    list_btn: Reklam listesi
-    pay_btn: Bakiyeyi tamamla
-  create:
-    enter_text: |
-      Reklam metninizi girin:
-
-      <i>70 karakterden fazla olmamalı ve kurallarımıza uygun olmalıdır (/adv_rules)</i>
-    enter_link: |
-      Reklamı yapılan kaynağa bir bağlantı girin:
-
-      <i>Bağlantı tam olmalıdır, Telegram'da bir şeyin reklamını yapıyorsanız bağlantı t.me ile başlamalıdır.
-      Kaynak kurallarımıza (/adv_rules) uygun olmalıdır, moderasyonu geçtikten sonra site değiştirilirse hesabınız bloke edilir ve para iade edilmez.</i>
-    select_locale: |
-      Reklamın gösterileceği kullanıcıların dilini seçin
-
-      Sayı, reklamınızı potansiyel olarak o dilde görecek kullanıcıların sayısıdır.
-      Yalnızca botu gerçekten kullanan kullanıcılar sayılır. Ancak reklam, alıntının yapıldığı gruptaki diğer kullanıcılar tarafından da görülebilmektedir, bu nedenle bu rakam çok daha yüksek olabilir
-
-      <i>Dil ülkeye karşılık gelmiyor.
-      Sadece bir dil seçebilirsiniz, eğer birden fazla dil ihtiyacınız varsa, lütfen başka bir dil için tekrar bir reklam oluşturun.</i>
-    enter_price: |
-      Reklamınızın 1000 gösterim başına fiyatını USD olarak belirtin:
-
-      <u>Aktif reklamların ortalama fiyatı:</u> ${averagePrice} USD
-
-      <i>Minimum fiyat 0.15 USD'dir.
-      Reklamlar rastgele bir şekilde gösterilir, ancak gösterilme olasılığı en yüksek olan reklam, gösterim fiyatı daha yüksek olan bir reklamdır.
-      </i>
-    sent_moderate: |
-      İlan moderasyona gönderilmiştir. Lütfen sabırlı olun ve bekleyin. Denetleme başarılı veya başarısız olursa bir bildirim alırsınız.
-  list:
-    select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
-    selected_list: |
-      selected_list
-  moderate:
-    adv: |
-      İlan #id_${adv._id} <a href="tg://user?id=${telegramId}">${name}</a>
-
-      Metin: ${adv.text}
-      Bağlantı: ${adv.link}
-      Yerel ${adv.locale}
-      Fiyat: ${adv.price}
-      Sayı ${adv.count}
-    accepted: |
-      Reklam başarıyla yönetildi. Reklam bölümünde göstermeye başlayabilirsiniz: /adv
-    denied: |
-      Maalesef reklam denetlenmedi. Lütfen kurallarımızı okuyun (/adv_rules), bunun bir hata olduğundan eminseniz @Ly_OBot adresinden bize yazın ve sorunu açıklayan mesaja bu etiketi ekleyin: #qba_${adv.id}
-    accept_btn: Kabul
-    deny_btn: Reddet
+    Emojiniz tüm yeni alıntılara eklenecektir ✨
+  done: Emoji stili güncellendi! ✨
 only_admin: |
-  Bu komut yalnızca grup yöneticisi tarafından kullanılabilir.
+  <b>⚠️ Admin Erişimi Gerekli</b>
+  Bu komut yalnızca grup yöneticileri tarafından kullanılabilir.
 only_group: |
-  Bu komut yalnızca gruplar içerisinde kullanılabilir.
+  <b>⚠️ Grup Komutu</b>
+  Bu özellik yalnızca grup sohbetlerinde çalışır.
 rate_limit: |
-  Bu komutu ${seconds} saniyeden daha sık kullanamazsınız.
+  <i>Kısa bir mola veriyorum...</i> Bu komutu tekrar kullanabilmen için ${seconds} saniye ⏳
+
+  <i>Uzman ipucu: Beklerken, son alıntını </i><code>/q color</code> <i>veya</i> <code>/q media</code> <i>ile özelleştirmeyi dene</i>

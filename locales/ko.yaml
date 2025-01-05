@@ -2,241 +2,196 @@
 language_name: '🇰🇷 한국어'
 description:
   short: |
-    메시지에서 인용구를 만드는 데 도움이 됩니다. 간단히 메시지에 대답하여 또는 저에게 전달하십시오.
+    어떤 메시지든 멋진 인용 스티커로 변환하세요! ✨
+    /q로 답장하거나 메시지를 포워드하세요.
   long: |
-    그룹 채팅에서 재미나 영감을 줄 메시지들을 기억하셨나요? 저에게 전달하시거나 /q를 입력하여 저에게 보내주시면 멋진 인용구 스티커로 만들어 드립니다. 개인적인 추억으로나 전문적인 용도로, 가능성은 무한합니다. 지금 바로 저를 시험해보세요! 😎
+    매력적인 인용 스티커를 만들고 당신의 소중한 대화 순간을 보존하세요! ✨
+
+    어떤 메시지에든 /q로 답장하거나 저에게 포워드하세요. 저장하기에 완벽합니다:
+    🌟 최고의 채팅 하이라이트와 추억
+    💭 영감을 주는 생각과 대화
+    🎨 사용자 정의 스타일의 창의적인 메시지
+    ✍️ 아름다운 형식의 중요한 노트
+
+    지금 바로 시작하세요 - 메시지를 포워드하거나 /q를 사용하세요!
 help: |
-  <b>📝 안녕하세요! 저는 아름다운 인용문을 만드는 봇입니다</b>
+  <b>✨ QuotLyBot 퀵 가이드</b>
 
-  <i>저는 중요한 채팅 순간을 보존하기 위해 메시지를 매력적인 인용문으로 변환할 수 있습니다. 저는 개인 메시지와 그룹 모두에서 작업합니다!</i>
+  <b>📱 기본 명령어</b>
+  • <code>/q</code> - 답장된 메시지를 인용
+  • <code>/q 3</code> - 여러 메시지를 인용
+  • 메시지 포워드 - 직접 인용
 
-  <b>🎯 기본 사용법:</b>
+  <b>🎨 스타일</b>
 
-  • 단일 메시지: <code>/q</code>로 회신하세요
-  • 여러 메시지: <code>/q 3</code>처럼 번호를 추가하세요
-  • 개인 채팅에서: 그냥 저에게 메시지를 전달하세요
+  색상:
+  • 기본: <code>/q red</code>
+  • 사용자 정의: <code>/q #ff69b4</code>
+  • 그라데이션: <code>/q red//#blue</code>
+  • 랜덤: <code>/q random</code>
 
-  <b>🎨 인용문 맞춤 설정:</b>
+  미디어:
+  • 사진 추가: <code>/q media</code>
+  • 이미지 자르기: <code>/q crop</code>
+  • 스레드 유지: <code>/q reply</code>
+  • 음성 미리보기: 자동
 
-  <b>1. 색상:</b>
-  • 이름: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • 사용자 정의 색상: <code>/q #cbafff</code>
-  • 랜덤 색상: <code>/q random</code>
+  형식:
+  • 스티커: <code>/q</code>
+  • 이미지: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • 스토리: <code>/q stories</code>
 
-  <b>2. 외형:</b>
-  • 스티커 대신 이미지: <code>img</code>를 추가하세요
-  • 고품질: <code>png</code>를 추가하세요
-  • 대화 보존: <code>reply</code>를 추가하세요
+  품질:
+  • 보통: <code>/q</code>
+  • 2배: <code>/q s2</code>
+  • 3배: <code>/q s3</code>
 
-  <b>3. 미디어:</b>
-  • 사진/스티커 포함: <code>media</code>를 추가하세요
+  <b>💫 인기 조합</b>
+  • <code>/q red media</code> - 사진과 함께 레드 인용
+  • <code>/q 3 reply</code> - 문맥을 가진 인용
+  • <code>/q img s2</code> - 고품질 이미지
+  • <code>/q stories media</code> - 사진과 함께 스토리
 
-  <b>4. 품질:</b>
-  향상된 품질을 위해 <code>s</code>와 숫자를 추가하세요:
-  • <code>s2</code> - 2배 품질
-  • <code>s3</code> - 3배 품질
+  <b>⚙️ 추가 기능</b>
+  • 등급: <code>/q rate</code>
+  • 랜덤 인용: <code>/qrand</code>
+  • 인기 인용: <code>/qtop</code>
+  • 언어: <code>/lang</code>
 
-  <b>💫 유용한 조합:</b>
+  <b>🎯 그룹 설정</b>
+  • 기본 색상: <code>/qcolor</code>
+  • 등급 활성화: <code>/qrate</code>
+  • 팩에 저장: <code>/qs</code>
 
-  • 사진과 함께 아름다운 인용문:
-  <code>/q 2 red media</code> - 2개의 메시지와 사진이 포함된 빨간색 인용문
+  <b>🌈 이모지 스타일</b>
+  클래식: <code>/qb apple</code>, <code>/qb google</code>
+  대체: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  레트로: <code>/qb blob</code>
 
-  • 고품질 대화 스크린샷:
-  <code>/q 3 reply png</code> - PNG 형식의 3메시지 대화
-
-  • 세련된 색상 인용문:
-  <code>/q #ff69b4 img s2</code> - 고품질 핑크색 인용문
-
-  <b>🌟 특별 기능:</b>
-
-  • 인용문 평가: <code>rate</code>를 추가하여 투표 활성화
-  • 이모지 스타일: <code>/qb apple</code> 또는 <code>/qb google</code>
-  • 랜덤 인용문: <code>/qrand</code>
-  • 인기 인용문: <code>/qtop</code>
-
-  <b>👨‍💼 관리자 명령:</b>
-
-  • <code>/qcolor</code> - 기본 그룹 색상 설정
-  • <code>/qrate</code> - 평가 시스템 활성화
-  • <code>/qgab</code> - 랜덤 인용문 외형 구성
-  • <code>/qs</code> - 그룹 스티커 팩에 저장
-
-  <b>🌐 기타 명령:</b>
-
-  • <code>/lang</code> - 언어 변경
-  • <code>/donate</code> - 개발자 지원
-
-  <b>📱 문의하기:</b>
-  • 개발자 블로그: @LyBlog
+  <b>📱 도움이 필요하세요?</b>
+  • 블로그: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • 지원: <code>/donate</code>
 help_group: |
-  <b>안녕하세요!</b>
+  <b>안녕하세요! 👋</b>
+  이 그룹에서 아름다운 인용을 만들겠습니다 - 어떤 메시지든 <code>/q</code>로 답장하세요!
 
-
-  에 대한 응답으로 /q 명령을 사용하여 그룹에 따옴표를 만들겠습니다. <a href="t.me/${username}?start=help">/help</a> 명령에 대한 자세한 내용은 저와 함께 개인 메시지를 참조하세요.
+  개인적으로 모든 기능을 알아보세요: <a href="t.me/${username}?start=help">도움 받기</a> ✨
 btn:
   add_group: 그룹에 추가
   help: 도와주세요
 quote:
-  unsupported_message: 지원되지 않는 메시지
+  unsupported_message: |
+    죄송합니다, 아직 이 메시지 유형은 지원하지 않습니다 😅
+
+    텍스트, 사진, 스티커 또는 음성 메시지를 시도해 보세요!
   api_error: |
-    <b>😓 견적 생성에 실패했습니다.</b>
+    <b>이런! 문제가 발생했습니다 😅</b>
     <pre>${error}</pre>
+    잠시 후 다시 시도해 주세요!
   empty_forward: |
-    명령은 메시지에 대한 응답으로 보내져야 합니다.
+    인용하고 싶은 메시지에 답장하거나 포워드하세요 ✨
   set_background_color: |
-    Цвет фона цитат установлен на: <code>${backgroundColor}</code>
+    <b>완벽합니다!</b> 인용 배경이 변경되었습니다: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    인용구 이모지 브랜드가 설정되었습니다: <code>${emojiBrand}</code>
-  sticker:
+    <b>완료!</b> 이모지 스타일이 변경되었습니다: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: 스티커가 <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다.
+    suc: <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다 ✨
     error:
-      animated: 애니메이션 스티커를 추가할 수 없습니다.
-      need_creator: <b>이 스티커를 저장하는 데 실패했습니다.</b>\n${creator}은(는) 개인 메시지에 어떤 메시지든 작성해야 합니다.
-      telegram: <b>그 스틭커를 저장하는 데 실패했습니다.</b>\n<pre>${error}</pre>
+      animated: 죄송합니다, 아직 애니메이션 스티커를 저장할 수 없습니다 😅
+      need_creator: <b>거의 완료!</b> 스티커를 저장하려면 먼저 ${creator}가 저에게 메시지를 보내야 합니다.
+      telegram: <b>이런!</b> 문제가 발생했습니다:\n<pre>${error}</pre>
   delete:
-    suc: 스티커가 <a href="${link}">그룹 스티커 팩</a>에서 성공적으로 제거되었습니다.
+    suc: <a href="${link}">그룹 스티커 팩</a>에서 제거되었습니다 🗑
     error:
-      telegram: <b>그 스티커를 저장하는 데 실패했습니다.</b>\n<pre>${error}</pre>
+      telegram: <b>이런!</b> 스티커를 제거할 수 없습니다:\n<pre>${error}</pre>
     btn:
       save_sticker: 스티커 저장
   delete_random:
-    suc: 그룹 무작위 스티커에서 스티커가 성공적으로 제거되었습니다.
-    error: <b>해당 스티커를 삭제하지 못했습니다.</b>\n<pre>${error}</pre>
+    suc: 랜덤 컬렉션에서 제거되었습니다 🗑
+    error: <b>이런!</b> 스티커를 제거할 수 없습니다:\n<pre>${error}</pre>
   empty_forward: |
-    명령은 스티커, 사진 또는 그림 파일에 대한 응답으로 보내져야 합니다.
+    저장하고 싶은 스티커, 사진 또는 이미지를 답장하세요 ✨
   fstik: |
-    개인 스티커 팩에 스티커를 저장하려면 이 메시지를 @fStikBot으로 전달하십시오.
+    개인 스티커 팩에 저장하려면 @fStikBot으로 포워드하세요 🎨
 rate:
   vote:
     rated: |
-      당신은 ${rateName} 하셨습니다.
+      당신은 이 인용을 ${rateName}! 평가해 주셔서 감사합니다 ⭐
     back: |
-      투표를 받으셨습니다.
+      당신의 투표가 제거되었습니다 🔄
   settings:
     enable: |
-      견적 평가가 활성화되었습니다.
+      인용 평가가 이제 활성화되었습니다! ⭐로 평가하세요.
     disable: |
-      견적 평가가 비활성화되었습니다.
+      인용 평가가 비활성화되었습니다 🔄
 random:
   empty: |
-    그룹에 긍정적인 평가가 없습니다.
+    아직 이 그룹에는 고평가된 인용이 없습니다! 메시지를 평가해 보세요 ⭐
   gab: |
-    랜덤 견적의 기회가 ${gab}로 설정되었습니다.
+    랜덤 인용 빈도가 ${gab}로 설정되었습니다 ✨
 hidden:
   settings:
     enable: |
-      송신 찾기가 활성화되었습니다.
+      송신자 검색 활성화됨 🔍
     disable: |
-      송신 찾기가 비활성화되었습니다.
+      송신자 검색 비활성화됨 🔄
 privacy:
   settings:
     enable: |
-      개인 정보 보호 모드가 활성화되었습니다.
+      프라이버시 모드가 활성화되었습니다 🔒 인용에서 귀하의 정보가 숨겨질 것입니다.
     disable: |
-      개인 정보 보호 모드가 비활성화되었습니다.
+      프라이버시 모드가 비활성화되었습니다 🔓
 top:
   info: |
-    <b>상위 그룹 견적:</b>
-  open: 열린 상단
+    <b>✨ 가장 많이 인용된 메시지</b>
+  open: 상위 인용 보기
 donate:
   info: |
-    개발자에게 커피나 다른 것을 구입할 수 있습니다. 다음과 같은 세부 정보로 구입할 수 있습니다:
+    <b>QuotLyBot 개발을 지원하세요! ☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    은행 카드: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-  title: Донат ${botUsername}
-  description: 봇 개발 지원하기
+    귀하의 지원은 다음의 도움을 줍니다:
+    • 24/7 서버를 유지
+    • 새로운 기능과 스타일 추가
+    • 인용 품질 향상
+    • 봇을 더 빠르게 만듬
+
+    <b>💳 간편한 결제 옵션</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">카드 결제</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 암호화폐 (기술 애호가용)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    모든 기여는 QuotLyBot을 더 나은 서비스로 만드는데 도움이 됩니다! 💜
+  title: '${botUsername} 지원하기'
+  description: 마법이 계속되도록 도와주세요 ✨
   successful: |
-    <b>봇 지원해 주셔서 감사합니다 💜</b>
+    <b>지원해 주셔서 감사합니다! 💜</b>
+    QuotLyBot이 더욱 발전할 수 있도록 도와주십니다!
   pay: '💜 텔레그램으로 지불하기'
-  liqpay: LiqPay (VISA, MasterCard)
-  other: 기타 옵션
+  liqpay: '카드로 결제하기 💳'
+  other: '다른 옵션'
 emoji:
   info: |
-    이모지를 포함해주세요.
+    <b>인용 이모지를 선택하세요!</b>
 
-    예를 들어, <code>/qemoji💜</code>을 사용하여 이후의 새 스티커에 💜 접미사가 생깁니다.
-    랜덤 이모지를 위해 <code>/qemoji random</code>
-  done: 이모티콘이 성공적으로 변경되었습니다.
-adv:
-  about: |
-    <b>💫 우리는 다수의 활발한 사용자와 그룹에게 광고를 구매할 수 있습니다.</b>
+    • 커스텀 이모지 설정: <code>/qemoji</code>💜
+    • 랜덤 이모지 사용: <code>/qemoji random</code>
+    • 이모지 삭제: <code>/qemoji clear</code>
 
-    • 우리의 봇은 30,000개 이상의 활성 그룹에 위치하고 있으며 매월 70,000명 이상의 사용자가 봇을 사용합니다.
-    이들 중 다양한 국가의 사용자들이 있습니다. 광고할 사용자들의 언어를 선택할 수 있습니다
-    • 광고는 견적 아래에 버튼이나 텍스트 메시지 형태로 표시됩니다. 사용자의 채팅에 따라 다릅니다
-    • 광고 요금은 본인이 지정합니다; 먼저 가장 높은 금액이 할당된 광고가 표시됩니다
-    • 광고의 텍스트와 콘텐츠는 우리의 규칙을 준수해야 합니다 (/adv_rules) 그리고 게시되기 전에 심사를 통과해야 합니다. 이는 보증금을 지급하기 전에 수행할 수 있습니다
-
-    잔고: ${balance} USD
-  rules: |
-    <b> 광고에서는 허용되지 않습니다:</b>
-    • 혐오나 모욕 사용
-    • 텍스트 당 더 많은 이모티콘 사용
-    • 오도 정보
-    • 우크라이나 법률에 금지된 정보
-    • 성인 콘텐츠
-    • 도박
-
-     <i>우리는 이유 없이 광고를 거부할 권리도 갖고 있습니다.</i>
-  main_menu:
-    create_btn: 광고 만들기
-    list_btn: 광고 목록
-    pay_btn: 잔고 충전
-  create:
-    enter_text: |
-      광고 텍스트를 입력하십시오:
-
-       <i>70자를 초과하지 않아야 하며 규칙을 준수해야 합니다 (/adv_rules)</i>
-    enter_link: |
-      광고하려는 자원에 대한 링크를 입력하십시오:
-
-       <i>링크는 완전해야 하며, 텔레그램에서 광고하는 경우 링크는 t.me로 시작해야 합니다. 자료가 접수 후 대치되면 계정이 차단되고 비용은 환불되지 않습니다. 우리의 규칙을 준수해야 합니다 (/adv_rules), 게시하기 전에 심사를 통과해야 합니다.</i>
-    select_locale: |
-      광고가 보여질 사용자들의 언어를 선택하십시오
-
-       사용자의 숫자는 실제로 봇을 사용하는 사용자만 카운트됩니다. 그러나 그룹에서 견적이 작성된 사용자 외에도 광고를 볼 수 있으므로 이 숫자는 훨씬 더 높을 수 있습니다
-
-       <i>언어는 국가에 해당하지 않습니다. 언어는 한 가지만 선택할 수 있으며 다른 언어에 대한 광고를 원하는 경우 다시 광고를 작성해야 합니다.</i>
-    enter_price: |
-      1,000회 광고 노출당 가격을 USD 단위로 입력하십시오:
-
-       <u>활성 광고의 평균 가격:</u> ${averagePrice} USD
-
-       <i>최소 가격은 0.15 USD입니다.
-      광고는 무작위로 표시되지만 더 높은 노출 가격을 가진 광고가 나올 확률이 더 높습니다.</i>
-    sent_moderate: |
-      광고가 심사로 전송되었습니다. 인내심을 가지고 기다려주십시오. 심사가 성공하거나 실패하면 알림을 받게 됩니다.
-  list:
-    select_list: |
-      select_list
-    wait_btn: wait_btn
-    ready_btn: ready_btn
-    end_btn: end_btn
-    selected_list: |
-      selected_list
-  moderate:
-    adv: |
-      광고 #id_${adv._id} 님의 <a href="tg://user?id=${telegramId}">${name}</a>
-
-      텍스트: ${adv.text}
-      링크: ${adv.link}
-      로케일: ${adv.locale}
-      가격: ${adv.price}
-      카운트 ${adv.count}
-    accepted: |
-      광고가 성공적으로 심사를 통과했습니다. 광고 섹션에서 표시를 시작할 수 있습니다: /adv
-    denied: |
-      안타깝게도 광고가 심사를 통과하지 못했습니다. 우리의 규칙을 읽어보시고 (/adv_rules), 이것이 실수였다고 확신하는 경우 @Ly_OBot에 문의하여 문제를 설명하는 메시지에이 태그를 포함하여 필피해 주십시오: #qba_${adv.id}
-    accept_btn: 수락
-    deny_btn: 거부
+    당신의 이모지가 모든 새로운 인용에 추가될 것입니다 ✨
+  done: 이모지 스타일이 업데이트되었습니다! ✨
 only_admin: |
-  이 명령은 그룹 관리자만 사용할 수 있습니다.
+  <b>⚠️ 관리자 권한 필요</b>
+  이 명령어는 그룹 관리자만 사용할 수 있습니다.
 only_group: |
-  이 명령은 그룹에서만 사용할 수 있습니다.
+  <b>⚠️ 그룹 명령어</b>
+  이 기능은 그룹 채팅에서만 작동합니다.
 rate_limit: |
-  이 명령은 ${seconds} 초마다 한 번 이상 사용할 수 없습니다.
+  <i>잠깐 쉬는 중...</i> 이 명령어를 다시 사용하려면 ${seconds}초 기다려 주세요 ⏳
+
+  <i>팁: 기다리는 동안 </i><code>/q color</code> <i>또는</i> <code>/q media</code>로 마지막 인용을 커스터마이징해 보세요
