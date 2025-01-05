@@ -2,245 +2,196 @@
 language_name: '🇦🇿 Azərbaycanca'
 description:
   short: |
-    Messajdan alıntı yaratmağa kömək edəcəyəm.
-    Sadəcə yuxarıda mənimlə mesaja cavab verin və ya onu mənə yönəltin.
+    Turn any message into a beautiful quote sticker! ✨
+    Reply with /q or forward the message to me
   long: |
-    Qrup çatdırmaq istədiyiniz məzmunlu qrup söhbətində əyləncəli və əlverişli mesajları gördünüzmü və onları əbədidaga salmaq istəyirsiniz? Sadəcə onları mənə yönəlt və ya /q yaz və onları təravətli bir alıntı stiker olaraq çevirəcəyəm, onları yaddaşa salıb dostlarınızla paylaşa biləcəyiniz. Şəxsi xatirələr üçün və ya peşəkar istifadə üçün, imkanlar sonsuzdur. Məni sınamaqda birisən! 😎
+    Create stunning quote stickers and preserve your favorite chat moments! ✨
+
+    Simply reply /q to any message or forward it to me. Perfect for saving:
+    🌟 Best chat highlights and memories
+    💭 Inspiring thoughts and conversations
+    🎨 Creative messages with custom styles
+    ✍️ Important notes in beautiful format
+
+    Get started now - just forward a message or use /q!
 help: |
-  <b>📝 Salam! Mən gözəl sitatlar yaratmaq üçün botam</b>
+  <b>✨ QuotLyBot Quick Guide</b>
 
-  <i>Mən hər hansı bir mesajı cazibədar bir sitata çevirə bilərəm ki, vacib söhbət məqamlarını saxlayasınız. Mən həm özəl mesajlarda, həm də qruplarda işləyirəm!</i>
+  <b>📱 Basic Commands</b>
+  • <code>/q</code> - Quote replied message
+  • <code>/q 3</code> - Quote several messages
+  • Forward message - Quote directly
 
-  <b>🎯 Əsas İstifadə:</b>
+  <b>🎨 Styles</b>
 
-  • Tək mesaj: ona <code>/q</code> ilə cavab verin
-  • Çox mesaj: bir rəqəm əlavə edin, məsələn <code>/q 3</code>
-  • Özəl söhbətlərdə: sadəcə mesajları mənə yönləndirin
+  Colors:
+  • Basic: <code>/q red</code>
+  • Custom: <code>/q #ff69b4</code>
+  • Gradient: <code>/q red//#blue</code>
+  • Random: <code>/q random</code>
 
-  <b>🎨 Sitat Fərdiləşdirmə:</b>
+  Media:
+  • Add photo: <code>/q media</code>
+  • Crop image: <code>/q crop</code>
+  • Keep thread: <code>/q reply</code>
+  • Voice preview: Automatic
 
-  <b>1. Rəng:</b>
-  • Ad: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Fərdi rəng: <code>/q #cbafff</code>
-  • Təsadüfi rəng: <code>/q random</code>
+  Format:
+  • Sticker: <code>/q</code>
+  • Image: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • Story: <code>/q stories</code>
 
-  <b>2. Görünüş:</b>
-  • Stiker əvəzinə şəkil: <code>img</code> əlavə edin
-  • Yüksək keyfiyyət: <code>png</code> əlavə edin
-  • Söhbəti saxla: <code>reply</code> əlavə edin
+  Quality:
+  • Normal: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>3. Media:</b>
-  • Foto/stiker daxil et: <code>media</code> əlavə edin
+  <b>💫 Popular Combinations</b>
+  • <code>/q red media</code> - Red quote with photo
+  • <code>/q 3 reply</code> - Quote with context
+  • <code>/q img s2</code> - High-quality image
+  • <code>/q stories media</code> - Story with photo
 
-  <b>4. Keyfiyyət:</b>
-  Yaxşılaşdırılmış keyfiyyət üçün <code>s</code> və bir rəqəm əlavə edin:
-  • <code>s2</code> - 2x keyfiyyət
-  • <code>s3</code> - 3x keyfiyyət
+  <b>⚙️ Extra Features</b>
+  • Rating: <code>/q rate</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+  • Language: <code>/lang</code>
 
-  <b>💫 Faydalı Kombinasiyalar:</b>
+  <b>🎯 Group Settings</b>
+  • Default color: <code>/qcolor</code>
+  • Enable rating: <code>/qrate</code>
+  • Save to pack: <code>/qs</code>
 
-  • Foto ilə gözəl sitat:
-  <code>/q 2 red media</code> - 2 mesaj və foto ilə qırmızı sitat
+  <b>🌈 Emoji Styles</b>
+  Classic: <code>/qb apple</code>, <code>/qb google</code>
+  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  Retro: <code>/qb blob</code>
 
-  • Yüksək keyfiyyətli söhbət skrinshotu:
-  <code>/q 3 reply png</code> - PNG formatında 3 mesajlı dialoq
-
-  • Rəngli stilizə edilmiş sitat:
-  <code>/q #ff69b4 img s2</code> - yüksək keyfiyyətli çəhrayı sitat
-
-  <b>🌟 Xüsusi Xüsusiyyətlər:</b>
-
-  • Sitat qiymətləndirməsi: səsvermə üçün <code>rate</code> əlavə edin
-  • Emoji stili: <code>/qb apple</code> ya da <code>/qb google</code>
-  • Təsadüfi sitatlar: <code>/qrand</code>
-  • Ən yaxşı sitatlar: <code>/qtop</code>
-
-  <b>👨‍💼 Admin Əmrləri:</b>
-
-  • <code>/qcolor</code> - standart qrup rəngini təyin et
-  • <code>/qrate</code> - qiymətləndirmə sistemini aktiv et
-  • <code>/qgab</code> - təsadüfi sitat görünüşünü tənzimləyin
-  • <code>/qs</code> - qrup stiker dəstinə yadda saxla
-
-  <b>🌐 Digər Əmrlər:</b>
-
-  • <code>/lang</code> - dili dəyişdir
-  • <code>/donate</code> - inkişafçını dəstəklə
-
-  <b>📱 Bizimlə Əlaqə Saxlayın:</b>
-  • İnkişafçının Bloqu: @LyBlog
+  <b>📱 Need Help?</b>
+  • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • Support: <code>/donate</code>
 help_group: |
-  <b>salam!</b>
-  Mesaja cavab olaraq /q əmrindən istifadə edərək qrupda təkliflər yaradacağam
+  <b>Hello! 👋</b>
+  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
 
-  Mənimlə şəxsi mesajlarda <a href="t.me/${username}?start=help">/help</a> əmri haqqında daha çox məlumat əldə edə bilərsiniz.
+  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
 btn:
   add_group: Qrupa əlavə etmək
   help: Istinad
 quote:
-  unsupported_message: Dəstəklənməyən mesaj
+  unsupported_message: |
+    Sorry, I don't support this message type yet 😅
+
+    Try text, photos, stickers, or voice messages!
   api_error: |
-    <b>😓 Sitatı yaratmaq alınmadı</b>
+    <b>Oops! Something went wrong 😅</b>
     <pre>${error}</pre>
+    Please try again in a moment!
   empty_forward: |
-    Komandanı mesaja cavab olaraq yazmaq lazımdır.
+    Please reply to or forward the message you'd like to quote ✨
   set_background_color: |
-    Sitatın standart rəngi <code>${backgroundColor}</code> oldu
+    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    Alıntıların emoji markası ayarlanır: <code>${emojiBrand}</code>
-  sticker:
+    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Stiker uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu.
+    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
     error:
-      animated: Mən animasiyalı stikeri əlavə edə bilmirəm.
-      need_creator: <b>Məndə bu stikeri saxlamaq alınmadı.</b>\n${creator} mənə şəxsi mesajlarda yazın.
-      telegram: <b>Məndə bu stiker saxlamaq alınmadı.</b>\n<pre>${error}</pre>
+      animated: Sorry, I can't save animated stickers yet 😅
+      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
+      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
   delete:
-    suc: Stiker uğurla <a href="${link}">qrupun stikerpakından</a> silinib.
+    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
     error:
-      telegram: <b>Məndə bu stikeri silmək alınmadı.</b>\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
     btn:
-      save_sticker: Stikeri saxlamaq
+      save_sticker: Save Sticker
   delete_random:
-    suc: Stiker təsadüfi stikerlər qrupundan uğurla silindi.
-    error: <b>Mən o stikeri silə bilmədim.</b>\n<pre>${error}</pre>
+    suc: Removed from random collection 🗑
+    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
   empty_forward: |
-    Komandanı stikerə, şəkilə vəya foto faylına cavab olaraq yazmaq lazımdır.
+    Please reply to a sticker, photo, or image you'd like to save ✨
   fstik: |
-    Stikerı şəxsi stikerpaka saxlamaq üçün bu mesajı @fStikBot-a göndər.
+    To save this to your personal sticker pack, forward to @fStikBot 🎨
 rate:
   vote:
     rated: |
-      Siz bunu ${rateName}.
+      You ${rateName} this quote! Thanks for rating ⭐
     back: |
-      Siz səsinizi qaytardız.
+      Your vote has been removed 🔄
   settings:
     enable: |
-      Sitatların qiymətləndirməsi açılıb.
+      Quote rating is now enabled! Rate with ⭐
     disable: |
-      Sitatların qiymətləndirməsi bağlanıb.
+      Quote rating has been disabled 🔄
 random:
   empty: |
-    Qrupda müsbət reytinqə malik olan sitat yoxdur.
+    No highly-rated quotes in this group yet! Start rating some messages ⭐
   gab: |
-    Təsadüfi sekilde təkliflərin şansı ${gab}təyin edilmişdir
+    Random quote frequency set to ${gab} ✨
 hidden:
   settings:
     enable: |
-      Göndərənin axtarışı açılıb.
+      Sender search enabled 🔍
     disable: |
-      Göndərənin axtarışı bağlanıb.
+      Sender search disabled 🔄
 privacy:
   settings:
     enable: |
-      Məxfilik rejimi aktivdir.
+      Privacy mode activated 🔒 Your info will be hidden in quotes
     disable: |
-      Məxfilik rejimi deaktivdir.
+      Privacy mode deactivated 🔓
 top:
   info: |
-    <b>Qrupun top sitatları:</b>
-  open: Üstü açın
+    <b>✨ Top Quoted Messages</b>
+  open: View Top Quotes
 donate:
   info: |
-    İnzibatçı üçün kofe və digər nəsə ala bilərsiniz:
+    <b>Support QuotLyBot's Development! ☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bank kartı: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
-  title: Maddi dəstək ${botUsername}
-  description: Botun inkişafına dəstək
+    Your support helps us:
+    • Keep the servers running 24/7
+    • Add new features and styles
+    • Improve quote quality
+    • Make the bot faster
+
+    <b>💳 Easy Payment Options</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    Every contribution helps make QuotLyBot better for everyone! 💜
+  title: Support ${botUsername}
+  description: Help keep the magic going ✨
   successful: |
-    <b>Botu dəstək elədiyiniz üçün təşəkkür edirəm 💜</b>
+    <b>Thank you for your support! 💜</b>
+    You're helping make QuotLyBot even better!
   pay: '💜 Ödəniş etmək (Telegram)'
-  liqpay: LiqPay (VISA, MasterCard)
-  other: Digər yollar
+  liqpay: 'Pay with Card 💳'
+  other: 'Other Options'
 emoji:
   info: |
-    Zəhmət olmasa emoji əlavə edin.
+    <b>Choose Your Quote Emoji!</b>
 
-    Məsələn, <code>/qemoji💜</code> əlavəsini 💜 olaraq dəyişdirəcəkdir bütün sonra gələn yeni stikerlər üçün.
-    Təsadüfi emoji üçün <code>/qemoji random</code>
-  done: Emoji uğurla dəyişdirildi.
-adv:
-  about: |
-    <b>💫 Çox sayda aktiv istifadəçi və qrup üçün reklam ala bilərsiniz</b>
+    • Set custom emoji: <code>/qemoji</code>💜
+    • Use random emoji: <code>/qemoji random</code>
+    • Clear emoji: <code>/qemoji clear</code>
 
-    • Botumuz 30'000 -dən çox aktiv qrupdadır və hər ay 70'000 -dən çox istifadəçi botdan istifadə edir.
-    Onların arasında müxtəlif ölkələrdən olan istifadəçilər var. İstifadəçilərin dilini seçə bilərsiniz ki, reklam göstərilsin
-    • İstifadəçinin söhbətindən asılı olaraq reklam, təklifin altında düymə və ya mətn mesajı şəklində göstərilir
-    • Bir reklamın qiymətini özünüz təyin edirsiniz; hər şeydən əvvəl ən yüksək məbləğin təyin olunduğu reklam göstəriləcək
-    • Reklamın mətni və məzmunu qaydalarımıza (/adv_rules) uyğun olmalıdır və yerləşdirilməzdən əvvəl moderasiya keçməlisiniz. Bu depozit qoymadan əvvəl edilə bilər
-
-    Balans: ${balance} USD
-  rules: |
-    <b>Reklamlarda <u></u> icazə verilmir:</b>
-    • Təhqir və təhqirdən
-    • Hər mətn üçün 1 -dən çox emoji istifadə etmək
-    • Yanıltıcı məlumatlar
-    • Ukrayna qanunları ilə qadağan edilmiş məlumatlar
-    • Böyüklər üçün
-    • Qumar
-
-    <i>Biz də Səbəbsiz bir reklamı sevməsək, onu rədd etmək hüququmuz var.</i>
-  main_menu:
-    create_btn: Reklam yarat
-    list_btn: Brendlərin siyahısı
-    pay_btn: Balans doldurmaq
-  create:
-    enter_text: |
-      Reklam mətninizi daxil edin:
-
-      <i>Ən çox 70 simvol və bizim qaydalarımıza əməl edin (/adv_rules)</i>
-    enter_link: |
-      Elan olunan resursa link daxil edin:
-
-      <i>Link tam olmalıdır, əgər bir şeyi Telegramda reklam edirsəniz, link t.me ilə başlamalıdır.
-      Resurs bizim qaydalarımıza uyğun olmalıdır (/adv_rules), əgər moderasiadan sonra sayt əvəzedilsə, hesabınız blok ediləcək və pul geri qaytarılmayacaq.</i>
-    select_locale: |
-      Reklamınızı göstərilmək istədiyiniz istifadəçilərin dilini seçin
-
-      Rəqəm o dilə bazirə reklamınızı görmə ehtimalı olan istifadəçilərin sayını göstərir.
-      Yalnız botdan faktiki olaraq istifadə edən istifadəçilər sayılar. Ancaq reklam başqa bir yerdə göstərilə bilər və bu rəqəm daha yüksək ola bilər
-
-      <i>Dil ölkə ilə uyğun gəlmir.
-      Yalnız bir dil seçə bilərsiniz, əgər bir neçəyə ehtiyacınız varsa, lütfən digər dil üçün bir reklam yenidən yaradın.</i>
-    enter_price: |
-      Reklamınızın 1000 nüfuz üzərində qiymətini USD ilə göstər:
-
-      <u>Faallı reyində ortalama qiymətlər:</u> ${averagePrice} USD
-
-      <i>Ən az 0.15 USD olmalıdır.
-      Reklamlar təsadüfi şəkildə göstərilir, lakin qiymətə görə ən yüksək nüfuz ehtimalı olan reklam daha çox göstərilir.</i>
-    sent_moderate: |
-      Reklam moderasiyaya göndərildi. Xahiş edirik səbr edin və gözləyin. Əgər moderasiya uğurlu və ya uğursuz olarsa, sizə bir bildiri alacaqsınız.
-  list:
-    select_list: |
-      siyahı seçin
-    wait_btn: gözləyin
-    ready_btn: hazır
-    end_btn: son
-    selected_list: |
-      seçilmiş siyahı
-  moderate:
-    adv: |
-      Reklam #id_${adv._id} buraxılmışdır <a href="tg://user?id=${telegramId}">${name}</a>
-
-      Mətn: ${adv.text}
-      Link: ${adv.link}
-      Yerli məlumatı: ${adv.locale}
-      Qiymət: ${adv.price}
-      Say ${adv.count}
-    accepted: |
-      Təsdiqlənməiş reklam. Onu reklam bölməsində göstərməyə başlaya bilərsiniz: /adv
-    denied: |
-      Təəssüf ki, reklam məsələni moderasiya olunmayıb. Əgər bu yanlış olduğunu düşünürsünüzsə, lütfən bizə @Ly_OBot adresində yazaraq və məsajı təsvir edərkən bu etiketi daxil etməyi unutmayın: #qba_${adv.id}
-    accept_btn: Təsdiq et
-    deny_btn: Rədd et
+    Your emoji will be added to all new quotes ✨
+  done: Emoji style updated! ✨
 only_admin: |
-  Bu komandanı yalnız qrupun admini istifadə edə bilər.
+  <b>⚠️ Admin Access Needed</b>
+  This command can only be used by group administrators.
 only_group: |
-  Bu komandanı yalnız qrupda istifadə etmək olar.
+  <b>⚠️ Group Command</b>
+  This feature works in group chats only.
 rate_limit: |
-  Bir ${seconds} saniyədən çox istifadə edə bilməzsiniz ${seconds} saniyədən çoxdan.
+  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+
+  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
