@@ -6,55 +6,70 @@ description:
     Sadəcə yuxarıda mənimlə mesaja cavab verin və ya onu mənə yönəltin.
   long: |
     Qrup çatdırmaq istədiyiniz məzmunlu qrup söhbətində əyləncəli və əlverişli mesajları gördünüzmü və onları əbədidaga salmaq istəyirsiniz? Sadəcə onları mənə yönəlt və ya /q yaz və onları təravətli bir alıntı stiker olaraq çevirəcəyəm, onları yaddaşa salıb dostlarınızla paylaşa biləcəyiniz. Şəxsi xatirələr üçün və ya peşəkar istifadə üçün, imkanlar sonsuzdur. Məni sınamaqda birisən! 😎
-help: |2
-  <b>Salam!</b>
-  Mən bir çatdırmatan təcili təklif yaratmağa kömək edəcəyəm.
-  Bot habelə şəxsi mesajlarda və qruplarda işləyə bilər.
+help: |
+  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
 
-    <b>⚙️ Mövcud əmr:</b>
-  /t — mesajdan təklif götür <i>[mesajınıza cavab yazın]</i>
+  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
 
-  Bir neçə mesajdan təklif tərtib etmək üçün, təklifi müəyyən edəcək bir nömrə parametr kimi yazın.
-  Şəxsi mesajda, bir neçə mesajı bir dəfəyə mənəba iletə və mən onlardan təklif göndərəcəyəm.
+  <b>🎯 Basic Usage:</b>
 
-    <b>/q əmr üçün mövcud bayraqlar:</b>
-      hex kod və ya rəng adı: <code>#cbafff</code> və ya <code>inşqldo</code> — rəng ilə təklif götürür <b>#cbafff</b>
-      <code>təsadüfi</code> — təsadüfi təklif rəngi
-      <code>vətəndash</code> və ya <code>rf</code> — cavabları saxlayaraq bir təklif edin
-      <code>p</code> və ya <code>pnq</code> — PNG təklif götür
-      <code>i</code> və ya <code>şək</code> — şəkil kimi bir təklif edin
-      <code>qiymət</code> — bir təklifə reytinq əlavə edin
-      <code>m</code> və ya <code>media</code> — media daxil edin
-      <code>c</code> və ya <code>kərp</code> — media kəsək
-      <code>ş2.5</code> — şəkil keyfiyyəti standartdan 2.5 dəfə yüksəkdir <i>(hər hansı bir dəyər qoyula bilər)</i>
+  • Single message: reply to it with <code>/q</code>
+  • Multiple messages: add a number, like <code>/q 3</code>
+  • In private chats: simply forward messages to me
 
-    <b>Bayraqlardan istifadə üsullarının nümunəsi:</b>
-    <code>/q 3 ağ rp</code>
-    <code>/t i qırmızı s3.2</code>
-    <code>/q rf 2 #cbafff m</code>
-    <code>/q 5 təsadüfi</code>
+  <b>🎨 Quote Customization:</b>
 
-  Yalnız idarəçilər üçün:
-  <code>/ts 🥰💜</code> — qrupun bir stiker/fotoşəkil/sənədindəki bir şəkli 🥰💜 emoji ilə qrupun bir azəyif paketinə qeyd et <i>(emoji hər hansı biri və hər hansı bir say ola bilər)</i> <i>[mesaja cavab]</i>
-  <code>/tç</code> — qrupun stiker paketindən stikeri silin <i>[cavaba cavab]</i>
-  <code>/tsrənd</code> — qrupun təsadüfi stikerlərindən stikeri silin <i>[cavaba cavab]</i>
-  <code>/tb</code> — emoji növünü təyin edin. Mövcuddur: <code>alma</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qrəng yaxşı</code> — təkliflərin rəngini <b>yaxşı</b> olaraq təyin edin <i>(hex kodu və ya rəng adı)</i>
-  <code>/temoçka</code> — stikerlər üçün emoji sonekini dəyişdirin
-  <code>/taliyyət</code> — təkliflərin qiymətlənməsini aktivləşdirin/deaktivləşdirin
-  <code>/tşəxsi 300</code> — təkliflərin təsadüfi görünmə ehtimalını təyin edin. Bir və sonsuzluq arasında hər hansı bir sayı. Hər ne qədər sayı böyük olarsa, təkliflərin görünmə ehtimalı o qədər aşağı olar. 300 göstərərək, mesajın görünmə ehtimalı təxminən 300 mesajdan biridir. Deaktivləşdirmək üçün dəyəri 0 edin
+  <b>1. Color:</b>
+  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Custom color: <code>/q #cbafff</code>
+  • Random color: <code>/q random</code>
 
-  /tsenaryo — müsbət qiymətlənmiş bir təklifdə təsadüfi
-  /tsrlar — qrupun yuxarı təklifləri
+  <b>2. Appearance:</b>
+  • Image instead of sticker: add <code>img</code>
+  • High quality: add <code>png</code>
+  • Preserve conversation: add <code>reply</code>
 
-  /kömək və ya /başla — bu mətni alın
+  <b>3. Media:</b>
+  • Include photo/sticker: add <code>media</code>
 
-  /dil — dil dəyiş
+  <b>4. Quality:</b>
+  Add <code>s</code> and a number for enhanced quality:
+  • <code>s2</code> - 2x quality
+  • <code>s3</code> - 3x quality
 
-  <b>☕️ Proqramçıya koffe alın:</b> /donate
+  <b>💫 Useful Combinations:</b>
 
-  <b>👨🏻‍💻 Proqramçı saytı:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/təklif-bot
+  • Beautiful quote with photo:
+  <code>/q 2 red media</code> - red quote with 2 messages and photo
+
+  • High-quality conversation screenshot:
+  <code>/q 3 reply png</code> - 3-message dialog in PNG
+
+  • Stylish colored quote:
+  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+
+  <b>🌟 Special Features:</b>
+
+  • Quote rating: add <code>rate</code> to enable voting
+  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+
+  <b>👨‍💼 Admin Commands:</b>
+
+  • <code>/qcolor</code> - set default group color
+  • <code>/qrate</code> - enable rating system
+  • <code>/qgab</code> - configure random quote appearance
+  • <code>/qs</code> - save to group sticker pack
+
+  <b>🌐 Other Commands:</b>
+
+  • <code>/lang</code> - change language
+  • <code>/donate</code> - support the developer
+
+  <b>📱 Contact Us:</b>
+  • Developer's Blog: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>salam!</b>
   Mesaja cavab olaraq /q əmrindən istifadə edərək qrupda təkliflər yaradacağam
