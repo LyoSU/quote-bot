@@ -7,68 +7,68 @@ description:
   long: |
     Heb je grappige of inspirerende berichten opgemerkt in je groepschat die je zou willen vereeuwigen? Stuur ze gewoon naar me door of typ /q en ik zal ze omzetten in een strak citaatsticker die je kunt opslaan en delen met je vrienden. Of het nu voor persoonlijke herinneringen is of voor professioneel gebruik, de mogelijkheden zijn eindeloos. Probeer me nu uit! 😎
 help: |
-  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
+  <b>📝 Hoi! Ik ben een bot voor het maken van mooie citaten</b>
 
-  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
+  <i>Ik kan elk bericht omzetten in een aantrekkelijke quote om belangrijke chatmomenten te bewaren. Ik werk zowel in privéberichten als in groepen!</i>
 
-  <b>🎯 Basic Usage:</b>
+  <b>🎯 Basisgebruik:</b>
 
-  • Single message: reply to it with <code>/q</code>
-  • Multiple messages: add a number, like <code>/q 3</code>
-  • In private chats: simply forward messages to me
+  • Enkel bericht: antwoord erop met <code>/q</code>
+  • Meerdere berichten: voeg een nummer toe, zoals <code>/q 3</code>
+  • In privéchats: stuur berichten eenvoudig naar mij door
 
-  <b>🎨 Quote Customization:</b>
+  <b>🎨 Quote Aanpassing:</b>
 
-  <b>1. Color:</b>
-  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Custom color: <code>/q #cbafff</code>
-  • Random color: <code>/q random</code>
+  <b>1. Kleur:</b>
+  • Naam: <code>/q rood</code>, <code>/q blauw</code>, <code>/q groen</code>
+  • Aangepaste kleur: <code>/q #cbafff</code>
+  • Willekeurige kleur: <code>/q random</code>
 
-  <b>2. Appearance:</b>
-  • Image instead of sticker: add <code>img</code>
-  • High quality: add <code>png</code>
-  • Preserve conversation: add <code>reply</code>
+  <b>2. Uiterlijk:</b>
+  • Afbeelding in plaats van sticker: voeg <code>img</code> toe
+  • Hoge kwaliteit: voeg <code>png</code> toe
+  • Gesprek bewaren: voeg <code>reply</code> toe
 
   <b>3. Media:</b>
-  • Include photo/sticker: add <code>media</code>
+  • Inclusief foto/sticker: voeg <code>media</code> toe
 
-  <b>4. Quality:</b>
-  Add <code>s</code> and a number for enhanced quality:
-  • <code>s2</code> - 2x quality
-  • <code>s3</code> - 3x quality
+  <b>4. Kwaliteit:</b>
+  Voeg <code>s</code> en een nummer toe voor verbeterde kwaliteit:
+  • <code>s2</code> - 2x kwaliteit
+  • <code>s3</code> - 3x kwaliteit
 
-  <b>💫 Useful Combinations:</b>
+  <b>💫 Nuttige Combinaties:</b>
 
-  • Beautiful quote with photo:
-  <code>/q 2 red media</code> - red quote with 2 messages and photo
+  • Mooie quote met foto:
+  <code>/q 2 rood media</code> - rode quote met 2 berichten en foto
 
-  • High-quality conversation screenshot:
-  <code>/q 3 reply png</code> - 3-message dialog in PNG
+  • Hoge kwaliteit conversatie screenshot:
+  <code>/q 3 reply png</code> - 3-berichtendialoog in PNG
 
-  • Stylish colored quote:
-  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+  • Stijlvolle gekleurde quote:
+  <code>/q #ff69b4 img s2</code> - roze quote in hoge kwaliteit
 
-  <b>🌟 Special Features:</b>
+  <b>🌟 Speciale Functies:</b>
 
-  • Quote rating: add <code>rate</code> to enable voting
-  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
+  • Quote waardering: voeg <code>rate</code> toe om stemmen in te schakelen
+  • Emoji stijl: <code>/qb apple</code> of <code>/qb google</code>
+  • Willekeurige citaten: <code>/qrand</code>
+  • Top citaten: <code>/qtop</code>
 
-  <b>👨‍💼 Admin Commands:</b>
+  <b>👨‍💼 Beheerder Commando's:</b>
 
-  • <code>/qcolor</code> - set default group color
-  • <code>/qrate</code> - enable rating system
-  • <code>/qgab</code> - configure random quote appearance
-  • <code>/qs</code> - save to group sticker pack
+  • <code>/qcolor</code> - stel standaard groepskleur in
+  • <code>/qrate</code> - schakel waarderingssysteem in
+  • <code>/qgab</code> - configureer de weergave van willekeurige citaten
+  • <code>/qs</code> - opslaan naar groepsstickerpakket
 
-  <b>🌐 Other Commands:</b>
+  <b>🌐 Andere Commando's:</b>
 
-  • <code>/lang</code> - change language
-  • <code>/donate</code> - support the developer
+  • <code>/lang</code> - wijzig taal
+  • <code>/donate</code> - ondersteun de ontwikkelaar
 
-  <b>📱 Contact Us:</b>
-  • Developer's Blog: @LyBlog
+  <b>📱 Neem contact met ons op:</b>
+  • Blog van de ontwikkelaar: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Hallo!</b>
