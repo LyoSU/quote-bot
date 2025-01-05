@@ -2,196 +2,196 @@
 language_name: '🇨🇳 简体中文'
 description:
   short: |
-    Turn any message into a beautiful quote sticker! ✨
-    Reply with /q or forward the message to me
+    将任何消息变成美丽的引用贴纸！✨
+    回复/q或将消息转发给我
   long: |
-    Create stunning quote stickers and preserve your favorite chat moments! ✨
+    创建惊艳的引用贴纸，保存你喜爱的聊天瞬间！✨
 
-    Simply reply /q to any message or forward it to me. Perfect for saving:
-    🌟 Best chat highlights and memories
-    💭 Inspiring thoughts and conversations
-    🎨 Creative messages with custom styles
-    ✍️ Important notes in beautiful format
+    只需回复/q给任意消息或转发给我。完美适用于保存：
+    🌟 最佳聊天亮点和回忆
+    💭 鼓舞人心的想法和对话
+    🎨 具有自定义风格的创意消息
+    ✍️ 美丽格式的重要笔记
 
-    Get started now - just forward a message or use /q!
+    立即开始——只需转发消息或使用/q！
 help: |
-  <b>✨ QuotLyBot Quick Guide</b>
+  <b>✨ QuotLyBot 快速指南</b>
 
-  <b>📱 Basic Commands</b>
-  • <code>/q</code> - Quote replied message
-  • <code>/q 3</code> - Quote several messages
-  • Forward message - Quote directly
+  <b>📱 基本命令</b>
+  • <code>/q</code> - 引用被回复的消息
+  • <code>/q 3</code> - 引用多条消息
+  • 转发消息 - 直接引用
 
-  <b>🎨 Styles</b>
+  <b>🎨 样式</b>
 
-  Colors:
-  • Basic: <code>/q red</code>
-  • Custom: <code>/q #ff69b4</code>
-  • Gradient: <code>/q red//#blue</code>
-  • Random: <code>/q random</code>
+  颜色：
+  • 基本：<code>/q red</code>
+  • 自定义：<code>/q #ff69b4</code>
+  • 渐变：<code>/q red//#blue</code>
+  • 随机：<code>/q random</code>
 
-  Media:
-  • Add photo: <code>/q media</code>
-  • Crop image: <code>/q crop</code>
-  • Keep thread: <code>/q reply</code>
-  • Voice preview: Automatic
+  媒体：
+  • 添加照片：<code>/q media</code>
+  • 裁剪图片：<code>/q crop</code>
+  • 保留线程：<code>/q reply</code>
+  • 语音预览：自动
 
-  Format:
-  • Sticker: <code>/q</code>
-  • Image: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Story: <code>/q stories</code>
+  格式：
+  • 贴纸：<code>/q</code>
+  • 图片：<code>/q img</code>
+  • 高清：<code>/q png</code>
+  • 故事：<code>/q stories</code>
 
-  Quality:
-  • Normal: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  质量：
+  • 普通：<code>/q</code>
+  • 2倍：<code>/q s2</code>
+  • 3倍：<code>/q s3</code>
 
-  <b>💫 Popular Combinations</b>
-  • <code>/q red media</code> - Red quote with photo
-  • <code>/q 3 reply</code> - Quote with context
-  • <code>/q img s2</code> - High-quality image
-  • <code>/q stories media</code> - Story with photo
+  <b>💫 流行组合</b>
+  • <code>/q red media</code> - 带照片的红色引文
+  • <code>/q 3 reply</code> - 带有上下文的引文
+  • <code>/q img s2</code> - 高质量图片
+  • <code>/q stories media</code> - 带照片的故事
 
-  <b>⚙️ Extra Features</b>
-  • Rating: <code>/q rate</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
-  • Language: <code>/lang</code>
+  <b>⚙️ 额外功能</b>
+  • 评分：<code>/q rate</code>
+  • 随机引文：<code>/qrand</code>
+  • 顶级引文：<code>/qtop</code>
+  • 语言：<code>/lang</code>
 
-  <b>🎯 Group Settings</b>
-  • Default color: <code>/qcolor</code>
-  • Enable rating: <code>/qrate</code>
-  • Save to pack: <code>/qs</code>
+  <b>🎯 群组设置</b>
+  • 默认颜色：<code>/qcolor</code>
+  • 启用评分：<code>/qrate</code>
+  • 保存到包：<code>/qs</code>
 
-  <b>🌈 Emoji Styles</b>
-  Classic: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  <b>🌈 表情符号样式</b>
+  经典：<code>/qb apple</code>, <code>/qb google</code>
+  替代：<code>/qb twitter</code>, <code>/qb joypixels</code>
+  复古：<code>/qb blob</code>
 
-  <b>📱 Need Help?</b>
-  • Blog: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • Support: <code>/donate</code>
+  <b>📱 需要帮助？</b>
+  • 博客：@LyBlog
+  • GitHub：github.com/LyoSU/quote-bot
+  • 支持：<code>/donate</code>
 help_group: |
-  <b>Hello! 👋</b>
-  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
+  <b>你好！👋</b>
+  我将在此群组内创建美丽的引语——只需在回复的消息中使用<code>/q</code>！
 
-  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
+  了解我在私人中的所有功能：<a href="t.me/${username}?start=help">获取帮助</a>✨
 btn:
   add_group: 添加到群组
   help: 帮助
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
+    抱歉，我暂时不支持这种消息类型 😅
 
-    Try text, photos, stickers, or voice messages!
+    试试文本、照片、贴纸或语音消息！
   api_error: |
-    <b>Oops! Something went wrong 😅</b>
+    <b>糟糕！出错了 😅</b>
     <pre>${error}</pre>
-    Please try again in a moment!
+    请稍等片刻再试！
   empty_forward: |
-    Please reply to or forward the message you'd like to quote ✨
+    请回复或转发您想引用的消息✨
   set_background_color: |
-    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
+    <b>太好了！</b> 引文背景已更改为：<code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
+    <b>完成！</b> 表情符号样式更改为：<code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
+    suc: 成功添加到您的<a href="${link}">群组贴纸包</a>✨
     error:
-      animated: Sorry, I can't save animated stickers yet 😅
-      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
-      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
+      animated: 抱歉，我暂时无法保存动画贴纸 😅
+      need_creator: <b>快到了！</b> ${creator}需要先发送给我一条消息才能保存贴纸
+      telegram: <b>糟糕！</b> 出现错误：\n<pre>${error}</pre>
   delete:
-    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    suc: 已从您的<a href="${link}">群组贴纸包</a>中移除 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+      telegram: <b>糟糕！</b> 无法移除贴纸：\n<pre>${error}</pre>
     btn:
-      save_sticker: Save Sticker
+      save_sticker: 保存贴纸
   delete_random:
-    suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    suc: 已从随机集合中移除 🗑
+    error: <b>糟糕！</b> 无法移除贴纸：\n<pre>${error}</pre>
   empty_forward: |
-    Please reply to a sticker, photo, or image you'd like to save ✨
+    请回复您想保存的贴纸、照片或图片✨
   fstik: |
-    To save this to your personal sticker pack, forward to @fStikBot 🎨
+    为了将此保存到您的个人贴纸包，请转发到 @fStikBot 🎨
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      您${rateName}这个引文！感谢您的评分 ⭐
     back: |
-      Your vote has been removed 🔄
+      您的投票已被移除 🔄
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      引文评分已启用！可以用 ⭐ 评分
     disable: |
-      Quote rating has been disabled 🔄
+      引文评分已禁用 🔄
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    该群组内暂时没有评分很高的引文！开始给一些消息打分吧 ⭐
   gab: |
-    Random quote frequency set to ${gab} ✨
+    随机引文频率设置为 ${gab} ✨
 hidden:
   settings:
     enable: |
-      Sender search enabled 🔍
+      发送者搜索已启用 🔍
     disable: |
-      Sender search disabled 🔄
+      发送者搜索已禁用 🔄
 privacy:
   settings:
     enable: |
-      Privacy mode activated 🔒 Your info will be hidden in quotes
+      隐私模式已激活 🔒 您的信息将在引文中被隐藏
     disable: |
-      Privacy mode deactivated 🔓
+      隐私模式已关闭 🔓
 top:
   info: |
-    <b>✨ Top Quoted Messages</b>
-  open: View Top Quotes
+    <b>✨ 顶级引用消息</b>
+  open: 查看顶级引文
 donate:
   info: |
-    <b>Support QuotLyBot's Development! ☕</b>
+    <b>支持 QuotLyBot 的发展！☕</b>
 
-    Your support helps us:
-    • Keep the servers running 24/7
-    • Add new features and styles
-    • Improve quote quality
-    • Make the bot faster
+    您的支持帮助我们：
+    • 让服务器 24/7 全天候运行
+    • 添加新功能和样式
+    • 改善引文质量
+    • 让机器人运行得更快
 
-    <b>💳 Easy Payment Options</b>
-    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    <b>💳 简单支付选项</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">银行卡支付</a> (Visa/Mastercard)
     • Apple Pay / Google Pay
 
-    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    <b>🔒 加密货币（适合技术爱好者）</b>
     • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
 
-    Every contribution helps make QuotLyBot better for everyone! 💜
-  title: Support ${botUsername}
-  description: Help keep the magic going ✨
+    每一份贡献都在帮助让 QuotLyBot 变得更好！💜
+  title: 支持 ${botUsername}
+  description: 帮助保持魔法继续 ✨
   successful: |
-    <b>Thank you for your support! 💜</b>
-    You're helping make QuotLyBot even better!
+    <b>感谢您的支持！💜</b>
+    您正在帮助让 QuotLyBot 变得更好！
   pay: '💜 通过 Telegram 支付'
-  liqpay: 'Pay with Card 💳'
-  other: 'Other Options'
+  liqpay: '银行卡支付 💳'
+  other: '其它选项'
 emoji:
   info: |
-    <b>Choose Your Quote Emoji!</b>
+    <b>选择您的引用表情符号！</b>
 
-    • Set custom emoji: <code>/qemoji</code>💜
-    • Use random emoji: <code>/qemoji random</code>
-    • Clear emoji: <code>/qemoji clear</code>
+    • 设置自定义表情：<code>/qemoji</code>💜
+    • 使用随机表情：<code>/qemoji random</code>
+    • 清除表情：<code>/qemoji clear</code>
 
-    Your emoji will be added to all new quotes ✨
-  done: Emoji style updated! ✨
+    您的表情将添加到所有新引文中 ✨
+  done: 表情符号样式已更新！✨
 only_admin: |
-  <b>⚠️ Admin Access Needed</b>
-  This command can only be used by group administrators.
+  <b>⚠️ 需要管理员访问权限</b>
+  此命令只能由群组管理员使用。
 only_group: |
-  <b>⚠️ Group Command</b>
-  This feature works in group chats only.
+  <b>⚠️ 群组命令</b>
+  此功能仅在群组聊天中有效。
 rate_limit: |
-  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+  <i>稍作休息...</i> 您可以在 ${seconds} 秒后再次使用此命令 ⏳
 
-  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+  <i>小提示：在等待的同时，尝试自定义您的最后一个引文，使用</i><code>/q color</code> <i>或</i> <code>/q media</code>
