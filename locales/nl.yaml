@@ -2,247 +2,196 @@
 language_name: '🇳🇱 Nederlands'
 description:
   short: |
-    Ik zal helpen een citaat te maken van het bericht.
-    Reageer gewoon op het bericht met /q of stuur het naar mij door.
+    Turn any message into a beautiful quote sticker! ✨
+    Reply with /q or forward the message to me
   long: |
-    Heb je grappige of inspirerende berichten opgemerkt in je groepschat die je zou willen vereeuwigen? Stuur ze gewoon naar me door of typ /q en ik zal ze omzetten in een strak citaatsticker die je kunt opslaan en delen met je vrienden. Of het nu voor persoonlijke herinneringen is of voor professioneel gebruik, de mogelijkheden zijn eindeloos. Probeer me nu uit! 😎
+    Create stunning quote stickers and preserve your favorite chat moments! ✨
+
+    Simply reply /q to any message or forward it to me. Perfect for saving:
+    🌟 Best chat highlights and memories
+    💭 Inspiring thoughts and conversations
+    🎨 Creative messages with custom styles
+    ✍️ Important notes in beautiful format
+
+    Get started now - just forward a message or use /q!
 help: |
-  <b>📝 Hoi! Ik ben een bot voor het maken van mooie citaten</b>
+  <b>✨ QuotLyBot Quick Guide</b>
 
-  <i>Ik kan elk bericht omzetten in een aantrekkelijke quote om belangrijke chatmomenten te bewaren. Ik werk zowel in privéberichten als in groepen!</i>
+  <b>📱 Basic Commands</b>
+  • <code>/q</code> - Quote replied message
+  • <code>/q 3</code> - Quote several messages
+  • Forward message - Quote directly
 
-  <b>🎯 Basisgebruik:</b>
+  <b>🎨 Styles</b>
 
-  • Enkel bericht: antwoord erop met <code>/q</code>
-  • Meerdere berichten: voeg een nummer toe, zoals <code>/q 3</code>
-  • In privéchats: stuur berichten eenvoudig naar mij door
+  Colors:
+  • Basic: <code>/q red</code>
+  • Custom: <code>/q #ff69b4</code>
+  • Gradient: <code>/q red//#blue</code>
+  • Random: <code>/q random</code>
 
-  <b>🎨 Quote Aanpassing:</b>
+  Media:
+  • Add photo: <code>/q media</code>
+  • Crop image: <code>/q crop</code>
+  • Keep thread: <code>/q reply</code>
+  • Voice preview: Automatic
 
-  <b>1. Kleur:</b>
-  • Naam: <code>/q rood</code>, <code>/q blauw</code>, <code>/q groen</code>
-  • Aangepaste kleur: <code>/q #cbafff</code>
-  • Willekeurige kleur: <code>/q random</code>
+  Format:
+  • Sticker: <code>/q</code>
+  • Image: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • Story: <code>/q stories</code>
 
-  <b>2. Uiterlijk:</b>
-  • Afbeelding in plaats van sticker: voeg <code>img</code> toe
-  • Hoge kwaliteit: voeg <code>png</code> toe
-  • Gesprek bewaren: voeg <code>reply</code> toe
+  Quality:
+  • Normal: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>3. Media:</b>
-  • Inclusief foto/sticker: voeg <code>media</code> toe
+  <b>💫 Popular Combinations</b>
+  • <code>/q red media</code> - Red quote with photo
+  • <code>/q 3 reply</code> - Quote with context
+  • <code>/q img s2</code> - High-quality image
+  • <code>/q stories media</code> - Story with photo
 
-  <b>4. Kwaliteit:</b>
-  Voeg <code>s</code> en een nummer toe voor verbeterde kwaliteit:
-  • <code>s2</code> - 2x kwaliteit
-  • <code>s3</code> - 3x kwaliteit
+  <b>⚙️ Extra Features</b>
+  • Rating: <code>/q rate</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+  • Language: <code>/lang</code>
 
-  <b>💫 Nuttige Combinaties:</b>
+  <b>🎯 Group Settings</b>
+  • Default color: <code>/qcolor</code>
+  • Enable rating: <code>/qrate</code>
+  • Save to pack: <code>/qs</code>
 
-  • Mooie quote met foto:
-  <code>/q 2 rood media</code> - rode quote met 2 berichten en foto
+  <b>🌈 Emoji Styles</b>
+  Classic: <code>/qb apple</code>, <code>/qb google</code>
+  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  Retro: <code>/qb blob</code>
 
-  • Hoge kwaliteit conversatie screenshot:
-  <code>/q 3 reply png</code> - 3-berichtendialoog in PNG
-
-  • Stijlvolle gekleurde quote:
-  <code>/q #ff69b4 img s2</code> - roze quote in hoge kwaliteit
-
-  <b>🌟 Speciale Functies:</b>
-
-  • Quote waardering: voeg <code>rate</code> toe om stemmen in te schakelen
-  • Emoji stijl: <code>/qb apple</code> of <code>/qb google</code>
-  • Willekeurige citaten: <code>/qrand</code>
-  • Top citaten: <code>/qtop</code>
-
-  <b>👨‍💼 Beheerder Commando's:</b>
-
-  • <code>/qcolor</code> - stel standaard groepskleur in
-  • <code>/qrate</code> - schakel waarderingssysteem in
-  • <code>/qgab</code> - configureer de weergave van willekeurige citaten
-  • <code>/qs</code> - opslaan naar groepsstickerpakket
-
-  <b>🌐 Andere Commando's:</b>
-
-  • <code>/lang</code> - wijzig taal
-  • <code>/donate</code> - ondersteun de ontwikkelaar
-
-  <b>📱 Neem contact met ons op:</b>
-  • Blog van de ontwikkelaar: @LyBlog
+  <b>📱 Need Help?</b>
+  • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • Support: <code>/donate</code>
 help_group: |
-  <b>Hallo!</b>
-  Ik maak citaten aan in de groep met behulp van de /q opdracht in reactie op bericht
+  <b>Hello! 👋</b>
+  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
 
-  Je kunt meer te weten komen over de opdracht <a href="t.me/${username}?start=help">/help</a> in privéberichten met mij
+  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
 btn:
   add_group: Voeg toe aan groep
   help: Hulp
 quote:
-  unsupported_message: Niet ondersteund bericht
+  unsupported_message: |
+    Sorry, I don't support this message type yet 😅
+
+    Try text, photos, stickers, or voice messages!
   api_error: |
-    <b>😓 Genereren van offerte mislukt</b>
+    <b>Oops! Something went wrong 😅</b>
     <pre>${error}</pre>
+    Please try again in a moment!
   empty_forward: |
-    Commando moet worden verzonden als antwoord op een bericht.
+    Please reply to or forward the message you'd like to quote ✨
   set_background_color: |
-    Achtergrondkleur van de offertes is ingesteld op: <code>${backgroundColor}</code>
+    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    Citaat-emoji-merk is ingesteld op: <code>${emojiBrand}</code>
-  sticker:
+    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Sticker is met succes toegevoegd aan het <a href="${link}">groepssticker pakket</a>.
+    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
     error:
-      animated: Ik kan geen geanimeerde sticker toevoegen.
-      need_creator: <b>Het opslaan van deze sticker is mislukt.</b>\n${creator} moet me een bericht sturen in de PM.
-      telegram: <b>Het opslaan van de sticker is mislukt.</b>\n<pre>${error}</pre>
+      animated: Sorry, I can't save animated stickers yet 😅
+      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
+      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
   delete:
-    suc: Sticker is met succes uit het <a href="${link}">groepssticker pakket</a> verwijderd.
+    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
     error:
-      telegram: <b>Ik kon die sticker niet opslaan.</b>\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
     btn:
-      save_sticker: De sticker opslaan
+      save_sticker: Save Sticker
   delete_random:
-    suc: Sticker is succesvol verwijderd uit de groep willekeurige stickers.
-    error: <b>Ik was niet in staat om die sticker te verwijderen.</b>\n<pre>${error}</pre>
+    suc: Removed from random collection 🗑
+    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
   empty_forward: |
-    Opdracht moet worden verzonden naar een sticker, foto of bestand met een foto.
+    Please reply to a sticker, photo, or image you'd like to save ✨
   fstik: |
-    Om de sticker op te slaan naar je persoonlijke stickerpakket, stuur dit bericht door naar @fStikBot
+    To save this to your personal sticker pack, forward to @fStikBot 🎨
 rate:
   vote:
     rated: |
-      Jij ${rateName} dit.
+      You ${rateName} this quote! Thanks for rating ⭐
     back: |
-      Je krijgt je stem terug.
+      Your vote has been removed 🔄
   settings:
     enable: |
-      Offertes beoordeling staat aan.
+      Quote rating is now enabled! Rate with ⭐
     disable: |
-      Het beoordelen van offertes staat uit.
+      Quote rating has been disabled 🔄
 random:
   empty: |
-    Er zijn geen citaten met een positieve waardering in de groep.
+    No highly-rated quotes in this group yet! Start rating some messages ⭐
   gab: |
-    De kans op willekeurige aanhalingstekens is gezet op ${gab}
+    Random quote frequency set to ${gab} ✨
 hidden:
   settings:
     enable: |
-      Zoeken door afzender is ingeschakeld.
+      Sender search enabled 🔍
     disable: |
-      Zoekopdracht afzender is uitgeschakeld.
+      Sender search disabled 🔄
 privacy:
   settings:
     enable: |
-      Privacy modus is ingeschakeld.
+      Privacy mode activated 🔒 Your info will be hidden in quotes
     disable: |
-      Privacy modus is uitgeschakeld.
+      Privacy mode deactivated 🔓
 top:
   info: |
-    <b>Top groep aanhalingstekens:</b>
-  open: Open top
+    <b>✨ Top Quoted Messages</b>
+  open: View Top Quotes
 donate:
   info: |
-    U kunt koffie kopen voor de ontwikkelaar of iets anders met de volgende gegevens:
+    <b>Support QuotLyBot's Development! ☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    Bankkaart: <a href="https://send.monobank.ua/jar/2fpLioJzU8">Visa, MasterCard, Apple Pay, Google Pay</a>
+    Your support helps us:
+    • Keep the servers running 24/7
+    • Add new features and styles
+    • Improve quote quality
+    • Make the bot faster
 
-    Meer: doneer.lyo.su
-  title: Doneren ${botUsername}
-  description: Steun bot ontwikkeling
+    <b>💳 Easy Payment Options</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    Every contribution helps make QuotLyBot better for everyone! 💜
+  title: Support ${botUsername}
+  description: Help keep the magic going ✨
   successful: |
-    <b>Bedankt voor het ondersteunen van de bot 💜</b>
+    <b>Thank you for your support! 💜</b>
+    You're helping make QuotLyBot even better!
   pay: '💜 Betaal via Telegram'
-  liqpay: LiqPay (VISA, MasterCard)
-  other: Andere opties
+  liqpay: 'Pay with Card 💳'
+  other: 'Other Options'
 emoji:
   info: |
-    Voeg emoji toe.
+    <b>Choose Your Quote Emoji!</b>
 
-    Bijvoorbeeld, <code>/qemoji💜</code> zal de suffix veranderen naar 💜 voor alle volgende nieuwe stickers.
-    Voor een willekeurige emoji <code>/qemoji willekeurig</code>
-  done: Emoji succesvol veranderd.
-adv:
-  about: |
-    <b>💫 U kunt bij ons adverteren voor een groot aantal actieve gebruikers en groepen</b>
+    • Set custom emoji: <code>/qemoji</code>💜
+    • Use random emoji: <code>/qemoji random</code>
+    • Clear emoji: <code>/qemoji clear</code>
 
-    • Onze bot bevindt zich in meer dan 30`000 actieve groepen en meer dan 70`000 gebruikers gebruiken de bot elke maand.
-    Onder hen zijn gebruikers uit verschillende landen. U kunt de taal van de gebruikers selecteren waarvoor de advertentie moet worden weergegeven
-    • De advertentie wordt onder het citaat weergegeven in de vorm van een knop of tekstbericht, afhankelijk van de chat van de gebruiker
-    • U bepaalt zelf de prijs van een advertentie; in de eerste plaats wordt de advertentie weergegeven waarvoor het hoogste bedrag is toegewezen
-    • De tekst en inhoud van de advertentie moeten voldoen aan onze regels (/adv_rules) en voordat deze wordt geplaatst moet u de moderatie doorlopen. Dit kan worden gedaan voordat u een storting doet
-
-    Saldo: ${balance} USD
-  rules: |
-    <b>In advertenties is het <u>niet</u> toegestaan:</b>
-    • Obsceniteiten of beledigingen gebruiken
-    • Meer dan 1 emoji per tekst gebruiken
-    • Misleidende informatie
-    • Informatie die verboden is door de wetten van Oekraïne
-    • Volwassen inhoud
-    • Gokken
-
-    <i>We hebben ook het recht om een advertentie af te wijzen als we het gewoon niet leuk vinden om geen reden</i>
-  main_menu:
-    create_btn: Maak advertenties
-    list_btn: Lijst van advertenties
-    pay_btn: Saldo opladen
-  create:
-    enter_text: |
-      Voer uw advertentietekst in:
-
-      <i>Niet meer dan 70 tekens en moet voldoen aan onze regels (/adv_rules)</i>
-    enter_link: |
-      Voer een link naar de geadverteerde bron in:
-
-      <i>De link moet compleet zijn, als u iets adverteert in Telegram, moet de link beginnen met t.me.
-      De bron moet voldoen aan onze regels (/adv_rules), als na moderatie de site wordt vervangen, wordt uw account geblokkeerd en wordt het geld niet geretourneerd</i>
-    select_locale: |
-      Selecteer de taal van de gebruikers aan wie de advertentie zal worden getoond
-
-      Het nummer is het aantal gebruikers dat potentiëel uw advertentie in die taal zal zien.
-      Alleen gebruikers die daadwerkelijk de bot gebruiken worden geteld. Maar de advertentie kan ook worden gezien door andere gebruikers die in de groep zijn waar het citaat is gemaakt, dus dit cijfer kan veel hoger zijn
-
-      <i>De taal komt niet overeen met het land.
-      U kunt slechts één taal kiezen, als u er meerdere nodig hebt, maak dan opnieuw een advertentie voor een andere taal</i>
-    enter_price: |
-      Specificeer de prijs per 1000 vertoningen van uw advertentie in USD:
-
-      <u>Gemiddelde prijs van actieve advertenties:</u> ${averagePrice} USD
-
-      <i>De minimumprijs is 0,15 USD.
-      Advertenties worden willekeurig weergegeven, maar de grootste kans om te worden weergegeven heeft een advertentie met een hogere prijs voor vertoningen.</i>
-    sent_moderate: |
-      De advertentie is ter moderatie verzonden. Wees geduldig en wacht af. Als de moderatie succesvol of onsuccesvol is, ontvangt u een melding.
-  list:
-    select_list: |
-      selecteer_lijst
-    wait_btn: wacht_knop
-    ready_btn: klaar_knop
-    end_btn: einde_knop
-    selected_list: |
-      geselecteerde_lijst
-  moderate:
-    adv: |
-      Adv #id_${adv._id} van <a href="tg://user?id=${telegramId}">${name}</a>
-
-      Tekst: ${adv.text}
-      Link: ${adv.link}
-      Gebiedstaal: ${adv.locale}
-      Prijs: ${adv.price}
-      Tellen ${adv.count}
-    accepted: |
-      De advertentie is succesvol gemodereerd. U kunt beginnen met het weergeven ervan in de advertentierubriek: /advertentie
-    denied: |
-      Helaas is de advertentie niet gemodereerd. Lees onze regels (/adv_rules), als u er zeker van bent dat dit een fout was, schrijf ons dan op @Ly_OBot en voeg deze tag toe in het bericht dat het probleem beschrijft: #qba_${adv.id}
-    accept_btn: Accepteer
-    deny_btn: Weiger
+    Your emoji will be added to all new quotes ✨
+  done: Emoji style updated! ✨
 only_admin: |
-  Alleen groepsbeheerder kan deze opdracht gebruiken.
+  <b>⚠️ Admin Access Needed</b>
+  This command can only be used by group administrators.
 only_group: |
-  Dit commando kan alleen in groepen gebruikt worden.
+  <b>⚠️ Group Command</b>
+  This feature works in group chats only.
 rate_limit: |
-  Je kunt dit commando niet vaker gebruiken dan eens per ${seconds} seconden.
+  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+
+  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
