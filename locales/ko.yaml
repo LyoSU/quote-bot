@@ -15,21 +15,21 @@ description:
 
     지금 바로 시작하세요 - 메시지를 포워드하거나 /q를 사용하세요!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>안녕하세요! 👋 저는 QuotLyBot입니다</b>
 
-  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
+  저는 여러분이 좋아하는 채팅 순간을 아름다운 인용구 스티커로 캡처하고 공유할 수 있도록 도와드립니다. 간단하고, 개인적이며, 사용하기 재미있습니다!
 
-  <b>Ready to create your first quote?</b>
-  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
+  <b>첫 번째 인용구를 만들 준비가 되셨나요?</b>
+  마음에 드는 메시지를 발견하면 <code>/q</code>로 답장하세요 - 제가 특별한 것으로 바꿔드리겠습니다 ✨
 
-  <b>✨ Pro Tips:</b>
-  • Type any color name (like 'blue' or 'red') for instant style
-  • Add <code>media</code> to include the message's photo
-  • Use <code>/q 3</code> to quote a whole conversation
-  • Add <code>r</code> to show what message is being quoted
-  • Not perfect? Just reply <code>/q</code> again to remake it
+  <b>✨ 전문가 팁:</b>
+  • 'blue' 또는 'red'와 같은 색상 이름을 입력하여 즉시 스타일 적용
+  • 메시지의 사진을 포함하려면 <code>media</code> 추가
+  • 전체 대화를 인용하려면 <code>/q 3</code> 사용
+  • 어떤 메시지가 인용되고 있는지를 표시하려면 <code>r</code> 추가
+  • 완벽하지 않나요? 그냥 <code>/q</code>로 다시 답장하여 다시 만드세요
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  모든 창의적 가능성을 발견할 준비가 되면 /help를 입력하세요! 🎨
 help: |
   <b>✨ QuotLyBot 퀵 가이드</b>
 
