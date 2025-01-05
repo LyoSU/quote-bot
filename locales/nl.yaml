@@ -6,55 +6,70 @@ description:
     Reageer gewoon op het bericht met /q of stuur het naar mij door.
   long: |
     Heb je grappige of inspirerende berichten opgemerkt in je groepschat die je zou willen vereeuwigen? Stuur ze gewoon naar me door of typ /q en ik zal ze omzetten in een strak citaatsticker die je kunt opslaan en delen met je vrienden. Of het nu voor persoonlijke herinneringen is of voor professioneel gebruik, de mogelijkheden zijn eindeloos. Probeer me nu uit! 😎
-help: |2
-  <b>Hallo!</b>
-  Ik zal helpen bij het maken van een offerte uit een bericht.
-  De bot kan zowel in privéberichten als in groepen werken.
+help: |
+  <b>📝 Hoi! Ik ben een bot voor het maken van mooie citaten</b>
 
-    <b>⚙️ Beschikbare commando's:</b>
-  /q — maak een offerte van het bericht <i>[antwoord op het bericht]</i>
+  <i>Ik kan elk bericht omzetten in een aantrekkelijke quote om belangrijke chatmomenten te bewaren. Ik werk zowel in privéberichten als in groepen!</i>
 
-  Om een offerte van meerdere berichten te maken, schrijf een nummer als parameter dat aangeeft hoeveel berichten er in de offerte moeten zitten.
-  In privéberichten kun je meerdere berichten tegelijk doorsturen en ik zal er een offerte van maken.
+  <b>🎯 Basisgebruik:</b>
 
-    <b>Beschikbare vlaggen voor het /q commando:</b>
-      hex code of kleurnaam: <code>#cbafff</code> of <code>indigo</code> — maak een offerte met kleur <b>#cbafff</b>
-      <code>willekeurig</code> — willekeurige offertekleur
-      <code>antwoord</code> of <code>a</code> — maak een offerte met behoud van antwoorden
-      <code>p</code> of <code>png</code> — maak een PNG-offerte
-      <code>i</code> of <code>img</code> — maak een offerte als afbeelding
-      <code>beoordeling</code> — voeg een beoordeling toe aan een offerte
-      <code>m</code> of <code>media</code> — media toevoegen
-      <code>c</code> of <code>bijsnijden</code> — media bijsnijden
-      <code>s2,5</code> — beeldkwaliteit is 2,5 keer hoger dan standaard <i>(kan elke waarde instellen)</i>
+  • Enkel bericht: antwoord erop met <code>/q</code>
+  • Meerdere berichten: voeg een nummer toe, zoals <code>/q 3</code>
+  • In privéchats: stuur berichten eenvoudig naar mij door
 
-    <b>Voorbeeld van het gebruik van vlaggen:</b>
-    <code>/q 3 wit rp</code>
-    <code>/q i rood s3,2</code>
-    <code>/q a 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Quote Aanpassing:</b>
 
-  Alleen voor beheerders:
-  <code>/qs 🥰💜</code> — slaat een sticker/foto/document met een foto op in een stickerpakket van een groep met emoji 🥰💜 <i>(emoji kan er elke zijn en in elke hoeveelheid)</i> <i>[antwoord op bericht]</i>
-  <code>/qd</code> — verwijder de sticker uit het stickerpakket van de groep <i>[als reactie op het bericht]</i>
-  <code>/qdrand</code> — verwijder de sticker uit de willekeurige groepsstickers <i>[als reactie op het bericht]</i>
-  <code>/qb</code> — emoji-merk instellen. Beschikbaar: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qkleur groen</code> — stel de kleur van offertes in op <b>groen</b> standaard <i>(hex code of kleurnaam)</i>
-  <code>/qemoji</code> — verander de emoji-suffix voor stickers
-  <code>/qbeoordeling</code> — beoordeling van offertes in-/uitschakelen
-  <code>/qgab 300</code> — stel de kans op een willekeurige gebeurtenis van een offerte in. Elk nummer van één tot oneindig. Hoe hoger het nummer, hoe lager de kans dat offertes verschijnen. Door 300 op te geven, zal de kans dat een bericht verschijnt ongeveer 1 op 300 keer zijn. Om uit te schakelen, stel de waarde in op 0
+  <b>1. Kleur:</b>
+  • Naam: <code>/q rood</code>, <code>/q blauw</code>, <code>/q groen</code>
+  • Aangepaste kleur: <code>/q #cbafff</code>
+  • Willekeurige kleur: <code>/q random</code>
 
-  /qrandom — willekeurig een offerte met een positieve beoordeling
-  /qtop — topgroep offertes
+  <b>2. Uiterlijk:</b>
+  • Afbeelding in plaats van sticker: voeg <code>img</code> toe
+  • Hoge kwaliteit: voeg <code>png</code> toe
+  • Gesprek bewaren: voeg <code>reply</code> toe
 
-  /help of /start — ontvang deze tekst
+  <b>3. Media:</b>
+  • Inclusief foto/sticker: voeg <code>media</code> toe
 
-  /taal — verander de taal
+  <b>4. Kwaliteit:</b>
+  Voeg <code>s</code> en een nummer toe voor verbeterde kwaliteit:
+  • <code>s2</code> - 2x kwaliteit
+  • <code>s3</code> - 3x kwaliteit
 
-  <b>☕️ Koop koffie voor de ontwikkelaar:</b> /donate
+  <b>💫 Nuttige Combinaties:</b>
 
-  <b>👨🏻‍💻 Ontwikkelaarsblog:</b> @LyBlog
-  GitHub:</b> github.com/LyoSU/quote-bot
+  • Mooie quote met foto:
+  <code>/q 2 rood media</code> - rode quote met 2 berichten en foto
+
+  • Hoge kwaliteit conversatie screenshot:
+  <code>/q 3 reply png</code> - 3-berichtendialoog in PNG
+
+  • Stijlvolle gekleurde quote:
+  <code>/q #ff69b4 img s2</code> - roze quote in hoge kwaliteit
+
+  <b>🌟 Speciale Functies:</b>
+
+  • Quote waardering: voeg <code>rate</code> toe om stemmen in te schakelen
+  • Emoji stijl: <code>/qb apple</code> of <code>/qb google</code>
+  • Willekeurige citaten: <code>/qrand</code>
+  • Top citaten: <code>/qtop</code>
+
+  <b>👨‍💼 Beheerder Commando's:</b>
+
+  • <code>/qcolor</code> - stel standaard groepskleur in
+  • <code>/qrate</code> - schakel waarderingssysteem in
+  • <code>/qgab</code> - configureer de weergave van willekeurige citaten
+  • <code>/qs</code> - opslaan naar groepsstickerpakket
+
+  <b>🌐 Andere Commando's:</b>
+
+  • <code>/lang</code> - wijzig taal
+  • <code>/donate</code> - ondersteun de ontwikkelaar
+
+  <b>📱 Neem contact met ons op:</b>
+  • Blog van de ontwikkelaar: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Hallo!</b>
   Ik maak citaten aan in de groep met behulp van de /q opdracht in reactie op bericht

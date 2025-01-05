@@ -6,55 +6,70 @@ description:
     Il suffit de répondre au message avec /q ou de me le transférer.
   long: |
     Vous avez remarqué des messages drôles ou inspirants dans votre chat de groupe que vous aimeriez immortaliser? Il vous suffit de me les transférer ou de taper /q et je les transformerai en un élégant autocollant de citation que vous pourrez enregistrer et partager avec vos amis. Que ce soit pour des souvenirs personnels ou une utilisation professionnelle, les possibilités sont infinies. Essayez-moi maintenant! 😎
-help: |2
-  <b>Bonjour !</b>
-  Je vais aider à créer un devis à partir d'un message.
-  Bot peut fonctionner à la fois dans les messages privés et dans les groupes.
+help: |
+  <b>📝 Salut! Je suis un bot pour créer de belles citations</b>
 
-    <b>⚙️ Commandes disponibles:</b>
-  /q — faire un devis à partir du message <i>[répondre au message]</i>
+  <i>Je peux transformer n'importe quel message en une citation attrayante pour préserver les moments importants de la discussion. Je travaille aussi bien dans les messages privés que dans les groupes !</i>
 
-  Pour créer un devis à partir de plusieurs messages, écrivez en paramètre un nombre qui indiquera combien de messages devraient être dans le devis.
-  En messages privés, vous pouvez transférer plusieurs messages à la fois et je ferai un devis à partir d'eux.
+  <b>🎯 Utilisation de base :</b>
 
-    <b>Drapeaux disponibles pour la commande /q:</b>
-      code hexadécimal ou nom de couleur: <code>#cbafff</code> ou <code>indigo</code> — faire un devis avec la couleur <b>#cbafff</b>
-      <code>aléatoire</code> — couleur de devis aléatoire
-      <code>réponse</code> ou <code>r</code> — faire un devis en sauvegardant les réponses
-      <code>p</code> ou <code>png</code> — faire un devis PNG
-      <code>i</code> ou <code>img</code> — faire un devis comme une image
-      <code>taux</code> — ajouter une notation à un devis
-      <code>m</code> ou <code>média</code> —inclure des médias
-      <code>c</code> ou <code>recadrer</code> — recadrer les médias
-      <code>s2.5</code> — la qualité de l'image est 2,5 fois supérieure à la norme <i>(peut définir n'importe quelle valeur)</i>
+  • Message unique : répondez-y avec <code>/q</code>
+  • Messages multiples : ajoutez un nombre, comme <code>/q 3</code>
+  • Dans les chats privés : transférez simplement les messages vers moi
 
-    <b>Exemple d'utilisation des drapeaux:</b>
-    <code>/q 3 blanc rp</code>
-    <code>/q i rouge s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Personnalisation des citations :</b>
 
-  Uniquement pour les administrateurs:
-  <code>/qs 🥰💜</code> — enregistre un autocollant/photo/document avec une photo dans un pack d'autocollants d'un groupe avec l'emoji 🥰💜 <i>(l'emoji peut être n'importe lequel et en n'importe quel nombre)</i> <i>[répondre au message]</i>
-  <code>/qd</code> — supprimer l'autocollant du pack d'autocollants du groupe  <i>[en réponse au message]</i>
-  <code>/qdrand</code> — supprimer l'autocollant des autocollants aléatoires du groupe  <i>[en réponse au message]</i>
-  <code>/qb</code> — définir la marque emoji. Disponible : <code>pomme</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcouleur verte</code> — définir la couleur des devis <b>verte</b> par défaut <i>(code hexadécimal ou nom de couleur)</i>
-  <code>/qemoji</code> — changer le suffixe emoji pour les autocollants
-  <code>/qnotation</code> — activer/désactiver la notation des devis
-  <code>/qgab 300</code> — définir la chance d'une occurrence aléatoire d'un devis. N'importe quel nombre de un à l'infini. Plus le nombre est élevé, plus la probabilité d'apparition des devis est faible. En spécifiant 300, la probabilité d'apparition d'un message sera approximativement d'une fois sur 300 messages. Pour désactiver, régler la valeur à 0
+  <b>1. Couleur :</b>
+  • Nom : <code>/q rouge</code>, <code>/q bleu</code>, <code>/q vert</code>
+  • Couleur personnalisée : <code>/q #cbafff</code>
+  • Couleur aléatoire : <code>/q aléatoire</code>
 
-  /qalea — devis aléatoire avec une notation positive
-  /qtop — meilleurs devis de groupe
+  <b>2. Apparence :</b>
+  • Image au lieu de sticker : ajoutez <code>img</code>
+  • Haute qualité : ajoutez <code>png</code>
+  • Préserver la conversation : ajoutez <code>reply</code>
 
-  /aide ou /démarrer — obtenir ce texte
+  <b>3. Médias :</b>
+  • Inclure photo/sticker : ajoutez <code>media</code>
 
-  /langue — changer de langue
+  <b>4. Qualité :</b>
+  Ajoutez <code>s</code> et un numéro pour améliorer la qualité :
+  • <code>s2</code> - qualité 2x
+  • <code>s3</code> - qualité 3x
 
-  <b>☕️ Acheter du café pour le développeur:</b> /donate
+  <b>💫 Combinaisons utiles :</b>
 
-  <b>👨🏻‍💻 Blog du développeur:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Belle citation avec photo :
+  <code>/q 2 rouge media</code> - citation rouge avec 2 messages et photo
+
+  • Capture d'écran de conversation de haute qualité :
+  <code>/q 3 reply png</code> - dialogue de 3 messages en PNG
+
+  • Citation colorée élégante :
+  <code>/q #ff69b4 img s2</code> - citation rose en haute qualité
+
+  <b>🌟 Fonctionnalités spéciales :</b>
+
+  • Classement de la citation : ajoutez <code>rate</code> pour activer le vote
+  • Style emoji : <code>/qb apple</code> ou <code>/qb google</code>
+  • Citations aléatoires : <code>/qrand</code>
+  • Meilleures citations : <code>/qtop</code>
+
+  <b>👨‍💼 Commandes Admin :</b>
+
+  • <code>/qcolor</code> - définir la couleur de groupe par défaut
+  • <code>/qrate</code> - activer le système de notation
+  • <code>/qgab</code> - configurer l'apparence des citations aléatoires
+  • <code>/qs</code> - enregistrer dans le paquet de stickers du groupe
+
+  <b>🌐 Autres Commandes :</b>
+
+  • <code>/lang</code> - changer la langue
+  • <code>/donate</code> - soutenir le développeur
+
+  <b>📱 Contactez-nous :</b>
+  • Blog du développeur: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Bonjour !</b>
   Je vais créer des citations dans le groupe en utilisant la commande /q en réponse au message

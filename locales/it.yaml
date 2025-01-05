@@ -6,55 +6,70 @@ description:
     Basta rispondere al messaggio con /q o inoltrarlo a me.
   long: |
     Hai notato dei messaggi divertenti o ispiratori nella chat di gruppo che vorresti immortalare? Inoltrali semplicemente a me o digita /q e li trasformerò in uno sticker citazione elegante che potrai salvare e condividere con i tuoi amici. Che sia per ricordi personali o uso professionale, le possibilità sono infinite. Provalo adesso! 😎
-help: |2
-  <b>Ciao!</b>
-  Ti aiuterò a creare una citazione da un messaggio.
-  Il bot può funzionare sia in messaggi privati che in gruppi.
+help: |
+  <b>📝 Ciao! Sono un bot per creare bellissime citazioni</b>
 
-    <b>⚙️ Comandi disponibili:</b>
-  /q — fare una citazione dal messaggio <i>[rispondi al messaggio]</i>
+  <i>Posso trasformare qualsiasi messaggio in una citazione attraente per preservare momenti importanti della chat. Funziono sia nei messaggi privati che nei gruppi!</i>
 
-  Per creare una citazione da diversi messaggi, scrivi come parametro un numero che indicherà quanti messaggi dovrebbero essere nella citazione.
-  In messaggi privati, puoi inoltrare diversi messaggi a me contemporaneamente e io farò una citazione da essi.
+  <b>🎯 Uso Base:</b>
 
-    <b>Bandiere disponibili per il comando /q:</b>
-      codice esadecimale o nome colore: <code>#cbafff</code> o <code>indaco</code> — fare una citazione con colore <b>#cbafff</b>
-      <code>casuale</code> — colore citazione casuale
-      <code>risposta</code> o <code>r</code> — fare una citazione salvando le risposte
-      <code>p</code> o <code>png</code> — fare una citazione PNG
-      <code>i</code> o <code>img</code> — fare una citazione come immagine
-      <code>voto</code> — aggiungere una valutazione a una citazione
-      <code>m</code> o <code>media</code> — includere media
-      <code>c</code> o <code>ritaglio</code> — ritaglia media
-      <code>s2.5</code> — qualità dell'immagine è 2.5 volte superiore al normale <i>(possono impostare qualsiasi valore)</i>
+  • Messaggio singolo: rispondi con <code>/q</code>
+  • Più messaggi: aggiungi un numero, come <code>/q 3</code>
+  • Nelle chat private: inoltra semplicemente i messaggi a me
 
-    <b>Esempio di utilizzo delle bandiere:</b>
-    <code>/q 3 bianco rp</code>
-    <code>/q i rosso s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Personalizzazione della Citazione:</b>
 
-  Solo per gli amministratori:
-  <code>/qs 🥰💜</code> — salva uno sticker/foto/documento con una foto in un pacchetto di sticker di un gruppo con emoji 🥰💜 <i>(l'emoji può essere qualsiasi e in qualsiasi quantità)</i> <i>[rispondi al messaggio]</i>
-  <code>/qd</code> — rimuove lo sticker dal pacchetto di sticker del gruppo  <i>[in risposta al messaggio]</i>
-  <code>/qdrand</code> — rimuove lo sticker dai random sticker del gruppo  <i>[in risposta al messaggio]</i>
-  <code>/qb</code> — imposta il marchio dell'emoji. Disponibile: <code>mela</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor verde</code> — imposta il colore delle citazioni <b>verde</b> di default <i>(codice esadecimale o nome colore)</i>
-  <code>/qemoji</code> — cambia il suffisso emoji per gli sticker
-  <code>/qrate</code> — abilita/disabilita la valutazione delle citazioni
-  <code>/qgab 300</code> — imposta la possibilità di una comparsa casuale di una citazione. Qualsiasi numero da uno all'infinito. Più è alto il numero, più bassa è la possibilità che appaiano le citazioni. Specificando 300, la possibilità di un messaggio apparirà circa una volta ogni 300 messaggi. Per disabilitare, impostare il valore su 0
+  <b>1. Colore:</b>
+  • Nome: <code>/q rosso</code>, <code>/q blu</code>, <code>/q verde</code>
+  • Colore personalizzato: <code>/q #cbafff</code>
+  • Colore casuale: <code>/q random</code>
 
-  /qrand — citazione casuale con valutazione positiva
-  /qtop — citazioni top del gruppo
+  <b>2. Aspetto:</b>
+  • Immagine invece di sticker: aggiungi <code>img</code>
+  • Alta qualità: aggiungi <code>png</code>
+  • Preserva conversazione: aggiungi <code>reply</code>
 
-  /help o /start — ottenere questo testo
+  <b>3. Media:</b>
+  • Includi foto/sticker: aggiungi <code>media</code>
 
-  /lang — cambia lingua
+  <b>4. Qualità:</b>
+  Aggiungi <code>s</code> e un numero per una qualità migliorata:
+  • <code>s2</code> - qualità 2x
+  • <code>s3</code> - qualità 3x
 
-  <b>☕️ Compra un caffè allo sviluppatore:</b> /donate
+  <b>💫 Combinazioni Utili:</b>
 
-  <b>👨🏻‍💻 Blog dello sviluppatore:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Bella citazione con foto:
+  <code>/q 2 rosso media</code> - citazione rossa con 2 messaggi e foto
+
+  • Screenshot di conversazione di alta qualità:
+  <code>/q 3 reply png</code> - dialogo di 3 messaggi in PNG
+
+  • Citazione stilosa colorata:
+  <code>/q #ff69b4 img s2</code> - citazione rosa in alta qualità
+
+  <b>🌟 Funzionalità Speciali:</b>
+
+  • Valutazione citazioni: aggiungi <code>rate</code> per abilitare il voto
+  • Stile emoji: <code>/qb apple</code> o <code>/qb google</code>
+  • Citazioni casuali: <code>/qrand</code>
+  • Citazioni migliori: <code>/qtop</code>
+
+  <b>👨‍💼 Comandi Admin:</b>
+
+  • <code>/qcolor</code> - imposta colore di default del gruppo
+  • <code>/qrate</code> - abilita il sistema di valutazione
+  • <code>/qgab</code> - configura l'aspetto delle citazioni casuali
+  • <code>/qs</code> - salva nel pacchetto sticker del gruppo
+
+  <b>🌐 Altri Comandi:</b>
+
+  • <code>/lang</code> - cambia lingua
+  • <code>/donate</code> - supporta lo sviluppatore
+
+  <b>📱 Contattaci:</b>
+  • Blog dello Sviluppatore: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Ciao!</b>
   Creerò delle citazioni nel gruppo usando il comando /q in risposta ad un messaggio

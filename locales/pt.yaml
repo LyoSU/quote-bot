@@ -6,56 +6,70 @@ description:
     Basta responder à mensagem com /q ou encaminhá-la para mim.
   long: |
     Notou alguma mensagem engraçada ou inspiradora em seu bate-papo em grupo que gostaria de imortalizar? Basta encaminhá-los para mim ou digitar /q e eu os transformarei em um elegante adesivo de quote que você pode salvar e compartilhar com seus amigos. Seja para memórias pessoais ou para uso profissional, as possibilidades são infinitas. Experimente-me agora! 😎
-help: |2
-  <b>Olá!</b>
-  Eu vou ajudar a criar uma citação de um post.
-  O bot pode funcionar tanto em mensagens privadas quanto em grupos.
+help: |
+  <b>📝 Olá! Eu sou um bot para criar belos trechos</b>
 
+  <i>Posso transformar qualquer mensagem em um trecho atraente para preservar momentos importantes do chat. Trabalho tanto em mensagens privadas quanto em grupos!</i>
 
-    <b>⚙️ Comandos disponíveis:</b>
-  /q — faz uma citação de uma mensagem <i>[em resposta à mensagem]</i>
+  <b>🎯 Uso Básico:</b>
 
-  Para criar uma citação de várias mensagens, escreva como parâmetro um número que indicará quantas mensagens devem constar na cotação.
-  Nas mensagens privadas, voice pode encaminhar várias mensagens  para mim de uma vez só e eu vou fazer uma citação delas.
+  • Mensagem única: responda com <code>/q</code>
+  • Múltiplas mensagens: adicione um número, como <code>/q 3</code>
+  • Em chats privados: simplesmente encaminhe mensagens para mim
 
-    <b>Flags disponíveis para o comando /q:</b>
-      código hex ou nome da cor: <code>#cbafff</code> ou <code>índigo</code> — faça uma citação com a cor <b>#cbafff</b>
-      <code>aleatório</code> — a cor da citação será aleatória
-      <code>resposta</code>  ou <code>r</code> — fazer uma citação salvando respostas
-      <code>p</code> ou <code>png</code> — fazer uma citação de imagem
-      <code>i</code> ou <code>img</code> — fazer uma citação como uma foto
-      <code>avaliação</code> — adicionar avaliação para uma citação
-      <code>m</code> or <code>mídia</code> — incluí mídia
-      <code>c</code> or <code>crop</code> — cortar a mídia
-      <code>s2.5</code> — qualidade da foto é 2.5 vezes mais alta do que o padrão <i>(pode selecionar qualque valor)</i>
+  <b>🎨 Personalização de Trecho:</b>
 
-    <b>Exemplo do uso de flags:</b>
-    <code>/q 3 branco rp</code>
-    <code>/q i vermelho s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>1. Cor:</b>
+  • Nome: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Cor personalizada: <code>/q #cbafff</code>
+  • Cor aleatória: <code>/q random</code>
 
-  Apenas para adminitradores:
-  <code>/qs 🥰💜</code> — salva um adesivo/foto/documento com uma foto em um pacote de adesivos de um grupo com emoji 🥰💜 <i>(o emoji pode ser qualquer um e em qualquer número)</i> <i>[em resposta à mensagem]</i>
-  <code>/qd</code> — remove o adesivo do pacote de adesivos do grupo  <i>[em resposta à uma mensagem]</i>
-  <code>/qdrand</code> — remove o adesivo dos adesivos aleatórios do grupo  <i>[em resposta à mensagem]</i>
-  <code>/qb</code> — definir a marca do emoji. Disponível: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor verde</code> — seleciona a cor das citações <b>verde</b> por padrão <i>(código hex ou nome da cor)</i>
-  <code>/qemoji</code> — excolhe o sufixo do emoji para os adesivos
-  <code>/qrate</code> — ativa/desativa a avaliação de citações
-  <code>/qgab 300</code> — definir a chance de ocorrência de uma citação. Qualquer número de um ao infinito. Quanto maior o número, menor a chance de citações aparecerem. Ao especificar 300, a chance da mensagem aparecer será de aproximadamente 1 vez em 300 mensagens. Para desativar, defina o valor para 0
+  <b>2. Aparência:</b>
+  • Imagem em vez de adesivo: adicione <code>img</code>
+  • Alta qualidade: adicione <code>png</code>
+  • Preservar a conversa: adicione <code>reply</code>
 
-  /qrand — citação aleatória com a avaliação positiva
-  /qtop — melhores citações do grupo
+  <b>3. Mídia:</b>
+  • Incluir foto/adesivo: adicione <code>media</code>
 
-  /help or /start — obtém este texto
+  <b>4. Qualidade:</b>
+  Adicione <code>s</code> e um número para qualidade melhorada:
+  • <code>s2</code> - 2x qualidade
+  • <code>s3</code> - 3x qualidade
 
-  /lang — mudar o idioma
+  <b>💫 Combinações Úteis:</b>
 
-  <b>☕️ Comprar um café para o desenvolvedor:</b> /doar
+  • Trecho bonito com foto:
+  <code>/q 2 red media</code> - trecho vermelho com 2 mensagens e foto
 
-  <b>👨🏻‍💻 Blog do desenvolvedor:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Captura de tela de conversa em alta qualidade:
+  <code>/q 3 reply png</code> - diálogo de 3 mensagens em PNG
+
+  • Trecho estiloso colorido:
+  <code>/q #ff69b4 img s2</code> - trecho rosa em alta qualidade
+
+  <b>🌟 Recursos Especiais:</b>
+
+  • Avaliação de trecho: adicione <code>rate</code> para habilitar votação
+  • Estilo de emoji: <code>/qb apple</code> ou <code>/qb google</code>
+  • Trechos aleatórios: <code>/qrand</code>
+  • Melhores trechos: <code>/qtop</code>
+
+  <b>👨‍💼 Comandos de Admin:</b>
+
+  • <code>/qcolor</code> - definir cor padrão do grupo
+  • <code>/qrate</code> - habilitar sistema de avaliação
+  • <code>/qgab</code> - configurar aparência de trecho aleatório
+  • <code>/qs</code> - salvar no pacote de adesivos do grupo
+
+  <b>🌐 Outros Comandos:</b>
+
+  • <code>/lang</code> - alterar idioma
+  • <code>/donate</code> - apoiar o desenvolvedor
+
+  <b>📱 Contato:</b>
+  • Blog do Desenvolvedor: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>
   Vou criar cotações no grupo pelo comando /q em resposta à mensagem

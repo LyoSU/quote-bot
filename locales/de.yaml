@@ -6,55 +6,70 @@ description:
     Antworten Sie einfach auf die Nachricht mit /q oder leiten Sie sie an mich weiter.
   long: |
     Hast du in deinem Gruppenchat lustige oder inspirierende Nachrichten entdeckt, die du gerne verewigen möchtest? Leiten Sie sie einfach an mich weiter oder geben Sie /q ein und ich verwandle sie in einen eleganten Zitataufkleber, den Sie speichern und mit Ihren Freunden teilen können. Ob für persönliche Erinnerungen oder für den beruflichen Gebrauch, die Möglichkeiten sind endlos. Probiere mich jetzt aus! 😎
-help: |2
-  <b>Hallo!</b>
-  Ich werde dabei helfen, ein Zitat aus einem Beitrag zu erstellen.
-  Der Bot kann sowohl in privaten Nachrichten als auch in Gruppen arbeiten.
+help: |
+  <b>📝 Hallo! Ich bin ein Bot zum Erstellen schöner Zitate</b>
 
-    <b>⚙️ Verfügbare Befehle:</b>
-  /q — erstelle ein Zitat aus der Nachricht <i>[Antwort auf die Nachricht]</i>
+  <i>Ich kann jede Nachricht in ein attraktives Zitat verwandeln, um wichtige Chat-Momente zu bewahren. Ich arbeite sowohl in privaten Nachrichten als auch in Gruppen!</i>
 
-  Um ein Zitat aus mehreren Nachrichten zu erstellen, schreiben Sie als Parameter eine Zahl, die angibt, wie viele Nachrichten im Zitat enthalten sein sollen.
-  In privaten Nachrichten können Sie mir gleichzeitig mehrere Nachrichten weiterleiten, und ich werde daraus ein Zitat machen.
+  <b>🎯 Grundlegende Nutzung:</b>
 
-    <b>Verfügbare Flaggen für den Befehl /q:</b>
-      Hex-Code oder Farbname: <code>#cbafff</code> oder <code>indigo</code> — erstellen Sie ein Zitat mit Farbe <b>#cbafff</b>
-      <code>random</code> — zufällige Zitatfarbe
-      <code>reply</code> oder <code>r</code> — erstellen Sie ein Zitat mit gespeicherten Antworten
-      <code>p</code> oder <code>png</code> — erstellen Sie ein PNG-Zitat
-      <code>i</code> oder <code>img</code> — erstellen Sie ein Zitat als Bild
-      <code>rate</code> — fügen Sie einem Zitat eine Bewertung hinzu
-      <code>m</code> oder <code>media</code> — Medien einbeziehen
-      <code>c</code> oder <code>crop</code> — Medienschnitt
-      <code>s2,5</code> — Bildqualität ist 2,5-mal höher als Standard <i>(kann jeden Wert festlegen)</i>
+  • Einzelne Nachricht: Antworte darauf mit <code>/q</code>
+  • Mehrere Nachrichten: Füge eine Zahl hinzu, z.B. <code>/q 3</code>
+  • In privaten Chats: leiten Sie mir einfach Nachrichten weiter
 
-    <b>Beispiel für die Verwendung von Flaggen:</b>
-    <code>/q 3 weiß rp</code>
-    <code>/q i rot s3,2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Zitat-Anpassung:</b>
 
-  Nur für Administratoren:
-  <code>/qs 🥰💜</code> — speichert ein Sticker/Foto/Dokument mit einem Foto in einem Aufkleberpaket einer Gruppe mit Emoji 🥰💜 <i>(Emoji kann jedes und beliebige Anzahl sein)</i> <i>[Antwort auf die Nachricht]</i>
-  <code>/qd</code> — entfernt den Aufkleber aus dem Aufkleberpaket der Gruppe <i>[als Antwort auf die Nachricht]</i>
-  <code>/qdrand</code> — entfernt den Aufkleber aus den zufälligen Aufklebern der Gruppe <i>[als Antwort auf die Nachricht]</i>
-  <code>/qb</code> — setzt Emoji-Marke. Verfügbar: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor grün</code> — setzt die Farbe der Zitate <b>grün</b> standardmäßig <i>(Hex-Code oder Farbname)</i>
-  <code>/qemoji</code> — ändert das Emoji-Suffix für Aufkleber
-  <code>/qrate</code> — Aktivieren/Deaktivieren der Bewertung von Zitaten
-  <code>/qgab 300</code> — setzt die Chance eines zufälligen Auftretens eines Zitats. Jede Zahl von eins bis Unendlich. Je höher die Zahl, desto geringer ist die Wahrscheinlichkeit, dass Zitate erscheinen. Durch Angabe von 300 wird die Wahrscheinlichkeit, dass eine Nachricht erscheint, ungefähr 1-mal in 300 Nachrichten sein. Um zu deaktivieren, setzen Sie den Wert auf 0
+  <b>1. Farbe:</b>
+  • Name: <code>/q rot</code>, <code>/q blau</code>, <code>/q grün</code>
+  • Benutzerdefinierte Farbe: <code>/q #cbafff</code>
+  • Zufällige Farbe: <code>/q zufällig</code>
 
-  /qrand — zufälliges Zitat mit einer positiven Bewertung
-  /qtop — Top-Gruppenzitate
+  <b>2. Aussehen:</b>
+  • Bild statt Sticker: Füge <code>img</code> hinzu
+  • Hohe Qualität: Füge <code>png</code> hinzu
+  • Unterhaltung bewahren: Füge <code>reply</code> hinzu
 
-  /help oder /start — erhalten Sie diesen Text
+  <b>3. Medien:</b>
+  • Foto/Sticker einfügen: Füge <code>media</code> hinzu
 
-  /lang — Sprache ändern
+  <b>4. Qualität:</b>
+  Füge <code>s</code> und eine Zahl für verbesserte Qualität hinzu:
+  • <code>s2</code> - 2x Qualität
+  • <code>s3</code> - 3x Qualität
 
-  <b>☕️ Kaufe dem Entwickler Kaffee:</b> /donate
+  <b>💫 Nützliche Kombinationen:</b>
 
-  <b>👨🏻‍💻 Entwicklerblog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Schönes Zitat mit Foto:
+  <code>/q 2 rot media</code> - rotes Zitat mit 2 Nachrichten und Foto
+
+  • Hochwertiger Konversations-Screenshot:
+  <code>/q 3 reply png</code> - 3-Nachrichten-Dialog im PNG
+
+  • Stilvolles farbiges Zitat:
+  <code>/q #ff69b4 img s2</code> - rosa Zitat in hoher Qualität
+
+  <b>🌟 Besondere Funktionen:</b>
+
+  • Zitatbewertung: Füge <code>rate</code> hinzu, um Abstimmungen zu ermöglichen
+  • Emoji-Stil: <code>/qb apple</code> oder <code>/qb google</code>
+  • Zufällige Zitate: <code>/qrand</code>
+  • Top-Zitate: <code>/qtop</code>
+
+  <b>👨‍💼 Admin-Befehle:</b>
+
+  • <code>/qcolor</code> - Standard-Gruppenfarbe festlegen
+  • <code>/qrate</code> - Bewertungssystem aktivieren
+  • <code>/qgab</code> - Aussehen von zufälligen Zitaten konfigurieren
+  • <code>/qs</code> - zum Gruppenaufkleber-Paket speichern
+
+  <b>🌐 Weitere Befehle:</b>
+
+  • <code>/lang</code> - Sprache ändern
+  • <code>/donate</code> - Entwickler unterstützen
+
+  <b>📱 Kontaktieren Sie uns:</b>
+  • Blog des Entwicklers: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Hallo!</b>
   Ich werde Anführungszeichen in der Gruppe erstellen, indem ich den Befehl /q als Antwort auf die Nachricht verwende

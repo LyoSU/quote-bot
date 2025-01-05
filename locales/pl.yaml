@@ -6,55 +6,70 @@ description:
     Wystarczy odpowiedzieć na wiadomość z /q lub przekazać ją do mnie.
   long: |
     Zauważyłeś jakąkolwiek zabawną lub inspirującą wiadomość na czacie grupowym, że chciałbyś być nieśmiertelny? Po prostu przekaż je do mnie lub wpisz /q i zamienię je w śpiącą naklejkę z cytatem, którą możesz zapisać i podzielić się z przyjaciółmi. Bez względu na to, czy jest to dla osobistych wspomnień czy profesjonalne, możliwości są niekończące. Wypróbuj mnie teraz! 😎
-help: |2
-  <b>Cześć!</b>
-  Pomogę stworzyć cytat z posta.
-  Bot może pracować zarówno w wiadomościach prywatnych, jak i w grupach.
+help: |
+  <b>📝 Cześć! Jestem botem do tworzenia pięknych cytatów</b>
 
-    <b>⚙️ Dostępne polecenia:</b>
-  /q — zrób cytat z wiadomości <i>[odpowiedz na wiadomość]</i>
+  <i>Mogę przekształcić dowolną wiadomość w atrakcyjny cytat, aby zachować ważne chwile czatu. Działam zarówno w prywatnych wiadomościach, jak i w grupach!</i>
 
-  Aby utworzyć cytat z kilku wiadomości, napisz jako parametr liczbę określającą ile wiadomości powinno być w cytacie.
-  W prywatnych wiadomościach możesz przekazać mi kilka wiadomości naraz, a ja zrobię z nich cytat.
+  <b>🎯 Podstawowe Użycie:</b>
 
-    <b>Dostępne flagi dla polecenia /q:</b>
-      kod heksadecymalny lub nazwa koloru: <code>#cbafff</code> lub <code>indigo</code> — zrób cytat z kolorem <b>#cbafff</b>
-      <code>random</code> — losowy kolor cytatu
-      <code>reply</code> lub <code>r</code> — zrób cytat z zachowaniem odpowiedzi
-      <code>p</code> lub <code>png</code> — stwórz cytat w formacie PNG
-      <code>i</code> lub <code>img</code> — zrób cytat jako obrazek
-      <code>rate</code> — dodaj ocenę do cytatu
-      <code>m</code> lub <code>media</code> — dołącz media
-      <code>c</code> lub <code>crop</code> — przycięcie mediów
-      <code>s2.5</code> — jakość obrazka jest 2.5 raza wyższa niż standardowa <i>(można ustawić dowolną wartość)</i>
+  • Pojedyncza wiadomość: odpowiedz na nią z <code>/q</code>
+  • Wiele wiadomości: dodaj numer, np. <code>/q 3</code>
+  • W prywatnych czatach: po prostu prześlij mi wiadomości
 
-    <b>Przykład użycia flag:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Personalizacja Cytatu:</b>
 
-  Tylko dla administratorów:
-  <code>/qs 🥰💜</code> — zapisuje naklejkę/zdjęcie/dokument z zdjęciem do pakietu naklejek grupy z emoji 🥰💜 <i>(emoji może być dowolne i dowolna ilość)</i> <i>[odpowiedz na wiadomość]</i>
-  <code>/qd</code> — usuń naklejkę z pakietu naklejek grupy  <i>[w odpowiedzi na wiadomość]</i>
-  <code>/qdrand</code> — usuń naklejkę z losowych naklejek grupy  <i>[w odpowiedzi na wiadomość]</i>
-  <code>/qb</code> — ustaw znak firmowy emoji. Dostępne: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — ustaw kolor cytatu <b>zielony</b> domyślnie <i>(kod heksadecymalny lub nazwa koloru)</i>
-  <code>/qemoji</code> — zmień sufiks emoji dla naklejek
-  <code>/qrate</code> — włącz/wyłącz ocenianie cytatów
-  <code>/qgab 300</code> — ustaw szansę losowego wystąpienia cytatu. Każda liczba od jeden do nieskończoności. Im wyższa liczba, tym mniejsza szansa pojawienia się cytatu. Podając 300, szansa na pojawienie się wiadomości będzie mniej więcej raz na 300 wiadomości. Aby wyłączyć, ustaw wartość na 0
+  <b>1. Kolor:</b>
+  • Nazwa: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Niestandardowy kolor: <code>/q #cbafff</code>
+  • Losowy kolor: <code>/q random</code>
 
-  /qrand — losuj cytat z pozytywną oceną
-  /qtop — najlepsze cytaty grupy
+  <b>2. Wygląd:</b>
+  • Obraz zamiast naklejki: dodaj <code>img</code>
+  • Wysoka jakość: dodaj <code>png</code>
+  • Zachowaj konwersację: dodaj <code>reply</code>
 
-  /help lub /start — otrzymaj ten tekst
+  <b>3. Media:</b>
+  • Dodaj zdjęcie/naklejkę: dodaj <code>media</code>
 
-  /lang — zmień język
+  <b>4. Jakość:</b>
+  Dodaj <code>s</code> i numer dla zwiększonej jakości:
+  • <code>s2</code> - 2x jakość
+  • <code>s3</code> - 3x jakość
 
-  <b>☕️ Kup kawę dla dewelopera:</b> /donate
+  <b>💫 Przydatne Kombinacje:</b>
 
-  <b>👨🏻‍💻 Blog dewelopera:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Piękny cytat ze zdjęciem:
+  <code>/q 2 red media</code> - czerwony cytat z 2 wiadomościami i zdjęciem
+
+  • Zrzut ekranu konwersacji w wysokiej jakości:
+  <code>/q 3 reply png</code> - dialog z 3 wiadomościami w PNG
+
+  • Stylowy kolorowy cytat:
+  <code>/q #ff69b4 img s2</code> - różowy cytat w wysokiej jakości
+
+  <b>🌟 Specjalne Funkcje:</b>
+
+  • Ocena cytatu: dodaj <code>rate</code> aby włączyć głosowanie
+  • Styl emoji: <code>/qb apple</code> lub <code>/qb google</code>
+  • Losowe cytaty: <code>/qrand</code>
+  • Najlepsze cytaty: <code>/qtop</code>
+
+  <b>👨‍💼 Komendy Administratora:</b>
+
+  • <code>/qcolor</code> - ustaw domyślny kolor grupy
+  • <code>/qrate</code> - włącz system oceniania
+  • <code>/qgab</code> - skonfiguruj wygląd losowego cytatu
+  • <code>/qs</code> - zapisz w grupowym pakiecie naklejek
+
+  <b>🌐 Inne Komendy:</b>
+
+  • <code>/lang</code> - zmień język
+  • <code>/donate</code> - wesprzyj developera
+
+  <b>📱 Skontaktuj się z nami:</b>
+  • Blog Developera: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Witam!</b>
   Utworzę cytaty w grupie za pomocą polecenia /q w odpowiedzi na wiadomość

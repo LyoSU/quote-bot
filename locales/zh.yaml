@@ -6,55 +6,70 @@ description:
     只需回复消息并输入/q，或将其转发给我。
   long: |
     在您的群聊中是否注意到了有趣或鼓舞人心的消息，您想要使它们永存？只需将它们转发给我或输入/q，我将把它们变成一个时尚的报价贴纸，您可以保存并与朋友分享。无论是用于个人记忆还是职业用途，都有无限的可能性。现在就来试试吧！😎
-help: |2
-  <b>你好！</b>
-  我将帮助创建一则帖子报价。
-  Bot可以在私人消息和群组中都能工作。
+help: |
+  <b>📝 你好！我是一个用于创建美丽引用的机器人</b>
 
-    <b>⚙️ 可用命令:</b>
-  /q — 从消息中制作一则报价 <i>[回复消息]</i>
+  <i>我可以将任何消息转换为有吸引力的引用，以保存重要的聊天时刻。我可以在私聊和群组中工作！</i>
 
-  要从多条消息创建报价，请将一个数字作为参数写入，以指示报价中应包含多少条消息。
-  在私人消息中，您可以一次转发多条消息给我，我会从中制作报价。
+  <b>🎯 基本用法：</b>
 
-    <b>/q 命令可用的标记:</b>
-      十六进制代码或颜色名称: <code>#cbafff</code> 或 <code>靛蓝</code> — 使用颜色 <b>#cbafff</b> 制作报价
-      <code>random</code> —随机报价颜色
-      <code>回复</code> 或 <code>r</code> — 制作带有回复保存的报价
-      <code>p</code> 或 <code>png</code> — 制作 PNG 报价
-      <code>i</code> 或 <code>img</code> — 以图片形式制作报价
-      <code>rate</code> — 为报价添加评分
-      <code>m</code> 或 <code>media</code> —包含媒体
-      <code>c</code> 或 <code>crop</code> — 裁剪媒体
-      <code>s2.5</code> — 图片质量是标准的 2.5 倍高 <i>(可以设置任何值)</i>
+  • 单条消息：回复消息并输入<code>/q</code>
+  • 多条消息：加一个数字，比如<code>/q 3</code>
+  • 在私聊中：直接转发消息给我
 
-    <b>使用标记的示例:</b>
-    <code>/q 3 白色 rp</code>
-    <code>/q i 红色 s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 引用自定义：</b>
 
-  仅限管理员使用:
-  <code>/qs 🥰💜</code> — 将表情符号🥰💜的贴纸/照片/带照片的照片保存到群组的贴纸包中<i>(表情符号可以是任何和任意数量)</i> <i>[回复消息]</i>
-  <code>/qd</code> — 从群组的贴纸包中移除贴纸 <i>[回复消息]</i>
-  <code>/qdrand</code> — 从群组的随机贴纸中移除贴纸 <i>[回复消息]</i>
-  <code>/qb</code> — 设置表情品牌。可用选项: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor 绿色</code> — 将报价颜色设为 <b>绿色</b> 默认值 <i>(十六进制代码或颜色名称)</i>
-  <code>/qemoji</code> — 更改贴纸的表情后缀
-  <code>/qrate</code> — 启用/禁用报价评分
-  <code>/qgab 300</code> — 设置随机出现报价的机会。从一到无穷大的任何数字。数字越高，出现报价的可能性越低。通过指定 300，出现消息的几率将大约为 1 次在 300 条消息中。要禁用，请将值设为 0
+  <b>1. 颜色：</b>
+  • 名称：<code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • 自定义颜色：<code>/q #cbafff</code>
+  • 随机颜色：<code>/q random</code>
 
-  /qrand — 随机报价带有正面评分
-  /qtop — 顶部群组报价
+  <b>2. 外观：</b>
+  • 使用图片而不是贴纸：加<code>img</code>
+  • 高质量：加<code>png</code>
+  • 保留对话：加<code>reply</code>
 
-  /help 或 /start — 获取此文本
+  <b>3. 媒体：</b>
+  • 包括照片/贴纸：加<code>media</code>
 
-  /lang — 更改语言
+  <b>4. 质量：</b>
+  增加<code>s</code>和一个数字以增强质量：
+  • <code>s2</code> - 2倍质量
+  • <code>s3</code> - 3倍质量
 
-  <b>☕️ 为开发者买杯咖啡:</b> /donate
+  <b>💫 有用的组合：</b>
 
-  <b>👨🏻‍💻 开发者博客:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • 带照片的美丽引文：
+  <code>/q 2 red media</code> - 红色引用，包含2条消息和照片
+
+  • 高质量对话截图：
+  <code>/q 3 reply png</code> - 3条对话消息的PNG格式
+
+  • 时尚的彩色引用：
+  <code>/q #ff69b4 img s2</code> - 高质量粉色引用
+
+  <b>🌟 特殊功能：</b>
+
+  • 引用评分：加<code>rate</code>启用投票
+  • Emoji风格：<code>/qb apple</code>或<code>/qb google</code>
+  • 随机引用：<code>/qrand</code>
+  • 顶级引用：<code>/qtop</code>
+
+  <b>👨‍💼 管理员命令：</b>
+
+  • <code>/qcolor</code> - 设置默认群组颜色
+  • <code>/qrate</code> - 启用评分系统
+  • <code>/qgab</code> - 配置随机引用外观
+  • <code>/qs</code> - 保存到群组贴纸包
+
+  <b>🌐 其他命令：</b>
+
+  • <code>/lang</code> - 更改语言
+  • <code>/donate</code> - 支持开发者
+
+  <b>📱 联系我们：</b>
+  • 开发者博客：@LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>你好！</b>
   在群组中使用 /q 命令回复消息时我将为您创建引用贴纸

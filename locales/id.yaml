@@ -6,55 +6,70 @@ description:
     Cukup balas pesannya dengan /q atau teruskan ke saya.
   long: |
     Melihat pesan lucu atau inspiratif di obrolan grup Anda yang ingin Anda abadikan? Cukup teruskan kepada saya atau ketik /q dan saya akan mengubahnya menjadi stiker kutipan menarik yang dapat Anda simpan dan bagikan dengan teman-teman Anda. Baik untuk kenangan pribadi atau penggunaan profesional, kemungkinannya tidak terbatas. Coba aku sekarang! 😎
-help: |2
-  <b>Halo!</b>
-  Saya akan membantu membuat kutipan dari sebuah pesan.
-  Bot dapat bekerja baik dalam pesan pribadi maupun di grup.
+help: |
+  <b>📝 Halo! Saya adalah bot untuk membuat kutipan indah</b>
 
-    <b>⚙️ Perintah yang tersedia:</b>
-  /q — buat kutipan dari pesan <i>[balas ke pesan]</i>
+  <i>Saya dapat mengubah pesan apa pun menjadi kutipan yang menarik untuk menjaga momen penting obrolan. Saya bekerja di pesan pribadi dan juga di grup!</i>
 
-  Untuk membuat kutipan dari beberapa pesan, tulis sebagai parameter sebuah angka yang akan menunjukkan berapa banyak pesan yang harus ada dalam kutipan tersebut.
-  Dalam pesan pribadi, Anda dapat meneruskan beberapa pesan kepada saya sekaligus dan saya akan membuat kutipan dari mereka.
+  <b>🎯 Penggunaan Dasar:</b>
 
-    <b>Bendera yang tersedia untuk perintah /q:</b>
-      kode heksa atau nama warna: <code>#cbafff</code> atau <code>indigo</code> — buat kutipan dengan warna <b>#cbafff</b>
-      <code>acak</code> — warna kutipan acak
-      <code>balas</code> atau <code>r</code> — buat kutipan dengan menyimpan jawaban
-      <code>p</code> atau <code>png</code> — buat kutipan PNG
-      <code>i</code> atau <code>img</code> — buat kutipan sebagai gambar
-      <code>rate</code> — tambahkan rating ke kutipan
-      <code>m</code> atau <code>media</code> — sertakan media
-      <code>c</code> atau <code>crop</code> — potong media
-      <code>s2.5</code> — kualitas gambar 2,5 kali lebih tinggi dari standar <i>(dapat menetapkan nilai apa pun)</i>
+  • Pesan tunggal: balas dengan <code>/q</code>
+  • Beberapa pesan: tambahkan angka, seperti <code>/q 3</code>
+  • Dalam obrolan pribadi: cukup teruskan pesan kepada saya
 
-    <b>Contoh penggunaan bendera:</b>
-    <code>/q 3 putih rp</code>
-    <code>/q i merah s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Kustomisasi Kutipan:</b>
 
-  Hanya untuk administrator:
-  <code>/qs 🥰💜</code> — menyimpan stiker/foto/dokumen dengan foto ke paket stiker dari grup dengan emoji 🥰💜 <i>(emoji bisa apa saja dan berapa saja)</i> <i>[balas pesan]</i>
-  <code>/qd</code> — hapus stiker dari paket stiker grup  <i>[sebagai balasan pesan]</i>
-  <code>/qdrand</code> — hapus stiker dari stiker grup secara acak  <i>[sebagai balasan pesan]</i>
-  <code>/qb</code> — atur merek emoji. Tersedia: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor hijau</code> — atur warna kutipan <b>hijau</b> secara default <i>(kode heksa atau nama warna)</i>
-  <code>/qemoji</code> — ubah akhiran emoji untuk stiker
-  <code>/qrate</code> — aktifkan/nonaktifkan penilaian kutipan
-  <code>/qgab 300</code> — atur peluang terjadinya kutipan acak. Angka apa pun dari satu hingga tak terhingga. Semakin tinggi angka, semakin rendah kemungkinan kutipan muncul. Dengan menentukan 300, peluang pesan muncul sekitar 1 kali dalam 300 pesan. Untuk menonaktifkan, atur nilai menjadi 0
+  <b>1. Warna:</b>
+  • Nama: <code>/q merah</code>, <code>/q biru</code>, <code>/q hijau</code>
+  • Warna kustom: <code>/q #cbafff</code>
+  • Warna acak: <code>/q acak</code>
 
-  /qrand — acak sebuah kutipan dengan rating positif
-  /qtop — kutipan teratas grup
+  <b>2. Penampilan:</b>
+  • Gambar alih-alih stiker: tambahkan <code>img</code>
+  • Kualitas tinggi: tambahkan <code>png</code>
+  • Pertahankan percakapan: tambahkan <code>balas</code>
 
-  /bantuan atau /mulai — dapatkan teks ini
+  <b>3. Media:</b>
+  • Sertakan foto/stiker: tambahkan <code>media</code>
 
-  /bahasa — ubah bahasa
+  <b>4. Kualitas:</b>
+  Tambahkan <code>s</code> dan angka untuk meningkatkan kualitas:
+  • <code>s2</code> - kualitas 2x
+  • <code>s3</code> - kualitas 3x
 
-  <b>☕️ Beli kopi untuk pengembang:</b> /donate
+  <b>💫 Kombinasi Berguna:</b>
 
-  <b>👨🏻‍💻 Blog Pengembang:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Kutipan indah dengan foto:
+  <code>/q 2 merah media</code> - kutipan merah dengan 2 pesan dan foto
+
+  • Tangkapan layar percakapan berkualitas tinggi:
+  <code>/q 3 balas png</code> - dialog 3 pesan dalam PNG
+
+  • Kutipan berwarna bergaya:
+  <code>/q #ff69b4 img s2</code> - kutipan pink dalam kualitas tinggi
+
+  <b>🌟 Fitur Khusus:</b>
+
+  • Penilaian kutipan: tambahkan <code>rate</code> untuk mengaktifkan voting
+  • Gaya emoji: <code>/qb apple</code> atau <code>/qb google</code>
+  • Kutipan acak: <code>/qrand</code>
+  • Kutipan terbaik: <code>/qtop</code>
+
+  <b>👨‍💼 Perintah Admin:</b>
+
+  • <code>/qcolor</code> - setel warna grup default
+  • <code>/qrate</code> - aktifkan sistem penilaian
+  • <code>/qgab</code> - konfigurasi tampilan kutipan acak
+  • <code>/qs</code> - simpan ke paket stiker grup
+
+  <b>🌐 Perintah Lain:</b>
+
+  • <code>/lang</code> - ubah bahasa
+  • <code>/donate</code> - dukung pengembang
+
+  <b>📱 Hubungi Kami:</b>
+  • Blog Pengembang: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Halo!</b>
   Saya akan membuat tanda kutip di grup menggunakan perintah / q sebagai tanggapan atas pesan

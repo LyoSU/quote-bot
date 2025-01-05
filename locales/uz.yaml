@@ -6,58 +6,73 @@ description:
     Xabarga /q bilan javob bering yoki uni menga yuboring.
   long: |
     Guruh chatida abadiylashtirmoqchi bo'lgan kulgili yoki ilhomlantiruvchi xabarlarni payqadingizmi? Ularni shunchaki menga yuboring yoki /q yozing va men ularni saqlashingiz va do‘stlaringiz bilan baham ko‘rishingiz mumkin bo‘lgan nafis tirnoq stikeriga aylantiraman. Shaxsiy xotiralar uchunmi yoki professional foydalanish uchunmi, imkoniyatlar cheksizdir. Meni hozir sinab ko'ring! 😎
-help: |2
-  <b>Salom</b>
-  Men matndan iqtibos yarataman.
-  Bot shaxsi xabarlarda va guruhda ishlay oladi.
+help: |
+  <b>📝 Salom! Men chiroyli iqtiboslar yaratish uchun botman</b>
 
-    <b>⚙️ Mavjud buyruqlar:</b>
-  /q — xabardan iqtibos yaratish <i>[xabarga javob</i>]
+  <i>Men har qanday xabarni jozibali iqtibosga aylantira olaman va muhim suhbat lahzalarini saqlayman. Men shaxsiy xabarlarda va guruhlarda ham ishlayman!</i>
 
-  Bir nechta xabardan iqtibos yaratish uchun, iqtibosda nechta xabarlar bo'lishini anglatadigan raqamni parametr sifatida yozing.
-  Shaxsi xabarlarda bir nechta xabrni birdan forward qiling va men ularni iqtibos qilaman.
+  <b>🎯 Asosiy Foydalanish:</b>
 
-    <b>/q buyruqlar uchun mavjud bayroqlar:</b>
-      rangning hex kodu yoki nomi: <code>#cbafff</code> yoki <code>indigo</code> — rangi <b>#cbafff</b> bo'lgan iqtibos
-      <code>random</code> —tasodifiy iqtibos rangi
-      <code>reply</code> yoki <code>r</code> —javoblarni saqlagan iqtibos yaratish
-      <code>p</code> yoki <code>png</code> —PNG iqtibos yaratish
-      <code>i</code> yoki <code>img</code> —rasim shaklida iqtibos yaratish
-      <code>rate</code> —iqtibosga reyting qo'shish
-      <code>m</code> yoki <code>media</code> —medialarni qo'shish
-      <code>c</code> yoki <code>crop</code> —mediani kesib olish
-      <code>s2.5</code> —rasim sifati standartning 2.5 marta yuqori <i>(hech qanday qiymatni sozlash mumkin)</i>
+  • Yagona xabar: unga javob bering <code>/q</code>
+  • Ko'p xabarlar: raqam qo'shing, masalan <code>/q 3</code>
+  • Shaxsiy suhbatlarda: xabarlarni menga yuboring
 
-    <b>Bayroqlar qo'llanishining misoli:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Iqtibosni Moslash:</b>
 
-  Faqat administratorlar uchun:
-  <code>/qs 🥰💜</code> —stiker/foto/dok'tni stiker pakasiga saqlash 🥰💜 <i>(emoji boshqa va har qanday emojiga bo'lishi mumkin)</i> <i>[xabarga javob</i>]
-  <code>/qd</code> —guruh stiker pakasidan stikerni o'chirish  <i>[xabarga javob</i>]
-  <code>/qdrand</code> —guruh tasodifiy stikerlardan stikerni o'chirish  <i>[xabarga javob</i>]
-  <code>/qb</code> —emoji brendini sozlash. Mavjud: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> —iqtibos rangini <b>yashil</b>ga sozlash <i>(hex kod yoki rang nomi)</i>
-  <code>/qemoji</code> —stiker uchun emoji suffiksini o'zgartirish
-  <code>/qrate</code> —iqtibos reytingini yoqish/o'chirish
-  <code>/qgab 300</code> —tasodifiy iqtibos ko'rsatilishining ehtimoli. Bir dan infinitgacha bo'lgan har qanday son. Son ko'proq bo'ldikda xabar ko'rsatilish ehtimoli ko'proq. 300 ko'rsatilganda, xabar ko'rsatilishi ehtimoli yakka 300 xabarga 1 martaga teng. O'chirish uchun qiymatni 0 ga sozlang
+  <b>1. Rang:</b>
+  • Nomi: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Maxsus rang: <code>/q #cbafff</code>
+  • Tasodifiy rang: <code>/q random</code>
 
-  /qrand —tasodifiy iqtibos muqobiliga ega bo'lgan reytingdagi
-  /qtop —top guruh iqtiboslari
+  <b>2. Tashqi ko'rinish:</b>
+  • Stiker o‘rniga rasm: <code>img</code> qo'shing
+  • Yuqori sifat: <code>png</code> qo'shing
+  • Suhbatni saqlash: <code>reply</code> qo'shing
 
-  /yordam yoki /bosh —ushbu matni olish
+  <b>3. Media:</b>
+  • Rasm/stiker kiritish: <code>media</code> qo'shing
 
-  /til —tilni o'zgartirish
+  <b>4. Sifat:</b>
+  Yuqorilangan sifat uchun: <code>s</code> va raqam qo'shing:
+  • <code>s2</code> - 2x sifat
+  • <code>s3</code> - 3x sifat
 
-  <b>☕️ Dasturchiga kofe sotib olish:</b> /donate
+  <b>💫 Foydali Kombinatsiyalar:</b>
 
-  <b>👨🏻‍💻 Dasturchi blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Rasm bilan chiroyli iqtibos:
+  <code>/q 2 red media</code> - 2 xabar va rasm bilan qizil iqtibos
+
+  • Yuqori sifatli suhbat skrinshoti:
+  <code>/q 3 reply png</code> - 3-xabarli dialog PNG formatida
+
+  • Stilda rangli iqtibos:
+  <code>/q #ff69b4 img s2</code> - yuqori sifatda pushti iqtibos
+
+  <b>🌟 Maxsus Xususiyatlar:</b>
+
+  • Iqtibos reytingi: ovoz berishni yoqish uchun <code>rate</code> qo'shing
+  • Emoji uslubi: <code>/qb apple</code> yoki <code>/qb google</code>
+  • Tasodifiy iqtiboslar: <code>/qrand</code>
+  • Eng yaxshi iqtiboslar: <code>/qtop</code>
+
+  <b>👨‍💼 Admin Buyruqlari:</b>
+
+  • <code>/qcolor</code> - standart guruh rangini o'rnating
+  • <code>/qrate</code> - reyting tizimini yoqing
+  • <code>/qgab</code> - tasodifiy iqtibos ko'rinishini sozlash
+  • <code>/qs</code> - guruh stiker to‘plamiga saqlash
+
+  <b>🌐 Boshqa Buyruqlar:</b>
+
+  • <code>/lang</code> - tilni o'zgartiring
+  • <code>/donate</code> - ishlab chiquvchini qo‘llab-quvvatlash
+
+  <b>📱 Biz bilan bog'laning:</b>
+  • Dasturchining Blogi: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Assalomu alaykum!</b>
-  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman.
+  Men guruhlarga xabarga javoban /q buyrug'i asosida iqtiboslar yarataman. 
 
   Batafsil ushbu buyruq orqali <a href="t.me/${username}?start=help">/help</a> men bilan shaxsiy xabarlarda bilib olishingiz mumkin
 btn:

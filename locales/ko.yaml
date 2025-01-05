@@ -5,55 +5,70 @@ description:
     메시지에서 인용구를 만드는 데 도움이 됩니다. 간단히 메시지에 대답하여 또는 저에게 전달하십시오.
   long: |
     그룹 채팅에서 재미나 영감을 줄 메시지들을 기억하셨나요? 저에게 전달하시거나 /q를 입력하여 저에게 보내주시면 멋진 인용구 스티커로 만들어 드립니다. 개인적인 추억으로나 전문적인 용도로, 가능성은 무한합니다. 지금 바로 저를 시험해보세요! 😎
-help: |2
-  <b>안녕하세요!</b>
-  나는 게시물에서 인용구를 만드는 데 도와드릴게요.
-  봇은 개인 메시지와 그룹에서 모두 작동할 수 있어요.
+help: |
+  <b>📝 안녕하세요! 저는 아름다운 인용문을 만드는 봇입니다</b>
 
-    <b>⚙️ 사용 가능한 명령어:</b>
-  /q — 메시지에서 인용구 작성 <i>[메시지에 답장]</i>
+  <i>저는 중요한 채팅 순간을 보존하기 위해 메시지를 매력적인 인용문으로 변환할 수 있습니다. 저는 개인 메시지와 그룹 모두에서 작업합니다!</i>
 
-  여러 메시지에서 인용구를 만들려면 인용구에 들어갈 메시지 수를 나타내는 숫자를 매개변수로 작성하세요.
-  개인 메시지에서는 한 번에 여러 메시지를 전달할 수 있고, 저는 이를 통해 인용구를 만들어 드릴 거예요.
+  <b>🎯 기본 사용법:</b>
 
-    <b>/q 명령에 대한 사용 가능한 플래그:</b>
-      헥스 코드 또는 색 이름: <code>#cbafff</code> 혹은 <code>indigo</code> — 색상이 <b>#cbafff</b>로 정해진 인용구 작성
-      <code>random</code> —랜덤 인용구 색상
-      <code>reply</code> 혹은 <code>r</code> — 답변 저장하면서 인용구 작성
-      <code>p</code> 혹은 <code>png</code> — PNG 인용구 작성
-      <code>i</code> 혹은 <code>img</code> — 사진으로 인용구 작성
-      <code>rate</code> — 인용구에 평가 추가
-      <code>m</code> 혹은 <code>media</code> — 미디어 포함
-      <code>c</code> 혹은 <code>crop</code> — 미디어 자르기
-      <code>s2.5</code> — 사진 품질은 표준보다 2.5배 높음 <i>(임의의 값을 설정할 수 있음)</i>
+  • 단일 메시지: <code>/q</code>로 회신하세요
+  • 여러 메시지: <code>/q 3</code>처럼 번호를 추가하세요
+  • 개인 채팅에서: 그냥 저에게 메시지를 전달하세요
 
-    <b>플래그 사용 예시:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 인용문 맞춤 설정:</b>
 
-  관리자 전용:
-  <code>/qs 🥰💜</code> — 스티커/사진/사진이 포함된 문서를 이모지 🥰💜로 그룹 스티커 팩에 저장 <i>(이모지는 임의의 이모지이고, 임의의 숫자)</i> <i>[메시지에 답장]</i>
-  <code>/qd</code> — 그룹 스티커 팩에서 스티커 제거 <i>[메시지에 대한 응답]</i>
-  <code>/qdrand</code> — 그룹 임의 스티커에서 스티커 제거 <i>[메시지에 대한 응답]</i>
-  <code>/qb</code> — 이모티콘 브랜드 설정. 사용 가능한 것: <code>애플</code>, <code>구글</code>, <code>트위터</code>, <code>조이픽셀</code>, <code>블롭</code>
-  <code>/qcolor green</code> — 인용구 색상을 <b>녹색</b>으로 설정 <i>(헥스 코드 또는 색 이름)</i>
-  <code>/qemoji</code> — 스티커에 대한 이모지 접미사 변경
-  <code>/qrate</code> — 인용구 평가 활성화/비활성화
-  <code>/qgab 300</code> — 인용구의 랜덤 발생 확률을 설정. 하나부터 무한대까지임의의 숫자. 숫자가 높을수록 인용구 출현 확률이 낮아짐. 300을 지정하면 메시지가 출현할 확률은 대략 300개의 메시지 중 1회입니다. 비활성화하려면 값을 0으로 설정하세요
+  <b>1. 색상:</b>
+  • 이름: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • 사용자 정의 색상: <code>/q #cbafff</code>
+  • 랜덤 색상: <code>/q random</code>
 
-  /qrand — 긍정적인 평가가 있는 인용구 랜덤
-  /qtop — 상위 그룹 인용구
+  <b>2. 외형:</b>
+  • 스티커 대신 이미지: <code>img</code>를 추가하세요
+  • 고품질: <code>png</code>를 추가하세요
+  • 대화 보존: <code>reply</code>를 추가하세요
 
-  /help or /start — 이 텍스트 가져오기
+  <b>3. 미디어:</b>
+  • 사진/스티커 포함: <code>media</code>를 추가하세요
 
-  /lang — 언어 변경
+  <b>4. 품질:</b>
+  향상된 품질을 위해 <code>s</code>와 숫자를 추가하세요:
+  • <code>s2</code> - 2배 품질
+  • <code>s3</code> - 3배 품질
 
-  <b>☕️ 개발자에게 커피 사주기:</b> /donate
+  <b>💫 유용한 조합:</b>
 
-  <b>👨🏻‍💻 개발자 블로그:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • 사진과 함께 아름다운 인용문:
+  <code>/q 2 red media</code> - 2개의 메시지와 사진이 포함된 빨간색 인용문
+
+  • 고품질 대화 스크린샷:
+  <code>/q 3 reply png</code> - PNG 형식의 3메시지 대화
+
+  • 세련된 색상 인용문:
+  <code>/q #ff69b4 img s2</code> - 고품질 핑크색 인용문
+
+  <b>🌟 특별 기능:</b>
+
+  • 인용문 평가: <code>rate</code>를 추가하여 투표 활성화
+  • 이모지 스타일: <code>/qb apple</code> 또는 <code>/qb google</code>
+  • 랜덤 인용문: <code>/qrand</code>
+  • 인기 인용문: <code>/qtop</code>
+
+  <b>👨‍💼 관리자 명령:</b>
+
+  • <code>/qcolor</code> - 기본 그룹 색상 설정
+  • <code>/qrate</code> - 평가 시스템 활성화
+  • <code>/qgab</code> - 랜덤 인용문 외형 구성
+  • <code>/qs</code> - 그룹 스티커 팩에 저장
+
+  <b>🌐 기타 명령:</b>
+
+  • <code>/lang</code> - 언어 변경
+  • <code>/donate</code> - 개발자 지원
+
+  <b>📱 문의하기:</b>
+  • 개발자 블로그: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>안녕하세요!</b>
 

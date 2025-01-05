@@ -6,55 +6,70 @@ description:
     Mesajı /q ile yanıtlayın veya bana iletin.
   long: |
 
-help: |2
-  <b>Merhaba!</b>
-  Bir alıntı oluşturmak için yardımcı olacağım.
-  Bot hem özel mesajlarda hem de gruplarda çalışabilir.
+help: |
+  <b>📝 Merhaba! Güzel alıntılar oluşturmak için bir botum</b>
 
-    <b>⚙️ Kullanılabilir komutlar:</b>
-  /q — mesajdan alıntı yap <i>[mesaja cevap ver]</i>
+  <i>Herhangi bir mesajı, önemli sohbet anlarını korumak için çekici bir alıntıya dönüştürebilirim. Hem özel mesajlarda hem de gruplarda çalışıyorum!</i>
 
-  Birden fazla mesajdan alıntı yapmak için, alıntıda kaç mesaj olması gerektiğini belirten bir sayı olarak yazın.
-  Özel mesajlarda birkaç mesajı birden bana iletin ve onlardan bir alıntı yapayım.
+  <b>🎯 Temel Kullanım:</b>
 
-    <b>/q komutu için kullanılabilir bayraklar:</b>
-      hex kodu veya renk adı: <code>#cbafff</code> veya <code>indigo</code> — rengi <b>#cbafff</b> olan bir alıntı yap
-      <code>rastgele</code> —rastgele alıntı rengi
-      <code>cevap</code> veya <code>c</code> — cevapları kaydederek bir alıntı yap
-      <code>p</code> veya <code>png</code> — PNG alıntı yap
-      <code>i</code> veya <code>img</code> — bir resim olarak bir alıntı yap
-      <code>puan</code> — bir alıntıya puan ekle
-      <code>m</code> veya <code>medya</code> — medyayı dahil et
-      <code>k</code> veya <code>kırp</code> — medyayı kırp
-      <code>s2.5</code> — resim kalitesi standarttan 2.5 kat daha yüksektir <i>(herhangi bir değer belirlenebilir)</i>
+  • Tek mesaj: ona <code>/q</code> ile yanıt verin
+  • Birden fazla mesaj: bir sayı ekleyin, örneğin <code>/q 3</code>
+  • Özel sohbetlerde: mesajları bana iletmeniz yeterli
 
-    <b>Bayrakların kullanım örneği:</b>
-    <code>/q 3 beyaz rp</code>
-    <code>/q i kırmızı s3.2</code>
-    <code>/q c 2 #cbafff m</code>
-    <code>/q 5 rastgele</code>
+  <b>🎨 Alıntı Özelleştirme:</b>
 
-  Yalnızca yöneticiler için:
-  <code>/qs 🥰💜</code> — emoji 🥰💜 ile bir grubun etiket paketine bir çıkartma/fotoğraf/döküman kaydeder <i>(emoji herhangi bir sayıda olabilir)</i> <i>[mesaja cevap ver]</i>
-  <code>/qd</code> — grubun etiket paketinden çıkartmayı kaldırır <i>[mesaja cevap ver]</i>
-  <code>/qdrand</code> — grubun rastgele çıkartmalarından birini kaldırır <i>[mesaja cevap ver]</i>
-  <code>/qb</code> — emoji markası belirle. Mevcut: <code>elma</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qrenk yeşil</code> — alıntıların rengini varsayılan olarak <b>yeşil</b> yap <i>(hex kodu veya renk adı)</i>
-  <code>/qemojisi</code> — çıkartmalar için emoji sonekini değiştir
-  <code>/qpuan</code> — alıntılara puan ekleyerek devre dışı bırak/aç
-  <code>/qgab 300</code> — rastgele bir alıntının rastgele bir şekilde görünme olasılığını ayarlar. Bir ile sonsuz arasında herhangi bir sayı. Sayı ne kadar yüksek olursa, alıntıların görünme olasılığı o kadar düşer. 300 belirterek, bir mesajın görünme olasılığının yaklaşık olarak 300 mesajda bir olmasını sağlar. Devre dışı bırakmak için değeri 0 olarak ayarlayın
+  <b>1. Renk:</b>
+  • İsim: <code>/q kırmızı</code>, <code>/q mavi</code>, <code>/q yeşil</code>
+  • Özel renk: <code>/q #cbafff</code>
+  • Rastgele renk: <code>/q rastgele</code>
 
-  /qrand — pozitif bir puan alıntısı rastgele bir alıntı
-  /qtop — en iyi grup alıntıları
+  <b>2. Görünüm:</b>
+  • Çıkartma yerine resim: <code>img</code> ekleyin
+  • Yüksek kalite: <code>png</code> ekleyin
+  • Konuşmayı koru: <code>reply</code> ekleyin
 
-  /yardım veya /başla — bu metni al
+  <b>3. Medya:</b>
+  • Fotoğraf/çıkartma dahil et: <code>media</code> ekleyin
 
-  /dil — dili değiştir
+  <b>4. Kalite:</b>
+  Gelişmiş kalite için <code>s</code> ve bir sayı ekleyin:
+  • <code>s2</code> - 2x kalite
+  • <code>s3</code> - 3x kalite
 
-  <b>☕️ Geliştiriciye kahve al:</b> /donate
+  <b>💫 Yararlı Kombinasyonlar:</b>
 
-  <b>👨🏻‍💻 Geliştirici blogu:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Fotoğraflı güzel alıntı:
+  <code>/q 2 kırmızı media</code> - 2 mesaj ve fotoğraflı kırmızı alıntı
+
+  • Yüksek kaliteli sohbet ekran görüntüsü:
+  <code>/q 3 reply png</code> - PNG formatında 3 mesajlı diyalog
+
+  • Şık renkli alıntı:
+  <code>/q #ff69b4 img s2</code> - yüksek kalitede pembe alıntı
+
+  <b>🌟 Özel Özellikler:</b>
+
+  • Alıntı puanlaması: oylamayı etkinleştirmek için <code>rate</code> ekleyin
+  • Emoji stili: <code>/qb apple</code> veya <code>/qb google</code>
+  • Rastgele alıntılar: <code>/qrand</code>
+  • En iyi alıntılar: <code>/qtop</code>
+
+  <b>👨‍💼 Yönetici Komutları:</b>
+
+  • <code>/qcolor</code> - varsayılan grup rengini ayarla
+  • <code>/qrate</code> - puanlama sistemini etkinleştir
+  • <code>/qgab</code> - rastgele alıntı görünümünü yapılandır
+  • <code>/qs</code> - grup çıkartma paketine kaydet
+
+  <b>🌐 Diğer Komutlar:</b>
+
+  • <code>/lang</code> - dili değiştir
+  • <code>/donate</code> - geliştiriciyi destekle
+
+  <b>📱 Bize Ulaşın:</b>
+  • Geliştirici Blogu: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Merhaba!</b>
   /q komutunu kullanarak yanıtlanan mesajlar için grupta alıntılar oluşturacağım. Benim hakkımda daha fazla bilgi sahibi olmak istiyorsan <a href="t.me/${username}?start=help">/help</a> komutunu kullanabilirsin
