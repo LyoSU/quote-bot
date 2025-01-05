@@ -75,14 +75,10 @@ const getTopStickerSets = async () => {
     const count = parseInt(stickerSets[i + 1], 10)
 
     if (count > MIN_USES) {
-      // Check if already published
-      const isPublished = await redis.sismember(`${PREFIX}:published_sets`, stickerSet)
-      if (!isPublished) {
-        // Validate quality metrics
-        const isQuality = await isQualitySet(stickerSet)
-        if (isQuality) {
-          stickerCount[stickerSet] = count
-        }
+      // Validate quality metrics
+      const isQuality = await isQualitySet(stickerSet)
+      if (isQuality) {
+        stickerCount[stickerSet] = count
       }
     }
   }
