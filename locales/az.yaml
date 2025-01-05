@@ -15,28 +15,28 @@ description:
 
     İndi başlayın - sadəcə mesajı yönləndirin və ya /q istifadə edin!
 start: |
-  <b>✨ Create Beautiful Quote Stickers!</b>
+  <b>✨ Gözəl Sitat Stikerləri Yaradın!</b>
 
-  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+  Söhbət mesajlarını zərif stikerlərə, möhtəşəm hekayə kartlarına və paylaşılabilir sənətə çevirin.
 
-  <b>🎨 Look What You Can Create:</b>
-  • Colorful gradient quotes
-  • Multi-message conversations
-  • Photo quotes with effects
+  <b>🎨 Yaradacaqlarınıza Baxın:</b>
+  • Rəngli qradient sitatlar
+  • Çox-mesajlı söhbətlər
+  • Effektli foto sitatlar
 
-  <b>🚀 Get Started in 3 Simple Steps:</b>
-  1. Find any message you like
-  2. Reply with <code>/q</code>
-  3. Your quote is ready to share!
+  <b>🚀 Başlamaq üçün 3 Sadə Addım:</b>
+  1. Bəyəndiyiniz hər hansı mesajı tapın
+  2. <code>/q</code> ilə cavab verin
+  3. Sitatınız paylaşıma hazırdır!
 
-  <b>💫 Quick Ideas to Try:</b>
-  • Make a pink quote: <code>/q pink</code>
-  • Add a photo: <code>/q media</code>
-  • Quote chat thread: <code>/q 3 r</code>
+  <b>💫 Sürətli Təcrübələr üçün İdeyalar:</b>
+  • Çəhrayı bir sitat yaradın: <code>/q pink</code>
+  • Foto əlavə edin: <code>/q media</code>
+  • Söhbət zəncirini sitat edin: <code>/q 3 r</code>
 
-  ✨ Try it now - find a message and reply with /q!
+  ✨ İndi cəhd edin - mesaj tapın və /q ilə cavab verin!
 
-  Want to explore all features? Type /help for a quick guide 📚
+  Bütün funksiyaları araşdırmaq istəyirsiniz? Tez bələdçi üçün /help yazın 📚
 help: |
   <b>✨ QuotLyBot Tez Təlimat</b>
 
