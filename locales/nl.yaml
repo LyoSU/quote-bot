@@ -15,28 +15,28 @@ description:
 
     Begin nu - stuur een bericht door of gebruik /q!
 start: |
-  <b>✨ Create Beautiful Quote Stickers!</b>
+  <b>✨ Creëer Mooie Quote Stickers!</b>
 
-  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+  Verander chatberichten in elegante stickers, prachtige verhaalkaarten en deelbare kunst.
 
-  <b>🎨 Look What You Can Create:</b>
-  • Colorful gradient quotes
-  • Multi-message conversations
-  • Photo quotes with effects
+  <b>🎨 Kijk Wat Je Kunt Creëren:</b>
+  • Kleurrijke gradiëntquotes
+  • Gesprekken met meerdere berichten
+  • Fotoquotes met effecten
 
-  <b>🚀 Get Started in 3 Simple Steps:</b>
-  1. Find any message you like
-  2. Reply with <code>/q</code>
-  3. Your quote is ready to share!
+  <b>🚀 Begin in 3 Eenvoudige Stappen:</b>
+  1. Vind een bericht dat je leuk vindt
+  2. Reageer met <code>/q</code>
+  3. Je quote is klaar om te delen!
 
-  <b>💫 Quick Ideas to Try:</b>
-  • Make a pink quote: <code>/q pink</code>
-  • Add a photo: <code>/q media</code>
-  • Quote chat thread: <code>/q 3 r</code>
+  <b>💫 Snelle Ideeën om te Proberen:</b>
+  • Maak een roze quote: <code>/q pink</code>
+  • Voeg een foto toe: <code>/q media</code>
+  • Quote chatdraad: <code>/q 3 r</code>
 
-  ✨ Try it now - find a message and reply with /q!
+  ✨ Probeer het nu - vind een bericht en reageer met /q!
 
-  Want to explore all features? Type /help for a quick guide 📚
+  Wil je alle functies verkennen? Typ /help voor een snelle gids 📚
 help: |
   <b>✨ QuotLyBot Snelle Gids</b>
 
