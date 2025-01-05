@@ -2,196 +2,196 @@
 language_name: '🇸🇦 عربي'
 description:
   short: |
-    Turn any message into a beautiful quote sticker! ✨
-    Reply with /q or forward the message to me
+    حوّل أي رسالة إلى ملصق اقتباس جميل! ✨
+    قم بالرد بـ /q أو أعد توجيه الرسالة لي
   long: |
-    Create stunning quote stickers and preserve your favorite chat moments! ✨
+    اصنع ملصقات اقتباس مذهلة واحتفظ بألحظات الدردشة المفضلة لديك! ✨
 
-    Simply reply /q to any message or forward it to me. Perfect for saving:
-    🌟 Best chat highlights and memories
-    💭 Inspiring thoughts and conversations
-    🎨 Creative messages with custom styles
-    ✍️ Important notes in beautiful format
+    بكل بساطة، قم بالرد /q على أي رسالة أو أعد توجيهها إليّ. مثالي للاحتفاظ ب:
+    🌟 أفضل لحظات الدردشة والذكريات
+    💭 أفكار ومحادثات ملهمة
+    🎨 رسائل إبداعية بأساليب مخصصة
+    ✍️ ملاحظات هامة بصيغة جميلة
 
-    Get started now - just forward a message or use /q!
+    ابدأ الآن - فقط أعد توجيه رسالة أو استخدم /q!
 help: |
-  <b>✨ QuotLyBot Quick Guide</b>
+  <b>✨ دليل سريع لQuotLyBot</b>
 
-  <b>📱 Basic Commands</b>
-  • <code>/q</code> - Quote replied message
-  • <code>/q 3</code> - Quote several messages
-  • Forward message - Quote directly
+  <b>📱 الأوامر الأساسية</b>
+  • <code>/q</code> - اقتباس الرسالة المردود عليها
+  • <code>/q 3</code> - اقتباس عدة رسائل
+  • إعادة توجيه الرسالة - اقتباس مباشر
 
-  <b>🎨 Styles</b>
+  <b>🎨 الأساليب</b>
 
-  Colors:
-  • Basic: <code>/q red</code>
-  • Custom: <code>/q #ff69b4</code>
-  • Gradient: <code>/q red//#blue</code>
-  • Random: <code>/q random</code>
+  الألوان:
+  • أساسي: <code>/q red</code>
+  • مخصص: <code>/q #ff69b4</code>
+  • متدرج: <code>/q red//#blue</code>
+  • عشوائي: <code>/q random</code>
 
-  Media:
-  • Add photo: <code>/q media</code>
-  • Crop image: <code>/q crop</code>
-  • Keep thread: <code>/q reply</code>
-  • Voice preview: Automatic
+  الوسائط:
+  • إضافة صورة: <code>/q media</code>
+  • قص الصورة: <code>/q crop</code>
+  • الاحتفاظ بالخيط: <code>/q reply</code>
+  • معاينة الصوت: تلقائي
 
-  Format:
-  • Sticker: <code>/q</code>
-  • Image: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Story: <code>/q stories</code>
+  التنسيق:
+  • ملصق: <code>/q</code>
+  • صورة: <code>/q img</code>
+  • جودة عالية: <code>/q png</code>
+  • قصة: <code>/q stories</code>
 
-  Quality:
-  • Normal: <code>/q</code>
+  الجودة:
+  • عادي: <code>/q</code>
   • 2x: <code>/q s2</code>
   • 3x: <code>/q s3</code>
 
-  <b>💫 Popular Combinations</b>
-  • <code>/q red media</code> - Red quote with photo
-  • <code>/q 3 reply</code> - Quote with context
-  • <code>/q img s2</code> - High-quality image
-  • <code>/q stories media</code> - Story with photo
+  <b>💫 تركيبات مشهورة</b>
+  • <code>/q red media</code> - اقتباس أحمر مع صورة
+  • <code>/q 3 reply</code> - اقتباس مع سياق
+  • <code>/q img s2</code> - صورة بجودة عالية
+  • <code>/q stories media</code> - قصة مع صورة
 
-  <b>⚙️ Extra Features</b>
-  • Rating: <code>/q rate</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
-  • Language: <code>/lang</code>
+  <b>⚙️ ميزات إضافية</b>
+  • التقييم: <code>/q rate</code>
+  • الاقتباسات العشوائية: <code>/qrand</code>
+  • أفضل الاقتباسات: <code>/qtop</code>
+  • اللغة: <code>/lang</code>
 
-  <b>🎯 Group Settings</b>
-  • Default color: <code>/qcolor</code>
-  • Enable rating: <code>/qrate</code>
-  • Save to pack: <code>/qs</code>
+  <b>🎯 إعدادات المجموعة</b>
+  • اللون الافتراضي: <code>/qcolor</code>
+  • تمكين التقييم: <code>/qrate</code>
+  • الحفظ في الحزمة: <code>/qs</code>
 
-  <b>🌈 Emoji Styles</b>
-  Classic: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  <b>🌈 أساليب الرموز التعبيرية</b>
+  كلاسيكي: <code>/qb apple</code>, <code>/qb google</code>
+  بديل: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  ريترو: <code>/qb blob</code>
 
-  <b>📱 Need Help?</b>
-  • Blog: @LyBlog
+  <b>📱 بحاجة لمساعدة؟</b>
+  • المدونة: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
-  • Support: <code>/donate</code>
+  • الدعم: <code>/donate</code>
 help_group: |
-  <b>Hello! 👋</b>
-  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
+  <b>مرحبًا! 👋</b>
+  سأقوم بإنشاء اقتباسات جميلة في هذه المجموعة - فقط استخدم <code>/q</code> في الرد على أي رسالة!
 
-  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
+  تعرف على جميع ميزاتي بشكل خاص: <a href="t.me/${username}?start=help">احصل على المساعدة</a> ✨
 btn:
   add_group: إضافة إلى المجموعة
   help: مساعدة
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
+    عذرًا، لا أستطيع دعم هذا النوع من الرسائل بعد 😅
 
-    Try text, photos, stickers, or voice messages!
+    جرب النصوص، الصور، الملصقات، أو الرسائل الصوتية!
   api_error: |
-    <b>Oops! Something went wrong 😅</b>
+    <b>عفوًا! حدث خطأ ما 😅</b>
     <pre>${error}</pre>
-    Please try again in a moment!
+    يرجى المحاولة مرة أخرى بعد قليل!
   empty_forward: |
-    Please reply to or forward the message you'd like to quote ✨
+    يرجى الرد على الرسالة التي تريد اقتباسها أو إعادة توجيهها ✨
   set_background_color: |
-    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
+    <b>رائع!</b> تم تغيير خلفية الاقتباس إلى: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
+    <b>تم!</b> تم تغيير أسلوب الرموز التعبيرية إلى: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
+    suc: تمت الإضافة بنجاح إلى <a href="${link}">حزمة ملصقات المجموعة</a> ✨
     error:
-      animated: Sorry, I can't save animated stickers yet 😅
-      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
-      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
+      animated: عذرًا، لا أستطيع حفظ الملصقات المتحركة بعد 😅
+      need_creator: <b>قريبًا!</b> ${creator} يجب أن يرسل لي رسالة أولاً لحفظ الملصقات
+      telegram: <b>عفوًا!</b> حدث خطأ:\n<pre>${error}</pre>
   delete:
-    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    suc: تم الإزالة من <a href="${link}">حزمة ملصقات المجموعة</a> 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+      telegram: <b>عفوًا!</b> لم أتمكن من إزالة الملصق:\n<pre>${error}</pre>
     btn:
-      save_sticker: Save Sticker
+      save_sticker: '🌟 حفظ الملصق'
   delete_random:
-    suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    suc: تم الإزالة من مجموعة عشوائية 🗑
+    error: <b>عفوًا!</b> لم أتمكن من إزالة الملصق:\n<pre>${error}</pre>
   empty_forward: |
-    Please reply to a sticker, photo, or image you'd like to save ✨
+    يرجى الرد على الملصق، الصورة أو الصورة التي تريد حفظها ✨
   fstik: |
-    To save this to your personal sticker pack, forward to @fStikBot 🎨
+    لحفظ هذا في حزمة الملصقات الشخصية الخاصة بك، أعد توجيهها إلى @fStikBot 🎨
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      لقد قمت ${rateName} لهذا الاقتباس! شكرًا لتقييمك ⭐
     back: |
-      Your vote has been removed 🔄
+      تمت إزالة تصويتك 🔄
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      تم تمكين تقييم الاقتباس الآن! قيم بـ ⭐
     disable: |
-      Quote rating has been disabled 🔄
+      تم تعطيل تقييم الاقتباس 🔄
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    لا توجد اقتباسات بتقييم عالي في هذه المجموعة بعد! ابدأ بتقييم بعض الرسائل ⭐
   gab: |
-    Random quote frequency set to ${gab} ✨
+    تم ضبط تردد الاقتباس العشوائي على ${gab} ✨
 hidden:
   settings:
     enable: |
-      Sender search enabled 🔍
+      تم تمكين بحث المرسل 🔍
     disable: |
-      Sender search disabled 🔄
+      تم تعطيل بحث المرسل 🔄
 privacy:
   settings:
     enable: |
-      Privacy mode activated 🔒 Your info will be hidden in quotes
+      تم تفعيل وضع الخصوصية 🔒 سيتم إخفاء معلوماتك في الاقتباسات
     disable: |
-      Privacy mode deactivated 🔓
+      تم إلغاء تفعيل وضع الخصوصية 🔓
 top:
   info: |
-    <b>✨ Top Quoted Messages</b>
-  open: View Top Quotes
+    <b>✨ أكثر الرسائل اقتباسًا</b>
+  open: عرض أفضل الاقتباسات
 donate:
   info: |
-    <b>Support QuotLyBot's Development! ☕</b>
+    <b>ادعم تطوير QuotLyBot! ☕</b>
 
-    Your support helps us:
-    • Keep the servers running 24/7
-    • Add new features and styles
-    • Improve quote quality
-    • Make the bot faster
+    يدعمك يساعدنا في:
+    • تشغيل الخوادم على مدار الساعة 24/7
+    • إضافة ميزات وأساليب جديدة
+    • تحسين جودة الاقتباسات
+    • جعل الروبوت أسرع
 
-    <b>💳 Easy Payment Options</b>
-    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    <b>💳 خيارات الدفع السهلة</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">الدفع عبر البطاقة</a> (Visa/Mastercard)
     • Apple Pay / Google Pay
 
-    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    <b>🔒 العملة الرقمية (للمستخدمين المتمرسين)</b>
     • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
 
-    Every contribution helps make QuotLyBot better for everyone! 💜
-  title: Support ${botUsername}
-  description: Help keep the magic going ✨
+    كل مساهمة تساعد في جعل QuotLyBot أفضل للجميع! 💜
+  title: ادعم ${botUsername}
+  description: ساعد في الحفاظ على السحر مستمرًا ✨
   successful: |
-    <b>Thank you for your support! 💜</b>
-    You're helping make QuotLyBot even better!
+    <b>شكرًا لدعمك! 💜</b>
+    أنت تساعد في جعل QuotLyBot أفضل!
   pay: '💜 الدفع عبر تيليجرام'
-  liqpay: 'Pay with Card 💳'
-  other: 'Other Options'
+  liqpay: 'الدفع عبر البطاقة 💳'
+  other: 'خيارات أخرى'
 emoji:
   info: |
-    <b>Choose Your Quote Emoji!</b>
+    <b>اختر رموز الاقتباس الخاصة بك!</b>
 
-    • Set custom emoji: <code>/qemoji</code>💜
-    • Use random emoji: <code>/qemoji random</code>
-    • Clear emoji: <code>/qemoji clear</code>
+    • ضبط الرموز المخصصة: <code>/qemoji</code>💜
+    • استخدام الرموز العشوائية: <code>/qemoji random</code>
+    • مسح الرموز: <code>/qemoji clear</code>
 
-    Your emoji will be added to all new quotes ✨
-  done: Emoji style updated! ✨
+    سيتم إضافة الرموز التعبيرية الخاصة بك إلى جميع الاقتباسات الجديدة ✨
+  done: تم تحديث أسلوب الرموز التعبيرية! ✨
 only_admin: |
-  <b>⚠️ Admin Access Needed</b>
-  This command can only be used by group administrators.
+  <b>⚠️ مطلوب وصول المدير</b>
+  يمكن استخدام هذا الأمر من قبل مديري المجموعات فقط.
 only_group: |
-  <b>⚠️ Group Command</b>
-  This feature works in group chats only.
+  <b>⚠️ أمر المجموعة</b>
+  هذه الميزة تعمل في دردشات المجموعات فقط.
 rate_limit: |
-  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+  <i>أخذ استراحة سريعة...</i> يمكنك استخدام هذا الأمر مرة أخرى بعد ${seconds} ثانية ⏳
 
-  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+  <i>نصيحة محترف: أثناء الانتظار، جرّب تخصيص الاقتباس الأخير الخاص بك باستخدام </i><code>/q color</code> <i>أو</i> <code>/q media</code>
