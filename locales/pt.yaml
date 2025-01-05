@@ -7,68 +7,68 @@ description:
   long: |
     Notou alguma mensagem engraçada ou inspiradora em seu bate-papo em grupo que gostaria de imortalizar? Basta encaminhá-los para mim ou digitar /q e eu os transformarei em um elegante adesivo de quote que você pode salvar e compartilhar com seus amigos. Seja para memórias pessoais ou para uso profissional, as possibilidades são infinitas. Experimente-me agora! 😎
 help: |
-  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
+  <b>📝 Olá! Eu sou um bot para criar belos trechos</b>
 
-  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
+  <i>Posso transformar qualquer mensagem em um trecho atraente para preservar momentos importantes do chat. Trabalho tanto em mensagens privadas quanto em grupos!</i>
 
-  <b>🎯 Basic Usage:</b>
+  <b>🎯 Uso Básico:</b>
 
-  • Single message: reply to it with <code>/q</code>
-  • Multiple messages: add a number, like <code>/q 3</code>
-  • In private chats: simply forward messages to me
+  • Mensagem única: responda com <code>/q</code>
+  • Múltiplas mensagens: adicione um número, como <code>/q 3</code>
+  • Em chats privados: simplesmente encaminhe mensagens para mim
 
-  <b>🎨 Quote Customization:</b>
+  <b>🎨 Personalização de Trecho:</b>
 
-  <b>1. Color:</b>
-  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Custom color: <code>/q #cbafff</code>
-  • Random color: <code>/q random</code>
+  <b>1. Cor:</b>
+  • Nome: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Cor personalizada: <code>/q #cbafff</code>
+  • Cor aleatória: <code>/q random</code>
 
-  <b>2. Appearance:</b>
-  • Image instead of sticker: add <code>img</code>
-  • High quality: add <code>png</code>
-  • Preserve conversation: add <code>reply</code>
+  <b>2. Aparência:</b>
+  • Imagem em vez de adesivo: adicione <code>img</code>
+  • Alta qualidade: adicione <code>png</code>
+  • Preservar a conversa: adicione <code>reply</code>
 
-  <b>3. Media:</b>
-  • Include photo/sticker: add <code>media</code>
+  <b>3. Mídia:</b>
+  • Incluir foto/adesivo: adicione <code>media</code>
 
-  <b>4. Quality:</b>
-  Add <code>s</code> and a number for enhanced quality:
-  • <code>s2</code> - 2x quality
-  • <code>s3</code> - 3x quality
+  <b>4. Qualidade:</b>
+  Adicione <code>s</code> e um número para qualidade melhorada:
+  • <code>s2</code> - 2x qualidade
+  • <code>s3</code> - 3x qualidade
 
-  <b>💫 Useful Combinations:</b>
+  <b>💫 Combinações Úteis:</b>
 
-  • Beautiful quote with photo:
-  <code>/q 2 red media</code> - red quote with 2 messages and photo
+  • Trecho bonito com foto:
+  <code>/q 2 red media</code> - trecho vermelho com 2 mensagens e foto
 
-  • High-quality conversation screenshot:
-  <code>/q 3 reply png</code> - 3-message dialog in PNG
+  • Captura de tela de conversa em alta qualidade:
+  <code>/q 3 reply png</code> - diálogo de 3 mensagens em PNG
 
-  • Stylish colored quote:
-  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+  • Trecho estiloso colorido:
+  <code>/q #ff69b4 img s2</code> - trecho rosa em alta qualidade
 
-  <b>🌟 Special Features:</b>
+  <b>🌟 Recursos Especiais:</b>
 
-  • Quote rating: add <code>rate</code> to enable voting
-  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
+  • Avaliação de trecho: adicione <code>rate</code> para habilitar votação
+  • Estilo de emoji: <code>/qb apple</code> ou <code>/qb google</code>
+  • Trechos aleatórios: <code>/qrand</code>
+  • Melhores trechos: <code>/qtop</code>
 
-  <b>👨‍💼 Admin Commands:</b>
+  <b>👨‍💼 Comandos de Admin:</b>
 
-  • <code>/qcolor</code> - set default group color
-  • <code>/qrate</code> - enable rating system
-  • <code>/qgab</code> - configure random quote appearance
-  • <code>/qs</code> - save to group sticker pack
+  • <code>/qcolor</code> - definir cor padrão do grupo
+  • <code>/qrate</code> - habilitar sistema de avaliação
+  • <code>/qgab</code> - configurar aparência de trecho aleatório
+  • <code>/qs</code> - salvar no pacote de adesivos do grupo
 
-  <b>🌐 Other Commands:</b>
+  <b>🌐 Outros Comandos:</b>
 
-  • <code>/lang</code> - change language
-  • <code>/donate</code> - support the developer
+  • <code>/lang</code> - alterar idioma
+  • <code>/donate</code> - apoiar o desenvolvedor
 
-  <b>📱 Contact Us:</b>
-  • Developer's Blog: @LyBlog
+  <b>📱 Contato:</b>
+  • Blog do Desenvolvedor: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Olá!</b>
