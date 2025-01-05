@@ -15,28 +15,21 @@ description:
 
     Hemen başlayın - sadece bir mesaj yönlendirin veya /q kullanın!
 start: |
-  <b>✨ Güzel Alıntı Çıkartmaları Oluşturun!</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Sohbet mesajlarını şık çıkartmalara, muhteşem hikaye kartlarına ve paylaşılabilir sanat eserlerine dönüştürün.
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>🎨 İşte Oluşturabilecekleriniz:</b>
-  • Renkli geçiş alıntıları
-  • Çoklu mesajlı konuşmalar
-  • Efektli fotoğraf alıntıları
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>🚀 3 Basit Adımda Başlayın:</b>
-  1. Beğendiğiniz bir mesajı bulun
-  2. <code>/q</code> ile yanıtlayın
-  3. Alıntınız paylaşmaya hazır!
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like 'blue' or 'red') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  <b>💫 Denemeniz İçin Hızlı Fikirler:</b>
-  • Pembe bir alıntı yapın: <code>/q pink</code>
-  • Fotoğraf ekleyin: <code>/q media</code>
-  • Sohbet dizisini alıntılayın: <code>/q 3 r</code>
-
-  ✨ Şimdi deneyin - bir mesaj bulun ve /q ile yanıtlayın!
-
-  Tüm özellikleri keşfetmek ister misiniz? Hızlı bir rehber için /help yazın 📚
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ QuotLyBot Hızlı Rehber</b>
 
