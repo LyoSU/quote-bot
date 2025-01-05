@@ -2,246 +2,196 @@
 language_name: '🇸🇦 عربي'
 description:
   short: |
-    سأساعد في إنشاء اقتباس من الرسالة.
-    ما عليك سوى الرد على الرسالة بـ /q أو إعادة توجيهها إلي.
+    Turn any message into a beautiful quote sticker! ✨
+    Reply with /q or forward the message to me
   long: |
-    هل لاحظت أي رسائل مضحكة أو ملهمة في محادثة مجموعتك ترغب في تخليدها؟ ما عليك سوى إعادة توجيهها لي أو كتابة /q وسأحولها إلى لاصق اقتباس أنيق يمكنك حفظه ومشاركته مع أصدقائك. سواء كانت لذكريات شخصية أم استخدام مهني، الإمكانيات لا حدود لها. جربني الآن! 😎
+    Create stunning quote stickers and preserve your favorite chat moments! ✨
+
+    Simply reply /q to any message or forward it to me. Perfect for saving:
+    🌟 Best chat highlights and memories
+    💭 Inspiring thoughts and conversations
+    🎨 Creative messages with custom styles
+    ✍️ Important notes in beautiful format
+
+    Get started now - just forward a message or use /q!
 help: |
-  <b>📝 مرحبًا! أنا بوت لإنشاء اقتباسات جميلة</b>
+  <b>✨ QuotLyBot Quick Guide</b>
 
-  <i>أستطيع تحويل أي رسالة إلى اقتباس جذاب للحفاظ على لحظات الدردشة المهمة. أعمل في الرسائل الخاصة والمجموعات أيضًا!</i>
+  <b>📱 Basic Commands</b>
+  • <code>/q</code> - Quote replied message
+  • <code>/q 3</code> - Quote several messages
+  • Forward message - Quote directly
 
-  <b>🎯 الاستخدام الأساسي:</b>
+  <b>🎨 Styles</b>
 
-  • رسالة واحدة: قم بالرد عليها باستخدام <code>/q</code>
-  • عدة رسائل: أضف رقمًا، مثل <code>/q 3</code>
-  • في الدردشات الخاصة: فقط قم بتحويل الرسائل إلي
+  Colors:
+  • Basic: <code>/q red</code>
+  • Custom: <code>/q #ff69b4</code>
+  • Gradient: <code>/q red//#blue</code>
+  • Random: <code>/q random</code>
 
-  <b>🎨 تخصيص الاقتباس:</b>
+  Media:
+  • Add photo: <code>/q media</code>
+  • Crop image: <code>/q crop</code>
+  • Keep thread: <code>/q reply</code>
+  • Voice preview: Automatic
 
-  <b>1. اللون:</b>
-  • اسم: <code>/q red</code>، <code>/q blue</code>، <code>/q green</code>
-  • لون مخصص: <code>/q #cbafff</code>
-  • لون عشوائي: <code>/q random</code>
+  Format:
+  • Sticker: <code>/q</code>
+  • Image: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • Story: <code>/q stories</code>
 
-  <b>2. المظهر:</b>
-  • صورة بدلاً من ملصق: أضف <code>img</code>
-  • جودة عالية: أضف <code>png</code>
-  • الحفاظ على المحادثة: أضف <code>reply</code>
+  Quality:
+  • Normal: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>3. الوسائط:</b>
-  • تضمين صورة/ملصق: أضف <code>media</code>
+  <b>💫 Popular Combinations</b>
+  • <code>/q red media</code> - Red quote with photo
+  • <code>/q 3 reply</code> - Quote with context
+  • <code>/q img s2</code> - High-quality image
+  • <code>/q stories media</code> - Story with photo
 
-  <b>4. الجودة:</b>
-  أضف <code>s</code> ورقم لتحسين الجودة:
-  • <code>s2</code> - جودة 2x
-  • <code>s3</code> - جودة 3x
+  <b>⚙️ Extra Features</b>
+  • Rating: <code>/q rate</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+  • Language: <code>/lang</code>
 
-  <b>💫 مجموعات مفيدة:</b>
+  <b>🎯 Group Settings</b>
+  • Default color: <code>/qcolor</code>
+  • Enable rating: <code>/qrate</code>
+  • Save to pack: <code>/qs</code>
 
-  • اقتباس جميل مع صورة:
-  <code>/q 2 red media</code> - اقتباس أحمر مع رسالتين وصورة
+  <b>🌈 Emoji Styles</b>
+  Classic: <code>/qb apple</code>, <code>/qb google</code>
+  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  Retro: <code>/qb blob</code>
 
-  • لقطة شاشة ذات جودة عالية للمحادثة:
-  <code>/q 3 reply png</code> - حوار ٣ رسائل بصيغة PNG
-
-  • اقتباس ملون أنيق:
-  <code>/q #ff69b4 img s2</code> - اقتباس وردي بجودة عالية
-
-  <b>🌟 ميزات خاصة:</b>
-
-  • تقييم الاقتباسات: أضف <code>rate</code> لتفعيل التصويت
-  • نمط الرموز التعبيرية: <code>/qb apple</code> أو <code>/qb google</code>
-  • الاقتباسات العشوائية: <code>/qrand</code>
-  • أفضل الاقتباسات: <code>/qtop</code>
-
-  <b>👨‍💼 أوامر المسؤول:</b>
-
-  • <code>/qcolor</code> - تعيين لون المجموعة الافتراضي
-  • <code>/qrate</code> - تفعيل نظام التقييم
-  • <code>/qgab</code> - تكوين ظهور الاقتباس العشوائي
-  • <code>/qs</code> - حفظ في حزمة ملصقات المجموعة
-
-  <b>🌐 أوامر أخرى:</b>
-
-  • <code>/lang</code> - تغيير اللغة
-  • <code>/donate</code> - دعم المطور
-
-  <b>📱 اتصل بنا:</b>
-  • مدونة المطور: @LyBlog
+  <b>📱 Need Help?</b>
+  • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
+  • Support: <code>/donate</code>
 help_group: |
-  <b>مرحبًا!</b>
-  سأقوم بإنشاء علامات اقتباس في المجموعة باستخدام الأمر /q ردًا على الرسالة
+  <b>Hello! 👋</b>
+  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
 
-  يمكنك معرفة المزيد حول الأمر <a href="t.me/${username}?start=help">/help</a> في الرسائل الخاصة معي
+  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
 btn:
   add_group: إضافة إلى المجموعة
   help: مساعدة
 quote:
-  unsupported_message: رسالة غير مدعومة
+  unsupported_message: |
+    Sorry, I don't support this message type yet 😅
+
+    Try text, photos, stickers, or voice messages!
   api_error: |
-    <b>😓 فشل في توليد الاقتباس</b>
+    <b>Oops! Something went wrong 😅</b>
     <pre>${error}</pre>
+    Please try again in a moment!
   empty_forward: |
-    يجب إرسال الأمر كرد على الرسالة.
+    Please reply to or forward the message you'd like to quote ✨
   set_background_color: |
-    يتم تعيين لون خلفية الاقتباسات إلى: <code>${backgroundColor}</code>
+    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    تم تعيين علامة تعبيرية الاقتباسات إلى: <code>${emojiBrand}</code>
-  sticker:
+    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: تمت إضافة الملصق بنجاح إلى حزمة ملصقات المجموعة <a href="${link}"></a>.
+    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
     error:
-      animated: لا أستطيع إضافة ملصق متحرك.
-      need_creator: <b>فشلت في حفظ هذا الملصق.</b>\n${creator} يجب أن أكتب لي أي رسالة في PM.
-      telegram: <b>فشلت في حفظ هذا الملصق.</b>\n<pre>${error}</pre>
+      animated: Sorry, I can't save animated stickers yet 😅
+      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
+      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
   delete:
-    suc: تمت إزالة الملصق بنجاح من حزمة ملصقات المجموعة <a href="${link}"></a>.
+    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
     error:
-      telegram: <b>لم أتمكن من حفظ هذا الملصق.</b>\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
     btn:
-      save_sticker: حفظ الملصق
+      save_sticker: Save Sticker
   delete_random:
-    suc: تمت إزالة الملصق بنجاح من ملصقات المجموعة العشوائية.
-    error: <b>لم أكن قادراً على حذف هذا الملصق.</b>\n<pre>${error}</pre>
+    suc: Removed from random collection 🗑
+    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
   empty_forward: |
-    يجب إرسال الأمر إلى ملصق أو صورة أو ملف مع صورة.
+    Please reply to a sticker, photo, or image you'd like to save ✨
   fstik: |
-    من أجل حفظ الملصق إلى حزمة الملصقات الشخصية الخاصة بك، قم بتوجيه هذه الرسالة إلى @fStikbot
+    To save this to your personal sticker pack, forward to @fStikBot 🎨
 rate:
   vote:
     rated: |
-      أنت ${rateName} هذا.
+      You ${rateName} this quote! Thanks for rating ⭐
     back: |
-      لقد حصلت على تصويتك مرة أخرى.
+      Your vote has been removed 🔄
   settings:
     enable: |
-      تقييم الأسعار قيد التشغيل.
+      Quote rating is now enabled! Rate with ⭐
     disable: |
-      تم إيقاف تقييم الاقتباس.
+      Quote rating has been disabled 🔄
 random:
   empty: |
-    لا توجد أقتباس ذات تقييم إيجابي في المجموعة.
+    No highly-rated quotes in this group yet! Start rating some messages ⭐
   gab: |
-    تم تعيين فرصة الاقتباس العشوائي إلى ${gab}
+    Random quote frequency set to ${gab} ✨
 hidden:
   settings:
     enable: |
-      البحث عن المرسل مفعل.
+      Sender search enabled 🔍
     disable: |
-      البحث عن المرسل معطل.
+      Sender search disabled 🔄
 privacy:
   settings:
     enable: |
-      تم تمكين وضع الخصوصية.
+      Privacy mode activated 🔒 Your info will be hidden in quotes
     disable: |
-      وضع الخصوصية معطل.
+      Privacy mode deactivated 🔓
 top:
   info: |
-    <b>أفضل اقتباسات المجموعة:</b>
-  open: فتح الأعلى
+    <b>✨ Top Quoted Messages</b>
+  open: View Top Quotes
 donate:
   info: |
-    يمكنك شراء قهوة للمطور أو شيء آخر باستخدام التفاصيل التالية:
+    <b>Support QuotLyBot's Development! ☕</b>
 
-    BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
-    ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
-    بطاقة البنك: <a href="https://send.monobank.ua/jar/2fpLioJzU8">فيزا، ماستركارد، أبل باي، جوجل باي</a>
-  title: تبرع ${botUsername}
-  description: دعم تطوير الروبوت
+    Your support helps us:
+    • Keep the servers running 24/7
+    • Add new features and styles
+    • Improve quote quality
+    • Make the bot faster
+
+    <b>💳 Easy Payment Options</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    Every contribution helps make QuotLyBot better for everyone! 💜
+  title: Support ${botUsername}
+  description: Help keep the magic going ✨
   successful: |
-    <b>شكراً لدعمكم البوت 💜</b>
+    <b>Thank you for your support! 💜</b>
+    You're helping make QuotLyBot even better!
   pay: '💜 الدفع عبر تيليجرام'
-  liqpay: LiqPay (VISA, MasterCard)
-  other: خيارات أخرى
+  liqpay: 'Pay with Card 💳'
+  other: 'Other Options'
 emoji:
   info: |
-    يرجى تضمين الرموز التعبيرية.
+    <b>Choose Your Quote Emoji!</b>
 
-    على سبيل المثال، <code>/qemoji💜</code> سيغير اللاصق ليصبح 💜 لجميع اللاصقات الجديدة التالية.
-    للاسم التعبيري عشوائيًا <code>/qemoji random</code>
-  done: تم تغيير الرموز التعبيرية بنجاح.
-adv:
-  about: |
-    <b>💫 يمكنك شراء إعلانات منا لعدد كبير من المستخدمين والمجموعات النشطة</b>
+    • Set custom emoji: <code>/qemoji</code>💜
+    • Use random emoji: <code>/qemoji random</code>
+    • Clear emoji: <code>/qemoji clear</code>
 
-    • البوت الخاص بنا موجود في أكثر من 30`000 مجموعة نشطة وأكثر من 70`000 مستخدم استخدم البوت كل شهر.
-    ومن بينهم مستخدمون من مختلف البلدان. يمكنك تحديد لغة المستخدمين التي سيتم عرض الإعلان لهم
-    • يتم عرض الإعلان أسفل الاقتباس على شكل زر أو رسالة نصية حسب دردشة المستخدم
-    • أنت تحدد سعر الإعلان بنفسك؛ بادئ ذي بدء، سيتم عرض الإعلان الذي تم تخصيص أعلى مبلغ له
-    • يجب أن يتوافق نص الإعلان ومحتواه مع قواعدنا (/adv_rules) وقبل نشره يجب عليك اجتياز الإشراف. يمكن القيام بذلك قبل إجراء الإيداع
-
-    الرصيد: ${balance} USD
-  rules: |
-    <b>في الإعلانات <u>غير مسموح</u> :</b>
-    • استخدام البذاءات أو الشتائم
-    • استخدام أكثر من رمز تعبيري واحد لكل نص
-    • معلومات مضللة
-    • معلومات محظورة بموجب قوانين أوكرانيا
-    • محتوى للبالغين
-    • المقامرة
-
-    <i>لدينا أيضًا الحق في رفض الإعلان إذا لم يعجبنا ببساطة دون سبب.</i>
-  main_menu:
-    create_btn: إنشاء إعلانات
-    list_btn: قائمة الإعلانات
-    pay_btn: رصيد شحن
-  create:
-    enter_text: |
-      أدخل النص الإعلاني:
-
-      <i>لا أكثر من 70 حرفاً ويجب أن يمتثل لقواعدنا (/adv_rules)</i>
-    enter_link: |
-      أدخل رابطًا للمصدر المُعلن عنه:
-
-      <i>يجب أن يكون الرابط كاملاً، إذا كنت تعلن عن شيء ما في Telegram، فيجب أن يبدأ الرابط بـ t.me.
-      يجب أن يتوافق المورد مع قواعدنا (/adv_rules)، إذا تم استبدال الموقع بعد اجتياز الإشراف، فسيتم حظر حسابك ولن يتم استرداد الأموال.</i>
-    select_locale: |
-      حدد لغة المستخدمين الذين سيتم عرض الإعلان لهم
-
-      الرقم هو عدد المستخدمين الذين يحتمل أن يشاهدوا إعلانك بتلك اللغة.
-      يتم حساب المستخدمين الذين يستخدمون البوت بالفعل. ولكن يمكن أيضا رؤية الإعلان من جانب مستخدمين آخرين من المجموعة التي تم فيها وضع الاقتباس، لذلك يمكن أن يكون هذا الرقم أعلى بكثير من
-
-      <i>ولا تتوافق اللغة مع البلد.
-      يمكنك اختيار لغة واحدة فقط، إذا كنت بحاجة إلى عدة لغات، الرجاء إنشاء إعلان مرة أخرى بلغة أخرى.</i>
-    enter_price: |
-      حدد السعر لكل 1000 انطباع من إعلاناتك بالدولار الأمريكي:
-
-      <u>متوسط سعر الإعلانات:</u> ${averagePrice} $
-
-      <i>الحد الأدنى للسعر هو 0. 5 دولارات
-      يتم عرض الإعلانات بطريقة عشوائية، ولكن أعلى فرصة للعرض لديها إعلان له سعر أعلى للانطباعات.
-      </i>
-    sent_moderate: |
-      تم إرسال الإعلان للإشراف. يرجى التحلي بالصبر والانتظار. إذا كان الإشراف ناجحاً أو غير ناجح، فسوف تتلقى إشعار.
-  list:
-    select_list: |
-      قائمة_الاختيار
-    wait_btn: انتظار
-    ready_btn: جاهز
-    end_btn: نهاية
-    selected_list: |
-      قائمة المختارة
-  moderate:
-    adv: |
-      Adv #id_${adv._id} من <a href="tg://user?id=${telegramId}">${name}</a>
-
-      النص: ${adv.text}
-      الرابط: ${adv.link}
-      المحلية: ${adv.locale}
-      السعر: ${adv.price}
-      العد ${adv.count}
-    accepted: |
-      تم إدارة الإعلان بنجاح. يمكنك بدء عرضه في قسم الإعلان: /adv
-    denied: |
-      ولسوء الحظ، لم يتم تخفيف الإعلان. الرجاء قراءة قواعدنا (/adv_rules)، إذا كنت متأكدا من أن هذا خطأ، كتابة إلينا على @Ly_OBot وإدراج هذه العلامة في الرسالة التي تصف المشكلة: #qba_${adv.id}
-    accept_btn: قبول
-    deny_btn: رفض
+    Your emoji will be added to all new quotes ✨
+  done: Emoji style updated! ✨
 only_admin: |
-  فقط مسؤول المجموعة يمكنه استخدام هذا الأمر.
+  <b>⚠️ Admin Access Needed</b>
+  This command can only be used by group administrators.
 only_group: |
-  لا يمكن استخدام هذا الأمر إلا في مجموعات.
+  <b>⚠️ Group Command</b>
+  This feature works in group chats only.
 rate_limit: |
-  لا يمكنك استخدام هذا الأمر أكثر من مرة كل ${seconds} ثانية.
+  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+
+  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
