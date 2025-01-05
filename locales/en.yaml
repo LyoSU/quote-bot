@@ -15,68 +15,64 @@ description:
 
     Get started now - just forward a message or use /q!
 help: |
-  <b>✨ Welcome to QuotLyBot!</b>
+  <b>✨ QuotLyBot Quick Guide</b>
 
-  Let's create beautiful quote stickers together! Here's your quick guide:
+  <b>📱 Basic Commands</b>
+  • <code>/q</code> - Quote replied message
+  • <code>/q 3</code> - Quote several messages
+  • Forward message - Quote directly
 
-  <b>🚀 Quick Start</b>
-  • Reply to any message with <code>/q</code>
-  • Or forward messages directly to me
-  • Use <code>/q 3</code> to quote multiple messages (up to 10)
+  <b>🎨 Styles</b>
 
-  <b>🎨 Style Your Quotes</b>
+  Colors:
+  • Basic: <code>/q red</code>
+  • Custom: <code>/q #ff69b4</code>
+  • Gradient: <code>/q red//#blue</code>
+  • Random: <code>/q random</code>
 
-  <b>Colors & Gradients:</b>
-  • Single color: <code>/q red</code>, <code>/q blue</code>, <code>/q #ff69b4</code>
-  • Random gradient: <code>/q random</code>
-  • Custom gradient: <code>/q #ff69b4//#cbafff</code>
-  • Random bottom: <code>/q //random</code>
-  • Transparent: <code>/q transparent</code>
+  Media:
+  • Add photo: <code>/q media</code>
+  • Crop image: <code>/q crop</code>
+  • Keep thread: <code>/q reply</code>
+  • Voice preview: Automatic
 
-  <b>Media & Content:</b>
-  • Include media: Add <code>media</code>
-  • Keep thread: Add <code>reply</code>
-  • Voice preview: Automatic for voice messages
-  • Crop media: Add <code>crop</code>
+  Format:
+  • Sticker: <code>/q</code>
+  • Image: <code>/q img</code>
+  • HD: <code>/q png</code>
+  • Story: <code>/q stories</code>
 
-  <b>Output Format:</b>
-  • Sticker (default): Just <code>/q</code>
-  • Image: Add <code>img</code>
-  • High-res PNG: Add <code>png</code>
-  • Stories format: Add <code>stories</code>
+  Quality:
+  • Normal: <code>/q</code>
+  • 2x: <code>/q s2</code>
+  • 3x: <code>/q s3</code>
 
-  <b>Quality Options:</b>
-  • Standard: Just <code>/q</code>
-  • Double: Add <code>s2</code>
-  • Triple: Add <code>s3</code>
+  <b>💫 Popular Combinations</b>
+  • <code>/q red media</code> - Red quote with photo
+  • <code>/q 3 reply</code> - Quote with context
+  • <code>/q img s2</code> - High-quality image
+  • <code>/q stories media</code> - Story with photo
 
-  <b>✨ Popular Combinations</b>
-  • Gradient sticker: <code>/q red//#blue</code>
-  • HD photo quote: <code>/q img s2</code>
-  • Full chat context: <code>/q 3 reply png</code>
-  • Story with media: <code>/q stories media</code>
-
-  <b>🌟 Special Features</b>
-  • Rate quotes: Add <code>rate</code>
-  • Change emoji style:
-    - Classic styles: <code>/qb apple</code>, <code>/qb google</code>
-    - Alternative styles: <code>/qb twitter</code>, <code>/qb joypixels</code>
-    - Retro style: <code>/qb blob</code> (Google's classic blobs)
+  <b>⚙️ Extra Features</b>
+  • Rating: <code>/q rate</code>
   • Random quotes: <code>/qrand</code>
-  • View top quotes: <code>/qtop</code>
-  • Privacy mode: <code>/qprivacy</code>
+  • Top quotes: <code>/qtop</code>
+  • Language: <code>/lang</code>
 
-  <b>⚙️ Group Settings</b>
-  • Set default color: <code>/qcolor</code>
-  • Enable ratings: <code>/qrate</code>
-  • Configure random: <code>/qgab</code>
+  <b>🎯 Group Settings</b>
+  • Default color: <code>/qcolor</code>
+  • Enable rating: <code>/qrate</code>
   • Save to pack: <code>/qs</code>
-  • Change language: <code>/lang</code>
+
+  <b>🌈 Emoji Styles</b>
+  Classic: <code>/qb apple</code>, <code>/qb google</code>
+  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  Retro: <code>/qb blob</code>
 
   <b>📱 Need Help?</b>
-  • Developer's Blog: @LyBlog
+  • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
-  • Support us: <code>/donate</code>
+  • Support: <code>/donate</code>
 help_group: |
   <b>Hello! 👋</b>
   I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
