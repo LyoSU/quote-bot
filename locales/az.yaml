@@ -7,68 +7,68 @@ description:
   long: |
     Qrup çatdırmaq istədiyiniz məzmunlu qrup söhbətində əyləncəli və əlverişli mesajları gördünüzmü və onları əbədidaga salmaq istəyirsiniz? Sadəcə onları mənə yönəlt və ya /q yaz və onları təravətli bir alıntı stiker olaraq çevirəcəyəm, onları yaddaşa salıb dostlarınızla paylaşa biləcəyiniz. Şəxsi xatirələr üçün və ya peşəkar istifadə üçün, imkanlar sonsuzdur. Məni sınamaqda birisən! 😎
 help: |
-  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
+  <b>📝 Salam! Mən gözəl sitatlar yaratmaq üçün botam</b>
 
-  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
+  <i>Mən hər hansı bir mesajı cazibədar bir sitata çevirə bilərəm ki, vacib söhbət məqamlarını saxlayasınız. Mən həm özəl mesajlarda, həm də qruplarda işləyirəm!</i>
 
-  <b>🎯 Basic Usage:</b>
+  <b>🎯 Əsas İstifadə:</b>
 
-  • Single message: reply to it with <code>/q</code>
-  • Multiple messages: add a number, like <code>/q 3</code>
-  • In private chats: simply forward messages to me
+  • Tək mesaj: ona <code>/q</code> ilə cavab verin
+  • Çox mesaj: bir rəqəm əlavə edin, məsələn <code>/q 3</code>
+  • Özəl söhbətlərdə: sadəcə mesajları mənə yönləndirin
 
-  <b>🎨 Quote Customization:</b>
+  <b>🎨 Sitat Fərdiləşdirmə:</b>
 
-  <b>1. Color:</b>
-  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Custom color: <code>/q #cbafff</code>
-  • Random color: <code>/q random</code>
+  <b>1. Rəng:</b>
+  • Ad: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Fərdi rəng: <code>/q #cbafff</code>
+  • Təsadüfi rəng: <code>/q random</code>
 
-  <b>2. Appearance:</b>
-  • Image instead of sticker: add <code>img</code>
-  • High quality: add <code>png</code>
-  • Preserve conversation: add <code>reply</code>
+  <b>2. Görünüş:</b>
+  • Stiker əvəzinə şəkil: <code>img</code> əlavə edin
+  • Yüksək keyfiyyət: <code>png</code> əlavə edin
+  • Söhbəti saxla: <code>reply</code> əlavə edin
 
   <b>3. Media:</b>
-  • Include photo/sticker: add <code>media</code>
+  • Foto/stiker daxil et: <code>media</code> əlavə edin
 
-  <b>4. Quality:</b>
-  Add <code>s</code> and a number for enhanced quality:
-  • <code>s2</code> - 2x quality
-  • <code>s3</code> - 3x quality
+  <b>4. Keyfiyyət:</b>
+  Yaxşılaşdırılmış keyfiyyət üçün <code>s</code> və bir rəqəm əlavə edin:
+  • <code>s2</code> - 2x keyfiyyət
+  • <code>s3</code> - 3x keyfiyyət
 
-  <b>💫 Useful Combinations:</b>
+  <b>💫 Faydalı Kombinasiyalar:</b>
 
-  • Beautiful quote with photo:
-  <code>/q 2 red media</code> - red quote with 2 messages and photo
+  • Foto ilə gözəl sitat:
+  <code>/q 2 red media</code> - 2 mesaj və foto ilə qırmızı sitat
 
-  • High-quality conversation screenshot:
-  <code>/q 3 reply png</code> - 3-message dialog in PNG
+  • Yüksək keyfiyyətli söhbət skrinshotu:
+  <code>/q 3 reply png</code> - PNG formatında 3 mesajlı dialoq
 
-  • Stylish colored quote:
-  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+  • Rəngli stilizə edilmiş sitat:
+  <code>/q #ff69b4 img s2</code> - yüksək keyfiyyətli çəhrayı sitat
 
-  <b>🌟 Special Features:</b>
+  <b>🌟 Xüsusi Xüsusiyyətlər:</b>
 
-  • Quote rating: add <code>rate</code> to enable voting
-  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
+  • Sitat qiymətləndirməsi: səsvermə üçün <code>rate</code> əlavə edin
+  • Emoji stili: <code>/qb apple</code> ya da <code>/qb google</code>
+  • Təsadüfi sitatlar: <code>/qrand</code>
+  • Ən yaxşı sitatlar: <code>/qtop</code>
 
-  <b>👨‍💼 Admin Commands:</b>
+  <b>👨‍💼 Admin Əmrləri:</b>
 
-  • <code>/qcolor</code> - set default group color
-  • <code>/qrate</code> - enable rating system
-  • <code>/qgab</code> - configure random quote appearance
-  • <code>/qs</code> - save to group sticker pack
+  • <code>/qcolor</code> - standart qrup rəngini təyin et
+  • <code>/qrate</code> - qiymətləndirmə sistemini aktiv et
+  • <code>/qgab</code> - təsadüfi sitat görünüşünü tənzimləyin
+  • <code>/qs</code> - qrup stiker dəstinə yadda saxla
 
-  <b>🌐 Other Commands:</b>
+  <b>🌐 Digər Əmrlər:</b>
 
-  • <code>/lang</code> - change language
-  • <code>/donate</code> - support the developer
+  • <code>/lang</code> - dili dəyişdir
+  • <code>/donate</code> - inkişafçını dəstəklə
 
-  <b>📱 Contact Us:</b>
-  • Developer's Blog: @LyBlog
+  <b>📱 Bizimlə Əlaqə Saxlayın:</b>
+  • İnkişafçının Bloqu: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>salam!</b>
