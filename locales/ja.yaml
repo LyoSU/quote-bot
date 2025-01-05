@@ -6,55 +6,70 @@ description:
     メッセージに/qで返信するか、転送してください。
   long: |
     グループチャットで不滅にしたい面白いメッセージや感動的なメッセージに気づいたことはありませんか？ 私にそれらを転送するか、/q と入力するだけで、私はそれらをあなたの友人と保存し、共有することができる洗練された引用ステッカーにします。 個人的な思い出のためでも、プロの使用のためでも、可能性は無限大です。今すぐ試してみてください！😎
-help: |2
-  <b>こんにちは！</b>
-  投稿から引用を作成するのを手伝います。
-  ボットはプライベートメッセージとグループの両方で動作します。
+help: |
+  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
 
-    <b>⚙️ 利用可能なコマンド:</b>
-  /q — メッセージから引用を作成します <i>[メッセージに返信]</i>
+  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
 
-  複数のメッセージから引用を作成するには、引用に含まれるメッセージの数を示す数値をパラメータとして書いてください。
-  プライベートメッセージでは、複数のメッセージを一度に転送して、それらから引用を作成することができます。
+  <b>🎯 Basic Usage:</b>
 
-    <b>/qコマンドの利用可能なフラグ:</b>
-      hexコードまたは色の名前: <code>#cbafff</code> または <code>indigo</code> — <b>#cbafff</b> の色の引用を作成します
-      <code>random</code> — ランダムな引用の色
-      <code>reply</code> または <code>r</code> — 回答を保存して引用を作成します
-      <code>p</code> または <code>png</code> — PNG引用を作成します
-      <code>i</code> または <code>img</code> — 画像として引用を作成します
-      <code>rate</code> — 引用に評価を追加します
-      <code>m</code> または <code>media</code> — メディアを含めます
-      <code>c</code> または <code>crop</code> — メディアをトリミングします
-      <code>s2.5</code> — 画質は標準の2.5倍高いです <i>(任意の値を設定できます)</i>
+  • Single message: reply to it with <code>/q</code>
+  • Multiple messages: add a number, like <code>/q 3</code>
+  • In private chats: simply forward messages to me
 
-    <b>フラグの使用例:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Quote Customization:</b>
 
-  管理者専用:
-  <code>/qs 🥰💜</code> — ステッカー／写真／写真入りドキュメントを、絵文字🥰💜を持つグループのステッカーパックに保存します <i>(絵文字は任意で、数も任意)</i> <i>[メッセージに返信]</i>
-  <code>/qd</code> — グループのステッカーパックからステッカーを削除します <i>[メッセージに返信]</i>
-  <code>/qdrand</code> — グループのランダムステッカーからステッカーを削除します <i>[メッセージに返信]</i>
-  <code>/qb</code> — 絵文字ブランドを設定します。利用可能なもの: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — 引用の色を<b>green</b> に設定します <i>(hexコードまたは色の名前)</i>
-  <code>/qemoji</code> — ステッカーの絵文字サフィックスを変更します
-  <code>/qrate</code> — 引用の評価を有効化／無効化します
-  <code>/qgab 300</code> — 引用のランダム出現の確率を設定します。1から無限までの任意の数。数値が高いほど、引用が現れる確率は低くなります。300を指定すれば、メッセージが現れる確率はおよそ300分の1になります。無効にするには、値を0に設定します
+  <b>1. Color:</b>
+  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Custom color: <code>/q #cbafff</code>
+  • Random color: <code>/q random</code>
 
-  /qrand — 評価された引用の中からランダムな引用を表示します
-  /qtop — トップグループの引用
+  <b>2. Appearance:</b>
+  • Image instead of sticker: add <code>img</code>
+  • High quality: add <code>png</code>
+  • Preserve conversation: add <code>reply</code>
 
-  /help または /start — このテキストを取得します
+  <b>3. Media:</b>
+  • Include photo/sticker: add <code>media</code>
 
-  /lang — 言語を変更します
+  <b>4. Quality:</b>
+  Add <code>s</code> and a number for enhanced quality:
+  • <code>s2</code> - 2x quality
+  • <code>s3</code> - 3x quality
 
-  <b>☕️ 開発者にコーヒーを買う:</b> /donate
+  <b>💫 Useful Combinations:</b>
 
-  <b>👨🏻‍💻 開発者ブログ:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Beautiful quote with photo:
+  <code>/q 2 red media</code> - red quote with 2 messages and photo
+
+  • High-quality conversation screenshot:
+  <code>/q 3 reply png</code> - 3-message dialog in PNG
+
+  • Stylish colored quote:
+  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+
+  <b>🌟 Special Features:</b>
+
+  • Quote rating: add <code>rate</code> to enable voting
+  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+
+  <b>👨‍💼 Admin Commands:</b>
+
+  • <code>/qcolor</code> - set default group color
+  • <code>/qrate</code> - enable rating system
+  • <code>/qgab</code> - configure random quote appearance
+  • <code>/qs</code> - save to group sticker pack
+
+  <b>🌐 Other Commands:</b>
+
+  • <code>/lang</code> - change language
+  • <code>/donate</code> - support the developer
+
+  <b>📱 Contact Us:</b>
+  • Developer's Blog: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>こんにちは！</b>
   私は、メッセージに応じて、/ qコマンドを使用して、グループ内の引用符を作成する
