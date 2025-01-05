@@ -7,68 +7,68 @@ description:
   long: |
     Заўважылі якія-небудзь смешныя або натхняльныя паведамленні ў вашым групавым чаце, якія вы хацелі б увекавечыць? Проста перашліце іх мне, або набярыце /q, і я ператвару іх у вытанчаны стыкер з цытатай, якую вы можаце захаваць і падзяліцца з сябрамі. Будзь гэта для асабістых успамінаў, або прафесійнага выкарыстання, магчымасці бязмежныя. Паспрабуйце мяне зараз! 😎
 help: |
-  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
+  <b>📝 Прывітанне! Я бот для стварэння прыгожых цытат</b>
 
-  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
+  <i>Я магу пераўтварыць любое паведамленне ў прывабную цытату для захавання важных момантаў чату. Я працую як у прыватных паведамленнях, так і ў групах!</i>
 
-  <b>🎯 Basic Usage:</b>
+  <b>🎯 Асноўнае выкарыстанне:</b>
 
-  • Single message: reply to it with <code>/q</code>
-  • Multiple messages: add a number, like <code>/q 3</code>
-  • In private chats: simply forward messages to me
+  • Адно паведамленне: адкажыце на яго з дапамогай <code>/q</code>
+  • Некалькі паведамленняў: дадайце нумар, як <code>/q 3</code>
+  • У прыватных чатах: проста перашліце паведамленні мне
 
-  <b>🎨 Quote Customization:</b>
+  <b>🎨 Наладка цытаты:</b>
 
-  <b>1. Color:</b>
-  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
-  • Custom color: <code>/q #cbafff</code>
-  • Random color: <code>/q random</code>
+  <b>1. Колер:</b>
+  • Назва: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Індывідуальны колер: <code>/q #cbafff</code>
+  • Выпадковы колер: <code>/q random</code>
 
-  <b>2. Appearance:</b>
-  • Image instead of sticker: add <code>img</code>
-  • High quality: add <code>png</code>
-  • Preserve conversation: add <code>reply</code>
+  <b>2. Знешні выгляд:</b>
+  • Выява замест налепкі: дадайце <code>img</code>
+  • Высокая якасць: дадайце <code>png</code>
+  • Захаваць размову: дадайце <code>reply</code>
 
-  <b>3. Media:</b>
-  • Include photo/sticker: add <code>media</code>
+  <b>3. Медыя:</b>
+  • Уключыць фота/налепку: дадайце <code>media</code>
 
-  <b>4. Quality:</b>
-  Add <code>s</code> and a number for enhanced quality:
-  • <code>s2</code> - 2x quality
-  • <code>s3</code> - 3x quality
+  <b>4. Якасць:</b>
+  Дадайце <code>s</code> і нумар для павышанай якасці:
+  • <code>s2</code> - якасць 2x
+  • <code>s3</code> - якасць 3x
 
-  <b>💫 Useful Combinations:</b>
+  <b>💫 Карысныя камбінацыі:</b>
 
-  • Beautiful quote with photo:
-  <code>/q 2 red media</code> - red quote with 2 messages and photo
+  • Прыгожая цытата з фота:
+  <code>/q 2 red media</code> - чырвоная цытата з 2 паведамленнямі і фота
 
-  • High-quality conversation screenshot:
-  <code>/q 3 reply png</code> - 3-message dialog in PNG
+  • Высокая якасць скрыншота размовы:
+  <code>/q 3 reply png</code> - дыялог з 3 паведамленняў у PNG
 
-  • Stylish colored quote:
-  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+  • Стыльная каляровая цытата:
+  <code>/q #ff69b4 img s2</code> - ружовая цытата ў высокай якасці
 
-  <b>🌟 Special Features:</b>
+  <b>🌟 Асаблівыя функцыі:</b>
 
-  • Quote rating: add <code>rate</code> to enable voting
-  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
+  • Ацэнка цытаты: дадайце <code>rate</code> для ўключэння галасавання
+  • Стыль эмодзі: <code>/qb apple</code> або <code>/qb google</code>
+  • Выпадковыя цытаты: <code>/qrand</code>
+  • Топ цытаты: <code>/qtop</code>
 
-  <b>👨‍💼 Admin Commands:</b>
+  <b>👨‍💼 Каманды адміністратара:</b>
 
-  • <code>/qcolor</code> - set default group color
-  • <code>/qrate</code> - enable rating system
-  • <code>/qgab</code> - configure random quote appearance
-  • <code>/qs</code> - save to group sticker pack
+  • <code>/qcolor</code> - усталяваць колер групы па змаўчанні
+  • <code>/qrate</code> - уключыць сістэму ацэнкі
+  • <code>/qgab</code> - наладзіць від выпадковай цытаты
+  • <code>/qs</code> - захаваць у групу налепак
 
-  <b>🌐 Other Commands:</b>
+  <b>🌐 Іншыя каманды:</b>
 
-  • <code>/lang</code> - change language
-  • <code>/donate</code> - support the developer
+  • <code>/lang</code> - змяніць мову
+  • <code>/donate</code> - падтрымка распрацоўшчыка
 
-  <b>📱 Contact Us:</b>
-  • Developer's Blog: @LyBlog
+  <b>📱 Звяжыцеся з намі:</b>
+  • Блог распрацоўшчыка: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Вітаю!</b>
