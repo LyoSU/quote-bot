@@ -15,28 +15,21 @@ description:
 
     Mulai sekarang - cukup teruskan pesan atau gunakan /q!
 start: |
-  <b>✨ Buat Stiker Kutipan yang Indah!</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Ubah pesan obrolan menjadi stiker elegan, kartu cerita yang memukau, dan seni yang bisa dibagikan.
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>🎨 Lihat Apa yang Bisa Anda Buat:</b>
-  • Kutipan gradasi warna-warni
-  • Percakapan multi-pesan
-  • Kutipan foto dengan efek
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>🚀 Mulai dalam 3 Langkah Sederhana:</b>
-  1. Temukan pesan yang Anda suka
-  2. Balas dengan <code>/q</code>
-  3. Kutipan Anda siap untuk dibagikan!
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like 'blue' or 'red') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  <b>💫 Ide Cepat untuk Dicoba:</b>
-  • Buat kutipan berwarna merah muda: <code>/q pink</code>
-  • Tambahkan foto: <code>/q media</code>
-  • Kutip rangkaian obrolan: <code>/q 3 r</code>
-
-  ✨ Coba sekarang - temukan pesan dan balas dengan /q!
-
-  Ingin menjelajahi semua fitur? Ketik /help untuk panduan cepat 📚
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ Panduan Singkat QuotLyBot</b>
 
