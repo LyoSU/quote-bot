@@ -15,28 +15,28 @@ description:
 
     立即开始——只需转发消息或使用/q！
 start: |
-  <b>✨ Create Beautiful Quote Stickers!</b>
+  <b>✨ 创建美丽的名言贴纸！</b>
 
-  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+  将聊天信息变成优雅的贴纸、惊艳的故事卡片和可分享的艺术作品。
 
-  <b>🎨 Look What You Can Create:</b>
-  • Colorful gradient quotes
-  • Multi-message conversations
-  • Photo quotes with effects
+  <b>🎨 看看你能创造些什么：</b>
+  • 色彩斑斓的渐变名言
+  • 多信息对话
+  • 带效果的照片名言
 
-  <b>🚀 Get Started in 3 Simple Steps:</b>
-  1. Find any message you like
-  2. Reply with <code>/q</code>
-  3. Your quote is ready to share!
+  <b>🚀 3个简单步骤开始：</b>
+  1. 找到你喜欢的任何信息
+  2. 回复 <code>/q</code>
+  3. 你的名言已准备好分享！
 
-  <b>💫 Quick Ideas to Try:</b>
-  • Make a pink quote: <code>/q pink</code>
-  • Add a photo: <code>/q media</code>
-  • Quote chat thread: <code>/q 3 r</code>
+  <b>💫 快速尝试的创意：</b>
+  • 制作粉色名言： <code>/q pink</code>
+  • 添加照片： <code>/q media</code>
+  • 引用聊天对话： <code>/q 3 r</code>
 
-  ✨ Try it now - find a message and reply with /q!
+  ✨ 现在就试试 - 找到一条信息并回复 /q！
 
-  Want to explore all features? Type /help for a quick guide 📚
+  想要探索所有功能？输入 /help 获取快速指南 📚
 help: |
   <b>✨ QuotLyBot 快速指南</b>
 
