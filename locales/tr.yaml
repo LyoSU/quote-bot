@@ -2,196 +2,196 @@
 language_name: '🇹🇷 Türkçe'
 description:
   short: |
-    Turn any message into a beautiful quote sticker! ✨
-    Reply with /q or forward the message to me
+    Herhangi bir mesajı güzel bir alıntı çıkartmasına dönüştürün! ✨
+    /q ile yanıtlayın ya da mesajı bana yönlendirin
   long: |
-    Create stunning quote stickers and preserve your favorite chat moments! ✨
+    Çarpıcı alıntı çıkartmaları oluşturun ve favori sohbet anlarınızı koruyun! ✨
 
-    Simply reply /q to any message or forward it to me. Perfect for saving:
-    🌟 Best chat highlights and memories
-    💭 Inspiring thoughts and conversations
-    🎨 Creative messages with custom styles
-    ✍️ Important notes in beautiful format
+    Sadece herhangi bir mesaja /q ile yanıt verin veya bana yönlendirin. Kaydetmek için mükemmel:
+    🌟 En iyi sohbet anları ve anıları
+    💭 İlham verici düşünceler ve konuşmalar
+    🎨 Özel stillerle yaratıcı mesajlar
+    ✍️ Güzel formatta önemli notlar
 
-    Get started now - just forward a message or use /q!
+    Hemen başlayın - sadece bir mesaj yönlendirin veya /q kullanın!
 help: |
-  <b>✨ QuotLyBot Quick Guide</b>
+  <b>✨ QuotLyBot Hızlı Rehber</b>
 
-  <b>📱 Basic Commands</b>
-  • <code>/q</code> - Quote replied message
-  • <code>/q 3</code> - Quote several messages
-  • Forward message - Quote directly
+  <b>📱 Temel Komutlar</b>
+  • <code>/q</code> - Yanıtladığınız mesajı alıntıla
+  • <code>/q 3</code> - Birden fazla mesajı alıntıla
+  • Mesaj yönlendir - Doğrudan alıntıla
 
-  <b>🎨 Styles</b>
+  <b>🎨 Stiller</b>
 
-  Colors:
-  • Basic: <code>/q red</code>
-  • Custom: <code>/q #ff69b4</code>
-  • Gradient: <code>/q red//#blue</code>
-  • Random: <code>/q random</code>
+  Renkler:
+  • Temel: <code>/q red</code>
+  • Özel: <code>/q #ff69b4</code>
+  • Gradyan: <code>/q red//#blue</code>
+  • Rastgele: <code>/q random</code>
 
-  Media:
-  • Add photo: <code>/q media</code>
-  • Crop image: <code>/q crop</code>
-  • Keep thread: <code>/q reply</code>
-  • Voice preview: Automatic
+  Medya:
+  • Fotoğraf ekle: <code>/q media</code>
+  • Resmi kırp: <code>/q crop</code>
+  • İleti dizisi koru: <code>/q reply</code>
+  • Sesli önizleme: Otomatik
 
   Format:
-  • Sticker: <code>/q</code>
-  • Image: <code>/q img</code>
+  • Çıkartma: <code>/q</code>
+  • Görüntü: <code>/q img</code>
   • HD: <code>/q png</code>
-  • Story: <code>/q stories</code>
+  • Hikaye: <code>/q stories</code>
 
-  Quality:
+  Kalite:
   • Normal: <code>/q</code>
   • 2x: <code>/q s2</code>
   • 3x: <code>/q s3</code>
 
-  <b>💫 Popular Combinations</b>
-  • <code>/q red media</code> - Red quote with photo
-  • <code>/q 3 reply</code> - Quote with context
-  • <code>/q img s2</code> - High-quality image
-  • <code>/q stories media</code> - Story with photo
+  <b>💫 Popüler Kombinasyonlar</b>
+  • <code>/q red media</code> - Fotoğraflı kırmızı alıntı
+  • <code>/q 3 reply</code> - Bağlamla alıntı
+  • <code>/q img s2</code> - Yüksek kaliteli görüntü
+  • <code>/q stories media</code> - Fotoğraflı hikaye
 
-  <b>⚙️ Extra Features</b>
-  • Rating: <code>/q rate</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
-  • Language: <code>/lang</code>
+  <b>⚙️ Ekstra Özellikler</b>
+  • Puanlama: <code>/q rate</code>
+  • Rastgele alıntılar: <code>/qrand</code>
+  • En iyi alıntılar: <code>/qtop</code>
+  • Dil: <code>/lang</code>
 
-  <b>🎯 Group Settings</b>
-  • Default color: <code>/qcolor</code>
-  • Enable rating: <code>/qrate</code>
-  • Save to pack: <code>/qs</code>
+  <b>🎯 Grup Ayarları</b>
+  • Varsayılan renk: <code>/qcolor</code>
+  • Puanlama etkinleştir: <code>/qrate</code>
+  • Pakete kaydet: <code>/qs</code>
 
-  <b>🌈 Emoji Styles</b>
-  Classic: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  <b>🌈 Emoji Stilleri</b>
+  Klasik: <code>/qb apple</code>, <code>/qb google</code>
+  Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
   Retro: <code>/qb blob</code>
 
-  <b>📱 Need Help?</b>
+  <b>📱 Yardıma mı ihtiyacınız var?</b>
   • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
-  • Support: <code>/donate</code>
+  • Destek: <code>/donate</code>
 help_group: |
-  <b>Hello! 👋</b>
-  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
+  <b>Merhaba! 👋</b>
+  Bu grupta güzel alıntılar oluşturacağım - herhangi bir mesajın yanıtına <code>/q</code> kullanın!
 
-  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
+  Tüm özelliklerimi özelde öğrenin: <a href="t.me/${username}?start=help">Yardım Alın</a> ✨
 btn:
   add_group: Gruba Ekle
   help: Dökümanlar
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
+    Üzgünüm, bu mesaj türünü henüz desteklemiyorum 😅
 
-    Try text, photos, stickers, or voice messages!
+    Metin, fotoğraf, çıkartma veya sesli mesajları deneyin!
   api_error: |
-    <b>Oops! Something went wrong 😅</b>
+    <b>Oops! Bir şeyler ters gitti 😅</b>
     <pre>${error}</pre>
-    Please try again in a moment!
+    Lütfen bir dakika sonra tekrar deneyin!
   empty_forward: |
-    Please reply to or forward the message you'd like to quote ✨
+    Lütfen alıntılamak istediğiniz mesaja yanıt verin veya onu iletin ✨
   set_background_color: |
-    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
+    <b>Mükemmel!</b> Alıntı arka planı değiştirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
+    <b>Tamam!</b> Emoji stili değiştirildi: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
+    suc: Başarıyla <a href="${link}">grup çıkartma paketinize</a> eklendi ✨
     error:
-      animated: Sorry, I can't save animated stickers yet 😅
-      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
-      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
+      animated: Üzgünüm, henüz animasyonlu çıkartmaları kaydedemiyorum 😅
+      need_creator: <b>Az kaldı!</b> ${creator} çıkartmaları kaydetmek için önce bana bir mesaj göndermeli
+      telegram: <b>Oops!</b> Bir şeyler ters gitti:\n<pre>${error}</pre>
   delete:
-    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    suc: <a href="${link}">Grup çıkartma paketinizden</a> kaldırıldı 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+      telegram: <b>Oops!</b> Çıkartma kaldırılamadı:\n<pre>${error}</pre>
     btn:
-      save_sticker: Save Sticker
+      save_sticker: Çıkartmayı Kaydet
   delete_random:
-    suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    suc: Rastgele koleksiyondan kaldırıldı 🗑
+    error: <b>Oops!</b> Çıkartma kaldırılamadı:\n<pre>${error}</pre>
   empty_forward: |
-    Please reply to a sticker, photo, or image you'd like to save ✨
+    Lütfen kaydetmek istediğiniz çıkartma, fotoğraf veya görüntüye yanıt verin ✨
   fstik: |
-    To save this to your personal sticker pack, forward to @fStikBot 🎨
+    Bunu kişisel çıkartma paketinize kaydetmek için @fStikBot'a iletin 🎨
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      Bu alıntıyı ${rateName} olarak derecelendirdiniz! Puanladığınız için teşekkür ederiz ⭐
     back: |
-      Your vote has been removed 🔄
+      Oyunuz kaldırıldı 🔄
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      Alıntı derecelendirmesi artık etkin! ⭐ ile derecelendirin
     disable: |
-      Quote rating has been disabled 🔄
+      Alıntı derecelendirmesi devre dışı bırakıldı 🔄
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    Bu grupta henüz yüksek puanlı alıntı yok! Bazı mesajları derecelendirin ⭐
   gab: |
-    Random quote frequency set to ${gab} ✨
+    Rastgele alıntı sıklığı ${gab} olarak ayarlandı ✨
 hidden:
   settings:
     enable: |
-      Sender search enabled 🔍
+      Gönderen arama etkinleştirildi 🔍
     disable: |
-      Sender search disabled 🔄
+      Gönderen arama devre dışı bırakıldı 🔄
 privacy:
   settings:
     enable: |
-      Privacy mode activated 🔒 Your info will be hidden in quotes
+      Gizlilik modu etkinleştirildi 🔒 Bilgileriniz alıntılarda gizlenecek
     disable: |
-      Privacy mode deactivated 🔓
+      Gizlilik modu devre dışı bırakıldı 🔓
 top:
   info: |
-    <b>✨ Top Quoted Messages</b>
-  open: View Top Quotes
+    <b>✨ En Çok Alıntılanan Mesajlar</b>
+  open: En İyi Alıntıları Gör
 donate:
   info: |
-    <b>Support QuotLyBot's Development! ☕</b>
+    <b>QuotLyBot'un Gelişimini Destekleyin! ☕</b>
 
-    Your support helps us:
-    • Keep the servers running 24/7
-    • Add new features and styles
-    • Improve quote quality
-    • Make the bot faster
+    Desteğiniz bize şunları sağlar:
+    • Sunucuların 24/7 çalışmasını
+    • Yeni özellikler ve stiller eklemeyi
+    • Alıntı kalitesini iyileştirmeyi
+    • Botu daha hızlı hale getirmeyi
 
-    <b>💳 Easy Payment Options</b>
-    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    <b>💳 Kolay Ödeme Seçenekleri</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Kart ile Ödeme</a> (Visa/Mastercard)
     • Apple Pay / Google Pay
 
-    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    <b>🔒 Kripto Para (Teknoloji meraklıları için)</b>
     • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
 
-    Every contribution helps make QuotLyBot better for everyone! 💜
-  title: Support ${botUsername}
-  description: Help keep the magic going ✨
+    Her katkı, QuotLyBot'u herkes için daha iyi hale getirmeye yardımcı olur! 💜
+  title: '${botUsername} Bağış Yap'
+  description: Büyüyü sürdürebilmek için yardım edin ✨
   successful: |
-    <b>Thank you for your support! 💜</b>
-    You're helping make QuotLyBot even better!
+    <b>Desteğiniz için teşekkür ederiz! 💜</b>
+    QuotLyBot'u daha da iyi hale getiriyorsunuz!
   pay: '💜 Telegram Üzerinden Ödeyin'
-  liqpay: 'Pay with Card 💳'
-  other: 'Other Options'
+  liqpay: 'Kart ile Öde 💳'
+  other: 'Diğer Yöntemler'
 emoji:
   info: |
-    <b>Choose Your Quote Emoji!</b>
+    <b>Alıntı Emojinizi Seçin!</b>
 
-    • Set custom emoji: <code>/qemoji</code>💜
-    • Use random emoji: <code>/qemoji random</code>
-    • Clear emoji: <code>/qemoji clear</code>
+    • Özel emoji ayarla: <code>/qemoji</code>💜
+    • Rastgele emoji kullan: <code>/qemoji random</code>
+    • Emoji temizle: <code>/qemoji clear</code>
 
-    Your emoji will be added to all new quotes ✨
-  done: Emoji style updated! ✨
+    Emojiniz tüm yeni alıntılara eklenecektir ✨
+  done: Emoji stili güncellendi! ✨
 only_admin: |
-  <b>⚠️ Admin Access Needed</b>
-  This command can only be used by group administrators.
+  <b>⚠️ Admin Erişimi Gerekli</b>
+  Bu komut yalnızca grup yöneticileri tarafından kullanılabilir.
 only_group: |
-  <b>⚠️ Group Command</b>
-  This feature works in group chats only.
+  <b>⚠️ Grup Komutu</b>
+  Bu özellik yalnızca grup sohbetlerinde çalışır.
 rate_limit: |
-  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+  <i>Kısa bir mola veriyorum...</i> Bu komutu tekrar kullanabilmen için ${seconds} saniye ⏳
 
-  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+  <i>Uzman ipucu: Beklerken, son alıntını </i><code>/q color</code> <i>veya</i> <code>/q media</code> <i>ile özelleştirmeyi dene</i>
