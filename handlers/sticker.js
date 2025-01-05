@@ -10,7 +10,7 @@ const redis = new Redis({
 
 // Constants
 const PREFIX = 'quotly'
-const PUBLISH_DELAY = 1000 * 60 * 5 // 5 minutes between publications
+const PUBLISH_DELAY = 1000
 const MIN_USES = 10
 const MIN_UNIQUE_USERS = 3
 const MIN_UNIQUE_STICKERS = 3
