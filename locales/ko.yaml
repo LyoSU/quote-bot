@@ -15,28 +15,28 @@ description:
 
     지금 바로 시작하세요 - 메시지를 포워드하거나 /q를 사용하세요!
 start: |
-  <b>✨ Create Beautiful Quote Stickers!</b>
+  <b>✨ 아름다운 인용구 스티커를 만드세요!</b>
 
-  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+  채팅 메시지를 우아한 스티커, 멋진 스토리 카드, 공유 가능한 아트로 변환하세요.
 
-  <b>🎨 Look What You Can Create:</b>
-  • Colorful gradient quotes
-  • Multi-message conversations
-  • Photo quotes with effects
+  <b>🎨 당신이 만들 수 있는 것들을 보세요:</b>
+  • 다채로운 그라데이션 인용문
+  • 여러 메시지를 포함한 대화
+  • 효과가 추가된 사진 인용문
 
-  <b>🚀 Get Started in 3 Simple Steps:</b>
-  1. Find any message you like
-  2. Reply with <code>/q</code>
-  3. Your quote is ready to share!
+  <b>🚀 3단계만으로 시작하기:</b>
+  1. 원하는 메시지를 찾으세요
+  2. <code>/q</code>로 답장하세요
+  3. 인용문이 준비되었습니다!
 
-  <b>💫 Quick Ideas to Try:</b>
-  • Make a pink quote: <code>/q pink</code>
-  • Add a photo: <code>/q media</code>
-  • Quote chat thread: <code>/q 3 r</code>
+  <b>💫 빠르게 시도할 아이디어:</b>
+  • 핑크색 인용문 만들기: <code>/q pink</code>
+  • 사진 추가하기: <code>/q media</code>
+  • 채팅 스레드 인용하기: <code>/q 3 r</code>
 
-  ✨ Try it now - find a message and reply with /q!
+  ✨ 지금 시도해 보세요 - 메시지를 찾아 /q로 답장하세요!
 
-  Want to explore all features? Type /help for a quick guide 📚
+  모든 기능을 탐색하고 싶으신가요? 빠른 가이드를 위해 /help를 입력하세요 📚
 help: |
   <b>✨ QuotLyBot 퀵 가이드</b>
 
