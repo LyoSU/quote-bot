@@ -6,55 +6,70 @@ description:
     Just reply to the message with /q or forward it to me.
   long: |
     Noticed any funny or inspiring messages in your group chat that you'd like to immortalize? Simply forward them to me or type /q and I'll turn them into a sleek quote sticker that you can save and share with your friends. Whether it's for personal memories or professional use, the possibilities are endless. Try me out now! 😎
-help: |2
-  <b>Hello!</b>
-  I will help create a quote from a post.
-  Bot can work both in private messages and in groups.
+help: |
+  <b>📝 Hi! I'm a bot for creating beautiful quotes</b>
 
-    <b>⚙️ Available commands:</b>
-  /q — make a quote from the message <i>[reply to the message]</i>
+  <i>I can transform any message into an attractive quote to preserve important chat moments. I work in both private messages and groups!</i>
 
-  To create a quote from several messages, write as a parameter a number that will indicate how many messages should be in the quote.
-  In private messages, you can forward several messages to me at once and I will make a quote from them.
+  <b>🎯 Basic Usage:</b>
 
-    <b>Available flags for the /q command:</b>
-      hex code or color name: <code>#cbafff</code> or <code>indigo</code> — make a quote with color <b>#cbafff</b>
-      <code>random</code> —random quote color
-      <code>reply</code> or <code>r</code> — make a quote with saving answers
-      <code>p</code> or <code>png</code> — make a PNG quote
-      <code>i</code> or <code>img</code> — make a quote as a picture
-      <code>rate</code> — add a rating to a quote
-      <code>m</code> or <code>media</code> —include media
-      <code>c</code> or <code>crop</code> — crop media
-      <code>s2.5</code> — picture quality is 2.5 times higher than standard <i>(сan set any value)</i>
+  • Single message: reply to it with <code>/q</code>
+  • Multiple messages: add a number, like <code>/q 3</code>
+  • In private chats: simply forward messages to me
 
-    <b>Example of using flags:</b>
-    <code>/q 3 white rp</code>
-    <code>/q i red s3.2</code>
-    <code>/q r 2 #cbafff m</code>
-    <code>/q 5 rm</code>
+  <b>🎨 Quote Customization:</b>
 
-  Only for administrators:
-  <code>/qs 🥰💜</code> — saves a sticker/photo/document with a photo to a sticker pack of a group with emoji 🥰💜 <i>(emoji can be any and any number)</i> <i>[reply to message]</i>
-  <code>/qd</code> — remove the sticker from the sticker pack of group  <i>[in response to the message]</i>
-  <code>/qdrand</code> — remove the sticker from the group random stickers  <i>[in response to the message]</i>
-  <code>/qb</code> — set emoji brand. Available: <code>apple</code>, <code>google</code>, <code>twitter</code>, <code>joypixels</code>, <code>blob</code>
-  <code>/qcolor green</code> — set the color of quotes <b>green</b> by default <i>(hex code or color name)</i>
-  <code>/qemoji</code> — change the emoji suffix for stickers
-  <code>/qrate</code> — enable/disable rating of quotes
-  <code>/qgab 300</code> — set the chance of a random occurrence of a quote. Any number from one to infinity. The higher the number, the lower the chance of quotes appearing. By specifying 300, the chance of a message appearing will be approximately 1 time in 300 messages. To disable, set the value to 0
+  <b>1. Color:</b>
+  • Name: <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+  • Custom color: <code>/q #cbafff</code>
+  • Random color: <code>/q random</code>
 
-  /qrand — random a quote with a positive rating of
-  /qtop — top group quotes
+  <b>2. Appearance:</b>
+  • Image instead of sticker: add <code>img</code>
+  • High quality: add <code>png</code>
+  • Preserve conversation: add <code>reply</code>
 
-  /help or /start — get this text
+  <b>3. Media:</b>
+  • Include photo/sticker: add <code>media</code>
 
-  /lang — change the language
+  <b>4. Quality:</b>
+  Add <code>s</code> and a number for enhanced quality:
+  • <code>s2</code> - 2x quality
+  • <code>s3</code> - 3x quality
 
-  <b>☕️ Buy coffee for developer:</b> /donate
+  <b>💫 Useful Combinations:</b>
 
-  <b>👨🏻‍💻 Developer blog:</b> @LyBlog
-  <b>GitHub:</b> github.com/LyoSU/quote-bot
+  • Beautiful quote with photo:
+  <code>/q 2 red media</code> - red quote with 2 messages and photo
+
+  • High-quality conversation screenshot:
+  <code>/q 3 reply png</code> - 3-message dialog in PNG
+
+  • Stylish colored quote:
+  <code>/q #ff69b4 img s2</code> - pink quote in high quality
+
+  <b>🌟 Special Features:</b>
+
+  • Quote rating: add <code>rate</code> to enable voting
+  • Emoji style: <code>/qb apple</code> or <code>/qb google</code>
+  • Random quotes: <code>/qrand</code>
+  • Top quotes: <code>/qtop</code>
+
+  <b>👨‍💼 Admin Commands:</b>
+
+  • <code>/qcolor</code> - set default group color
+  • <code>/qrate</code> - enable rating system
+  • <code>/qgab</code> - configure random quote appearance
+  • <code>/qs</code> - save to group sticker pack
+
+  <b>🌐 Other Commands:</b>
+
+  • <code>/lang</code> - change language
+  • <code>/donate</code> - support the developer
+
+  <b>📱 Contact Us:</b>
+  • Developer's Blog: @LyBlog
+  • GitHub: github.com/LyoSU/quote-bot
 help_group: |
   <b>Hello!</b>
   I will create quotes in the group using the /q command in response to message
