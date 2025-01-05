@@ -2,196 +2,196 @@
 language_name: '🇮🇩 Indonesia'
 description:
   short: |
-    Turn any message into a beautiful quote sticker! ✨
-    Reply with /q or forward the message to me
+    Ubah pesan apapun menjadi stiker kutipan indah! ✨
+    Balas dengan /q atau teruskan pesan ke saya
   long: |
-    Create stunning quote stickers and preserve your favorite chat moments! ✨
+    Buat stiker kutipan memukau dan simpan momen obrolan favoritmu! ✨
 
-    Simply reply /q to any message or forward it to me. Perfect for saving:
-    🌟 Best chat highlights and memories
-    💭 Inspiring thoughts and conversations
-    🎨 Creative messages with custom styles
-    ✍️ Important notes in beautiful format
+    Cukup balas /q ke pesan apapun atau teruskan ke saya. Sempurna untuk menyimpan:
+    🌟 Sorotan dan kenangan obrolan terbaik
+    💭 Pemikiran dan percakapan yang menginspirasi
+    🎨 Pesan kreatif dengan gaya kustom
+    ✍️ Catatan penting dalam format indah
 
-    Get started now - just forward a message or use /q!
+    Mulai sekarang - cukup teruskan pesan atau gunakan /q!
 help: |
-  <b>✨ QuotLyBot Quick Guide</b>
+  <b>✨ Panduan Singkat QuotLyBot</b>
 
-  <b>📱 Basic Commands</b>
-  • <code>/q</code> - Quote replied message
-  • <code>/q 3</code> - Quote several messages
-  • Forward message - Quote directly
+  <b>📱 Perintah Dasar</b>
+  • <code>/q</code> - Kutipan pesan yang dibalas
+  • <code>/q 3</code> - Kutipan beberapa pesan
+  • Teruskan pesan - Kutipan langsung
 
-  <b>🎨 Styles</b>
+  <b>🎨 Gaya</b>
 
-  Colors:
-  • Basic: <code>/q red</code>
-  • Custom: <code>/q #ff69b4</code>
-  • Gradient: <code>/q red//#blue</code>
-  • Random: <code>/q random</code>
+  Warna:
+  • Dasar: <code>/q red</code>
+  • Kustom: <code>/q #ff69b4</code>
+  • Gradasi: <code>/q red//#blue</code>
+  • Acak: <code>/q random</code>
 
   Media:
-  • Add photo: <code>/q media</code>
-  • Crop image: <code>/q crop</code>
-  • Keep thread: <code>/q reply</code>
-  • Voice preview: Automatic
+  • Tambah foto: <code>/q media</code>
+  • Potong gambar: <code>/q crop</code>
+  • Pertahankan thread: <code>/q reply</code>
+  • Pratinjau suara: Otomatis
 
   Format:
-  • Sticker: <code>/q</code>
-  • Image: <code>/q img</code>
+  • Stiker: <code>/q</code>
+  • Gambar: <code>/q img</code>
   • HD: <code>/q png</code>
-  • Story: <code>/q stories</code>
+  • Cerita: <code>/q stories</code>
 
-  Quality:
+  Kualitas:
   • Normal: <code>/q</code>
   • 2x: <code>/q s2</code>
   • 3x: <code>/q s3</code>
 
-  <b>💫 Popular Combinations</b>
-  • <code>/q red media</code> - Red quote with photo
-  • <code>/q 3 reply</code> - Quote with context
-  • <code>/q img s2</code> - High-quality image
-  • <code>/q stories media</code> - Story with photo
+  <b>💫 Kombinasi Populer</b>
+  • <code>/q red media</code> - Kutipan merah dengan foto
+  • <code>/q 3 reply</code> - Kutipan dengan konteks
+  • <code>/q img s2</code> - Gambar berkualitas tinggi
+  • <code>/q stories media</code> - Cerita dengan foto
 
-  <b>⚙️ Extra Features</b>
-  • Rating: <code>/q rate</code>
-  • Random quotes: <code>/qrand</code>
-  • Top quotes: <code>/qtop</code>
-  • Language: <code>/lang</code>
+  <b>⚙️ Fitur Tambahan</b>
+  • Penilaian: <code>/q rate</code>
+  • Kutipan acak: <code>/qrand</code>
+  • Kutipan terbaik: <code>/qtop</code>
+  • Bahasa: <code>/lang</code>
 
-  <b>🎯 Group Settings</b>
-  • Default color: <code>/qcolor</code>
-  • Enable rating: <code>/qrate</code>
-  • Save to pack: <code>/qs</code>
+  <b>🎯 Pengaturan Grup</b>
+  • Warna default: <code>/qcolor</code>
+  • Aktifkan penilaian: <code>/qrate</code>
+  • Simpan ke paket: <code>/qs</code>
 
-  <b>🌈 Emoji Styles</b>
-  Classic: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  <b>🌈 Gaya Emoji</b>
+  Klasik: <code>/qb apple</code>, <code>/qb google</code>
+  Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
   Retro: <code>/qb blob</code>
 
-  <b>📱 Need Help?</b>
+  <b>📱 Butuh Bantuan?</b>
   • Blog: @LyBlog
   • GitHub: github.com/LyoSU/quote-bot
-  • Support: <code>/donate</code>
+  • Dukungan: <code>/donate</code>
 help_group: |
-  <b>Hello! 👋</b>
-  I'll create beautiful quotes in this group - just use <code>/q</code> in reply to any message!
+  <b>Halo! 👋</b>
+  Saya akan membuat kutipan indah di grup ini - cukup gunakan <code>/q</code> untuk membalas pesan apapun!
 
-  Learn all my features in private: <a href="t.me/${username}?start=help">Get Help</a> ✨
+  Pelajari semua fitur saya secara pribadi: <a href="t.me/${username}?start=help">Dapatkan Bantuan</a> ✨
 btn:
   add_group: Tambahkan ke Grup
   help: Bantuan
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
+    Maaf, saya belum mendukung jenis pesan ini 😅
 
-    Try text, photos, stickers, or voice messages!
+    Cobalah teks, foto, stiker, atau pesan suara!
   api_error: |
-    <b>Oops! Something went wrong 😅</b>
+    <b>Ups! Ada yang salah 😅</b>
     <pre>${error}</pre>
-    Please try again in a moment!
+    Silakan coba lagi sebentar lagi!
   empty_forward: |
-    Please reply to or forward the message you'd like to quote ✨
+    Silakan balas atau teruskan pesan yang ingin Anda kutip ✨
   set_background_color: |
-    <b>Perfect!</b> Quote background changed to: <code>${backgroundColor}</code> 🎨
+    <b>Sempurna!</b> Latar belakang kutipan diubah menjadi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
-    <b>Done!</b> Emoji style changed to: <code>${emojiBrand}</code> ✨
+    <b>Selesai!</b> Gaya emoji diubah menjadi: <code>${emojiBrand}</code> ✨
 sticker:
   save:
-    suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨
+    suc: Stiker telah berhasil ditambahkan ke <a href="${link}">paket stiker grup</a> ✨
     error:
-      animated: Sorry, I can't save animated stickers yet 😅
-      need_creator: <b>Almost there!</b> ${creator} needs to send me a message first to save stickers
-      telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
+      animated: Maaf, saya belum bisa menyimpan stiker animasi 😅
+      need_creator: <b>Hampir selesai!</b> ${creator} harus mengirimkan pesan kepada saya terlebih dahulu untuk menyimpan stiker
+      telegram: <b>Ups!</b> Ada yang salah:\n<pre>${error}</pre>
   delete:
-    suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    suc: Dihapus dari <a href="${link}">paket stiker grup</a> Anda 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+      telegram: <b>Ups!</b> Tidak dapat menghapus stiker:\n<pre>${error}</pre>
     btn:
-      save_sticker: Save Sticker
+      save_sticker: Simpan Stiker
   delete_random:
-    suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    suc: Dihapus dari koleksi acak 🗑
+    error: <b>Ups!</b> Tidak dapat menghapus stiker:\n<pre>${error}</pre>
   empty_forward: |
-    Please reply to a sticker, photo, or image you'd like to save ✨
+    Silakan balas pada stiker, foto, atau gambar yang ingin Anda simpan ✨
   fstik: |
-    To save this to your personal sticker pack, forward to @fStikBot 🎨
+    Untuk menyimpan di paket stiker pribadi Anda, teruskan ke @fStikBot 🎨
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      Anda ${rateName} kutipan ini! Terima kasih telah menilai ⭐
     back: |
-      Your vote has been removed 🔄
+      Suara Anda telah dihapus 🔄
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      Penilaian kutipan sekarang diaktifkan! Nilai dengan ⭐
     disable: |
-      Quote rating has been disabled 🔄
+      Penilaian kutipan telah dinonaktifkan 🔄
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    Belum ada kutipan berpenilaian tinggi di grup ini! Mulailah menilai beberapa pesan ⭐
   gab: |
-    Random quote frequency set to ${gab} ✨
+    Frekuensi kutipan acak diatur ke ${gab} ✨
 hidden:
   settings:
     enable: |
-      Sender search enabled 🔍
+      Pencarian pengirim diaktifkan. 🔍
     disable: |
-      Sender search disabled 🔄
+      Pencarian pengirim dinonaktifkan. 🔄
 privacy:
   settings:
     enable: |
-      Privacy mode activated 🔒 Your info will be hidden in quotes
+      Mode privasi diaktifkan 🔒 Info Anda akan disembunyikan dalam kutipan
     disable: |
-      Privacy mode deactivated 🔓
+      Mode privasi dinonaktifkan 🔓
 top:
   info: |
-    <b>✨ Top Quoted Messages</b>
-  open: View Top Quotes
+    <b>✨ Pesan Kutipan Teratas</b>
+  open: Lihat Kutipan Teratas
 donate:
   info: |
-    <b>Support QuotLyBot's Development! ☕</b>
+    <b>Dukung Pengembangan QuotLyBot! ☕</b>
 
-    Your support helps us:
-    • Keep the servers running 24/7
-    • Add new features and styles
-    • Improve quote quality
-    • Make the bot faster
+    Dukungan Anda membantu kami:
+    • Menjaga server berjalan 24/7
+    • Menambah fitur dan gaya baru
+    • Meningkatkan kualitas kutipan
+    • Membuat bot lebih cepat
 
-    <b>💳 Easy Payment Options</b>
-    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Card Payment</a> (Visa/Mastercard)
+    <b>💳 Opsi Pembayaran Mudah</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Pembayaran Kartu</a> (Visa/Mastercard)
     • Apple Pay / Google Pay
 
-    <b>🔒 Cryptocurrency (for tech-savvy users)</b>
+    <b>🔒 Cryptocurrency (untuk pengguna melek teknologi)</b>
     • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
     • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
 
-    Every contribution helps make QuotLyBot better for everyone! 💜
-  title: Support ${botUsername}
-  description: Help keep the magic going ✨
+    Setiap kontribusi membantu membuat QuotLyBot lebih baik untuk semua! 💜
+  title: Dukungan ${botUsername}
+  description: Bantu agar keajaiban terus berlangsung ✨
   successful: |
-    <b>Thank you for your support! 💜</b>
-    You're helping make QuotLyBot even better!
+    <b>Terima kasih atas dukungan Anda! 💜</b>
+    Anda telah membantu membuat QuotLyBot menjadi lebih baik!
   pay: '💜 Bayar Telegram'
-  liqpay: 'Pay with Card 💳'
-  other: 'Other Options'
+  liqpay: 'Bayar dengan Kartu 💳'
+  other: 'Sebaliknya'
 emoji:
   info: |
-    <b>Choose Your Quote Emoji!</b>
+    <b>Pilih Emoji Kutipan Anda!</b>
 
-    • Set custom emoji: <code>/qemoji</code>💜
-    • Use random emoji: <code>/qemoji random</code>
-    • Clear emoji: <code>/qemoji clear</code>
+    • Atur emoji kustom: <code>/qemoji</code>💜
+    • Gunakan emoji acak: <code>/qemoji random</code>
+    • Hapus emoji: <code>/qemoji clear</code>
 
-    Your emoji will be added to all new quotes ✨
-  done: Emoji style updated! ✨
+    Emoji Anda akan ditambahkan ke semua kutipan baru ✨
+  done: Gaya emoji diperbarui! ✨
 only_admin: |
-  <b>⚠️ Admin Access Needed</b>
-  This command can only be used by group administrators.
+  <b>⚠️ Akses Admin Diperlukan</b>
+  Perintah ini hanya bisa digunakan oleh administrator grup.
 only_group: |
-  <b>⚠️ Group Command</b>
-  This feature works in group chats only.
+  <b>⚠️ Perintah Grup</b>
+  Fitur ini hanya berfungsi di obrolan grup.
 rate_limit: |
-  <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
+  <i>Istirahat sejenak...</i> Anda dapat menggunakan perintah ini lagi dalam ${seconds} detik ⏳
 
-  <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+  <i>Tip pro: Sambil menunggu, coba kustomisasi kutipan terakhir Anda dengan </i><code>/q color</code> <i>atau</i> <code>/q media</code>
