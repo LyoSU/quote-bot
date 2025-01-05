@@ -14,7 +14,7 @@ const PUBLISH_DELAY = 1000 * 60 * 5 // 5 minutes between publications
 const MIN_USES = 10
 const MIN_UNIQUE_USERS = 5
 const MIN_UNIQUE_STICKERS = 3
-const MIN_GROUPS = 2
+const MIN_GROUPS = 3
 const MAX_USES_PER_USER = 10
 const DATA_EXPIRE_TIME = 60 // seconds
 
@@ -120,10 +120,6 @@ setInterval(async () => {
  * Middleware to track sticker usage
  */
 module.exports = async (ctx, next) => {
-  if (!ctx.chat.username || Math.random() < 0.7) {
-    return next()
-  }
-
   if (ctx.message.sticker) {
     const { set_name } = ctx.message.sticker
 
