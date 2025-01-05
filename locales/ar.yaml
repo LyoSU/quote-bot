@@ -15,28 +15,21 @@ description:
 
     ابدأ الآن - فقط أعد توجيه رسالة أو استخدم /q!
 start: |
-  <b>✨ أنشئ ملصقات اقتباسات رائعة!</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  حوّل رسائل الدردشة إلى ملصقات أنيقة، وبطاقات قصص مذهلة وفن قابل للمشاركة.
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>🎨 انظر ما يمكنك إنشاؤه:</b>
-  • اقتباسات متدرجة الألوان
-  • محادثات متعددة الرسائل
-  • اقتباسات مصورة مع تأثيرات
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>🚀 ابدأ في 3 خطوات بسيطة:</b>
-  1. ابحث عن أي رسالة تعجبك
-  2. رد باستخدام <code>/q</code>
-  3. اقتباسك جاهز للمشاركة!
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like 'blue' or 'red') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  <b>💫 أفكار سريعة لتجربتها:</b>
-  • اصنع اقتباسًا ورديًا: <code>/q pink</code>
-  • أضف صورة: <code>/q media</code>
-  • اقتبس سلسلة محادثات: <code>/q 3 r</code>
-
-  ✨ جرّبها الآن - ابحث عن رسالة ورد عليها ب /q!
-
-  تريد استكشاف جميع الميزات؟ اكتب /help للحصول على دليل سريع 📚
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ دليل سريع لQuotLyBot</b>
 
