@@ -15,28 +15,28 @@ description:
 
     Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
 start: |
-  <b>✨ Create Beautiful Quote Stickers!</b>
+  <b>✨ Chiroyli Iqtibos Stikerlarini Yarating!</b>
 
-  Turn chat messages into elegant stickers, stunning story cards, and shareable art.
+  Suhbat xabarlarini nafis stikerlarga, ajoyib hikoya kartalariga va ulashishga arzigulik sanʼatga aylantiring.
 
-  <b>🎨 Look What You Can Create:</b>
-  • Colorful gradient quotes
-  • Multi-message conversations
-  • Photo quotes with effects
+  <b>🎨 Nimalarni Yaratishingiz Mumkin:</b>
+  • Rangli gradient iqtiboslar
+  • Ko'p-xabarli suhbatlar
+  • Effektli foto iqtiboslar
 
-  <b>🚀 Get Started in 3 Simple Steps:</b>
-  1. Find any message you like
-  2. Reply with <code>/q</code>
-  3. Your quote is ready to share!
+  <b>🚀 3 Oddiy Qadamda Boshlang:</b>
+  1. Istalgan xabarni toping
+  2. <code>/q</code> bilan javob bering
+  3. Iqtibosingiz ulashishga tayyor!
 
-  <b>💫 Quick Ideas to Try:</b>
-  • Make a pink quote: <code>/q pink</code>
-  • Add a photo: <code>/q media</code>
-  • Quote chat thread: <code>/q 3 r</code>
+  <b>💫 Sinab Ko'rish Uchun Tezkor Fikrlar:</b>
+  • Pushti iqtibos yarating: <code>/q pink</code>
+  • Rasm qo'shing: <code>/q media</code>
+  • Suhbat tarmog'iga iqtibos: <code>/q 3 r</code>
 
-  ✨ Try it now - find a message and reply with /q!
+  ✨ Uni hozir sinab ko'ring - xabar toping va /q bilan javob bering!
 
-  Want to explore all features? Type /help for a quick guide 📚
+  Barcha funksiyalarni ko'rishni xohlaysizmi? Tezkor qo'llanma uchun /help yozing 📚
 help: |
   <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
 
