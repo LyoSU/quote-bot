@@ -15,15 +15,15 @@ description:
 
     지금 바로 시작하세요 - 메시지를 포워드하거나 /q를 사용하세요!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>안녕하세요! 👋 저는 QuotLyBot입니다</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  저는 일반 채팅 메시지를 멋진 인용구 스티커로 변환합니다. 간단하고 창의적이며 재미있게 사용할 수 있습니다!
 
-  <b>Ready to create your first quote?</b>
-  1️⃣ In private: Forward any messages to me (you can select several!)
-  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
+  <b>첫 번째 인용구를 만들 준비가 되셨나요?</b>
+  1️⃣ 개인 대화에서: 저에게 메시지를 전달해 주세요 (여러 개를 선택할 수 있습니다!)
+  2️⃣ 그룹에서: 그룹에 저를 추가하고 <code>/q</code>로 메시지에 답장해 주세요
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  모든 창의적인 가능성을 발견할 준비가 되셨다면 /help를 입력하세요! 🎨
 help: |
   <b>✨ QuotLyBot 퀵 가이드</b>
 
