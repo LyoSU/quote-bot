@@ -15,21 +15,21 @@ description:
 
     Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
 start: |
-  <b>Salom! 👋 Men QuotLyBot</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Men sizga sevimli chat lahzalaringizni chiroyli iqtibos stikerlariga aylantirib ulashishda yordam beraman. Oddiy, shaxsiy va foydalanish uchun qulay!
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>Birinchi iqtibosingizni yaratishga tayyormisiz?</b>
-  Sizga yoqadigan har qanday xabarni toping va <code>/q</code> ni javob sifatida yuboring - men uni maxsus narsaga aylantiraman ✨
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>✨ Pro Maslahatlar:</b>
-  • Tezda uslubni qo‘llash uchun har qanday rang nomini (masalan, 'ko‘k' yoki 'qizil') yozing
-  • Xabar suratini qo‘shish uchun <code>media</code> qo‘shing
-  • Butun suhbatni iqtiboslash uchun <code>/q 3</code> dan foydalaning
-  • Qaysi xabar iqtiboslanayotganini ko‘rsatish uchun <code>r</code> qo‘shing
-  • Mukammal emasmi? Yana qayta yaratish uchun shunchaki <code>/q</code> ni javob sifatida yuboring
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like '<code>blue</code>' or '<code>red</code>') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  Yaratuvchanlik imkoniyatlarini kashf qilishga tayyor bo‘lsangiz, /help ni kiriting! 🎨
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
 
