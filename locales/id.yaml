@@ -15,21 +15,21 @@ description:
 
     Mulai sekarang - cukup teruskan pesan atau gunakan /q!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Hai! 👋 Saya QuotLyBot</b>
 
-  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
+  Saya membantu Anda menangkap dan membagikan momen obrolan favorit Anda sebagai stiker kutipan yang indah. Sederhana, pribadi, dan menyenangkan untuk digunakan!
 
-  <b>Ready to create your first quote?</b>
-  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
+  <b>Siap membuat kutipan pertama Anda?</b>
+  Cukup cari pesan yang Anda suka dan balas dengan <code>/q</code> - Saya akan mengubahnya menjadi sesuatu yang istimewa ✨
 
-  <b>✨ Pro Tips:</b>
-  • Type any color name (like '<code>blue</code>' or '<code>red</code>') for instant style
-  • Add <code>media</code> to include the message's photo
-  • Use <code>/q 3</code> to quote a whole conversation
-  • Add <code>r</code> to show what message is being quoted
-  • Not perfect? Just reply <code>/q</code> again to remake it
+  <b>✨ Tips Pro:</b>
+  • Ketik nama warna apa saja (seperti '<code>blue</code>' atau '<code>red</code>') untuk gaya instan
+  • Tambahkan <code>media</code> untuk menyertakan foto pesan
+  • Gunakan <code>/q 3</code> untuk mengutip seluruh percakapan
+  • Tambahkan <code>r</code> untuk menunjukkan pesan mana yang dikutip
+  • Tidak sempurna? Cukup balas <code>/q</code> lagi untuk membuat ulang
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  Ketik /help ketika Anda siap untuk menemukan semua kemungkinan kreatif! 🎨
 help: |
   <b>✨ Panduan Singkat QuotLyBot</b>
 
