@@ -15,15 +15,15 @@ description:
 
     Inizia ora - basta inoltrare un messaggio o usare /q!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Ciao! 👋 Sono QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Trasformo i messaggi di chat ordinari in fantastici adesivi con citazioni. Semplice, creativo e divertente da usare!
 
-  <b>Ready to create your first quote?</b>
-  1️⃣ In private: Forward any messages to me (you can select several!)
-  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
+  <b>Pronto a creare la tua prima citazione?</b>
+  1️⃣ In privato: Inoltra qualsiasi messaggio a me (puoi selezionarne diversi!)
+  2️⃣ Nei gruppi: Aggiungimi al tuo gruppo e rispondi con <code>/q</code> a qualsiasi messaggio
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  Digita /help quando sei pronto a scoprire tutte le possibilità creative! 🎨
 help: |
   <b>✨ Guida Rapida di QuotLyBot</b>
 
