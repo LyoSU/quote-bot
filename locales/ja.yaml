@@ -15,15 +15,15 @@ description:
 
     今すぐ始めましょう - メッセージを転送するか、/qを使って！
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>こんにちは！👋 私はQuotLyBotです</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  通常のチャットメッセージを素晴らしい引用ステッカーに変えます。シンプルでクリエイティブ、そして楽しく使えます！
 
-  <b>Ready to create your first quote?</b>
-  1️⃣ In private: Forward any messages to me (you can select several!)
-  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
+  <b>最初の引用を作成しますか？</b>
+  1️⃣ プライベートで：いくつかのメッセージを私に転送してください（複数選択も可能です！）
+  2️⃣ グループで：グループに私を追加し、任意のメッセージへの返信で<code>/q</code>を使用してください
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  すべてのクリエイティブな可能性を発見する準備ができたら、/helpと入力してください！🎨
 help: |
   <b>✨ QuotLyBot クイックガイド</b>
 
