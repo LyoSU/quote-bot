@@ -15,15 +15,15 @@ description:
 
     立即开始——只需转发消息或使用/q！
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>嗨！👋 我是 QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  我将普通的聊天信息转化为精彩的引用贴纸。简单、有创意、有趣！
 
-  <b>Ready to create your first quote?</b>
-  1️⃣ In private: Forward any messages to me (you can select several!)
-  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
+  <b>准备好创建你的第一个引用了吗？</b>
+  1️⃣ 在私聊中：转发任意消息给我（你可以选择多个！）
+  2️⃣ 在群组中：将我添加到你的群组并对任何消息回复<code>/q</code>
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  当你准备好探索所有创意可能性时，输入 /help！🎨
 help: |
   <b>✨ QuotLyBot 快速指南</b>
 
