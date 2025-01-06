@@ -17,19 +17,13 @@ description:
 start: |
   <b>Salut ! 👋 Je suis QuotLyBot</b>
 
-  Je t'aide à capturer et partager tes moments de discussion préférés sous forme de magnifiques autocollants de citation. Simple, privé et amusant à utiliser !
+  Je transforme les messages de chat ordinaires en superbes autocollants de citation. Simple, créatif et amusant à utiliser !
 
-  <b>Prêt à créer ta première citation ?</b>
-  Trouve simplement un message que tu aimes et réponds avec <code>/q</code> - Je le transformerai en quelque chose de spécial ✨
+  <b>Prêt à créer votre première citation ?</b>
+  1️⃣ En privé : Transférez-moi tous les messages (vous pouvez en sélectionner plusieurs !)
+  2️⃣ En groupe : Ajoutez-moi à votre groupe et répondez avec <code>/q</code> à n'importe quel message
 
-  <b>✨ Astuces Pro :</b>
-  • Tape n'importe quel nom de couleur (comme '<code>bleu</code>' ou '<code>rouge</code>') pour un style instantané
-  • Ajoute <code>media</code> pour inclure la photo du message
-  • Utilise <code>/q 3</code> pour citer toute une conversation
-  • Ajoute <code>r</code> pour montrer quel message est cité
-  • Pas parfait ? Réponds simplement <code>/q</code> de nouveau pour le refaire
-
-  Tape /help quand tu es prêt à découvrir toutes les possibilités créatives ! 🎨
+  Tapez /help quand vous êtes prêt à découvrir toutes les possibilités créatives ! 🎨
 help: |
   <b>✨ Guide Rapide QuotLyBot</b>
 

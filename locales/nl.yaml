@@ -15,19 +15,13 @@ description:
 
     Begin nu - stuur een bericht door of gebruik /q!
 start: |
-  <b>Hoi! 👋 Ik ben QuotLyBot</b>
+  <b>Hallo! 👋 Ik ben QuotLyBot</b>
 
-  Ik help je om je favoriete gesprek momenten vast te leggen en te delen als mooie quote stickers. Eenvoudig, privé en leuk in gebruik!
+  Ik transformeer gewone chatberichten in prachtige citaatstickers. Eenvoudig, creatief en leuk om te gebruiken!
 
-  <b>Klaar om je eerste quote te maken?</b>
-  Vind gewoon een bericht dat je leuk vindt en antwoord met <code>/q</code> - dan maak ik er iets bijzonders van ✨
-
-  <b>✨ Pro Tips:</b>
-  • Typ een willekeurige kleurnaam (zoals '<code>blauw</code>' of '<code>rood</code>') voor directe stijl
-  • Voeg <code>media</code> toe om de foto van het bericht op te nemen
-  • Gebruik <code>/q 3</code> om een hele conversatie te quoten
-  • Voeg <code>r</code> toe om te laten zien welk bericht geciteerd wordt
-  • Niet perfect? Antwoord gewoon opnieuw met <code>/q</code> om het opnieuw te maken
+  <b>Klaar om je eerste citaat te maken?</b>
+  1️⃣ In privé: Stuur een bericht naar mij door (je kunt er meerdere selecteren!)
+  2️⃣ In groepen: Voeg me toe aan je groep en antwoord met <code>/q</code> op elk bericht
 
   Typ /help wanneer je klaar bent om alle creatieve mogelijkheden te ontdekken! 🎨
 help: |

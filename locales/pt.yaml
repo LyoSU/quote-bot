@@ -15,19 +15,13 @@ description:
 
     Comece agora - basta encaminhar uma mensagem ou usar /q!
 start: |
-  <b>Oi! 👋 Eu sou o QuotLyBot</b>
+  <b>Olá! 👋 Eu sou o QuotLyBot</b>
 
-  Eu te ajudo a capturar e compartilhar seus momentos favoritos do chat como lindos adesivos de citação. Simples, privado e divertido de usar!
+  Transformo mensagens de chat comuns em incríveis figurinhas de citações. Simples, criativo e divertido de usar!
 
   <b>Pronto para criar sua primeira citação?</b>
-  Basta encontrar qualquer mensagem que você goste e responder com <code>/q</code> - Eu vou transformá-la em algo especial ✨
-
-  <b>✨ Dicas Pro:</b>
-  • Digite o nome de qualquer cor (como '<code>azul</code>' ou '<code>vermelho</code>') para estilo instantâneo
-  • Adicione <code>media</code> para incluir a foto da mensagem
-  • Use <code>/q 3</code> para citar uma conversa inteira
-  • Adicione <code>r</code> para mostrar qual mensagem está sendo citada
-  • Não ficou perfeito? Basta responder <code>/q</code> novamente para refazer
+  1️⃣ No privado: Encaminhe qualquer mensagem para mim (você pode selecionar várias!)
+  2️⃣ Em grupos: Adicione-me ao seu grupo e responda com <code>/q</code> a qualquer mensagem
 
   Digite /help quando estiver pronto para descobrir todas as possibilidades criativas! 🎨
 help: |

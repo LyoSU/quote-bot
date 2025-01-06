@@ -17,17 +17,11 @@ description:
 start: |
   <b>Ciao! 👋 Sono QuotLyBot</b>
 
-  Ti aiuto a catturare e condividere i tuoi momenti preferiti della chat come bellissimi adesivi con citazioni. Semplice, privato e divertente da usare!
+  Trasformo i messaggi di chat ordinari in fantastici adesivi con citazioni. Semplice, creativo e divertente da usare!
 
   <b>Pronto a creare la tua prima citazione?</b>
-  Basta trovare qualsiasi messaggio che ti piace e rispondere con <code>/q</code> - lo trasformerò in qualcosa di speciale ✨
-
-  <b>✨ Consigli Pro:</b>
-  • Digita il nome di qualsiasi colore (come '<code>blu</code>' o '<code>rosso</code>') per uno stile istantaneo
-  • Aggiungi <code>media</code> per includere la foto del messaggio
-  • Usa <code>/q 3</code> per citare un'intera conversazione
-  • Aggiungi <code>r</code> per mostrare quale messaggio viene citato
-  • Non è perfetto? Basta rispondere di nuovo con <code>/q</code> per rifarlo
+  1️⃣ In privato: Inoltra qualsiasi messaggio a me (puoi selezionarne diversi!)
+  2️⃣ Nei gruppi: Aggiungimi al tuo gruppo e rispondi con <code>/q</code> a qualsiasi messaggio
 
   Digita /help quando sei pronto a scoprire tutte le possibilità creative! 🎨
 help: |
