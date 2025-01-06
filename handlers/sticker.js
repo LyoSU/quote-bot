@@ -12,9 +12,9 @@ const redis = new Redis({
 const PREFIX = 'quotly'
 const PUBLISH_DELAY = 1000
 const MIN_USES = 10
-const MIN_UNIQUE_USERS = 5
+const MIN_UNIQUE_USERS = 10
 const MIN_UNIQUE_STICKERS = 5
-const MIN_GROUPS = 5
+const MIN_GROUPS = 10
 const MAX_USES_PER_USER = 10
 const DATA_EXPIRE_TIME = 60 * 60 // 1 hour
 
