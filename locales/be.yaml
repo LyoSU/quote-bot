@@ -15,21 +15,21 @@ description:
 
     Пачніце цяпер - проста перашліце паведамленне або скарыстайцеся /q!
 start: |
-  <b>Прывітанне! 👋 Я QuotLyBot</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Я дапамагаю захопліваць і дзяліцца вашымі любімымі момантамі чата як прыгожымі налепкамі з цытатамі. Проста, прыватна і весела!
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>Гатовыя стварыць вашу першую цытату?</b>
-  Проста знайдзіце любое паведамленне, якое вам падабаецца, і адкажыце з <code>/q</code> - я ператвору яго ў нешта асаблівае ✨
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>✨ Парады прафесіянала:</b>
-  • Увядзіце любое імя колеру (напрыклад, 'blue' або 'red') для імгненнага стылю
-  • Дадайце <code>media</code>, каб уключыць фота паведамлення
-  • Выкарыстоўвайце <code>/q 3</code>, каб цытаваць увесь дыялог
-  • Дадайце <code>r</code>, каб паказаць, што паведамленне цытуецца
-  • Не ідэальна? Проста адкажыце <code>/q</code> зноў, каб перарабіць яго
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like '<code>blue</code>' or '<code>red</code>') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  Увядзіце /help, калі будзеце гатовыя адкрыць усе творчыя магчымасці! 🎨
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ Кароткі гід па QuotLyBot</b>
 
