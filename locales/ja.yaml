@@ -15,21 +15,21 @@ description:
 
     今すぐ始めましょう - メッセージを転送するか、/qを使って！
 start: |
-  <b>こんにちは！👋 私はQuotLyBotです</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  あなたのお気に入りのチャットの瞬間を美しい引用ステッカーとしてキャプチャして共有するお手伝いをします。シンプルでプライベート、そして使いやすいです！
+  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
 
-  <b>最初の引用を作成する準備はできましたか？</b>
-  気に入ったメッセージを見つけて<code>/q</code>と返信するだけで、特別なものに変えます✨
+  <b>Ready to create your first quote?</b>
+  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
 
-  <b>✨ プロのヒント:</b>
-  • 色の名前（"青" や "赤" など）を入力して即座にスタイルを追加
-  • メッセージの写真を含めるには<code>media</code>を追加
-  • 会話全体を引用するには<code>/q 3</code>を使用
-  • 引用されているメッセージを表示するには<code>r</code>を追加
-  • 完璧でない場合は、<code>/q</code>と再度返信して再作成
+  <b>✨ Pro Tips:</b>
+  • Type any color name (like '<code>blue</code>' or '<code>red</code>') for instant style
+  • Add <code>media</code> to include the message's photo
+  • Use <code>/q 3</code> to quote a whole conversation
+  • Add <code>r</code> to show what message is being quoted
+  • Not perfect? Just reply <code>/q</code> again to remake it
 
-  すべての創造的な可能性を探求する準備ができたら、/helpと入力してください！ 🎨
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ QuotLyBot クイックガイド</b>
 
