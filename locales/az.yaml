@@ -15,15 +15,15 @@ description:
 
     İndi başlayın - sadəcə mesajı yönləndirin və ya /q istifadə edin!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Salam! 👋 Mən QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Mən adi söhbət mesajlarını heyrətamiz sitat stikerlərinə çevirirəm. Sadə, yaradıcı və istifadəsi əyləncəlidir!
 
-  <b>Ready to create your first quote?</b>
-  1️⃣ In private: Forward any messages to me (you can select several!)
-  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
+  <b>İlk sitatınızı yaratmağa hazırsınızmı?</b>
+  1️⃣ Şəxsi: İstənilən mesajı mənə yönləndirin (bir neçəsini seçə bilərsiniz!)
+  2️⃣ Qruplarda: Məni qrupunuza əlavə edin və istənilən mesaja <code>/q</code> ilə cavab verin
 
-  Type /help when you're ready to discover all the creative possibilities! 🎨
+  Bütün yaradıcı imkanları kəşf etməyə hazır olanda /help yazın! 🎨
 help: |
   <b>✨ QuotLyBot Tez Təlimat</b>
 
