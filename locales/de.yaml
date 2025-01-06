@@ -17,19 +17,19 @@ description:
 start: |
   <b>Hi! 👋 Ich bin QuotLyBot</b>
 
-  Ich helfe Ihnen, Ihre Lieblingschats als schöne Zitatsticker festzuhalten und zu teilen. Einfach, privat und macht Spaß!
+  Ich helfe dir, deine Lieblingschatmomente als wunderschöne Zitat-Sticker festzuhalten und zu teilen. Einfach, privat und macht Spaß!
 
-  <b>Sind Sie bereit, Ihr erstes Zitat zu erstellen?</b>
-  Suchen Sie einfach eine Nachricht, die Ihnen gefällt, und antworten Sie mit <code>/q</code> - Ich mache daraus etwas Besonderes ✨
+  <b>Bereit, dein erstes Zitat zu erstellen?</b>
+  Finde einfach eine beliebige Nachricht, die dir gefällt, und antworte mit <code>/q</code> - ich verwandle sie in etwas Besonderes ✨
 
   <b>✨ Profi-Tipps:</b>
-  • Geben Sie einen Farbnamen ein (wie 'blau' oder 'rot') für einen sofortigen Stil
-  • Fügen Sie <code>media</code> hinzu, um das Foto der Nachricht einzuschließen
-  • Verwenden Sie <code>/q 3</code>, um eine ganze Konversation zu zitieren
-  • Fügen Sie <code>r</code> hinzu, um anzuzeigen, welche Nachricht zitiert wird
-  • Nicht perfekt? Antworten Sie einfach erneut mit <code>/q</code>, um es nochmals zu erstellen
+  • Gib einen Farbnamen ein (wie '<code>blau</code>' oder '<code>rot</code>') für einen sofortigen Stil
+  • Füge <code>media</code> hinzu, um das Foto der Nachricht zu integrieren
+  • Benutze <code>/q 3</code>, um ein ganzes Gespräch zu zitieren
+  • Füge <code>r</code> hinzu, um anzuzeigen, welche Nachricht zitiert wird
+  • Nicht perfekt? Einfach nochmal mit <code>/q</code> antworten, um es erneut zu erstellen
 
-  Geben Sie /help ein, wenn Sie bereit sind, alle kreativen Möglichkeiten zu entdecken! 🎨
+  Gib /help ein, wenn du bereit bist, alle kreativen Möglichkeiten zu entdecken! 🎨
 help: |
   <b>✨ QuotLyBot Schnellstart-Anleitung</b>
 

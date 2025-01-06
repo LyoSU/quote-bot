@@ -17,17 +17,17 @@ description:
 start: |
   <b>¡Hola! 👋 Soy QuotLyBot</b>
 
-  Te ayudo a capturar y compartir tus momentos favoritos de chat como hermosas pegatinas de citas. ¡Simple, privado y divertido de usar!
+  Te ayudo a capturar y compartir tus momentos favoritos del chat como hermosas pegatinas de citas. ¡Simple, privado y divertido de usar!
 
   <b>¿Listo para crear tu primera cita?</b>
   Solo encuentra cualquier mensaje que te guste y responde con <code>/q</code> - Lo convertiré en algo especial ✨
 
   <b>✨ Consejos Pro:</b>
-  • Escribe el nombre de cualquier color (como 'blue' o 'red') para un estilo instantáneo
-  • Agrega <code>media</code> para incluir la foto del mensaje
+  • Escribe el nombre de cualquier color (como '<code>blue</code>' o '<code>red</code>') para obtener un estilo instantáneo
+  • Añade <code>media</code> para incluir la foto del mensaje
   • Usa <code>/q 3</code> para citar toda una conversación
-  • Agrega <code>r</code> para mostrar qué mensaje está siendo citado
-  • ¿No es perfecto? Simplemente responde <code>/q</code> de nuevo para rehacerlo
+  • Añade <code>r</code> para mostrar qué mensaje se está citando
+  • ¿No es perfecto? Solo responde <code>/q</code> nuevamente para rehacerlo
 
   Escribe /help cuando estés listo para descubrir todas las posibilidades creativas! 🎨
 help: |

@@ -17,19 +17,19 @@ description:
 start: |
   <b>Hai! 👋 Saya QuotLyBot</b>
 
-  Saya membantu Anda menangkap dan berbagi momen obrolan favorit Anda sebagai stiker kutipan yang indah. Sederhana, pribadi, dan menyenangkan untuk digunakan!
+  Saya membantu Anda menangkap dan membagikan momen obrolan favorit Anda sebagai stiker kutipan yang indah. Sederhana, pribadi, dan menyenangkan untuk digunakan!
 
   <b>Siap membuat kutipan pertama Anda?</b>
-  Cukup temukan pesan apa pun yang Anda suka dan balas dengan <code>/q</code> - Saya akan mengubahnya menjadi sesuatu yang istimewa ✨
+  Cukup cari pesan yang Anda suka dan balas dengan <code>/q</code> - Saya akan mengubahnya menjadi sesuatu yang istimewa ✨
 
   <b>✨ Tips Pro:</b>
-  • Ketik nama warna apa pun (seperti 'biru' atau 'merah') untuk gaya instan
+  • Ketik nama warna apa saja (seperti '<code>blue</code>' atau '<code>red</code>') untuk gaya instan
   • Tambahkan <code>media</code> untuk menyertakan foto pesan
   • Gunakan <code>/q 3</code> untuk mengutip seluruh percakapan
   • Tambahkan <code>r</code> untuk menunjukkan pesan mana yang dikutip
   • Tidak sempurna? Cukup balas <code>/q</code> lagi untuk membuat ulang
 
-  Ketik /help jika Anda siap untuk menemukan semua kemungkinan kreatif! 🎨
+  Ketik /help ketika Anda siap untuk menemukan semua kemungkinan kreatif! 🎨
 help: |
   <b>✨ Panduan Singkat QuotLyBot</b>
 

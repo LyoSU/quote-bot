@@ -15,21 +15,21 @@ description:
 
     Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
 start: |
-  <b>Salom! 👋 Men QuotLyBot</b>
+  <b>Salom! 👋 Men QuotLyBotman</b>
 
-  Men sizga sevimli chat lahzalaringizni chiroyli iqtibos stikerlariga aylantirib ulashishda yordam beraman. Oddiy, shaxsiy va foydalanish uchun qulay!
+  Men sizga sevimli suhbat daqiqalaringizni chiroyli iqtibosli stikerlar sifatida saqlash va ulashishda yordam beraman. Oddiy, maxfiy va qiziqarli foydalanish!
 
   <b>Birinchi iqtibosingizni yaratishga tayyormisiz?</b>
-  Sizga yoqadigan har qanday xabarni toping va <code>/q</code> ni javob sifatida yuboring - men uni maxsus narsaga aylantiraman ✨
+  Faqat yoqtirgan xabaringizni toping va <code>/q</code> javobini bering - men uni maxsus narsaga aylantiraman ✨
 
   <b>✨ Pro Maslahatlar:</b>
-  • Tezda uslubni qo‘llash uchun har qanday rang nomini (masalan, 'ko‘k' yoki 'qizil') yozing
-  • Xabar suratini qo‘shish uchun <code>media</code> qo‘shing
-  • Butun suhbatni iqtiboslash uchun <code>/q 3</code> dan foydalaning
-  • Qaysi xabar iqtiboslanayotganini ko‘rsatish uchun <code>r</code> qo‘shing
-  • Mukammal emasmi? Yana qayta yaratish uchun shunchaki <code>/q</code> ni javob sifatida yuboring
+  • Tezkor uslub uchun har qanday rang nomini yozing (masalan, '<code>ko'k</code>' yoki '<code>qizil</code>')
+  • Xabarning fotosuratini qo'shish uchun <code>media</code> qo'shing
+  • Butun suhbatni iqtibos qilish uchun <code>/q 3</code> dan foydalaning
+  • Qaysi xabar iqtibos qilinayotganini ko'rsatish uchun <code>r</code> qo'shing
+  • Mukammal emasmi? Uni qayta yaratish uchun faqat <code>/q</code> javobini yozing
 
-  Yaratuvchanlik imkoniyatlarini kashf qilishga tayyor bo‘lsangiz, /help ni kiriting! 🎨
+  Barcha ijodiy imkoniyatlarni kashf qilishga tayyor bo'lganingizda /help yozing! 🎨
 help: |
   <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
 
