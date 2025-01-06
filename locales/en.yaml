@@ -17,17 +17,11 @@ description:
 start: |
   <b>Hi! 👋 I'm QuotLyBot</b>
 
-  I help you capture and share your favorite chat moments as beautiful quote stickers. Simple, private, and fun to use!
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
   <b>Ready to create your first quote?</b>
-  Just find any message you like and reply with <code>/q</code> - I'll turn it into something special ✨
-
-  <b>✨ Pro Tips:</b>
-  • Type any color name (like '<code>blue</code>' or '<code>red</code>') for instant style
-  • Add <code>media</code> to include the message's photo
-  • Use <code>/q 3</code> to quote a whole conversation
-  • Add <code>r</code> to show what message is being quoted
-  • Not perfect? Just reply <code>/q</code> again to remake it
+  1️⃣ In private: Forward any messages to me (you can select several!)
+  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
 
   Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
