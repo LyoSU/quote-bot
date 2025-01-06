@@ -15,21 +15,15 @@ description:
 
     Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
 start: |
-  <b>Salom! 👋 Men QuotLyBotman</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Men sizga sevimli suhbat daqiqalaringizni chiroyli iqtibosli stikerlar sifatida saqlash va ulashishda yordam beraman. Oddiy, maxfiy va qiziqarli foydalanish!
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>Birinchi iqtibosingizni yaratishga tayyormisiz?</b>
-  Faqat yoqtirgan xabaringizni toping va <code>/q</code> javobini bering - men uni maxsus narsaga aylantiraman ✨
+  <b>Ready to create your first quote?</b>
+  1️⃣ In private: Forward any messages to me (you can select several!)
+  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
 
-  <b>✨ Pro Maslahatlar:</b>
-  • Tezkor uslub uchun har qanday rang nomini yozing (masalan, '<code>ko'k</code>' yoki '<code>qizil</code>')
-  • Xabarning fotosuratini qo'shish uchun <code>media</code> qo'shing
-  • Butun suhbatni iqtibos qilish uchun <code>/q 3</code> dan foydalaning
-  • Qaysi xabar iqtibos qilinayotganini ko'rsatish uchun <code>r</code> qo'shing
-  • Mukammal emasmi? Uni qayta yaratish uchun faqat <code>/q</code> javobini yozing
-
-  Barcha ijodiy imkoniyatlarni kashf qilishga tayyor bo'lganingizda /help yozing! 🎨
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
 
