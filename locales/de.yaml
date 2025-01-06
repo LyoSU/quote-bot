@@ -15,21 +15,15 @@ description:
 
     Fang jetzt an - leite einfach eine Nachricht weiter oder benutze /q!
 start: |
-  <b>Hi! 👋 Ich bin QuotLyBot</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Ich helfe dir, deine Lieblingschatmomente als wunderschöne Zitat-Sticker festzuhalten und zu teilen. Einfach, privat und macht Spaß!
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>Bereit, dein erstes Zitat zu erstellen?</b>
-  Finde einfach eine beliebige Nachricht, die dir gefällt, und antworte mit <code>/q</code> - ich verwandle sie in etwas Besonderes ✨
+  <b>Ready to create your first quote?</b>
+  1️⃣ In private: Forward any messages to me (you can select several!)
+  2️⃣ In groups: Add me to your group and reply with <code>/q</code> to any message
 
-  <b>✨ Profi-Tipps:</b>
-  • Gib einen Farbnamen ein (wie '<code>blau</code>' oder '<code>rot</code>') für einen sofortigen Stil
-  • Füge <code>media</code> hinzu, um das Foto der Nachricht zu integrieren
-  • Benutze <code>/q 3</code>, um ein ganzes Gespräch zu zitieren
-  • Füge <code>r</code> hinzu, um anzuzeigen, welche Nachricht zitiert wird
-  • Nicht perfekt? Einfach nochmal mit <code>/q</code> antworten, um es erneut zu erstellen
-
-  Gib /help ein, wenn du bereit bist, alle kreativen Möglichkeiten zu entdecken! 🎨
+  Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
   <b>✨ QuotLyBot Schnellstart-Anleitung</b>
 
