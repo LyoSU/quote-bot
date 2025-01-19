@@ -17,7 +17,12 @@ const emojiArray = Object.values(emojiDb.dbData).filter(data => {
 const telegram = new Telegram(process.env.BOT_TOKEN)
 
 const openai = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPENAI_API_KEY,
+  defaultHeaders: {
+    "HTTP-Referer": "hppt://t.me/quotlybot",
+    "X-Title": "Quotly Bot",
+  }
 })
 
 const describeImage = async (image, language = 'en') => {
@@ -537,7 +542,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'google/gemini-2.0-flash-exp:free',
       messages: [
         {
           role: 'system',
