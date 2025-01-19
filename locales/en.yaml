@@ -30,7 +30,9 @@ help: |
   <b>📱 Basic Commands</b>
   • <code>/q</code> - Quote replied message
   • <code>/q 3</code> - Quote several messages
+  • <code>/qdrand</code> - Delete sticker from group random quotes
   • Forward message - Quote directly
+
 
   <b>🎨 Styles</b>
 
