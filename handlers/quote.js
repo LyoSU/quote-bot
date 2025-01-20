@@ -569,7 +569,7 @@ ${JSON.stringify(messageForAIContext)}
             url: 'https://telegra.ph/file/20ff3795b173ab91a81e9.jpg'
           }
         },
-        text: message.replace(/<|>/g, '').trim()
+        text: message.replace(/<|>/g, '').trim(),
         replyMessage: {}
       })
     } else {
