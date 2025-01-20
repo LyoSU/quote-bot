@@ -465,7 +465,7 @@ module.exports = async (ctx, next) => {
       }
     })
 
-    const systemMessage =  `You are an active group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'group'} language. Don't write like an AI. Copy context chat style. Match the meme style you see. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters.
+    const systemMessage =  `You are an active group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'group'} language. Don't write like an AI. Copy context chat style. Match the meme style you see. No questions. Just drop a hilarious meme or joke related to the topic. Keep it under 128 characters. Responses without any formatting, links or images.
 
 Context Processing:
 <chat_history>
@@ -542,7 +542,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-exp:free',
+      model: 'google/gemini-2.0-flash-thinking-exp:free',
       messages: [
         {
           role: 'system',
