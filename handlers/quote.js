@@ -551,7 +551,8 @@ ${JSON.stringify(messageForAIContext)}
         ...messageForAI
       ],
       max_tokens: 150,
-      temperature: 0.7
+      temperature: 0.7,
+      retry: 3
     })
 
     if (completion?.choices?.length > 0 && completion.choices[0].message?.content) {
