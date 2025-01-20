@@ -542,7 +542,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-exp-1121:free',
+      model: 'google/gemini-flash-1.5',
       messages: [
         {
           role: 'system',
