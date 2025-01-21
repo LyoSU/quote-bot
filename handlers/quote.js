@@ -463,9 +463,9 @@ module.exports = async (ctx, next) => {
       return {
         role: 'user',
         name: name,
-        content: (message.text || message.caption || (message.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')).slice(0, 128)
+        content: (message.text || message.caption).slice(0, 128)
       }
-    }).filter((message) => message)
+    }).filter((message) => message && message.content)
 
     const systemMessage = `You are a sarcastic and unfiltered group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'fallback'}. Don't write like an AI. Copy the style and humor of chat examples. Match the meme style you see. Feel free to be edgy, use strong language, and be brutally honest when appropriate. Just write a hilarious text meme or joke about this topic. Keep it under 128 characters.
 
