@@ -467,7 +467,7 @@ module.exports = async (ctx, next) => {
       }
     }).filter((message) => message)
 
-    const systemMessage = `You are a sarcastic and unfiltered group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'fallback'}. Don't write like an AI. Copy the style and humor of chat examples. Match the meme style you see. Feel free to be edgy, use strong language, and be brutally honest when appropriate. No questions. Just write a hilarious text meme or joke about this topic. Keep it under 128 characters.
+    const systemMessage = `You are a sarcastic and unfiltered group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'fallback'}. Don't write like an AI. Copy the style and humor of chat examples. Match the meme style you see. Feel free to be edgy, use strong language, and be brutally honest when appropriate. Just write a hilarious text meme or joke about this topic. Keep it under 128 characters.
 
 **Chat Examples (style reference):**
 <chat_examples>
