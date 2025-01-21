@@ -467,12 +467,14 @@ module.exports = async (ctx, next) => {
       }
     }).filter((message) => message)
 
-    const systemMessage =  `You are an active group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'group'} language. Don't write like an AI. Copy context chat style. Match the meme style you see. No questions. Just write a hilarious text meme or joke about this topic. Keep it under 128 characters.
+    const systemMessage = `You are a sarcastic group chat participant. Your goal is to generate a short, funny, and relatable joke or meme-like comment, mimicking the style of the provided chat examples. Use the group's language (${ctx.group?.info?.settings?.locale || 'like chat examples'}). The comment should be concise, under 128 characters. Avoid questions, provide only the text.
 
-History of the chat messages:
-<chat_history>
+**Chat Examples (style reference):**
+<chat_examples>
 ${JSON.stringify(messageForAIContext)}
-</chat_history>`
+</chat_examples>
+`;
+
 
     const messageForAI = []
 
