@@ -463,7 +463,7 @@ module.exports = async (ctx, next) => {
       return {
         role: 'user',
         name: name,
-        content: (message.text || message.caption).slice(0, 128)
+        content: (message?.text || message?.caption)?.slice(0, 128)
       }
     }).filter((message) => message && message.content)
 
