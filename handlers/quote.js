@@ -456,6 +456,8 @@ module.exports = async (ctx, next) => {
     messageForAIContext = messageForAIContext.filter((message) => message && Object.keys(message).length !== 0)
 
     messageForAIContext = messageForAIContext.map((message) => {
+      if (message.text && message.text.startsWith('/')) return
+
       const name = message?.from?.title || message.from?.name || message?.from?.first_name + ' ' + message?.from?.last_name || message?.from?.username || 'Anonymous'
 
       return {
@@ -463,11 +465,11 @@ module.exports = async (ctx, next) => {
         name: name,
         content: (message.text || message.caption || (message.mediaType === 'sticker' ? '[user sent a sticker]' : '[user sent a media]')).slice(0, 128)
       }
-    })
+    }).filter((message) => message)
 
     const systemMessage =  `You are an active group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'group'} language. Don't write like an AI. Copy context chat style. Match the meme style you see. No questions. Just write a hilarious text meme or joke about this topic. Keep it under 128 characters.
 
-Context Processing:
+History of the chat messages:
 <chat_history>
 ${JSON.stringify(messageForAIContext)}
 </chat_history>`
