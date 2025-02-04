@@ -110,12 +110,18 @@ sticker:
   delete:
     suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
     error:
-      telegram: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Save Sticker
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Removed from random collection 🗑
-    error: <b>Oops!</b> Couldn't remove the sticker:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Please reply to a sticker, photo, or image you'd like to save ✨
   fstik: |

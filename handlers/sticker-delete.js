@@ -2,54 +2,64 @@ module.exports = async ctx => {
   const stickerLinkPrefix = 'https://t.me/addstickers/'
   let result
 
-  if (ctx.message.reply_to_message) {
-    const replyMessage = ctx.message.reply_to_message
+  if (!ctx.message.reply_to_message) {
+    return ctx.replyWithHTML(ctx.i18n.t('sticker.empty_forward'))
+  }
 
-    if (replyMessage.sticker) {
-      // Check if sticker is from group's sticker set
-      if (ctx.group.info.stickerSet.name === replyMessage.sticker.set_name) {
-        // Delete from sticker set
-        const deleteStickerFromSet = await ctx.telegram.deleteStickerFromSet(replyMessage.sticker.file_id).catch((error) => {
-          result = ctx.i18n.t('sticker.delete.error.telegram', {
-            error
-          })
-        })
+  const replyMessage = ctx.message.reply_to_message
+  if (!replyMessage.sticker) {
+    return ctx.replyWithHTML(ctx.i18n.t('sticker.empty_forward'))
+  }
 
-        if (deleteStickerFromSet) {
-          result = ctx.i18n.t('sticker.delete.suc', {
-            link: `${stickerLinkPrefix}${ctx.group.info.stickerSet.name}`
-          })
-        }
+  // Check if sticker is from group's sticker set
+  if (ctx.group.info.stickerSet.name === replyMessage.sticker.set_name) {
+    try {
+      await ctx.telegram.deleteStickerFromSet(replyMessage.sticker.file_id)
+      result = ctx.i18n.t('sticker.delete.suc', {
+        link: `${stickerLinkPrefix}${ctx.group.info.stickerSet.name}`
+      })
+    } catch (error) {
+      const errorMessage = error.message.toLowerCase()
+      let reason
+
+      if (errorMessage.includes('not found')) {
+        reason = ctx.i18n.t('sticker.delete.error.not_found')
+      } else if (errorMessage.includes('rights') || errorMessage.includes('administrator')) {
+        reason = ctx.i18n.t('sticker.delete.error.rights')
       } else {
-        // Delete from quotes database
-        const group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
-        const quote = await ctx.db.Quote.findOne({
-          group: group,
-          file_unique_id: replyMessage.sticker.file_unique_id
-        })
-
-        if (quote) {
-          const deleteResult = await ctx.db.Quote.deleteOne({ _id: quote._id }).catch(err => {
-            console.error('Error deleting sticker:', err)
-            result = ctx.i18n.t('sticker.delete_random.error', {
-              error: err.message
-            })
-          })
-
-          if (deleteResult && deleteResult.deletedCount === 1) {
-            result = ctx.i18n.t('sticker.delete_random.suc')
-          }
-        } else {
-          result = ctx.i18n.t('sticker.delete_random.error', {
-            error: 'quote not found'
-          })
-        }
+        console.error('Telegram sticker deletion error:', error)
+        reason = ctx.i18n.t('sticker.delete.error.generic')
       }
-    } else {
-      result = ctx.i18n.t('sticker.empty_forward')
+
+      result = ctx.i18n.t('sticker.delete.error.telegram', { reason })
     }
   } else {
-    result = ctx.i18n.t('sticker.empty_forward')
+    // Delete from quotes database
+    try {
+      const group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
+      const quote = await ctx.db.Quote.findOne({
+        group: group,
+        file_unique_id: replyMessage.sticker.file_unique_id
+      })
+
+      if (!quote) {
+        return ctx.replyWithHTML(ctx.i18n.t('sticker.delete_random.not_found'))
+      }
+
+      const deleteResult = await ctx.db.Quote.deleteOne({ _id: quote._id })
+      if (deleteResult.deletedCount === 1) {
+        result = ctx.i18n.t('sticker.delete_random.suc')
+      } else {
+        result = ctx.i18n.t('sticker.delete_random.error', {
+          error: 'Failed to delete from database'
+        })
+      }
+    } catch (err) {
+      console.error('Database deletion error:', err)
+      result = ctx.i18n.t('sticker.delete_random.error', {
+        error: 'Database error occurred'
+      })
+    }
   }
 
   if (result) {
