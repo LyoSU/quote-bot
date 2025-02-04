@@ -107,6 +107,56 @@ const generateRandomColor = () => {
 
 const minIdsInChat = {}
 
+const handleQuoteError = async (ctx, error) => {
+  console.error('Quote error:', error)
+
+  if (error.response?.statusCode === 429) {
+    return ctx.replyWithHTML(ctx.i18n.t('quote.errors.rate_limit', {
+      seconds: 30
+    }))
+  }
+
+  if (error.response?.body) {
+    let errorBody;
+    try {
+      errorBody = JSON.parse(error.response.body);
+    } catch (e) {
+      console.error('Failed to parse error response body:', e);
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.generic_error', {
+        error: 'Invalid error response format'
+      }));
+    }
+
+    if (errorBody.error.message.includes('file too large')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.file_too_large'))
+    }
+
+    if (errorBody.error.message.includes('unsupported format')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.invalid_format'))
+    }
+
+    return ctx.replyWithHTML(ctx.i18n.t('quote.errors.generic_error', {
+      error: errorBody.error.message
+    }))
+  }
+
+  if (error.description?.includes('STICKERSET_INVALID')) {
+    // Reset sticker set and try again without custom pack
+    if (ctx.session?.userInfo) {
+      ctx.session.userInfo.tempStickerSet.create = false
+    }
+    return handleQuote(ctx)
+  }
+
+  if (error.description) {
+    return ctx.replyWithHTML(ctx.i18n.t('quote.errors.telegram_error', {
+      error: error.description
+    }))
+  }
+
+  return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'))
+}
+
 module.exports = async (ctx, next) => {
   const flag = {
     count: false,
@@ -637,9 +687,7 @@ ${JSON.stringify(messageForAIContext)}
       timeout: 1000 * 30,
       retry: 2
     }
-  ).catch((error) => {
-    return { error }
-  })
+  ).catch((error) => handleQuoteError(ctx, error))
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
@@ -673,55 +721,20 @@ ${JSON.stringify(messageForAIContext)}
 
   if (generate.body) {
     const image = generate.body
-    if (generate.headers['quote-type'] === 'quote') {
-      let replyMarkup = {}
+    try {
+      if (generate.headers['quote-type'] === 'quote') {
+        let replyMarkup = {}
 
-      if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
-        replyMarkup = Markup.inlineKeyboard([
-          Markup.callbackButton('👍', 'rate:👍'),
-          Markup.callbackButton('👎', 'rate:👎')
-        ])
-      }
-
-      let sendResult
-
-      if (flag.privacy) {
-        sendResult = await ctx.replyWithSticker({
-          source: image,
-          filename: 'quote.webp'
-        }, {
-          emoji: emojis,
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true,
-          reply_markup: replyMarkup,
-          business_connection_id: ctx.update?.business_message?.business_connection_id
-        })
-      } else {
-        if (ctx.session?.userInfo && !ctx.session?.userInfo?.tempStickerSet?.create) {
-          const getMe = await telegram.getMe()
-
-          const packName = `temp_${Math.random().toString(36).substring(5)}_${Math.abs(ctx.from.id)}_by_${getMe.username}`
-          const packTitle = `Created by @${getMe.username}`
-
-          const created = await telegram.createNewStickerSet(ctx.from.id, packName, packTitle, {
-            png_sticker: { source: 'placeholder.png' },
-            emojis
-          }).catch(() => {
-          })
-
-          ctx.session.userInfo.tempStickerSet.name = packName
-          ctx.session.userInfo.tempStickerSet.create = created
+        if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+          replyMarkup = Markup.inlineKeyboard([
+            Markup.callbackButton('👍', 'rate:👍'),
+            Markup.callbackButton('👎', 'rate:👎')
+          ])
         }
 
-        let packOwnerId
-        let packName
+        let sendResult
 
-        if (ctx.session?.userInfo && ctx.session?.userInfo?.tempStickerSet?.create && ctx.update.update_id % 5 === 0) {
-          packOwnerId = ctx.from.id
-          packName = ctx.session.userInfo.tempStickerSet.name
-        }
-
-        if (!packOwnerId || !packName) {
+        if (flag.privacy) {
           sendResult = await ctx.replyWithSticker({
             source: image,
             filename: 'quote.webp'
@@ -733,84 +746,123 @@ ${JSON.stringify(messageForAIContext)}
             business_connection_id: ctx.update?.business_message?.business_connection_id
           })
         } else {
-          const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
-            png_sticker: { source: image },
-            emojis
-          }, true).catch((error) => {
-            console.error(error)
-            if (error.description === 'Bad Request: STICKERSET_INVALID') {
-              ctx.session.userInfo.tempStickerSet.create = false
-            }
-          })
+          if (ctx.session?.userInfo && !ctx.session?.userInfo?.tempStickerSet?.create) {
+            const getMe = await telegram.getMe()
 
-          if (!addSticker) {
-            return ctx.replyWithHTML(ctx.i18n.t('quote.error'), {
-              reply_to_message_id: ctx.message.message_id,
-              allow_sending_without_reply: true
+            const packName = `temp_${Math.random().toString(36).substring(5)}_${Math.abs(ctx.from.id)}_by_${getMe.username}`
+            const packTitle = `Created by @${getMe.username}`
+
+            const created = await telegram.createNewStickerSet(ctx.from.id, packName, packTitle, {
+              png_sticker: { source: 'placeholder.png' },
+              emojis
+            }).catch(() => {
             })
+
+            ctx.session.userInfo.tempStickerSet.name = packName
+            ctx.session.userInfo.tempStickerSet.create = created
           }
 
-          const sticketSet = await ctx.getStickerSet(packName)
+          let packOwnerId
+          let packName
 
-          if (ctx.session.userInfo.tempStickerSet.create) {
-            sticketSet.stickers.forEach(async (sticker, index) => {
-              // wait 3 seconds before delete sticker
-              await new Promise((resolve) => setTimeout(resolve, 3000))
+          if (ctx.session?.userInfo && ctx.session?.userInfo?.tempStickerSet?.create && ctx.update.update_id % 5 === 0) {
+            packOwnerId = ctx.from.id
+            packName = ctx.session.userInfo.tempStickerSet.name
+          }
 
-              if (index > config.globalStickerSet.save_sticker_count - 1) {
-                telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+          if (!packOwnerId || !packName) {
+            sendResult = await ctx.replyWithSticker({
+              source: image,
+              filename: 'quote.webp'
+            }, {
+              emoji: emojis,
+              reply_to_message_id: ctx.message.message_id,
+              allow_sending_without_reply: true,
+              reply_markup: replyMarkup,
+              business_connection_id: ctx.update?.business_message?.business_connection_id
+            })
+          } else {
+            const addSticker = await ctx.tg.addStickerToSet(packOwnerId, packName.toLowerCase(), {
+              png_sticker: { source: image },
+              emojis
+            }, true).catch((error) => {
+              console.error(error)
+              if (error.description === 'Bad Request: STICKERSET_INVALID') {
+                ctx.session.userInfo.tempStickerSet.create = false
               }
             })
+
+            if (!addSticker) {
+              return ctx.replyWithHTML(ctx.i18n.t('quote.error'), {
+                reply_to_message_id: ctx.message.message_id,
+                allow_sending_without_reply: true
+              })
+            }
+
+            const sticketSet = await ctx.getStickerSet(packName)
+
+            if (ctx.session.userInfo.tempStickerSet.create) {
+              sticketSet.stickers.forEach(async (sticker, index) => {
+                // wait 3 seconds before delete sticker
+                await new Promise((resolve) => setTimeout(resolve, 3000))
+
+                if (index > config.globalStickerSet.save_sticker_count - 1) {
+                  telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+                }
+              })
+            }
+
+            sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
+              reply_to_message_id: ctx.message.message_id,
+              allow_sending_without_reply: true,
+              reply_markup: replyMarkup,
+              business_connection_id: ctx.update?.business_message?.business_connection_id
+            })
+          }
+        }
+
+        if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+          const quoteDb = new ctx.db.Quote()
+          quoteDb.group = ctx.group.info
+          quoteDb.user = ctx.session.userInfo
+          quoteDb.file_id = sendResult.sticker.file_id
+          quoteDb.file_unique_id = sendResult.sticker.file_unique_id
+          quoteDb.rate = {
+            votes: [
+              {
+                name: '👍',
+                vote: []
+              },
+              {
+                name: '👎',
+                vote: []
+              }
+            ],
+            score: 0
           }
 
-          sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
-            reply_to_message_id: ctx.message.message_id,
-            allow_sending_without_reply: true,
-            reply_markup: replyMarkup,
-            business_connection_id: ctx.update?.business_message?.business_connection_id
-          })
+          await quoteDb.save()
         }
+      } else if (generate.headers['quote-type'] === 'image') {
+        await ctx.replyWithPhoto({
+          source: image,
+          filename: 'quote.png'
+        }, {
+          reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true
+        })
+      } else {
+        await ctx.replyWithDocument({
+          source: image,
+          filename: 'quote.png'
+        }, {
+          reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true,
+          business_connection_id: ctx.update?.business_message?.business_connection_id
+        })
       }
-
-      if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
-        const quoteDb = new ctx.db.Quote()
-        quoteDb.group = ctx.group.info
-        quoteDb.user = ctx.session.userInfo
-        quoteDb.file_id = sendResult.sticker.file_id
-        quoteDb.file_unique_id = sendResult.sticker.file_unique_id
-        quoteDb.rate = {
-          votes: [
-            {
-              name: '👍',
-              vote: []
-            },
-            {
-              name: '👎',
-              vote: []
-            }
-          ],
-          score: 0
-        }
-
-        await quoteDb.save()
-      }
-    } else if (generate.headers['quote-type'] === 'image') {
-      await ctx.replyWithPhoto({
-        source: image,
-        filename: 'quote.png'
-      }, {
-        reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true
-      })
-    } else {
-      await ctx.replyWithDocument({
-        source: image,
-        filename: 'quote.png'
-      }, {
-        reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true,
-        business_connection_id: ctx.update?.business_message?.business_connection_id
-      })
+    } catch (error) {
+      return handleQuoteError(ctx, error)
     }
   }
 }
