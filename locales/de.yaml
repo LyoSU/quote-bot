@@ -15,68 +15,68 @@ description:
 
     Fang jetzt an - leite einfach eine Nachricht weiter oder benutze /q!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Hallo! 👋 Ich bin QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Ich verwandle gewöhnliche Chatnachrichten in beeindruckende Zitataufkleber. Einfach, kreativ und macht Spaß!
 
-  ✨ <b>Ready to create your first quote?</b>
-  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
-  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
+  ✨ <b>Bereit, dein erstes Zitat zu erstellen?</b>
+  <b>In privaten Chats:</b> Leite mir beliebige Nachrichten weiter (du kannst sogar mehrere gleichzeitig auswählen!)
+  <b>In Gruppen:</b> Füge mich zu deiner Gruppe hinzu und antworte mit <code>/q</code> auf eine beliebige Nachricht
 
-  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
+  Möchtest du Farben, Stile und mehr ändern? Gib /help ein, wenn du bereit bist, alle kreativen Möglichkeiten zu entdecken! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Schnelle & Einfache Zitate! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Verwandle Nachrichten in Telegram in stilvolle Zitate. So geht's:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Grundlegendes Zitieren</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Antworten & Zitieren: Antworte auf eine Nachricht und gib <code>/q</code> ein, um sie zu zitieren.
+  • Mehrere Zitate: Antworte auf die erste von mehreren Nachrichten, gib <code>/q [Anzahl]</code> ein (z.B. <code>/q 3</code>), um mehrere zu zitieren.
+  • Weiterleiten & Zitieren: Leite eine Nachricht an den Bot weiter, um sie direkt zu zitieren.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Gestalte dein Zitat</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Farben:
+      • Einfach: <code>/q rot</code> (oder blau, grün, etc.)
+      • Benutzerdefiniert: <code>/q #[Hex-Farbcode]</code> (z.B. <code>/q #cbafff</code>)
+      • Zufällig: <code>/q zufällig</code>
+  • Medien: Füge Bilder/Videos aus der zitierten Nachricht mit <code>/q m</code> oder <code>/q media</code> hinzu
+      • Medien zuschneiden: Verwende <code>/q c</code> oder <code>/q crop</code>, um die Medien zuzuschneiden.
+  • Antworten beibehalten: Zeige die Nachricht, auf die geantwortet wird, mit <code>/q r</code> oder <code>/q reply</code> an
+  • Bildformat: Verwende <code>/q i</code> oder <code>/q img</code> oder <code>/q p</code> oder <code>/q png</code> für Bildzitate (anstatt Aufklebern).
 
-  💡 <b>Cool Combinations</b>
+  💡 <b>Coole Kombinationen</b>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  • Weißes Zitat mit Antworten: <code>/q 3 weiß rp</code>
+  • Hochwertiges rotes Bild: <code>/q i rot s3.2</code>
+  • Zitat mit Medien & Antworten: <code>/q r 2 #cbafff m</code>
 
-  ⚙️ <b>More Options</b>
+  ⚙️ <b>Weitere Optionen</b>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  • Zitate bewerten: <code>/q rate</code> (wenn in der Gruppe aktiviert)
+  • Zufallszitat: <code>/qrand</code> (wenn in der Gruppe aktiviert)
+  • Top-Zitate: <code>/qtop</code> (wenn in der Gruppe aktiviert)
+  • Sprache ändern: <code>/lang</code>
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  🎯 <b>Gruppen-Admin-Einstellungen</b> (nur für Gruppen-Admins)
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  • Standardfarbe: <code>/qcolor [Farbe]</code>
+  • Bewertung aktivieren: <code>/qrate</code>
+  • Zum Sticker-Pack speichern: <code>/qs [Emoji]</code>
+  • Sticker entfernen: <code>/qd</code> (Auf die Sticker antworten)
+  • Häufigkeit von Zufallszitaten: <code>/qgab [Anzahl]</code>
+  • Ändern des Emoji-Suffix: <code>/qemoji</code> (Sticker-Emoji-Suffix ändern)
+  • Emoji-Stil:
+      • Klassisch: <code>/qb apple</code>, <code>/qb google</code>
+      • Alternativ: <code>/qb twitter</code>, <code>/qb joypixels</code>
       • Retro: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>Brauchst du Hilfe?</b>
 
   • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Unterstützung: <code>/donate</code>
 help_group: |
   <b>Hallo! 👋</b>
   Ich werde in dieser Gruppe schöne Zitate erstellen - einfach <code>/q</code> als Antwort auf eine Nachricht verwenden!
@@ -100,6 +100,33 @@ quote:
     <b>Perfekt!</b> Zitat-Hintergrund geändert zu: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Fertig!</b> Emoji-Stil geändert zu: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Erfolgreich zu Ihrem <a href="${link}">Gruppen-Stickerpack</a> hinzugefügt ✨
@@ -110,12 +137,18 @@ sticker:
   delete:
     suc: Von Ihrem <a href="${link}">Gruppen-Stickerpack</a> entfernt 🗑
     error:
-      telegram: <b>Ups!</b> Konnte den Sticker nicht entfernen:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Sticker speichern
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Von der zufälligen Sammlung entfernt 🗑
-    error: <b>Ups!</b> Konnte den Sticker nicht entfernen:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Bitte antworten Sie auf einen Sticker, ein Foto oder ein Bild, das Sie speichern möchten ✨
   fstik: |
