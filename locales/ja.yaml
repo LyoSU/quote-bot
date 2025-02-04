@@ -15,74 +15,68 @@ description:
 
     今すぐ始めましょう - メッセージを転送するか、/qを使って！
 start: |
-  <b>こんにちは！👋 私はQuotLyBotです</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  通常のチャットメッセージを素晴らしい引用ステッカーに変えます。シンプルでクリエイティブ、そして楽しく使えます！
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>最初の引用を作成しますか？</b>
-  1️⃣ プライベートで：いくつかのメッセージを私に転送してください（複数選択も可能です！）
-  2️⃣ グループで：グループに私を追加し、任意のメッセージへの返信で<code>/q</code>を使用してください
+  ✨ <b>Ready to create your first quote?</b>
+  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
+  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
 
-  すべてのクリエイティブな可能性を発見する準備ができたら、/helpと入力してください！🎨
+  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
-  <b>✨ QuotLyBot クイックガイド</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  <b>📱 基本コマンド</b>
-  • <code>/q</code> - 引用返信メッセージ
-  • <code>/q 3</code> - 複数メッセージを引用
-  • メッセージを転送 - ダイレクト引用
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  <b>🎨 スタイル</b>
+  📱 <b>Basic Quoting</b>
 
-  色:
-  • ベーシック: <code>/q red</code>
-  • カスタム: <code>/q #ff69b4</code>
-  • グラデーション: <code>/q red//#blue</code>
-  • ランダム: <code>/q random</code>
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  メディア:
-  • 写真を追加: <code>/q media</code>
-  • 画像をトリミング: <code>/q crop</code>
-  • スレッドを保持: <code>/q reply</code>
-  • ボイスプレビュー: 自動
+  🎨 <b>Customize Your Quote</b>
 
-  フォーマット:
-  • ステッカー: <code>/q</code>
-  • 画像: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • ストーリー: <code>/q stories</code>
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  品質:
-  • ノーマル: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  💡 <b>Cool Combinations</b>
 
-  <b>💫 人気の組み合わせ</b>
-  • <code>/q red media</code> - 赤引用と写真
-  • <code>/q 3 reply</code> - コンテキストで引用
-  • <code>/q img s2</code> - 高画質画像
-  • <code>/q stories media</code> - ストーリーと写真
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ 追加機能</b>
-  • レーティング: <code>/q rate</code>
-  • ランダム引用: <code>/qrand</code>
-  • トップ引用: <code>/qtop</code>
-  • 言語: <code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  <b>🎯 グループ設定</b>
-  • デフォルト色: <code>/qcolor</code>
-  • レーティングを有効にする: <code>/qrate</code>
-  • パックに保存: <code>/qs</code>
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  <b>🌈 絵文字スタイル</b>
-  クラシック: <code>/qb apple</code>, <code>/qb google</code>
-  代替: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  レトロ: <code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  <b>📱 ヘルプが必要ですか?</b>
-  • ブログ: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • サポート: <code>/donate</code>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>こんにちは！👋</b>
   このグループで美しい引用を作成します。どんなメッセージにも<code>/q</code>を使って返信してください！
