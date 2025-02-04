@@ -15,68 +15,68 @@ description:
 
     Darhol boshlang - xabarni yuboring yoki /q dan foydalaning!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Salom! 👋 Men QuotLyBotman</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Oddiy chat xabarlarini ajoyib iqtibos stikerlariga aylantiraman. Oddiy, ijodkor va foydalanish uchun qiziqarli!
 
-  ✨ <b>Ready to create your first quote?</b>
-  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
-  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
+  ✨ <b>Birinchi iqtibosingizni yaratishga tayyormisiz?</b>
+  <b>Xususiy suhbatlarda:</b> Har qanday xabarni menga yo'naltiring (hatto bir nechta bir vaqtning o'zida tanlang!)
+  <b>Guruhlarda:</b> Meni guruhingizga qo'shing va istalgan xabarga <code>/q</code> bilan javob bering
 
-  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
+  Ranglar, uslublar va boshqalarni o'zgartirmoqchimisiz? Barcha ijodiy imkoniyatlarni kashf qilishga tayyor bo'lganda /help yozing! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Tez va Oson Iqtiboslar! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Telegramda xabarlarni uslubiy iqtiboslarga aylantiring. Mana qanday:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Asosiy Iqtiboslash</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Javob va Iqtibos: Xabarga javob bering va <code>/q</code> yozib uni iqtiboslang.
+  • Bir nechta iqtiboslang: Bir nechta xabarlarning birinchisiga javob bering, <code>/q [son]</code> (masalan, <code>/q 3</code>) yozib bir nechta iqtiboslang.
+  • Yuborish va Iqtiboslash: Xabarni to'g'ridan-to'g'ri iqtiboslash uchun botga yuboring.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Iqtibosingizni Moslashtiring</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Ranglar:
+      • Asosiy: <code>/q red</code> (yoki blue, green va boshqalar)
+      • Maxsus: <code>/q #[heks rang kodi]</code> (masalan, <code>/q #cbafff</code>)
+      • Tasodifiy: <code>/q random</code>
+  • Media: Iqtiboslangan xabardan rasmlar/videolarni <code>/q m</code> yoki <code>/q media</code> bilan qo'shing
+      • Media qirqish: Mediani qirqish uchun <code>/q c</code> yoki <code>/q crop</code> dan foydalaning.
+  • Javoblarni saqlash: Javob olgan xabarni ko'rsatish uchun <code>/q r</code> yoki <code>/q reply</code>
+  • Rasm Formati: Iqtiboslar uchun <code>/q i</code> yoki <code>/q img</code> yoki <code>/q p</code> yoki <code>/q png</code> (stikerlar o'rniga) foydalaning.
 
-  💡 <b>Cool Combinations</b>
+  💡 <b>Ajoyib Kombinatsiyalar</b>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  • Javoblar bilan oq iqtibos: <code>/q 3 white rp</code>
+  • Yuqori sifatli qizil rasm: <code>/q i red s3.2</code>
+  • Media va javoblar bilan iqtibos: <code>/q r 2 #cbafff m</code>
 
-  ⚙️ <b>More Options</b>
+  ⚙️ <b>Ko'proq Variantlar</b>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  • Iqtiboslarni Baholash: <code>/q rate</code> (guruhda yoqilgan bo'lsa)
+  • Tasodifiy Iqtibos: <code>/qrand</code> (guruhda yoqilgan bo'lsa)
+  • Eng yuqori Iqtiboslar: <code>/qtop</code> (guruhda yoqilgan bo'lsa)
+  • Tilni o'zgartirish: <code>/lang</code>
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  🎯 <b>Guruh Admin Sozlamalari</b> (faqat guruh adminlari uchun)
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+  • Standart Rang: <code>/qcolor [rang]</code>
+  • Baholashni Yoqish: <code>/qrate</code>
+  • Stiker Paketiga Saqlash: <code>/qs [emoji]</code>
+  • Stikerni O'chirish: <code>/qd</code> (stikerni javob bering)
+  • Tasodifiy Iqtibos Tezligi: <code>/qgab [son]</code>
+  • Emoji Suffixni O'zgartirish: <code>/qemoji</code> (stiker emojini o'zgartirish)
+  • Emoji Uslubi:
+      • Klassik: <code>/qb apple</code>, <code>/qb google</code>
       • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
       • Retro: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>Yordam Kerakmi?</b>
 
   • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Qo'llab-quvvatlash: <code>/donate</code>
 help_group: |
   <b>Salom! 👋</b>
   Men bu guruhda chiroyli sitatalar yarataman - vaqtincha biron-bir xabar bilan <code>/q</code> buyrug'idan foydalaning!
@@ -100,6 +100,33 @@ quote:
     <b>Mukammal!</b> Sitataning fon rangi almashtirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Tayyor!</b> Emoji uslubi almashtirildi: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Stiker muvaffaqiyatli ravishda <a href="${link}">stikerlar to'plami guruhiga qo'shildi</a> ✨
@@ -110,12 +137,18 @@ sticker:
   delete:
     suc: <a href="${link}">Guruh stikerlari to'plamidan</a> olib tashlandi 🗑
     error:
-      telegram: <b>Oops!</b> Stikerni olib tashlashning iloji bo'lmadi:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Stikerni saqlang
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Tasodifiy to'plamdan olib tashlandi 🗑
-    error: <b>Oops!</b> Stikerni olib tashlashning iloji bo'lmadi:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Iltimos, saqlamoqchi bo'lgan stiker, foto yoki rasmga javob bering ✨
   fstik: |
