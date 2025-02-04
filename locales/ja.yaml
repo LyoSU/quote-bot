@@ -102,31 +102,31 @@ quote:
     <b>完了!</b> 絵文字スタイルが変更されました: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 申し訳ありませんが、引用サービスは一時的に利用できません。数分後にもう一度お試しください。
 
-      If the issue persists, check @LyBlog for updates.
+      問題が解決しない場合は、@LyBlog を確認してください。
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ リクエストが多すぎます！再び引用を作成する前に ${seconds} 秒お待ちください。
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 メディアファイルが大きすぎます（最大5MB）。より小さい画像やビデオを使用してください。
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ 対応していないファイル形式です。対応形式は以下の通りです:
+      • 画像 (JPG, PNG, WEBP)
+      • ビデオ (MP4)
+      • ステッカー
+      • テキストメッセージ
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Telegramエラー: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      通常このエラーは以下の理由で発生します:
+      • ファイルが大きすぎる
+      • ステッカーパックが満杯
+      • ボットに権限がない
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 おっと！何か問題が発生しました:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      再試行するか、問題が解決しない場合は @LyBlog に報告してください。
 sticker:
   save:
     suc: 正常に<a href="${link}">グループステッカーパック</a>に追加されました ✨
@@ -138,17 +138,17 @@ sticker:
     suc: <a href="${link}">グループステッカーパック</a>から削除されました 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>ステッカーの削除に失敗しました 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: ステッカーはもうパックに存在しません 🤔
+      rights: このステッカーを削除する権限がありません 🔒
+      generic: 問題が発生しました。後でもう一度お試しください ⚠️
   delete_random:
     suc: ランダムなコレクションから削除されました 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>引用を削除できませんでした 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: この引用はデータベースに存在しません 🤔
   empty_forward: |
     保存したいステッカー、写真、画像に返信してください ✨
   fstik: |
