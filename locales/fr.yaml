@@ -102,31 +102,31 @@ quote:
     <b>Fait !</b> Le style emoji a été changé en : <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Notre service de devis est temporairement indisponible. Veuillez réessayer dans quelques minutes.
 
-      If the issue persists, check @LyBlog for updates.
+      Si le problème persiste, consultez @LyBlog pour les mises à jour.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Trop de demandes ! Veuillez attendre ${seconds} secondes avant de créer une autre citation.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Le fichier multimédia est trop volumineux (max 5&nbsp;Mo). Essayez d'utiliser une image ou une vidéo plus petite.
     invalid_format: |
-      ❌ Unsupported file format. I support:
+      ❌ Format de fichier non pris en charge. Je supporte :
       • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      • Vidéos (MP4)
+      • Autocollants
+      • Messages texte
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Erreur Telegram : ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Cela se produit généralement lorsque :
+      • Le fichier est trop volumineux
+      • Le pack d'autocollants est plein
+      • Le bot n'a pas les permissions
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Oups ! Quelque chose a mal tourné :
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Veuillez réessayer ou signaler cela à @LyBlog si cela persiste.
 sticker:
   save:
     suc: Ajouté avec succès à votre <a href="${link}">pack d'autocollants du groupe</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: Supprimé de votre <a href="${link}">pack d'autocollants du groupe</a> 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Impossible de supprimer l'autocollant 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: L'autocollant n'existe plus dans le pack 🤔
+      rights: Je n'ai pas l'autorisation de supprimer cet autocollant 🔒
+      generic: Quelque chose a mal tourné. Veuillez réessayer plus tard ⚠️
   delete_random:
     suc: Supprimé de la collection aléatoire 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Impossible de supprimer la citation 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Cette citation n'est pas dans la base de données 🤔
   empty_forward: |
     Veuillez répondre à un autocollant, une photo ou une image que vous souhaitez enregistrer ✨
   fstik: |
