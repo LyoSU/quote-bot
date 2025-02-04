@@ -15,68 +15,68 @@ description:
 
     今すぐ始めましょう - メッセージを転送するか、/qを使って！
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>こんにちは！ 👋 私はQuotLyBotです</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  普通のチャットメッセージを美しい引用ステッカーに変換します。シンプルでクリエイティブ、そして使うのが楽しいですよ！
 
-  ✨ <b>Ready to create your first quote?</b>
-  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
-  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
+  ✨ <b>最初の引用を作成する準備はできましたか？</b>
+  <b>プライベートチャットでは:</b> メッセージを私に転送してください（一度に複数選択することもできます！）
+  <b>グループでは:</b> 私をグループに追加し、<code>/q</code>を使ってどのメッセージにも返信してください
 
-  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
+  色、スタイル、もっと変更したいですか？すべての創造的な可能性を発見する準備ができた時は、/helpと入力してください！ 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: 簡単かつ迅速な引用！ ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  メッセージをスタイリッシュな引用に変換します。方法は次の通りです:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>基本的な引用作成</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • 返信して引用: メッセージに返信し、<code>/q</code>を入力して引用します。
+  • 複数の引用: いくつかのメッセージの最初に返信し、<code>/q [番号]</code>（例: <code>/q 3</code>）を入力して複数を引用します。
+  • 転送して引用: メッセージをボットに転送して直接引用します。
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>引用をカスタマイズ</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • 色:
+      • 基本: <code>/q red</code>（またはblue, greenなど）
+      • カスタム: <code>/q #[色の16進コード]</code>（例: <code>/q #cbafff</code>）
+      • ランダム: <code>/q random</code>
+  • メディア: 引用メッセージから画像/ビデオを含むには<code>/q m</code>または<code>/q media</code>を使用
+      • メディアを切り取る: <code>/q c</code>または<code>/q crop</code>を使用してメディアを切り取ります。
+  • 返信をキープ: 返信されているメッセージを表示するには<code>/q r</code>または<code>/q reply</code>を使用
+  • 画像形式: 画像引用には<code>/q i</code>または<code>/q img</code>または<code>/q p</code>または<code>/q png</code>を使用（ステッカーの代わりに）。
 
-  💡 <b>Cool Combinations</b>
+  💡 <b>クールな組み合わせ</b>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  • 返信付きの白い引用: <code>/q 3 white rp</code>
+  • 高品質の赤い画像: <code>/q i red s3.2</code>
+  • メディアと返信付きの引用: <code>/q r 2 #cbafff m</code>
 
-  ⚙️ <b>More Options</b>
+  ⚙️ <b>その他のオプション</b>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  • 引用を評価: <code>/q rate</code>（グループで有効の場合）
+  • ランダム引用: <code>/qrand</code>（グループで有効の場合）
+  • トップ引用: <code>/qtop</code>（グループで有効の場合）
+  • 言語変更: <code>/lang</code>
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  🎯 <b>グループ管理者設定</b>（グループ管理者のみ）
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • Retro: <code>/qb blob</code>
+  • デフォルトの色: <code>/qcolor [color]</code>
+  • 評価を有効にする: <code>/qrate</code>
+  • ステッカーパックに保存: <code>/qs [emoji]</code>
+  • ステッカーを削除: <code>/qd</code>（ステッカーに返信）
+  • ランダム引用の頻度: <code>/qgab [番号]</code>
+  • 絵文字サフィックス変更: <code>/qemoji</code>（ステッカーの絵文字サフィックス変更）
+  • 絵文字スタイル:
+      • クラシック: <code>/qb apple</code>, <code>/qb google</code>
+      • オルト: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • レトロ: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>助けが必要？</b>
 
-  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • ブログ: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • サポート: <code>/donate</code>
 help_group: |
   <b>こんにちは！👋</b>
   このグループで美しい引用を作成します。どんなメッセージにも<code>/q</code>を使って返信してください！
@@ -100,6 +100,33 @@ quote:
     <b>完璧です!</b> 引用背景が変更されました: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>完了!</b> 絵文字スタイルが変更されました: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: 正常に<a href="${link}">グループステッカーパック</a>に追加されました ✨
@@ -110,12 +137,18 @@ sticker:
   delete:
     suc: <a href="${link}">グループステッカーパック</a>から削除されました 🗑
     error:
-      telegram: <b>おっと！</b> ステッカーを削除できませんでした:\n<pre>${error}</pre>
-    btn:
-      save_sticker: ステッカーを保存
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: ランダムなコレクションから削除されました 🗑
-    error: <b>おっと！</b> ステッカーを削除できませんでした:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     保存したいステッカー、写真、画像に返信してください ✨
   fstik: |
