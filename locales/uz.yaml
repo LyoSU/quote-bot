@@ -102,31 +102,31 @@ quote:
     <b>Tayyor!</b> Emoji uslubi almashtirildi: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Bizning iqtiboslar xizmati vaqtincha mavjud emas. Bir necha daqiqadan so‘ng qayta urinib koʻring.
 
-      If the issue persists, check @LyBlog for updates.
+      Muammo davom etsa, @LyBlog'dagi yangilanishlarni tekshiring.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Juda ko'p so'rovlar! Yangi iqtibos yaratishdan oldin ${seconds} soniya kuting.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Media fayl juda katta (maksimal 5MB). Kichikroq rasm yoki video ishlatishga harakat qiling.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ Qo'llab-quvvatlanmaydigan fayl formati. Men quyidagi formatlarni qo‘llab-quvvatlayman:
+      • Rasmlar (JPG, PNG, WEBP)
+      • Videolar (MP4)
+      • Stikerlar
+      • Matnli xabarlar
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Telegram xatosi: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Bu odatda quyidagi holatlarda sodir bo'ladi:
+      • Fayl juda katta
+      • Stiker to'plami to'la
+      • Botda ruxsatlar yo'q
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Uzr! Nimadir noto'g'ri ketdi:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Iltimos, yana urinib ko'ring yoki bu haqda @LyBlog'ga xabar bering agar davom etsa.
 sticker:
   save:
     suc: Stiker muvaffaqiyatli ravishda <a href="${link}">stikerlar to'plami guruhiga qo'shildi</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: <a href="${link}">Guruh stikerlari to'plamidan</a> olib tashlandi 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Stiker o'chirib bo'lmadi 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: Stiker to'plamda endi mavjud emas 🤔
+      rights: Ushbu stikerni o'chirishga ruxsatim yo'q 🔒
+      generic: Nimadir noto'g'ri ketdi. Iltimos, keyinroq yana urinib ko'ring ⚠️
   delete_random:
     suc: Tasodifiy to'plamdan olib tashlandi 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Iqtibosni olib tashlab bo'lmadi 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Ushbu iqtibos ma'lumotlar bazasida mavjud emas 🤔
   empty_forward: |
     Iltimos, saqlamoqchi bo'lgan stiker, foto yoki rasmga javob bering ✨
   fstik: |
