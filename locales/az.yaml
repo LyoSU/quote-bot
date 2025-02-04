@@ -102,31 +102,31 @@ quote:
     <b>Hazır!</b> Emoje stili dəyişdirildi: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Təəssüf ki, hazırda bizim sitat xidmətimiz əlçatan deyil. Bir neçə dəqiqədən sonra yenidən cəhd edin.
 
-      If the issue persists, check @LyBlog for updates.
+      Problem davam edərsə, yeniliklər üçün @LyBlog-u yoxlayın.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Çoxlu sorğu göndərildi! Başqa sitat yaratmadan əvvəl ${seconds} saniyə gözləyin.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Media faylı çox böyükdür (maks 5MB). Kiçik şəkil və ya video istifadə etməyə çalışın.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ Dəstəklənməyən fayl formatı. Mən bu formatları dəstəkləyirəm:
+      • Şəkillər (JPG, PNG, WEBP)
+      • Videolar (MP4)
+      • Stikerlər
+      • Mətn mesajları
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Telegram xətası: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Bu ümumiyyətlə bu hallarda baş verir:
+      • Fayl çox böyükdür
+      • Stiker dəsti doludur
+      • Botun icazələri yoxdur
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Üzr istəyirik! Bir nasazlıq baş verdi:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Yenidən cəhd edin və ya bu problemin davam etməsi halında bunu @LyBlog-a məlumat verin.
 sticker:
   save:
     suc: Uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu ✨
@@ -138,17 +138,17 @@ sticker:
     suc: <a href="${link}">Qrupun stikerpaka</a>dan çıxarıldı 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Stikeri silmək alınmadı 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: Artıq stikerdən paketdə yoxdur 🤔
+      rights: Bu stikeri silmək üçün mənim icazəm yoxdur 🔒
+      generic: Bir problem baş verdi. Bir az sonra yenidən cəhd edin ⚠️
   delete_random:
     suc: Təsadüfi kolleksiyadan çıxarıldı 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Sitatı silmək alınmadı 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Bu sitat bazada yoxdur 🤔
   empty_forward: |
     Zəhmət olmasa, saxlamaq istədiyiniz stikeri, fotonu və ya şəkli cavablayın ✨
   fstik: |
