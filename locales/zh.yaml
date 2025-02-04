@@ -15,74 +15,68 @@ description:
 
     立即开始——只需转发消息或使用/q！
 start: |
-  <b>嗨！👋 我是 QuotLyBot</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  我将普通的聊天信息转化为精彩的引用贴纸。简单、有创意、有趣！
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>准备好创建你的第一个引用了吗？</b>
-  1️⃣ 在私聊中：转发任意消息给我（你可以选择多个！）
-  2️⃣ 在群组中：将我添加到你的群组并对任何消息回复<code>/q</code>
+  ✨ <b>Ready to create your first quote?</b>
+  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
+  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
 
-  当你准备好探索所有创意可能性时，输入 /help！🎨
+  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
-  <b>✨ QuotLyBot 快速指南</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  <b>📱 基本命令</b>
-  • <code>/q</code> - 引用被回复的消息
-  • <code>/q 3</code> - 引用多条消息
-  • 转发消息 - 直接引用
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  <b>🎨 样式</b>
+  📱 <b>Basic Quoting</b>
 
-  颜色：
-  • 基本：<code>/q red</code>
-  • 自定义：<code>/q #ff69b4</code>
-  • 渐变：<code>/q red//#blue</code>
-  • 随机：<code>/q random</code>
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  媒体：
-  • 添加照片：<code>/q media</code>
-  • 裁剪图片：<code>/q crop</code>
-  • 保留线程：<code>/q reply</code>
-  • 语音预览：自动
+  🎨 <b>Customize Your Quote</b>
 
-  格式：
-  • 贴纸：<code>/q</code>
-  • 图片：<code>/q img</code>
-  • 高清：<code>/q png</code>
-  • 故事：<code>/q stories</code>
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  质量：
-  • 普通：<code>/q</code>
-  • 2倍：<code>/q s2</code>
-  • 3倍：<code>/q s3</code>
+  💡 <b>Cool Combinations</b>
 
-  <b>💫 流行组合</b>
-  • <code>/q red media</code> - 带照片的红色引文
-  • <code>/q 3 reply</code> - 带有上下文的引文
-  • <code>/q img s2</code> - 高质量图片
-  • <code>/q stories media</code> - 带照片的故事
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ 额外功能</b>
-  • 评分：<code>/q rate</code>
-  • 随机引文：<code>/qrand</code>
-  • 顶级引文：<code>/qtop</code>
-  • 语言：<code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  <b>🎯 群组设置</b>
-  • 默认颜色：<code>/qcolor</code>
-  • 启用评分：<code>/qrate</code>
-  • 保存到包：<code>/qs</code>
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  <b>🌈 表情符号样式</b>
-  经典：<code>/qb apple</code>, <code>/qb google</code>
-  替代：<code>/qb twitter</code>, <code>/qb joypixels</code>
-  复古：<code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  <b>📱 需要帮助？</b>
-  • 博客：@LyBlog
-  • GitHub：github.com/LyoSU/quote-bot
-  • 支持：<code>/donate</code>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>你好！👋</b>
   我将在此群组内创建美丽的引语——只需在回复的消息中使用<code>/q</code>！
