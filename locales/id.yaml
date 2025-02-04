@@ -15,74 +15,68 @@ description:
 
     Mulai sekarang - cukup teruskan pesan atau gunakan /q!
 start: |
-  <b>Hai! 👋 Saya adalah QuotLyBot</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Saya mengubah pesan obrolan biasa menjadi stiker kutipan yang menakjubkan. Sederhana, kreatif, dan menyenangkan untuk digunakan!
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>Siap untuk membuat kutipan pertama Anda?</b>
-  1️⃣ Secara pribadi: Teruskan pesan apa pun kepada saya (Anda bisa memilih beberapa!)
-  2️⃣ Di grup: Tambahkan saya ke grup Anda dan balas dengan <code>/q</code> ke pesan apa pun
+  ✨ <b>Ready to create your first quote?</b>
+  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
+  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
 
-  Ketik /help saat Anda siap untuk menemukan semua kemungkinan kreatif! 🎨
+  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
-  <b>✨ Panduan Singkat QuotLyBot</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  <b>📱 Perintah Dasar</b>
-  • <code>/q</code> - Kutipan pesan yang dibalas
-  • <code>/q 3</code> - Kutipan beberapa pesan
-  • Teruskan pesan - Kutipan langsung
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  <b>🎨 Gaya</b>
+  📱 <b>Basic Quoting</b>
 
-  Warna:
-  • Dasar: <code>/q red</code>
-  • Kustom: <code>/q #ff69b4</code>
-  • Gradasi: <code>/q red//#blue</code>
-  • Acak: <code>/q random</code>
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  Media:
-  • Tambah foto: <code>/q media</code>
-  • Potong gambar: <code>/q crop</code>
-  • Pertahankan thread: <code>/q reply</code>
-  • Pratinjau suara: Otomatis
+  🎨 <b>Customize Your Quote</b>
 
-  Format:
-  • Stiker: <code>/q</code>
-  • Gambar: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Cerita: <code>/q stories</code>
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  Kualitas:
-  • Normal: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  💡 <b>Cool Combinations</b>
 
-  <b>💫 Kombinasi Populer</b>
-  • <code>/q red media</code> - Kutipan merah dengan foto
-  • <code>/q 3 reply</code> - Kutipan dengan konteks
-  • <code>/q img s2</code> - Gambar berkualitas tinggi
-  • <code>/q stories media</code> - Cerita dengan foto
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ Fitur Tambahan</b>
-  • Penilaian: <code>/q rate</code>
-  • Kutipan acak: <code>/qrand</code>
-  • Kutipan terbaik: <code>/qtop</code>
-  • Bahasa: <code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  <b>🎯 Pengaturan Grup</b>
-  • Warna default: <code>/qcolor</code>
-  • Aktifkan penilaian: <code>/qrate</code>
-  • Simpan ke paket: <code>/qs</code>
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  <b>🌈 Gaya Emoji</b>
-  Klasik: <code>/qb apple</code>, <code>/qb google</code>
-  Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  <b>📱 Butuh Bantuan?</b>
-  • Blog: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • Dukungan: <code>/donate</code>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>Halo! 👋</b>
   Saya akan membuat kutipan indah di grup ini - cukup gunakan <code>/q</code> untuk membalas pesan apapun!
