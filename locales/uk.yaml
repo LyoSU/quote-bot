@@ -102,31 +102,31 @@ quote:
     <b>Готово!</b> Стиль емодзі змінено на: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Наш сервіс цитат тимчасово недоступний. Будь ласка, спробуйте ще раз через кілька хвилин.
 
-      If the issue persists, check @LyBlog for updates.
+      Якщо проблема залишається, перевірте оновлення в @LyBlog.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Забагато запитів! Будь ласка, зачекайте ${seconds} секунд перед створенням наступної цитати.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Файл медіа занадто великий (максимум 5МБ). Спробуйте використати менше зображення або відео.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ Непідтримуваний формат файлу. Я підтримую:
+      • Зображення (JPG, PNG, WEBP)
+      • Відео (MP4)
+      • Наліпки
+      • Текстові повідомлення
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Помилка Telegram: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Це зазвичай трапляється, коли:
+      • Файл занадто великий
+      • Пакет наліпок переповнений
+      • Боту не вистачає прав
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Упс! Щось пішло не так:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Будь ласка, спробуйте ще раз або повідомте про це в @LyBlog, якщо це не зникне.
 sticker:
   save:
     suc: Успішно додано у <a href="${link}">пак наліпок вашої групи</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: Видалено з вашого <a href="${link}">паку наліпок групи</a> 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Не вдалося видалити наліпку 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: Наліпка більше не існує в пакеті 🤔
+      rights: У мене немає дозволу на видалення цієї наліпки 🔒
+      generic: Щось пішло не так. Будь ласка, спробуйте пізніше ⚠️
   delete_random:
     suc: Видалено з випадкової колекції 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Не вдалося видалити цитату 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Ця цитата не знаходиться в базі даних 🤔
   empty_forward: |
     Будь ласка, відповідайте на наліпку, фото або зображення, яке ви хочете зберегти ✨
   fstik: |

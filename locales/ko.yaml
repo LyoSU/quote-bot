@@ -102,31 +102,31 @@ quote:
     <b>완료!</b> 이모지 스타일이 변경되었습니다: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 견적 서비스가 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도해주세요.
 
-      If the issue persists, check @LyBlog for updates.
+      문제가 지속되면 @LyBlog에서 업데이트를 확인하세요．
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ 요청이 너무 많습니다! 다른 견적을 생성하기 전에 ${seconds}초 기다려 주세요．
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 미디어 파일이 너무 큽니다 (최대 5MB). 더 작은 이미지나 비디오를 사용해 보세요．
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ 지원되지 않는 파일 형식입니다. 지원되는 형식:
+      • 이미지 (JPG, PNG, WEBP)
+      • 비디오 (MP4)
+      • 스티커
+      • 텍스트 메시지
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ 텔레그램 오류: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      이런 일이 발생하는 경우:
+      • 파일이 너무 큼
+      • 스티커 팩이 가득 참
+      • 봇에 권한이 없음
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 이런! 문제가 발생했습니다:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      다시 시도하거나 문제가 지속되면 @LyBlog에 보고하세요．
 sticker:
   save:
     suc: <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다 ✨
@@ -138,17 +138,17 @@ sticker:
     suc: <a href="${link}">그룹 스티커 팩</a>에서 제거되었습니다 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>스티커 제거 실패 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: 패키지에 스티커가 더 이상 존재하지 않습니다 🤔
+      rights: 이 스티커를 삭제할 권한이 없습니다 🔒
+      generic: 문제가 발생했습니다. 나중에 다시 시도해 주세요 ⚠️
   delete_random:
     suc: 랜덤 컬렉션에서 제거되었습니다 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>견적을 제거할 수 없습니다 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: 이 견적은 데이터베이스에 없습니다 🤔
   empty_forward: |
     저장하고 싶은 스티커, 사진 또는 이미지를 답장하세요 ✨
   fstik: |

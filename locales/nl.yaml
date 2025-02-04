@@ -102,31 +102,31 @@ quote:
     <b>Klaar!</b> Emoji stijl gewijzigd naar: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Onze offerteservice is tijdelijk niet beschikbaar. Probeer het over een paar minuten opnieuw.
 
-      If the issue persists, check @LyBlog for updates.
+      Als het probleem aanhoudt, controleer @LyBlog voor updates.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Te veel aanvragen! Wacht ${seconds} seconden voordat u een nieuwe offerte creëert.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Het mediabestand is te groot (maximaal 5MB). Probeer een kleinere afbeelding of video te gebruiken.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
+      ❌ Niet-ondersteund bestandsformaat. Ik ondersteun:
+      • Afbeeldingen (JPG, PNG, WEBP)
+      • Video's (MP4)
       • Stickers
-      • Text messages
+      • Tekstberichten
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Telegramfout: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Dit gebeurt meestal wanneer:
+      • Het bestand te groot is
+      • Het stickerpakket vol is
+      • De bot geen toestemmingen heeft
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Oeps! Er is iets misgegaan:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Probeer het opnieuw of meld dit bij @LyBlog als het probleem aanhoudt.
 sticker:
   save:
     suc: Succesvol toegevoegd aan je <a href="${link}">groepssticker pakket</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: Verwijderd uit je <a href="${link}">groepssticker pakket</a> 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Oeps!</b> Sticker kon niet worden verwijderd:
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: De sticker bestaat niet meer in het pakket 🤔
+      rights: Ik heb geen toestemming om deze sticker te verwijderen 🔒
+      generic: Er is iets misgegaan. Probeer het later opnieuw ⚠️
   delete_random:
     suc: Verwijderd uit willekeurige verzameling 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Kon de offerte niet verwijderen 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Deze offerte staat niet in de database 🤔
   empty_forward: |
     Reageer op een sticker, foto of afbeelding die je wilt opslaan ✨
   fstik: |

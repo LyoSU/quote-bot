@@ -102,31 +102,31 @@ quote:
     <b>Tamam!</b> Emoji stili değiştirildi: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Üzgünüz, alıntı hizmetimiz geçici olarak kullanılamıyor. Lütfen birkaç dakika sonra tekrar deneyin.
 
-      If the issue persists, check @LyBlog for updates.
+      Sorun devam ederse, güncellemeler için @LyBlog'a göz atın.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Çok fazla istek! Yeni bir alıntı oluşturmadan önce lütfen ${seconds} saniye bekleyin.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Medya dosyası çok büyük (maksimum 5MB). Daha küçük bir resim veya video kullanmayı deneyin.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ Desteklenmeyen dosya formatı. Desteklediğim:
+      • Görseller (JPG, PNG, WEBP)
+      • Videolar (MP4)
+      • Çıkartmalar
+      • Metin mesajları
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Telegram hatası: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Bu genellikle şu durumlarda olur:
+      • Dosya çok büyük
+      • Çıkartma paketi dolu
+      • Botun yetkileri yetersiz
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Oops! Bir şeyler ters gitti:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Lütfen tekrar deneyin veya sorun devam ederse bunu @LyBlog'a bildirin.
 sticker:
   save:
     suc: Başarıyla <a href="${link}">grup çıkartma paketinize</a> eklendi ✨
@@ -138,17 +138,17 @@ sticker:
     suc: <a href="${link}">Grup çıkartma paketinizden</a> kaldırıldı 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Çıkartma kaldırılamadı 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: Çıkartma artık pakette yok 🤔
+      rights: Bu çıkartmayı silme iznim yok 🔒
+      generic: Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin ⚠️
   delete_random:
     suc: Rastgele koleksiyondan kaldırıldı 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Alıntı kaldırılamadı 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Bu alıntı veritabanında değil 🤔
   empty_forward: |
     Lütfen kaydetmek istediğiniz çıkartma, fotoğraf veya görüntüye yanıt verin ✨
   fstik: |

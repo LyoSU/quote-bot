@@ -1,5 +1,5 @@
 ---
-language_name: '🇧🇷 Português'
+language_name: '🇧🇷'
 description:
   short: |
     Transforme qualquer mensagem em um lindo adesivo de citação! ✨
@@ -108,31 +108,31 @@ quote:
     <b>Pronto!</b> Estilo de emoji alterado para: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Nosso serviço de citações está temporariamente indisponível. Por favor, tente novamente em alguns minutos.
 
-      If the issue persists, check @LyBlog for updates.
+      Se o problema persistir, verifique @LyBlog para atualizações.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Muitas solicitações! Por favor, aguarde ${seconds} segundos antes de criar outra citação.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 O arquivo de mídia é muito grande (máximo de 5MB). Tente usar uma imagem ou vídeo menor.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ Formato de arquivo não suportado. Eu suporto:
+      • Imagens (JPG, PNG, WEBP)
+      • Vídeos (MP4)
+      • Figurinhas
+      • Mensagens de texto
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Erro do Telegram: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Isso geralmente acontece quando:
+      • O arquivo é muito grande
+      • O pacote de figurinhas está cheio
+      • O bot não tem permissões
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Opa! Algo deu errado:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Por favor, tente novamente ou reporte isso para @LyBlog se persistir.
 sticker:
   save:
     suc: Adicionado com sucesso ao seu <a href="${link}">pacote de adesivos do grupo</a> ✨
@@ -145,14 +145,14 @@ sticker:
     error:
       telegram: |
         <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: A figurinha não existe mais no pacote 🤔
+      rights: Não tenho permissão para deletar esta figurinha 🔒
+      generic: Algo deu errado. Por favor, tente novamente mais tarde ⚠️
   delete_random:
     suc: Removido da coleção aleatória 🗑
     error: |
       <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
-    not_found: This quote is not in the database 🤔
+    not_found: Esta citação não está no banco de dados 🤔
   empty_forward: |
     Por favor, responda a um adesivo, foto ou imagem que você gostaria de salvar ✨
   fstik: |

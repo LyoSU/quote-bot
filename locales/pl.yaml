@@ -102,31 +102,31 @@ quote:
     <b>Gotowe!</b> Styl emoji zmieniony na: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Nasza usługa cytatów jest tymczasowo niedostępna. Spróbuj ponownie za kilka minut.
 
-      If the issue persists, check @LyBlog for updates.
+      Jeśli problem się utrzymuje, sprawdź @LyBlog w poszukiwaniu aktualizacji.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ Zbyt wiele żądań! Proszę czekać ${seconds} sekund przed utworzeniem kolejnego cytatu.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 Plik multimedialny jest zbyt duży (mak. 5 MB). Spróbuj użyć mniejszego obrazu lub wideo.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ Nieobsługiwany format pliku. Obsługuję:
+      • Obrazy (JPG, PNG, WEBP)
+      • Wideo (MP4)
+      • Naklejki
+      • Wiadomości tekstowe
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Błąd Telegram: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Zwykle dzieje się to, gdy:
+      • Plik jest zbyt duży
+      • Pakiet naklejek jest pełny
+      • Bot nie ma uprawnień
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 Ups! Coś poszło nie tak:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Proszę spróbować ponownie lub zgłosić to do @LyBlog, jeśli problem się utrzymuje.
 sticker:
   save:
     suc: Pomyślnie dodano do Twojego <a href="${link}">pakietu naklejek grupy</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: Usunięto z Twojego <a href="${link}">pakietu naklejek grupy</a> 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Nie udało się usunąć naklejki 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: Naklejka nie znajduje się już w pakiecie 🤔
+      rights: Nie mam uprawnień do usunięcia tej naklejki 🔒
+      generic: Coś poszło nie tak. Proszę spróbować ponownie później ⚠️
   delete_random:
     suc: Usunięto z losowej kolekcji 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>Nie udało się usunąć cytatu 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Tego cytatu nie ma w bazie danych 🤔
   empty_forward: |
     Odpowiedz na naklejkę, zdjęcie lub obraz, który chcesz zapisać ✨
   fstik: |

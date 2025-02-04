@@ -102,31 +102,31 @@ quote:
     <b>¡Hecho!</b> Estilo de emoji cambiado a: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 Nuestro servicio de citas no está disponible temporalmente. Por favor, inténtalo de nuevo en unos minutos.
 
-      If the issue persists, check @LyBlog for updates.
+      Si el problema persiste, consulta @LyBlog para actualizaciones.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ ¡Demasiadas solicitudes! Por favor, espera ${seconds} segundos antes de crear otra cita.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 El archivo multimedia es demasiado grande (máx 5MB). Intenta usar una imagen o video más pequeño.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
+      ❌ Formato de archivo no compatible. Yo soporto:
+      • Imágenes (JPG, PNG, WEBP)
       • Videos (MP4)
       • Stickers
-      • Text messages
+      • Mensajes de texto
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Error de Telegram: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      Esto generalmente sucede cuando:
+      • El archivo es demasiado grande
+      • El paquete de stickers está lleno
+      • El bot carece de permisos
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 ¡Ups! Algo salió mal:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Por favor, inténtalo de nuevo o informa a @LyBlog si persiste.
 sticker:
   save:
     suc: El sticker se ha guardado con éxito en el <a href="${link}">pack de stickers del grupo</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: Eliminado de tu <a href="${link}">pack de stickers del grupo</a> 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>Falló al eliminar el sticker 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: El sticker ya no existe en el paquete 🤔
+      rights: No tengo permiso para eliminar este sticker 🔒
+      generic: Algo salió mal. Por favor, inténtalo de nuevo más tarde ⚠️
   delete_random:
     suc: Eliminado de la colección aleatoria 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>No se pudo eliminar la cita 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: Esta cita no está en la base de datos 🤔
   empty_forward: |
     Por favor responde a un sticker, foto o imagen que te gustaría guardar ✨
   fstik: |

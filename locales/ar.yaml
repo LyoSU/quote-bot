@@ -102,31 +102,31 @@ quote:
     <b>تم!</b> تم تغيير أسلوب الرموز التعبيرية إلى: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 خدمة الاقتباس غير متوفرة مؤقتًا. حاول مرة أخرى بعد بضع دقائق.
 
-      If the issue persists, check @LyBlog for updates.
+      إذا استمرت المشكلة، تحقق من @LyBlog للحصول على التحديثات.
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ تم تقديم طلبات كثيرة جدًا! يرجى الانتظار ${seconds} ثانية قبل إنشاء اقتباس آخر.
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 الملف الإعلامي كبير جدًا (الحد الأقصى 5 ميغابايت). حاول استخدام صورة أو فيديو أصغر.
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ تنسيق الملف غير مدعوم. أدعم:
+      • الصور (JPG، PNG، WEBP)
+      • الفيديوهات (MP4)
+      • الملصقات
+      • الرسائل النصية
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ خطأ في تيليجرام: ${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      عادة ما يحدث هذا عندما:
+      • يكون الملف كبيرًا جدًا
+      • يكون مجموعة الملصقات ممتلئة
+      • يفتقر البوت إلى الأذونات
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 عفوًا! حدث خطأ ما:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      يرجى المحاولة مرة أخرى أو الإبلاغ عن هذا إلى @LyBlog إذا استمر المشكلة.
 sticker:
   save:
     suc: تمت الإضافة بنجاح إلى <a href="${link}">حزمة ملصقات المجموعة</a> ✨
@@ -138,17 +138,17 @@ sticker:
     suc: تم الإزالة من <a href="${link}">حزمة ملصقات المجموعة</a> 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>فشل في إزالة الملصق 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: الملصق لم يعد موجودًا في المجموعة 🤔
+      rights: ليس لدي الإذن لحذف هذا الملصق 🔒
+      generic: حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقًا ⚠️
   delete_random:
     suc: تم الإزالة من مجموعة عشوائية 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>لم أتمكن من إزالة الاقتباس 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: هذا الاقتباس غير موجود في قاعدة البيانات 🤔
   empty_forward: |
     يرجى الرد على الملصق، الصورة أو الصورة التي تريد حفظها ✨
   fstik: |
