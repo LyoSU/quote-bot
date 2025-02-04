@@ -15,68 +15,68 @@ description:
 
     Начните прямо сейчас – просто перешлите сообщение или используйте /q!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Привет! 👋 Я QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Я превращаю обычные сообщения чата в потрясающие наклейки с цитатами. Просто, креативно и весело в использовании!
 
-  ✨ <b>Ready to create your first quote?</b>
-  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
-  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
+  ✨ <b>Готовы создать свою первую цитату?</b>
+  <b>В личных чатах:</b> Перешлите мне любые сообщения (вы даже можете выбрать несколько сразу!)
+  <b>В группах:</b> Добавьте меня в свою группу и ответьте на любое сообщение командой <code>/q</code>
 
-  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
+  Хотите изменить цвета, стили и многое другое? Введите /help, когда будете готовы открыть для себя все креативные возможности! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Быстрые и Лёгкие Цитаты! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Превратите сообщения в стильные цитаты в Telegram. Вот как:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Основные Цитаты</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Ответ и Цитата: Ответьте на сообщение и введите <code>/q</code>, чтобы процитировать его.
+  • Цитата Нескольких: Ответьте на первое из нескольких сообщений, введите <code>/q [число]</code> (например, <code>/q 3</code>), чтобы процитировать несколько.
+  • Переслать и Цитировать: Перешлите сообщение боту, чтобы процитировать его напрямую.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Настройте Свою Цитату</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Цвета:
+      • Основной: <code>/q red</code> (или blue, green и т.д.)
+      • Пользовательский: <code>/q #[код цвета в hex]</code> (например, <code>/q #cbafff</code>)
+      • Случайный: <code>/q random</code>
+  • Медиа: Включите изображения/видео из цитируемого сообщения с помощью <code>/q m</code> или <code>/q media</code>
+      • Обрезать Медиа: Используйте <code>/q c</code> или <code>/q crop</code>, чтобы обрезать медиа.
+  • Сохранить Ответы: Покажите сообщение, на которое отвечают, с помощью <code>/q r</code> или <code>/q reply</code>
+  • Формат Изображения: Используйте <code>/q i</code> или <code>/q img</code> или <code>/q p</code> или <code>/q png</code> для цитат в виде изображений (вместо наклеек).
 
-  💡 <b>Cool Combinations</b>
+  💡 <b>Крутые Комбинации</b>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  • Белая цитата с ответами: <code>/q 3 white rp</code>
+  • Качественное красное изображение: <code>/q i red s3.2</code>
+  • Цитата с медиа и ответами: <code>/q r 2 #cbafff m</code>
 
-  ⚙️ <b>More Options</b>
+  ⚙️ <b>Больше Опций</b>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  • Оценить Цитаты: <code>/q rate</code> (если включено в группе)
+  • Случайная Цитата: <code>/qrand</code> (если включено в группе)
+  • Лучшие Цитаты: <code>/qtop</code> (если включено в группе)
+  • Изменить Язык: <code>/lang</code>
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  🎯 <b>Настройки Администратора Группы</b> (только для администраторов группы)
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • Retro: <code>/qb blob</code>
+  • Цвет По Умолчанию: <code>/qcolor [цвет]</code>
+  • Включить Оценку: <code>/qrate</code>
+  • Сохранить в Пакет Наклеек: <code>/qs [эмодзи]</code>
+  • Удалить Наклейку: <code>/qd</code> (ответьте на наклейку)
+  • Частота Случайных Цитат: <code>/qgab [число]</code>
+  • Изменение Суффикса Эмодзи: <code>/qemoji</code> (измените суффикс эмодзи наклейки)
+  • Стиль Эмодзи:
+      • Классический: <code>/qb apple</code>, <code>/qb google</code>
+      • Альтернатива: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Ретро: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>Нужна Помощь?</b>
 
-  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • Блог: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Поддержка: <code>/donate</code>
 help_group: |
   <b>Привет! 👋</b>
   Я буду создавать красивые цитаты в этой группе - просто используйте <code>/q</code> в ответе на любое сообщение!
@@ -100,6 +100,33 @@ quote:
     <b>Идеально!</b> Фон цитаты изменен на: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Готово!</b> Стиль эмодзи изменен на: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Успешно добавлено в ваш <a href="${link}">стикерпак группы</a> ✨
@@ -110,12 +137,18 @@ sticker:
   delete:
     suc: Удалено из вашего <a href="${link}">стикерпака группы</a> 🗑
     error:
-      telegram: <b>Упс!</b> Не удалось удалить стикер:\n<pre>${error}</pre>
-    btn:
-      save_sticker: '🌟 Сохранить стикер'
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Удалено из случайной коллекции 🗑
-    error: <b>Упс!</b> Не удалось удалить стикер:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Пожалуйста, ответьте на стикер, фото или изображение, которое хотите сохранить ✨
   fstik: |
