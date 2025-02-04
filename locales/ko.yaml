@@ -15,74 +15,68 @@ description:
 
     지금 바로 시작하세요 - 메시지를 포워드하거나 /q를 사용하세요!
 start: |
-  <b>안녕하세요! 👋 저는 QuotLyBot입니다</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  저는 일반 채팅 메시지를 멋진 인용구 스티커로 변환합니다. 간단하고 창의적이며 재미있게 사용할 수 있습니다!
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>첫 번째 인용구를 만들 준비가 되셨나요?</b>
-  1️⃣ 개인 대화에서: 저에게 메시지를 전달해 주세요 (여러 개를 선택할 수 있습니다!)
-  2️⃣ 그룹에서: 그룹에 저를 추가하고 <code>/q</code>로 메시지에 답장해 주세요
+  ✨ <b>Ready to create your first quote?</b>
+  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
+  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
 
-  모든 창의적인 가능성을 발견할 준비가 되셨다면 /help를 입력하세요! 🎨
+  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
-  <b>✨ QuotLyBot 퀵 가이드</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  <b>📱 기본 명령어</b>
-  • <code>/q</code> - 답장된 메시지를 인용
-  • <code>/q 3</code> - 여러 메시지를 인용
-  • 메시지 포워드 - 직접 인용
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  <b>🎨 스타일</b>
+  📱 <b>Basic Quoting</b>
 
-  색상:
-  • 기본: <code>/q red</code>
-  • 사용자 정의: <code>/q #ff69b4</code>
-  • 그라데이션: <code>/q red//#blue</code>
-  • 랜덤: <code>/q random</code>
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  미디어:
-  • 사진 추가: <code>/q media</code>
-  • 이미지 자르기: <code>/q crop</code>
-  • 스레드 유지: <code>/q reply</code>
-  • 음성 미리보기: 자동
+  🎨 <b>Customize Your Quote</b>
 
-  형식:
-  • 스티커: <code>/q</code>
-  • 이미지: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • 스토리: <code>/q stories</code>
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  품질:
-  • 보통: <code>/q</code>
-  • 2배: <code>/q s2</code>
-  • 3배: <code>/q s3</code>
+  💡 <b>Cool Combinations</b>
 
-  <b>💫 인기 조합</b>
-  • <code>/q red media</code> - 사진과 함께 레드 인용
-  • <code>/q 3 reply</code> - 문맥을 가진 인용
-  • <code>/q img s2</code> - 고품질 이미지
-  • <code>/q stories media</code> - 사진과 함께 스토리
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ 추가 기능</b>
-  • 등급: <code>/q rate</code>
-  • 랜덤 인용: <code>/qrand</code>
-  • 인기 인용: <code>/qtop</code>
-  • 언어: <code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  <b>🎯 그룹 설정</b>
-  • 기본 색상: <code>/qcolor</code>
-  • 등급 활성화: <code>/qrate</code>
-  • 팩에 저장: <code>/qs</code>
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  <b>🌈 이모지 스타일</b>
-  클래식: <code>/qb apple</code>, <code>/qb google</code>
-  대체: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  레트로: <code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  <b>📱 도움이 필요하세요?</b>
-  • 블로그: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • 지원: <code>/donate</code>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>안녕하세요! 👋</b>
   이 그룹에서 아름다운 인용을 만들겠습니다 - 어떤 메시지든 <code>/q</code>로 답장하세요!
