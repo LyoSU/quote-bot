@@ -17,71 +17,65 @@ description:
 start: |
   <b>Merhaba! 👋 Ben QuotLyBot</b>
 
-  Sıradan sohbet mesajlarını nefes kesici alıntı çıkartmalarına dönüştürüyorum. Basit, yaratıcı ve kullanımı eğlenceli!
+  Sıradan sohbet mesajlarını muhteşem alıntı çıkartmalarına dönüştürüyorum. Basit, yaratıcı ve kullanımı eğlenceli!
 
-  <b>İlk alıntınızı oluşturmaya hazır mısınız?</b>
-  1️⃣ Özel olarak: Herhangi bir mesajı bana yönlendirin (birkaçını seçebilirsiniz!)
-  2️⃣ Gruplarda: Beni grubunuza ekleyin ve herhangi bir mesaja <code>/q</code> ile yanıt verin
+  ✨ <b>İlk alıntınızı oluşturmaya hazır mısınız?</b>
+  <b>Özel sohbetlerde:</b> Bana herhangi bir mesajı iletin (hatta birkaçını birden seçebilirsiniz!)
+  <b>Gruplarda:</b> Beni grubunuza ekleyin ve herhangi bir mesaja <code>/q</code> ile yanıt verin
 
-  Tüm yaratıcı olanakları keşfetmeye hazır olduğunuzda /help yazın! 🎨
+  Renkleri, stilleri ve daha fazlasını değiştirmek mi istiyorsunuz? Tüm yaratıcı olasılıkları keşfetmeye hazır olduğunuzda /help yazın! 🎨
 help: |
-  <b>✨ QuotLyBot Hızlı Rehber</b>
+  <b>✨ QuotLyBot: Hızlı & Kolay Alıntılar! ✨</b>
 
-  <b>📱 Temel Komutlar</b>
-  • <code>/q</code> - Yanıtladığınız mesajı alıntıla
-  • <code>/q 3</code> - Birden fazla mesajı alıntıla
-  • Mesaj yönlendir - Doğrudan alıntıla
+  Telegram'da mesajları şık alıntılara dönüştürün. İşte nasıl yapılacağı:
 
-  <b>🎨 Stiller</b>
+  📱 <b>Temel Alıntılama</b>
 
-  Renkler:
-  • Temel: <code>/q red</code>
-  • Özel: <code>/q #ff69b4</code>
-  • Gradyan: <code>/q red//#blue</code>
-  • Rastgele: <code>/q random</code>
+  • Yanıtla & Alıntıla: Bir mesaja yanıt verin ve onu alıntılamak için <code>/q</code> yazın.
+  • Birden Fazla Alıntı: Birkaç mesajdan ilkinin yanıtına <code>/q [sayı]</code> (örneğin, <code>/q 3</code>) yazarak birden fazlasını alıntılayın.
+  • İlet & Alıntıla: Direkt alıntılamak için bir mesajı bota iletin.
 
-  Medya:
-  • Fotoğraf ekle: <code>/q media</code>
-  • Resmi kırp: <code>/q crop</code>
-  • İleti dizisi koru: <code>/q reply</code>
-  • Sesli önizleme: Otomatik
+  🎨 <b>Alıntınızı Özelleştirin</b>
 
-  Format:
-  • Çıkartma: <code>/q</code>
-  • Görüntü: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Hikaye: <code>/q stories</code>
+  • Renkler:
+      • Temel: <code>/q red</code> (ya da blue, green, vb.)
+      • Özel: <code>/q #[hex renk kodu]</code> (örneğin, <code>/q #cbafff</code>)
+      • Rastgele: <code>/q random</code>
+  • Medya: Alıntılanan mesajdan görüntüleri/videoları <code>/q m</code> ya da <code>/q media</code> ile ekleyin
+      • Medya Kırpma: Medyayı kırpmak için <code>/q c</code> ya da <code>/q crop</code> kullanın.
+  • Yanıtları Sakla: <code>/q r</code> ya da <code>/q reply</code> ile yanıtlanan mesajı gösterin
+  • Görüntü Formatı: Görüntü alıntıları için (sticker yerine) <code>/q i</code> ya da <code>/q img</code> veya <code>/q p</code> veya <code>/q png</code> kullanın.
 
-  Kalite:
-  • Normal: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  💡 <b>Harika Kombinasyonlar</b>
 
-  <b>💫 Popüler Kombinasyonlar</b>
-  • <code>/q red media</code> - Fotoğraflı kırmızı alıntı
-  • <code>/q 3 reply</code> - Bağlamla alıntı
-  • <code>/q img s2</code> - Yüksek kaliteli görüntü
-  • <code>/q stories media</code> - Fotoğraflı hikaye
+  • Yanıtlarla beyaz alıntı: <code>/q 3 white rp</code>
+  • Yüksek kaliteli kırmızı görüntü: <code>/q i red s3.2</code>
+  • Medya ve yanıtlarla alıntı: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ Ekstra Özellikler</b>
-  • Puanlama: <code>/q rate</code>
-  • Rastgele alıntılar: <code>/qrand</code>
-  • En iyi alıntılar: <code>/qtop</code>
-  • Dil: <code>/lang</code>
+  ⚙️ <b>Daha Fazla Seçenek</b>
 
-  <b>🎯 Grup Ayarları</b>
-  • Varsayılan renk: <code>/qcolor</code>
-  • Puanlama etkinleştir: <code>/qrate</code>
-  • Pakete kaydet: <code>/qs</code>
+  • Alıntıları Değerlendir: <code>/q rate</code> (grupta etkinse)
+  • Rastgele Alıntı: <code>/qrand</code> (grupta etkinse)
+  • En İyi Alıntılar: <code>/qtop</code> (grupta etkinse)
+  • Dili Değiştir: <code>/lang</code>
 
-  <b>🌈 Emoji Stilleri</b>
-  Klasik: <code>/qb apple</code>, <code>/qb google</code>
-  Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  🎯 <b>Grup Yönetici Ayarları</b> (sadece grup yöneticileri için)
 
-  <b>📱 Yardıma mı ihtiyacınız var?</b>
-  • Blog: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
+  • Varsayılan Renk: <code>/qcolor [renk]</code>
+  • Derecelendirmeyi Etkinleştir: <code>/qrate</code>
+  • Sticker Paketi Kaydet: <code>/qs [emoji]</code>
+  • Sticker Kaldır: <code>/qd</code> (stickera yanıt verin)
+  • Rastgele Alıntı Frekansı: <code>/qgab [sayı]</code>
+  • Emoji Sonek Değiştir: <code>/qemoji</code> (sticker emoji sonekini değiştirir)
+  • Emoji Stili:
+      • Klasik: <code>/qb apple</code>, <code>/qb google</code>
+      • Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Yardıma mı ihtiyacınız var?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
   • Destek: <code>/donate</code>
 help_group: |
   <b>Merhaba! 👋</b>
@@ -106,6 +100,33 @@ quote:
     <b>Mükemmel!</b> Alıntı arka planı değiştirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Tamam!</b> Emoji stili değiştirildi: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Başarıyla <a href="${link}">grup çıkartma paketinize</a> eklendi ✨
@@ -116,12 +137,18 @@ sticker:
   delete:
     suc: <a href="${link}">Grup çıkartma paketinizden</a> kaldırıldı 🗑
     error:
-      telegram: <b>Oops!</b> Çıkartma kaldırılamadı:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Çıkartmayı Kaydet
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Rastgele koleksiyondan kaldırıldı 🗑
-    error: <b>Oops!</b> Çıkartma kaldırılamadı:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Lütfen kaydetmek istediğiniz çıkartma, fotoğraf veya görüntüye yanıt verin ✨
   fstik: |

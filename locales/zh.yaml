@@ -17,71 +17,65 @@ description:
 start: |
   <b>嗨！👋 我是 QuotLyBot</b>
 
-  我将普通的聊天信息转化为精彩的引用贴纸。简单、有创意、有趣！
+  我将普通的聊天信息转换为精美的引言贴纸。简单、创意、乐趣十足！
 
-  <b>准备好创建你的第一个引用了吗？</b>
-  1️⃣ 在私聊中：转发任意消息给我（你可以选择多个！）
-  2️⃣ 在群组中：将我添加到你的群组并对任何消息回复<code>/q</code>
+  ✨ <b>准备好创建您的第一个引言了吗？</b>
+  <b>在私人聊天中：</b> 转发任何消息给我（您甚至可以一次选择多个）！
+  <b>在群组中：</b> 添加我到您的群组并回复任意消息使用<code>/q</code>
 
-  当你准备好探索所有创意可能性时，输入 /help！🎨
+  想要更改颜色、样式等？当您准备好发现所有创意可能性时请输入 /help！ 🎨
 help: |
-  <b>✨ QuotLyBot 快速指南</b>
+  <b>✨ QuotLyBot：快速 & 简单的引言！✨</b>
 
-  <b>📱 基本命令</b>
-  • <code>/q</code> - 引用被回复的消息
-  • <code>/q 3</code> - 引用多条消息
-  • 转发消息 - 直接引用
+  在 Telegram 中将消息转换为时尚的引言。操作如下：
 
-  <b>🎨 样式</b>
+  📱 <b>基本引言</b>
 
-  颜色：
-  • 基本：<code>/q red</code>
-  • 自定义：<code>/q #ff69b4</code>
-  • 渐变：<code>/q red//#blue</code>
-  • 随机：<code>/q random</code>
+  • 回复 & 引言：回复一条消息并键入<code>/q</code>来引用它。
+  • 多条引言：回复多条消息中的第一条，键入<code>/q [number]</code>（例如，<code>/q 3</code>）来引用多条。
+  • 转发 & 引言：将一条消息转发到机器人来直接引用它。
 
-  媒体：
-  • 添加照片：<code>/q media</code>
-  • 裁剪图片：<code>/q crop</code>
-  • 保留线程：<code>/q reply</code>
-  • 语音预览：自动
+  🎨 <b>自定义您的引言</b>
 
-  格式：
-  • 贴纸：<code>/q</code>
-  • 图片：<code>/q img</code>
-  • 高清：<code>/q png</code>
-  • 故事：<code>/q stories</code>
+  • 颜色：
+      • 基本：<code>/q red</code>（或蓝色、绿色等）
+      • 自定义：<code>/q #[hex color code]</code>（例如，<code>/q #cbafff</code>）
+      • 随机：<code>/q random</code>
+  • 媒体： 使用<code>/q m</code>或<code>/q media</code>在引用的消息中包含图片、视频
+      • 裁剪媒体：使用<code>/q c</code>或<code>/q crop</code>裁剪媒体。
+  • 保留回复：显示正在回复的消息使用<code>/q r</code>或<code>/q reply</code>
+  • 图片格式：使用<code>/q i</code>或<code>/q img</code>或<code>/q p</code>或<code>/q png</code>来引用图片（而不是贴纸）。
 
-  质量：
-  • 普通：<code>/q</code>
-  • 2倍：<code>/q s2</code>
-  • 3倍：<code>/q s3</code>
+  💡 <b>酷组合</b>
 
-  <b>💫 流行组合</b>
-  • <code>/q red media</code> - 带照片的红色引文
-  • <code>/q 3 reply</code> - 带有上下文的引文
-  • <code>/q img s2</code> - 高质量图片
-  • <code>/q stories media</code> - 带照片的故事
+  • 带回复的白色引言：<code>/q 3 white rp</code>
+  • 高质量的红色图片：<code>/q i red</code>
+  • 带媒体 & 回复的引言：<code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ 额外功能</b>
-  • 评分：<code>/q rate</code>
-  • 随机引文：<code>/qrand</code>
-  • 顶级引文：<code>/qtop</code>
-  • 语言：<code>/lang</code>
+  ⚙️ <b>更多选项</b>
 
-  <b>🎯 群组设置</b>
-  • 默认颜色：<code>/qcolor</code>
+  • 评分引言：<code>/q rate</code>（如果在群组中启用）
+  • 随机引言：<code>/qrand</code>（如果在群组中启用）
+  • 顶级引言：<code>/qtop</code>（如果在群组中启用）
+  • 更改语言：<code>/lang</code>
+
+  🎯 <b>群组管理员设置</b>（仅限群组管理员）
+
+  • 默认颜色：<code>/qcolor [color]</code>
   • 启用评分：<code>/qrate</code>
-  • 保存到包：<code>/qs</code>
+  • 保存到贴纸包：<code>/qs [emoji]</code>
+  • 移除贴纸：<code>/qd</code>（回复贴纸）
+  • 随机引言频率：<code>/qgab [number]</code>
+  • 表情后缀更改：<code>/qemoji</code>（更改贴纸表情后缀）
+  • 表情风格：
+      • 经典：<code>/qb apple</code>, <code>/qb google</code>
+      • 替代：<code>/qb twitter</code>, <code>/qb joypixels</code>
+      • 复古：<code>/qb blob</code>
 
-  <b>🌈 表情符号样式</b>
-  经典：<code>/qb apple</code>, <code>/qb google</code>
-  替代：<code>/qb twitter</code>, <code>/qb joypixels</code>
-  复古：<code>/qb blob</code>
+  📱 <b>需要帮助?</b>
 
-  <b>📱 需要帮助？</b>
-  • 博客：@LyBlog
-  • GitHub：github.com/LyoSU/quote-bot
+  • 博客：<a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub：<a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
   • 支持：<code>/donate</code>
 help_group: |
   <b>你好！👋</b>
@@ -106,6 +100,33 @@ quote:
     <b>太好了！</b> 引文背景已更改为：<code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>完成！</b> 表情符号样式更改为：<code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: 成功添加到您的<a href="${link}">群组贴纸包</a>✨
@@ -116,12 +137,18 @@ sticker:
   delete:
     suc: 已从您的<a href="${link}">群组贴纸包</a>中移除 🗑
     error:
-      telegram: <b>糟糕！</b> 无法移除贴纸：\n<pre>${error}</pre>
-    btn:
-      save_sticker: 保存贴纸
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: 已从随机集合中移除 🗑
-    error: <b>糟糕！</b> 无法移除贴纸：\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     请回复您想保存的贴纸、照片或图片✨
   fstik: |

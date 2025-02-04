@@ -15,73 +15,67 @@ description:
 
     İndi başlayın - sadəcə mesajı yönləndirin və ya /q istifadə edin!
 start: |
-  <b>Salam! 👋 Mən QuotLyBot</b>
+  <b>Salam! 👋 Mən QuotLyBotam</b>
 
-  Mən adi söhbət mesajlarını heyrətamiz sitat stikerlərinə çevirirəm. Sadə, yaradıcı və istifadəsi əyləncəlidir!
+  Adi söhbət mesajlarını möhtəşəm sitat stickerlərinə çevirirəm. Sadə, yaradıcı və istifadəsi əyləncəlidir!
 
-  <b>İlk sitatınızı yaratmağa hazırsınızmı?</b>
-  1️⃣ Şəxsi: İstənilən mesajı mənə yönləndirin (bir neçəsini seçə bilərsiniz!)
-  2️⃣ Qruplarda: Məni qrupunuza əlavə edin və istənilən mesaja <code>/q</code> ilə cavab verin
+  ✨ <b>İlk sitatınızı yaratmağa hazırsınız?</b>
+  <b>Şəxsi söhbətlərdə:</b> Hər hansı mesajları mənə yönəldin (hətta birdən çoxunu seçə bilərsiniz!)
+  <b>Qruplarda:</b> Məni qrupunuza əlavə edin və hər hansı bir mesaja <code>/q</code> cavab verin
 
-  Bütün yaradıcı imkanları kəşf etməyə hazır olanda /help yazın! 🎨
+  Rəngləri, üslubları və daha çoxunu dəyişmək istəyirsiniz? Bütün yaradıcı imkanları kəşf etmək üçün hazır olduğunuzda /help yazın! 🎨
 help: |
-  <b>✨ QuotLyBot Tez Təlimat</b>
+  <b>✨ QuotLyBot: Sürətli & Sadə Sitatlar! ✨</b>
 
-  <b>📱 Əsas Əmrlər</b>
-  • <code>/q</code> - Cavablanan mesaja sitat
-  • <code>/q 3</code> - Bir neçə mesaja sitat
-  • Mesajı yönləndirin - Birbaşa sitat
+  Mesajları Telegramda stilizə edilmiş sitatlara çevirin. Baxın necə:
 
-  <b>🎨 Stillar</b>
+  📱 <b>Əsas Sitatlaşma</b>
 
-  Rənglər:
-  • Əsas: <code>/q red</code>
-  • Xüsusi: <code>/q #ff69b4</code>
-  • Qradient: <code>/q red//#blue</code>
-  • Təsadüfi: <code>/q random</code>
+  • Cavab & Sitat:  Mesajı cavablayın və sitatlaşdırmaq üçün <code>/q</code> yazın.
+  • Çoxlu Sitat: Bir neçə mesajın birincisinə cavab verin, <code>/q [rəqəm]</code> (məsələn, <code>/q 3</code>) yazın ki, çoxlu sitatlar alınsın.
+  • Göndər & Sitat: Mesajı birbaşa sitat etmək üçün bota yönəldin.
 
-  Media:
-  • Foto əlavə et: <code>/q media</code>
-  • Şəkli kəs: <code>/q crop</code>
-  • Mövzu saxla: <code>/q reply</code>
-  • Səsli önizlə: Avtomatik
+  🎨 <b>Sitatınızı tənzimləyin</b>
 
-  Format:
-  • Stiker: <code>/q</code>
-  • Şəkil: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Hekayə: <code>/q stories</code>
+  • Rənglər:
+      • Əsas: <code>/q qırmızı</code> (və ya mavi, yaşıl və s.)
+      • Fərdi: <code>/q #[hex rəng kodu]</code> (məsələn, <code>/q #cbafff</code>)
+      • Təsadüfi: <code>/q random</code>
+  • Media: Sitatlaşdırılan mesajdan şəkil/video daxil edin <code>/q m</code> və ya <code>/q media</code>
+      • Mediani Kəsmək: Medianı kəsmək üçün <code>/q c</code> və ya <code>/q crop</code> istifadə edin.
+  • Cavabları Saxla: Cavablanan mesajı göstərmək üçün <code>/q r</code> və ya <code>/q reply</code> istifadə edin.
+  • Şəkil Formatı: Şəkil sitatları üçün <code>/q i</code> və ya <code>/q img</code> və ya <code>/q p</code> və ya <code>/q png</code> istifadə edin (sticker əvəzinə).
 
-  Keyfiyyət:
-  • Normal: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  💡 <b>Maraqlı Kombinasiyalar</b>
 
-  <b>💫 Populyar Kombinasiyalar</b>
-  • <code>/q red media</code> - Qırmızı sitat ilə foto
-  • <code>/q 3 reply</code> - Mövzu ilə sitat
-  • <code>/q img s2</code> - Yüksək keyfiyyətli şəkil
-  • <code>/q stories media</code> - Hekayə ilə foto
+  • Cavablarla ağ sitat: <code>/q 3 ağ rp</code>
+  • Yüksək keyfiyyətli qırmızı şəkil: <code>/q i qırmızı s3.2</code>
+  • Media və cavablarla sitat: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ Əlavə Xüsusiyyətlər</b>
-  • Reytinqlər: <code>/q rate</code>
-  • Təsadüfi sitatlar: <code>/qrand</code>
-  • Ən yaxşı sitatlar: <code>/qtop</code>
-  • Dil: <code>/lang</code>
+  ⚙️ <b>Daha çox seçimlər</b>
 
-  <b>🎯 Qrup Ayarları</b>
-  • Standart rəng: <code>/qcolor</code>
-  • Reytinqləri aktiv et: <code>/qrate</code>
-  • Paketə yadda saxla: <code>/qs</code>
+  • Sitatları qiymətləndir: <code>/q rate</code> (qrupda aktiv edilibsə)
+  • Təsadüfi Sitat: <code>/qrand</code> (qrupda aktiv edilibsə)
+  • Ən Yaxşı Sitatlar: <code>/qtop</code> (qrupda aktiv edilibsə)
+  • Dili dəyişmək: <code>/lang</code>
 
-  <b>🌈 Emoje Stillar</b>
-  Klassik: <code>/qb apple</code>, <code>/qb google</code>
-  Alternativ: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  🎯 <b>Qrup Admin Parametrləri</b> (yalnız qrup adminləri üçün)
 
-  <b>📱 Yardıma ehtiyac var?</b>
-  • Blog: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
+  • Əsas Rəng: <code>/qcolor [rəng]</code>
+  • Reytinqi aktiv et: <code>/qrate</code>
+  • Stickeri Paketə Yadda Saxla: <code>/qs [emoji]</code>
+  • Stickeri Sil: <code>/qd</code> (stickerə cavab verin)
+  • Təsadüfi Sitat Tezliyi: <code>/qgab [rəqəm]</code>
+  • Emoji Sonu Dəyişdir: <code>/qemoji</code> (sticker emoji sonunu dəyiş)
+  • Emoji Üslubu:
+      • Klassik: <code>/qb apple</code>, <code>/qb google</code>
+      • Alternativ: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Kömək lazımdır?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
   • Dəstək: <code>/donate</code>
 help_group: |
   <b>Salam! 👋</b>
@@ -106,6 +100,33 @@ quote:
     <b>Əla!</b> Sitatın fonu dəyişdirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Hazır!</b> Emoje stili dəyişdirildi: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu ✨
@@ -116,12 +137,18 @@ sticker:
   delete:
     suc: <a href="${link}">Qrupun stikerpaka</a>dan çıxarıldı 🗑
     error:
-      telegram: <b>Oops!</b> Stickerdən çıxarmaq mümkün olmadı:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Stikeri yadda saxla
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Təsadüfi kolleksiyadan çıxarıldı 🗑
-    error: <b>Oops!</b> Stickerdən çıxarmaq mümkün olmadı:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Zəhmət olmasa, saxlamaq istədiyiniz stikeri, fotonu və ya şəkli cavablayın ✨
   fstik: |

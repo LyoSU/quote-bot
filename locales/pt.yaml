@@ -106,6 +106,33 @@ quote:
     <b>Perfeito!</b> Cor de fundo da citação mudada para: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Pronto!</b> Estilo de emoji alterado para: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Adicionado com sucesso ao seu <a href="${link}">pacote de adesivos do grupo</a> ✨
@@ -116,12 +143,16 @@ sticker:
   delete:
     suc: Removido do seu <a href="${link}">pacote de adesivos do grupo</a> 🗑
     error:
-      telegram: <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Salvar adesivo
+      telegram: |
+        <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Removido da coleção aleatória 🗑
-    error: <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
+    error: |
+      <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Por favor, responda a um adesivo, foto ou imagem que você gostaria de salvar ✨
   fstik: |

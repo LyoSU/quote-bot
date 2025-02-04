@@ -15,73 +15,67 @@ description:
 
     지금 바로 시작하세요 - 메시지를 포워드하거나 /q를 사용하세요!
 start: |
-  <b>안녕하세요! 👋 저는 QuotLyBot입니다</b>
+  <b>안녕하세요! 👋 저는 QuotLyBot입니다.</b>
 
-  저는 일반 채팅 메시지를 멋진 인용구 스티커로 변환합니다. 간단하고 창의적이며 재미있게 사용할 수 있습니다!
+  일반 채팅 메시지를 멋진 인용 스티커로 변환합니다. 간단하고 창의적이며 사용하기 재미있습니다!
 
-  <b>첫 번째 인용구를 만들 준비가 되셨나요?</b>
-  1️⃣ 개인 대화에서: 저에게 메시지를 전달해 주세요 (여러 개를 선택할 수 있습니다!)
-  2️⃣ 그룹에서: 그룹에 저를 추가하고 <code>/q</code>로 메시지에 답장해 주세요
+  ✨ <b>첫 번째 인용을 만들 준비가 되셨나요?</b>
+  <b>개인 채팅에서:</b> 아무 메시지나 저에게 전달하세요 (여러 개를 한 번에 선택할 수도 있습니다!)
+  <b>그룹에서:</b> 저를 그룹에 추가하고 <code>/q</code>를 사용하여 아무 메시지에 답장하세요
 
-  모든 창의적인 가능성을 발견할 준비가 되셨다면 /help를 입력하세요! 🎨
+  색상, 스타일 등을 변경하고 싶으신가요? 모든 창의적인 가능성을 발견할 준비가 되었을 때 /help를 입력하세요! 🎨
 help: |
-  <b>✨ QuotLyBot 퀵 가이드</b>
+  <b>✨ QuotLyBot: 빠르고 쉬운 인용! ✨</b>
 
-  <b>📱 기본 명령어</b>
-  • <code>/q</code> - 답장된 메시지를 인용
-  • <code>/q 3</code> - 여러 메시지를 인용
-  • 메시지 포워드 - 직접 인용
+  Telegram에서 메시지를 스타일리시한 인용으로 바꾸세요. 방법은 다음과 같습니다:
 
-  <b>🎨 스타일</b>
+  📱 <b>기본 인용</b>
 
-  색상:
-  • 기본: <code>/q red</code>
-  • 사용자 정의: <code>/q #ff69b4</code>
-  • 그라데이션: <code>/q red//#blue</code>
-  • 랜덤: <code>/q random</code>
+  • 답장 및 인용: 메시지에 답장하고 <code>/q</code>를 입력하여 인용하세요.
+  • 여러 개 인용: 여러 메시지 중 첫 번째 메시지에 답장하고 <code>/q [숫자]</code>를 입력하여 (예: <code>/q 3</code>) 여러 개 인용하세요.
+  • 전달 및 인용: 메시지를 봇에 전달하여 직접 인용하세요.
 
-  미디어:
-  • 사진 추가: <code>/q media</code>
-  • 이미지 자르기: <code>/q crop</code>
-  • 스레드 유지: <code>/q reply</code>
-  • 음성 미리보기: 자동
+  🎨 <b>인용 맞춤화</b>
 
-  형식:
-  • 스티커: <code>/q</code>
-  • 이미지: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • 스토리: <code>/q stories</code>
+  • 색상:
+      • 기본: <code>/q red</code> (또는 blue, green 등)
+      • 사용자 정의: <code>/q #[헥스 색상 코드]</code> (예: <code>/q #cbafff</code>)
+      • 무작위: <code>/q random</code>
+  • 미디어: 인용한 메시지에서 이미지/비디오를 포함하려면 <code>/q m</code> 또는 <code>/q media</code>
+      • 미디어 크롭: <code>/q c</code> 또는 <code>/q crop</code>을 사용하여 미디어를 크롭하세요.
+  • 답장 유지: <code>/q r</code> 또는 <code>/q reply</code>를 사용하여 답장 중인 메시지를 표시합니다.
+  • 이미지 형식: 이미지 인용을 위해 (스티커 대신에) <code>/q i</code>, <code>/q img</code>, <code>/q p</code> 또는 <code>/q png</code>를 사용하세요.
 
-  품질:
-  • 보통: <code>/q</code>
-  • 2배: <code>/q s2</code>
-  • 3배: <code>/q s3</code>
+  💡 <b>멋진 조합</b>
 
-  <b>💫 인기 조합</b>
-  • <code>/q red media</code> - 사진과 함께 레드 인용
-  • <code>/q 3 reply</code> - 문맥을 가진 인용
-  • <code>/q img s2</code> - 고품질 이미지
-  • <code>/q stories media</code> - 사진과 함께 스토리
+  • 답장이 포함된 하얀색 인용: <code>/q 3 white rp</code>
+  • 고화질 빨간색 이미지: <code>/q i red s3.2</code>
+  • 미디어 및 답장이 포함된 인용: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ 추가 기능</b>
-  • 등급: <code>/q rate</code>
-  • 랜덤 인용: <code>/qrand</code>
-  • 인기 인용: <code>/qtop</code>
-  • 언어: <code>/lang</code>
+  ⚙️ <b>추가 옵션</b>
 
-  <b>🎯 그룹 설정</b>
-  • 기본 색상: <code>/qcolor</code>
-  • 등급 활성화: <code>/qrate</code>
-  • 팩에 저장: <code>/qs</code>
+  • 인용 평가: <code>/q rate</code> (그룹에서 활성화된 경우)
+  • 무작위 인용: <code>/qrand</code> (그룹에서 활성화된 경우)
+  • 최고 인용: <code>/qtop</code> (그룹에서 활성화된 경우)
+  • 언어 변경: <code>/lang</code>
 
-  <b>🌈 이모지 스타일</b>
-  클래식: <code>/qb apple</code>, <code>/qb google</code>
-  대체: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  레트로: <code>/qb blob</code>
+  🎯 <b>그룹 관리자 설정</b> (그룹 관리자 전용)
 
-  <b>📱 도움이 필요하세요?</b>
-  • 블로그: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
+  • 기본 색상: <code>/qcolor [색상]</code>
+  • 평가 활성화: <code>/qrate</code>
+  • 스티커 팩에 저장: <code>/qs [이모지]</code>
+  • 스티커 제거: <code>/qd</code> (스티커에 답장)
+  • 무작위 인용 빈도: <code>/qgab [숫자]</code>
+  • 이모지 접두사 변경: <code>/qemoji</code> (스티커 이모지 접미사 변경)
+  • 이모지 스타일:
+      • 클래식: <code>/qb apple</code>, <code>/qb google</code>
+      • 대체: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • 레트로: <code>/qb blob</code>
+
+  📱 <b>도움이 필요하신가요?</b>
+
+  • 블로그: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
   • 지원: <code>/donate</code>
 help_group: |
   <b>안녕하세요! 👋</b>
@@ -106,6 +100,33 @@ quote:
     <b>완벽합니다!</b> 인용 배경이 변경되었습니다: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>완료!</b> 이모지 스타일이 변경되었습니다: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다 ✨
@@ -116,12 +137,18 @@ sticker:
   delete:
     suc: <a href="${link}">그룹 스티커 팩</a>에서 제거되었습니다 🗑
     error:
-      telegram: <b>이런!</b> 스티커를 제거할 수 없습니다:\n<pre>${error}</pre>
-    btn:
-      save_sticker: 스티커 저장
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: 랜덤 컬렉션에서 제거되었습니다 🗑
-    error: <b>이런!</b> 스티커를 제거할 수 없습니다:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     저장하고 싶은 스티커, 사진 또는 이미지를 답장하세요 ✨
   fstik: |

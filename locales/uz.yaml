@@ -17,72 +17,66 @@ description:
 start: |
   <b>Salom! 👋 Men QuotLyBotman</b>
 
-  Men oddiy chat xabarlarni ajoyib kotirovka stikerlariga aylantiraman. Oddiy, ijodiy va foydalanuv uchun qulay!
+  Oddiy chat xabarlarini ajoyib iqtibos stikerlariga aylantiraman. Oddiy, ijodkor va foydalanish uchun qiziqarli!
 
-  <b>Birinchi kotirovkangizni yaratishga tayyormisiz?</b>
-  1️⃣ Maxfiyda: Har qanday xabarlarni menga yo'naltiring (bir necha tanlash mumkin!)
-  2️⃣ Guruhlarda: Meni guruhingizga qo'shing va har qanday xabarga <code>/q</code> bilan javob yozing
+  ✨ <b>Birinchi iqtibosingizni yaratishga tayyormisiz?</b>
+  <b>Xususiy suhbatlarda:</b> Har qanday xabarni menga yo'naltiring (hatto bir nechta bir vaqtning o'zida tanlang!)
+  <b>Guruhlarda:</b> Meni guruhingizga qo'shing va istalgan xabarga <code>/q</code> bilan javob bering
 
-  Ijodiy imkoniyatlar haqida bilmoqqa tayyor bo'lsangiz /help yozing! 🎨
+  Ranglar, uslublar va boshqalarni o'zgartirmoqchimisiz? Barcha ijodiy imkoniyatlarni kashf qilishga tayyor bo'lganda /help yozing! 🎨
 help: |
-  <b>✨ QuotLyBot uchun Tezkor Qo'llanma</b>
+  <b>✨ QuotLyBot: Tez va Oson Iqtiboslar! ✨</b>
 
-  <b>📱 Asosiy Buyruqlar</b>
-  • <code>/q</code> - Javob qilingan xabarni sitata qilish
-  • <code>/q 3</code> - Bir nechta xabarlarni sitata qilish
-  • Xabarni yuborish - To'g'ridan-to'g'ri sitata qilish
+  Telegramda xabarlarni uslubiy iqtiboslarga aylantiring. Mana qanday:
 
-  <b>🎨 Uslublar</b>
+  📱 <b>Asosiy Iqtiboslash</b>
 
-  Ranglar:
-  • Asosiy: <code>/q qizil</code>
-  • O'zgartirilgan: <code>/q #ff69b4</code>
-  • Gradiyent: <code>/q qizil//#ko'k</code>
-  • Tasodifiy: <code>/q tasodifiy</code>
+  • Javob va Iqtibos: Xabarga javob bering va <code>/q</code> yozib uni iqtiboslang.
+  • Bir nechta iqtiboslang: Bir nechta xabarlarning birinchisiga javob bering, <code>/q [son]</code> (masalan, <code>/q 3</code>) yozib bir nechta iqtiboslang.
+  • Yuborish va Iqtiboslash: Xabarni to'g'ridan-to'g'ri iqtiboslash uchun botga yuboring.
 
-  Media:
-  • Foto qo'shish: <code>/q media</code>
-  • Rasmni kesish: <code>/q crop</code>
-  • Treadni saqlash: <code>/q javob</code>
-  • Ovoz preview: Avtomatik
+  🎨 <b>Iqtibosingizni Moslashtiring</b>
 
-  Format:
-  • Stiker: <code>/q</code>
-  • Rasm: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Hikoya: <code>/q stories</code>
+  • Ranglar:
+      • Asosiy: <code>/q red</code> (yoki blue, green va boshqalar)
+      • Maxsus: <code>/q #[heks rang kodi]</code> (masalan, <code>/q #cbafff</code>)
+      • Tasodifiy: <code>/q random</code>
+  • Media: Iqtiboslangan xabardan rasmlar/videolarni <code>/q m</code> yoki <code>/q media</code> bilan qo'shing
+      • Media qirqish: Mediani qirqish uchun <code>/q c</code> yoki <code>/q crop</code> dan foydalaning.
+  • Javoblarni saqlash: Javob olgan xabarni ko'rsatish uchun <code>/q r</code> yoki <code>/q reply</code>
+  • Rasm Formati: Iqtiboslar uchun <code>/q i</code> yoki <code>/q img</code> yoki <code>/q p</code> yoki <code>/q png</code> (stikerlar o'rniga) foydalaning.
 
-  Sifat:
-  • Oddiy: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  💡 <b>Ajoyib Kombinatsiyalar</b>
 
-  <b>💫 Mashhur Kombinatsiyalar</b>
-  • <code>/q qizil media</code> - Qizil sitata foto bilan
-  • <code>/q 3 javob</code> - Kontekst bilan sitata
-  • <code>/q img s2</code> - Yuqori sifatli rasm
-  • <code>/q stories media</code> - Foto bilan hikoya
+  • Javoblar bilan oq iqtibos: <code>/q 3 white rp</code>
+  • Yuqori sifatli qizil rasm: <code>/q i red s3.2</code>
+  • Media va javoblar bilan iqtibos: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ Qo'shimcha Xususiyatlar</b>
-  • Reyting: <code>/q rate</code>
-  • Tasodifiy sitatalar: <code>/qrand</code>
-  • Eng yuqori sitatalar: <code>/qtop</code>
-  • Til: <code>/lang</code>
+  ⚙️ <b>Ko'proq Variantlar</b>
 
-  <b>🎯 Guruh Sozlamalari</b>
-  • Standart rang: <code>/qcolor</code>
-  • Reytingni yoqish: <code>/qrate</code>
-  • To'plamga saqlash: <code>/qs</code>
+  • Iqtiboslarni Baholash: <code>/q rate</code> (guruhda yoqilgan bo'lsa)
+  • Tasodifiy Iqtibos: <code>/qrand</code> (guruhda yoqilgan bo'lsa)
+  • Eng yuqori Iqtiboslar: <code>/qtop</code> (guruhda yoqilgan bo'lsa)
+  • Tilni o'zgartirish: <code>/lang</code>
 
-  <b>🌈 Emoji Uslublar</b>
-  Klassik: <code>/qb olma</code>, <code>/qb google</code>
-  Alternativ: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  🎯 <b>Guruh Admin Sozlamalari</b> (faqat guruh adminlari uchun)
 
-  <b>📱 Yordam Kerakmi?</b>
-  • Blog: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • Yordam: <code>/donate</code>
+  • Standart Rang: <code>/qcolor [rang]</code>
+  • Baholashni Yoqish: <code>/qrate</code>
+  • Stiker Paketiga Saqlash: <code>/qs [emoji]</code>
+  • Stikerni O'chirish: <code>/qd</code> (stikerni javob bering)
+  • Tasodifiy Iqtibos Tezligi: <code>/qgab [son]</code>
+  • Emoji Suffixni O'zgartirish: <code>/qemoji</code> (stiker emojini o'zgartirish)
+  • Emoji Uslubi:
+      • Klassik: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Yordam Kerakmi?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Qo'llab-quvvatlash: <code>/donate</code>
 help_group: |
   <b>Salom! 👋</b>
   Men bu guruhda chiroyli sitatalar yarataman - vaqtincha biron-bir xabar bilan <code>/q</code> buyrug'idan foydalaning!
@@ -106,6 +100,33 @@ quote:
     <b>Mukammal!</b> Sitataning fon rangi almashtirildi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Tayyor!</b> Emoji uslubi almashtirildi: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Stiker muvaffaqiyatli ravishda <a href="${link}">stikerlar to'plami guruhiga qo'shildi</a> ✨
@@ -116,12 +137,18 @@ sticker:
   delete:
     suc: <a href="${link}">Guruh stikerlari to'plamidan</a> olib tashlandi 🗑
     error:
-      telegram: <b>Oops!</b> Stikerni olib tashlashning iloji bo'lmadi:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Stikerni saqlang
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Tasodifiy to'plamdan olib tashlandi 🗑
-    error: <b>Oops!</b> Stikerni olib tashlashning iloji bo'lmadi:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Iltimos, saqlamoqchi bo'lgan stiker, foto yoki rasmga javob bering ✨
   fstik: |
