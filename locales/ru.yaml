@@ -15,74 +15,68 @@ description:
 
     Начните прямо сейчас – просто перешлите сообщение или используйте /q!
 start: |
-  <b>Привет! 👋 Я QuotLyBot</b>
+  <b>Hi! 👋 I'm QuotLyBot</b>
 
-  Я превращаю обычные чат-сообщения в потрясающие стикеры с цитатами. Просто, креативно и весело в использовании!
+  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
 
-  <b>Готовы создать свою первую цитату?</b>
-  1️⃣ В личных сообщениях: Перешлите мне любые сообщения (можете выбрать несколько!)
-  2️⃣ В группах: Добавьте меня в вашу группу и ответьте <code>/q</code> на любое сообщение
+  ✨ <b>Ready to create your first quote?</b>
+  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
+  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
 
-  Напишите /help, когда будете готовы открыть все креативные возможности! 🎨
+  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
 help: |
-  <b>✨ Быстрый гид по QuotLyBot</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  <b>📱 Основные команды</b>
-  • <code>/q</code> - Цитировать отвеченное сообщение
-  • <code>/q 3</code> - Цитировать несколько сообщений
-  • Переслать сообщение - Цитировать непосредственно
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  <b>🎨 Стили</b>
+  📱 <b>Basic Quoting</b>
 
-  Цвета:
-  • Основной: <code>/q red</code>
-  • Индивидуальный: <code>/q #ff69b4</code>
-  • Градиент: <code>/q red//#blue</code>
-  • Случайный: <code>/q random</code>
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  Медиа:
-  • Добавить фото: <code>/q media</code>
-  • Обрезать изображение: <code>/q crop</code>
-  • Сохранить поток: <code>/q reply</code>
-  • Просмотр голосом: Автоматически
+  🎨 <b>Customize Your Quote</b>
 
-  Формат:
-  • Стикер: <code>/q</code>
-  • Изображение: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • История: <code>/q stories</code>
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  Качество:
-  • Нормальное: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  💡 <b>Cool Combinations</b>
 
-  <b>💫 Популярные комбинации</b>
-  • <code>/q red media</code> - Красная цитата с фото
-  • <code>/q 3 reply</code> - Цитата с контекстом
-  • <code>/q img s2</code> - Изображение высокого качества
-  • <code>/q stories media</code> - История с фото
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  <b>⚙️ Добавочные функции</b>
-  • Оценка: <code>/q rate</code>
-  • Случайные цитаты: <code>/qrand</code>
-  • Лучшие цитаты: <code>/qtop</code>
-  • Язык: <code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  <b>🎯 Настройки группы</b>
-  • Цвет по умолчанию: <code>/qcolor</code>
-  • Включить рейтинг: <code>/qrate</code>
-  • Сохранить в пакет: <code>/qs</code>
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  <b>🌈 Стили эмодзи</b>
-  Классика: <code>/qb apple</code>, <code>/qb google</code>
-  Альт: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Ретро: <code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  <b>📱 Нужна помощь?</b>
-  • Блог: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • Поддержка: <code>/donate</code>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>Привет! 👋</b>
   Я буду создавать красивые цитаты в этой группе - просто используйте <code>/q</code> в ответе на любое сообщение!
