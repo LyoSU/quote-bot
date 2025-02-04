@@ -15,68 +15,68 @@ description:
 
     Begin nu - stuur een bericht door of gebruik /q!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Hallo! 👋 Ik ben QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Ik transformeer gewone chatberichten in verbluffende quote stickers. Eenvoudig, creatief en leuk in gebruik!
 
-  ✨ <b>Ready to create your first quote?</b>
-  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
-  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
+  ✨ <b>Klaar om je eerste quote te maken?</b>
+  <b>In privéchats:</b> Stuur alle berichten door naar mij (je kunt er zelfs meerdere tegelijk kiezen!)
+  <b>In groepen:</b> Voeg mij toe aan je groep en antwoord met <code>/q</code> op elk bericht
 
-  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
+  Wil je kleuren, stijlen en meer veranderen? Typ /help wanneer je klaar bent om alle creatieve mogelijkheden te ontdekken! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Snel & Gemakkelijk Citeren! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Zet berichten om in stijlvolle quotes in Telegram. Zo werkt het:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Basis Citeren</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Antwoord & Citeren:  Antwoord op een bericht en typ <code>/q</code> om het te citeren.
+  • Meerdere Citeren: Reageer op het eerste van meerdere berichten, typ <code>/q [nummer]</code> (bijv. <code>/q 3</code>) om meerdere te citeren.
+  • Doorsturen & Citeren: Stuur een bericht door naar de bot om het direct te citeren.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Je Citaat Aanpassen</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Kleuren:
+      • Basis: <code>/q rood</code> (of blauw, groen, enz.)
+      • Aangepast: <code>/q #[hex kleurcode]</code> (bijv. <code>/q #cbafff</code>)
+      • Willekeurig: <code>/q random</code>
+  • Media: Voeg afbeeldingen/video's uit het geciteerde bericht toe met <code>/q m</code> of <code>/q media</code>
+      • Media Bijsnijden: Gebruik <code>/q c</code> of <code>/q crop</code> om de media bij te snijden.
+  • Antwoorden Behoud: Toon het bericht waarop gereageerd wordt met <code>/q r</code> of <code>/q reply</code>
+  • Beeldformaat: Gebruik <code>/q i</code> of <code>/q img</code> of <code>/q p</code> of <code>/q png</code> voor beeldquotes (in plaats van stickers).
 
-  💡 <b>Cool Combinations</b>
+  💡 <b>Coole Combinaties</b>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  • Witte quote met antwoorden: <code>/q 3 white rp</code>
+  • Hoogwaardige rode afbeelding: <code>/q i red s3.2</code>
+  • Quote met media & antwoorden: <code>/q r 2 #cbafff m</code>
 
-  ⚙️ <b>More Options</b>
+  ⚙️ <b>Meer Opties</b>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  • Quotes Beoordelen: <code>/q rate</code> (indien ingeschakeld in groep)
+  • Willekeurige Quote: <code>/qrand</code> (indien ingeschakeld in groep)
+  • Top Quotes: <code>/qtop</code> (indien ingeschakeld in groep)
+  • Taal Wijzigen: <code>/lang</code>
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  🎯 <b>Groepsbeheer Instellingen</b> (alleen voor groepsbeheerders)
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  • Standaardkleur: <code>/qcolor [kleur]</code>
+  • Beoordeling Inschakelen: <code>/qrate</code>
+  • Opslaan in Sticker Pakket: <code>/qs [emoji]</code>
+  • Sticker Verwijderen: <code>/qd</code> (antwoord op sticker)
+  • Frequentie Willekeurige Quote: <code>/qgab [nummer]</code>
+  • Emoji Achtervoegsel Wijzigen: <code>/qemoji</code> (verander emoji achtervoegsel van sticker)
+  • Emoji Stijl:
+      • Klassiek: <code>/qb apple</code>, <code>/qb google</code>
+      • Alternatief: <code>/qb twitter</code>, <code>/qb joypixels</code>
       • Retro: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>Hulp Nodig?</b>
 
   • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Ondersteuning: <code>/donate</code>
 help_group: |
   <b>Hallo! 👋</b>
   Ik maak prachtige citaten in deze groep - gebruik gewoon <code>/q</code> als antwoord op een bericht!
@@ -100,6 +100,33 @@ quote:
     <b>Perfect!</b> Citaat achtergrond veranderd naar: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Klaar!</b> Emoji stijl gewijzigd naar: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Succesvol toegevoegd aan je <a href="${link}">groepssticker pakket</a> ✨
@@ -110,12 +137,18 @@ sticker:
   delete:
     suc: Verwijderd uit je <a href="${link}">groepssticker pakket</a> 🗑
     error:
-      telegram: <b>Oeps!</b> Sticker kon niet worden verwijderd:\n<pre>${error}</pre>
-    btn:
-      save_sticker: De sticker opslaan
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Verwijderd uit willekeurige verzameling 🗑
-    error: <b>Oeps!</b> Sticker kon niet worden verwijderd:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Reageer op een sticker, foto of afbeelding die je wilt opslaan ✨
   fstik: |
