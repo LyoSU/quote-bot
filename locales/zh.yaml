@@ -102,31 +102,31 @@ quote:
     <b>完成！</b> 表情符号样式更改为：<code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+      😕 我们的报价服务暂时不可用。请稍后再试。
 
-      If the issue persists, check @LyBlog for updates.
+      如果问题仍然存在，请查看@LyBlog以获取更新。
     rate_limit: |
-      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+      ⏳ 请求过多！请等待${seconds}秒后再创建新的报价。
     file_too_large: |
-      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+      📸 媒体文件太大（最大5MB）。尝试使用较小的图像或视频。
     invalid_format: |
-      ❌ Unsupported file format. I support:
-      • Images (JPG, PNG, WEBP)
-      • Videos (MP4)
-      • Stickers
-      • Text messages
+      ❌ 不支持的文件格式。我支持以下格式：
+      • 图片（JPG, PNG, WEBP）
+      • 视频（MP4）
+      • 贴纸
+      • 文本消息
     telegram_error: |
-      ⚠️ Telegram error: ${error}
+      ⚠️ Telegram错误：${error}
 
-      This usually happens when:
-      • The file is too large
-      • The sticker pack is full
-      • The bot lacks permissions
+      这通常发生在：
+      • 文件太大
+      • 贴纸包已满
+      • 机器人权限不足
     generic_error: |
-      😅 Oops! Something went wrong:
+      😅 哎呀！出了点问题：
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      请重试或将此问题报告给@LyBlog。
 sticker:
   save:
     suc: 成功添加到您的<a href="${link}">群组贴纸包</a>✨
@@ -138,17 +138,17 @@ sticker:
     suc: 已从您的<a href="${link}">群组贴纸包</a>中移除 🗑
     error:
       telegram: |
-        <b>Failed to remove sticker 😕</b>
+        <b>无法移除贴纸 😕</b>
         ${reason}
-      not_found: The sticker no longer exists in the pack 🤔
-      rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      not_found: 贴纸在包中不存在 🤔
+      rights: 我没有删除此贴纸的权限 🔒
+      generic: 出现问题。请稍后再试 ⚠️
   delete_random:
     suc: 已从随机集合中移除 🗑
     error: |
-      <b>Couldn't remove the quote 😕</b>
+      <b>无法移除报价 😕</b>
       ${error}
-    not_found: This quote is not in the database 🤔
+    not_found: 此报价不在数据库中 🤔
   empty_forward: |
     请回复您想保存的贴纸、照片或图片✨
   fstik: |
