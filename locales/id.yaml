@@ -15,68 +15,68 @@ description:
 
     Mulai sekarang - cukup teruskan pesan atau gunakan /q!
 start: |
-  <b>Hi! 👋 I'm QuotLyBot</b>
+  <b>Hai! 👋 Saya QuotLyBot</b>
 
-  I transform ordinary chat messages into stunning quote stickers. Simple, creative, and fun to use!
+  Saya mengubah pesan obrolan biasa menjadi stiker kutipan yang menakjubkan. Sederhana, kreatif, dan menyenangkan untuk digunakan!
 
-  ✨ <b>Ready to create your first quote?</b>
-  <b>In private chats:</b> Forward any messages to me (you can even select several at once!)
-  <b>In groups:</b> Add me to your group and reply with <code>/q</code> to any message
+  ✨ <b>Siap untuk membuat kutipan pertama Anda?</b>
+  <b>Di obrolan pribadi:</b> Teruskan pesan apa pun kepada saya (Anda bahkan dapat memilih beberapa sekaligus!)
+  <b>Di grup:</b> Tambahkan saya ke grup Anda dan balas dengan <code>/q</code> ke pesan apa pun
 
-  Want to change colors, styles, and more? Type /help when you're ready to discover all the creative possibilities! 🎨
+  Ingin mengubah warna, gaya, dan lainnya? Ketik /help saat Anda siap untuk menemukan semua kemungkinan kreatif! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Kutipan Cepat & Mudah! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Ubah pesan menjadi kutipan bergaya di Telegram. Begini caranya:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Dasar Kutipan</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Balas & Kutip: Balas pesan dan ketik <code>/q</code> untuk mengutipnya.
+  • Kutip Beberapa: Balas pesan pertama dari beberapa pesan, ketik <code>/q [nomor]</code> (misalnya, <code>/q 3</code>) untuk mengutip beberapa pesan.
+  • Teruskan & Kutip: Teruskan pesan ke bot untuk mengutipnya langsung.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Kustomisasi Kutipan Anda</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Warna:
+      • Dasar: <code>/q merah</code> (atau biru, hijau, dll.)
+      • Kustom: <code>/q #[kode warna hex]</code> (misalnya, <code>/q #cbafff</code>)
+      • Acak: <code>/q acak</code>
+  • Media: Sertakan gambar/video dari pesan yang dikutip dengan <code>/q m</code> atau <code>/q media</code>
+      • Potong Media: Gunakan <code>/q c</code> atau <code>/q potong</code> untuk memotong media.
+  • Pertahankan Balasan: Tampilkan pesan yang dibalas dengan <code>/q r</code> atau <code>/q balas</code>
+  • Format Gambar: Gunakan <code>/q i</code> atau <code>/q img</code> atau <code>/q p</code> atau <code>/q png</code> untuk kutipan gambar (alih-alih stiker).
 
-  💡 <b>Cool Combinations</b>
+  💡 <b>Kombinasi Keren</b>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  • Kutipan putih dengan balasan: <code>/q 3 putih rp</code>
+  • Gambar merah berkualitas tinggi: <code>/q i merah s3.2</code>
+  • Kutipan dengan media & balasan: <code>/q r 2 #cbafff m</code>
 
-  ⚙️ <b>More Options</b>
+  ⚙️ <b>Opsi Lainnya</b>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  • Nilai Kutipan: <code>/q nilai</code> (jika diaktifkan dalam grup)
+  • Kutipan Acak: <code>/qrand</code> (jika diaktifkan dalam grup)
+  • Kutipan Teratas: <code>/qtop</code> (jika diaktifkan dalam grup)
+  • Ubah Bahasa: <code>/lang</code>
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  🎯 <b>Pengaturan Admin Grup</b> (hanya untuk admin grup)
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+  • Warna Default: <code>/qwarna [warna]</code>
+  • Aktifkan Penilaian: <code>/qrate</code>
+  • Simpan ke Paket Stiker: <code>/qs [emoji]</code>
+  • Hapus Stiker: <code>/qd</code> (balas ke stiker)
+  • Frekuensi Kutipan Acak: <code>/qgab [nomor]</code>
+  • Ubah Akhiran Emoji: <code>/qemoji</code> (ubah akhiran emoji stiker)
+  • Gaya Emoji:
+      • Klasik: <code>/qb apple</code>, <code>/qb google</code>
       • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
       • Retro: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>Perlu Bantuan?</b>
 
   • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Dukungan: <code>/donate</code>
 help_group: |
   <b>Halo! 👋</b>
   Saya akan membuat kutipan indah di grup ini - cukup gunakan <code>/q</code> untuk membalas pesan apapun!
@@ -100,6 +100,33 @@ quote:
     <b>Sempurna!</b> Latar belakang kutipan diubah menjadi: <code>${backgroundColor}</code> 🎨
   set_emoji_brand: |
     <b>Selesai!</b> Gaya emoji diubah menjadi: <code>${emojiBrand}</code> ✨
+  errors:
+    api_down: |
+      😕 Our quote service is temporarily unavailable. Please try again in a few minutes.
+
+      If the issue persists, check @LyBlog for updates.
+    rate_limit: |
+      ⏳ Too many requests! Please wait ${seconds} seconds before creating another quote.
+    file_too_large: |
+      📸 The media file is too large (max 5MB). Try using a smaller image or video.
+    invalid_format: |
+      ❌ Unsupported file format. I support:
+      • Images (JPG, PNG, WEBP)
+      • Videos (MP4)
+      • Stickers
+      • Text messages
+    telegram_error: |
+      ⚠️ Telegram error: ${error}
+
+      This usually happens when:
+      • The file is too large
+      • The sticker pack is full
+      • The bot lacks permissions
+    generic_error: |
+      😅 Oops! Something went wrong:
+      <code>${error}</code>
+
+      Please try again or report this to @LyBlog if it persists.
 sticker:
   save:
     suc: Stiker telah berhasil ditambahkan ke <a href="${link}">paket stiker grup</a> ✨
@@ -110,12 +137,18 @@ sticker:
   delete:
     suc: Dihapus dari <a href="${link}">paket stiker grup</a> Anda 🗑
     error:
-      telegram: <b>Ups!</b> Tidak dapat menghapus stiker:\n<pre>${error}</pre>
-    btn:
-      save_sticker: Simpan Stiker
+      telegram: |
+        <b>Failed to remove sticker 😕</b>
+        ${reason}
+      not_found: The sticker no longer exists in the pack 🤔
+      rights: I don't have permission to delete this sticker 🔒
+      generic: Something went wrong. Please try again later ⚠️
   delete_random:
     suc: Dihapus dari koleksi acak 🗑
-    error: <b>Ups!</b> Tidak dapat menghapus stiker:\n<pre>${error}</pre>
+    error: |
+      <b>Couldn't remove the quote 😕</b>
+      ${error}
+    not_found: This quote is not in the database 🤔
   empty_forward: |
     Silakan balas pada stiker, foto, atau gambar yang ingin Anda simpan ✨
   fstik: |
