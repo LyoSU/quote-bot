@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: Stiker tidak ada lagi di dalam paket 🤔
       rights: Saya tidak memiliki izin untuk menghapus stiker ini 🔒
-      generic: Terjadi kesalahan. Silakan coba lagi nanti ⚠️
+      generic: |
+        Something went wrong. Please try again later ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Dihapus dari koleksi acak 🗑
     error: |
