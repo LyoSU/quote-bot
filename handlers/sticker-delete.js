@@ -12,7 +12,7 @@ module.exports = async ctx => {
   }
 
   // Check if sticker is from group's sticker set
-  if (ctx.group.info.stickerSet.name === replyMessage.sticker.set_name) {
+  if (ctx.group.info.stickerSet && ctx.group.info.stickerSet.name === replyMessage.sticker.set_name) {
     try {
       await ctx.telegram.deleteStickerFromSet(replyMessage.sticker.file_id)
       result = ctx.i18n.t('sticker.delete.suc', {
@@ -28,7 +28,9 @@ module.exports = async ctx => {
         reason = ctx.i18n.t('sticker.delete.error.rights')
       } else {
         console.error('Telegram sticker deletion error:', error)
-        reason = ctx.i18n.t('sticker.delete.error.generic')
+        reason = ctx.i18n.t('sticker.delete.error.generic', {
+          error: errorMessage
+        })
       }
 
       result = ctx.i18n.t('sticker.delete.error.telegram', { reason })

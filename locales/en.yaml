@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: The sticker no longer exists in the pack 🤔
       rights: I don't have permission to delete this sticker 🔒
-      generic: Something went wrong. Please try again later ⚠️
+      generic: |
+        Something went wrong. Please try again later ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Removed from random collection 🗑
     error: |
