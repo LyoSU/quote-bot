@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: 贴纸在包中不存在 🤔
       rights: 我没有删除此贴纸的权限 🔒
-      generic: 出现问题。请稍后再试 ⚠️
+      generic: |
+        Something went wrong. Please try again later ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: 已从随机集合中移除 🗑
     error: |
