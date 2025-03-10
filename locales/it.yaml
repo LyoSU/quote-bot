@@ -147,7 +147,10 @@ sticker:
         <b>Oops!</b> Impossibile rimuovere lo sticker:\n<pre>${error}</pre>
       not_found: L'adesivo non esiste più nel pacchetto 🤔
       rights: Non ho il permesso di eliminare questo adesivo 🔒
-      generic: Qualcosa è andato storto. Per favore riprova più tardi ⚠️
+      generic: |
+        Something went wrong. Please try again later ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Rimosso dalla collezione casuale 🗑
     error: |
