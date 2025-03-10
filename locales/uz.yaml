@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: Stiker to'plamda endi mavjud emas 🤔
       rights: Ushbu stikerni o'chirishga ruxsatim yo'q 🔒
-      generic: Nimadir noto'g'ri ketdi. Iltimos, keyinroq yana urinib ko'ring ⚠️
+      generic: |
+        Something went wrong. Please try again later ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Tasodifiy to'plamdan olib tashlandi 🗑
     error: |
