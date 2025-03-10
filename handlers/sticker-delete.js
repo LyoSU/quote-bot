@@ -12,7 +12,7 @@ module.exports = async ctx => {
   }
 
   // Check if sticker is from group's sticker set
-  if (ctx.group.info.stickerSet && ctx.group.info.stickerSet.name === replyMessage.sticker.set_name) {
+  if (ctx.group.info.stickerSet && replyMessage.sticker.set_name && ctx.group.info.stickerSet.name === replyMessage.sticker.set_name) {
     try {
       await ctx.telegram.deleteStickerFromSet(replyMessage.sticker.file_id)
       result = ctx.i18n.t('sticker.delete.suc', {
