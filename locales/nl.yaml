@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: De sticker bestaat niet meer in het pakket 🤔
       rights: Ik heb geen toestemming om deze sticker te verwijderen 🔒
-      generic: Er is iets misgegaan. Probeer het later opnieuw ⚠️
+      generic: |
+        Er is iets misgegaan. Probeer het later opnieuw ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Verwijderd uit willekeurige verzameling 🗑
     error: |

@@ -147,7 +147,10 @@ sticker:
         <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>
       not_found: A figurinha não existe mais no pacote 🤔
       rights: Não tenho permissão para deletar esta figurinha 🔒
-      generic: Algo deu errado. Por favor, tente novamente mais tarde ⚠️
+      generic: |
+        Algo deu errado. Por favor, tente novamente mais tarde ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Removido da coleção aleatória 🗑
     error: |

@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: Naklejka nie znajduje się już w pakiecie 🤔
       rights: Nie mam uprawnień do usunięcia tej naklejki 🔒
-      generic: Coś poszło nie tak. Proszę spróbować ponownie później ⚠️
+      generic: |
+        Coś poszło nie tak. Proszę spróbować ponownie później ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Usunięto z losowej kolekcji 🗑
     error: |

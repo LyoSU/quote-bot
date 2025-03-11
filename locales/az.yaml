@@ -142,7 +142,10 @@ sticker:
         ${reason}
       not_found: Artıq stikerdən paketdə yoxdur 🤔
       rights: Bu stikeri silmək üçün mənim icazəm yoxdur 🔒
-      generic: Bir problem baş verdi. Bir az sonra yenidən cəhd edin ⚠️
+      generic: |
+        Nəsə səhv oldu. Zəhmət olmasa, yenidən cəhd edin ⚠️
+
+        <code>${error}</code>
   delete_random:
     suc: Təsadüfi kolleksiyadan çıxarıldı 🗑
     error: |
