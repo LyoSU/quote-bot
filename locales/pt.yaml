@@ -148,7 +148,7 @@ sticker:
       not_found: A figurinha não existe mais no pacote 🤔
       rights: Não tenho permissão para deletar esta figurinha 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Algo deu errado. Por favor, tente novamente mais tarde ⚠️
 
         <code>${error}</code>
   delete_random:
