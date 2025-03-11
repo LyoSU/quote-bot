@@ -143,7 +143,7 @@ sticker:
       not_found: Stiker tidak ada lagi di dalam paket 🤔
       rights: Saya tidak memiliki izin untuk menghapus stiker ini 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Ada yang salah. Silakan coba lagi nanti ⚠️
 
         <code>${error}</code>
   delete_random:
