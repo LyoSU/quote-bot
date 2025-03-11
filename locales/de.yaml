@@ -143,7 +143,7 @@ sticker:
       not_found: Der Sticker existiert nicht mehr im Paket 🤔
       rights: Ich habe keine Berechtigung, diesen Sticker zu löschen 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal ⚠️
 
         <code>${error}</code>
   delete_random:
