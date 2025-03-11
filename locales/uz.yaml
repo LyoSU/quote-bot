@@ -143,7 +143,7 @@ sticker:
       not_found: Stiker to'plamda endi mavjud emas 🤔
       rights: Ushbu stikerni o'chirishga ruxsatim yo'q 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Bir narsa noto'g'ri ketdi. Keyinroq yana urinib ko'ring ⚠️
 
         <code>${error}</code>
   delete_random:
