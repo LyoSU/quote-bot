@@ -148,7 +148,7 @@ sticker:
       not_found: L'adesivo non esiste più nel pacchetto 🤔
       rights: Non ho il permesso di eliminare questo adesivo 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Qualcosa è andato storto. Per favore riprova più tardi ⚠️
 
         <code>${error}</code>
   delete_random:
