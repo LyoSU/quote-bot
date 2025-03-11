@@ -143,7 +143,7 @@ sticker:
       not_found: Çıkartma artık pakette yok 🤔
       rights: Bu çıkartmayı silme iznim yok 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin ⚠️
 
         <code>${error}</code>
   delete_random:
