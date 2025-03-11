@@ -143,7 +143,7 @@ sticker:
       not_found: 패키지에 스티커가 더 이상 존재하지 않습니다 🤔
       rights: 이 스티커를 삭제할 권한이 없습니다 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        문제가 발생했습니다. 나중에 다시 시도해주세요 ⚠️
 
         <code>${error}</code>
   delete_random:
