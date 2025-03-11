@@ -143,7 +143,7 @@ sticker:
       not_found: L'autocollant n'existe plus dans le pack 🤔
       rights: Je n'ai pas l'autorisation de supprimer cet autocollant 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Quelque chose s'est mal passé. Veuillez réessayer plus tard ⚠️
 
         <code>${error}</code>
   delete_random:
