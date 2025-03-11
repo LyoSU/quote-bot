@@ -143,7 +143,7 @@ sticker:
       not_found: Artıq stikerdən paketdə yoxdur 🤔
       rights: Bu stikeri silmək üçün mənim icazəm yoxdur 🔒
       generic: |
-        Something went wrong. Please try again later ⚠️
+        Nəsə səhv oldu. Zəhmət olmasa, yenidən cəhd edin ⚠️
 
         <code>${error}</code>
   delete_random:
