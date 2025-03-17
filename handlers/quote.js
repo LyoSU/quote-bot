@@ -407,19 +407,7 @@ module.exports = async (ctx, next) => {
     if (quoteMessage.quote) {
       text = quoteMessage.quote.text
 
-      // Handle entities adjustment based on quote position
-      if (quoteMessage.quote.position !== undefined && message.entities && message.entities.length > 0) {
-        // Filter out entities that come before the quote position
-        // And adjust offsets for entities that come after the position
-        message.entities = message.entities
-          .filter(entity => entity.offset + entity.length > quoteMessage.quote.position)
-          .map(entity => {
-            return {
-              ...entity,
-              offset: Math.max(0, entity.offset - quoteMessage.quote.position)
-            };
-          });
-      }
+      message.entities = quoteMessage.quote.entities
     }
 
     if (!text) {
