@@ -294,6 +294,10 @@ module.exports = async (ctx, next) => {
 
   messages = messages.filter((message) => message && Object.keys(message).length !== 0)
 
+  if (ctx.message.quote) {
+    messages[0].quote = ctx.message.quote
+  }
+
   if (messages.length <= 0) {
     if (process.env.GROUP_ID) {
       for (let index = 1; index < messageCount; index++) {
@@ -392,7 +396,23 @@ module.exports = async (ctx, next) => {
 
     let text
 
-    if (quoteMessage.caption) {
+    if (quoteMessage.quote) {
+      text = quoteMessage.quote.text
+
+      // Handle entities adjustment based on quote position
+      if (quoteMessage.quote.position !== undefined && quoteMessage.entities && quoteMessage.entities.length > 0) {
+        // Filter out entities that come before the quote position
+        // And adjust offsets for entities that come after the position
+        message.entities = quoteMessage.entities
+          .filter(entity => entity.offset + entity.length > quoteMessage.quote.position)
+          .map(entity => {
+            return {
+              ...entity,
+              offset: Math.max(0, entity.offset - quoteMessage.quote.position)
+            };
+          });
+      }
+    } else if (quoteMessage.caption) {
       text = quoteMessage.caption
       message.entities = quoteMessage.caption_entities
     } else {
