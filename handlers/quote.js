@@ -396,14 +396,22 @@ module.exports = async (ctx, next) => {
 
     let text
 
+    if (quoteMessage.caption) {
+      text = quoteMessage.caption
+      message.entities = quoteMessage.caption_entities
+    } else {
+      text = quoteMessage.text
+      message.entities = quoteMessage.entities
+    }
+
     if (quoteMessage.quote) {
       text = quoteMessage.quote.text
 
       // Handle entities adjustment based on quote position
-      if (quoteMessage.quote.position !== undefined && quoteMessage.entities && quoteMessage.entities.length > 0) {
+      if (quoteMessage.quote.position !== undefined && message.entities && message.entities.length > 0) {
         // Filter out entities that come before the quote position
         // And adjust offsets for entities that come after the position
-        message.entities = quoteMessage.entities
+        message.entities = message.entities
           .filter(entity => entity.offset + entity.length > quoteMessage.quote.position)
           .map(entity => {
             return {
@@ -412,12 +420,6 @@ module.exports = async (ctx, next) => {
             };
           });
       }
-    } else if (quoteMessage.caption) {
-      text = quoteMessage.caption
-      message.entities = quoteMessage.caption_entities
-    } else {
-      text = quoteMessage.text
-      message.entities = quoteMessage.entities
     }
 
     if (!text) {
