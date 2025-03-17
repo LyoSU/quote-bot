@@ -30,7 +30,7 @@
     "openai": "^4.47.3",
     "prom-client": "^12.0.0",
     "sharp": "^0.30.5",
-    "tdl": "^8.0.0",
+    "tdl": "^8.0.2",
     "telegraf": "^3.39.0",
     "telegraf-i18n": "^6.6.0",
     "telegraf-ratelimit": "^2.0.0",
