@@ -286,6 +286,7 @@ module.exports = async (ctx, next) => {
 
   if (isCommand && ctx.message.external_reply) {
     messages.push(Object.assign(ctx.message.external_reply, {
+      message_id: ctx.message.message_id,
       quote: ctx.message.quote
     }))
   }
