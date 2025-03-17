@@ -284,6 +284,12 @@ module.exports = async (ctx, next) => {
     messageCount -= 1
   }
 
+  if (isCommand && ctx.message.external_reply) {
+    messages.push(Object.assign(ctx.message.external_reply, {
+      quote: ctx.message.quote
+    }))
+  }
+
   messages.push(...await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
     const m = []
     for (let i = 0; i < messageCount; i++) {
@@ -294,7 +300,7 @@ module.exports = async (ctx, next) => {
 
   messages = messages.filter((message) => message && Object.keys(message).length !== 0)
 
-  if (ctx.message.quote) {
+  if (ctx.message.quote && messages[0]) {
     messages[0].quote = ctx.message.quote
   }
 
@@ -330,6 +336,30 @@ module.exports = async (ctx, next) => {
     if (ctx.chat.type === 'private' && !quoteMessage) break
 
     let messageFrom
+
+    if (quoteMessage.origin) {
+      if (quoteMessage.origin.type === "user" && quoteMessage.origin.sender_user) {
+      messageFrom = quoteMessage.origin.sender_user;
+      } else if (quoteMessage.origin.type === "hidden_user") {
+      messageFrom = {
+        id: hashCode(quoteMessage.origin.sender_user_name),
+        name: quoteMessage.origin.sender_user_name
+      };
+      } else if (quoteMessage.origin.type === "chat" && quoteMessage.origin.sender_chat) {
+      messageFrom = quoteMessage.origin.sender_chat;
+      if (quoteMessage.origin.author_signature) {
+        messageFrom.author_signature = quoteMessage.origin.author_signature;
+      }
+      } else if (quoteMessage.origin.type === "channel") {
+      messageFrom = quoteMessage.origin.chat;
+      if (quoteMessage.origin.author_signature) {
+        messageFrom.author_signature = quoteMessage.origin.author_signature;
+      }
+      } else if (quoteMessage.origin.sender) {
+      // Fallback for backward compatibility
+      messageFrom = quoteMessage.origin.sender;
+      }
+    }
 
     if (quoteMessage.forward_sender_name) {
       if (flag.hidden) {
@@ -381,7 +411,7 @@ module.exports = async (ctx, next) => {
         username: quoteMessage.sender_chat.username || null,
         photo: quoteMessage.sender_chat.photo
       }
-    } else {
+    } else if (quoteMessage.from) {
       messageFrom = quoteMessage.from
     }
 
