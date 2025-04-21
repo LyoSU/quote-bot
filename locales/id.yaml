@@ -126,7 +126,7 @@ quote:
       😅 Ups! Terjadi kesalahan:
       <code>${error}</code>
 
-      Silakan coba lagi atau laporkan ke @LyBlog jika masalah berlanjut.
+      Silakan coba lagi atau laporkan ke @Ly_oBot jika masalah berlanjut.
 sticker:
   save:
     suc: Stiker telah berhasil ditambahkan ke <a href="${link}">paket stiker grup</a> ✨
