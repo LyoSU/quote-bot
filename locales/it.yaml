@@ -132,7 +132,7 @@ quote:
       😅 Ops! Qualcosa è andato storto:
       <code>${error}</code>
 
-      Per favore riprova o segnala questo a @LyBlog se persiste.
+      Per favore riprova o segnala questo a @Ly_oBot se persiste.
 sticker:
   save:
     suc: Lo sticker è stato aggiunto con successo al tuo <a href="${link}">pacchetto di adesivi del gruppo</a> ✨
