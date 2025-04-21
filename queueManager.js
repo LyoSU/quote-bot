@@ -2,7 +2,7 @@ const FastPriorityQueue = require('fastpriorityqueue')
 const EventEmitter = require('events')
 
 // Default values and thresholds
-const DEFAULT_MAX_QUEUE_SIZE = 3000
+const DEFAULT_MAX_QUEUE_SIZE = 1000
 const DEFAULT_WARNING_THRESHOLD = 0.6 // 60%
 const DEFAULT_PAUSE_THRESHOLD = 0.8 // 80%
 const DEFAULT_RESUME_THRESHOLD = 0.5 // 50%
