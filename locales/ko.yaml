@@ -126,7 +126,7 @@ quote:
       😅 이런! 문제가 발생했습니다:
       <code>${error}</code>
 
-      다시 시도하거나 문제가 지속되면 @LyBlog에 보고하세요．
+      다시 시도하거나 문제가 지속되면 @Ly_oBot에 보고하세요．
 sticker:
   save:
     suc: <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다 ✨
