@@ -126,7 +126,7 @@ quote:
       😅 Üzr istəyirik! Bir nasazlıq baş verdi:
       <code>${error}</code>
 
-      Yenidən cəhd edin və ya bu problemin davam etməsi halında bunu @LyBlog-a məlumat verin.
+      Yenidən cəhd edin və ya bu problemin davam etməsi halında bunu @Ly_oBot-a məlumat verin.
 sticker:
   save:
     suc: Uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu ✨
