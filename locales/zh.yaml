@@ -126,7 +126,7 @@ quote:
       😅 哎呀！出了点问题：
       <code>${error}</code>
 
-      请重试或将此问题报告给@LyBlog。
+      请再试一次，或者如果问题持续存在，请向 @Ly_oBot 报告。
 sticker:
   save:
     suc: 成功添加到您的<a href="${link}">群组贴纸包</a>✨

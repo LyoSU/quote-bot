@@ -123,10 +123,10 @@ quote:
       • Stiker to'plami to'la
       • Botda ruxsatlar yo'q
     generic_error: |
-      😅 Uzr! Nimadir noto'g'ri ketdi:
+      😅 Voy! Nimadir xato ketdi:
       <code>${error}</code>
 
-      Iltimos, yana urinib ko'ring yoki bu haqda @LyBlog'ga xabar bering agar davom etsa.
+      Iltimos, qayta urining yoki muammo davom etsa, @Ly_oBot ga xabar bering.
 sticker:
   save:
     suc: Stiker muvaffaqiyatli ravishda <a href="${link}">stikerlar to'plami guruhiga qo'shildi</a> ✨

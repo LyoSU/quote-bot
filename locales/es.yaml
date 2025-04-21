@@ -126,7 +126,7 @@ quote:
       😅 ¡Ups! Algo salió mal:
       <code>${error}</code>
 
-      Por favor, inténtalo de nuevo o informa a @LyBlog si persiste.
+      Por favor, inténtalo de nuevo o informa a @Ly_oBot si persiste.
 sticker:
   save:
     suc: El sticker se ha guardado con éxito en el <a href="${link}">pack de stickers del grupo</a> ✨

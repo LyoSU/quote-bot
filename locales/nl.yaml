@@ -126,7 +126,7 @@ quote:
       😅 Oeps! Er is iets misgegaan:
       <code>${error}</code>
 
-      Probeer het opnieuw of meld dit bij @LyBlog als het probleem aanhoudt.
+      Probeer het opnieuw of meld dit bij @Ly_oBot als het probleem aanhoudt.
 sticker:
   save:
     suc: Succesvol toegevoegd aan je <a href="${link}">groepssticker pakket</a> ✨

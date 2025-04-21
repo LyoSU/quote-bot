@@ -126,7 +126,7 @@ quote:
       😅 Ups! Coś poszło nie tak:
       <code>${error}</code>
 
-      Proszę spróbować ponownie lub zgłosić to do @LyBlog, jeśli problem się utrzymuje.
+      Proszę spróbować ponownie lub zgłosić to do @Ly_oBot, jeśli problem się utrzymuje.
 sticker:
   save:
     suc: Pomyślnie dodano do Twojego <a href="${link}">pakietu naklejek grupy</a> ✨

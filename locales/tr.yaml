@@ -123,10 +123,10 @@ quote:
       • Çıkartma paketi dolu
       • Botun yetkileri yetersiz
     generic_error: |
-      😅 Oops! Bir şeyler ters gitti:
+      😅 Hata! Bir şeyler yanlış gitti:
       <code>${error}</code>
 
-      Lütfen tekrar deneyin veya sorun devam ederse bunu @LyBlog'a bildirin.
+      Lütfen tekrar deneyin veya sorun devam ederse bunu @Ly_oBot'a bildirin.
 sticker:
   save:
     suc: Başarıyla <a href="${link}">grup çıkartma paketinize</a> eklendi ✨

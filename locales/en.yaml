@@ -126,7 +126,7 @@ quote:
       😅 Oops! Something went wrong:
       <code>${error}</code>
 
-      Please try again or report this to @LyBlog if it persists.
+      Please try again or report this to @Ly_oBot if it persists.
 sticker:
   save:
     suc: Successfully added to your <a href="${link}">group sticker pack</a> ✨

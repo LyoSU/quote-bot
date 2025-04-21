@@ -126,7 +126,7 @@ quote:
       😅 Ups! Es ist ein Fehler aufgetreten:
       <code>${error}</code>
 
-      Bitte versuchen Sie es erneut oder melden Sie das an @LyBlog, wenn es weiterhin besteht.
+      Bitte versuchen Sie es erneut oder melden Sie das an @Ly_oBot, wenn es weiterhin besteht.
 sticker:
   save:
     suc: Erfolgreich zu Ihrem <a href="${link}">Gruppen-Stickerpack</a> hinzugefügt ✨
