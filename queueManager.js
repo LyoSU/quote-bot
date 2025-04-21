@@ -189,7 +189,7 @@ class QueueManager extends EventEmitter {
 
   getStatus () {
     const queuePercentage = (this.updateQueue.size / this.maxQueueSize) * 100
-    return `Queue size: ${this.updateQueue.size}/${this.maxQueueSize} (${queuePercentage.toFixed(2)}%)`
+    return `Queue size: ${this.updateQueue.size} (${queuePercentage.toFixed(2)}%)`
   }
 }
 
