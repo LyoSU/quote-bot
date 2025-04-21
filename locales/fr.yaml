@@ -126,7 +126,7 @@ quote:
       😅 Oups ! Quelque chose a mal tourné :
       <code>${error}</code>
 
-      Veuillez réessayer ou signaler cela à @LyBlog si cela persiste.
+      Veuillez réessayer ou signaler cela à @Ly_oBot si cela persiste.
 sticker:
   save:
     suc: Ajouté avec succès à votre <a href="${link}">pack d'autocollants du groupe</a> ✨
