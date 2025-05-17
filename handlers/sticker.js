@@ -105,12 +105,12 @@ const getTopStickerSets = async () => {
 }
 
 // Run checks every 10 minutes
-setInterval(async () => {
-  const topStickerSets = await getTopStickerSets()
-  if (topStickerSets.length > 0) {
-    console.log(`Processed ${topStickerSets.length} qualifying sticker sets`)
-  }
-}, 1000 * 60 * 10)
+// setInterval(async () => {
+//   const topStickerSets = await getTopStickerSets()
+//   if (topStickerSets.length > 0) {
+//     console.log(`Processed ${topStickerSets.length} qualifying sticker sets`)
+//   }
+// }, 1000 * 60 * 10)
 
 /**
  * Middleware to track sticker usage
