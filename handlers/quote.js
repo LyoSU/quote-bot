@@ -110,12 +110,73 @@ const minIdsInChat = {}
 const handleQuoteError = async (ctx, error) => {
   console.error('Quote error:', error)
 
+  // API rate limiting
   if (error.response?.statusCode === 429) {
     return ctx.replyWithHTML(ctx.i18n.t('quote.errors.rate_limit', {
       seconds: 30
     }))
   }
 
+  // Handle Telegram API specific errors
+  if (error.description) {
+    const errorDesc = error.description.toLowerCase()
+
+    // Permission errors
+    if (errorDesc.includes('not enough rights to send documents')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.no_rights_send_documents'))
+    }
+
+    if (errorDesc.includes('not enough rights to send stickers')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.no_rights_send_stickers'))
+    }
+
+    if (errorDesc.includes('not enough rights to send photos')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.no_rights_send_photos'))
+    }
+
+    // Chat access errors
+    if (errorDesc.includes('chat write forbidden') || errorDesc.includes('forbidden')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.chat_write_forbidden'))
+    }
+
+    if (errorDesc.includes('bot was blocked by the user')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.bot_blocked'))
+    }
+
+    if (errorDesc.includes('user is deactivated')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.user_deactivated'))
+    }
+
+    // Sticker-related errors
+    if (errorDesc.includes('stickerset_invalid')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.sticker_set_invalid'))
+    }
+
+    if (errorDesc.includes('sticker set full') || errorDesc.includes('too many stickers')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.sticker_set_full'))
+    }
+
+    // File size and format errors
+    if (errorDesc.includes('request entity too large') || errorDesc.includes('file too big')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.file_too_large'))
+    }
+
+    if (errorDesc.includes('message is too long')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.message_too_long'))
+    }
+
+    // Network-related errors
+    if (errorDesc.includes('timeout') || errorDesc.includes('timed out')) {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.timeout_error'))
+    }
+
+    // Generic Telegram error with specific description
+    return ctx.replyWithHTML(ctx.i18n.t('quote.errors.telegram_error', {
+      error: error.description
+    }))
+  }
+
+  // Handle HTTP errors from quote API
   if (error.response?.body) {
     let errorBody;
     try {
@@ -140,6 +201,12 @@ const handleQuoteError = async (ctx, error) => {
     }))
   }
 
+  // Network errors
+  if (error.code === 'ECONNRESET' || error.code === 'ENOTFOUND' || error.code === 'ETIMEDOUT') {
+    return ctx.replyWithHTML(ctx.i18n.t('quote.errors.network_error'))
+  }
+
+  // Handle sticker set errors by resetting and retrying
   if (error.description?.includes('STICKERSET_INVALID')) {
     // Reset sticker set and try again without custom pack
     if (ctx.session?.userInfo) {
@@ -148,12 +215,7 @@ const handleQuoteError = async (ctx, error) => {
     return handleQuote(ctx)
   }
 
-  if (error.description) {
-    return ctx.replyWithHTML(ctx.i18n.t('quote.errors.telegram_error', {
-      error: error.description
-    }))
-  }
-
+  // Fallback for unknown errors
   return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'))
 }
 
@@ -893,14 +955,18 @@ ${JSON.stringify(messageForAIContext)}
           allow_sending_without_reply: true
         })
       } else {
-        await ctx.replyWithDocument({
-          source: image,
-          filename: 'quote.png'
-        }, {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true,
-          business_connection_id: ctx.update?.business_message?.business_connection_id
-        })
+        try {
+          await ctx.replyWithDocument({
+            source: image,
+            filename: 'quote.png'
+          }, {
+            reply_to_message_id: ctx.message.message_id,
+            allow_sending_without_reply: true,
+            business_connection_id: ctx.update?.business_message?.business_connection_id
+          })
+        } catch (error) {
+          return handleQuoteError(ctx, error)
+        }
       }
     } catch (error) {
       return handleQuoteError(ctx, error)
