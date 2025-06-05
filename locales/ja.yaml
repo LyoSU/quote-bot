@@ -263,7 +263,6 @@ donate:
     <b>サポートありがとうございます！💜</b>
     QuotLyBotのさらなる進化を支援いただけて嬉しいです！
   pay: '💜 ペイテレグラム'
-  liqpay: 'カードで支払う 💳'
   other: '他の方法'
 emoji:
   info: |
