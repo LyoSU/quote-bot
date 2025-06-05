@@ -263,7 +263,6 @@ donate:
     <b>지원해 주셔서 감사합니다! 💜</b>
     QuotLyBot이 더욱 발전할 수 있도록 도와주십니다!
   pay: '💜 텔레그램으로 지불하기'
-  liqpay: '카드로 결제하기 💳'
   other: '다른 옵션'
 emoji:
   info: |
