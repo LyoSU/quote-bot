@@ -263,7 +263,6 @@ donate:
     <b>感谢您的支持！💜</b>
     您正在帮助让 QuotLyBot 变得更好！
   pay: '💜 通过 Telegram 支付'
-  liqpay: '银行卡支付 💳'
   other: '其它选项'
 emoji:
   info: |
