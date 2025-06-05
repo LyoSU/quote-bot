@@ -263,7 +263,6 @@ donate:
     <b>Terima kasih atas dukungan Anda! 💜</b>
     Anda telah membantu membuat QuotLyBot menjadi lebih baik!
   pay: '💜 Bayar Telegram'
-  liqpay: 'Bayar dengan Kartu 💳'
   other: 'Sebaliknya'
 emoji:
   info: |
