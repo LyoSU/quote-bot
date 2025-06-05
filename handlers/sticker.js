@@ -50,6 +50,13 @@ async function publishWithDelay (stickerSet) {
       json: {
         name: stickerSet.name,
         count: stickerSet.count
+      },
+      timeout: {
+        request: 5 * 1000
+      },
+      retry: {
+        limit: 2,
+        methods: ['POST']
       }
     })
 
@@ -60,6 +67,14 @@ async function publishWithDelay (stickerSet) {
     lastPublishTime = Date.now()
   } catch (error) {
     console.error('Error publishing sticker set:', error)
+
+    // Handle specific errors
+    if (error.response?.statusCode === 429) {
+      console.log(`Rate limited, waiting before retry: ${stickerSet.name}`)
+      await new Promise(resolve => setTimeout(resolve, 60000)) // Wait 1 minute
+    } else if (error.code === 'ETIMEDOUT' || error.code === 'ECONNRESET') {
+      console.log(`Network timeout for sticker set: ${stickerSet.name}`)
+    }
   }
 }
 
