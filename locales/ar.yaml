@@ -127,6 +127,56 @@ quote:
       <code>${error}</code>
 
       يرجى المحاولة مرة أخرى أو الإبلاغ عن هذا إلى @Ly_oBot إذا استمر المشكلة.
+    no_rights_send_documents: |
+      🚫 <b>Permission Error</b>
+      I don't have permission to send documents in this chat.
+
+      <b>To fix this:</b>
+      • Group admin: Give me "Send documents" permission
+      • Private chat: Make sure you haven't blocked the bot
+    no_rights_send_stickers: |
+      🚫 <b>Permission Error</b>
+      I don't have permission to send stickers in this chat.
+
+      <b>To fix this:</b>
+      • Group admin: Give me "Send stickers" permission
+      • Try using <code>/q img</code> for image format instead
+    no_rights_send_photos: |
+      🚫 <b>Permission Error</b>
+      I don't have permission to send photos in this chat.
+
+      <b>To fix this:</b>
+      • Group admin: Give me "Send photos" permission
+      • Try using <code>/q</code> for sticker format instead
+    chat_write_forbidden: |
+      🚫 <b>Chat Restricted</b>
+      I can't send messages in this chat.
+
+      <b>Possible reasons:</b>
+      • You've blocked the bot
+      • The group has restricted bots
+      • I was removed from the group
+    sticker_set_invalid: |
+      🔄 <b>Sticker Pack Issue</b>
+      There's a problem with the sticker pack. Creating a new quote...
+    sticker_set_full: |
+      📦 <b>Sticker Pack Full</b>
+      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+    bot_blocked: |
+      🚫 <b>Bot Blocked</b>
+      You've blocked this bot. Please unblock it to receive quotes.
+    user_deactivated: |
+      👤 <b>Account Issue</b>
+      The target user account is deactivated or deleted.
+    message_too_long: |
+      📝 <b>Message Too Long</b>
+      The quoted message is too long. Try quoting fewer messages or shorter text.
+    network_error: |
+      🌐 <b>Network Error</b>
+      Connection problem occurred. Please try again in a moment.
+    timeout_error: |
+      ⏱️ <b>Timeout Error</b>
+      The request took too long. Please try again with a simpler quote.
 sticker:
   save:
     suc: تمت الإضافة بنجاح إلى <a href="${link}">حزمة ملصقات المجموعة</a> ✨
