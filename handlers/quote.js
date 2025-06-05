@@ -788,7 +788,7 @@ ${JSON.stringify(messageForAIContext)}
       },
       responseType: 'buffer',
       timeout: {
-        request: 5 * 1000
+        request: 30 * 1000 // 30 seconds
       },
       retry: {
         limit: 2,
