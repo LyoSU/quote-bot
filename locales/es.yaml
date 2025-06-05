@@ -263,7 +263,6 @@ donate:
     <b>¡Gracias por tu apoyo! 💜</b>
     ¡Estás ayudando a mejorar QuotLyBot aún más!
   pay: '💜 Pagar vía Telegram'
-  liqpay: 'Pagar con Tarjeta 💳'
   other: 'Otros'
 emoji:
   info: |
