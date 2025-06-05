@@ -1,8 +1,5 @@
 const Markup = require('telegraf/markup')
 const { v4: uuidv4 } = require('uuid')
-const { LiqPay } = require('../utils')
-
-const liqpay = new LiqPay(process.env.LIQPAY_PUBLIC, process.env.LIQPAY_PRIVATE)
 
 module.exports = async ctx => {
   if (ctx.updateSubTypes[0] === 'successful_payment') {
