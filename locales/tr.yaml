@@ -263,7 +263,6 @@ donate:
     <b>Desteğiniz için teşekkür ederiz! 💜</b>
     QuotLyBot'u daha da iyi hale getiriyorsunuz!
   pay: '💜 Telegram Üzerinden Ödeyin'
-  liqpay: 'Kart ile Öde 💳'
   other: 'Diğer Yöntemler'
 emoji:
   info: |
