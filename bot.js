@@ -10,6 +10,7 @@ const MAX_QUEUE_SIZE = 3000
 const QUEUE_WARNING_THRESHOLD = 0.8
 const PAUSE_THRESHOLD = 0.9
 const RESUME_THRESHOLD = 0.7
+const WORKER_HANDLER_TIMEOUT = process.env.WORKER_HANDLER_TIMEOUT || 30000 // 30s
 
 if (cluster.isMaster) {
   const { setupMaster } = require('./master')
@@ -34,5 +35,5 @@ if (cluster.isMaster) {
 } else {
   const { setupWorker } = require('./worker')
 
-  setupWorker(BOT_TOKEN)
+  setupWorker(BOT_TOKEN, WORKER_HANDLER_TIMEOUT)
 }

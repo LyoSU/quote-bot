@@ -3,7 +3,7 @@ const { Telegraf } = require('telegraf')
 const { db } = require('./database')
 const { stats } = require('./middlewares')
 
-function setupWorker (botToken) {
+function setupWorker (botToken, handlerTimeout) {
   console.log(`Worker ${process.pid} started`)
 
   const tdlibProxy = new Proxy({}, {
@@ -30,7 +30,7 @@ function setupWorker (botToken) {
     }
   })
 
-  const bot = new Telegraf(botToken)
+  const bot = new Telegraf(botToken, { handlerTimeout })
 
   bot.use((ctx, next) => {
     const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
