@@ -127,7 +127,19 @@ class HighLoadStats {
   }
 
   startPeriodicUpdate () {
-    setInterval(() => this.updateAndLogStats(), UPDATE_INTERVAL_MS)
+    // Prevent multiple intervals
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval)
+    }
+
+    this.updateInterval = setInterval(() => this.updateAndLogStats(), UPDATE_INTERVAL_MS)
+
+    // Cleanup on process exit
+    process.once('SIGTERM', () => {
+      if (this.updateInterval) {
+        clearInterval(this.updateInterval)
+      }
+    })
   }
 
   middleware () {

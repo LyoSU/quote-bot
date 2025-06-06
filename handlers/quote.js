@@ -69,22 +69,33 @@ async function startClearStickerPack() {
   if (clearStickerPackTimer) return
 
   clearStickerPackTimer = setInterval(async () => {
-    if (!botInfo) botInfo = await telegram.getMe()
+    try {
+      if (!botInfo) botInfo = await telegram.getMe()
 
-    const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username)
-      .catch((error) => {
-        console.log('clearStickerPack error:', error)
-      })
+      const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username)
+        .catch((error) => {
+          console.log('clearStickerPack error:', error)
+        })
 
-    if (!stickerSet) return
+      if (!stickerSet) return
 
-    const stickersToDelete = stickerSet.stickers.slice(config.globalStickerSet.save_sticker_count)
+      const stickersToDelete = stickerSet.stickers.slice(config.globalStickerSet.save_sticker_count)
 
-    for (const sticker of stickersToDelete) {
-      await telegram.deleteStickerFromSet(sticker.file_id)
-        .catch(console.error)
+      for (const sticker of stickersToDelete) {
+        await telegram.deleteStickerFromSet(sticker.file_id)
+          .catch(console.error)
+      }
+    } catch (error) {
+      console.error('Sticker cleanup error:', error)
     }
-  }, 1000)
+  }, 5000) // Run every 5 seconds
+
+  // Add cleanup on process exit
+  process.once('SIGTERM', () => {
+    if (clearStickerPackTimer) {
+      clearInterval(clearStickerPackTimer)
+    }
+  })
 }
 
 const hashCode = (s) => {
@@ -208,6 +219,15 @@ const handleQuoteError = async (ctx, error) => {
 
   // Handle sticker set errors by resetting and retrying
   if (error.description?.includes('STICKERSET_INVALID')) {
+    // Prevent infinite loops by checking retry count
+    if (!ctx.stickerRetryCount) ctx.stickerRetryCount = 0
+    ctx.stickerRetryCount++
+
+    if (ctx.stickerRetryCount > 2) {
+      console.error('Max sticker retry attempts reached')
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'))
+    }
+
     // Reset sticker set and try again without custom pack
     if (ctx.session?.userInfo) {
       ctx.session.userInfo.tempStickerSet.create = false
@@ -429,7 +449,7 @@ module.exports = async (ctx, next) => {
         // Cache forward name lookups
         const forwardCacheKey = `forward_${quoteMessage.forward_sender_name}`
         if (!ctx.forwardCache) ctx.forwardCache = new Map()
-        
+
         let sarchForwardName
         if (ctx.forwardCache.has(forwardCacheKey)) {
           sarchForwardName = ctx.forwardCache.get(forwardCacheKey)
@@ -556,7 +576,7 @@ module.exports = async (ctx, next) => {
         // Cache privacy settings to avoid repeated DB queries
         const cacheKey = `privacy_${message.from.id}`
         if (!ctx.privacyCache) ctx.privacyCache = new Map()
-        
+
         if (ctx.privacyCache.has(cacheKey)) {
           flag.privacy = ctx.privacyCache.get(cacheKey)
         } else {
