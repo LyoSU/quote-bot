@@ -42,10 +42,16 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const checkTdlibHealth = async () => {
     try {
       // Simple health check using getMe
-      await Promise.race([
+      const result = await Promise.race([
         tdlib.getUser(process.env.BOT_TOKEN.split(':')[0]),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Health check timeout')), 5000))
       ])
+      
+      // Check if result is an error object
+      if (result && result.code && result.message) {
+        throw new Error(result.message)
+      }
+      
       if (!tdlibHealthy) {
         console.log('TDLib health restored')
         tdlibHealthy = true
@@ -54,6 +60,12 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       if (tdlibHealthy) {
         console.error('TDLib health check failed:', error.message)
         tdlibHealthy = false
+      }
+      
+      // If health check fails, try to trigger TDLib reconnection
+      if (error.message.includes('not available') || error.message.includes('timeout')) {
+        console.log('Attempting to trigger TDLib reconnection...')
+        // The tdlib module will handle reconnection internally
       }
     }
     lastTdlibCheck = Date.now()
@@ -185,11 +197,14 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         bot.telegram.sendMessage(msg.chatId, msg.text)
       } else if (msg.type === MESSAGE_TYPES.TDLIB_REQUEST) {
         // Check TDLib health before processing
-        if (!tdlibHealthy) {
+        const timeSinceLastCheck = Date.now() - lastTdlibCheck
+        if (!tdlibHealthy || timeSinceLastCheck > TDLIB_HEALTH_INTERVAL * 2) {
           worker.send({ 
             type: MESSAGE_TYPES.TDLIB_RESPONSE, 
             id: msg.id, 
-            error: 'TDLib is currently unhealthy' 
+            error: timeSinceLastCheck > TDLIB_HEALTH_INTERVAL * 2 
+              ? 'TDLib health check overdue' 
+              : 'TDLib is currently unhealthy'
           })
           return
         }
@@ -356,6 +371,9 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     console.log(`    RSS: ${(memoryUsage.rss / 1024 / 1024).toFixed(2)} MB`)
     console.log(`    Heap Total: ${(memoryUsage.heapTotal / 1024 / 1024).toFixed(2)} MB`)
     console.log(`    Heap Used: ${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`)
+    console.log(`  TDLib Status:`)
+    console.log(`    Healthy: ${tdlibHealthy ? 'Yes' : 'No'}`)
+    console.log(`    Last Check: ${Math.round((now - lastTdlibCheck) / 1000)}s ago`)
     console.log(`  Uptime: ${(process.uptime() / 60).toFixed(2)} minutes`)
     console.log('==================\n')
   }, LOAD_CHECK_INTERVAL)

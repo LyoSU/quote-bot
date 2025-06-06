@@ -13,24 +13,94 @@ try {
   }
 }
 
-const client = tdl.createClient({
-  apiId: process.env.TELEGRAM_API_ID,
-  apiHash: process.env.TELEGRAM_API_HASH,
-  databaseDirectory: path.join(tdDirectory, 'db'),
-  filesDirectory: tdDirectory,
-  tdlibParameters: {
-    use_message_database: false,
-    use_chat_info_database: false,
-    use_file_database: false
-  }
-})
+let client = null
+let isConnecting = false
+let reconnectAttempts = 0
+const MAX_RECONNECT_ATTEMPTS = 5
+const RECONNECT_DELAY = 5000
 
-client.on('error', console.error)
-client.loginAsBot(process.env.BOT_TOKEN)
+const createClient = () => {
+  return tdl.createClient({
+    apiId: process.env.TELEGRAM_API_ID,
+    apiHash: process.env.TELEGRAM_API_HASH,
+    databaseDirectory: path.join(tdDirectory, 'db'),
+    filesDirectory: tdDirectory,
+    tdlibParameters: {
+      use_message_database: false,
+      use_chat_info_database: false,
+      use_file_database: false
+    }
+  })
+}
+
+const connectClient = async () => {
+  if (isConnecting) return
+  isConnecting = true
+  
+  try {
+    if (client) {
+      try {
+        await client.close()
+      } catch (e) {
+        // Ignore close errors
+      }
+    }
+    
+    client = createClient()
+    
+    client.on('error', (error) => {
+      console.error('TDLib client error:', error)
+      reconnectClient()
+    })
+    
+    client.on('destroy', () => {
+      console.log('TDLib client destroyed, attempting reconnect...')
+      reconnectClient()
+    })
+    
+    await client.loginAsBot(process.env.BOT_TOKEN)
+    console.log('TDLib client connected successfully')
+    reconnectAttempts = 0
+    isConnecting = false
+  } catch (error) {
+    console.error('Failed to connect TDLib client:', error)
+    isConnecting = false
+    reconnectClient()
+  }
+}
+
+const reconnectClient = () => {
+  if (isConnecting || reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) return
+  
+  reconnectAttempts++
+  console.log(`TDLib reconnect attempt ${reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS} in ${RECONNECT_DELAY}ms`)
+  
+  setTimeout(() => {
+    connectClient()
+  }, RECONNECT_DELAY * reconnectAttempts) // Exponential backoff
+}
+
+// Initial connection
+connectClient()
 
 function sendMethod (method, parm) {
   return new Promise((resolve, reject) => {
-    client.invoke(Object.assign({ _: method }, parm)).then(resolve).catch(resolve)
+    if (!client) {
+      reject(new Error('TDLib client not available'))
+      return
+    }
+    
+    try {
+      client.invoke(Object.assign({ _: method }, parm)).then(resolve).catch((error) => {
+        // Trigger reconnection on critical errors
+        if (error && (error.code === 'NETWORK_ERROR' || error.message?.includes('Connection'))) {
+          reconnectClient()
+        }
+        resolve(error) // Don't reject, return error as result
+      })
+    } catch (error) {
+      reject(error)
+    }
   })
 }
 
@@ -351,5 +421,13 @@ function getMessages (chatID, messageIds) {
 
 module.exports = {
   getMessages,
-  getUser
+  getUser,
+  reconnect: () => {
+    console.log('Manual TDLib reconnect triggered')
+    reconnectAttempts = 0 // Reset attempts counter
+    reconnectClient()
+  },
+  isHealthy: () => {
+    return client !== null && !isConnecting && reconnectAttempts < MAX_RECONNECT_ATTEMPTS
+  }
 }

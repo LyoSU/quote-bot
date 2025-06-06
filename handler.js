@@ -175,6 +175,19 @@ bot.hears(/\/q(.*)\*(.*)/, rateLimit({
 
 bot.command('donate', handleDonate)
 bot.command('ping', handlePing)
+bot.command('tdlib_restart', onlyAdmin, async (ctx) => {
+  try {
+    const tdlib = require('./helpers/tdlib')
+    tdlib.reconnect()
+    await ctx.replyWithHTML('🔄 TDLib restart initiated', {
+      reply_to_message_id: ctx.message.message_id
+    })
+  } catch (error) {
+    await ctx.replyWithHTML(`❌ Error: ${error.message}`, {
+      reply_to_message_id: ctx.message.message_id
+    })
+  }
+})
 bot.action(/(donate):(.*)/, handleDonate)
 bot.on('pre_checkout_query', ({ answerPreCheckoutQuery }) =>
   answerPreCheckoutQuery(true)
