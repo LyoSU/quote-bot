@@ -32,9 +32,14 @@ module.exports = async ctx => {
     })
 
     // delete the message after 10 seconds
-    await new Promise(resolve => setTimeout(resolve, 10000))
-    await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id)
-    await ctx.deleteMessage()
+    setTimeout(async () => {
+      try {
+        await ctx.telegram.deleteMessage(ctx.chat.id, response.message_id)
+        await ctx.deleteMessage()
+      } catch (error) {
+        console.error('Error deleting ping messages:', error)
+      }
+    }, 10000)
   } catch (error) {
     console.error('Error in ping command:', error)
   }

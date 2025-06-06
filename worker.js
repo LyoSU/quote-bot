@@ -13,11 +13,6 @@ function setupWorker (botToken, handlerTimeout) {
           const id = Date.now() + Math.random()
           process.send({ type: 'TDLIB_REQUEST', method: prop, args, id })
 
-          const timeout = setTimeout(() => {
-            process.removeListener('message', handler)
-            reject(new Error(`TDLib request timeout for method: ${prop}`))
-          }, 15000) // 15 second timeout
-
           const handler = (msg) => {
             if (msg.type === 'TDLIB_RESPONSE' && msg.id === id) {
               clearTimeout(timeout)
@@ -29,6 +24,11 @@ function setupWorker (botToken, handlerTimeout) {
               }
             }
           }
+
+          const timeout = setTimeout(() => {
+            process.removeListener('message', handler)
+            reject(new Error(`TDLib request timeout for method: ${prop}`))
+          }, 15000) // 15 second timeout
 
           process.on('message', handler)
         })
