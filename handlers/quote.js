@@ -261,7 +261,7 @@ module.exports = async (ctx, next) => {
     // flag.reply = true
     if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
     minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(1000)
+    await sleep(200)
     if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
     delete minIdsInChat[ctx.from.id]
   }
@@ -426,9 +426,19 @@ module.exports = async (ctx, next) => {
 
     if (quoteMessage.forward_sender_name) {
       if (flag.hidden) {
-        const sarchForwardName = await ctx.db.User.find({
-          full_name: quoteMessage.forward_sender_name
-        }).limit(2)
+        // Cache forward name lookups
+        const forwardCacheKey = `forward_${quoteMessage.forward_sender_name}`
+        if (!ctx.forwardCache) ctx.forwardCache = new Map()
+        
+        let sarchForwardName
+        if (ctx.forwardCache.has(forwardCacheKey)) {
+          sarchForwardName = ctx.forwardCache.get(forwardCacheKey)
+        } else {
+          sarchForwardName = await ctx.db.User.find({
+            full_name: quoteMessage.forward_sender_name
+          }).limit(2).lean()
+          ctx.forwardCache.set(forwardCacheKey, sarchForwardName)
+        }
 
         // if (sarchForwardName.length === 0) {
         //   sarchForwardName = await ctx.db.User.find({
@@ -543,8 +553,18 @@ module.exports = async (ctx, next) => {
       if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) {
         flag.privacy = true
       } else {
-        const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id })
-        if (quotedFind && quotedFind.settings.privacy) flag.privacy = true
+        // Cache privacy settings to avoid repeated DB queries
+        const cacheKey = `privacy_${message.from.id}`
+        if (!ctx.privacyCache) ctx.privacyCache = new Map()
+        
+        if (ctx.privacyCache.has(cacheKey)) {
+          flag.privacy = ctx.privacyCache.get(cacheKey)
+        } else {
+          const quotedFind = await ctx.db.User.findOne({ telegram_id: message.from.id }).lean()
+          const hasPrivacy = quotedFind && quotedFind.settings.privacy
+          ctx.privacyCache.set(cacheKey, hasPrivacy)
+          if (hasPrivacy) flag.privacy = true
+        }
       }
     }
 
@@ -911,14 +931,17 @@ ${JSON.stringify(messageForAIContext)}
             const sticketSet = await ctx.getStickerSet(packName)
 
             if (ctx.session.userInfo.tempStickerSet.create) {
-              sticketSet.stickers.forEach(async (sticker, index) => {
-                // wait 3 seconds before delete sticker
-                await new Promise((resolve) => setTimeout(resolve, 3000))
-
-                if (index > config.globalStickerSet.save_sticker_count - 1) {
-                  telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+              // Use for...of loop to properly handle async operations
+              (async () => {
+                for (const [index, sticker] of sticketSet.stickers.entries()) {
+                  if (index > config.globalStickerSet.save_sticker_count - 1) {
+                    // Delay deletion but don't block response
+                    setTimeout(() => {
+                      telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
+                    }, 3000 + (index * 100)) // Stagger deletions
+                  }
                 }
-              })
+              })()
             }
 
             sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
@@ -931,26 +954,20 @@ ${JSON.stringify(messageForAIContext)}
         }
 
         if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
-          const quoteDb = new ctx.db.Quote()
-          quoteDb.group = ctx.group.info
-          quoteDb.user = ctx.session.userInfo
-          quoteDb.file_id = sendResult.sticker.file_id
-          quoteDb.file_unique_id = sendResult.sticker.file_unique_id
-          quoteDb.rate = {
-            votes: [
-              {
-                name: '👍',
-                vote: []
-              },
-              {
-                name: '👎',
-                vote: []
-              }
-            ],
-            score: 0
-          }
-
-          await quoteDb.save()
+          // Use insertOne for better performance than save()
+          await ctx.db.Quote.create({
+            group: ctx.group.info,
+            user: ctx.session.userInfo,
+            file_id: sendResult.sticker.file_id,
+            file_unique_id: sendResult.sticker.file_unique_id,
+            rate: {
+              votes: [
+                { name: '👍', vote: [] },
+                { name: '👎', vote: [] }
+              ],
+              score: 0
+            }
+          })
         }
       } else if (generate.headers['quote-type'] === 'image') {
         await ctx.replyWithPhoto({
@@ -976,6 +993,14 @@ ${JSON.stringify(messageForAIContext)}
       }
     } catch (error) {
       return handleQuoteError(ctx, error)
+    } finally {
+      // Clean up cache to prevent memory leaks
+      if (ctx.privacyCache && ctx.privacyCache.size > 100) {
+        ctx.privacyCache.clear()
+      }
+      if (ctx.forwardCache && ctx.forwardCache.size > 50) {
+        ctx.forwardCache.clear()
+      }
     }
   }
 }
