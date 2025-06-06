@@ -33,6 +33,35 @@ const CPU_THRESHOLD = 80 // percentage
 
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
+  
+  // TDLib health monitoring
+  let tdlibHealthy = true
+  let lastTdlibCheck = Date.now()
+  const TDLIB_HEALTH_INTERVAL = 30000 // 30 seconds
+  
+  const checkTdlibHealth = async () => {
+    try {
+      // Simple health check using getMe
+      await Promise.race([
+        tdlib.getUser(process.env.BOT_TOKEN.split(':')[0]),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Health check timeout')), 5000))
+      ])
+      if (!tdlibHealthy) {
+        console.log('TDLib health restored')
+        tdlibHealthy = true
+      }
+    } catch (error) {
+      if (tdlibHealthy) {
+        console.error('TDLib health check failed:', error.message)
+        tdlibHealthy = false
+      }
+    }
+    lastTdlibCheck = Date.now()
+  }
+  
+  // Start health checks
+  setInterval(checkTdlibHealth, TDLIB_HEALTH_INTERVAL)
+  checkTdlibHealth() // Initial check
 
   // Add request tracking
   let requestCounts = []
@@ -155,10 +184,33 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       } else if (msg.type === MESSAGE_TYPES.SEND_MESSAGE) {
         bot.telegram.sendMessage(msg.chatId, msg.text)
       } else if (msg.type === MESSAGE_TYPES.TDLIB_REQUEST) {
+        // Check TDLib health before processing
+        if (!tdlibHealthy) {
+          worker.send({ 
+            type: MESSAGE_TYPES.TDLIB_RESPONSE, 
+            id: msg.id, 
+            error: 'TDLib is currently unhealthy' 
+          })
+          return
+        }
+        
+        // Add timeout for TDLib operations
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error(`TDLib ${msg.method} timeout in master`)), 8000) // Reduced to 8s
+        })
+        
         try {
-          const result = await tdlib[msg.method](...msg.args)
+          const result = await Promise.race([
+            tdlib[msg.method](...msg.args),
+            timeoutPromise
+          ])
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, result })
         } catch (error) {
+          console.error(`TDLib ${msg.method} error:`, error.message)
+          // Mark as unhealthy if consistent failures
+          if (error.message.includes('timeout')) {
+            tdlibHealthy = false
+          }
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, error: error.message })
         }
       }

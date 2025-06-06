@@ -28,7 +28,7 @@ function setupWorker (botToken, handlerTimeout) {
           const timeout = setTimeout(() => {
             process.removeListener('message', handler)
             reject(new Error(`TDLib request timeout for method: ${prop}`))
-          }, 15000) // 15 second timeout
+          }, 10000) // 10 second timeout (shorter than master)
 
           process.on('message', handler)
         })

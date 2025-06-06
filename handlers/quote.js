@@ -373,13 +373,27 @@ module.exports = async (ctx, next) => {
     }))
   }
 
-  messages.push(...await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
-    const m = []
-    for (let i = 0; i < messageCount; i++) {
-      m.push(startMessage + i)
+  try {
+    const tdlibMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
+      const m = []
+      for (let i = 0; i < messageCount; i++) {
+        m.push(startMessage + i)
+      }
+      return m
+    })())
+    messages.push(...tdlibMessages)
+  } catch (error) {
+    console.error('TDLib getMessages failed:', error.message)
+    // Fallback: use only the replied message if available
+    if (firstMessage) {
+      messages.push(firstMessage)
+    } else {
+      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'), {
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
+      })
     }
-    return m
-  })()))
+  }
 
   messages = messages.filter((message) => message && Object.keys(message).length !== 0)
 
@@ -638,13 +652,20 @@ module.exports = async (ctx, next) => {
   if (flag.ai) {
     let messageForAIContext = []
 
-    messageForAIContext.push(...await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
-      const m = []
-      for (let i = 1; i < 10; i++) {
-        m.push(startMessage - i)
-      }
-      return m
-    })()))
+    try {
+      const aiContextMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
+        const m = []
+        for (let i = 1; i < 10; i++) {
+          m.push(startMessage - i)
+        }
+        return m
+      })())
+      messageForAIContext.push(...aiContextMessages)
+    } catch (error) {
+      console.error('TDLib getMessages for AI context failed:', error.message)
+      // Continue without AI context if TDLib fails
+      messageForAIContext = []
+    }
 
     messageForAIContext = messageForAIContext.filter((message) => message && Object.keys(message).length !== 0)
 
