@@ -13,8 +13,14 @@ function setupWorker (botToken, handlerTimeout) {
           const id = Date.now() + Math.random()
           process.send({ type: 'TDLIB_REQUEST', method: prop, args, id })
 
+          const timeout = setTimeout(() => {
+            process.removeListener('message', handler)
+            reject(new Error(`TDLib request timeout for method: ${prop}`))
+          }, 15000) // 15 second timeout
+
           const handler = (msg) => {
             if (msg.type === 'TDLIB_RESPONSE' && msg.id === id) {
+              clearTimeout(timeout)
               process.removeListener('message', handler)
               if (msg.error) {
                 reject(new Error(msg.error))
@@ -32,9 +38,26 @@ function setupWorker (botToken, handlerTimeout) {
 
   const bot = new Telegraf(botToken, { handlerTimeout })
 
+  // Cache config to avoid blocking file reads
+  let configCache = null
+  let configLastModified = 0
+
+  const getConfig = () => {
+    try {
+      const stats = fs.statSync('./config.json')
+      if (!configCache || stats.mtimeMs > configLastModified) {
+        configCache = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+        configLastModified = stats.mtimeMs
+      }
+      return configCache
+    } catch (error) {
+      console.error('Error reading config:', error)
+      return configCache || {}
+    }
+  }
+
   bot.use((ctx, next) => {
-    const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
-    ctx.config = config
+    ctx.config = getConfig()
     ctx.db = db
     ctx.tdlib = tdlibProxy
     return next()
