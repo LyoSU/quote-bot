@@ -106,10 +106,11 @@ const updateGroupAndUser = async (ctx, next) => {
   await Promise.all([getUser(ctx), getGroup(ctx)]);
   await next(ctx);
   if (ctx.state.emptyRequest === false) {
-    await Promise.all([
+    // Don't await save operations to prevent blocking
+    Promise.all([
       ctx.session.userInfo.save().catch(() => {}),
       ctx.group.info.save().catch(() => {})
-    ]);
+    ]).catch(() => {}); // Fire and forget
   }
 };
 

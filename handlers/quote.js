@@ -682,8 +682,15 @@ ${JSON.stringify(messageForAIContext)}
           const photo = quoteMessage.media.slice(-1)[0]
           const photoUrl = await ctx.telegram.getFileLink(photo.file_id)
 
-          // Download the image
-          const response = await fetch(photoUrl)
+          // Download the image with timeout
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), 10000) // 10s timeout
+          
+          const response = await fetch(photoUrl, { 
+            signal: controller.signal,
+            timeout: 10000
+          })
+          clearTimeout(timeoutId)
           const arrayBuffer = await response.arrayBuffer()
           const buffer = Buffer.from(arrayBuffer)
 
@@ -840,7 +847,13 @@ ${JSON.stringify(messageForAIContext)}
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
-      const errorMessage = JSON.parse(generate.error.response.body).error.message
+      let errorMessage = 'API Error'
+      try {
+        errorMessage = JSON.parse(generate.error.response.body).error.message
+      } catch (parseError) {
+        console.error('Failed to parse error response:', parseError)
+        errorMessage = generate.error.response.body.toString()
+      }
 
       return ctx.replyWithHTML(ctx.i18n.t('quote.api_error', {
         error: errorMessage

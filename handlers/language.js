@@ -10,17 +10,37 @@ const i18n = new I18n({
   defaultLanguageOnMissing: true
 })
 
-module.exports = async ctx => {
-  const localseFile = fs.readdirSync('./locales/')
+// Cache locales to avoid blocking file reads
+let localesCache = null
+let localesCacheTime = 0
+const CACHE_TTL = 60000 // 1 minute
 
-  const locales = {}
+const getLocales = () => {
+  const now = Date.now()
+  if (!localesCache || (now - localesCacheTime) > CACHE_TTL) {
+    try {
+      const localseFile = fs.readdirSync('./locales/')
+      const locales = {}
 
-  localseFile.forEach((fileName) => {
-    const localName = fileName.split('.')[0]
-    locales[localName] = {
-      flag: i18n.t(localName, 'language_name')
+      localseFile.forEach((fileName) => {
+        const localName = fileName.split('.')[0]
+        locales[localName] = {
+          flag: i18n.t(localName, 'language_name')
+        }
+      })
+
+      localesCache = locales
+      localesCacheTime = now
+    } catch (error) {
+      console.error('Error reading locales:', error)
+      return localesCache || {}
     }
-  })
+  }
+  return localesCache
+}
+
+module.exports = async ctx => {
+  const locales = getLocales()
 
   if (ctx.updateType === 'callback_query') {
     if (locales[ctx.match[1]]) {
