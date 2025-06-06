@@ -373,7 +373,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     console.log(`    Heap Used: ${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`)
     console.log(`  TDLib Status:`)
     console.log(`    Healthy: ${tdlibHealthy ? 'Yes' : 'No'}`)
-    console.log(`    Last Check: ${Math.round((now - lastTdlibCheck) / 1000)}s ago`)
+    console.log(`    Last Check: ${Math.round((Date.now() - lastTdlibCheck) / 1000)}s ago`)
     console.log(`  Uptime: ${(process.uptime() / 60).toFixed(2)} minutes`)
     console.log('==================\n')
   }, LOAD_CHECK_INTERVAL)
