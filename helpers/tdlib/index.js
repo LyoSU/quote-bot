@@ -239,7 +239,11 @@ function getMessages (chatID, messageIds) {
           const replyToMessageID = messageInfo?.reply_to?.message_id / Math.pow(2, 20)
 
           if (messageInfo?.reply_to?.message_id) messagePromise.push(getMessages(chatID, [replyToMessageID]))
-          Promise.all(messagePromise).then((replyMessage) => {
+          Promise.allSettled(messagePromise).then((replyResults) => {
+            const replyMessage = replyResults
+              .filter(result => result.status === 'fulfilled' && result.value)
+              .map(result => result.value)
+            
             if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
             const chatIds = [
@@ -260,10 +264,16 @@ function getMessages (chatID, messageIds) {
 
             const chatInfoPromise = chatIds.map(getChat)
 
-            Promise.all(chatInfoPromise).then((chats) => {
+            Promise.allSettled(chatInfoPromise).then((chatResults) => {
+              const chats = chatResults
+                .filter(result => result.status === 'fulfilled' && result.value)
+                .map(result => result.value)
+              
               const chatInfo = {}
               chats.map((chat) => {
-                chatInfo[chat.id] = chat
+                if (chat && chat.id) {
+                  chatInfo[chat.id] = chat
+                }
               })
 
               message.chat = chatInfo[messageInfo.chat_id]
@@ -411,7 +421,13 @@ function getMessages (chatID, messageIds) {
         })
       })
 
-      Promise.all(messages).then(resolve)
+      Promise.allSettled(messages).then((messageResults) => {
+        const successfulMessages = messageResults
+          .filter(result => result.status === 'fulfilled' && result.value)
+          .map(result => result.value)
+        
+        resolve(successfulMessages)
+      })
     }).catch((error) => {
       console.error(error)
       reject(error)

@@ -41,23 +41,49 @@ function setupWorker (botToken, handlerTimeout) {
   // Cache config to avoid blocking file reads
   let configCache = null
   let configLastModified = 0
+  let configLoading = false
 
-  const getConfig = () => {
+  const getConfig = async () => {
     try {
-      const stats = fs.statSync('./config.json')
+      if (configLoading) {
+        // Wait for ongoing config load
+        await new Promise(resolve => {
+          const checkInterval = setInterval(() => {
+            if (!configLoading) {
+              clearInterval(checkInterval)
+              resolve()
+            }
+          }, 10)
+        })
+        return configCache || {}
+      }
+
+      const stats = await fs.promises.stat('./config.json').catch(() => null)
+      if (!stats) {
+        console.warn('Config file not found, using cached version')
+        return configCache || {}
+      }
+
       if (!configCache || stats.mtimeMs > configLastModified) {
-        configCache = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
-        configLastModified = stats.mtimeMs
+        configLoading = true
+        try {
+          const configData = await fs.promises.readFile('./config.json', 'utf8')
+          configCache = JSON.parse(configData)
+          configLastModified = stats.mtimeMs
+        } finally {
+          configLoading = false
+        }
       }
       return configCache
     } catch (error) {
+      configLoading = false
       console.error('Error reading config:', error)
       return configCache || {}
     }
   }
 
-  bot.use((ctx, next) => {
-    ctx.config = getConfig()
+  bot.use(async (ctx, next) => {
+    ctx.config = await getConfig()
     ctx.db = db
     ctx.tdlib = tdlibProxy
     return next()

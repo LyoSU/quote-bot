@@ -49,7 +49,21 @@ const anthropicClient = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
 
-const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+// Config will be loaded asynchronously through context
+let config = null
+
+// Initialize config asynchronously
+const initConfig = async () => {
+  try {
+    const configData = await fs.promises.readFile('./config.json', 'utf8')
+    config = JSON.parse(configData)
+  } catch (error) {
+    console.error('Error loading config in quote handler:', error)
+    config = { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
+  }
+}
+
+initConfig()
 
 // for create global sticker pack
 // telegram.createNewStickerSet(66478514, 'created_by_QuotLyBot', 'Created by @QuotLyBot', {
@@ -65,21 +79,22 @@ function sleep (ms) {
 }
 
 // Cleans old stickers from the sticker pack periodically
-async function startClearStickerPack() {
+async function startClearStickerPack(stickerConfig = null) {
   if (clearStickerPackTimer) return
 
   clearStickerPackTimer = setInterval(async () => {
     try {
       if (!botInfo) botInfo = await telegram.getMe()
 
-      const stickerSet = await telegram.getStickerSet(config.globalStickerSet.name + botInfo.username)
+      const configToUse = stickerConfig || config || { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
+      const stickerSet = await telegram.getStickerSet(configToUse.globalStickerSet.name + botInfo.username)
         .catch((error) => {
           console.log('clearStickerPack error:', error)
         })
 
       if (!stickerSet) return
 
-      const stickersToDelete = stickerSet.stickers.slice(config.globalStickerSet.save_sticker_count)
+      const stickersToDelete = stickerSet.stickers.slice(configToUse.globalStickerSet.save_sticker_count)
 
       for (const sticker of stickersToDelete) {
         await telegram.deleteStickerFromSet(sticker.file_id)
@@ -240,6 +255,8 @@ const handleQuoteError = async (ctx, error) => {
 }
 
 module.exports = async (ctx, next) => {
+  // Use config from context if available, fallback to local config
+  const currentConfig = ctx.config || config || { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
   const flag = {
     count: false,
     reply: false,
@@ -988,7 +1005,7 @@ ${JSON.stringify(messageForAIContext)}
               // Use for...of loop to properly handle async operations
               (async () => {
                 for (const [index, sticker] of sticketSet.stickers.entries()) {
-                  if (index > config.globalStickerSet.save_sticker_count - 1) {
+                  if (index > currentConfig.globalStickerSet.save_sticker_count - 1) {
                     // Delay deletion but don't block response
                     setTimeout(() => {
                       telegram.deleteStickerFromSet(sticker.file_id).catch(() => {})
@@ -1059,4 +1076,7 @@ ${JSON.stringify(messageForAIContext)}
   }
 }
 
-startClearStickerPack()
+// Initialize sticker pack cleaning with delay to allow config loading
+setTimeout(() => {
+  startClearStickerPack(config)
+}, 1000)

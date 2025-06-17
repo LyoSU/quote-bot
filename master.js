@@ -34,6 +34,55 @@ const CPU_THRESHOLD = 80 // percentage
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
   
+  // Circuit breaker for TDLib operations
+  const circuitBreaker = {
+    failures: 0,
+    lastFailTime: 0,
+    isOpen: false,
+    successCount: 0,
+    
+    async execute(operation, operationName = 'unknown') {
+      // Check if circuit is open
+      if (this.isOpen) {
+        const timeSinceLastFail = Date.now() - this.lastFailTime
+        if (timeSinceLastFail < 30000) { // 30 seconds cooldown
+          throw new Error(`Circuit breaker is open for TDLib operations (${operationName})`)
+        } else {
+          // Half-open state: try one request
+          this.isOpen = false
+        }
+      }
+      
+      try {
+        const result = await operation()
+        
+        // Success - reset failure count
+        this.failures = 0
+        this.successCount++
+        
+        // If we had multiple successes after being open, fully close the circuit
+        if (this.successCount >= 3) {
+          this.isOpen = false
+          this.successCount = 0
+        }
+        
+        return result
+      } catch (error) {
+        this.failures++
+        this.lastFailTime = Date.now()
+        this.successCount = 0
+        
+        // Open circuit after 3 consecutive failures
+        if (this.failures >= 3) {
+          this.isOpen = true
+          console.error(`Circuit breaker opened for TDLib after ${this.failures} failures`)
+        }
+        
+        throw error
+      }
+    }
+  }
+  
   // TDLib health monitoring
   let tdlibHealthy = true
   let lastTdlibCheck = Date.now()
@@ -215,17 +264,22 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         })
         
         try {
-          const result = await Promise.race([
-            tdlib[msg.method](...msg.args),
-            timeoutPromise
-          ])
+          const result = await circuitBreaker.execute(async () => {
+            return await Promise.race([
+              tdlib[msg.method](...msg.args),
+              timeoutPromise
+            ])
+          }, msg.method)
+          
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, result })
         } catch (error) {
           console.error(`TDLib ${msg.method} error:`, error.message)
-          // Mark as unhealthy if consistent failures
-          if (error.message.includes('timeout')) {
+          
+          // Mark as unhealthy if consistent failures or circuit breaker is open
+          if (error.message.includes('timeout') || error.message.includes('Circuit breaker is open')) {
             tdlibHealthy = false
           }
+          
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, error: error.message })
         }
       }
@@ -374,6 +428,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     console.log(`  TDLib Status:`)
     console.log(`    Healthy: ${tdlibHealthy ? 'Yes' : 'No'}`)
     console.log(`    Last Check: ${Math.round((Date.now() - lastTdlibCheck) / 1000)}s ago`)
+    console.log(`    Circuit Breaker: ${circuitBreaker.isOpen ? 'Open' : 'Closed'} (failures: ${circuitBreaker.failures})`)
     console.log(`  Uptime: ${(process.uptime() / 60).toFixed(2)} minutes`)
     console.log('==================\n')
   }, LOAD_CHECK_INTERVAL)
