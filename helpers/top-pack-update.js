@@ -41,13 +41,28 @@ module.exports = async (db, group, quote) => {
 
   if (quoteIndex < 0) {
     const fileUrl = await telegram.getFileLink(quote.file_id)
-    const data = await downloadFileByUrl(fileUrl)
+
+    // Add timeout and size limits
+    const data = await downloadFileByUrl(fileUrl, {
+      timeout: 15000, // 15s timeout
+      maxSize: 20 * 1024 * 1024 // 20MB max
+    })
+
+    // Add yield point before heavy processing
+    await new Promise(resolve => setImmediate(resolve))
+
     const imageSharp = sharp(data.read())
 
-    const stickerPNG = await imageSharp.webp({ quality: 100 }).png({
-      compressionLevel: 9,
-      force: false
-    }).toBuffer()
+    // Add yield point before intensive conversion
+    await new Promise(resolve => setImmediate(resolve))
+
+    const stickerPNG = await imageSharp
+      .webp({ quality: 100 })
+      .png({
+        compressionLevel: 9,
+        force: false
+      })
+      .toBuffer()
 
     let stickerAdd
     const emojis = '🌟'

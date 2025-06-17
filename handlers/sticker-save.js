@@ -31,9 +31,24 @@ module.exports = async ctx => {
 
     if (stickerFile) {
       const fileUrl = await ctx.telegram.getFileLink(stickerFile)
-      const data = await downloadFileByUrl(fileUrl)
+
+      // Add timeout and size limits to download
+      const data = await downloadFileByUrl(fileUrl, {
+        timeout: 15000, // 15s timeout
+        maxSize: 20 * 1024 * 1024 // 20MB max for stickers
+      })
+
+      // Add yield point before heavy processing
+      await new Promise(resolve => setImmediate(resolve))
+
       const imageSharp = sharp(data.read())
       const imageMetadata = await imageSharp.metadata()
+
+      // Check image size limits
+      if (imageMetadata.width > 2048 || imageMetadata.height > 2048) {
+        result = ctx.i18n.t('sticker.save.error.too_large')
+        return
+      }
 
       if (imageMetadata.height >= imageMetadata.width) {
         imageSharp.resize({ height: 512 })
@@ -41,10 +56,16 @@ module.exports = async ctx => {
         imageSharp.resize({ width: 512 })
       }
 
-      const stickerPNG = await imageSharp.webp({ quality: 100 }).png({
-        compressionLevel: 9,
-        force: false
-      }).toBuffer()
+      // Add yield point before intensive conversion
+      await new Promise(resolve => setImmediate(resolve))
+
+      const stickerPNG = await imageSharp
+        .webp({ quality: 100 })
+        .png({
+          compressionLevel: 9,
+          force: false
+        })
+        .toBuffer()
 
       let stickerAdd
       let emojis = ''

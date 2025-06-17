@@ -729,7 +729,25 @@ ${JSON.stringify(messageForAIContext)}
             timeout: 10000
           })
           clearTimeout(timeoutId)
+          
+          // Check content length before processing
+          const contentLength = parseInt(response.headers.get('content-length'), 10)
+          const maxImageSize = 5 * 1024 * 1024 // 5MB limit for AI processing
+          
+          if (contentLength && contentLength > maxImageSize) {
+            console.warn(`Image too large for AI processing: ${contentLength} bytes`)
+            continue
+          }
+          
           const arrayBuffer = await response.arrayBuffer()
+          
+          // Check actual size after download
+          if (arrayBuffer.byteLength > maxImageSize) {
+            console.warn(`Downloaded image too large: ${arrayBuffer.byteLength} bytes`)
+            continue
+          }
+          
+          // Process buffer in chunks to avoid blocking
           const buffer = Buffer.from(arrayBuffer)
 
           // Get the file extension and determine media type
@@ -749,8 +767,16 @@ ${JSON.stringify(messageForAIContext)}
 
           const mediaType = mediaTypes[extension]
 
-          // Convert to base64
-          const base64Data = buffer.toString('base64')
+          // Convert to base64 with yield points for large images
+          let base64Data
+          if (buffer.length > 1024 * 1024) { // 1MB+
+            // Add yield point for large images
+            await new Promise(resolve => setImmediate(resolve))
+            base64Data = buffer.toString('base64')
+            await new Promise(resolve => setImmediate(resolve))
+          } else {
+            base64Data = buffer.toString('base64')
+          }
 
           userMessage = {
             role: 'user',
