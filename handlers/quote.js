@@ -82,28 +82,57 @@ function sleep (ms) {
 async function startClearStickerPack(stickerConfig = null) {
   if (clearStickerPackTimer) return
 
+  let isRunning = false
+
   clearStickerPackTimer = setInterval(async () => {
+    // Prevent overlapping executions
+    if (isRunning) {
+      console.log('Sticker cleanup already running, skipping this cycle')
+      return
+    }
+
+    isRunning = true
     try {
       if (!botInfo) botInfo = await telegram.getMe()
 
       const configToUse = stickerConfig || config || { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
-      const stickerSet = await telegram.getStickerSet(configToUse.globalStickerSet.name + botInfo.username)
-        .catch((error) => {
-          console.log('clearStickerPack error:', error)
-        })
+      
+      // Add timeout to prevent hanging
+      const stickerSet = await Promise.race([
+        telegram.getStickerSet(configToUse.globalStickerSet.name + botInfo.username),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('getStickerSet timeout')), 10000))
+      ]).catch((error) => {
+        console.log('clearStickerPack error:', error)
+        return null
+      })
 
       if (!stickerSet) return
 
       const stickersToDelete = stickerSet.stickers.slice(configToUse.globalStickerSet.save_sticker_count)
 
-      for (const sticker of stickersToDelete) {
-        await telegram.deleteStickerFromSet(sticker.file_id)
-          .catch(console.error)
+      // Limit concurrent deletions
+      const maxConcurrent = 3
+      for (let i = 0; i < stickersToDelete.length; i += maxConcurrent) {
+        const batch = stickersToDelete.slice(i, i + maxConcurrent)
+        await Promise.allSettled(
+          batch.map(sticker => 
+            Promise.race([
+              telegram.deleteStickerFromSet(sticker.file_id),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('deleteStickerFromSet timeout')), 5000))
+            ])
+          )
+        )
+        // Add delay between batches
+        if (i + maxConcurrent < stickersToDelete.length) {
+          await new Promise(resolve => setTimeout(resolve, 1000))
+        }
       }
     } catch (error) {
       console.error('Sticker cleanup error:', error)
+    } finally {
+      isRunning = false
     }
-  }, 5000) // Run every 5 seconds
+  }, 10000) // Increased to 10 seconds
 
   // Add cleanup on process exit
   process.once('SIGTERM', () => {
