@@ -1,8 +1,16 @@
 module.exports = async ctx => {
   let group
 
-  if (!ctx.group.info) group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
-  else group = ctx.group.info
+  if (!ctx.group.info) {
+    // Check if database is connected before query
+    if (ctx.db.connection.readyState !== 1) {
+      console.warn('Database not ready, skipping group lookup')
+      return false
+    }
+    group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
+  } else {
+    group = ctx.group.info
+  }
 
   if (!group) {
     group = new ctx.db.Group()

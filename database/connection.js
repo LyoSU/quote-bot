@@ -14,9 +14,7 @@ const connectWithRetry = async () => {
       serverSelectionTimeoutMS: 10000, // 10s timeout for server selection
       connectTimeoutMS: 10000, // 10s timeout for connection
       socketTimeoutMS: 30000, // 30s timeout for socket operations
-      maxPoolSize: 10, // Maintain up to 10 socket connections
-      bufferCommands: true, // Allow buffering commands during connection
-      bufferMaxEntries: 16 // Allow some buffering
+      maxPoolSize: 10 // Maintain up to 10 socket connections
     })
     console.log('Successfully connected to MongoDB')
     retryCount = 0 // Reset on successful connection
