@@ -6,7 +6,27 @@ const RETRY_DELAY = 5000
 let isConnecting = false
 
 const connectWithRetry = async () => {
-  if (isConnecting) return
+  if (isConnecting) {
+    // Wait for ongoing connection with timeout to prevent deadlock
+    await new Promise(resolve => {
+      const checkInterval = setInterval(() => {
+        if (!isConnecting) {
+          clearInterval(checkInterval)
+          resolve()
+        }
+      }, 100)
+
+      // Add timeout to prevent infinite waiting
+      setTimeout(() => {
+        clearInterval(checkInterval)
+        isConnecting = false // Reset flag to prevent deadlock
+        console.warn('Connection flag timeout, resetting flag')
+        resolve()
+      }, 15000) // 15 seconds timeout
+    })
+    return
+  }
+
   isConnecting = true
 
   try {

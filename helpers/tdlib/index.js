@@ -34,9 +34,29 @@ const createClient = () => {
 }
 
 const connectClient = async () => {
-  if (isConnecting) return
+  if (isConnecting) {
+    // Wait for ongoing connection with timeout to prevent deadlock
+    await new Promise(resolve => {
+      const checkInterval = setInterval(() => {
+        if (!isConnecting) {
+          clearInterval(checkInterval)
+          resolve()
+        }
+      }, 100)
+
+      // Add timeout to prevent infinite waiting
+      setTimeout(() => {
+        clearInterval(checkInterval)
+        isConnecting = false // Reset flag to prevent deadlock
+        console.warn('TDLib connection flag timeout, resetting flag')
+        resolve()
+      }, 20000) // 20 seconds timeout
+    })
+    return
+  }
+
   isConnecting = true
-  
+
   try {
     if (client) {
       try {
@@ -45,19 +65,19 @@ const connectClient = async () => {
         // Ignore close errors
       }
     }
-    
+
     client = createClient()
-    
+
     client.on('error', (error) => {
       console.error('TDLib client error:', error)
       reconnectClient()
     })
-    
+
     client.on('destroy', () => {
       console.log('TDLib client destroyed, attempting reconnect...')
       reconnectClient()
     })
-    
+
     await client.loginAsBot(process.env.BOT_TOKEN)
     console.log('TDLib client connected successfully')
     reconnectAttempts = 0
@@ -71,10 +91,10 @@ const connectClient = async () => {
 
 const reconnectClient = () => {
   if (isConnecting || reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) return
-  
+
   reconnectAttempts++
   console.log(`TDLib reconnect attempt ${reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS} in ${RECONNECT_DELAY}ms`)
-  
+
   setTimeout(() => {
     connectClient()
   }, RECONNECT_DELAY * reconnectAttempts) // Exponential backoff
@@ -89,7 +109,7 @@ function sendMethod (method, parm) {
       reject(new Error('TDLib client not available'))
       return
     }
-    
+
     try {
       client.invoke(Object.assign({ _: method }, parm)).then(resolve).catch((error) => {
         // Trigger reconnection on critical errors
@@ -243,7 +263,7 @@ function getMessages (chatID, messageIds) {
             const replyMessage = replyResults
               .filter(result => result.status === 'fulfilled' && result.value)
               .map(result => result.value)
-            
+
             if (replyMessage && replyMessage[0] && replyMessage[0][0] && Object.keys(replyMessage[0][0]).length !== 0) message.reply_to_message = replyMessage[0][0]
 
             const chatIds = [
@@ -268,7 +288,7 @@ function getMessages (chatID, messageIds) {
               const chats = chatResults
                 .filter(result => result.status === 'fulfilled' && result.value)
                 .map(result => result.value)
-              
+
               const chatInfo = {}
               chats.map((chat) => {
                 if (chat && chat.id) {
@@ -425,7 +445,7 @@ function getMessages (chatID, messageIds) {
         const successfulMessages = messageResults
           .filter(result => result.status === 'fulfilled' && result.value)
           .map(result => result.value)
-        
+
         resolve(successfulMessages)
       })
     }).catch((error) => {

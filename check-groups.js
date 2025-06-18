@@ -51,9 +51,15 @@ const checkGroups = async () => {
     checkRunning = false
 
     // Add delay to prevent overwhelming the system
-    setTimeout(() => {
-      checkGroups()
-    }, 1000)
+    // Use early return to prevent infinite recursion
+    if (iterationCount < MAX_ITERATIONS) {
+      setTimeout(() => {
+        checkGroups()
+      }, 1000)
+    } else {
+      console.log('Max iterations reached in timeout, exiting...')
+      process.exit(0)
+    }
   } catch (error) {
     console.error('Error in checkGroups:', error)
     checkRunning = false

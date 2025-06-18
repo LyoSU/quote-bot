@@ -53,7 +53,18 @@ class HighLoadStats {
     pipeline.zadd(this.getKey(`${type}:responseTimes`), duration, duration)
     pipeline.expire(this.getKey(`${type}:responseTimes`), TTL_SECONDS)
 
-    await pipeline.exec()
+    // Add timeout to prevent hanging on Redis operations
+    const pipelinePromise = pipeline.exec()
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Redis pipeline timeout')), 5000)
+    )
+
+    try {
+      await Promise.race([pipelinePromise, timeoutPromise])
+    } catch (error) {
+      console.error('Redis pipeline error:', error)
+      // Don't throw, just log the error to prevent request failures
+    }
   }
 
   async updateQueueSize (size) {
