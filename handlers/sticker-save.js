@@ -74,7 +74,7 @@ module.exports = async ctx => {
       if (stickerFile.emoji) emojis += stickerFile.emoji
       emojis += '🌟'
 
-      if (!ctx.group.info.stickerSet.name) {
+      if (!ctx.group || !ctx.group.info || !ctx.group.info.stickerSet || !ctx.group.info.stickerSet.name) {
         const getMe = await ctx.telegram.getMe()
 
         const packName = `g${Math.random().toString(36).substring(5)}_${Math.abs(ctx.group.info.group_id)}_by_${getMe.username}`
