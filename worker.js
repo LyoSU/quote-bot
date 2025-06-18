@@ -46,7 +46,7 @@ function setupWorker (botToken, handlerTimeout) {
   const getConfig = async () => {
     try {
       if (configLoading) {
-        // Wait for ongoing config load
+        // Wait for ongoing config load with timeout to prevent deadlock
         await new Promise(resolve => {
           const checkInterval = setInterval(() => {
             if (!configLoading) {
@@ -54,6 +54,14 @@ function setupWorker (botToken, handlerTimeout) {
               resolve()
             }
           }, 10)
+          
+          // Add timeout to prevent infinite waiting
+          setTimeout(() => {
+            clearInterval(checkInterval)
+            configLoading = false // Reset flag to prevent deadlock
+            console.warn('Config loading timeout, resetting flag')
+            resolve()
+          }, 5000)
         })
         return configCache || {}
       }
