@@ -980,7 +980,7 @@ ${JSON.stringify(messageForAIContext)}
       if (generate.headers['quote-type'] === 'quote') {
         let replyMarkup = {}
 
-        if (ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+        if (ctx.group && ctx.group.info && ctx.group.info.settings && (ctx.group.info.settings.rate || flag.rate)) {
           replyMarkup = Markup.inlineKeyboard([
             Markup.callbackButton('👍', 'rate:👍'),
             Markup.callbackButton('👎', 'rate:👎')
