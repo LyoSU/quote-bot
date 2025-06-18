@@ -358,7 +358,7 @@ module.exports = async (ctx, next) => {
   }
 
   let emojiBrand = 'apple'
-  if (ctx.group && ctx.group.info.settings.quote.emojiBrand) {
+  if (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.quote && ctx.group.info.settings.quote.emojiBrand) {
     emojiBrand = ctx.group.info.settings.quote.emojiBrand
   } else if (ctx.session?.userInfo?.settings?.quote?.emojiBrand) {
     emojiBrand = ctx.session.userInfo.settings.quote.emojiBrand

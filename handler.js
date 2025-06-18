@@ -299,6 +299,9 @@ bot.on(
     async (ctx, next) => {
       if (ctx.state.skip) return next()
       await getGroup(ctx)
+      if (!ctx.group || !ctx.group.info || !ctx.group.info.settings) {
+        return next()
+      }
       const gab = ctx.group.info.settings.randomQuoteGab
 
       if (gab > 0) {
