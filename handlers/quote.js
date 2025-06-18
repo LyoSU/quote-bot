@@ -630,7 +630,7 @@ module.exports = async (ctx, next) => {
     if (text) message.text = text
 
     if (!flag.privacy && message.from) {
-      if (ctx.group && ctx.group.info.settings.privacy && !ctx.chat.username) {
+      if (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.privacy && !ctx.chat.username) {
         flag.privacy = true
       } else {
         // Cache privacy settings to avoid repeated DB queries

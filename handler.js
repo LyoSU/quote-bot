@@ -107,10 +107,16 @@ const updateGroupAndUser = async (ctx, next) => {
   await next(ctx);
   if (ctx.state.emptyRequest === false) {
     // Don't await save operations to prevent blocking
-    Promise.all([
-      ctx.session.userInfo.save().catch(() => {}),
-      ctx.group.info.save().catch(() => {})
-    ]).catch(() => {}); // Fire and forget
+    const savePromises = []
+    if (ctx.session.userInfo && typeof ctx.session.userInfo.save === 'function') {
+      savePromises.push(ctx.session.userInfo.save().catch(() => {}))
+    }
+    if (ctx.group && ctx.group.info && typeof ctx.group.info.save === 'function') {
+      savePromises.push(ctx.group.info.save().catch(() => {}))
+    }
+    if (savePromises.length > 0) {
+      Promise.all(savePromises).catch(() => {}) // Fire and forget
+    }
   }
 };
 
