@@ -58,7 +58,7 @@ const createHealthServer = () => {
 
   const PORT = process.env.HEALTH_CHECK_PORT || 3001
   server.listen(PORT, () => {
-    console.log(`Health check server running on port ${PORT}`)
+    console.log(`[${new Date().toISOString()}] Health check server running on port ${PORT}`)
   })
 
   // Check health every 10 seconds

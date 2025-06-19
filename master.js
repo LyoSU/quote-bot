@@ -2,6 +2,19 @@ const cluster = require('cluster')
 const { stats } = require('./middlewares')
 const os = require('os')
 
+// Helper function for timestamped logging
+const logWithTimestamp = (message) => {
+  console.log(`[${new Date().toISOString()}] ${message}`)
+}
+
+const errorWithTimestamp = (message, ...args) => {
+  console.error(`[${new Date().toISOString()}] ${message}`, ...args)
+}
+
+const warnWithTimestamp = (message) => {
+  console.warn(`[${new Date().toISOString()}] ${message}`)
+}
+
 // Update priorities
 const UPDATE_PRIORITIES = {
   COMMAND: 1,
@@ -79,7 +92,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         // Open circuit after 3 consecutive failures
         if (this.failures >= 3) {
           this.isOpen = true
-          console.error(`Circuit breaker opened for TDLib after ${this.failures} failures`)
+          errorWithTimestamp(`Circuit breaker opened for TDLib after ${this.failures} failures`)
         }
 
         throw error
@@ -106,18 +119,18 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
       }
 
       if (!tdlibHealthy) {
-        console.log('TDLib health restored')
+        logWithTimestamp('TDLib health restored')
         tdlibHealthy = true
       }
     } catch (error) {
       if (tdlibHealthy) {
-        console.error('TDLib health check failed:', error.message)
+        errorWithTimestamp('TDLib health check failed:', error.message)
         tdlibHealthy = false
       }
 
       // If health check fails, try to trigger TDLib reconnection
       if (error.message.includes('not available') || error.message.includes('timeout')) {
-        console.log('Attempting to trigger TDLib reconnection...')
+        logWithTimestamp('Attempting to trigger TDLib reconnection...')
         // The tdlib module will handle reconnection internally
       }
     }
@@ -146,7 +159,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     return (requestCounts.length / RPS_WINDOW).toFixed(2)
   }
 
-  console.log(`Master process ${process.pid} is running`)
+  logWithTimestamp(`Master process ${process.pid} is running`)
 
   stats.startPeriodicUpdate()
 
@@ -237,7 +250,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   })
 
   cluster.on('exit', (worker, code, signal) => {
-    console.log(`Worker ${worker.process.pid} died`)
+    logWithTimestamp(`Worker ${worker.process.pid} died`)
     const newWorker = cluster.fork()
     workers.splice(workers.findIndex(w => w.worker === worker), 1, { worker: newWorker, load: 0, health: 100 })
   })
@@ -281,7 +294,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, result })
         } catch (error) {
-          console.error(`TDLib ${msg.method} error:`, error.message)
+          errorWithTimestamp(`TDLib ${msg.method} error:`, error.message)
 
           // Mark as unhealthy if consistent failures or circuit breaker is open
           if (error.message.includes('timeout') || error.message.includes('Circuit breaker is open')) {
@@ -298,10 +311,10 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   setInterval(() => {
     const totalLoad = workers.reduce((sum, w) => sum + w.load, 0)
     const queueStatus = queueManager.getStatus()
-    console.log(`Total worker load: ${totalLoad}, ${queueStatus}`)
+    logWithTimestamp(`Total worker load: ${totalLoad}, ${queueStatus}`)
 
     if (totalLoad === workers.length * maxUpdatesPerWorker && queueManager.hasUpdates()) {
-      console.warn('System under high load: All workers at max capacity and queue not empty')
+      warnWithTimestamp('System under high load: All workers at max capacity and queue not empty')
       // Add logic here for notifying admin or auto-scaling
     }
   }, LOAD_CHECK_INTERVAL)
@@ -374,7 +387,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
   // Enhanced error handling
   process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error)
+    errorWithTimestamp('Uncaught Exception:', error)
     // Recovery attempt
     workers.forEach(({ worker }) => worker.kill())
     process.exit(1)
@@ -390,7 +403,8 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
     const memoryUsage = process.memoryUsage()
 
-    console.log('\n=== System Metrics ===')
+    const timestamp = new Date().toISOString()
+    console.log(`\n[${timestamp}] === System Metrics ===`)
     console.log('Performance:')
     console.log(`  Requests/sec: ${calculateRPS()}`) // Add RPS to metrics
 
