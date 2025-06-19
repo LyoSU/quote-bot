@@ -33,14 +33,18 @@ const CPU_THRESHOLD = 80 // percentage
 
 function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   const tdlib = require('./helpers/tdlib')
-  
+  const healthEndpoint = require('./health-endpoint')
+
+  // Start health check endpoint
+  healthEndpoint.createHealthServer()
+
   // Circuit breaker for TDLib operations
   const circuitBreaker = {
     failures: 0,
     lastFailTime: 0,
     isOpen: false,
     successCount: 0,
-    
+
     async execute(operation, operationName = 'unknown') {
       // Check if circuit is open
       if (this.isOpen) {
@@ -52,42 +56,42 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
           this.isOpen = false
         }
       }
-      
+
       try {
         const result = await operation()
-        
+
         // Success - reset failure count
         this.failures = 0
         this.successCount++
-        
+
         // If we had multiple successes after being open, fully close the circuit
         if (this.successCount >= 3) {
           this.isOpen = false
           this.successCount = 0
         }
-        
+
         return result
       } catch (error) {
         this.failures++
         this.lastFailTime = Date.now()
         this.successCount = 0
-        
+
         // Open circuit after 3 consecutive failures
         if (this.failures >= 3) {
           this.isOpen = true
           console.error(`Circuit breaker opened for TDLib after ${this.failures} failures`)
         }
-        
+
         throw error
       }
     }
   }
-  
+
   // TDLib health monitoring
   let tdlibHealthy = true
   let lastTdlibCheck = Date.now()
   const TDLIB_HEALTH_INTERVAL = 30000 // 30 seconds
-  
+
   const checkTdlibHealth = async () => {
     try {
       // Simple health check using getMe
@@ -95,12 +99,12 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         tdlib.getUser(process.env.BOT_TOKEN.split(':')[0]),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Health check timeout')), 5000))
       ])
-      
+
       // Check if result is an error object
       if (result && result.code && result.message) {
         throw new Error(result.message)
       }
-      
+
       if (!tdlibHealthy) {
         console.log('TDLib health restored')
         tdlibHealthy = true
@@ -110,7 +114,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         console.error('TDLib health check failed:', error.message)
         tdlibHealthy = false
       }
-      
+
       // If health check fails, try to trigger TDLib reconnection
       if (error.message.includes('not available') || error.message.includes('timeout')) {
         console.log('Attempting to trigger TDLib reconnection...')
@@ -119,7 +123,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     }
     lastTdlibCheck = Date.now()
   }
-  
+
   // Start health checks
   setInterval(checkTdlibHealth, TDLIB_HEALTH_INTERVAL)
   checkTdlibHealth() // Initial check
@@ -134,7 +138,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
     // Keep only requests within the window
     requestCounts = requestCounts.filter(time => now - time < RPS_WINDOW * 1000)
   }
-  
+
   function calculateRPS() {
     const now = Date.now()
     // Clean old requests first
@@ -224,6 +228,10 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   bot.use((ctx, next) => {
     const update = ctx.update
     trackRequest() // Track each request
+
+    // Update health check activity
+    healthEndpoint.updateActivity()
+
     distributeUpdate(update)
     return next()
   })
@@ -248,21 +256,21 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
         // Check TDLib health before processing
         const timeSinceLastCheck = Date.now() - lastTdlibCheck
         if (!tdlibHealthy || timeSinceLastCheck > TDLIB_HEALTH_INTERVAL * 2) {
-          worker.send({ 
-            type: MESSAGE_TYPES.TDLIB_RESPONSE, 
-            id: msg.id, 
-            error: timeSinceLastCheck > TDLIB_HEALTH_INTERVAL * 2 
-              ? 'TDLib health check overdue' 
+          worker.send({
+            type: MESSAGE_TYPES.TDLIB_RESPONSE,
+            id: msg.id,
+            error: timeSinceLastCheck > TDLIB_HEALTH_INTERVAL * 2
+              ? 'TDLib health check overdue'
               : 'TDLib is currently unhealthy'
           })
           return
         }
-        
+
         // Add timeout for TDLib operations
         const timeoutPromise = new Promise((_, reject) => {
           setTimeout(() => reject(new Error(`TDLib ${msg.method} timeout in master`)), 8000) // Reduced to 8s
         })
-        
+
         try {
           const result = await circuitBreaker.execute(async () => {
             return await Promise.race([
@@ -270,16 +278,16 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
               timeoutPromise
             ])
           }, msg.method)
-          
+
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, result })
         } catch (error) {
           console.error(`TDLib ${msg.method} error:`, error.message)
-          
+
           // Mark as unhealthy if consistent failures or circuit breaker is open
           if (error.message.includes('timeout') || error.message.includes('Circuit breaker is open')) {
             tdlibHealthy = false
           }
-          
+
           worker.send({ type: MESSAGE_TYPES.TDLIB_RESPONSE, id: msg.id, error: error.message })
         }
       }
