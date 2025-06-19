@@ -28,7 +28,7 @@ const checkMainAppHealth = async () => {
   return new Promise((resolve) => {
     const req = http.get(`http://localhost:${MAIN_APP_PORT}/health`, { timeout: 5000 }, (res) => {
       let data = ''
-      res.on('data', chunk => data += chunk)
+      res.on('data', chunk => { data += chunk })
       res.on('end', () => {
         try {
           const healthData = JSON.parse(data)
@@ -129,7 +129,6 @@ const performHealthCheck = async () => {
       await log(`🚨 Application unhealthy for ${unhealthyCount} consecutive checks - restarting`)
       await restartApplication()
     }
-
   } catch (error) {
     await log(`❌ Health check error: ${error.message}`)
     unhealthyCount++
