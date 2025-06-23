@@ -96,7 +96,7 @@ async function startClearStickerPack(stickerConfig = null) {
       if (!botInfo) botInfo = await telegram.getMe()
 
       const configToUse = stickerConfig || config || { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
-      
+
       // Add timeout to prevent hanging
       const stickerSet = await Promise.race([
         telegram.getStickerSet(configToUse.globalStickerSet.name + botInfo.username),
@@ -115,7 +115,7 @@ async function startClearStickerPack(stickerConfig = null) {
       for (let i = 0; i < stickersToDelete.length; i += maxConcurrent) {
         const batch = stickersToDelete.slice(i, i + maxConcurrent)
         await Promise.allSettled(
-          batch.map(sticker => 
+          batch.map(sticker =>
             Promise.race([
               telegram.deleteStickerFromSet(sticker.file_id),
               new Promise((_, reject) => setTimeout(() => reject(new Error('deleteStickerFromSet timeout')), 5000))
@@ -752,30 +752,30 @@ ${JSON.stringify(messageForAIContext)}
           // Download the image with timeout
           const controller = new AbortController()
           const timeoutId = setTimeout(() => controller.abort(), 10000) // 10s timeout
-          
-          const response = await fetch(photoUrl, { 
+
+          const response = await fetch(photoUrl, {
             signal: controller.signal,
             timeout: 10000
           })
           clearTimeout(timeoutId)
-          
+
           // Check content length before processing
           const contentLength = parseInt(response.headers.get('content-length'), 10)
           const maxImageSize = 5 * 1024 * 1024 // 5MB limit for AI processing
-          
+
           if (contentLength && contentLength > maxImageSize) {
             console.warn(`Image too large for AI processing: ${contentLength} bytes`)
             continue
           }
-          
+
           const arrayBuffer = await response.arrayBuffer()
-          
+
           // Check actual size after download
           if (arrayBuffer.byteLength > maxImageSize) {
             console.warn(`Downloaded image too large: ${arrayBuffer.byteLength} bytes`)
             continue
           }
-          
+
           // Process buffer in chunks to avoid blocking
           const buffer = Buffer.from(arrayBuffer)
 
@@ -837,7 +837,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.5-flash-preview',
+      model: 'google/gemini-2.5-flash-lite-preview-06-17',
       messages: [
         {
           role: 'system',
