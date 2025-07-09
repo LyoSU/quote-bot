@@ -79,8 +79,8 @@ const selectMessagesWithAI = async (messages, query, language = 'en') => {
                   type: "integer",
                   minimum: 0
                 },
-                minItems: 1,
-                maxItems: 3,
+                minItems: 2,
+                maxItems: 6,
                 description: "Array of message indices that best match the user's query"
               },
               reasoning: {
@@ -106,7 +106,7 @@ const selectMessagesWithAI = async (messages, query, language = 'en') => {
 5. ⏰ Time Crystal: Use recent messages if no specific matches emerge from the ether
 
 🔮 Sacred Rules of Divination:
-- Channel 1-3 most powerful message treasures maximum
+- Channel 2-6 most powerful message treasures maximum
 - Prefer text-rich scrolls over mere visual artifacts
 - If a soul's name is whispered, prioritize their mystical words
 - For humor quests, seek jokes, memes, and laughter spells
