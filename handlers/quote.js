@@ -45,6 +45,105 @@ const describeImage = async (image, language = 'en') => {
   return result.choices[0].message.content
 }
 
+const selectMessagesWithAI = async (messages, query, language = 'en') => {
+  try {
+    const messagesToAnalyze = messages.slice(0, 50).map((msg, index) => {
+      const from = msg.from || msg.sender_chat || {}
+      const name = from.title || from.first_name || from.username || 'Anonymous'
+      const text = msg.text || msg.caption || '[media]'
+
+      return {
+        index,
+        name,
+        text: text.slice(0, 200),
+        timestamp: msg.date
+      }
+    }).filter(msg => msg.text && !msg.text.startsWith('/'))
+
+    if (messagesToAnalyze.length === 0) return []
+
+        const result = await openai.chat.completions.create({
+      model: 'google/gemini-2.5-flash',
+      reasoning_effort: 'medium',
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: "message_selection",
+          strict: true,
+          schema: {
+            type: "object",
+            properties: {
+              selected_indices: {
+                type: "array",
+                items: {
+                  type: "integer",
+                  minimum: 0
+                },
+                minItems: 1,
+                maxItems: 3,
+                description: "Array of message indices that best match the user's query"
+              },
+              reasoning: {
+                type: "string",
+                description: "Brief explanation of why these messages were selected"
+              }
+            },
+            required: ["selected_indices", "reasoning"],
+            additionalProperties: false
+          }
+        }
+      },
+      messages: [
+        {
+          role: 'system',
+          content: `You are a magical message diviner for QuotLy Bot! 🔮✨ Your mystical powers help you find the perfect chat treasures that match the user's magical request: "${query}".
+
+✨ Your Divination Powers (in order of mystical importance):
+1. 👤 Soul Recognition: If the query mentions someone's name (like "жарт Поліни"), find messages from that magical being
+2. 🎯 Topic Sensing: Detect specific keywords and themes in the mystical request
+3. 🌟 Content Resonance: Match the spiritual essence and context of messages
+4. 🎭 Emotional Aura: Feel the mood (funny, serious, magical) and find matching vibes
+5. ⏰ Time Crystal: Use recent messages if no specific matches emerge from the ether
+
+🔮 Sacred Rules of Divination:
+- Channel 1-3 most powerful message treasures maximum
+- Prefer text-rich scrolls over mere visual artifacts
+- If a soul's name is whispered, prioritize their mystical words
+- For humor quests, seek jokes, memes, and laughter spells
+- Arrange findings in time's natural flow (oldest to newest)
+
+Return your selection as JSON with selected_indices array and reasoning explanation.`
+        },
+        {
+          role: 'user',
+          content: `Query: "${query}"
+
+Messages to analyze:
+${JSON.stringify(messagesToAnalyze, null, 2)}`
+        }
+      ],
+      max_tokens: 200,
+      temperature: 0.3
+    })
+
+    const responseContent = result.choices[0].message.content.trim()
+    const response = JSON.parse(responseContent)
+
+    if (response.selected_indices && Array.isArray(response.selected_indices)) {
+      console.log('🔮 AI Selection Reasoning:', response.reasoning || 'No reasoning provided')
+      return {
+        indices: response.selected_indices.filter(i => i >= 0 && i < messages.length).slice(0, 3),
+        reasoning: response.reasoning || 'No reasoning provided'
+      }
+    }
+
+    return { indices: [0], reasoning: 'Fallback to most recent message' }
+  } catch (error) {
+    console.error('AI message selection error:', error)
+    return { indices: [0], reasoning: 'Error occurred, using fallback' }
+  }
+}
+
 const anthropicClient = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
@@ -166,7 +265,7 @@ const handleQuoteError = async (ctx, error) => {
   console.error('Quote error:', error)
 
   // API rate limiting
-  if (error.response?.statusCode === 429) {
+  if (error.response && error.response.statusCode === 429) {
     return ctx.replyWithHTML(ctx.i18n.t('quote.errors.rate_limit', {
       seconds: 30
     }))
@@ -298,12 +397,14 @@ module.exports = async (ctx, next) => {
     privacy: false,
     ai: false,
     html: false,
+    aiQuery: false,
   }
 
   const isCommand = ctx.message.text ? ctx.message.text.match(/\/q/) : false
 
   if (ctx.message && ctx.message.text && isCommand) {
     const args = ctx.message.text.split(' ')
+    const fullQuery = args.slice(1).join(' ') // Get everything after /q
     args.splice(0, 1)
 
     flag.count = args.find((arg) => !isNaN(parseInt(arg)))
@@ -318,7 +419,22 @@ module.exports = async (ctx, next) => {
     flag.ai = args.find((arg) => ['*'].includes(arg))
     flag.html = args.find((arg) => ['h', 'html'].includes(arg))
     flag.stories = args.find((arg) => ['s', 'stories'].includes(arg))
-    flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
+
+    // Check if this is an AI query (text without reply that's not just flags/colors)
+    if (fullQuery && !ctx.message.reply_to_message && fullQuery.length > 2) {
+      const knownFlags = ['r', 'reply', 'p', 'png', 'i', 'img', 'rate', 'h', 'hidden', 'm', 'media', 'c', 'crop', '*', 'html', 's', 'stories']
+      const isValidColor = /^(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3}|rgba?\([^)]+\)|[a-zA-Z]+|random|transparent|\/\/[0-9a-fA-F]{6})$/.test(fullQuery.trim())
+      const isOnlyFlags = args.every(arg => knownFlags.includes(arg) || !isNaN(parseInt(arg)) || arg.match(/s([+-]?(?:\d*\.)?\d+)/))
+
+      if (!isValidColor && !isOnlyFlags) {
+        flag.aiQuery = fullQuery
+      }
+    }
+
+    // Only set color if it's not an AI query
+    if (!flag.aiQuery) {
+      flag.color = args.find((arg) => (!Object.values(flag).find((f) => arg === f)))
+    }
 
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
   }
@@ -373,16 +489,83 @@ module.exports = async (ctx, next) => {
 
   let messages = []
 
-  if (ctx.chat.type === 'private' && !ctx.message.reply_to_message) {
+  // Handle AI query for message selection
+  if (flag.aiQuery && !ctx.message.reply_to_message) {
+    try {
+      // Get last 50 messages for AI analysis
+      const recentMessages = []
+      const currentMessageId = ctx.message.message_id
+
+      for (let i = 1; i <= 50; i++) {
+        try {
+          const msgId = currentMessageId - i
+          if (msgId > 0) {
+            const msg = await ctx.tdlib.getMessages(ctx.message.chat.id, [msgId])
+            if (msg && msg[0] && Object.keys(msg[0]).length !== 0) {
+              recentMessages.push(msg[0])
+            }
+          }
+        } catch (error) {
+          // Skip failed messages
+          continue
+        }
+      }
+
+      if (recentMessages.length === 0) {
+        return ctx.replyWithHTML('🔮 <b>Oops! The crystal ball is cloudy</b>\n\n<i>I couldn\'t find any messages to work my magic on in this chat.</i>\n\n✨ <i>Try sending some messages first!</i>', {
+          reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true
+        })
+      }
+
+            // Use AI to select relevant messages
+      const aiResult = await selectMessagesWithAI(recentMessages, flag.aiQuery, ctx.group?.info?.settings?.locale || 'uk')
+
+      if (aiResult.indices.length === 0) {
+        return ctx.replyWithHTML('🔍✨ <b>Hmm, the magic didn\'t quite work</b>\n\n<i>I searched through the mystical chat scrolls but couldn\'t find anything matching:</i>\n\n🌟 <code>' + flag.aiQuery + '</code>\n\n<i>Try rephrasing your magical incantation! 🪄</i>', {
+          reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true
+        })
+      }
+
+      // Get selected messages
+      const selectedMessages = aiResult.indices.map(index => recentMessages[index]).filter(Boolean)
+      messages = selectedMessages
+      firstMessage = selectedMessages[0]
+      messageCount = selectedMessages.length
+
+      // Send a quick status message for user feedback
+      const statusMsg = await ctx.replyWithHTML(`✨🔮 <b>Magic is happening!</b>\n\n🌟 <i>Found ${selectedMessages.length} perfect message${selectedMessages.length > 1 ? 's' : ''} treasure${selectedMessages.length > 1 ? 's' : ''}!</i>\n\n🪄 <i>Brewing your quote potion...</i>`, {
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
+      })
+
+      // Delete status message after 3 seconds
+      setTimeout(() => {
+        ctx.deleteMessage(statusMsg.message_id).catch(() => {})
+      }, 3000)
+
+      // Optional: Show AI reasoning in development/debug mode
+      if (process.env.NODE_ENV === 'development' && aiResult.reasoning) {
+        console.log(`🔮✨ AI Magic Reasoning for "${flag.aiQuery}":`, aiResult.reasoning)
+      }
+
+    } catch (error) {
+      console.error('AI message selection failed:', error)
+      return ctx.replyWithHTML('🔮💫 <b>Oops! The magic spell fizzled</b>\n\n<i>My crystal ball got a bit foggy while analyzing the messages.</i>\n\n✨ <i>Try casting the spell again, or use the classic quote magic with reply! 🪄</i>', {
+        reply_to_message_id: ctx.message.message_id,
+        allow_sending_without_reply: true
+      })
+    }
+  } else if (ctx.chat.type === 'private' && !ctx.message.reply_to_message) {
     firstMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
     firstMessage = ctx.message.reply_to_message
 
-    if (!firstMessage?.message_id) {
+    if (!firstMessage || !firstMessage.message_id) {
       return ctx.replyWithHTML(ctx.i18n.t('quote.empty_forward'), {
         reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true,
         allow_sending_without_reply: true
       })
     }
@@ -405,39 +588,42 @@ module.exports = async (ctx, next) => {
     startMessage -= messageCount - 1
   }
 
-  // if firstMessage exists, get messages
-  if (!flag.reply && firstMessage && firstMessage.from.is_bot && firstMessage.message_id === startMessage) {
-    messages.push(firstMessage)
-    startMessage += 1
-    messageCount -= 1
-  }
-
-  if (isCommand && ctx.message.external_reply) {
-    messages.push(Object.assign(ctx.message.external_reply, {
-      message_id: ctx.message.message_id,
-      quote: ctx.message.quote
-    }))
-  }
-
-  try {
-    const tdlibMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
-      const m = []
-      for (let i = 0; i < messageCount; i++) {
-        m.push(startMessage + i)
-      }
-      return m
-    })())
-    messages.push(...tdlibMessages)
-  } catch (error) {
-    console.error('TDLib getMessages failed:', error.message)
-    // Fallback: use only the replied message if available
-    if (firstMessage) {
+  // Skip message fetching if we already have AI-selected messages
+  if (!flag.aiQuery) {
+    // if firstMessage exists, get messages
+    if (!flag.reply && firstMessage && firstMessage.from.is_bot && firstMessage.message_id === startMessage) {
       messages.push(firstMessage)
-    } else {
-      return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'), {
-        reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true
-      })
+      startMessage += 1
+      messageCount -= 1
+    }
+
+    if (isCommand && ctx.message.external_reply) {
+      messages.push(Object.assign(ctx.message.external_reply, {
+        message_id: ctx.message.message_id,
+        quote: ctx.message.quote
+      }))
+    }
+
+    try {
+      const tdlibMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
+        const m = []
+        for (let i = 0; i < messageCount; i++) {
+          m.push(startMessage + i)
+        }
+        return m
+      })())
+      messages.push(...tdlibMessages)
+    } catch (error) {
+      console.error('TDLib getMessages failed:', error.message)
+      // Fallback: use only the replied message if available
+      if (firstMessage) {
+        messages.push(firstMessage)
+      } else {
+        return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'), {
+          reply_to_message_id: ctx.message.message_id,
+          allow_sending_without_reply: true
+        })
+      }
     }
   }
 
@@ -868,13 +1054,13 @@ ${JSON.stringify(messageForAIContext)}
         replyMessage: {}
       })
     } else {
-      return ctx.replyWithHTML(`😓 Sorry, AI busy. Try again later.`, {
+      return ctx.replyWithHTML(`🌙✨ <b>The magic spirits are taking a nap</b>\n\n<i>My AI wizard friend seems to be busy brewing other potions right now.</i>\n\n🔮 <i>Give it a moment and try your spell again! 🪄💫</i>`, {
         reply_to_message_id: ctx.message.message_id,
         allow_sending_without_reply: true
       }).then((res) => {
         setTimeout(() => {
           ctx.deleteMessage(res.message_id)
-        }, 5000)
+        }, 8000)
       })
     }
   }
