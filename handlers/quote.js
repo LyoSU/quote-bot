@@ -489,75 +489,7 @@ module.exports = async (ctx, next) => {
 
   let messages = []
 
-  // Handle AI query for message selection
-  if (flag.aiQuery && !ctx.message.reply_to_message) {
-    try {
-      // Get last 50 messages for AI analysis
-      const recentMessages = []
-      const currentMessageId = ctx.message.message_id
-
-      for (let i = 1; i <= 50; i++) {
-        try {
-          const msgId = currentMessageId - i
-          if (msgId > 0) {
-            const msg = await ctx.tdlib.getMessages(ctx.message.chat.id, [msgId])
-            if (msg && msg[0] && Object.keys(msg[0]).length !== 0) {
-              recentMessages.push(msg[0])
-            }
-          }
-        } catch (error) {
-          // Skip failed messages
-          continue
-        }
-      }
-
-      if (recentMessages.length === 0) {
-        return ctx.replyWithHTML('🔮 <b>Oops! The crystal ball is cloudy</b>\n\n<i>I couldn\'t find any messages to work my magic on in this chat.</i>\n\n✨ <i>Try sending some messages first!</i>', {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true
-        })
-      }
-
-            // Use AI to select relevant messages
-      const aiResult = await selectMessagesWithAI(recentMessages, flag.aiQuery, ctx.group?.info?.settings?.locale || 'uk')
-
-      if (aiResult.indices.length === 0) {
-        return ctx.replyWithHTML('🔍✨ <b>Hmm, the magic didn\'t quite work</b>\n\n<i>I searched through the mystical chat scrolls but couldn\'t find anything matching:</i>\n\n🌟 <code>' + flag.aiQuery + '</code>\n\n<i>Try rephrasing your magical incantation! 🪄</i>', {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true
-        })
-      }
-
-      // Get selected messages
-      const selectedMessages = aiResult.indices.map(index => recentMessages[index]).filter(Boolean)
-      messages = selectedMessages
-      firstMessage = selectedMessages[0]
-      messageCount = selectedMessages.length
-
-      // Send a quick status message for user feedback
-      const statusMsg = await ctx.replyWithHTML(`✨🔮 <b>Magic is happening!</b>\n\n🌟 <i>Found ${selectedMessages.length} perfect message${selectedMessages.length > 1 ? 's' : ''} treasure${selectedMessages.length > 1 ? 's' : ''}!</i>\n\n🪄 <i>Brewing your quote potion...</i>`, {
-        reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true
-      })
-
-      // Delete status message after 3 seconds
-      setTimeout(() => {
-        ctx.deleteMessage(statusMsg.message_id).catch(() => {})
-      }, 3000)
-
-      // Optional: Show AI reasoning in development/debug mode
-      if (process.env.NODE_ENV === 'development' && aiResult.reasoning) {
-        console.log(`🔮✨ AI Magic Reasoning for "${flag.aiQuery}":`, aiResult.reasoning)
-      }
-
-    } catch (error) {
-      console.error('AI message selection failed:', error)
-      return ctx.replyWithHTML('🔮💫 <b>Oops! The magic spell fizzled</b>\n\n<i>My crystal ball got a bit foggy while analyzing the messages.</i>\n\n✨ <i>Try casting the spell again, or use the classic quote magic with reply! 🪄</i>', {
-        reply_to_message_id: ctx.message.message_id,
-        allow_sending_without_reply: true
-      })
-    }
-  } else if (ctx.chat.type === 'private' && !ctx.message.reply_to_message) {
+  if (ctx.chat.type === 'private' && !ctx.message.reply_to_message) {
     firstMessage = JSON.parse(JSON.stringify(ctx.message)) // copy message
     messageCount = maxQuoteMessage
   } else {
