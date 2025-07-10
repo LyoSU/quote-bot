@@ -7,7 +7,7 @@ const redis = new Redis({
 })
 
 const WINDOW_SIZE_SEC = 60
-const UPDATE_INTERVAL_MS = 1000 * 5
+const UPDATE_INTERVAL_MS = 1000 * 30
 const TTL_SECONDS = 120 // 2 minutes TTL for all Redis keys
 const KEY_PREFIX = 'quote:stats:' // Prefix for all Redis keys
 
