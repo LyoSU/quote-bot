@@ -12,12 +12,6 @@ A powerful Telegram bot that creates beautiful quote stickers from chat messages
 - **Customizable Design**: Custom background colors, emoji brands, and scaling
 - **Privacy Protection**: Optional user anonymization
 
-### AI-Powered Intelligence 🤖
-- **Smart Message Selection**: Use natural language to find relevant messages
-- **Context-Aware Responses**: AI-generated responses based on chat context
-- **Image Analysis**: AI can analyze images in messages for better context
-- **Multi-language Support**: Works in multiple languages
-
 ### Advanced Features
 - **High Performance**: Cluster architecture with load balancing
 - **Rate Limiting**: Smart rate limiting to prevent spam
