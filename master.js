@@ -138,7 +138,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   }
 
   // Start health checks
-  setInterval(checkTdlibHealth, TDLIB_HEALTH_INTERVAL)
+  const tdlibHealthInterval = setInterval(checkTdlibHealth, TDLIB_HEALTH_INTERVAL)
   checkTdlibHealth() // Initial check
 
   // Add request tracking
@@ -308,7 +308,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   })
 
   // Load monitoring
-  setInterval(() => {
+  const loadMonitorInterval = setInterval(() => {
     const totalLoad = workers.reduce((sum, w) => sum + w.load, 0)
     const queueStatus = queueManager.getStatus()
     logWithTimestamp(`Total worker load: ${totalLoad}, ${queueStatus}`)
@@ -382,18 +382,41 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
   }
 
   // Periodic checks
-  setInterval(checkWorkersHealth, WORKER_HEALTH_CHECK_INTERVAL)
-  setInterval(adjustWorkersCount, ADAPTIVE_SCALING_INTERVAL)
+  const healthCheckInterval = setInterval(checkWorkersHealth, WORKER_HEALTH_CHECK_INTERVAL)
+  const scalingInterval = setInterval(adjustWorkersCount, ADAPTIVE_SCALING_INTERVAL)
 
   // Enhanced error handling
   process.on('uncaughtException', (error) => {
     errorWithTimestamp('Uncaught Exception:', error)
+    // Cleanup intervals
+    clearInterval(tdlibHealthInterval)
+    clearInterval(healthCheckInterval)
+    clearInterval(scalingInterval)
+    clearInterval(loadMonitorInterval)
+    clearInterval(metricsInterval)
     // Recovery attempt
     workers.forEach(({ worker }) => worker.kill())
     process.exit(1)
   })
 
-  setInterval(() => {
+  // Cleanup on process termination
+  process.on('SIGTERM', () => {
+    clearInterval(tdlibHealthInterval)
+    clearInterval(healthCheckInterval)
+    clearInterval(scalingInterval)
+    clearInterval(loadMonitorInterval)
+    clearInterval(metricsInterval)
+  })
+
+  process.on('SIGINT', () => {
+    clearInterval(tdlibHealthInterval)
+    clearInterval(healthCheckInterval)
+    clearInterval(scalingInterval)
+    clearInterval(loadMonitorInterval)
+    clearInterval(metricsInterval)
+  })
+
+  const metricsInterval = setInterval(() => {
     const metrics = queueManager.getMetrics()
     const workerMetrics = workers.map(w => ({
       pid: w.worker.process.pid,

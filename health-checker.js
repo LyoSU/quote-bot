@@ -143,16 +143,18 @@ const startHealthChecker = async () => {
   await performHealthCheck()
 
   // Schedule regular checks
-  setInterval(performHealthCheck, HEALTH_CHECK_INTERVAL)
+  const healthCheckInterval = setInterval(performHealthCheck, HEALTH_CHECK_INTERVAL)
 
   // Handle process termination
   process.on('SIGINT', async () => {
     await log('🛑 Health Checker stopping...')
+    clearInterval(healthCheckInterval)
     process.exit(0)
   })
 
   process.on('SIGTERM', async () => {
     await log('🛑 Health Checker terminated')
+    clearInterval(healthCheckInterval)
     process.exit(0)
   })
 }
@@ -160,6 +162,7 @@ const startHealthChecker = async () => {
 // Handle uncaught errors
 process.on('uncaughtException', async (error) => {
   await log(`💥 Health Checker crashed: ${error.message}`)
+  // Note: healthCheckInterval will be cleaned up when process exits
   process.exit(1)
 })
 

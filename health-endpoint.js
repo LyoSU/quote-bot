@@ -62,7 +62,16 @@ const createHealthServer = () => {
   })
 
   // Check health every 10 seconds
-  setInterval(checkHealth, 10000)
+  const healthInterval = setInterval(checkHealth, 10000)
+
+  // Cleanup on process termination
+  const cleanup = () => {
+    clearInterval(healthInterval)
+    server.close()
+  }
+
+  process.on('SIGTERM', cleanup)
+  process.on('SIGINT', cleanup)
 
   return server
 }
