@@ -239,13 +239,12 @@ bot.use((ctx, next) => {
   return next()
 })
 
-// Handle photo/document with /qi or /quote_image caption
-bot.on(['photo', 'document'], (ctx, next) => {
-  if (ctx.message.caption && (ctx.message.caption.match(/\/qi/) || ctx.message.caption.match(/\/quote_image/))) {
+bot.on(['photo', 'document'], Composer.privateChat((ctx, next) => {
+  if (!ctx.message.caption && !ctx.message.media_group_id) {
     return handleImageToQuote(ctx, next)
   }
   return next()
-})
+}))
 
 bot.command('q', handleQuote)
 bot.command('qi', handleImageToQuote)

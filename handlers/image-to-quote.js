@@ -42,18 +42,6 @@ const handleImageToQuoteError = async (ctx, error) => {
 }
 
 module.exports = async (ctx, next) => {
-  // Check if message has photo
-  if (!ctx.message.photo && !ctx.message.document) {
-    return next()
-  }
-
-  // Check if this is a command to process image
-  const isImageCommand = ctx.message.caption && ctx.message.caption.match(/\/qi|\/quote_image/)
-
-  if (!isImageCommand) {
-    return next()
-  }
-
   ctx.replyWithChatAction('typing')
 
   try {
