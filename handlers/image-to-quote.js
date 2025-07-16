@@ -200,11 +200,15 @@ Focus on accuracy and clean data extraction. Prioritize message content and user
 
       const messageData = {
         from: {
-          id: userId,
-          name: (msg.from && msg.from.name) || `user_${index}`
+          id: userId
         },
         text: msg.text || '',
         avatar: showAvatar
+      }
+
+      // Only add name if showing avatar
+      if (showAvatar) {
+        messageData.from.name = (msg.from && msg.from.name) || `user_${index}`
       }
 
       // Add reply message if present
