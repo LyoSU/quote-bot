@@ -166,7 +166,7 @@ Focus on accuracy and clean data extraction. Prioritize message content and user
 
     // Check for error response
     if (parsedResponse.error) {
-      return ctx.replyWithHTML(`❌ ${parsedResponse.error}`)
+      return next()
     }
 
     // Validate response structure
