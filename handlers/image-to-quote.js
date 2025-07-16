@@ -86,10 +86,15 @@ EXTRACTION REQUIREMENTS:
 - Identify each individual message in chronological order
 - Extract clean usernames WITHOUT any status indicators, roles, badges, or timestamps
 - Preserve message text content including emojis and formatting context
-- Detect reply relationships between messages
+- Detect reply relationships: when a message is replying to a previous message
 - Ignore all metadata: timestamps, online status, user roles (admin/mod), activity indicators ("last seen", "typing", etc.)
 - Handle multi-language content appropriately
 - Maintain conversation flow and message threading
+
+REPLY MESSAGE CLARIFICATION:
+- "text": Always contains the current user's message content
+- "replyMessage": Contains the ORIGINAL message that the current message is replying TO
+- If you see a reply structure (quoted text above a message), the quoted part goes in "replyMessage" and the user's response goes in "text"
 
 OUTPUT FORMAT:
 Return a valid JSON object with this exact structure:
@@ -101,16 +106,18 @@ Return a valid JSON object with this exact structure:
         "id": unique_numeric_identifier,
         "name": "clean_username_only"
       },
-      "text": "message_content_with_emojis",
+      "text": "current_user_message_content",
       "replyMessage": {
-        "name": "original_author_name",
-        "text": "quoted_message_text"
+        "name": "original_message_author",
+        "text": "original_message_being_replied_to"
       }
     }
   ]
 }
 
 IMPORTANT RULES:
+- "text" field: ALWAYS the current message author's text
+- "replyMessage.text": ALWAYS the original message text that is being replied to
 - Only include "replyMessage" field if the message is actually replying to another message
 - Generate consistent numeric IDs for the same user across messages
 - Strip ALL status indicators from usernames (online/offline, roles, timestamps, badges)
@@ -206,7 +213,7 @@ Focus on accuracy and clean data extraction. Prioritize message content and user
       const messageData = {
         from: {
           id: userId,
-          name: (msg.from && msg.from.name) || `Користувач ${index + 1}`
+          name: (msg.from && msg.from.name) || `user_${index}`
         },
         text: msg.text || '',
         avatar: showAvatar
@@ -215,7 +222,7 @@ Focus on accuracy and clean data extraction. Prioritize message content and user
       // Add reply message if present
       if (msg.replyMessage && msg.replyMessage.text) {
         messageData.replyMessage = {
-          name: msg.replyMessage.name || 'Користувач',
+          name: msg.replyMessage.name || 'unknown',
           text: msg.replyMessage.text,
           entities: msg.replyMessage.entities || [],
           chatId: hashCode(msg.replyMessage.name || 'unknown')
@@ -295,16 +302,6 @@ Focus on accuracy and clean data extraction. Prioritize message content and user
         reply_to_message_id: ctx.message.message_id,
         allow_sending_without_reply: true
       })
-
-      // Send info message
-      await ctx.replyWithHTML(
-        `✅ Цитату створено з ${parsedResponse.messages.length} повідомлень!\n\n` +
-        '💡 <b>Підказка:</b> Надішліть скріншот переписки з підписом <code>/qi</code> або <code>/quote_image</code> щоб створити цитату',
-        {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true
-        }
-      )
     }
   } catch (error) {
     console.error('Image to quote processing error:', error)
