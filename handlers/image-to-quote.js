@@ -94,11 +94,11 @@ module.exports = async (ctx, next) => {
   "messages": [
     {
       "from": {
-        "name": "Ім'я користувача",
-        "id": генеруй_унікальний_id_на_основі_імені
+        "id": генеруй_унікальний_числовий_id,
+        "name": "Ім'я користувача"
       },
       "text": "Текст повідомлення",
-      "entities": [] // якщо є форматування
+      "avatar": true
     }
   ]
 }
@@ -108,7 +108,7 @@ module.exports = async (ctx, next) => {
 
     // Call OpenAI Vision API
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.5-flash-lite-preview-06-17',
+      model: 'openai/gpt-4o',
       messages: [
         {
           role: 'user',
@@ -166,8 +166,11 @@ module.exports = async (ctx, next) => {
 
     // Process messages and generate quote
     const quoteMessages = parsedResponse.messages.map((msg, index) => {
-      // Generate unique ID based on name if not provided
-      const userId = (msg.from && msg.from.id) || hashCode((msg.from && msg.from.name) || `user_${index}`)
+      // Ensure we have a valid user ID (number)
+      let userId = msg.from && msg.from.id
+      if (!userId || typeof userId !== 'number') {
+        userId = hashCode((msg.from && msg.from.name) || `user_${index}`)
+      }
 
       return {
         from: {
@@ -175,9 +178,7 @@ module.exports = async (ctx, next) => {
           name: (msg.from && msg.from.name) || `Користувач ${index + 1}`
         },
         text: msg.text || '',
-        entities: msg.entities || [],
-        avatar: true,
-        chatId: userId
+        avatar: true
       }
     })
 
