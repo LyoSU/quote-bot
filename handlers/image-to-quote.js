@@ -97,8 +97,7 @@ module.exports = async (ctx, next) => {
         "id": генеруй_унікальний_числовий_id,
         "name": "Ім'я користувача"
       },
-      "text": "Текст повідомлення",
-      "avatar": true
+      "text": "Текст повідомлення"
     }
   ]
 }
@@ -108,7 +107,7 @@ module.exports = async (ctx, next) => {
 
     // Call OpenAI Vision API
     const completion = await openai.chat.completions.create({
-      model: 'openai/gpt-4o',
+      model: 'google/gemini-2.5-flash-lite-preview-06-17',
       messages: [
         {
           role: 'user',
@@ -172,13 +171,29 @@ module.exports = async (ctx, next) => {
         userId = hashCode((msg.from && msg.from.name) || `user_${index}`)
       }
 
+      // Determine if should show avatar
+      let showAvatar = true
+      if (index > 0) {
+        // Get previous message user ID
+        const prevMsg = parsedResponse.messages[index - 1]
+        let prevUserId = prevMsg.from && prevMsg.from.id
+        if (!prevUserId || typeof prevUserId !== 'number') {
+          prevUserId = hashCode((prevMsg.from && prevMsg.from.name) || `user_${index - 1}`)
+        }
+
+        // If same user as previous message, don't show avatar
+        if (userId === prevUserId) {
+          showAvatar = false
+        }
+      }
+
       return {
         from: {
           id: userId,
           name: (msg.from && msg.from.name) || `Користувач ${index + 1}`
         },
         text: msg.text || '',
-        avatar: true
+        avatar: showAvatar
       }
     })
 
