@@ -80,34 +80,50 @@ module.exports = async (ctx, next) => {
 
     // Create vision prompt
     const visionPrompt = `
-Розпізнай текст з цього скріншоту переписки в месенджері і переформатуй його в JSON схему для генерації цитат.
+You are an expert text recognition system specialized in extracting structured conversation data from messenger screenshots. Your task is to analyze the provided image and convert the visible conversation into a structured JSON format for quote generation.
 
-ВАЖЛИВО:
-- Визначи кожне окреме повідомлення
-- Збережи імена користувачів
-- Збережи структуру діалогу
-- Якщо є емодзі, збережи їх
-- Якщо є часові мітки, можеш їх проігнорувати
+EXTRACTION REQUIREMENTS:
+- Identify each individual message in chronological order
+- Extract clean usernames WITHOUT any status indicators, roles, badges, or timestamps
+- Preserve message text content including emojis and formatting context
+- Detect reply relationships between messages
+- Ignore all metadata: timestamps, online status, user roles (admin/mod), activity indicators ("last seen", "typing", etc.)
+- Handle multi-language content appropriately
+- Maintain conversation flow and message threading
 
-Поверни результат у форматі JSON:
+OUTPUT FORMAT:
+Return a valid JSON object with this exact structure:
+
 {
   "messages": [
     {
       "from": {
-        "id": генеруй_унікальний_числовий_id,
-        "name": "Ім'я користувача"
+        "id": unique_numeric_identifier,
+        "name": "clean_username_only"
       },
-      "text": "Текст повідомлення"
+      "text": "message_content_with_emojis",
+      "replyMessage": {
+        "name": "original_author_name",
+        "text": "quoted_message_text"
+      }
     }
   ]
 }
 
-Якщо не можеш розпізнати текст або це не схоже на переписку, поверни: {"error": "Не вдалося розпізнати переписку"}
+IMPORTANT RULES:
+- Only include "replyMessage" field if the message is actually replying to another message
+- Generate consistent numeric IDs for the same user across messages
+- Strip ALL status indicators from usernames (online/offline, roles, timestamps, badges)
+- Preserve exact message text including emojis and special characters
+- Handle various messenger interfaces (Telegram, WhatsApp, Discord, etc.)
+- If image quality is poor or no conversation is detected, return: {"error": "Unable to extract conversation data"}
+
+Focus on accuracy and clean data extraction. Prioritize message content and user identification over metadata.
 `
 
     // Call OpenAI Vision API
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.5-flash-lite-preview-06-17',
+      model: 'google/gemini-2.5-flash',
       messages: [
         {
           role: 'user',
@@ -187,7 +203,7 @@ module.exports = async (ctx, next) => {
         }
       }
 
-      return {
+      const messageData = {
         from: {
           id: userId,
           name: (msg.from && msg.from.name) || `Користувач ${index + 1}`
@@ -195,6 +211,18 @@ module.exports = async (ctx, next) => {
         text: msg.text || '',
         avatar: showAvatar
       }
+
+      // Add reply message if present
+      if (msg.replyMessage && msg.replyMessage.text) {
+        messageData.replyMessage = {
+          name: msg.replyMessage.name || 'Користувач',
+          text: msg.replyMessage.text,
+          entities: msg.replyMessage.entities || [],
+          chatId: hashCode(msg.replyMessage.name || 'unknown')
+        }
+      }
+
+      return messageData
     })
 
     // Set default background
