@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/LyoSU/quote-bot#readme",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.27.3",
     "dotenv": "^8.6.0",
     "emoji-db": "^14.0.1",
     "enot-node": "^1.0.1",

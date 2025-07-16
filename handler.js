@@ -11,6 +11,7 @@ const {
   handleAdv,
   handleModerateAdv,
   handleQuote,
+  handleImageToQuote,
   handleGetQuote,
   handleTopQuote,
   handleRandomQuote,
@@ -238,7 +239,17 @@ bot.use((ctx, next) => {
   return next()
 })
 
+// Handle photo/document with /qi or /quote_image caption
+bot.on(['photo', 'document'], (ctx, next) => {
+  if (ctx.message.caption && (ctx.message.caption.match(/\/qi/) || ctx.message.caption.match(/\/quote_image/))) {
+    return handleImageToQuote(ctx, next)
+  }
+  return next()
+})
+
 bot.command('q', handleQuote)
+bot.command('qi', handleImageToQuote)
+bot.command('quote_image', handleImageToQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)

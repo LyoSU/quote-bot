@@ -5,7 +5,6 @@ const got = require('got')
 const {
   OpenAI
 } = require('openai')
-const Anthropic = require('@anthropic-ai/sdk')
 const slug = require('limax')
 const EmojiDbLib = require('emoji-db')
 
