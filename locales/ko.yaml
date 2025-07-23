@@ -87,7 +87,7 @@ btn:
   help: 도와주세요
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    인용은 이 메시지 유형을 지원하지 않습니다
   api_error: |
     <b>이런! 문제가 발생했습니다 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       다시 시도하거나 문제가 지속되면 @Ly_oBot에 보고하세요．
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>권한 오류</b>
+      이 채팅에서 문서를 보낼 수 있는 권한이 없습니다.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>이 문제를 해결하려면:</b>
+      • 그룹 관리자: "문서 보내기" 권한을 부여해 주세요
+      • 개인 채팅: 봇을 차단하지 않았는지 확인하세요
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>권한 오류</b>
+      이 채팅에서 스티커를 보낼 수 있는 권한이 없습니다.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>이 문제를 해결하려면:</b>
+      • 그룹 관리자: "스티커 보내기" 권한을 부여해 주세요
+      • 이미지 형식으로 <code>/q img</code>를 사용해 보세요
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>권한 오류</b>
+      이 채팅에서 사진을 보낼 수 있는 권한이 없습니다.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>이 문제를 해결하려면:</b>
+      • 그룹 관리자: "사진 보내기" 권한을 부여해 주세요
+      • 스티커 형식으로 <code>/q</code>를 사용해 보세요
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>채팅 제한</b>
+      이 채팅에서 메시지를 보낼 수 없습니다.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>가능한 이유:</b>
+      • 봇을 차단했습니다
+      • 그룹에서 봇을 제한했습니다
+      • 그룹에서 제거되었습니다
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>스티커 팩 문제</b>
+      스티커 팩에 문제가 있습니다. 새 인용구를 생성 중입니다...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>스티커 팩 가득 참</b>
+      스티커 팩이 한도에 도달했습니다. 인용구가 일반 스티커로 전송됩니다.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>봇 차단됨</b>
+      이 봇을 차단했습니다. 인용구를 받으려면 차단을 해제하세요.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>계정 문제</b>
+      대상 사용자 계정이 비활성화되었거나 삭제되었습니다.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>메시지가 너무 깁니다</b>
+      인용된 메시지가 너무 깁니다. 더 적은 메시지를 인용하거나 짧은 텍스트를 사용해 보세요.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>네트워크 오류</b>
+      연결 문제 발생. 잠시 후 다시 시도하세요.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>타임아웃 오류</b>
+      요청이 너무 오래 걸렸습니다. 더 간단한 인용구로 다시 시도하세요.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 이미지를 분석하고 텍스트를 추출 중입니다...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ ${count}개의 메시지로부터 인용 생성됨!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>팁:</b> <code>/qi</code> 또는 <code>/quote_image</code> 캡션으로 스크린샷을 보내 인용 생성하기
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ 이미지 파일을 보내주세요 (JPG, PNG, WebP)
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ 이미지가 너무 큽니다. 최대 크기: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ 지원되지 않는 이미지 형식입니다. 지원 내용: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ 이미지에서 읽을 수 있는 채팅 메시지를 찾을 수 없습니다. 대화의 명확한 스크린샷인지 확인하세요.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ 인식 오류. 이미지에 명확한 대화 텍스트가 없을 수 있습니다.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ 텍스트 인식 오류. 다시 시도해 주세요.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ 너무 많은 요청! ${seconds}초 후에 다시 시도하세요.
 sticker:
   save:
     suc: <a href="${link}">그룹 스티커 팩</a>에 성공적으로 추가되었습니다 ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      이 인용구에 대해 ${rateName} 하셨습니다
     back: |
-      Your vote has been removed
+      귀하의 투표가 제거되었습니다
   settings:
     enable: |
-      Quote rating is now enabled
+      인용구 평가가 이제 활성화되었습니다
     disable: |
-      Quote rating has been disabled
+      인용구 평가가 비활성화되었습니다
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    이 그룹에는 아직 높은 평가를 받은 인용구가 없습니다! 메시지를 평가해보세요
   gab: |
     랜덤 인용 빈도가 ${gab}로 설정되었습니다 ✨
 hidden:
