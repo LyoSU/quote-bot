@@ -93,9 +93,7 @@ btn:
   help: Referencia
 quote:
   unsupported_message: |
-    Desculpe, ainda não suporto este tipo de mensagem 😅
-
-    Tente texto, fotos, adesivos ou mensagens de voz!
+    This message type is not supported for quoting
   api_error: |
     <b>Ops! Algo deu errado 😅</b>
     <pre>${error}</pre>
@@ -235,17 +233,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Você ${rateName} esta citação! Obrigado por avaliar ⭐
+      You ${rateName} this quote
     back: |
-      Seu voto foi removido 🔄
+      Your vote has been removed
   settings:
     enable: |
-      A avaliação de citações agora está ativada! Avalie com ⭐
+      Quote rating is now enabled
     disable: |
-      A avaliação de citações foi desativada 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Ainda não há citações altamente avaliadas neste grupo! Comece a avaliar algumas mensagens ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Frequência de citação aleatória definida para ${gab} ✨
 hidden:
