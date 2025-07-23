@@ -87,9 +87,7 @@ btn:
   help: Help
 quote:
   unsupported_message: |
-    Sorry, I don't support this message type yet 😅
-
-    Try text, photos, stickers, or voice messages!
+    This message type is not supported for quoting
   api_error: |
     <b>Oops! Something went wrong 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote! Thanks for rating ⭐
+      You ${rateName} this quote
     back: |
-      Your vote has been removed 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Quote rating is now enabled! Rate with ⭐
+      Quote rating is now enabled
     disable: |
-      Quote rating has been disabled 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Random quote frequency set to ${gab} ✨
 hidden:
