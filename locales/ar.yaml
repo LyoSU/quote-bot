@@ -87,7 +87,7 @@ btn:
   help: مساعدة
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    نوع الرسالة هذه غير مدعوم للاقتباس
   api_error: |
     <b>عفوًا! حدث خطأ ما 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       يرجى المحاولة مرة أخرى أو الإبلاغ عن هذا إلى @Ly_oBot إذا استمر المشكلة.
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>خطأ في الأذونات</b>
+      ليس لدي إذن لإرسال المستندات في هذه الدردشة.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>لإصلاح هذا:</b>
+      • مسؤول المجموعة: أعطني إذن "إرسال المستندات"
+      • دردشة خاصة: تأكد أنك لم تحظر البوت
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>خطأ في الأذونات</b>
+      ليس لدي إذن لإرسال الملصقات في هذه الدردشة.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>لإصلاح هذا:</b>
+      • مسؤول المجموعة: أعطني إذن "إرسال الملصقات"
+      • حاول استخدام <code>/q img</code> لتنسيق الصور بدلاً من ذلك
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>خطأ في الأذونات</b>
+      ليس لدي إذن لإرسال الصور في هذه الدردشة.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>لإصلاح هذا:</b>
+      • مسؤول المجموعة: أعطني إذن "إرسال الصور"
+      • حاول استخدام <code>/q</code> لتنسيق الملصقات بدلاً من ذلك
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>الدردشة محظورة</b>
+      لا يمكنني إرسال الرسائل في هذه الدردشة.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>الأسباب المحتملة:</b>
+      • لقد قمت بحظر البوت
+      • المجموعة قيدت البوتات
+      • لقد تمت إزالتي من المجموعة
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>مشكلة في حزمة الملصقات</b>
+      هناك مشكلة في حزمة الملصقات. يتم إنشاء اقتباس جديد...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>حزمة الملصقات ممتلئة</b>
+      وصلت حزمة الملصقات إلى الحد الأقصى. سيتم إرسال اقتباسك كملصق عادي.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>البوت محظور</b>
+      لقد حظرت هذا البوت. يرجى رفع الحظر لتلقي الاقتباسات.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>مشكلة في الحساب</b>
+      حساب المستخدم المستهدف معطل أو محذوف.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>الرسالة طويلة جداً</b>
+      الرسالة المقتبسة طويلة جداً. حاول الاقتباس من رسائل أقل أو نص أقصر.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>خطأ في الشبكة</b>
+      حدثت مشكلة في الاتصال. يرجى المحاولة مرة أخرى بعد لحظة.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>خطأ مهلة</b>
+      استغرقت الطلب وقتاً طويلاً. يرجى المحاولة مرة أخرى باستخدام اقتباس أبسط.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 جارٍ تحليل الصورة واستخراج النص...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ تم إنشاء الاقتباس من ${count} رسائل!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>نصيحة:</b> أرسل لقطة شاشة مع توضيح <code>/qi</code> أو <code>/quote_image</code> لإنشاء الاقتباسات
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ يرجى إرسال ملف صورة (JPG, PNG, WebP)
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ الصورة كبيرة جدًا. الحد الأقصى: 20 ميجابايت
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ تنسيق الصورة غير مدعوم. مدعوم: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ لم نتمكن من العثور على رسائل دردشة قابلة للقراءة في الصورة. تأكد من أنها لقطة شاشة واضحة لمحادثة.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ خطأ في التعرف. قد لا تحتوي الصورة على نص محادثة واضحة.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ خطأ في التعرف على النص. يُرجى المحاولة مرة أخرى.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ طلبات كثيرة جداً! يُرجى الانتظار ${seconds} ثانية قبل المحاولة مجدداً.
 sticker:
   save:
     suc: تمت الإضافة بنجاح إلى <a href="${link}">حزمة ملصقات المجموعة</a> ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      لقد ${rateName} هذا الاقتباس
     back: |
-      Your vote has been removed
+      تمت إزالة تصويتك
   settings:
     enable: |
-      Quote rating is now enabled
+      تم تفعيل تقييم الاقتباس الآن
     disable: |
-      Quote rating has been disabled
+      تم تعطيل تقييم الاقتباس
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    لا توجد اقتباسات ذات تقييم عالي في هذه المجموعة حتى الآن! ابدأ بتقييم بعض الرسائل
   gab: |
     تم ضبط تردد الاقتباس العشوائي على ${gab} ✨
 hidden:
