@@ -87,9 +87,7 @@ btn:
   help: 帮助
 quote:
   unsupported_message: |
-    抱歉，我暂时不支持这种消息类型 😅
-
-    试试文本、照片、贴纸或语音消息！
+    This message type is not supported for quoting
   api_error: |
     <b>糟糕！出错了 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      您${rateName}这个引文！感谢您的评分 ⭐
+      You ${rateName} this quote
     back: |
-      您的投票已被移除 🔄
+      Your vote has been removed
   settings:
     enable: |
-      引文评分已启用！可以用 ⭐ 评分
+      Quote rating is now enabled
     disable: |
-      引文评分已禁用 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    该群组内暂时没有评分很高的引文！开始给一些消息打分吧 ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     随机引文频率设置为 ${gab} ✨
 hidden:
