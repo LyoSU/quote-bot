@@ -87,9 +87,7 @@ btn:
   help: 帮助
 quote:
   unsupported_message: |
-    抱歉，我暂时不支持这种消息类型 😅
-
-    试试文本、照片、贴纸或语音消息！
+    此消息类型不支持引用
   api_error: |
     <b>糟糕！出错了 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       请再试一次，或者如果问题持续存在，请向 @Ly_oBot 报告。
+    no_rights_send_documents: |
+      🚫 <b>权限错误</b>
+      我没有权限在此聊天中发送文件。
+
+      <b>解决方法：</b>
+      • 群管理员：请给予我“发送文件”权限
+      • 私聊：确保您没有屏蔽此机器人
+    no_rights_send_stickers: |
+      🚫 <b>权限错误</b>
+      我没有权限在此聊天中发送贴纸。
+
+      <b>解决方法：</b>
+      • 群管理员：请给予我“发送贴纸”权限
+      • 尝试使用<code>/q img</code>以图像格式发送
+    no_rights_send_photos: |
+      🚫 <b>权限错误</b>
+      我没有权限在此聊天中发送照片。
+
+      <b>解决方法：</b>
+      • 群管理员：请给予我“发送照片”权限
+      • 尝试使用<code>/q</code>以贴纸格式发送
+    chat_write_forbidden: |
+      🚫 <b>聊天受限</b>
+      我无法在此聊天中发送消息。
+
+      <b>可能的原因：</b>
+      • 您已屏蔽此机器人
+      • 群组限制了机器人
+      • 我被移出了群组
+    sticker_set_invalid: |
+      🔄 <b>贴纸包问题</b>
+      贴纸包存在问题，正在创建新的引用...
+    sticker_set_full: |
+      📦 <b>贴纸包已满</b>
+      贴纸包已达到上限，您的引用将被作为普通贴纸发送。
+    bot_blocked: |
+      🚫 <b>机器人被屏蔽</b>
+      您已屏蔽了此机器人，请解除屏蔽以接收引用。
+    user_deactivated: |
+      👤 <b>账号问题</b>
+      目标用户账号已被停用或删除。
+    message_too_long: |
+      📝 <b>消息太长</b>
+      引用的消息太长，请尝试引用较少的消息或较短的文本。
+    network_error: |
+      🌐 <b>网络错误</b>
+      出现连接问题，请稍后重试。
+    timeout_error: |
+      ⏱️ <b>超时错误</b>
+      请求耗时过长，请尝试使用更简单的引用重试。
+  image_to_quote:
+    processing: |
+      🔍 正在分析图像并提取文本...
+    success: |
+      ✅ 已从 ${count} 条消息中创建引用！
+
+      💡 <b>提示：</b>发送截图并添加<code>/qi</code>或<code>/quote_image</code>标题以创建引用
+    errors:
+      no_image: |
+        ❌ 请发送图像文件（JPG, PNG, WebP)
+      file_too_large: |
+        ❌ 图像过大。最大尺寸：20MB
+      unsupported_format: |
+        ❌ 不支持的图像格式。支持格式：JPG, PNG, WebP
+      no_text_found: |
+        ❌ 无法在图像中找到可读的聊天消息。请确保这是对话的明确截图。
+      parse_error: |
+        ❌ 识别错误。图像可能不包含清晰的对话文本。
+      api_error: |
+        ❌ 文本识别错误。请再试一次。
+      rate_limit: |
+        ⏳ 请求次数过多！请等待 ${seconds} 秒后再试。
 sticker:
   save:
     suc: 成功添加到您的<a href="${link}">群组贴纸包</a>✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      您${rateName}这个引文！感谢您的评分 ⭐
+      您 ${rateName} 了它。
     back: |
-      您的投票已被移除 🔄
+      您的投票已被撤销
   settings:
     enable: |
-      引文评分已启用！可以用 ⭐ 评分
+      引用评价已启用。
     disable: |
-      引文评分已禁用 🔄
+      引用评价已禁用
 random:
   empty: |
-    该群组内暂时没有评分很高的引文！开始给一些消息打分吧 ⭐
+    此组中还没有高分引用！开始评价消息吧
   gab: |
     随机引文频率设置为 ${gab} ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>感谢您的支持！💜</b>
     您正在帮助让 QuotLyBot 变得更好！
   pay: '💜 通过 Telegram 支付'
-  liqpay: '银行卡支付 💳'
   other: '其它选项'
 emoji:
   info: |
