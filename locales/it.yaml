@@ -93,7 +93,7 @@ btn:
   help: Aiuto
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    Questo tipo di messaggio non è supportato per la citazione
   api_error: |
     <b>Oops! Qualcosa è andato storto 😅</b>
     <pre>${error}</pre>
@@ -132,77 +132,77 @@ quote:
 
       Per favore riprova o segnala questo a @Ly_oBot se persiste.
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>Errore Di Permesso</b>
+      Non ho il permesso di inviare documenti in questa chat.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>Per risolvere questo problema:</b>
+      • Amministratore del gruppo: Dammi il permesso "Inviare documenti"
+      • Chat privata: Assicurati di non aver bloccato il bot
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>Errore Di Permesso</b>
+      Non ho il permesso di inviare sticker in questa chat.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>Per risolvere questo problema:</b>
+      • Amministratore del gruppo: Dammi il permesso "Inviare sticker"
+      • Prova a usare <code>/q img</code> per il formato immagine invece
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>Errore Di Permesso</b>
+      Non ho il permesso di inviare foto in questa chat.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>Per risolvere questo problema:</b>
+      • Amministratore del gruppo: Dammi il permesso "Inviare foto"
+      • Prova a usare <code>/q</code> per il formato sticker invece
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>Chat Limitata</b>
+      Non posso inviare messaggi in questa chat.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>Possibili motivi:</b>
+      • Hai bloccato il bot
+      • Il gruppo ha limitato i bot
+      • Sono stato rimosso dal gruppo
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>Problema Con Il Pacchetto Di Sticker</b>
+      C'è un problema con il pacchetto di sticker. Creazione di una nuova citazione...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>Pacchetto Di Sticker Pieno</b>
+      Il pacchetto di sticker ha raggiunto il limite. La tua citazione sarà inviata come sticker normale.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>Bot Bloccato</b>
+      Hai bloccato questo bot. Sbloccalo per ricevere citazioni.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>Problema Con L'Account</b>
+      L'account utente di destinazione è disattivato o eliminato.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>Messaggio Troppo Lungo</b>
+      Il messaggio citato è troppo lungo. Prova a citare meno messaggi o un testo più breve.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>Errore Di Rete</b>
+      Si è verificato un problema di connessione. Riprova tra un momento.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>Errore Di Timeout</b>
+      La richiesta ha impiegato troppo tempo. Riprova con una citazione più semplice.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 Analizzando l'immagine ed estraendo il testo...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ Citazione creata da ${count} messaggi!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>Consiglio:</b> Invia uno screenshot con <code>/qi</code> o <code>/quote_image</code> per creare citazioni
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ Per favore invia un file immagine (JPG, PNG, WebP)
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ Immagine troppo grande. Dimensione massima: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ Formato immagine non supportato. Supportati: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ Impossibile trovare messaggi di chat leggibili nell'immagine. Assicurati che sia uno screenshot chiaro di una conversazione.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ Errore di riconoscimento. L'immagine potrebbe non contenere testo di conversazione chiaro.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ Errore di riconoscimento del testo. Per favore riprova.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ Troppe richieste! Attendi ${seconds} secondi prima di riprovare.
 sticker:
   save:
     suc: Lo sticker è stato aggiunto con successo al tuo <a href="${link}">pacchetto di adesivi del gruppo</a> ✨
@@ -233,17 +233,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      Tu ${rateName} questo.
     back: |
-      Your vote has been removed
+      Il tuo voto è stato rimosso
   settings:
     enable: |
-      Quote rating is now enabled
+      La valutazione delle citazioni è abilitata
     disable: |
-      Quote rating has been disabled
+      La valutazione delle citazioni è stata disabilitata
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    Non ci sono ancora citazioni molto votate in questo gruppo! Inizia a votare alcuni messaggi
   gab: |
     Frequenza delle citazioni casuali impostata a ${gab} ✨
 hidden:
