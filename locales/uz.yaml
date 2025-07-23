@@ -87,9 +87,7 @@ btn:
   help: Ma'lumotnoma
 quote:
   unsupported_message: |
-    Kechirasiz, hozircha bu xabar turini qo'llab-quvvatlamayman 😅
-
-    Matn, foto, stiker yoki ovozli xabarlarni sinab ko'ring!
+    This message type is not supported for quoting
   api_error: |
     <b>Oops! Nimadir xato ketdi 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Siz ${rateName} bu sitatani! Reyting berish uchun rahmat ⭐
+      You ${rateName} this quote
     back: |
-      Sizning ovozingiz olib tashlandi 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Sitataga reyting berish imkoniyati endi yoqilgan! Reyting berishda ishtirok eting ⭐
+      Quote rating is now enabled
     disable: |
-      Sitataga reyting berish o'chirildi 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Bu guruhda hali yuqori baholangan sitatalar yo'q! Ba'zi xabarlarga reyting berishni boshlang ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Tasodifiy sitata chastotasi ${gab} ga o'rnatildi ✨
 hidden:
