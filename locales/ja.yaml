@@ -87,9 +87,7 @@ btn:
   help: ヘルプ
 quote:
   unsupported_message: |
-    申し訳ありませんが、このメッセージタイプはまだサポートしていません 😅
-
-    テキスト、写真、ステッカー、ボイスメッセージを試してみてください！
+    This message type is not supported for quoting
   api_error: |
     <b>おっと！何かがうまくいかなかったようです 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      あなたはこの引用を${rateName}しました！評価ありがとうございます ⭐
+      You ${rateName} this quote
     back: |
-      あなたの投票は削除されました 🔄
+      Your vote has been removed
   settings:
     enable: |
-      引用評価が有効になりました！⭐で評価してください
+      Quote rating is now enabled
     disable: |
-      引用評価が無効になりました 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    このグループにはまだ高評価の引用はありません！いくつかのメッセージを評価し始めてください ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     ランダム引用の頻度が${gab}に設定されました ✨
 hidden:
