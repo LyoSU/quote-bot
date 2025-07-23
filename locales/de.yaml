@@ -87,9 +87,7 @@ btn:
   help: Hilfe
 quote:
   unsupported_message: |
-    Entschuldigung, diesen Nachrichtentyp unterstütze ich noch nicht 😅
-
-    Probieren Sie Textnachrichten, Fotos, Sticker oder Sprachnachrichten!
+    This message type is not supported for quoting
   api_error: |
     <b>Ups! Etwas ist schiefgelaufen 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Du hast dieses Zitat ${rateName}! Danke fürs Bewerten ⭐
+      You ${rateName} this quote
     back: |
-      Deine Bewertung wurde entfernt 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Die Zitatbewertung ist jetzt aktiviert! Bewerten mit ⭐
+      Quote rating is now enabled
     disable: |
-      Die Zitatbewertung wurde deaktiviert 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Es gibt noch keine hoch bewerteten Zitate in dieser Gruppe! Beginne mit der Bewertung einiger Nachrichten ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Zufällige Zitatfrequenz auf ${gab} eingestellt ✨
 hidden:
