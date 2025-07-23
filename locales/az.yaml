@@ -87,7 +87,7 @@ btn:
   help: Istinad
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    Bu mesaj növü sitat üçün dəstəklənmir
   api_error: |
     <b>Oops! Bir şey səhv getdi 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       Yenidən cəhd edin və ya bu problemin davam etməsi halında bunu @Ly_oBot-a məlumat verin.
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>İcazə Xətası</b>
+      Bu çatda sənədləri göndərmək üçün icazəm yoxdur.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>Bunu düzəltmək üçün:</b>
+      • Qrup admini: Mənə "Sənədləri göndər" icazəsi ver
+      • Şəxsi çat: Botu bloklamadığınıza əmin olun
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>İcazə Xətası</b>
+      Bu çatda stikerləri göndərmək üçün icazəm yoxdur.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>Bunu düzəltmək üçün:</b>
+      • Qrup admini: Mənə "Stikerləri göndər" icazəsi ver
+      • Şəkil formatı üçün <code>/q img</code> istifadə etməyi yoxlayın
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>İcazə Xətası</b>
+      Bu çatda şəkilləri göndərmək üçün icazəm yoxdur.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>Bunu düzəltmək üçün:</b>
+      • Qrup admini: Mənə "Şəkilləri göndər" icazəsi ver
+      • Stiker formatı üçün <code>/q</code> istifadə etməyi yoxlayın
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>Çat Məhdudiyyəti</b>
+      Bu çatda mesajlar göndərə bilmirəm.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>Mümkün səbəblər:</b>
+      • Botu bloklamısınız
+      • Qrup botları məhdudlaşdırdı
+      • Qrupdan kənarlaşdırıldım
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>Stiker Paketi Problemi</b>
+      Stiker paketində problem var. Yeni sitat yaradılır...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>Stiker Paketi Dolu</b>
+      Stiker paketi limitinə çatıb. Sitatınız adi stiker kimi göndəriləcək.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>Bot Bloklanıb</b>
+      Bu botu bloklamısınız. Sitatları almaq üçün açın.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>Hesab Problemi</b>
+      Hədəf istifadəçi hesabı deaktiv edilib və ya silinib.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>Mesaj Çox Uzundur</b>
+      Sitat gətirilən mesaj çox uzundur. Daha az mesaj və ya daha qısa mətn sitat edin.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>Şəbəkə Xətası</b>
+      Bağlantı problemi baş verdi. Bir azdan yenidən cəhd edin.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>Vaxt Aşımı Xətası</b>
+      Sorğu çox uzun çəkdi. Daha sadə bir sitatla yenidən cəhd edin.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 Şəkil təhlil edilir və mətn çıxarılır...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ ${count} mesajdan sitat yaradıldı!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>Məsləhət:</b> <code>/qi</code> və ya <code>/quote_image</code> manşeti ilə ekran görüntüsü göndərin
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ Zəhmət olmasa, şəkil faylı (JPG, PNG, WebP) göndərin
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ Şəkil çox böyükdür. Maksimum ölçü: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ Dəstəklənməyən şəkil formatı. Dəstəklənən: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ Şəkildə oxuna bilən chat mesajları tapılmadı. Əmin olun ki, söhbətin dəqiq bir ekran görüntüsü var.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ Tanıma xətası. Şəkil açıq olmayan söhbət mətni ehtiva edə bilər.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ Mətn tanıma xətası. Yenidən cəhd edin.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ Çoxlu sorğular! Yenidən cəhd etməzdən əvvəl ${seconds} saniyə gözləyin.
 sticker:
   save:
     suc: Uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      Sən bunu ${rateName}
     back: |
-      Your vote has been removed
+      Səsiniz silindi
   settings:
     enable: |
-      Quote rating is now enabled
+      Sitatların qiymətləndirməsi açılıb
     disable: |
-      Quote rating has been disabled
+      Sitatların qiymətləndirməsi dayandırılıb
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    Bu qrupda hələ yüksək qiymət verilmiş sitatlar yoxdur! Bəzi mesajlara qiymət verin
   gab: |
     Təsadüfi sitat tezliyi ${gab} olaraq təyin edildi ✨
 hidden:
