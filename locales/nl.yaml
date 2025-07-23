@@ -87,7 +87,7 @@ btn:
   help: Hulp
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    Dit berichttype wordt niet ondersteund voor quoten
   api_error: |
     <b>Oeps! Er ging iets mis 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       Probeer het opnieuw of meld dit bij @Ly_oBot als het probleem aanhoudt.
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>Machtigingenfout</b>
+      Ik heb geen toestemming om documenten te verzenden in deze chat.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>Om dit te verhelpen:</b>
+      • Groepsbeheerder: Geef mij "Documenten verzenden"-machtiging
+      • Privéchat: Zorg ervoor dat je de bot niet hebt geblokkeerd
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>Machtigingenfout</b>
+      Ik heb geen toestemming om stickers te verzenden in deze chat.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>Om dit te verhelpen:</b>
+      • Groepsbeheerder: Geef mij "Stickers verzenden"-machtiging
+      • Probeer <code>/q img</code> te gebruiken voor het afbeeldingsformaat
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>Machtigingenfout</b>
+      Ik heb geen toestemming om foto's te verzenden in deze chat.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>Om dit te verhelpen:</b>
+      • Groepsbeheerder: Geef mij "Foto's verzenden"-machtiging
+      • Probeer <code>/q</code> voor het stickerformaat
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>Chat Beperkt</b>
+      Ik kan geen berichten versturen in deze chat.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>Mogelijke redenen:</b>
+      • Je hebt de bot geblokkeerd
+      • De groep heeft bots beperkt
+      • Ik ben uit de groep verwijderd
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>Stickerpakket Probleem</b>
+      Er is een probleem met het stickerpakket. Een nieuwe quote wordt gecreëerd...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>Stickerpakket Vol</b>
+      Het stickerpakket heeft zijn limiet bereikt. Je quote wordt als een normale sticker verzonden.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>Bot Geblokkeerd</b>
+      Je hebt deze bot geblokkeerd. Deblokkeer de bot om offertes te ontvangen.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>Accountprobleem</b>
+      Het doelgebruikersaccount is gedeactiveerd of verwijderd.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>Bericht te Lang</b>
+      Het geciteerde bericht is te lang. Probeer kortere berichten of minder berichten te citeren.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>Netwerkfout</b>
+      Er is een verbindingsprobleem opgetreden. Probeer het over een moment opnieuw.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>Timeout Fout</b>
+      De aanvraag duurde te lang. Probeer opnieuw met een simpelere quote.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 Beeld analyseren en tekst extraheren...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ Quote gemaakt van ${count} berichten!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>Tip:</b> Stuur schermafbeelding met <code>/qi</code> of <code>/quote_image</code> onderschrift om quotes te maken
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ Stuur een afbeeldingsbestand (JPG, PNG, WebP)
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ Afbeelding is te groot. Maximale grootte: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ Niet ondersteund afbeeldingsformaat. Ondersteund: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ Kon geen leesbare chatberichten in de afbeelding vinden. Zorg dat het een duidelijke schermafbeelding van een gesprek is.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ Herkenningsfout. De afbeelding bevat mogelijk geen duidelijke gesprekstekst.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ Tekstherkenningsfout. Probeer het opnieuw.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ Te veel verzoeken! Wacht alstublieft ${seconds} seconden voordat je het opnieuw probeert.
 sticker:
   save:
     suc: Succesvol toegevoegd aan je <a href="${link}">groepssticker pakket</a> ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      Jij ${rateName} deze quote
     back: |
-      Your vote has been removed
+      Je stem is verwijderd
   settings:
     enable: |
-      Quote rating is now enabled
+      Offertes beoordeling staat aan
     disable: |
-      Quote rating has been disabled
+      Offertes beoordelen is uitgeschakeld
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    Nog geen hoog beoordeelde quotes in deze groep! Begin met het beoordelen van enkele berichten
   gab: |
     Frequentie voor willekeurige citaat ingesteld op ${gab} ✨
 hidden:
