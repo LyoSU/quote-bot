@@ -87,9 +87,7 @@ btn:
   help: Pomoc
 quote:
   unsupported_message: |
-    Przepraszam, jeszcze nie obsługuję tego rodzaju wiadomości 😅
-
-    Spróbuj tekst, zdjęcia, naklejki lub wiadomości głosowe!
+    This message type is not supported for quoting
   api_error: |
     <b>Ups! Coś poszło nie tak 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Oceniłeś ${rateName} ten cytat! Dzięki za ocenę ⭐
+      You ${rateName} this quote
     back: |
-      Twoja ocena została usunięta 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Ocena cytatu została włączona! Oceniaj za pomocą ⭐
+      Quote rating is now enabled
     disable: |
-      Ocena cytatu została wyłączona 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Jeszcze nie ma cytatów o wysokiej ocenie w tej grupie! Zacznij oceniać wiadomości ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Częstotliwość losowych cytatów ustawiona na ${gab} ✨
 hidden:
