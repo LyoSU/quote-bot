@@ -87,7 +87,7 @@ btn:
   help: Bantuan
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    Jenis pesan ini tidak didukung untuk kutipan
   api_error: |
     <b>Ups! Ada yang salah 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       Silakan coba lagi atau laporkan ke @Ly_oBot jika masalah berlanjut.
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>Kesalahan Izin</b>
+      Saya tidak memiliki izin untuk mengirim dokumen dalam obrolan ini.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>Untuk memperbaikinya:</b>
+      • Admin grup: Berikan saya izin "Kirim dokumen"
+      • Obrolan pribadi: Pastikan Anda belum memblokir bot ini
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>Kesalahan Izin</b>
+      Saya tidak memiliki izin untuk mengirim stiker dalam obrolan ini.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>Untuk memperbaikinya:</b>
+      • Admin grup: Berikan saya izin "Kirim stiker"
+      • Coba gunakan <code>/q img</code> untuk format gambar sebagai alternatif
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>Kesalahan Izin</b>
+      Saya tidak memiliki izin untuk mengirim foto dalam obrolan ini.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>Untuk memperbaikinya:</b>
+      • Admin grup: Berikan saya izin "Kirim foto"
+      • Coba gunakan <code>/q</code> untuk format stiker sebagai alternatif
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>Chat Dibatasi</b>
+      Saya tidak bisa mengirim pesan dalam obrolan ini.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>Alasan yang mungkin:</b>
+      • Anda telah memblokir bot
+      • Grup telah membatasi bot
+      • Saya telah dihapus dari grup
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>Masalah Paket Stiker</b>
+      Ada masalah dengan paket stiker. Membuat kutipan baru...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>Paket Stiker Penuh</b>
+      Paket stiker telah mencapai batasnya. Kutipan Anda akan dikirim sebagai stiker biasa.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>Bot Diblokir</b>
+      Anda telah memblokir bot ini. Silakan buka blokir agar dapat menerima kutipan.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>Masalah Akun</b>
+      Akun pengguna target dinonaktifkan atau dihapus.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>Pesan Terlalu Panjang</b>
+      Pesan yang dikutip terlalu panjang. Coba kutip lebih sedikit pesan atau teks yang lebih pendek.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>Kesalahan Jaringan</b>
+      Terjadi masalah koneksi. Silakan coba lagi sebentar lagi.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>Kesalahan Timeout</b>
+      Permintaan terlalu lama. Silakan coba lagi dengan kutipan yang lebih sederhana.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 Menganalisis gambar dan mengekstrak teks...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ Kutipan dibuat dari ${count} pesan!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>Tip:</b> Kirim tangkapan layar dengan deskripsi <code>/qi</code> atau <code>/quote_image</code> untuk membuat kutipan
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ Silakan kirim file gambar (JPG, PNG, WebP)
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ Gambar terlalu besar. Ukuran maksimum: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ Format gambar tidak didukung. Yang didukung: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ Tidak bisa menemukan pesan obrolan yang dapat dibaca dalam gambar. Pastikan itu adalah tangkapan layar percakapan yang jelas.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ Kesalahan pengenalan. Mungkin gambar tidak berisi teks percakapan yang jelas.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ Kesalahan pengenalan teks. Silakan coba lagi.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ Terlalu banyak permintaan! Silakan tunggu ${seconds} detik sebelum mencoba lagi.
 sticker:
   save:
     suc: Stiker telah berhasil ditambahkan ke <a href="${link}">paket stiker grup</a> ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      Anda ${rateName} ini
     back: |
-      Your vote has been removed
+      Suara Anda telah dihapus
   settings:
     enable: |
-      Quote rating is now enabled
+      Evaluasi untuk kutipan disertakan
     disable: |
-      Quote rating has been disabled
+      Evaluasi kutipan telah dinonaktifkan
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    Belum ada kutipan dengan penilaian tinggi di grup ini! Mulailah menilai beberapa pesan
   gab: |
     Frekuensi kutipan acak diatur ke ${gab} ✨
 hidden:
