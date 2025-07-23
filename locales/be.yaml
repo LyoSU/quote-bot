@@ -87,7 +87,7 @@ btn:
   help: Даведка
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    Гэта тып паведамлення не падтрымліваецца для цытавання
   api_error: |
     <b>Ой! Нешта пайшло не так 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       Калі ласка, паспрабуйце яшчэ раз або паведаміце пра гэта @Ly_oBot, калі гэта захоўваецца.
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>Памылка Доступу</b>
+      У мяне няма дазволу адпраўляць дакументы ў гэтым чаце.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>Каб выправіць гэта:</b>
+      • Адміністратар групы: Дайце мне дазвол "Адпраўляць дакументы"
+      • Прыватны чат: Пераканайцеся, што вы не заблакіравалі бота
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>Памылка Доступу</b>
+      У мяне няма дазволу адпраўляць налепкі ў гэтым чаце.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>Каб выправіць гэта:</b>
+      • Адміністратар групы: Дайце мне дазвол "Адпраўляць налепкі"
+      • Спрабуйце выкарыстаць <code>/q img</code> для фармату выявы замест гэтага
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>Памылка Доступу</b>
+      У мяне няма дазволу адпраўляць фатаграфіі ў гэтым чаце.
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>Каб выправіць гэта:</b>
+      • Адміністратар групы: Дайце мне дазвол "Адпраўляць фатаграфіі"
+      • Спрабуйце выкарыстаць <code>/q</code> для фармату налепкі замест гэтага
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>Чат Абмежаваны</b>
+      Я не магу адпраўляць паведамленні ў гэтым чаце.
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>Магчымыя прычыны:</b>
+      • Вы заблакіравалі бота
+      • Група абмежавала ботаў
+      • Мяне выдалілі з групы
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>Праблема з Налепачным Пакетам</b>
+      Ёсць праблема з налепачным пакетам. Ствараецца новая цытата...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>Налепачны Пакет Поўны</b>
+      Налепачны пакет дасягнуў свайго ліміту. Ваша цытата будзе адпраўленая як звычайная налепка.
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>Бот Заблакіраваны</b>
+      Вы заблакіравалі гэтага бота. Калі ласка, разблакіруйце яго, каб атрымаць цытаты.
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>Праблема з Уліковым Запісам</b>
+      Мэтавы ўліковы запіс карыстальніка дэзактываваны або выдалены.
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>Паведамленне Занадта Доўгае</b>
+      Зачэпленая паведамленне занадта доўгая. Спрабуйце ҳамене цытаты або карацейшы тэкст.
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>Памылка Сеткі</b>
+      Узніклі праблемы з падключэннем. Паўтарыце спробы праз момант.
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>Памылка Тайм-Ауту</b>
+      Запыт заняў занадта шмат часу. Паўтарыце спробу з прасцейшай цытатай.
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 Аналізую выява і здабываю тэкст...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ Цытата створана з ${count} паведамленняў!
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>Карысны парада:</b> Адпраўце скрыншот з надпісам <code>/qi</code> або <code>/quote_image</code>, каб стварыць цытаты
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ Калі ласка, адпраўце файл выявы (JPG, PNG, WebP)
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ Выява занадта вялікая. Максімальны памер: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ Падтрымка фармату выявы адсутнічае. Падтрымліваюцца: JPG, PNG, WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ Не змоглі знайсці чытабельныя паведамленні чата на выяве. Пераканайцеся, што гэта чытэльны здымак экрана размовы.
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ Памылка распазнання. На выяве можа не быць яснага тэксту размовы.
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ Памылка распазнання тэксту. Паспрабуйце яшчэ раз.
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ Занадта шмат запытаў! Калі ласка, пачакайце ${seconds} секунд перад паўторнай спробай.
 sticker:
   save:
     suc: Стыкер паспяхова дададзены ў ваш <a href="${link}">стыкерпак суполкі</a> ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      Вы ${rateName} гэта цытата
     back: |
-      Your vote has been removed
+      Ваш голас быў выдалены
   settings:
     enable: |
-      Quote rating is now enabled
+      Ацэнка цытат цяпер уключана
     disable: |
-      Quote rating has been disabled
+      Ацэнка цытат была выключана
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    У гэтай групе пакуль няма высока ацэненых цытат! Пачніце ацэньваць некаторыя паведамленні
   gab: |
     Частата выпадковых цытат усталявана на ${gab} ✨
 hidden:
