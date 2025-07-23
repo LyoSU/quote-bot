@@ -87,9 +87,7 @@ btn:
   help: Ayuda
 quote:
   unsupported_message: |
-    Lo siento, aún no soporto este tipo de mensaje 😅
-
-    ¡Prueba con texto, fotos, stickers o mensajes de voz!
+    Este tipo de mensajes no es compatible para citar
   api_error: |
     <b>¡Vaya! Algo salió mal 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       Por favor, inténtalo de nuevo o informa a @Ly_oBot si persiste.
+    no_rights_send_documents: |
+      🚫 <b>Error de permiso</b>
+      No tengo permiso para enviar documentos en este chat.
+
+      <b>Para solucionarlo:</b>
+      • Administrador del grupo: Dame permiso para "Enviar documentos"
+      • Chat privado: Asegúrate de que no hayas bloqueado el bot
+    no_rights_send_stickers: |
+      🚫 <b>Error de permiso</b>
+      No tengo permiso para enviar stickers en este chat.
+
+      <b>Para solucionarlo:</b>
+      • Administrador del grupo: Dame permiso para "Enviar stickers"
+      • Intenta usar <code>/q img</code> para formato de imagen en su lugar
+    no_rights_send_photos: |
+      🚫 <b>Error de permiso</b>
+      No tengo permiso para enviar fotos en este chat.
+
+      <b>Para solucionarlo:</b>
+      • Administrador del grupo: Dame permiso para "Enviar fotos"
+      • Intenta usar <code>/q</code> para formato de sticker en su lugar
+    chat_write_forbidden: |
+      🚫 <b>Chat restringido</b>
+      No puedo enviar mensajes en este chat.
+
+      <b>Posibles razones:</b>
+      • Has bloqueado el bot
+      • El grupo ha restringido los bots
+      • Me eliminaron del grupo
+    sticker_set_invalid: |
+      🔄 <b>Problema con el paquete de stickers</b>
+      Hay un problema con el paquete de stickers. Creando una nueva cita...
+    sticker_set_full: |
+      📦 <b>Paquete de stickers lleno</b>
+      El paquete de stickers ha alcanzado su límite. Tu cita se enviará como un sticker normal.
+    bot_blocked: |
+      🚫 <b>Bot bloqueado</b>
+      Has bloqueado este bot. Desbloquéalo para recibir citas.
+    user_deactivated: |
+      👤 <b>Problema de cuenta</b>
+      La cuenta del usuario objetivo está desactivada o eliminada.
+    message_too_long: |
+      📝 <b>Mensaje demasiado largo</b>
+      El mensaje citado es demasiado largo. Intenta citar menos mensajes o texto más corto.
+    network_error: |
+      🌐 <b>Error de red</b>
+      Ocurrió un problema de conexión. Por favor, inténtalo de nuevo en un momento.
+    timeout_error: |
+      ⏱️ <b>Error de tiempo de espera</b>
+      La solicitud tardó demasiado. Por favor, inténtalo de nuevo con una cita más simple.
+  image_to_quote:
+    processing: |
+      🔍 Analizando imagen y extrayendo texto...
+    success: |
+      ✅ ¡Cita creada a partir de ${count} mensajes!
+
+      💡 <b>Consejo:</b> Envía una captura de pantalla con el título <code>/qi</code> o <code>/quote_image</code> para crear citas
+    errors:
+      no_image: |
+        ❌ Por favor, envía un archivo de imagen (JPG, PNG, WebP)
+      file_too_large: |
+        ❌ La imagen es demasiado grande. Tamaño máximo: 20MB
+      unsupported_format: |
+        ❌ Formato de imagen no compatible. Compatible: JPG, PNG, WebP
+      no_text_found: |
+        ❌ No se encontraron mensajes legibles en el chat de la imagen. Asegúrate de que es una captura clara de una conversación.
+      parse_error: |
+        ❌ Error de reconocimiento. La imagen puede no contener texto claro de conversación.
+      api_error: |
+        ❌ Error de reconocimiento de texto. Por favor, inténtalo de nuevo.
+      rate_limit: |
+        ⏳ ¡Demasiadas solicitudes! Por favor, espera ${seconds} segundos antes de intentarlo de nuevo.
 sticker:
   save:
     suc: El sticker se ha guardado con éxito en el <a href="${link}">pack de stickers del grupo</a> ✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      ¡Has ${rateName} esta cita! Gracias por calificar ⭐
+      Votaste ${rateName} esta cita
     back: |
-      Tu voto ha sido eliminado 🔄
+      Tu voto ha sido eliminado
   settings:
     enable: |
-      ¡La calificación de citas está habilitada! Califica con ⭐
+      La votación de citas está ahora habilitada
     disable: |
-      La calificación de citas ha sido deshabilitada 🔄
+      La votación de citas ha sido deshabilitada
 random:
   empty: |
-    ¡Todavía no hay citas altamente calificadas en este grupo! Comienza a calificar algunos mensajes ⭐
+    ¡No hay citas altamente calificadas en este grupo todavía! Comienza a calificar algunos mensajes
   gab: |
     Frecuencia de citas aleatorias establecida a ${gab} ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>¡Gracias por tu apoyo! 💜</b>
     ¡Estás ayudando a mejorar QuotLyBot aún más!
   pay: '💜 Pagar vía Telegram'
-  liqpay: 'Pagar con Tarjeta 💳'
   other: 'Otros'
 emoji:
   info: |

@@ -87,9 +87,7 @@ btn:
   help: Bantuan
 quote:
   unsupported_message: |
-    Maaf, saya belum mendukung jenis pesan ini 😅
-
-    Cobalah teks, foto, stiker, atau pesan suara!
+    Jenis pesan ini tidak didukung untuk kutipan
   api_error: |
     <b>Ups! Ada yang salah 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       Silakan coba lagi atau laporkan ke @Ly_oBot jika masalah berlanjut.
+    no_rights_send_documents: |
+      🚫 <b>Kesalahan Izin</b>
+      Saya tidak memiliki izin untuk mengirim dokumen dalam obrolan ini.
+
+      <b>Untuk memperbaikinya:</b>
+      • Admin grup: Berikan saya izin "Kirim dokumen"
+      • Obrolan pribadi: Pastikan Anda belum memblokir bot ini
+    no_rights_send_stickers: |
+      🚫 <b>Kesalahan Izin</b>
+      Saya tidak memiliki izin untuk mengirim stiker dalam obrolan ini.
+
+      <b>Untuk memperbaikinya:</b>
+      • Admin grup: Berikan saya izin "Kirim stiker"
+      • Coba gunakan <code>/q img</code> untuk format gambar sebagai alternatif
+    no_rights_send_photos: |
+      🚫 <b>Kesalahan Izin</b>
+      Saya tidak memiliki izin untuk mengirim foto dalam obrolan ini.
+
+      <b>Untuk memperbaikinya:</b>
+      • Admin grup: Berikan saya izin "Kirim foto"
+      • Coba gunakan <code>/q</code> untuk format stiker sebagai alternatif
+    chat_write_forbidden: |
+      🚫 <b>Chat Dibatasi</b>
+      Saya tidak bisa mengirim pesan dalam obrolan ini.
+
+      <b>Alasan yang mungkin:</b>
+      • Anda telah memblokir bot
+      • Grup telah membatasi bot
+      • Saya telah dihapus dari grup
+    sticker_set_invalid: |
+      🔄 <b>Masalah Paket Stiker</b>
+      Ada masalah dengan paket stiker. Membuat kutipan baru...
+    sticker_set_full: |
+      📦 <b>Paket Stiker Penuh</b>
+      Paket stiker telah mencapai batasnya. Kutipan Anda akan dikirim sebagai stiker biasa.
+    bot_blocked: |
+      🚫 <b>Bot Diblokir</b>
+      Anda telah memblokir bot ini. Silakan buka blokir agar dapat menerima kutipan.
+    user_deactivated: |
+      👤 <b>Masalah Akun</b>
+      Akun pengguna target dinonaktifkan atau dihapus.
+    message_too_long: |
+      📝 <b>Pesan Terlalu Panjang</b>
+      Pesan yang dikutip terlalu panjang. Coba kutip lebih sedikit pesan atau teks yang lebih pendek.
+    network_error: |
+      🌐 <b>Kesalahan Jaringan</b>
+      Terjadi masalah koneksi. Silakan coba lagi sebentar lagi.
+    timeout_error: |
+      ⏱️ <b>Kesalahan Timeout</b>
+      Permintaan terlalu lama. Silakan coba lagi dengan kutipan yang lebih sederhana.
+  image_to_quote:
+    processing: |
+      🔍 Menganalisis gambar dan mengekstrak teks...
+    success: |
+      ✅ Kutipan dibuat dari ${count} pesan!
+
+      💡 <b>Tip:</b> Kirim tangkapan layar dengan deskripsi <code>/qi</code> atau <code>/quote_image</code> untuk membuat kutipan
+    errors:
+      no_image: |
+        ❌ Silakan kirim file gambar (JPG, PNG, WebP)
+      file_too_large: |
+        ❌ Gambar terlalu besar. Ukuran maksimum: 20MB
+      unsupported_format: |
+        ❌ Format gambar tidak didukung. Yang didukung: JPG, PNG, WebP
+      no_text_found: |
+        ❌ Tidak bisa menemukan pesan obrolan yang dapat dibaca dalam gambar. Pastikan itu adalah tangkapan layar percakapan yang jelas.
+      parse_error: |
+        ❌ Kesalahan pengenalan. Mungkin gambar tidak berisi teks percakapan yang jelas.
+      api_error: |
+        ❌ Kesalahan pengenalan teks. Silakan coba lagi.
+      rate_limit: |
+        ⏳ Terlalu banyak permintaan! Silakan tunggu ${seconds} detik sebelum mencoba lagi.
 sticker:
   save:
     suc: Stiker telah berhasil ditambahkan ke <a href="${link}">paket stiker grup</a> ✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Anda ${rateName} kutipan ini! Terima kasih telah menilai ⭐
+      Anda ${rateName} ini
     back: |
-      Suara Anda telah dihapus 🔄
+      Suara Anda telah dihapus
   settings:
     enable: |
-      Penilaian kutipan sekarang diaktifkan! Nilai dengan ⭐
+      Evaluasi untuk kutipan disertakan
     disable: |
-      Penilaian kutipan telah dinonaktifkan 🔄
+      Evaluasi kutipan telah dinonaktifkan
 random:
   empty: |
-    Belum ada kutipan berpenilaian tinggi di grup ini! Mulailah menilai beberapa pesan ⭐
+    Belum ada kutipan dengan penilaian tinggi di grup ini! Mulailah menilai beberapa pesan
   gab: |
     Frekuensi kutipan acak diatur ke ${gab} ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>Terima kasih atas dukungan Anda! 💜</b>
     Anda telah membantu membuat QuotLyBot menjadi lebih baik!
   pay: '💜 Bayar Telegram'
-  liqpay: 'Bayar dengan Kartu 💳'
   other: 'Sebaliknya'
 emoji:
   info: |

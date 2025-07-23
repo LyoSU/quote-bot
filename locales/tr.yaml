@@ -87,9 +87,7 @@ btn:
   help: Dökümanlar
 quote:
   unsupported_message: |
-    Üzgünüm, bu mesaj türünü henüz desteklemiyorum 😅
-
-    Metin, fotoğraf, çıkartma veya sesli mesajları deneyin!
+    Bu mesaj türü alıntı için desteklenmiyor
   api_error: |
     <b>Oops! Bir şeyler ters gitti 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       Lütfen tekrar deneyin veya sorun devam ederse bunu @Ly_oBot'a bildirin.
+    no_rights_send_documents: |
+      🚫 <b>İzin Hatası</b>
+      Bu sohbette belge gönderme iznim yok.
+
+      <b>Bunu düzeltmek için:</b>
+      • Grup yöneticisi: Bana "Belge gönderme" izni ver
+      • Özel sohbet: Botu engellemediğinizden emin olun
+    no_rights_send_stickers: |
+      🚫 <b>İzin Hatası</b>
+      Bu sohbette çıkartma gönderme iznim yok.
+
+      <b>Bunu düzeltmek için:</b>
+      • Grup yöneticisi: Bana "Çıkartma gönderme" izni ver
+      • Resim formatı için <code>/q img</code> kullanmayı deneyin
+    no_rights_send_photos: |
+      🚫 <b>İzin Hatası</b>
+      Bu sohbette fotoğraf gönderme iznim yok.
+
+      <b>Bunu düzeltmek için:</b>
+      • Grup yöneticisi: Bana "Fotoğraf gönderme" izni ver
+      • Çıkartma formatı için <code>/q</code> kullanmayı deneyin
+    chat_write_forbidden: |
+      🚫 <b>Sohbet Kısıtlandı</b>
+      Bu sohbette mesaj gönderemem.
+
+      <b>Olası nedenler:</b>
+      • Botu engellediniz
+      • Grupta botlar kısıtlandı
+      • Gruptan çıkarıldım
+    sticker_set_invalid: |
+      🔄 <b>Çıkartma Paketi Sorunu</b>
+      Çıkartma paketinde bir sorun var. Yeni bir teklif oluşturuluyor...
+    sticker_set_full: |
+      📦 <b>Çıkartma Paketi Dolu</b>
+      Çıkartma paketi sınırına ulaştı. Teklifiniz normal bir çıkartma olarak gönderilecektir.
+    bot_blocked: |
+      🚫 <b>Bot Engellendi</b>
+      Bu botu engellediniz. Alıntıları almak için engelini kaldırın.
+    user_deactivated: |
+      👤 <b>Hesap Sorunu</b>
+      Hedef kullanıcı hesabı devre dışı bırakıldı veya silindi.
+    message_too_long: |
+      📝 <b>Mesaj Çok Uzun</b>
+      Alıntılanan mesaj çok uzun. Daha az mesaj veya daha kısa metin alıntılamayı deneyin.
+    network_error: |
+      🌐 <b>Ağ Hatası</b>
+      Bağlantı problemi oluştu. Lütfen bir an sonra tekrar deneyin.
+    timeout_error: |
+      ⏱️ <b>Zaman Aşımı Hatası</b>
+      İstek çok uzun sürdü. Lütfen daha basit bir alıntıyla tekrar deneyin.
+  image_to_quote:
+    processing: |
+      🔍 Görüntü analiz ediliyor ve metin çıkarılıyor...
+    success: |
+      ✅ ${count} mesajdan alıntı oluşturuldu!
+
+      💡 <b>İpucu:</b> Alıntı oluşturmak için <code>/qi</code> veya <code>/quote_image</code> başlığı ile ekran görüntüsü gönderin
+    errors:
+      no_image: |
+        ❌ Lütfen bir resim dosyası gönderin (JPG, PNG, WebP)
+      file_too_large: |
+        ❌ Resim çok büyük. Maksimum boyut: 20MB
+      unsupported_format: |
+        ❌ Desteklenmeyen resim formatı. Desteklenenler: JPG, PNG, WebP
+      no_text_found: |
+        ❌ Resimde okunabilir sohbet mesajı bulunamadı. Bunun net bir sohbet ekran görüntüsü olduğundan emin olun.
+      parse_error: |
+        ❌ Tanıma hatası. Resim net bir sohbet metni içermiyor olabilir.
+      api_error: |
+        ❌ Metin tanıma hatası. Lütfen tekrar deneyin.
+      rate_limit: |
+        ⏳ Çok fazla istek var! Lütfen ${seconds} saniye bekleyin ve tekrar deneyin.
 sticker:
   save:
     suc: Başarıyla <a href="${link}">grup çıkartma paketinize</a> eklendi ✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Bu alıntıyı ${rateName} olarak derecelendirdiniz! Puanladığınız için teşekkür ederiz ⭐
+      Sen ${rateName} bu.
     back: |
-      Oyunuz kaldırıldı 🔄
+      Oyunuz kaldırıldı
   settings:
     enable: |
-      Alıntı derecelendirmesi artık etkin! ⭐ ile derecelendirin
+      Alıntı değerlendirme etkin
     disable: |
-      Alıntı derecelendirmesi devre dışı bırakıldı 🔄
+      Alıntı değerlendirme devre dışı bırakıldı
 random:
   empty: |
-    Bu grupta henüz yüksek puanlı alıntı yok! Bazı mesajları derecelendirin ⭐
+    Bu grupta henüz yüksek puanlı teklifler yok! Bazı mesajları değerlendirmeye başlayın
   gab: |
     Rastgele alıntı sıklığı ${gab} olarak ayarlandı ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>Desteğiniz için teşekkür ederiz! 💜</b>
     QuotLyBot'u daha da iyi hale getiriyorsunuz!
   pay: '💜 Telegram Üzerinden Ödeyin'
-  liqpay: 'Kart ile Öde 💳'
   other: 'Diğer Yöntemler'
 emoji:
   info: |

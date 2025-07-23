@@ -87,9 +87,7 @@ btn:
   help: Ma'lumotnoma
 quote:
   unsupported_message: |
-    Kechirasiz, hozircha bu xabar turini qo'llab-quvvatlamayman 😅
-
-    Matn, foto, stiker yoki ovozli xabarlarni sinab ko'ring!
+    Ushbu xabar turi iqtibos uchun qo'llab-quvvatlanmaydi
   api_error: |
     <b>Oops! Nimadir xato ketdi 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       Iltimos, qayta urining yoki muammo davom etsa, @Ly_oBot ga xabar bering.
+    no_rights_send_documents: |
+      🚫 <b>Ruxsat Xatosi</b>
+      Bu chatda hujjatlarni jo'natish uchun men ruxsatim yo'q.
+
+      <b>Buni tuzatish uchun:</b>
+      • Guruh admini: Menga "Hujjatlarni jo'natish" ruxsatini bering
+      • Xususiy chat: Botni bloklamaganingizni tekshiring
+    no_rights_send_stickers: |
+      🚫 <b>Ruxsat Xatosi</b>
+      Bu chatda stikerlarni jo'natish uchun men ruxsatim yo'q.
+
+      <b>Buni tuzatish uchun:</b>
+      • Guruh admini: Menga "Stikerlarni jo'natish" ruxsatini bering
+      • Buning o'rniga <code>/q img</code> ni sinab ko'ring
+    no_rights_send_photos: |
+      🚫 <b>Ruxsat Xatosi</b>
+      Bu chatda fotosuratlarni jo'natish uchun men ruxsatim yo'q.
+
+      <b>Buni tuzatish uchun:</b>
+      • Guruh admini: Menga "Fotosuratlarni jo'natish" ruxsatini bering
+      • Stiker formatida <code>/q</code> ni sinab ko'ring
+    chat_write_forbidden: |
+      🚫 <b>Chat Cheklangan</b>
+      Bu chatda xabarlarni jo'nata olmayman.
+
+      <b>Ehtimoliy sabablar:</b>
+      • Siz botni bloklagansiz
+      • Guruh botlarni cheklagan
+      • Guruhdan chiqarildi
+    sticker_set_invalid: |
+      🔄 <b>Stiker Yigindisi Muammosi</b>
+      Stiker yigindisi bilan muammo bor. Yangi iqtibos yaratilmoqda...
+    sticker_set_full: |
+      📦 <b>Stiker Yigindisi To'liq</b>
+      Stiker yigindisi o'zining chegarasiga yetdi. Sizning iqtibosingiz oddiy stiker sifatida yuboriladi.
+    bot_blocked: |
+      🚫 <b>Bot Bloklangan</b>
+      Siz ushbu botni bloklagansiz. Iqtiboslarni olish uchun uni ochib qo'ying.
+    user_deactivated: |
+      👤 <b>Hisob Muammosi</b>
+      Ma'lum qilingan foydalanuvchi hisobi o'chirilgan yoki faol emas.
+    message_too_long: |
+      📝 <b>Xabar Juda Uzun</b>
+      Harihat ketgan xabar juda uzun. Kamroq xabarlar yoki qisqaroq matnlarni harihat qilib ko'ring.
+    network_error: |
+      🌐 <b>Tarmoq Xatosi</b>
+      Ulanish muammosi yuzaga keldi. Iltimos, birozdan so'ng yana urinib ko'ring.
+    timeout_error: |
+      ⏱️ <b>Vaqt Tugash Xatosi</b>
+      So'rov juda uzoq vaqt oldi. Iltimos, yanada oddiy iqtibos bilan yana urinib ko'ring.
+  image_to_quote:
+    processing: |
+      🔍 Rasmni tahlil qilinmoqda va matn olinmoqda...
+    success: |
+      ✅ ${count} xabardan iqtibos yaratildi!
+
+      💡 <b>Maslahat:</b> Iqtiboslar yaratish uchun <code>/qi</code> yoki <code>/quote_image</code> sarlavhali skrinshotni yuboring
+    errors:
+      no_image: |
+        ❌ Iltimos, rasm fayli yuboring (JPG, PNG, WebP)
+      file_too_large: |
+        ❌ Rasm juda katta. Maksimal o'lcham: 20MB
+      unsupported_format: |
+        ❌ Qo'llab-quvvatlanmaydigan rasm formati. Qo'llab-quvvatlanadiganlar: JPG, PNG, WebP
+      no_text_found: |
+        ❌ Rasmda o'qiladigan chat xabarlari topilmadi. Suhbat skrinshotining aniq ekanligiga ishonch hosil qiling.
+      parse_error: |
+        ❌ Tanib olish xatosi. Rasmda aniq suhbat matnlari yo'q bo'lishi mumkin.
+      api_error: |
+        ❌ Matn tanib olish xatosi. Iltimos, yana urinib ko'ring.
+      rate_limit: |
+        ⏳ Juda ko'p so'rovlar! Iltimos, yana urinib ko'rishdan oldin ${seconds} soniya kuting.
 sticker:
   save:
     suc: Stiker muvaffaqiyatli ravishda <a href="${link}">stikerlar to'plami guruhiga qo'shildi</a> ✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Siz ${rateName} bu sitatani! Reyting berish uchun rahmat ⭐
+      Siz ${rateName} ushbu iqtibos
     back: |
-      Sizning ovozingiz olib tashlandi 🔄
+      Sizning ovozingiz olib tashlandi
   settings:
     enable: |
-      Sitataga reyting berish imkoniyati endi yoqilgan! Reyting berishda ishtirok eting ⭐
+      Iqtibos reytingi yoqildi
     disable: |
-      Sitataga reyting berish o'chirildi 🔄
+      Iqtibos reytingi o'chirildi
 random:
   empty: |
-    Bu guruhda hali yuqori baholangan sitatalar yo'q! Ba'zi xabarlarga reyting berishni boshlang ⭐
+    Hali bu guruhda yuqori baholangan iqtiboslar yo'q! Xabarlarni baholashga kirishing
   gab: |
     Tasodifiy sitata chastotasi ${gab} ga o'rnatildi ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>Qo'llab quvvatlaganingiz uchun rahmat! 💜</b>
     Siz QuotLyBot ni yanada yaxshilashga xizmat ko'rsatmoqda!
   pay: '💜 Telegram to''lov'
-  liqpay: 'Karta orqali to''lov 💳'
   other: 'Boshqa usullar'
 emoji:
   info: |
