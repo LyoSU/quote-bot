@@ -93,9 +93,7 @@ btn:
   help: Referencia
 quote:
   unsupported_message: |
-    Desculpe, ainda não suporto este tipo de mensagem 😅
-
-    Tente texto, fotos, adesivos ou mensagens de voz!
+    Este tipo de mensagem não é suportado para citação
   api_error: |
     <b>Ops! Algo deu errado 😅</b>
     <pre>${error}</pre>
@@ -133,6 +131,78 @@ quote:
       <code>${error}</code>
 
       Por favor, tente novamente ou reporte isso para @Ly_oBot se persistir.
+    no_rights_send_documents: |
+      🚫 <b>Erro de Permissão</b>
+      Eu não tenho permissão para enviar documentos neste chat.
+
+      <b>Para corrigir isso:</b>
+      • Administrador do grupo: Dê-me permissão para "enviar documentos"
+      • Chat privado: Certifique-se de que você não bloqueou o bot
+    no_rights_send_stickers: |
+      🚫 <b>Erro de Permissão</b>
+      Eu não tenho permissão para enviar figurinhas neste chat.
+
+      <b>Para corrigir isso:</b>
+      • Administrador do grupo: Dê-me permissão para "enviar figurinhas"
+      • Tente usar <code>/q img</code> para formato de imagem em vez disso
+    no_rights_send_photos: |
+      🚫 <b>Erro de Permissão</b>
+      Eu não tenho permissão para enviar fotos neste chat.
+
+      <b>Para corrigir isso:</b>
+      • Administrador do grupo: Dê-me permissão para "enviar fotos"
+      • Tente usar <code>/q</code> para formato de figurinha em vez disso
+    chat_write_forbidden: |
+      🚫 <b>Chat Restrito</b>
+      Eu não posso enviar mensagens neste chat.
+
+      <b>Motivos possíveis:</b>
+      • Você bloqueou o bot
+      • O grupo restringiu bots
+      • Eu fui removido do grupo
+    sticker_set_invalid: |
+      🔄 <b>Problema com o Pacote de Figurinhas</b>
+      Há um problema com o pacote de figurinhas. Criando uma nova citação...
+    sticker_set_full: |
+      📦 <b>Pacote de Figurinhas Cheio</b>
+      O pacote de figurinhas atingiu seu limite. Sua citação será enviada como uma figurinha comum.
+    bot_blocked: |
+      🚫 <b>Bot Bloqueado</b>
+      Você bloqueou este bot. Desbloqueie para receber citações.
+    user_deactivated: |
+      👤 <b>Problema de Conta</b>
+      A conta do usuário alvo está desativada ou excluída.
+    message_too_long: |
+      📝 <b>Mensagem Muito Longa</b>
+      A mensagem citada é muito longa. Tente citar menos mensagens ou um texto mais curto.
+    network_error: |
+      🌐 <b>Erro de Rede</b>
+      Ocorreu um problema de conexão. Por favor, tente novamente em um momento.
+    timeout_error: |
+      ⏱️ <b>Erro de Tempo Esgotado</b>
+      A solicitação demorou muito. Por favor, tente novamente com uma citação mais simples.
+  image_to_quote:
+    processing: |
+      🔍 Analisando a imagem e extraindo o texto...
+    success: |
+      ✅ Citação criada a partir de ${count} mensagens!
+
+      💡 <b>Dica:</b> Envie uma captura de tela com a legenda <code>/qi</code> ou <code>/quote_image</code> para criar citações
+    errors:
+      no_image: |
+        ❌ Por favor, envie um arquivo de imagem (JPG, PNG, WebP)
+      file_too_large: |
+        ❌ A imagem é muito grande. Tamanho máximo: 20MB
+      unsupported_format: |
+        ❌ Formato de imagem não suportado. Suportados: JPG, PNG, WebP
+      no_text_found: |
+        ❌ Não foi possível encontrar mensagens de chat legíveis na imagem. Certifique-se de que seja uma captura de tela clara de uma conversa.
+      parse_error: |
+        ❌ Erro de reconhecimento. A imagem pode não conter texto de conversa claro.
+      api_error: |
+        ❌ Erro de reconhecimento de texto. Por favor, tente novamente.
+      rate_limit: |
+        ⏳ Muitos pedidos! Por favor, espere ${seconds} segundos antes de tentar novamente.
 sticker:
   save:
     suc: Adicionado com sucesso ao seu <a href="${link}">pacote de adesivos do grupo</a> ✨
@@ -163,17 +233,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Você ${rateName} esta citação! Obrigado por avaliar ⭐
+      Você ${rateName} essa citação
     back: |
-      Seu voto foi removido 🔄
+      Seu voto foi removido
   settings:
     enable: |
-      A avaliação de citações agora está ativada! Avalie com ⭐
+      A avaliação de citação agora está habilitada
     disable: |
-      A avaliação de citações foi desativada 🔄
+      A avaliação de citação foi desativada
 random:
   empty: |
-    Ainda não há citações altamente avaliadas neste grupo! Comece a avaliar algumas mensagens ⭐
+    Ainda não há citações altamente avaliadas neste grupo! Comece a avaliar algumas mensagens
   gab: |
     Frequência de citação aleatória definida para ${gab} ✨
 hidden:
@@ -217,7 +287,6 @@ donate:
     <b>Obrigado pelo seu apoio! 💜</b>
     Você está ajudando a tornar o QuotLyBot ainda melhor!
   pay: '💜 Telegram de pagamento'
-  liqpay: 'Pagar com Cartão 💳'
   other: 'Outros Métodos'
 emoji:
   info: |
