@@ -87,9 +87,7 @@ btn:
   help: مساعدة
 quote:
   unsupported_message: |
-    عذرًا، لا أستطيع دعم هذا النوع من الرسائل بعد 😅
-
-    جرب النصوص، الصور، الملصقات، أو الرسائل الصوتية!
+    This message type is not supported for quoting
   api_error: |
     <b>عفوًا! حدث خطأ ما 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      لقد قمت ${rateName} لهذا الاقتباس! شكرًا لتقييمك ⭐
+      You ${rateName} this quote
     back: |
-      تمت إزالة تصويتك 🔄
+      Your vote has been removed
   settings:
     enable: |
-      تم تمكين تقييم الاقتباس الآن! قيم بـ ⭐
+      Quote rating is now enabled
     disable: |
-      تم تعطيل تقييم الاقتباس 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    لا توجد اقتباسات بتقييم عالي في هذه المجموعة بعد! ابدأ بتقييم بعض الرسائل ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     تم ضبط تردد الاقتباس العشوائي على ${gab} ✨
 hidden:
