@@ -87,9 +87,7 @@ btn:
   help: Bantuan
 quote:
   unsupported_message: |
-    Maaf, saya belum mendukung jenis pesan ini 😅
-
-    Cobalah teks, foto, stiker, atau pesan suara!
+    This message type is not supported for quoting
   api_error: |
     <b>Ups! Ada yang salah 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Anda ${rateName} kutipan ini! Terima kasih telah menilai ⭐
+      You ${rateName} this quote
     back: |
-      Suara Anda telah dihapus 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Penilaian kutipan sekarang diaktifkan! Nilai dengan ⭐
+      Quote rating is now enabled
     disable: |
-      Penilaian kutipan telah dinonaktifkan 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Belum ada kutipan berpenilaian tinggi di grup ini! Mulailah menilai beberapa pesan ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Frekuensi kutipan acak diatur ke ${gab} ✨
 hidden:
