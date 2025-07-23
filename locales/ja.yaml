@@ -87,7 +87,7 @@ btn:
   help: ヘルプ
 quote:
   unsupported_message: |
-    This message type is not supported for quoting
+    このメッセージタイプは引用に対応していません
   api_error: |
     <b>おっと！何かがうまくいかなかったようです 😅</b>
     <pre>${error}</pre>
@@ -126,77 +126,77 @@ quote:
 
       再試行するか、問題が解決しない場合は @Ly_oBot に報告してください。
     no_rights_send_documents: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send documents in this chat.
+      🚫 <b>アクセス許可エラー</b>
+      このチャットでドキュメントを送信する許可がありません。
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send documents" permission
-      • Private chat: Make sure you haven't blocked the bot
+      <b>修正方法:</b>
+      • グループ管理者: "ドキュメント送信" の許可を与えてください
+      • プライベートチャット: ボットをブロックしていないことを確認してください。
     no_rights_send_stickers: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send stickers in this chat.
+      🚫 <b>アクセス許可エラー</b>
+      このチャットでステッカーを送信する許可がありません。
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send stickers" permission
-      • Try using <code>/q img</code> for image format instead
+      <b>修正方法:</b>
+      • グループ管理者: "ステッカー送信" の許可を与えてください
+      • イメージ形式には <code>/q img</code> を試してください
     no_rights_send_photos: |
-      🚫 <b>Permission Error</b>
-      I don't have permission to send photos in this chat.
+      🚫 <b>アクセス許可エラー</b>
+      このチャットで写真を送信する許可がありません。
 
-      <b>To fix this:</b>
-      • Group admin: Give me "Send photos" permission
-      • Try using <code>/q</code> for sticker format instead
+      <b>修正方法:</b>
+      • グループ管理者: "写真送信" の許可を与えてください
+      • ステッカー形式には <code>/q</code> を試してください
     chat_write_forbidden: |
-      🚫 <b>Chat Restricted</b>
-      I can't send messages in this chat.
+      🚫 <b>チャット制限</b>
+      このチャットでメッセージを送信できません。
 
-      <b>Possible reasons:</b>
-      • You've blocked the bot
-      • The group has restricted bots
-      • I was removed from the group
+      <b>可能な理由:</b>
+      • ボットをブロックしました
+      • グループがボットを制限しています
+      • 私がグループから抜け出されています
     sticker_set_invalid: |
-      🔄 <b>Sticker Pack Issue</b>
-      There's a problem with the sticker pack. Creating a new quote...
+      🔄 <b>ステッカー パックの問題</b>
+      ステッカー パックに問題があります。新しい引用を作成しています...
     sticker_set_full: |
-      📦 <b>Sticker Pack Full</b>
-      The sticker pack has reached its limit. Your quote will be sent as a regular sticker.
+      📦 <b>ステッカー パックが満杯です</b>
+      ステッカー パックが制限に達しました。あなたの引用は通常のステッカーとして送信されます。
     bot_blocked: |
-      🚫 <b>Bot Blocked</b>
-      You've blocked this bot. Please unblock it to receive quotes.
+      🚫 <b>ボットがブロックされました</b>
+      このボットをブロックしました。引用を受け取るにはそれを解除してください。
     user_deactivated: |
-      👤 <b>Account Issue</b>
-      The target user account is deactivated or deleted.
+      👤 <b>アカウントの問題</b>
+      対象ユーザーのアカウントが無効化または削除されています。
     message_too_long: |
-      📝 <b>Message Too Long</b>
-      The quoted message is too long. Try quoting fewer messages or shorter text.
+      📝 <b>メッセージが長すぎます</b>
+      引用されたメッセージが長すぎます。引用するメッセージ数を減らすか短いテキストを試してください。
     network_error: |
-      🌐 <b>Network Error</b>
-      Connection problem occurred. Please try again in a moment.
+      🌐 <b>ネットワーク エラー</b>
+      接続問題が発生しました。少し時間を置いてもう一度お試しください。
     timeout_error: |
-      ⏱️ <b>Timeout Error</b>
-      The request took too long. Please try again with a simpler quote.
+      ⏱️ <b>タイムアウト エラー</b>
+      リクエストに時間がかかりすぎている。より簡単な引用で再度お試しください。
   image_to_quote:
     processing: |
-      🔍 Analyzing image and extracting text...
+      🔍 画像を分析しテキストを抽出しています...
     success: |
-      ✅ Quote created from ${count} messages!
+      ✅ ${count} 件のメッセージから引用が生成されました！
 
-      💡 <b>Tip:</b> Send screenshot with <code>/qi</code> or <code>/quote_image</code> caption to create quotes
+      💡 <b>ヒント:</b> スクリーンショットに <code>/qi</code> または <code>/quote_image</code> のキャプションを付けて引用を作成してください
     errors:
       no_image: |
-        ❌ Please send an image file (JPG, PNG, WebP)
+        ❌ 画像ファイル (JPG、PNG、WebP) を送信してください
       file_too_large: |
-        ❌ Image is too large. Maximum size: 20MB
+        ❌ 画像が大きすぎます。最大サイズ: 20MB
       unsupported_format: |
-        ❌ Unsupported image format. Supported: JPG, PNG, WebP
+        ❌ サポートされていない画像形式。サポートされている形式: JPG、PNG、WebP
       no_text_found: |
-        ❌ Couldn't find readable chat messages in the image. Make sure it's a clear screenshot of a conversation.
+        ❌ 画像内に読み取れるチャットメッセージが見つかりませんでした。会話の明瞭なスクリーンショットであることを確認してください。
       parse_error: |
-        ❌ Recognition error. The image might not contain clear conversation text.
+        ❌ 認識エラー。画像は明瞭な会話テキストを含んでいない可能性があります。
       api_error: |
-        ❌ Text recognition error. Please try again.
+        ❌ テキスト認識エラー。もう一度お試しください。
       rate_limit: |
-        ⏳ Too many requests! Please wait ${seconds} seconds before trying again.
+        ⏳ 多くのリクエストがあります！再試行する前に ${seconds} 秒待ってください。
 sticker:
   save:
     suc: 正常に<a href="${link}">グループステッカーパック</a>に追加されました ✨
@@ -229,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      You ${rateName} this quote
+      あなたはこれを ${rateName} します。
     back: |
-      Your vote has been removed
+      あなたの投票は削除されました
   settings:
     enable: |
-      Quote rating is now enabled
+      引用の評価が有効になりました
     disable: |
-      Quote rating has been disabled
+      引用の評価が無効化されました
 random:
   empty: |
-    No highly-rated quotes in this group yet! Start rating some messages
+    このグループには高評価の引用がまだありません！いくつかのメッセージを評価し始めてください
   gab: |
     ランダム引用の頻度が${gab}に設定されました ✨
 hidden:
