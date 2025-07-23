@@ -87,9 +87,7 @@ btn:
   help: Hulp
 quote:
   unsupported_message: |
-    Sorry, ik ondersteun dit berichttype nog niet 😅
-
-    Probeer tekst-, foto-, sticker- of spraakberichten!
+    This message type is not supported for quoting
   api_error: |
     <b>Oeps! Er ging iets mis 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Je ${rateName} deze citaat! Bedankt voor het beoordelen ⭐
+      You ${rateName} this quote
     back: |
-      Je stem is verwijderd 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Citaat beoordeling is nu ingeschakeld! Beoordeel met ⭐
+      Quote rating is now enabled
     disable: |
-      Citaat beoordeling is uitgeschakeld 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Nog geen hoog gewaardeerde citaten in deze groep! Begin enkele berichten te beoordelen ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Frequentie voor willekeurige citaat ingesteld op ${gab} ✨
 hidden:
