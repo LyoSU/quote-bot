@@ -87,9 +87,7 @@ btn:
   help: Istinad
 quote:
   unsupported_message: |
-    Bağışlayın, bu mesaj növünü hələ dəstəkləmirəm 😅
-
-    Mətni, fotoları, stikerləri və ya səsli mesajları yoxlayın!
+    Bu mesaj növü sitat üçün dəstəklənmir
   api_error: |
     <b>Oops! Bir şey səhv getdi 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       Yenidən cəhd edin və ya bu problemin davam etməsi halında bunu @Ly_oBot-a məlumat verin.
+    no_rights_send_documents: |
+      🚫 <b>İcazə Xətası</b>
+      Bu çatda sənədləri göndərmək üçün icazəm yoxdur.
+
+      <b>Bunu düzəltmək üçün:</b>
+      • Qrup admini: Mənə "Sənədləri göndər" icazəsi ver
+      • Şəxsi çat: Botu bloklamadığınıza əmin olun
+    no_rights_send_stickers: |
+      🚫 <b>İcazə Xətası</b>
+      Bu çatda stikerləri göndərmək üçün icazəm yoxdur.
+
+      <b>Bunu düzəltmək üçün:</b>
+      • Qrup admini: Mənə "Stikerləri göndər" icazəsi ver
+      • Şəkil formatı üçün <code>/q img</code> istifadə etməyi yoxlayın
+    no_rights_send_photos: |
+      🚫 <b>İcazə Xətası</b>
+      Bu çatda şəkilləri göndərmək üçün icazəm yoxdur.
+
+      <b>Bunu düzəltmək üçün:</b>
+      • Qrup admini: Mənə "Şəkilləri göndər" icazəsi ver
+      • Stiker formatı üçün <code>/q</code> istifadə etməyi yoxlayın
+    chat_write_forbidden: |
+      🚫 <b>Çat Məhdudiyyəti</b>
+      Bu çatda mesajlar göndərə bilmirəm.
+
+      <b>Mümkün səbəblər:</b>
+      • Botu bloklamısınız
+      • Qrup botları məhdudlaşdırdı
+      • Qrupdan kənarlaşdırıldım
+    sticker_set_invalid: |
+      🔄 <b>Stiker Paketi Problemi</b>
+      Stiker paketində problem var. Yeni sitat yaradılır...
+    sticker_set_full: |
+      📦 <b>Stiker Paketi Dolu</b>
+      Stiker paketi limitinə çatıb. Sitatınız adi stiker kimi göndəriləcək.
+    bot_blocked: |
+      🚫 <b>Bot Bloklanıb</b>
+      Bu botu bloklamısınız. Sitatları almaq üçün açın.
+    user_deactivated: |
+      👤 <b>Hesab Problemi</b>
+      Hədəf istifadəçi hesabı deaktiv edilib və ya silinib.
+    message_too_long: |
+      📝 <b>Mesaj Çox Uzundur</b>
+      Sitat gətirilən mesaj çox uzundur. Daha az mesaj və ya daha qısa mətn sitat edin.
+    network_error: |
+      🌐 <b>Şəbəkə Xətası</b>
+      Bağlantı problemi baş verdi. Bir azdan yenidən cəhd edin.
+    timeout_error: |
+      ⏱️ <b>Vaxt Aşımı Xətası</b>
+      Sorğu çox uzun çəkdi. Daha sadə bir sitatla yenidən cəhd edin.
+  image_to_quote:
+    processing: |
+      🔍 Şəkil təhlil edilir və mətn çıxarılır...
+    success: |
+      ✅ ${count} mesajdan sitat yaradıldı!
+
+      💡 <b>Məsləhət:</b> <code>/qi</code> və ya <code>/quote_image</code> manşeti ilə ekran görüntüsü göndərin
+    errors:
+      no_image: |
+        ❌ Zəhmət olmasa, şəkil faylı (JPG, PNG, WebP) göndərin
+      file_too_large: |
+        ❌ Şəkil çox böyükdür. Maksimum ölçü: 20MB
+      unsupported_format: |
+        ❌ Dəstəklənməyən şəkil formatı. Dəstəklənən: JPG, PNG, WebP
+      no_text_found: |
+        ❌ Şəkildə oxuna bilən chat mesajları tapılmadı. Əmin olun ki, söhbətin dəqiq bir ekran görüntüsü var.
+      parse_error: |
+        ❌ Tanıma xətası. Şəkil açıq olmayan söhbət mətni ehtiva edə bilər.
+      api_error: |
+        ❌ Mətn tanıma xətası. Yenidən cəhd edin.
+      rate_limit: |
+        ⏳ Çoxlu sorğular! Yenidən cəhd etməzdən əvvəl ${seconds} saniyə gözləyin.
 sticker:
   save:
     suc: Uğurla <a href="${link}">qrupun stikerpaka</a> əlavə olundu ✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Siz bu sitatı ${rateName} etdiniz! Reytinq üçün təşəkkürlər ⭐
+      Sən bunu ${rateName}
     back: |
-      Sizin səsiniz ləğv edildi 🔄
+      Səsiniz silindi
   settings:
     enable: |
-      Sitat reytinqi aktivləşdirildi! ⭐ ilə qiymətləndirin
+      Sitatların qiymətləndirməsi açılıb
     disable: |
-      Sitat reytinqi deaktiv edildi 🔄
+      Sitatların qiymətləndirməsi dayandırılıb
 random:
   empty: |
-    Bu qrupda hələ yüksək reytinqli sitatlar yoxdur! Bəzi mesajları qiymətləndirməyə başlayın ⭐
+    Bu qrupda hələ yüksək qiymət verilmiş sitatlar yoxdur! Bəzi mesajlara qiymət verin
   gab: |
     Təsadüfi sitat tezliyi ${gab} olaraq təyin edildi ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>Dəstəyiniz üçün təşəkkürlər! 💜</b>
     QuotLyBot'u daha da yaxşı etməyə kömək edirsiniz!
   pay: '💜 Ödəniş etmək (Telegram)'
-  liqpay: 'Kart ilə Ödəmə 💳'
   other: 'Digər yollar'
 emoji:
   info: |
