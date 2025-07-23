@@ -87,9 +87,7 @@ btn:
   help: 도와주세요
 quote:
   unsupported_message: |
-    죄송합니다, 아직 이 메시지 유형은 지원하지 않습니다 😅
-
-    텍스트, 사진, 스티커 또는 음성 메시지를 시도해 보세요!
+    This message type is not supported for quoting
   api_error: |
     <b>이런! 문제가 발생했습니다 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      당신은 이 인용을 ${rateName}! 평가해 주셔서 감사합니다 ⭐
+      You ${rateName} this quote
     back: |
-      당신의 투표가 제거되었습니다 🔄
+      Your vote has been removed
   settings:
     enable: |
-      인용 평가가 이제 활성화되었습니다! ⭐로 평가하세요.
+      Quote rating is now enabled
     disable: |
-      인용 평가가 비활성화되었습니다 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    아직 이 그룹에는 고평가된 인용이 없습니다! 메시지를 평가해 보세요 ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     랜덤 인용 빈도가 ${gab}로 설정되었습니다 ✨
 hidden:
