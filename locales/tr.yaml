@@ -87,9 +87,7 @@ btn:
   help: Dökümanlar
 quote:
   unsupported_message: |
-    Üzgünüm, bu mesaj türünü henüz desteklemiyorum 😅
-
-    Metin, fotoğraf, çıkartma veya sesli mesajları deneyin!
+    This message type is not supported for quoting
   api_error: |
     <b>Oops! Bir şeyler ters gitti 😅</b>
     <pre>${error}</pre>
@@ -231,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Bu alıntıyı ${rateName} olarak derecelendirdiniz! Puanladığınız için teşekkür ederiz ⭐
+      You ${rateName} this quote
     back: |
-      Oyunuz kaldırıldı 🔄
+      Your vote has been removed
   settings:
     enable: |
-      Alıntı derecelendirmesi artık etkin! ⭐ ile derecelendirin
+      Quote rating is now enabled
     disable: |
-      Alıntı derecelendirmesi devre dışı bırakıldı 🔄
+      Quote rating has been disabled
 random:
   empty: |
-    Bu grupta henüz yüksek puanlı alıntı yok! Bazı mesajları derecelendirin ⭐
+    No highly-rated quotes in this group yet! Start rating some messages
   gab: |
     Rastgele alıntı sıklığı ${gab} olarak ayarlandı ✨
 hidden:
