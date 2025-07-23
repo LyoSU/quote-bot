@@ -87,9 +87,7 @@ btn:
   help: Pomoc
 quote:
   unsupported_message: |
-    Przepraszam, jeszcze nie obsługuję tego rodzaju wiadomości 😅
-
-    Spróbuj tekst, zdjęcia, naklejki lub wiadomości głosowe!
+    Ten typ wiadomości nie jest obsługiwany do cytowania
   api_error: |
     <b>Ups! Coś poszło nie tak 😅</b>
     <pre>${error}</pre>
@@ -127,6 +125,78 @@ quote:
       <code>${error}</code>
 
       Proszę spróbować ponownie lub zgłosić to do @Ly_oBot, jeśli problem się utrzymuje.
+    no_rights_send_documents: |
+      🚫 <b>Błąd uprawnień</b>
+      Nie mam uprawnień do wysyłania dokumentów na tym czacie.
+
+      <b>Aby to naprawić:</b>
+      • Administrator grupy: przyznaj mi uprawnienie "Wysyłaj dokumenty"
+      • Czat prywatny: upewnij się, że nie zablokowałeś bota
+    no_rights_send_stickers: |
+      🚫 <b>Błąd uprawnień</b>
+      Nie mam uprawnień do wysyłania naklejek na tym czacie.
+
+      <b>Aby to naprawić:</b>
+      • Administrator grupy: przyznaj mi uprawnienie "Wysyłaj naklejki"
+      • Spróbuj użyć <code>/q img</code> do formatu obrazu zamiast
+    no_rights_send_photos: |
+      🚫 <b>Błąd uprawnień</b>
+      Nie mam uprawnień do wysyłania zdjęć na tym czacie.
+
+      <b>Aby to naprawić:</b>
+      • Administrator grupy: przyznaj mi uprawnienie "Wysyłaj zdjęcia"
+      • Spróbuj użyć <code>/q</code> do formatu naklejki zamiast
+    chat_write_forbidden: |
+      🚫 <b>Czat ograniczony</b>
+      Nie mogę wysyłać wiadomości na tym czacie.
+
+      <b>Możliwe przyczyny:</b>
+      • Zablokowałeś bota
+      • Grupa ma ograniczenia dla botów
+      • Zostałem usunięty z grupy
+    sticker_set_invalid: |
+      🔄 <b>Problem z paczką naklejek</b>
+      Jest problem z paczką naklejek. Tworzę nowy cytat...
+    sticker_set_full: |
+      📦 <b>Paczka naklejek pełna</b>
+      Paczka naklejek osiągnęła swoje limit. Twój cytat zostanie wysłany jako zwykła naklejka.
+    bot_blocked: |
+      🚫 <b>Bot zablokowany</b>
+      Zablokowałeś tego bota. Odblokuj go, aby otrzymać cytaty.
+    user_deactivated: |
+      👤 <b>Problem z kontem</b>
+      Konto docelowego użytkownika jest zdezaktywowane lub usunięte.
+    message_too_long: |
+      📝 <b>Zbyt długa wiadomość</b>
+      Cytowana wiadomość jest zbyt długa. Spróbuj cytować mniej wiadomości lub krótszy tekst.
+    network_error: |
+      🌐 <b>Błąd sieci</b>
+      Wystąpił problem z połączeniem. Spróbuj ponownie za chwilę.
+    timeout_error: |
+      ⏱️ <b>Błąd czasu oczekiwania</b>
+      Żądanie trwało zbyt długo. Spróbuj ponownie z prostszym cytatem.
+  image_to_quote:
+    processing: |
+      🔍 Analizowanie obrazu i wyciąganie tekstu...
+    success: |
+      ✅ Cytat stworzony z ${count} wiadomości!
+
+      💡 <b>Wskazówka:</b> Wyślij zrzut ekranu z podpisem <code>/qi</code> lub <code>/quote_image</code>, aby stworzyć cytaty
+    errors:
+      no_image: |
+        ❌ Proszę wyślij plik graficzny (JPG, PNG, WebP)
+      file_too_large: |
+        ❌ Obraz jest za duży. Maksymalny rozmiar: 20MB
+      unsupported_format: |
+        ❌ Niewspierany format obrazu. Obsługiwane: JPG, PNG, WebP
+      no_text_found: |
+        ❌ Nie udało się znaleźć czytelnych wiadomości czatu na obrazie. Upewnij się, że to wyraźny zrzut rozmowy.
+      parse_error: |
+        ❌ Błąd rozpoznania. Obraz może nie zawierać wyraźnego tekstu rozmowy.
+      api_error: |
+        ❌ Błąd rozpoznania tekstu. Spróbuj ponownie.
+      rate_limit: |
+        ⏳ Zbyt wiele żądań! Poczekaj ${seconds} sekund przed ponowną próbą.
 sticker:
   save:
     suc: Pomyślnie dodano do Twojego <a href="${link}">pakietu naklejek grupy</a> ✨
@@ -159,17 +229,17 @@ sticker:
 rate:
   vote:
     rated: |
-      Oceniłeś ${rateName} ten cytat! Dzięki za ocenę ⭐
+      Ty ${rateName} ten cytat
     back: |
-      Twoja ocena została usunięta 🔄
+      Twój głos został usunięty
   settings:
     enable: |
-      Ocena cytatu została włączona! Oceniaj za pomocą ⭐
+      Ocena cytatów jest teraz włączona
     disable: |
-      Ocena cytatu została wyłączona 🔄
+      Ocena cytatów została wyłączona
 random:
   empty: |
-    Jeszcze nie ma cytatów o wysokiej ocenie w tej grupie! Zacznij oceniać wiadomości ⭐
+    W tej grupie nie ma jeszcze cytatów o wysokiej ocenie! Zacznij oceniać wiadomości
   gab: |
     Częstotliwość losowych cytatów ustawiona na ${gab} ✨
 hidden:
@@ -213,7 +283,6 @@ donate:
     <b>Dziękujemy za wsparcie! 💜</b>
     Pomagasz uczynić QuotLyBot jeszcze lepszym!
   pay: '💜 Zapłać przez Telegram'
-  liqpay: 'Zapłać kartą 💳'
   other: 'Inne opcje'
 emoji:
   info: |
