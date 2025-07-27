@@ -319,7 +319,7 @@ module.exports = async (ctx, next) => {
     // flag.reply = true
     if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
     minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(200)
+    await sleep(300)
     if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
     delete minIdsInChat[ctx.from.id]
   }
@@ -645,10 +645,10 @@ module.exports = async (ctx, next) => {
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
       const replyMessageInfo = quoteMessage.reply_to_message
-      
+
       // Determine reply sender using the same logic as main message
       let replyMessageFrom
-      
+
       if (replyMessageInfo.forward_sender_name) {
         if (flag.hidden) {
           // Cache forward name lookups
@@ -717,7 +717,7 @@ module.exports = async (ctx, next) => {
           message.replyMessage.chatId = hashCode(replyMessageFrom.name)
         }
       }
-      
+
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
       if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
