@@ -645,25 +645,79 @@ module.exports = async (ctx, next) => {
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
       const replyMessageInfo = quoteMessage.reply_to_message
-      if (replyMessageInfo.forward_from) {
-        replyMessageInfo.from = replyMessageInfo.forward_from
-      }
-      if (replyMessageInfo.sender_chat) {
-        message.replyMessage.name = replyMessageInfo.sender_chat.title
-        if (replyMessageInfo.sender_chat.id) {
-          message.replyMessage.chatId = replyMessageInfo.sender_chat.id
+      
+      // Determine reply sender using the same logic as main message
+      let replyMessageFrom
+      
+      if (replyMessageInfo.forward_sender_name) {
+        if (flag.hidden) {
+          // Cache forward name lookups
+          const forwardCacheKey = `forward_${replyMessageInfo.forward_sender_name}`
+          if (!ctx.forwardCache) ctx.forwardCache = new Map()
+
+          let sarchForwardName
+          if (ctx.forwardCache.has(forwardCacheKey)) {
+            sarchForwardName = ctx.forwardCache.get(forwardCacheKey)
+          } else {
+            sarchForwardName = await ctx.db.User.find({
+              full_name: replyMessageInfo.forward_sender_name
+            }).limit(2).lean()
+            ctx.forwardCache.set(forwardCacheKey, sarchForwardName)
+          }
+
+          if (sarchForwardName.length === 1) {
+            replyMessageFrom = {
+              id: sarchForwardName[0].telegram_id,
+              name: replyMessageInfo.forward_sender_name,
+              username: sarchForwardName[0].username || null
+            }
+
+            let getHiddenChat
+            getHiddenChat = await ctx.tdlib.getUser(replyMessageFrom.id).catch(() => {})
+            if (!getHiddenChat) {
+              getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
+            }
+            if (getHiddenChat) replyMessageFrom = getHiddenChat
+          } else {
+            replyMessageFrom = {
+              id: hashCode(replyMessageInfo.forward_sender_name),
+              name: replyMessageInfo.forward_sender_name
+            }
+          }
         } else {
-          message.replyMessage.chatId = hashCode(message.replyMessage.name)
+          replyMessageFrom = {
+            id: hashCode(replyMessageInfo.forward_sender_name),
+            name: replyMessageInfo.forward_sender_name
+          }
         }
-      } else {
-        if (replyMessageInfo.from.first_name) message.replyMessage.name = replyMessageInfo.from.first_name
-        if (replyMessageInfo.from.last_name) message.replyMessage.name += ' ' + replyMessageInfo.from.last_name
-        if (replyMessageInfo.from.id) {
-          message.replyMessage.chatId = replyMessageInfo.from.id
+      } else if (replyMessageInfo.forward_from_chat) {
+        replyMessageFrom = replyMessageInfo.forward_from_chat
+      } else if (replyMessageInfo.forward_from) {
+        replyMessageFrom = replyMessageInfo.forward_from
+      } else if (replyMessageInfo.sender_chat) {
+        replyMessageFrom = {
+          id: replyMessageInfo.sender_chat.id,
+          name: replyMessageInfo.sender_chat.title,
+          username: replyMessageInfo.sender_chat.username || null,
+          photo: replyMessageInfo.sender_chat.photo
+        }
+      } else if (replyMessageInfo.from) {
+        replyMessageFrom = replyMessageInfo.from
+      }
+
+      if (replyMessageFrom) {
+        if (replyMessageFrom.title) replyMessageFrom.name = replyMessageFrom.title
+        if (replyMessageFrom.first_name) replyMessageFrom.name = replyMessageFrom.first_name
+        if (replyMessageFrom.last_name) replyMessageFrom.name += ' ' + replyMessageFrom.last_name
+
+        message.replyMessage.name = replyMessageFrom.name
+        if (replyMessageFrom.id) {
+          message.replyMessage.chatId = replyMessageFrom.id
         } else {
-          message.replyMessage.chatId = hashCode(message.replyMessage.name)
+          message.replyMessage.chatId = hashCode(replyMessageFrom.name)
         }
       }
+      
       if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
       if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
       if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
