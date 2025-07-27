@@ -454,7 +454,7 @@ module.exports = async (ctx, next) => {
 
   if (!messages.find((message) => {
     return message?.message_id === firstMessage?.message_id
-  }) && !isCommand) {
+  }) && !isCommand && ctx.chat.type !== 'private') {
     if (parseInt(flag.count) < 0) {
       messages.push(firstMessage)
     } else {
