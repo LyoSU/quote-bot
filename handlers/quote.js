@@ -567,7 +567,7 @@ module.exports = async (ctx, next) => {
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
     let diffUser = true
-    if (lastMessage && (messageFrom.id === lastMessage.from.id)) diffUser = false
+    if (lastMessage && lastMessage.from && (messageFrom.id === lastMessage.from.id)) diffUser = false
 
     const message = {}
 
