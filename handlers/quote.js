@@ -620,7 +620,7 @@ module.exports = async (ctx, next) => {
     }
 
     if (avatarImage) message.avatar = avatarImage
-    if (messageFrom) message.from = messageFrom
+    if (messageFrom && messageFrom.name !== false) message.from = messageFrom
     if (text) message.text = text
 
     if (!flag.privacy && message.from) {
