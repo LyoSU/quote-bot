@@ -462,7 +462,7 @@ module.exports = async (ctx, next) => {
     }
   }
 
-  let lastMessage
+  let lastSenderId = null
   for (const index in messages) {
     const quoteMessage = messages[index]
 
@@ -567,7 +567,7 @@ module.exports = async (ctx, next) => {
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
     let diffUser = true
-    if (lastMessage && lastMessage.from && (messageFrom.id === lastMessage.from.id)) diffUser = false
+    if (lastSenderId !== null && messageFrom.id === lastSenderId) diffUser = false
 
     const message = {}
 
@@ -740,7 +740,7 @@ module.exports = async (ctx, next) => {
 
     quoteMessages.push(message)
 
-    lastMessage = message
+    lastSenderId = messageFrom.id
   }
 
   if (flag.ai) {
