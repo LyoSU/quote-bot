@@ -46,6 +46,11 @@ help: |
   • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
   • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
+  🤖 <b>AI Modes</b>
+  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
+  • Change AI Style: Use <code>/aimode [style]</code> (admin only)
+  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
+
   💡 <b>Cool Combinations</b>
 
   • White quote with replies: <code>/q 3 white rp</code>
@@ -304,3 +309,45 @@ rate_limit: |
   <i>Taking a quick break...</i> You can use this command again in ${seconds} seconds ⏳
 
   <i>Pro tip: While you wait, try customizing your last quote with </i><code>/q color</code> <i>or</i> <code>/q media</code>
+aimode:
+  title: "🤖 <b>AI Modes</b>"
+  current: "Current mode: {mode}"
+  available: "<b>Available modes:</b>"
+  unknown: "❌ Unknown mode: <code>{mode}</code>"
+  available_list: "Available: {modes}"
+  success: "✅ AI mode changed to: {mode}"
+  error: "❌ Error saving settings"
+  modes:
+    sarcastic:
+      name: "😏 Sarcastic"
+      description: "Sarcastic and witty comments with dark humor"
+    philosopher:
+      name: "🧠 Philosopher"
+      description: "Deep thoughts and philosophical reflections"
+    comedian:
+      name: "😂 Comedian"
+      description: "Funny jokes and comedic comments"
+    poet:
+      name: "📝 Poet"
+      description: "Poetic lines and beautiful metaphors"
+    motivator:
+      name: "💪 Motivator"
+      description: "Motivating and inspiring messages"
+    conspiracy:
+      name: "🕵️ Conspiracy Theorist"
+      description: "Conspiracy theories and suspicious comments"
+    critic:
+      name: "🎭 Critic"
+      description: "Critical reviews and ratings for everything"
+    boomer:
+      name: "👴 Boomer"
+      description: "Old-school comments from older generation"
+    zoomer:
+      name: "😎 Zoomer"
+      description: "Youth slang and trendy phrases"
+    academic:
+      name: "🎓 Academic"
+      description: "Scientific facts and academic commentary"
+    memer:
+      name: "🐸 Memer"
+      description: "Meme phrases and internet culture"

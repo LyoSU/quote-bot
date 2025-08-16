@@ -26,6 +26,7 @@ const {
   handleSettingsRate,
   handlePrivacy,
   handleLanguage,
+  handleAiMode,
   handleFstik,
   handleSticker,
   handleDonate,
@@ -280,6 +281,8 @@ bot.command('privacy', onlyAdmin, handlePrivacy)
 
 bot.command('lang', handleLanguage)
 bot.action(/set_language:(.*)/, handleLanguage)
+
+bot.use(handleAiMode)
 
 // bot.on('sticker', rateLimit({
 //   window: 1000 * 60,

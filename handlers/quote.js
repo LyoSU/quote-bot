@@ -207,7 +207,7 @@ const handleQuoteError = async (ctx, error) => {
   }
 
   // Handle HTTP errors from quote API
-  if (error.response?.body) {
+  if (error.response && error.response.body) {
     let errorBody;
     try {
       errorBody = JSON.parse(error.response.body);
@@ -237,7 +237,7 @@ const handleQuoteError = async (ctx, error) => {
   }
 
   // Handle sticker set errors by resetting and retrying
-  if (error.description?.includes('STICKERSET_INVALID')) {
+  if (error.description && error.description.includes('STICKERSET_INVALID')) {
     // Prevent infinite loops by checking retry count
     if (!ctx.stickerRetryCount) ctx.stickerRetryCount = 0
     ctx.stickerRetryCount++
@@ -248,7 +248,7 @@ const handleQuoteError = async (ctx, error) => {
     }
 
     // Reset sticker set and try again without custom pack
-    if (ctx.session?.userInfo) {
+    if (ctx.session && ctx.session.userInfo) {
       ctx.session.userInfo.tempStickerSet.create = false
     }
     return handleQuote(ctx)
@@ -339,9 +339,9 @@ module.exports = async (ctx, next) => {
     } else {
       backgroundColor = flag.color
     }
-  } else if (ctx.group && ctx?.group?.info?.settings?.quote?.backgroundColor) {
-    backgroundColor = ctx?.group?.info?.settings?.quote?.backgroundColor
-  } else if (ctx.session?.userInfo?.settings?.quote?.backgroundColor) {
+  } else if (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.quote && ctx.group.info.settings.quote.backgroundColor) {
+    backgroundColor = ctx.group.info.settings.quote.backgroundColor
+  } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings && ctx.session.userInfo.settings.quote && ctx.session.userInfo.settings.quote.backgroundColor) {
     backgroundColor = ctx.session.userInfo.settings.quote.backgroundColor
   }
 
@@ -352,11 +352,11 @@ module.exports = async (ctx, next) => {
   let emojiBrand = 'apple'
   if (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.quote && ctx.group.info.settings.quote.emojiBrand) {
     emojiBrand = ctx.group.info.settings.quote.emojiBrand
-  } else if (ctx.session?.userInfo?.settings?.quote?.emojiBrand) {
+  } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings && ctx.session.userInfo.settings.quote && ctx.session.userInfo.settings.quote.emojiBrand) {
     emojiBrand = ctx.session.userInfo.settings.quote.emojiBrand
   }
 
-  if ((ctx.group && ctx.group?.info?.settings?.hidden) || ctx.session?.userInfo?.settings?.hidden) flag.hidden = true
+  if ((ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.hidden) || (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings && ctx.session.userInfo.settings.hidden)) flag.hidden = true
 
 
   const maxQuoteMessage = 50
@@ -775,7 +775,12 @@ module.exports = async (ctx, next) => {
       }
     }).filter((message) => message && message.content)
 
-    const systemMessage = `You are a sarcastic and unfiltered group chat participant. Write in the language others use, default language is ${ctx.group?.info?.settings?.locale || 'fallback'}. Don't write like an AI. Copy the style and humor of chat examples. Match the meme style you see. Feel free to be edgy, use strong language, and be brutally honest when appropriate. Just write a hilarious text meme or joke about this topic. Keep it under 128 characters.
+    const aiMode = (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.aiMode) || 'sarcastic'
+    const aiModes = require('../config/aiModes')
+    const selectedAiMode = aiModes[aiMode] || aiModes.sarcastic
+    
+    const locale = (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.locale) || 'fallback'
+    const systemMessage = selectedAiMode.systemPrompt(locale) + `
 
 **Chat Examples (style reference):**
 ${JSON.stringify(messageForAIContext)}

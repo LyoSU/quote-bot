@@ -39,6 +39,10 @@ const groupSchema = Schema({
     randomQuoteGab: {
       type: Number,
       default: 800
+    },
+    aiMode: {
+      type: String,
+      default: 'sarcastic'
     }
   },
   stickerSet: {

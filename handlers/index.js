@@ -20,6 +20,7 @@ module.exports = {
   handleSettingsRate: require('./rate-settings'),
   handlePrivacy: require('./privacy-settings'),
   handleLanguage: require('./language'),
+  handleAiMode: require('./ai-mode'),
   handleFstik: require('./fstik'),
   handleSticker: require('./sticker'),
   handleDonate: require('./donate'),
