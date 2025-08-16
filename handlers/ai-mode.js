@@ -30,7 +30,7 @@ composer.command('qai', rateLimit(3, 60), async (ctx) => {
     Object.keys(aiModes).forEach(modeName => {
       const modeInfo = aiModes[modeName]
       const isActive = modeName === currentMode ? '✅ ' : ''
-      message += `${isActive}<code>/aimode ${modeName}</code> - ${modeInfo.displayName}\n`
+      message += `${isActive}<code>/qai ${modeName}</code> - ${modeInfo.displayName}\n`
       message += `<i>${modeInfo.description}</i>\n\n`
     })
 

@@ -48,7 +48,7 @@ help: |
 
   🤖 <b>AI Modes</b>
   • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-  • Change AI Style: Use <code>/aimode [style]</code> (admin only)
+  • Change AI Style: Use <code>/qai [style]</code> (admin only)
   • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
 
   💡 <b>Cool Combinations</b>
