@@ -24,6 +24,8 @@ const openai = new OpenAI({
   }
 })
 
+const { sendGramadsAd } = require('../helpers/gramads')
+
 // Config will be loaded asynchronously through context
 let config = null
 
@@ -325,6 +327,14 @@ module.exports = async (ctx, next) => {
   }
 
   ctx.replyWithChatAction('choose_sticker')
+
+  // Send Gramads ad for Russian locale users (non-blocking)
+  if (ctx.from && (ctx.from.language_code === 'ru' || (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings && ctx.session.userInfo.settings.locale === 'ru'))) {
+    // Send ad asynchronously without blocking quote generation
+    sendGramadsAd(ctx.from.id).catch(() => {
+      // Silently handle any errors - don't interrupt quote generation
+    })
+  }
 
   // set background color
   let backgroundColor
