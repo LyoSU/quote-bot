@@ -340,7 +340,8 @@ function getMessages (chatID, messageIds) {
 
                     media = {
                       file_id: voice_note.voice.remote.id,
-                      waveform
+                      waveform,
+                      duration: voice_note.duration
                     }
                   } else if (messageInfo.content[type].sizes) {
                     media = messageInfo.content[type].sizes.map((size) => {

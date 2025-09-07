@@ -614,7 +614,10 @@ module.exports = async (ctx, next) => {
       message.media = [thumbnail]
     }
     if (flag.media && quoteMessage.voice) {
-      message.voice = quoteMessage.voice
+      message.voice = {
+        waveform: quoteMessage.voice.waveform || [],
+        duration: quoteMessage.voice.duration || 0
+      }
     }
 
     if (messageFrom.id) {
