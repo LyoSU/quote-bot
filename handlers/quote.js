@@ -1145,7 +1145,7 @@ ${JSON.stringify(messageForAIContext)}
           }
         }
 
-        if (sendResult && ctx.group && (ctx.group.info.settings.rate || flag.rate)) {
+        if (sendResult && ctx.group && ctx.group.info && (ctx.group.info.settings.rate || flag.rate)) {
           // Use insertOne for better performance than save()
           await ctx.db.Quote.create({
             group: ctx.group.info,

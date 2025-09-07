@@ -1,5 +1,5 @@
 module.exports = async ctx => {
-  if (ctx.group) {
+  if (ctx.group && ctx.group.info && ctx.group.info.settings) {
     if (ctx.group.info.settings.privacy === true) {
       ctx.group.info.settings.privacy = false
       await ctx.replyWithHTML(ctx.i18n.t('privacy.settings.disable'))
@@ -7,7 +7,7 @@ module.exports = async ctx => {
       ctx.group.info.settings.privacy = true
       await ctx.replyWithHTML(ctx.i18n.t('privacy.settings.enable'))
     }
-  } else {
+  } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings) {
     if (ctx.session.userInfo.settings.privacy === true) {
       ctx.session.userInfo.settings.privacy = false
       await ctx.replyWithHTML(ctx.i18n.t('privacy.settings.disable'))

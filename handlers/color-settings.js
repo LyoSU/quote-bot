@@ -4,9 +4,9 @@ module.exports = async ctx => {
     backgroundColor = `#${ctx.match[2]}`
   } else if (ctx.match && ctx.match[2]) backgroundColor = `${ctx.match[2]}`
 
-  if (ctx.group) {
+  if (ctx.group && ctx.group.info && ctx.group.info.settings) {
     ctx.group.info.settings.quote.backgroundColor = backgroundColor
-  } else {
+  } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings) {
     ctx.session.userInfo.settings.quote.backgroundColor = backgroundColor
   }
 

@@ -14,9 +14,9 @@ module.exports = async ctx => {
     emojiBrand = setEmojiBrand
   }
 
-  if (ctx.group) {
+  if (ctx.group && ctx.group.info && ctx.group.info.settings) {
     ctx.group.info.settings.quote.emojiBrand = emojiBrand
-  } else {
+  } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings) {
     ctx.session.userInfo.settings.quote.emojiBrand = emojiBrand
   }
 
