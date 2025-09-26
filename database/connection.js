@@ -37,7 +37,6 @@ const connectWithRetry = async () => {
       maxPoolSize: 20,
       minPoolSize: 5,
       maxIdleTimeMS: 30000,
-      bufferMaxEntries: 0,
       retryWrites: true
     })
     console.log('Successfully connected to MongoDB')
