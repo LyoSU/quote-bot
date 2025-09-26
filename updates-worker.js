@@ -44,6 +44,9 @@ class TelegramProcessor {
     this.errorCount = 0
     this.concurrentLimit = 100 // Process up to 100 updates concurrently per worker
     this.activePromises = new Set() // Track active processing promises
+    this.workerId = process.env.pm_id || process.pid
+    this.workerIndex = this.workerId % 8 // Calculate worker index from PM2 ID
+    this.queueName = `telegram:updates:worker:${this.workerIndex}`
 
     this.setupRedisEvents()
     this.setupBot()
@@ -190,7 +193,7 @@ class TelegramProcessor {
       try {
         // Only get new update if we have capacity
         if (this.activePromises.size < this.concurrentLimit) {
-          const result = await this.redis.brpop('telegram:updates', 1)
+          const result = await this.redis.brpop(this.queueName, 1)
 
           if (result && result[1]) {
             // Start processing concurrently (don't await)
@@ -227,7 +230,7 @@ class TelegramProcessor {
       await this.redis.connect()
       await this.tdlibRedis.connect()
 
-      logWithTimestamp('Starting Telegram processor...')
+      logWithTimestamp(`Starting Telegram processor (Worker ${this.workerId}[${this.workerIndex}] -> ${this.queueName})...`)
 
       // Start processing loop
       this.startProcessing()
@@ -235,13 +238,12 @@ class TelegramProcessor {
       // Worker stats every 10 seconds
       setInterval(async () => {
         try {
-          const queueSize = await this.redis.llen('telegram:updates')
+          const queueSize = await this.redis.llen(this.queueName)
           const totalProcessed = await this.redis.get('telegram:processed_count') || 0
           const totalErrors = await this.redis.get('telegram:error_count') || 0
-          const workerId = process.env.pm_id || process.pid
           const activeCount = this.activePromises.size
 
-          logWithTimestamp(`⚡ WORKER-${workerId} | Queue: ${queueSize} | Processed: ${totalProcessed} | Errors: ${totalErrors} | Active: ${activeCount}/${this.concurrentLimit}`)
+          logWithTimestamp(`⚡ WORKER-${this.workerId}[${this.workerIndex}] | Queue: ${queueSize} | Processed: ${totalProcessed} | Errors: ${totalErrors} | Active: ${activeCount}/${this.concurrentLimit}`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }

@@ -59,8 +59,13 @@ class TelegramCollector {
           priority: this.getUpdatePriority(update)
         }
 
-        // Push to Redis queue (back to simple queue mode)
-        await this.redis.lpush('telegram:updates', JSON.stringify(enrichedUpdate))
+        // Get chat ID for consistent worker assignment
+        const chatId = this.getChatId(update)
+        const workerIndex = Math.abs(chatId) % 8 // 8 workers from ecosystem config
+        const queueName = `telegram:updates:worker:${workerIndex}`
+
+        // Push to specific worker queue
+        await this.redis.lpush(queueName, JSON.stringify(enrichedUpdate))
 
         // Track globally in Redis
         await this.redis.incr('telegram:collected_count')
@@ -127,6 +132,22 @@ class TelegramCollector {
     logWithTimestamp('TDLib server started (centralized)')
   }
 
+  getChatId(update) {
+    // Extract chat ID from various update types
+    if (update.message) return update.message.chat.id
+    if (update.edited_message) return update.edited_message.chat.id
+    if (update.channel_post) return update.channel_post.chat.id
+    if (update.edited_channel_post) return update.edited_channel_post.chat.id
+    if (update.callback_query) return update.callback_query.message?.chat?.id || update.callback_query.from.id
+    if (update.inline_query) return update.inline_query.from.id
+    if (update.chosen_inline_result) return update.chosen_inline_result.from.id
+    if (update.shipping_query) return update.shipping_query.from.id
+    if (update.pre_checkout_query) return update.pre_checkout_query.from.id
+
+    // Fallback to update_id if no chat found
+    return update.update_id
+  }
+
   getUpdatePriority(update) {
     // Higher priority for commands
     if (update.message?.text?.startsWith('/')) {
@@ -144,8 +165,10 @@ class TelegramCollector {
     try {
       await this.redis.connect()
 
-      // Clear queue and reset stats
-      await this.redis.del('telegram:updates')
+      // Clear worker queues and reset stats
+      for (let i = 0; i < 8; i++) {
+        await this.redis.del(`telegram:updates:worker:${i}`)
+      }
       await this.redis.set('telegram:collected_count', 0)
 
       // Start TDLib server
@@ -160,9 +183,16 @@ class TelegramCollector {
       setInterval(async () => {
         try {
           const collected = await this.redis.get('telegram:collected_count') || 0
-          const queueSize = await this.redis.llen('telegram:updates')
 
-          logWithTimestamp(`📊 COLLECTOR | Collected: ${collected} | Queue: ${queueSize}`)
+          // Get queue sizes for all workers
+          const queueSizes = []
+          for (let i = 0; i < 8; i++) {
+            const size = await this.redis.llen(`telegram:updates:worker:${i}`)
+            queueSizes.push(size)
+          }
+          const totalQueue = queueSizes.reduce((a, b) => a + b, 0)
+
+          logWithTimestamp(`📊 COLLECTOR | Collected: ${collected} | Total Queue: ${totalQueue} | Workers: [${queueSizes.join(',')}]`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }
