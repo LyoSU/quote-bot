@@ -45,7 +45,7 @@ class TelegramProcessor {
     this.concurrentLimit = 100 // Process up to 100 updates concurrently per worker
     this.activePromises = new Set() // Track active processing promises
     this.workerId = process.env.pm_id || process.pid
-    this.workerIndex = this.workerId % 8 // Calculate worker index from PM2 ID
+    this.workerIndex = this.workerId % 4 // Calculate worker index from PM2 ID
     this.queueName = `telegram:updates:worker:${this.workerIndex}`
 
     this.setupRedisEvents()
