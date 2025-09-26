@@ -31,10 +31,14 @@ const connectWithRetry = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 10000, // 10s timeout for server selection
-      connectTimeoutMS: 10000, // 10s timeout for connection
-      socketTimeoutMS: 30000, // 30s timeout for socket operations
-      maxPoolSize: 10 // Maintain up to 10 socket connections
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
+      socketTimeoutMS: 20000,
+      maxPoolSize: 20,
+      minPoolSize: 5,
+      maxIdleTimeMS: 30000,
+      bufferMaxEntries: 0,
+      retryWrites: true
     })
     console.log('Successfully connected to MongoDB')
     retryCount = 0 // Reset on successful connection

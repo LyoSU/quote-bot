@@ -28,7 +28,7 @@ function setupWorker (botToken, handlerTimeout) {
           const timeout = setTimeout(() => {
             process.removeListener('message', handler)
             reject(new Error(`TDLib request timeout for method: ${prop}`))
-          }, 10000) // 10 second timeout (shorter than master)
+          }, 5000) // 5 second timeout for faster recovery
 
           process.on('message', handler)
         })
@@ -38,60 +38,51 @@ function setupWorker (botToken, handlerTimeout) {
 
   const bot = new Telegraf(botToken, { handlerTimeout })
 
-  // Cache config to avoid blocking file reads
+  // Cache config to avoid blocking file reads - optimized
   let configCache = null
   let configLastModified = 0
-  let configLoading = false
+  let configPromise = null
 
-  const getConfig = async () => {
-    try {
-      if (configLoading) {
-        // Wait for ongoing config load with timeout to prevent deadlock
-        await new Promise(resolve => {
-          const checkInterval = setInterval(() => {
-            if (!configLoading) {
-              clearInterval(checkInterval)
-              resolve()
-            }
-          }, 10)
-          
-          // Add timeout to prevent infinite waiting
-          setTimeout(() => {
-            clearInterval(checkInterval)
-            configLoading = false // Reset flag to prevent deadlock
-            console.warn('Config loading timeout, resetting flag')
-            resolve()
-          }, 5000)
-        })
-        return configCache || {}
-      }
+  const getConfig = () => {
+    // Return cached config synchronously if available
+    if (configCache) {
+      // Async refresh check without blocking
+      setImmediate(async () => {
+        try {
+          const stats = await fs.promises.stat('./config.json').catch(() => null)
+          if (stats && stats.mtimeMs > configLastModified) {
+            const configData = await fs.promises.readFile('./config.json', 'utf8')
+            configCache = JSON.parse(configData)
+            configLastModified = stats.mtimeMs
+          }
+        } catch (error) {
+          console.warn('Background config refresh failed:', error.message)
+        }
+      })
+      return configCache
+    }
 
-      const stats = await fs.promises.stat('./config.json').catch(() => null)
-      if (!stats) {
-        console.warn('Config file not found, using cached version')
-        return configCache || {}
-      }
-
-      if (!configCache || stats.mtimeMs > configLastModified) {
-        configLoading = true
+    // Only load synchronously on first request
+    if (!configPromise) {
+      configPromise = (async () => {
         try {
           const configData = await fs.promises.readFile('./config.json', 'utf8')
           configCache = JSON.parse(configData)
-          configLastModified = stats.mtimeMs
-        } finally {
-          configLoading = false
+          configLastModified = Date.now()
+        } catch (error) {
+          console.warn('Initial config load failed, using defaults:', error.message)
+          configCache = {}
         }
-      }
-      return configCache
-    } catch (error) {
-      configLoading = false
-      console.error('Error reading config:', error)
-      return configCache || {}
+        configPromise = null
+        return configCache
+      })()
     }
+
+    return configCache || {}
   }
 
   bot.use(async (ctx, next) => {
-    ctx.config = await getConfig()
+    ctx.config = getConfig()
     ctx.db = db
     ctx.tdlib = tdlibProxy
     return next()

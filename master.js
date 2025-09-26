@@ -281,7 +281,7 @@ function setupMaster (bot, queueManager, maxWorkers, maxUpdatesPerWorker) {
 
         // Add timeout for TDLib operations
         const timeoutPromise = new Promise((_, reject) => {
-          setTimeout(() => reject(new Error(`TDLib ${msg.method} timeout in master`)), 8000) // Reduced to 8s
+          setTimeout(() => reject(new Error(`TDLib ${msg.method} timeout in master`)), 6000) // Reduced to 6s for faster recovery
         })
 
         try {

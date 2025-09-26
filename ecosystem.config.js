@@ -3,13 +3,13 @@ module.exports = {
     {
       name: 'QuoteBot',
       script: './index.js',
-      max_memory_restart: '5000M',
-      watch: true,
-      ignore_watch: ['node_modules', 'assets', 'helpers/tdlib/data/db', 'health-check.log'],
-      max_restarts: 10,
-      min_uptime: '10s',
-      restart_delay: 4000,
-      kill_timeout: 5000,
+      max_memory_restart: '3000M',
+      watch: false, // Disable for production
+      max_restarts: 5,
+      min_uptime: '30s',
+      restart_delay: 2000,
+      kill_timeout: 3000,
+      node_args: '--max-old-space-size=2048',
       env: {
         NODE_ENV: 'development'
       },
