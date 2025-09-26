@@ -27,7 +27,7 @@ const sendGramadsAd = async (chatId) => {
     })
 
     if (response.statusCode === 200) {
-      console.log(`Gramads ad sent successfully to chat ${chatId}`)
+      // Removed success log to reduce spam
       return JSON.parse(response.body)
     } else {
       console.warn(`Gramads API returned status ${response.statusCode} for chat ${chatId}`)

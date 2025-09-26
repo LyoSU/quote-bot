@@ -125,8 +125,8 @@ class TelegramProcessor {
 
     while (this.isProcessing) {
       try {
-        // Blocking pop with 1 second timeout
-        const result = await this.redis.brpop('telegram:updates', 1)
+        // Blocking pop with shorter timeout for faster processing
+        const result = await this.redis.brpop('telegram:updates', 0.1)
 
         if (result && result[1]) {
           await this.processUpdate(result[1])

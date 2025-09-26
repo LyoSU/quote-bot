@@ -26,7 +26,7 @@ module.exports = {
     {
       name: 'updates-workers',
       script: './updates-worker.js',
-      instances: 4, // Multiple workers for processing
+      instances: 8, // Increase workers to handle backlog
       exec_mode: 'cluster', // Can use cluster for CPU intensive tasks
       max_memory_restart: '2000M',
       watch: false,
