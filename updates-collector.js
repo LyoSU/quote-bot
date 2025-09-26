@@ -79,6 +79,44 @@ class TelegramCollector {
     })
   }
 
+  startTDLibServer() {
+    // Initialize TDLib only in collector process
+    const tdlib = require('./helpers/tdlib')
+
+    // Subscribe to TDLib requests from workers
+    this.redis.subscribe('tdlib:requests')
+
+    this.redis.on('message', async (channel, message) => {
+      if (channel === 'tdlib:requests') {
+        try {
+          const request = JSON.parse(message)
+
+          try {
+            const result = await tdlib[request.method](...request.args)
+
+            // Send response back
+            this.redis.publish('tdlib:responses', JSON.stringify({
+              id: request.id,
+              result: result
+            }))
+
+          } catch (error) {
+            // Send error response
+            this.redis.publish('tdlib:responses', JSON.stringify({
+              id: request.id,
+              error: error.message
+            }))
+          }
+
+        } catch (parseError) {
+          logWithTimestamp('TDLib request parse error:', parseError.message)
+        }
+      }
+    })
+
+    logWithTimestamp('TDLib server started (centralized)')
+  }
+
   getUpdatePriority(update) {
     // Higher priority for commands
     if (update.message?.text?.startsWith('/')) {
@@ -98,6 +136,9 @@ class TelegramCollector {
 
       // Clear old stats
       await this.redis.set('telegram:collected_count', 0)
+
+      // Start TDLib server
+      this.startTDLibServer()
 
       logWithTimestamp('Starting Telegram collector...')
       await this.bot.launch()

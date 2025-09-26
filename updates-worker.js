@@ -47,6 +47,56 @@ class TelegramProcessor {
     })
   }
 
+  createTDLibProxy() {
+    // Create proxy that sends TDLib requests through Redis
+    return new Proxy({}, {
+      get: (target, prop) => {
+        return (...args) => {
+          return new Promise((resolve, reject) => {
+            const requestId = Date.now() + Math.random()
+
+            // Send request through Redis
+            const request = {
+              id: requestId,
+              method: prop,
+              args: args
+            }
+
+            this.redis.publish('tdlib:requests', JSON.stringify(request))
+
+            // Listen for response
+            const responseHandler = (channel, message) => {
+              if (channel === 'tdlib:responses') {
+                try {
+                  const response = JSON.parse(message)
+                  if (response.id === requestId) {
+                    this.redis.unsubscribe('tdlib:responses')
+                    if (response.error) {
+                      reject(new Error(response.error))
+                    } else {
+                      resolve(response.result)
+                    }
+                  }
+                } catch (error) {
+                  // Ignore parse errors
+                }
+              }
+            }
+
+            this.redis.subscribe('tdlib:responses')
+            this.redis.on('message', responseHandler)
+
+            // Timeout after 10 seconds
+            setTimeout(() => {
+              this.redis.unsubscribe('tdlib:responses')
+              reject(new Error(`TDLib ${prop} timeout`))
+            }, 10000)
+          })
+        }
+      }
+    })
+  }
+
   setupBot () {
     // Set up database and config context
     this.bot.use(async (ctx, next) => {
@@ -68,11 +118,9 @@ class TelegramProcessor {
       return next()
     })
 
-    // Add TDLib proxy (simplified, use existing tdlib helper)
+    // TDLib proxy through Redis IPC (like old architecture)
     this.bot.use(async (ctx, next) => {
-      // Simplified TDLib - use existing helpers
-      const tdlib = require('./helpers/tdlib')
-      ctx.tdlib = tdlib
+      ctx.tdlib = this.createTDLibProxy()
       return next()
     })
 
