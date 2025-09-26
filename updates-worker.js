@@ -148,16 +148,15 @@ class TelegramProcessor {
 
       this.processedCount++
 
-      // Update processed counter
-      await this.redis.incr('telegram:processed_count')
+      // Track locally only
+      // Can't use redis incr in subscriber mode
 
       // Don't log each update - only batch stats
     } catch (error) {
       this.errorCount++
       errorWithTimestamp('Error processing update:', error.message)
 
-      // Track error
-      await this.redis.incr('telegram:error_count')
+      // Track error locally only
     }
   }
 
@@ -195,19 +194,10 @@ class TelegramProcessor {
 
       // Worker stats every 10 seconds
       setInterval(async () => {
-        try {
-          const queueSize = 'pub/sub' // No queue in pub/sub mode
-          const totalProcessed = await this.redis.get('telegram:processed_count') || 0
-          const totalErrors = await this.redis.get('telegram:error_count') || 0
-          const workerId = process.env.pm_id || process.pid
+        const workerId = process.env.pm_id || process.pid
+        const status = this.isProcessing ? 'active' : 'idle'
 
-          // Calculate average processing time if we have data
-          const avgDelay = queueSize > 0 ? 'processing...' : 'idle'
-
-          logWithTimestamp(`⚡ WORKER-${workerId} | Processed: ${totalProcessed} | Queue: ${queueSize} | Errors: ${totalErrors} | Status: ${avgDelay}`)
-        } catch (error) {
-          errorWithTimestamp('Stats error:', error.message)
-        }
+        logWithTimestamp(`⚡ WORKER-${workerId} | Local Processed: ${this.processedCount} | Local Errors: ${this.errorCount} | Status: ${status}`)
       }, 10000) // Every 10 seconds
 
       logWithTimestamp('Processor started successfully')

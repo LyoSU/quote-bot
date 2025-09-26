@@ -61,8 +61,8 @@ class TelegramCollector {
         // Publish update to Redis pub/sub
         await this.redis.publish('telegram:updates', JSON.stringify(enrichedUpdate))
 
-        // Track metrics
-        await this.redis.incr('telegram:collected_count')
+        // Track locally only
+        this.collectedCount = (this.collectedCount || 0) + 1
 
         // Don't log each update - only batch stats
 
@@ -135,8 +135,8 @@ class TelegramCollector {
     try {
       await this.redis.connect()
 
-      // Clear old stats
-      await this.redis.set('telegram:collected_count', 0)
+      // Initialize local stats
+      this.collectedCount = 0
 
       // Start TDLib server
       this.startTDLibServer()
@@ -147,16 +147,8 @@ class TelegramCollector {
       logWithTimestamp('Telegram collector started successfully')
 
       // Collector stats every 10 seconds
-      setInterval(async () => {
-        try {
-          const collected = await this.redis.get('telegram:collected_count') || 0
-          const queueSize = 'pub/sub' // No queue size in pub/sub mode
-          const avgPriority = await this.redis.get('telegram:avg_priority') || 1
-
-          logWithTimestamp(`📊 COLLECTOR | Total: ${collected} | Queue: ${queueSize} | Avg Priority: ${avgPriority}`)
-        } catch (error) {
-          errorWithTimestamp('Stats error:', error.message)
-        }
+      setInterval(() => {
+        logWithTimestamp(`📊 COLLECTOR | Collected: ${this.collectedCount} | Mode: pub/sub`)
       }, 10000) // Every 10 seconds
 
     } catch (error) {
