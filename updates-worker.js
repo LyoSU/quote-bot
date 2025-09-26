@@ -16,7 +16,7 @@ const errorWithTimestamp = (message, ...args) => {
 }
 
 class TelegramProcessor {
-  constructor() {
+  constructor () {
     this.bot = new Telegraf(process.env.BOT_TOKEN, {
       handlerTimeout: 30000
     })
@@ -37,7 +37,7 @@ class TelegramProcessor {
     this.setupBot()
   }
 
-  setupRedisEvents() {
+  setupRedisEvents () {
     this.redis.on('connect', () => {
       logWithTimestamp('Connected to Redis')
     })
@@ -47,7 +47,7 @@ class TelegramProcessor {
     })
   }
 
-  setupBot() {
+  setupBot () {
     // Set up database and config context
     this.bot.use(async (ctx, next) => {
       ctx.db = db
@@ -90,7 +90,7 @@ class TelegramProcessor {
     })
   }
 
-  async processUpdate(updateData) {
+  async processUpdate (updateData) {
     try {
       const update = JSON.parse(updateData)
 
@@ -106,7 +106,6 @@ class TelegramProcessor {
       await this.redis.incr('telegram:processed_count')
 
       logWithTimestamp(`Processed update ${update.update_id} (queue delay: ${Date.now() - update.collected_at}ms)`)
-
     } catch (error) {
       this.errorCount++
       errorWithTimestamp('Error processing update:', error.message)
@@ -116,7 +115,7 @@ class TelegramProcessor {
     }
   }
 
-  async startProcessing() {
+  async startProcessing () {
     if (this.isProcessing) {
       return
     }
@@ -132,7 +131,6 @@ class TelegramProcessor {
         if (result && result[1]) {
           await this.processUpdate(result[1])
         }
-
       } catch (error) {
         errorWithTimestamp('Processing loop error:', error.message)
         // Wait before retrying
@@ -141,7 +139,7 @@ class TelegramProcessor {
     }
   }
 
-  async start() {
+  async start () {
     try {
       await this.redis.connect()
 
@@ -164,14 +162,13 @@ class TelegramProcessor {
       }, 30000) // Every 30 seconds
 
       logWithTimestamp('Processor started successfully')
-
     } catch (error) {
       errorWithTimestamp('Failed to start processor:', error.message)
       process.exit(1)
     }
   }
 
-  async stop() {
+  async stop () {
     logWithTimestamp('Stopping processor...')
     this.isProcessing = false
     await this.redis.quit()
