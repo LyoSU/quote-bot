@@ -21,6 +21,7 @@ class TelegramProcessor {
       handlerTimeout: 30000
     })
 
+    // Single Redis connection for all operations
     this.redis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
       port: process.env.REDIS_PORT || 6379,
@@ -64,13 +65,12 @@ class TelegramProcessor {
 
             this.redis.publish('tdlib:requests', JSON.stringify(request))
 
-            // Listen for response
+            // Listen for response (simplified)
             const responseHandler = (channel, message) => {
               if (channel === 'tdlib:responses') {
                 try {
                   const response = JSON.parse(message)
                   if (response.id === requestId) {
-                    this.redis.unsubscribe('tdlib:responses')
                     if (response.error) {
                       reject(new Error(response.error))
                     } else {
@@ -83,14 +83,12 @@ class TelegramProcessor {
               }
             }
 
-            this.redis.subscribe('tdlib:responses')
             this.redis.on('message', responseHandler)
 
-            // Timeout after 10 seconds
+            // Timeout after 5 seconds
             setTimeout(() => {
-              this.redis.unsubscribe('tdlib:responses')
               reject(new Error(`TDLib ${prop} timeout`))
-            }, 10000)
+            }, 5000)
           })
         }
       }
@@ -169,22 +167,21 @@ class TelegramProcessor {
     }
 
     this.isProcessing = true
-    logWithTimestamp('Starting update processing loop...')
+    logWithTimestamp('Starting update processing via pub/sub...')
 
-    while (this.isProcessing) {
-      try {
-        // Blocking pop with shorter timeout for faster processing
-        const result = await this.redis.brpop('telegram:updates', 0.1)
+    // Subscribe to updates and TDLib responses
+    await this.redis.subscribe('telegram:updates', 'tdlib:responses')
 
-        if (result && result[1]) {
-          await this.processUpdate(result[1])
+    this.redis.on('message', async (channel, message) => {
+      if (channel === 'telegram:updates' && this.isProcessing) {
+        try {
+          await this.processUpdate(message)
+        } catch (error) {
+          errorWithTimestamp('Processing error:', error.message)
         }
-      } catch (error) {
-        errorWithTimestamp('Processing loop error:', error.message)
-        // Wait before retrying
-        await new Promise(resolve => setTimeout(resolve, 1000))
       }
-    }
+      // TDLib responses handled in proxy
+    })
   }
 
   async start () {
@@ -199,7 +196,7 @@ class TelegramProcessor {
       // Worker stats every 10 seconds
       setInterval(async () => {
         try {
-          const queueSize = await this.redis.llen('telegram:updates')
+          const queueSize = 'pub/sub' // No queue in pub/sub mode
           const totalProcessed = await this.redis.get('telegram:processed_count') || 0
           const totalErrors = await this.redis.get('telegram:error_count') || 0
           const workerId = process.env.pm_id || process.pid

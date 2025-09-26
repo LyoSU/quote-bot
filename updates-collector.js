@@ -25,6 +25,7 @@ class TelegramCollector {
       lazyConnect: true
     })
 
+
     this.setupRedisEvents()
     this.setupBot()
   }
@@ -57,8 +58,8 @@ class TelegramCollector {
           priority: this.getUpdatePriority(update)
         }
 
-        // Push to Redis queue
-        await this.redis.lpush('telegram:updates', JSON.stringify(enrichedUpdate))
+        // Publish update to Redis pub/sub
+        await this.redis.publish('telegram:updates', JSON.stringify(enrichedUpdate))
 
         // Track metrics
         await this.redis.incr('telegram:collected_count')
@@ -149,7 +150,7 @@ class TelegramCollector {
       setInterval(async () => {
         try {
           const collected = await this.redis.get('telegram:collected_count') || 0
-          const queueSize = await this.redis.llen('telegram:updates')
+          const queueSize = 'pub/sub' // No queue size in pub/sub mode
           const avgPriority = await this.redis.get('telegram:avg_priority') || 1
 
           logWithTimestamp(`📊 COLLECTOR | Total: ${collected} | Queue: ${queueSize} | Avg Priority: ${avgPriority}`)
