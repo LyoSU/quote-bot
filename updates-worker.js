@@ -21,8 +21,17 @@ class TelegramProcessor {
       handlerTimeout: 30000
     })
 
-    // Single Redis connection for all operations
+    // Main Redis connection for queue and stats
     this.redis = new Redis({
+      host: process.env.REDIS_HOST || 'localhost',
+      port: process.env.REDIS_PORT || 6379,
+      retryDelayOnFailover: 100,
+      maxRetriesPerRequest: 3,
+      lazyConnect: true
+    })
+
+    // Separate connection for TDLib pub/sub
+    this.tdlibRedis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
       port: process.env.REDIS_PORT || 6379,
       retryDelayOnFailover: 100,
@@ -65,12 +74,15 @@ class TelegramProcessor {
 
             this.redis.publish('tdlib:requests', JSON.stringify(request))
 
-            // Listen for response (simplified)
+            // Listen for response on separate connection
             const responseHandler = (channel, message) => {
               if (channel === 'tdlib:responses') {
                 try {
                   const response = JSON.parse(message)
                   if (response.id === requestId) {
+                    this.tdlibRedis.unsubscribe('tdlib:responses')
+                    this.tdlibRedis.removeListener('message', responseHandler)
+
                     if (response.error) {
                       reject(new Error(response.error))
                     } else {
@@ -83,10 +95,13 @@ class TelegramProcessor {
               }
             }
 
-            this.redis.on('message', responseHandler)
+            this.tdlibRedis.subscribe('tdlib:responses')
+            this.tdlibRedis.on('message', responseHandler)
 
             // Timeout after 5 seconds
             setTimeout(() => {
+              this.tdlibRedis.unsubscribe('tdlib:responses')
+              this.tdlibRedis.removeListener('message', responseHandler)
               reject(new Error(`TDLib ${prop} timeout`))
             }, 5000)
           })
@@ -148,15 +163,16 @@ class TelegramProcessor {
 
       this.processedCount++
 
-      // Track locally only
-      // Can't use redis incr in subscriber mode
+      // Update global processed counter
+      await this.redis.incr('telegram:processed_count')
 
       // Don't log each update - only batch stats
     } catch (error) {
       this.errorCount++
       errorWithTimestamp('Error processing update:', error.message)
 
-      // Track error locally only
+      // Track error globally
+      await this.redis.incr('telegram:error_count')
     }
   }
 
@@ -166,26 +182,28 @@ class TelegramProcessor {
     }
 
     this.isProcessing = true
-    logWithTimestamp('Starting update processing via pub/sub...')
+    logWithTimestamp('Starting update processing via queue...')
 
-    // Subscribe to updates and TDLib responses
-    await this.redis.subscribe('telegram:updates', 'tdlib:responses')
+    while (this.isProcessing) {
+      try {
+        // Blocking pop from queue
+        const result = await this.redis.brpop('telegram:updates', 1)
 
-    this.redis.on('message', async (channel, message) => {
-      if (channel === 'telegram:updates' && this.isProcessing) {
-        try {
-          await this.processUpdate(message)
-        } catch (error) {
-          errorWithTimestamp('Processing error:', error.message)
+        if (result && result[1]) {
+          await this.processUpdate(result[1])
         }
+      } catch (error) {
+        errorWithTimestamp('Processing loop error:', error.message)
+        // Wait before retrying
+        await new Promise(resolve => setTimeout(resolve, 1000))
       }
-      // TDLib responses handled in proxy
-    })
+    }
   }
 
   async start () {
     try {
       await this.redis.connect()
+      await this.tdlibRedis.connect()
 
       logWithTimestamp('Starting Telegram processor...')
 
@@ -194,10 +212,16 @@ class TelegramProcessor {
 
       // Worker stats every 10 seconds
       setInterval(async () => {
-        const workerId = process.env.pm_id || process.pid
-        const status = this.isProcessing ? 'active' : 'idle'
+        try {
+          const queueSize = await this.redis.llen('telegram:updates')
+          const totalProcessed = await this.redis.get('telegram:processed_count') || 0
+          const totalErrors = await this.redis.get('telegram:error_count') || 0
+          const workerId = process.env.pm_id || process.pid
 
-        logWithTimestamp(`⚡ WORKER-${workerId} | Local Processed: ${this.processedCount} | Local Errors: ${this.errorCount} | Status: ${status}`)
+          logWithTimestamp(`⚡ WORKER-${workerId} | Queue: ${queueSize} | Total Processed: ${totalProcessed} | Errors: ${totalErrors}`)
+        } catch (error) {
+          errorWithTimestamp('Stats error:', error.message)
+        }
       }, 10000) // Every 10 seconds
 
       logWithTimestamp('Processor started successfully')
@@ -211,6 +235,7 @@ class TelegramProcessor {
     logWithTimestamp('Stopping processor...')
     this.isProcessing = false
     await this.redis.quit()
+    await this.tdlibRedis.quit()
     logWithTimestamp('Processor stopped')
   }
 }

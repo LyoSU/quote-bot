@@ -17,6 +17,7 @@ class TelegramCollector {
       handlerTimeout: 1000 // Fast timeout for collector
     })
 
+    // Single Redis connection for all operations
     this.redis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
       port: process.env.REDIS_PORT || 6379,
@@ -58,11 +59,11 @@ class TelegramCollector {
           priority: this.getUpdatePriority(update)
         }
 
-        // Publish update to Redis pub/sub
-        await this.redis.publish('telegram:updates', JSON.stringify(enrichedUpdate))
+        // Push to Redis queue (back to simple queue mode)
+        await this.redis.lpush('telegram:updates', JSON.stringify(enrichedUpdate))
 
-        // Track locally only
-        this.collectedCount = (this.collectedCount || 0) + 1
+        // Track globally in Redis
+        await this.redis.incr('telegram:collected_count')
 
         // Don't log each update - only batch stats
 
@@ -84,10 +85,18 @@ class TelegramCollector {
     // Initialize TDLib only in collector process
     const tdlib = require('./helpers/tdlib')
 
-    // Subscribe to TDLib requests from workers
-    this.redis.subscribe('tdlib:requests')
+    // Create separate connection for TDLib pub/sub
+    this.tdlibRedis = new Redis({
+      host: process.env.REDIS_HOST || 'localhost',
+      port: process.env.REDIS_PORT || 6379,
+      retryDelayOnFailover: 100,
+      maxRetriesPerRequest: 3
+    })
 
-    this.redis.on('message', async (channel, message) => {
+    // Subscribe to TDLib requests from workers
+    this.tdlibRedis.subscribe('tdlib:requests')
+
+    this.tdlibRedis.on('message', async (channel, message) => {
       if (channel === 'tdlib:requests') {
         try {
           const request = JSON.parse(message)
@@ -135,8 +144,9 @@ class TelegramCollector {
     try {
       await this.redis.connect()
 
-      // Initialize local stats
-      this.collectedCount = 0
+      // Clear queue and reset stats
+      await this.redis.del('telegram:updates')
+      await this.redis.set('telegram:collected_count', 0)
 
       // Start TDLib server
       this.startTDLibServer()
@@ -147,8 +157,15 @@ class TelegramCollector {
       logWithTimestamp('Telegram collector started successfully')
 
       // Collector stats every 10 seconds
-      setInterval(() => {
-        logWithTimestamp(`📊 COLLECTOR | Collected: ${this.collectedCount} | Mode: pub/sub`)
+      setInterval(async () => {
+        try {
+          const collected = await this.redis.get('telegram:collected_count') || 0
+          const queueSize = await this.redis.llen('telegram:updates')
+
+          logWithTimestamp(`📊 COLLECTOR | Collected: ${collected} | Queue: ${queueSize}`)
+        } catch (error) {
+          errorWithTimestamp('Stats error:', error.message)
+        }
       }, 10000) // Every 10 seconds
 
     } catch (error) {
@@ -161,6 +178,7 @@ class TelegramCollector {
     logWithTimestamp('Stopping collector...')
     this.bot.stop('SIGTERM')
     await this.redis.quit()
+    if (this.tdlibRedis) await this.tdlibRedis.quit()
     logWithTimestamp('Collector stopped')
   }
 }
