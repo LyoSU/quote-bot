@@ -25,64 +25,63 @@ start: |
 
   Digita /help quando sei pronto a scoprire tutte le possibilità creative! 🎨
 help: |
-  <b>✨ Guida Rapida di QuotLyBot</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  <b>📱 Comandi di Base</b>
-  • <code>/q</code> - Cita il messaggio risposto
-  • <code>/q 3</code> - Cita diversi messaggi
-  • Inoltra il messaggio - Cita direttamente
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  <b>🎨 Stili</b>
+  📱 <b>Basic Quoting</b>
 
-  Colori:
-  • Base: <code>/q red</code>
-  • Personalizzato: <code>/q #ff69b4</code>
-  • Gradiente: <code>/q red//#blue</code>
-  • Casuale: <code>/q random</code>
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  Media:
-  • Aggiungi foto: <code>/q media</code>
-  • Ritaglia immagine: <code>/q crop</code>
-  • Mantieni discussione: <code>/q reply</code>
-  • Anteprima vocale: Automatica
+  🎨 <b>Customize Your Quote</b>
 
-  Formato:
-  • Sticker: <code>/q</code>
-  • Immagine: <code>/q img</code>
-  • HD: <code>/q png</code>
-  • Storia: <code>/q stories</code>
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  Qualità:
-  • Normale: <code>/q</code>
-  • 2x: <code>/q s2</code>
-  • 3x: <code>/q s3</code>
+  🤖 <b>AI Modes</b>
+  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
+  • Change AI Style: Use <code>/qai [style]</code> (admin only)
+  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
 
-  <b>💫 Combinazioni Popolari</b>
-  • <code>/q red media</code> - Citazione rossa con foto
-  • <code>/q 3 reply</code> - Citazione con contesto
-  • <code>/q img s2</code> - Immagine ad alta qualità
-  • <code>/q stories media</code> - Storia con foto
+  💡 <b>Cool Combinations</b>
 
-  <b>⚙️ Funzioni Extra</b>
-  • Valutazione: <code>/q rate</code>
-  • Citazioni casuali: <code>/qrand</code>
-  • Citazioni top: <code>/qtop</code>
-  • Lingua: <code>/lang</code>
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  <b>🎯 Impostazioni del Gruppo</b>
-  • Colore predefinito: <code>/qcolor</code>
-  • Abilita valutazione: <code>/qrate</code>
-  • Salva nel pacchetto: <code>/qs</code>
+  ⚙️ <b>More Options</b>
 
-  <b>🌈 Stili Emoji</b>
-  Classico: <code>/qb apple</code>, <code>/qb google</code>
-  Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-  Retro: <code>/qb blob</code>
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  <b>📱 Hai Bisogno di Aiuto?</b>
-  • Blog: @LyBlog
-  • GitHub: github.com/LyoSU/quote-bot
-  • Supporto: <code>/donate</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
+
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
+
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>Ciao! 👋</b>
   Creerò splendide citazioni in questo gruppo - basta usare <code>/q</code> in risposta a qualsiasi messaggio!
@@ -308,3 +307,45 @@ rate_limit: |
   <i>Facendo una breve pausa...</i> Puoi utilizzare nuovamente questo comando tra ${seconds} secondi ⏳
 
   <i>Consiglio Pro: Mentre aspetti, prova a personalizzare la tua ultima citazione con </i><code>/q color</code> <i>o</i> <code>/q media</code>
+aimode:
+  title: "🤖 <b>AI Modes</b>"
+  current: "Current mode: {mode}"
+  available: "<b>Available modes:</b>"
+  unknown: "❌ Unknown mode: <code>{mode}</code>"
+  available_list: "Available: {modes}"
+  success: "✅ AI mode changed to: {mode}"
+  error: "❌ Error saving settings"
+  modes:
+    sarcastic:
+      name: "😏 Sarcastic"
+      description: "Sarcastic and witty comments with dark humor"
+    philosopher:
+      name: "🧠 Philosopher"
+      description: "Deep thoughts and philosophical reflections"
+    comedian:
+      name: "😂 Comedian"
+      description: "Funny jokes and comedic comments"
+    poet:
+      name: "📝 Poet"
+      description: "Poetic lines and beautiful metaphors"
+    motivator:
+      name: "💪 Motivator"
+      description: "Motivating and inspiring messages"
+    conspiracy:
+      name: "🕵️ Conspiracy Theorist"
+      description: "Conspiracy theories and suspicious comments"
+    critic:
+      name: "🎭 Critic"
+      description: "Critical reviews and ratings for everything"
+    boomer:
+      name: "👴 Boomer"
+      description: "Old-school comments from older generation"
+    zoomer:
+      name: "😎 Zoomer"
+      description: "Youth slang and trendy phrases"
+    academic:
+      name: "🎓 Academic"
+      description: "Scientific facts and academic commentary"
+    memer:
+      name: "🐸 Memer"
+      description: "Meme phrases and internet culture"

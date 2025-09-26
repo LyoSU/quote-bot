@@ -25,58 +25,63 @@ start: |
 
   想要更改颜色、样式等？当您准备好发现所有创意可能性时请输入 /help！ 🎨
 help: |
-  <b>✨ QuotLyBot：快速 & 简单的引言！✨</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  在 Telegram 中将消息转换为时尚的引言。操作如下：
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  📱 <b>基本引言</b>
+  📱 <b>Basic Quoting</b>
 
-  • 回复 & 引言：回复一条消息并键入<code>/q</code>来引用它。
-  • 多条引言：回复多条消息中的第一条，键入<code>/q [number]</code>（例如，<code>/q 3</code>）来引用多条。
-  • 转发 & 引言：将一条消息转发到机器人来直接引用它。
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  🎨 <b>自定义您的引言</b>
+  🎨 <b>Customize Your Quote</b>
 
-  • 颜色：
-      • 基本：<code>/q red</code>（或蓝色、绿色等）
-      • 自定义：<code>/q #[hex color code]</code>（例如，<code>/q #cbafff</code>）
-      • 随机：<code>/q random</code>
-  • 媒体： 使用<code>/q m</code>或<code>/q media</code>在引用的消息中包含图片、视频
-      • 裁剪媒体：使用<code>/q c</code>或<code>/q crop</code>裁剪媒体。
-  • 保留回复：显示正在回复的消息使用<code>/q r</code>或<code>/q reply</code>
-  • 图片格式：使用<code>/q i</code>或<code>/q img</code>或<code>/q p</code>或<code>/q png</code>来引用图片（而不是贴纸）。
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  💡 <b>酷组合</b>
+  🤖 <b>AI Modes</b>
+  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
+  • Change AI Style: Use <code>/qai [style]</code> (admin only)
+  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
 
-  • 带回复的白色引言：<code>/q 3 white rp</code>
-  • 高质量的红色图片：<code>/q i red</code>
-  • 带媒体 & 回复的引言：<code>/q r 2 #cbafff m</code>
+  💡 <b>Cool Combinations</b>
 
-  ⚙️ <b>更多选项</b>
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  • 评分引言：<code>/q rate</code>（如果在群组中启用）
-  • 随机引言：<code>/qrand</code>（如果在群组中启用）
-  • 顶级引言：<code>/qtop</code>（如果在群组中启用）
-  • 更改语言：<code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  🎯 <b>群组管理员设置</b>（仅限群组管理员）
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  • 默认颜色：<code>/qcolor [color]</code>
-  • 启用评分：<code>/qrate</code>
-  • 保存到贴纸包：<code>/qs [emoji]</code>
-  • 移除贴纸：<code>/qd</code>（回复贴纸）
-  • 随机引言频率：<code>/qgab [number]</code>
-  • 表情后缀更改：<code>/qemoji</code>（更改贴纸表情后缀）
-  • 表情风格：
-      • 经典：<code>/qb apple</code>, <code>/qb google</code>
-      • 替代：<code>/qb twitter</code>, <code>/qb joypixels</code>
-      • 复古：<code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  📱 <b>需要帮助?</b>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
 
-  • 博客：<a href="https://t.me/LyBlog">@LyBlog</a>
-  • GitHub：<a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • 支持：<code>/donate</code>
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • Support: <code>/donate</code>
 help_group: |
   <b>你好！👋</b>
   我将在此群组内创建美丽的引语——只需在回复的消息中使用<code>/q</code>！
@@ -304,3 +309,45 @@ rate_limit: |
   <i>稍作休息...</i> 您可以在 ${seconds} 秒后再次使用此命令 ⏳
 
   <i>小提示：在等待的同时，尝试自定义您的最后一个引文，使用</i><code>/q color</code> <i>或</i> <code>/q media</code>
+aimode:
+  title: "🤖 <b>AI Modes</b>"
+  current: "Current mode: {mode}"
+  available: "<b>Available modes:</b>"
+  unknown: "❌ Unknown mode: <code>{mode}</code>"
+  available_list: "Available: {modes}"
+  success: "✅ AI mode changed to: {mode}"
+  error: "❌ Error saving settings"
+  modes:
+    sarcastic:
+      name: "😏 Sarcastic"
+      description: "Sarcastic and witty comments with dark humor"
+    philosopher:
+      name: "🧠 Philosopher"
+      description: "Deep thoughts and philosophical reflections"
+    comedian:
+      name: "😂 Comedian"
+      description: "Funny jokes and comedic comments"
+    poet:
+      name: "📝 Poet"
+      description: "Poetic lines and beautiful metaphors"
+    motivator:
+      name: "💪 Motivator"
+      description: "Motivating and inspiring messages"
+    conspiracy:
+      name: "🕵️ Conspiracy Theorist"
+      description: "Conspiracy theories and suspicious comments"
+    critic:
+      name: "🎭 Critic"
+      description: "Critical reviews and ratings for everything"
+    boomer:
+      name: "👴 Boomer"
+      description: "Old-school comments from older generation"
+    zoomer:
+      name: "😎 Zoomer"
+      description: "Youth slang and trendy phrases"
+    academic:
+      name: "🎓 Academic"
+      description: "Scientific facts and academic commentary"
+    memer:
+      name: "🐸 Memer"
+      description: "Meme phrases and internet culture"
