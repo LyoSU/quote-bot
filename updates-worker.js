@@ -42,6 +42,8 @@ class TelegramProcessor {
     this.isProcessing = false
     this.processedCount = 0
     this.errorCount = 0
+    this.concurrentLimit = 100 // Process up to 100 updates concurrently per worker
+    this.activePromises = new Set() // Track active processing promises
 
     this.setupRedisEvents()
     this.setupBot()
@@ -182,21 +184,41 @@ class TelegramProcessor {
     }
 
     this.isProcessing = true
-    logWithTimestamp('Starting update processing via queue...')
+    logWithTimestamp(`Starting concurrent processing (limit: ${this.concurrentLimit})...`)
 
     while (this.isProcessing) {
       try {
-        // Blocking pop from queue
-        const result = await this.redis.brpop('telegram:updates', 1)
+        // Only get new update if we have capacity
+        if (this.activePromises.size < this.concurrentLimit) {
+          const result = await this.redis.brpop('telegram:updates', 1)
 
-        if (result && result[1]) {
-          await this.processUpdate(result[1])
+          if (result && result[1]) {
+            // Start processing concurrently (don't await)
+            const processPromise = this.processUpdate(result[1])
+              .then(() => {
+                this.activePromises.delete(processPromise)
+              })
+              .catch((error) => {
+                this.activePromises.delete(processPromise)
+                errorWithTimestamp('Concurrent processing error:', error.message)
+              })
+
+            this.activePromises.add(processPromise)
+          }
+        } else {
+          // Wait for at least one promise to complete
+          await Promise.race(this.activePromises)
         }
       } catch (error) {
         errorWithTimestamp('Processing loop error:', error.message)
-        // Wait before retrying
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        await new Promise(resolve => setTimeout(resolve, 100))
       }
+    }
+
+    // Wait for all active promises to complete before stopping
+    if (this.activePromises.size > 0) {
+      logWithTimestamp(`Waiting for ${this.activePromises.size} active processes to complete...`)
+      await Promise.allSettled(this.activePromises)
     }
   }
 
@@ -217,8 +239,9 @@ class TelegramProcessor {
           const totalProcessed = await this.redis.get('telegram:processed_count') || 0
           const totalErrors = await this.redis.get('telegram:error_count') || 0
           const workerId = process.env.pm_id || process.pid
+          const activeCount = this.activePromises.size
 
-          logWithTimestamp(`⚡ WORKER-${workerId} | Queue: ${queueSize} | Total Processed: ${totalProcessed} | Errors: ${totalErrors}`)
+          logWithTimestamp(`⚡ WORKER-${workerId} | Queue: ${queueSize} | Processed: ${totalProcessed} | Errors: ${totalErrors} | Active: ${activeCount}/${this.concurrentLimit}`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }
