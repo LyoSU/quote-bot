@@ -243,7 +243,7 @@ class TelegramProcessor {
           const totalErrors = await this.redis.get('telegram:error_count') || 0
           const activeCount = this.activePromises.size
 
-          logWithTimestamp(`⚡ WORKER-${this.workerId}[${this.workerIndex}] | Queue: ${queueSize} | Processed: ${totalProcessed} | Errors: ${totalErrors} | Active: ${activeCount}/${this.concurrentLimit}`)
+          logWithTimestamp(`⚡ [${this.workerIndex}] | Queue: ${queueSize} | Processed: ${totalProcessed} | Errors: ${totalErrors} | Active: ${activeCount}/${this.concurrentLimit}`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }

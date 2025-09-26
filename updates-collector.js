@@ -192,7 +192,7 @@ class TelegramCollector {
           }
           const totalQueue = queueSizes.reduce((a, b) => a + b, 0)
 
-          logWithTimestamp(`📊 COLLECTOR | Collected: ${collected} | Total Queue: ${totalQueue} | Workers: [${queueSizes.join(',')}]`)
+          logWithTimestamp(`Collected: ${collected} | Total Queue: ${totalQueue} | Workers: [${queueSizes.join(',')}]`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }
