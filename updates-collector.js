@@ -63,7 +63,7 @@ class TelegramCollector {
         // Track metrics
         await this.redis.incr('telegram:collected_count')
 
-        logWithTimestamp(`Collected update ${updateId} (priority: ${enrichedUpdate.priority})`)
+        // Don't log each update - only batch stats
 
       } catch (error) {
         errorWithTimestamp('Error collecting update:', error.message)
@@ -104,16 +104,18 @@ class TelegramCollector {
 
       logWithTimestamp('Telegram collector started successfully')
 
-      // Periodic stats
+      // Collector stats every 10 seconds
       setInterval(async () => {
         try {
           const collected = await this.redis.get('telegram:collected_count') || 0
           const queueSize = await this.redis.llen('telegram:updates')
-          logWithTimestamp(`Stats - Collected: ${collected}, Queue: ${queueSize}`)
+          const avgPriority = await this.redis.get('telegram:avg_priority') || 1
+
+          logWithTimestamp(`📊 COLLECTOR | Total: ${collected} | Queue: ${queueSize} | Avg Priority: ${avgPriority}`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }
-      }, 30000) // Every 30 seconds
+      }, 10000) // Every 10 seconds
 
     } catch (error) {
       errorWithTimestamp('Failed to start collector:', error.message)

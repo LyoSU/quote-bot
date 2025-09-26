@@ -105,7 +105,7 @@ class TelegramProcessor {
       // Update processed counter
       await this.redis.incr('telegram:processed_count')
 
-      logWithTimestamp(`Processed update ${update.update_id} (queue delay: ${Date.now() - update.collected_at}ms)`)
+      // Don't log each update - only batch stats
     } catch (error) {
       this.errorCount++
       errorWithTimestamp('Error processing update:', error.message)
@@ -148,18 +148,22 @@ class TelegramProcessor {
       // Start processing loop
       this.startProcessing()
 
-      // Periodic stats
+      // Worker stats every 10 seconds
       setInterval(async () => {
         try {
           const queueSize = await this.redis.llen('telegram:updates')
           const totalProcessed = await this.redis.get('telegram:processed_count') || 0
           const totalErrors = await this.redis.get('telegram:error_count') || 0
+          const workerId = process.env.pm_id || process.pid
 
-          logWithTimestamp(`Stats - Queue: ${queueSize}, Processed: ${totalProcessed}, Errors: ${totalErrors}`)
+          // Calculate average processing time if we have data
+          const avgDelay = queueSize > 0 ? 'processing...' : 'idle'
+
+          logWithTimestamp(`⚡ WORKER-${workerId} | Processed: ${totalProcessed} | Queue: ${queueSize} | Errors: ${totalErrors} | Status: ${avgDelay}`)
         } catch (error) {
           errorWithTimestamp('Stats error:', error.message)
         }
-      }, 30000) // Every 30 seconds
+      }, 10000) // Every 10 seconds
 
       logWithTimestamp('Processor started successfully')
     } catch (error) {
