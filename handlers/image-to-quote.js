@@ -118,7 +118,7 @@ Focus on accuracy and clean data extraction. Prioritize message content and user
 
     // Call OpenAI Vision API
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.5-flash',
+      model: 'google/gemini-2.5-flash-preview-09-2025',
       messages: [
         {
           role: 'user',

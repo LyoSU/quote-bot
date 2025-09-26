@@ -791,7 +791,7 @@ module.exports = async (ctx, next) => {
     const aiMode = (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.aiMode) || 'sarcastic'
     const aiModes = require('../config/aiModes')
     const selectedAiMode = aiModes[aiMode] || aiModes.sarcastic
-    
+
     const locale = (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.locale) || 'fallback'
     const systemMessage = selectedAiMode.systemPrompt(locale) + `
 
@@ -903,7 +903,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.5-flash-lite-preview-06-17',
+      model: 'google/gemini-2.5-flash-lite-preview-09-2025',
       messages: [
         {
           role: 'system',
