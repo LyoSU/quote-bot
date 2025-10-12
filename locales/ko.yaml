@@ -25,58 +25,63 @@ start: |
 
   색상, 스타일 등을 변경하고 싶으신가요? 모든 창의적인 가능성을 발견할 준비가 되었을 때 /help를 입력하세요! 🎨
 help: |
-  <b>✨ QuotLyBot: 빠르고 쉬운 인용! ✨</b>
+  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
 
-  Telegram에서 메시지를 스타일리시한 인용으로 바꾸세요. 방법은 다음과 같습니다:
+  Turn messages into stylish quotes in Telegram. Here's how:
 
-  📱 <b>기본 인용</b>
+  📱 <b>Basic Quoting</b>
 
-  • 답장 및 인용: 메시지에 답장하고 <code>/q</code>를 입력하여 인용하세요.
-  • 여러 개 인용: 여러 메시지 중 첫 번째 메시지에 답장하고 <code>/q [숫자]</code>를 입력하여 (예: <code>/q 3</code>) 여러 개 인용하세요.
-  • 전달 및 인용: 메시지를 봇에 전달하여 직접 인용하세요.
+  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
+  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
+  • Forward & Quote: Forward a message to the bot to quote it directly.
 
-  🎨 <b>인용 맞춤화</b>
+  🎨 <b>Customize Your Quote</b>
 
-  • 색상:
-      • 기본: <code>/q red</code> (또는 blue, green 등)
-      • 사용자 정의: <code>/q #[헥스 색상 코드]</code> (예: <code>/q #cbafff</code>)
-      • 무작위: <code>/q random</code>
-  • 미디어: 인용한 메시지에서 이미지/비디오를 포함하려면 <code>/q m</code> 또는 <code>/q media</code>
-      • 미디어 크롭: <code>/q c</code> 또는 <code>/q crop</code>을 사용하여 미디어를 크롭하세요.
-  • 답장 유지: <code>/q r</code> 또는 <code>/q reply</code>를 사용하여 답장 중인 메시지를 표시합니다.
-  • 이미지 형식: 이미지 인용을 위해 (스티커 대신에) <code>/q i</code>, <code>/q img</code>, <code>/q p</code> 또는 <code>/q png</code>를 사용하세요.
+  • Colors:
+      • Basic: <code>/q red</code> (or blue, green, etc.)
+      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
+      • Random: <code>/q random</code>
+  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
+  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-  💡 <b>멋진 조합</b>
+  🤖 <b>AI Modes</b>
+  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
+  • Change AI Style: Use <code>/qai [style]</code> (admin only)
+  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
 
-  • 답장이 포함된 하얀색 인용: <code>/q 3 white rp</code>
-  • 고화질 빨간색 이미지: <code>/q i red s3.2</code>
-  • 미디어 및 답장이 포함된 인용: <code>/q r 2 #cbafff m</code>
+  💡 <b>Cool Combinations</b>
 
-  ⚙️ <b>추가 옵션</b>
+  • White quote with replies: <code>/q 3 white rp</code>
+  • High-quality red image: <code>/q i red s3.2</code>
+  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
 
-  • 인용 평가: <code>/q rate</code> (그룹에서 활성화된 경우)
-  • 무작위 인용: <code>/qrand</code> (그룹에서 활성화된 경우)
-  • 최고 인용: <code>/qtop</code> (그룹에서 활성화된 경우)
-  • 언어 변경: <code>/lang</code>
+  ⚙️ <b>More Options</b>
 
-  🎯 <b>그룹 관리자 설정</b> (그룹 관리자 전용)
+  • Rate Quotes: <code>/q rate</code> (if enabled in group)
+  • Random Quote: <code>/qrand</code> (if enabled in group)
+  • Top Quotes: <code>/qtop</code> (if enabled in group)
+  • Change Language: <code>/lang</code>
 
-  • 기본 색상: <code>/qcolor [색상]</code>
-  • 평가 활성화: <code>/qrate</code>
-  • 스티커 팩에 저장: <code>/qs [이모지]</code>
-  • 스티커 제거: <code>/qd</code> (스티커에 답장)
-  • 무작위 인용 빈도: <code>/qgab [숫자]</code>
-  • 이모지 접두사 변경: <code>/qemoji</code> (스티커 이모지 접미사 변경)
-  • 이모지 스타일:
-      • 클래식: <code>/qb apple</code>, <code>/qb google</code>
-      • 대체: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • 레트로: <code>/qb blob</code>
+  🎯 <b>Group Admin Settings</b> (for group admins only)
 
-  📱 <b>도움이 필요하신가요?</b>
+  • Default Color: <code>/qcolor [color]</code>
+  • Enable Rating: <code>/qrate</code>
+  • Save to Sticker Pack: <code>/qs [emoji]</code>
+  • Remove Sticker: <code>/qd</code> (reply to sticker)
+  • Random Quote Frequency: <code>/qgab [number]</code>
+  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
+  • Emoji Style:
+      • Classic: <code>/qb apple</code>, <code>/qb google</code>
+      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Retro: <code>/qb blob</code>
 
-  • 블로그: <a href="https://t.me/LyBlog">@LyBlog</a>
+  📱 <b>Need Help?</b>
+
+  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • 지원: <code>/donate</code>
+  • Support: <code>/donate</code>
 help_group: |
   <b>안녕하세요! 👋</b>
   이 그룹에서 아름다운 인용을 만들겠습니다 - 어떤 메시지든 <code>/q</code>로 답장하세요!
@@ -304,3 +309,45 @@ rate_limit: |
   <i>잠깐 쉬는 중...</i> 이 명령어를 다시 사용하려면 ${seconds}초 기다려 주세요 ⏳
 
   <i>팁: 기다리는 동안 </i><code>/q color</code> <i>또는</i> <code>/q media</code>로 마지막 인용을 커스터마이징해 보세요
+aimode:
+  title: "🤖 <b>AI Modes</b>"
+  current: "Current mode: {mode}"
+  available: "<b>Available modes:</b>"
+  unknown: "❌ Unknown mode: <code>{mode}</code>"
+  available_list: "Available: {modes}"
+  success: "✅ AI mode changed to: {mode}"
+  error: "❌ Error saving settings"
+  modes:
+    sarcastic:
+      name: "😏 Sarcastic"
+      description: "Sarcastic and witty comments with dark humor"
+    philosopher:
+      name: "🧠 Philosopher"
+      description: "Deep thoughts and philosophical reflections"
+    comedian:
+      name: "😂 Comedian"
+      description: "Funny jokes and comedic comments"
+    poet:
+      name: "📝 Poet"
+      description: "Poetic lines and beautiful metaphors"
+    motivator:
+      name: "💪 Motivator"
+      description: "Motivating and inspiring messages"
+    conspiracy:
+      name: "🕵️ Conspiracy Theorist"
+      description: "Conspiracy theories and suspicious comments"
+    critic:
+      name: "🎭 Critic"
+      description: "Critical reviews and ratings for everything"
+    boomer:
+      name: "👴 Boomer"
+      description: "Old-school comments from older generation"
+    zoomer:
+      name: "😎 Zoomer"
+      description: "Youth slang and trendy phrases"
+    academic:
+      name: "🎓 Academic"
+      description: "Scientific facts and academic commentary"
+    memer:
+      name: "🐸 Memer"
+      description: "Meme phrases and internet culture"
