@@ -25,63 +25,58 @@ start: |
 
   Хотите изменить цвета, стили и многое другое? Введите /help, когда будете готовы открыть для себя все креативные возможности! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Быстрые и Лёгкие Цитаты! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Превратите сообщения в стильные цитаты в Telegram. Вот как:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Основные Цитаты</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Ответ и Цитата: Ответьте на сообщение и введите <code>/q</code>, чтобы процитировать его.
+  • Цитата Нескольких: Ответьте на первое из нескольких сообщений, введите <code>/q [число]</code> (например, <code>/q 3</code>), чтобы процитировать несколько.
+  • Переслать и Цитировать: Перешлите сообщение боту, чтобы процитировать его напрямую.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Настройте Свою Цитату</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Цвета:
+      • Основной: <code>/q red</code> (или blue, green и т.д.)
+      • Пользовательский: <code>/q #[код цвета в hex]</code> (например, <code>/q #cbafff</code>)
+      • Случайный: <code>/q random</code>
+  • Медиа: Включите изображения/видео из цитируемого сообщения с помощью <code>/q m</code> или <code>/q media</code>
+      • Обрезать Медиа: Используйте <code>/q c</code> или <code>/q crop</code>, чтобы обрезать медиа.
+  • Сохранить Ответы: Покажите сообщение, на которое отвечают, с помощью <code>/q r</code> или <code>/q reply</code>
+  • Формат Изображения: Используйте <code>/q i</code> или <code>/q img</code> или <code>/q p</code> или <code>/q png</code> для цитат в виде изображений (вместо наклеек).
 
-  🤖 <b>AI Modes</b>
-  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-  • Change AI Style: Use <code>/qai [style]</code> (admin only)
-  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
+  💡 <b>Крутые Комбинации</b>
 
-  💡 <b>Cool Combinations</b>
+  • Белая цитата с ответами: <code>/q 3 white rp</code>
+  • Качественное красное изображение: <code>/q i red s3.2</code>
+  • Цитата с медиа и ответами: <code>/q r 2 #cbafff m</code>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  ⚙️ <b>Больше Опций</b>
 
-  ⚙️ <b>More Options</b>
+  • Оценить Цитаты: <code>/q rate</code> (если включено в группе)
+  • Случайная Цитата: <code>/qrand</code> (если включено в группе)
+  • Лучшие Цитаты: <code>/qtop</code> (если включено в группе)
+  • Изменить Язык: <code>/lang</code>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  🎯 <b>Настройки Администратора Группы</b> (только для администраторов группы)
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  • Цвет По Умолчанию: <code>/qcolor [цвет]</code>
+  • Включить Оценку: <code>/qrate</code>
+  • Сохранить в Пакет Наклеек: <code>/qs [эмодзи]</code>
+  • Удалить Наклейку: <code>/qd</code> (ответьте на наклейку)
+  • Частота Случайных Цитат: <code>/qgab [число]</code>
+  • Изменение Суффикса Эмодзи: <code>/qemoji</code> (измените суффикс эмодзи наклейки)
+  • Стиль Эмодзи:
+      • Классический: <code>/qb apple</code>, <code>/qb google</code>
+      • Альтернатива: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • Ретро: <code>/qb blob</code>
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • Retro: <code>/qb blob</code>
+  📱 <b>Нужна Помощь?</b>
 
-  📱 <b>Need Help?</b>
-
-  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • Блог: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Поддержка: <code>/donate</code>
 help_group: |
   <b>Привет! 👋</b>
   Я буду создавать красивые цитаты в этой группе - просто используйте <code>/q</code> в ответе на любое сообщение!
@@ -351,3 +346,143 @@ aimode:
     memer:
       name: "🐸 Memer"
       description: "Meme phrases and internet culture"
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+
+    Превращаю сообщения в стильные стикеры-цитаты!
+  btn:
+    features: "✨ Возможности"
+    settings: "⚙️ Настройки"
+    help: "📚 Команды"
+    language: "🌍 Язык"
+    back: "← Назад"
+    add_group: "➕ Добавить в группу"
+  settings:
+    title: |
+      <b>⚙️ Настройки</b>
+
+      Настройте свои цитаты:
+    btn:
+      color: "🎨 Цвет"
+      emoji_style: "😊 Стиль эмодзи"
+      privacy: "🔒 Приватность"
+      back: "← Назад"
+  features:
+    title: |
+      <b>✨ Что я умею?</b>
+
+      Нажмите, чтобы узнать больше:
+    btn:
+      basics: "📱 Основы"
+      colors: "🎨 Цвета"
+      media: "🖼 Медиа"
+      group: "👥 Для групп"
+    basics:
+      title: |
+        <b>📱 Основы цитирования</b>
+
+        <b>Личный чат:</b>
+        Перешлите сообщение → получите стикер!
+
+        <b>Группы:</b>
+        Ответьте <code>/q</code> на сообщение
+
+        <b>Несколько сообщений:</b>
+        <code>/q 3</code> — сообщение + 2 ниже
+        <code>/q -3</code> — сообщение + 2 выше
+
+        <b>Формат картинки:</b>
+        <code>/q img</code> — PNG вместо стикера
+    colors:
+      title: |
+        <b>🎨 Цвета и стили</b>
+
+        <b>Названия цветов:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Свой цвет (hex):</b>
+        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+
+        <b>Специальные:</b>
+        <code>/q random</code> — случайный градиент
+        <code>/q transparent</code> — без фона
+
+        <b>Стили эмодзи:</b>
+        Apple, Google, Twitter, JoyPixels, Blob
+        Задать: <code>/qb apple</code>
+    media:
+      title: |
+        <b>🖼 Медиа в цитатах</b>
+
+        <b>Добавить медиа:</b>
+        <code>/q m</code> — включает картинки/видео
+
+        <b>Обрезать медиа:</b>
+        <code>/q c</code> — обрезает под размер
+
+        <b>Показать ответ:</b>
+        <code>/q r</code> — включает сообщение-ответ
+
+        <b>HD качество:</b>
+        <code>/q s3.2</code> — выше разрешение
+
+        <b>Комбинируйте:</b>
+        <code>/q m r red</code> — медиа + ответ + цвет
+    group:
+      title: |
+        <b>👥 Функции для групп</b>
+
+        <b>Оценка цитат:</b>
+        👍👎 кнопки на цитатах
+        Включить: <code>/qrate</code>
+
+        <b>Топ цитат:</b>
+        <code>/qtop</code> — лучшие цитаты
+
+        <b>Случайная цитата:</b>
+        <code>/qrand</code> — случайная из топа
+
+        <b>Стикерпак группы:</b>
+        <code>/qs 💜</code> — сохранить в пак
+        <code>/qd</code> — удалить из пака
+onboarding:
+  welcome:
+    title: |
+      <b>Привет! 👋</b>
+
+      Я превращаю сообщения чата в красивые стикеры-цитаты.
+      Давай покажу как это работает!
+    btn:
+      start: "Начнём! →"
+      skip: "Пропустить"
+  step1:
+    title: |
+      <b>Шаг 1 из 2</b> 📨
+
+      Перешлите мне любое сообщение из чата.
+      Я превращу его в стикер-цитату!
+    waiting: |
+      Жду сообщение...
+      Просто перешлите что-нибудь из любого чата!
+  step2:
+    title: |
+      <b>Отлично! 🎉</b>
+
+      Вы только что создали свою первую цитату!
+
+      <b>В группах</b> используйте <code>/q</code> в ответ на сообщение.
+
+      Готовы попробовать больше?
+    btn:
+      menu: "Открыть меню"
+      add_group: "Добавить в группу"
+  complete:
+    title: |
+      <b>Всё готово! ✨</b>
+
+      Теперь вы знаете основы. Добавьте меня в группу или исследуйте все функции в меню.
+quick_action:
+  remake: "🔄"
+  tooltip:
+    remake: "Recreate with different style"
