@@ -304,3 +304,139 @@ rate_limit: |
   <i>Tomando un breve descanso...</i> Puedes usar este comando nuevamente en ${seconds} segundos ⏳
 
   <i>Consejo profesional: Mientras esperas, intenta personalizar tu última cita con </i><code>/q color</code> <i>o</i> <code>/q media</code>
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+
+    ¡Transforma mensajes en impresionantes stickers de citas!
+  btn:
+    features: "✨ Funciones"
+    settings: "⚙️ Ajustes"
+    help: "📚 Comandos"
+    language: "🌍 Idioma"
+    back: "← Volver"
+    add_group: "➕ Añadir al grupo"
+  settings:
+    title: |
+      <b>⚙️ Ajustes</b>
+
+      Configura tus citas:
+    btn:
+      color: "🎨 Color"
+      emoji_style: "😊 Estilo emoji"
+      privacy: "🔒 Privacidad"
+      back: "← Volver"
+  features:
+    title: |
+      <b>✨ ¿Qué puedo hacer?</b>
+
+      Toca para saber más:
+    btn:
+      basics: "📱 Básicos"
+      colors: "🎨 Colores"
+      media: "🖼 Media"
+      group: "👥 Grupos"
+    basics:
+      title: |
+        <b>📱 Citas básicas</b>
+
+        <b>Chat privado:</b>
+        ¡Reenvíame un mensaje → obtén un sticker!
+
+        <b>Grupos:</b>
+        Responde <code>/q</code> a un mensaje
+
+        <b>Múltiples mensajes:</b>
+        <code>/q 3</code> — mensaje + 2 debajo
+        <code>/q -3</code> — mensaje + 2 arriba
+
+        <b>Formato imagen:</b>
+        <code>/q img</code> — PNG en lugar de sticker
+    colors:
+      title: |
+        <b>🎨 Colores y estilos</b>
+
+        <b>Nombres de colores:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Color personalizado (hex):</b>
+        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+
+        <b>Especiales:</b>
+        <code>/q random</code> — gradiente aleatorio
+        <code>/q transparent</code> — sin fondo
+
+        <b>Estilos de emoji:</b>
+        Apple, Google, Twitter, JoyPixels, Blob
+        Establecer: <code>/qb apple</code>
+    media:
+      title: |
+        <b>🖼 Media en citas</b>
+
+        <b>Incluir media:</b>
+        <code>/q m</code> — añade imágenes/videos
+
+        <b>Recortar media:</b>
+        <code>/q c</code> — recorta al tamaño
+
+        <b>Mostrar respuesta:</b>
+        <code>/q r</code> — incluye mensaje respondido
+
+        <b>Calidad HD:</b>
+        <code>/q s3.2</code> — mayor resolución
+
+        <b>Combínalos:</b>
+        <code>/q m r red</code> — media + respuesta + color
+    group:
+      title: |
+        <b>👥 Funciones de grupo</b>
+
+        <b>Valorar citas:</b>
+        Botones 👍👎 en citas
+        Activar: <code>/qrate</code>
+
+        <b>Top citas:</b>
+        <code>/qtop</code> — mejores citas
+
+        <b>Cita aleatoria:</b>
+        <code>/qrand</code> — aleatoria del top
+
+        <b>Pack de stickers:</b>
+        <code>/qs 💜</code> — guardar en pack
+        <code>/qd</code> — eliminar del pack
+onboarding:
+  welcome:
+    title: |
+      <b>¡Hola! 👋</b>
+
+      Transformo mensajes de chat en hermosos stickers de citas.
+      ¡Déjame mostrarte cómo funciona!
+    btn:
+      start: "¡Vamos! →"
+      skip: "Saltar"
+  step1:
+    title: |
+      <b>Paso 1 de 2</b> 📨
+
+      Reenvíame cualquier mensaje de un chat.
+      ¡Lo convertiré en un sticker de cita!
+    waiting: |
+      Esperando tu mensaje...
+      ¡Solo reenvía algo de cualquier chat!
+  step2:
+    title: |
+      <b>¡Genial! 🎉</b>
+
+      ¡Acabas de crear tu primera cita!
+
+      <b>En grupos</b>, usa <code>/q</code> como respuesta a un mensaje.
+
+      ¿Listo para más?
+    btn:
+      menu: "Abrir menú"
+      add_group: "Añadir al grupo"
+  complete:
+    title: |
+      <b>¡Todo listo! ✨</b>
+
+      Ya conoces lo básico. Añádeme a un grupo o explora todas las funciones en el menú.

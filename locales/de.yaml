@@ -304,3 +304,139 @@ rate_limit: |
   <i>Mache eine kurze Pause...</i> Sie können diesen Befehl in ${seconds} Sekunden erneut verwenden ⏳
 
   <i>Profi-Tipp: Während Sie warten, versuchen Sie, Ihr letztes Zitat mit </i><code>/q color</code> <i>oder</i> <code>/q media</code> <i>anzupassen</i>
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+
+    Verwandelt Nachrichten in stilvolle Zitat-Sticker!
+  btn:
+    features: "✨ Funktionen"
+    settings: "⚙️ Einstellungen"
+    help: "📚 Befehle"
+    language: "🌍 Sprache"
+    back: "← Zurück"
+    add_group: "➕ Zur Gruppe"
+  settings:
+    title: |
+      <b>⚙️ Einstellungen</b>
+
+      Passen Sie Ihre Zitate an:
+    btn:
+      color: "🎨 Farbe"
+      emoji_style: "😊 Emoji-Stil"
+      privacy: "🔒 Privatsphäre"
+      back: "← Zurück"
+  features:
+    title: |
+      <b>✨ Was kann ich?</b>
+
+      Tippen Sie für mehr Info:
+    btn:
+      basics: "📱 Grundlagen"
+      colors: "🎨 Farben"
+      media: "🖼 Medien"
+      group: "👥 Gruppen"
+    basics:
+      title: |
+        <b>📱 Grundlagen</b>
+
+        <b>Privater Chat:</b>
+        Nachricht weiterleiten → Sticker erhalten!
+
+        <b>Gruppen:</b>
+        Antworten Sie mit <code>/q</code>
+
+        <b>Mehrere Nachrichten:</b>
+        <code>/q 3</code> — Nachricht + 2 darunter
+        <code>/q -3</code> — Nachricht + 2 darüber
+
+        <b>Bildformat:</b>
+        <code>/q img</code> — PNG statt Sticker
+    colors:
+      title: |
+        <b>🎨 Farben & Stile</b>
+
+        <b>Farbnamen:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Eigene Farbe (hex):</b>
+        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+
+        <b>Spezial:</b>
+        <code>/q random</code> — zufälliger Verlauf
+        <code>/q transparent</code> — ohne Hintergrund
+
+        <b>Emoji-Stile:</b>
+        Apple, Google, Twitter, JoyPixels, Blob
+        Setzen: <code>/qb apple</code>
+    media:
+      title: |
+        <b>🖼 Medien in Zitaten</b>
+
+        <b>Medien hinzufügen:</b>
+        <code>/q m</code> — fügt Bilder/Videos hinzu
+
+        <b>Medien zuschneiden:</b>
+        <code>/q c</code> — auf Größe zuschneiden
+
+        <b>Antwort zeigen:</b>
+        <code>/q r</code> — beantwortete Nachricht
+
+        <b>HD-Qualität:</b>
+        <code>/q s3.2</code> — höhere Auflösung
+
+        <b>Kombinieren:</b>
+        <code>/q m r red</code> — Medien + Antwort + Farbe
+    group:
+      title: |
+        <b>👥 Gruppenfunktionen</b>
+
+        <b>Zitate bewerten:</b>
+        👍👎 Tasten bei Zitaten
+        Aktivieren: <code>/qrate</code>
+
+        <b>Top-Zitate:</b>
+        <code>/qtop</code> — beste Zitate
+
+        <b>Zufälliges Zitat:</b>
+        <code>/qrand</code> — zufällig aus Top
+
+        <b>Sticker-Pack:</b>
+        <code>/qs 💜</code> — zum Pack hinzufügen
+        <code>/qd</code> — aus Pack entfernen
+onboarding:
+  welcome:
+    title: |
+      <b>Hallo! 👋</b>
+
+      Ich verwandle Chat-Nachrichten in schöne Zitat-Sticker.
+      Lass mich zeigen, wie es funktioniert!
+    btn:
+      start: "Los geht's! →"
+      skip: "Überspringen"
+  step1:
+    title: |
+      <b>Schritt 1 von 2</b> 📨
+
+      Leiten Sie mir eine Nachricht aus einem Chat weiter.
+      Ich mache daraus einen Zitat-Sticker!
+    waiting: |
+      Warte auf Ihre Nachricht...
+      Leiten Sie einfach etwas weiter!
+  step2:
+    title: |
+      <b>Super! 🎉</b>
+
+      Sie haben gerade Ihr erstes Zitat erstellt!
+
+      <b>In Gruppen</b> nutzen Sie <code>/q</code> als Antwort.
+
+      Bereit für mehr?
+    btn:
+      menu: "Menü öffnen"
+      add_group: "Zur Gruppe"
+  complete:
+    title: |
+      <b>Alles bereit! ✨</b>
+
+      Jetzt kennen Sie die Grundlagen. Fügen Sie mich einer Gruppe hinzu oder entdecken Sie alle Funktionen im Menü.

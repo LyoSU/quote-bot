@@ -304,3 +304,139 @@ rate_limit: |
   <i>Prendre une petite pause...</i> Vous pouvez utiliser cette commande à nouveau dans ${seconds} secondes ⏳
 
   <i>Astuce pro: Pendant que vous attendez, essayez de personnaliser votre dernière citation avec </i><code>/q color</code> <i>ou</i> <code>/q media</code>
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+
+    Transforme les messages en superbes autocollants de citations!
+  btn:
+    features: "✨ Fonctionnalités"
+    settings: "⚙️ Paramètres"
+    help: "📚 Commandes"
+    language: "🌍 Langue"
+    back: "← Retour"
+    add_group: "➕ Ajouter au groupe"
+  settings:
+    title: |
+      <b>⚙️ Paramètres</b>
+
+      Configurez vos citations:
+    btn:
+      color: "🎨 Couleur"
+      emoji_style: "😊 Style emoji"
+      privacy: "🔒 Confidentialité"
+      back: "← Retour"
+  features:
+    title: |
+      <b>✨ Que puis-je faire?</b>
+
+      Appuyez pour en savoir plus:
+    btn:
+      basics: "📱 Bases"
+      colors: "🎨 Couleurs"
+      media: "🖼 Médias"
+      group: "👥 Groupes"
+    basics:
+      title: |
+        <b>📱 Citations de base</b>
+
+        <b>Chat privé:</b>
+        Transférez un message → obtenez un autocollant!
+
+        <b>Groupes:</b>
+        Répondez <code>/q</code> à un message
+
+        <b>Plusieurs messages:</b>
+        <code>/q 3</code> — message + 2 en dessous
+        <code>/q -3</code> — message + 2 au dessus
+
+        <b>Format image:</b>
+        <code>/q img</code> — PNG au lieu d'autocollant
+    colors:
+      title: |
+        <b>🎨 Couleurs & styles</b>
+
+        <b>Noms de couleurs:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Couleur personnalisée (hex):</b>
+        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+
+        <b>Spéciaux:</b>
+        <code>/q random</code> — dégradé aléatoire
+        <code>/q transparent</code> — sans fond
+
+        <b>Styles d'emoji:</b>
+        Apple, Google, Twitter, JoyPixels, Blob
+        Définir: <code>/qb apple</code>
+    media:
+      title: |
+        <b>🖼 Médias dans les citations</b>
+
+        <b>Inclure médias:</b>
+        <code>/q m</code> — ajoute images/vidéos
+
+        <b>Recadrer médias:</b>
+        <code>/q c</code> — recadre à la taille
+
+        <b>Afficher réponse:</b>
+        <code>/q r</code> — inclut message répondu
+
+        <b>Qualité HD:</b>
+        <code>/q s3.2</code> — résolution plus élevée
+
+        <b>Combinez:</b>
+        <code>/q m r red</code> — médias + réponse + couleur
+    group:
+      title: |
+        <b>👥 Fonctions de groupe</b>
+
+        <b>Noter les citations:</b>
+        Boutons 👍👎 sur les citations
+        Activer: <code>/qrate</code>
+
+        <b>Top citations:</b>
+        <code>/qtop</code> — meilleures citations
+
+        <b>Citation aléatoire:</b>
+        <code>/qrand</code> — aléatoire du top
+
+        <b>Pack d'autocollants:</b>
+        <code>/qs 💜</code> — sauvegarder dans le pack
+        <code>/qd</code> — supprimer du pack
+onboarding:
+  welcome:
+    title: |
+      <b>Bonjour! 👋</b>
+
+      Je transforme les messages en beaux autocollants de citations.
+      Laissez-moi vous montrer comment ça marche!
+    btn:
+      start: "C'est parti! →"
+      skip: "Passer"
+  step1:
+    title: |
+      <b>Étape 1 sur 2</b> 📨
+
+      Transférez-moi n'importe quel message d'un chat.
+      Je le transformerai en autocollant de citation!
+    waiting: |
+      J'attends votre message...
+      Transférez simplement quelque chose!
+  step2:
+    title: |
+      <b>Génial! 🎉</b>
+
+      Vous venez de créer votre première citation!
+
+      <b>Dans les groupes</b>, utilisez <code>/q</code> en réponse.
+
+      Prêt pour plus?
+    btn:
+      menu: "Ouvrir le menu"
+      add_group: "Ajouter au groupe"
+  complete:
+    title: |
+      <b>Tout est prêt! ✨</b>
+
+      Vous connaissez maintenant les bases. Ajoutez-moi à un groupe ou explorez toutes les fonctionnalités dans le menu.
