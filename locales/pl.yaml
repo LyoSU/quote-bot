@@ -351,3 +351,143 @@ aimode:
     memer:
       name: "🐸 Memer"
       description: "Meme phrases and internet culture"
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+
+    Transform messages into stunning quote stickers!
+  btn:
+    features: "✨ Features"
+    settings: "⚙️ Settings"
+    help: "📚 Commands"
+    language: "🌍 Language"
+    back: "← Back"
+    add_group: "➕ Add to Group"
+  settings:
+    title: |
+      <b>⚙️ Settings</b>
+
+      Configure your quote preferences:
+    btn:
+      color: "🎨 Default Color"
+      emoji_style: "😊 Emoji Style"
+      privacy: "🔒 Privacy"
+      back: "← Back"
+  features:
+    title: |
+      <b>✨ What can I do?</b>
+
+      Tap any feature to learn more:
+    btn:
+      basics: "📱 Basics"
+      colors: "🎨 Colors & Styles"
+      media: "🖼 Media"
+      group: "👥 Group Features"
+    basics:
+      title: |
+        <b>📱 Basic Quoting</b>
+
+        <b>Private chat:</b>
+        Forward me any message → get a sticker!
+
+        <b>Groups:</b>
+        Reply <code>/q</code> to any message
+
+        <b>Multiple messages:</b>
+        <code>/q 3</code> — the replied message + 2 below it
+        <code>/q -3</code> — the replied message + 2 above it
+
+        <b>Image format:</b>
+        <code>/q img</code> — PNG instead of sticker
+    colors:
+      title: |
+        <b>🎨 Colors & Styles</b>
+
+        <b>Named colors:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Custom hex:</b>
+        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+
+        <b>Special:</b>
+        <code>/q random</code> — surprise gradient
+        <code>/q transparent</code> — no background
+
+        <b>Emoji styles:</b>
+        Apple, Google, Twitter, JoyPixels, Blob
+        Set with <code>/qb apple</code>
+    media:
+      title: |
+        <b>🖼 Media in Quotes</b>
+
+        <b>Include media:</b>
+        <code>/q m</code> — adds images/videos
+
+        <b>Crop media:</b>
+        <code>/q c</code> — crops to fit
+
+        <b>Show replies:</b>
+        <code>/q r</code> — includes replied message
+
+        <b>HD quality:</b>
+        <code>/q s3.2</code> — higher resolution
+
+        <b>Combine them:</b>
+        <code>/q m r red</code> — media + replies + color
+    group:
+      title: |
+        <b>👥 Group Features</b>
+
+        <b>Rate quotes:</b>
+        👍👎 buttons on quotes
+        Enable: <code>/qrate</code>
+
+        <b>Top quotes:</b>
+        <code>/qtop</code> — best rated quotes
+
+        <b>Random quote:</b>
+        <code>/qrand</code> — random from top
+
+        <b>Group sticker pack:</b>
+        <code>/qs 💜</code> — save to pack
+        <code>/qd</code> — remove from pack
+onboarding:
+  welcome:
+    title: |
+      <b>Welcome! 👋</b>
+
+      I turn chat messages into beautiful quote stickers.
+      Let me show you how it works!
+    btn:
+      start: "Let's Go! →"
+      skip: "Skip Tutorial"
+  step1:
+    title: |
+      <b>Step 1 of 2</b> 📨
+
+      Forward me any message from a chat.
+      I'll turn it into a quote sticker!
+    waiting: |
+      Waiting for your message...
+      Just forward something from any chat!
+  step2:
+    title: |
+      <b>Amazing! 🎉</b>
+
+      You just created your first quote!
+
+      <b>In groups</b>, use <code>/q</code> as a reply to any message.
+
+      Ready to try more features?
+    btn:
+      menu: "Open Menu"
+      add_group: "Dodaj do Grupy"
+  complete:
+    title: |
+      <b>You're all set! ✨</b>
+
+      Now you know the basics. Add me to a group or explore all features in the menu.
+quick_action:
+  remake: "🔄"
+  tooltip:
+    remake: "Recreate with different style"
