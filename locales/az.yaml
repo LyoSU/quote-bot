@@ -25,63 +25,58 @@ start: |
 
   Rəngləri, üslubları və daha çoxunu dəyişmək istəyirsiniz? Bütün yaradıcı imkanları kəşf etmək üçün hazır olduğunuzda /help yazın! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: Sürətli & Sadə Sitatlar! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Mesajları Telegramda stilizə edilmiş sitatlara çevirin. Baxın necə:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>Əsas Sitatlaşma</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • Cavab & Sitat:  Mesajı cavablayın və sitatlaşdırmaq üçün <code>/q</code> yazın.
+  • Çoxlu Sitat: Bir neçə mesajın birincisinə cavab verin, <code>/q [rəqəm]</code> (məsələn, <code>/q 3</code>) yazın ki, çoxlu sitatlar alınsın.
+  • Göndər & Sitat: Mesajı birbaşa sitat etmək üçün bota yönəldin.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>Sitatınızı tənzimləyin</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • Rənglər:
+      • Əsas: <code>/q qırmızı</code> (və ya mavi, yaşıl və s.)
+      • Fərdi: <code>/q #[hex rəng kodu]</code> (məsələn, <code>/q #cbafff</code>)
+      • Təsadüfi: <code>/q random</code>
+  • Media: Sitatlaşdırılan mesajdan şəkil/video daxil edin <code>/q m</code> və ya <code>/q media</code>
+      • Mediani Kəsmək: Medianı kəsmək üçün <code>/q c</code> və ya <code>/q crop</code> istifadə edin.
+  • Cavabları Saxla: Cavablanan mesajı göstərmək üçün <code>/q r</code> və ya <code>/q reply</code> istifadə edin.
+  • Şəkil Formatı: Şəkil sitatları üçün <code>/q i</code> və ya <code>/q img</code> və ya <code>/q p</code> və ya <code>/q png</code> istifadə edin (sticker əvəzinə).
 
-  🤖 <b>AI Modes</b>
-  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-  • Change AI Style: Use <code>/qai [style]</code> (admin only)
-  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
+  💡 <b>Maraqlı Kombinasiyalar</b>
 
-  💡 <b>Cool Combinations</b>
+  • Cavablarla ağ sitat: <code>/q 3 ağ rp</code>
+  • Yüksək keyfiyyətli qırmızı şəkil: <code>/q i qırmızı s3.2</code>
+  • Media və cavablarla sitat: <code>/q r 2 #cbafff m</code>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  ⚙️ <b>Daha çox seçimlər</b>
 
-  ⚙️ <b>More Options</b>
+  • Sitatları qiymətləndir: <code>/q rate</code> (qrupda aktiv edilibsə)
+  • Təsadüfi Sitat: <code>/qrand</code> (qrupda aktiv edilibsə)
+  • Ən Yaxşı Sitatlar: <code>/qtop</code> (qrupda aktiv edilibsə)
+  • Dili dəyişmək: <code>/lang</code>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  🎯 <b>Qrup Admin Parametrləri</b> (yalnız qrup adminləri üçün)
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
-
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
+  • Əsas Rəng: <code>/qcolor [rəng]</code>
+  • Reytinqi aktiv et: <code>/qrate</code>
+  • Stickeri Paketə Yadda Saxla: <code>/qs [emoji]</code>
+  • Stickeri Sil: <code>/qd</code> (stickerə cavab verin)
+  • Təsadüfi Sitat Tezliyi: <code>/qgab [rəqəm]</code>
+  • Emoji Sonu Dəyişdir: <code>/qemoji</code> (sticker emoji sonunu dəyiş)
+  • Emoji Üslubu:
+      • Klassik: <code>/qb apple</code>, <code>/qb google</code>
+      • Alternativ: <code>/qb twitter</code>, <code>/qb joypixels</code>
       • Retro: <code>/qb blob</code>
 
-  📱 <b>Need Help?</b>
+  📱 <b>Kömək lazımdır?</b>
 
   • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • Dəstək: <code>/donate</code>
 help_group: |
   <b>Salam! 👋</b>
   Bu qrupda gözəl sitatlar yaradacağam - sadəcə hər hansı bir mesaja cavab olaraq <code>/q</code> istifadə edin!
@@ -215,7 +210,7 @@ sticker:
       telegram: |
         <b>Stikeri silmək alınmadı 😕</b>
         ${reason}
-      not_found: Artıq stikerdən paketdə yoxdur 🤔
+      not_found: Stiker artıq paketdə yoxdur 🤔
       rights: Bu stikeri silmək üçün mənim icazəm yoxdur 🔒
       generic: |
         Nəsə səhv oldu. Zəhmət olmasa, yenidən cəhd edin ⚠️
@@ -300,7 +295,7 @@ emoji:
     Sizin emojiniz bütün yeni sitatlara əlavə ediləcək ✨
   done: Emoji stili yeniləndi! ✨
 only_admin: |
-  <b>⚠️ Administrator Ölçməsi Lazımdır</b>
+  <b>⚠️ Administrator İcazəsi Lazımdır</b>
   Bu əmr yalnız qrup administratorları tərəfindən istifadə edilə bilər.
 only_group: |
   <b>⚠️ Qrup Əmri</b>
@@ -354,139 +349,121 @@ aimode:
 menu:
   title: |
     <b>🎨 QuotLyBot</b>
-
-    Transform messages into stunning quote stickers!
+    Mesajları möhtəşəm sitat stikerlərə çevirin!
   btn:
-    features: "✨ Features"
-    settings: "⚙️ Settings"
-    help: "📚 Commands"
-    language: "🌍 Language"
-    back: "← Back"
-    add_group: "➕ Add to Group"
+    features: "✨ Xüsusiyyətlər"
+    settings: "⚙️ Parametrlər"
+    help: "📚 Əmrlər"
+    language: "🌍 Dil"
+    back: "← Geri"
+    add_group: "➕ Qrupa əlavə et"
   settings:
     title: |
-      <b>⚙️ Settings</b>
-
-      Configure your quote preferences:
+      <b>⚙️ Parametrlər</b>
+      Seçimlərinizi idarə edin:
     btn:
       color: "🎨 Default Color"
       emoji_style: "😊 Emoji Style"
-      privacy: "🔒 Privacy"
-      back: "← Back"
+      privacy: "🔒 Gizlilik"
+      back: "← Geri"
   features:
     title: |
-      <b>✨ What can I do?</b>
-
-      Tap any feature to learn more:
+      <b>✨ Nə edə bilərəm?</b>
+      Daha çox öyrənmək üçün xüsusiyyətə toxunun:
     btn:
-      basics: "📱 Basics"
-      colors: "🎨 Colors & Styles"
+      basics: "📱 Əsaslar"
+      colors: "🎨 Rənglər və Üslublar"
       media: "🖼 Media"
-      group: "👥 Group Features"
+      group: "👥 Qrup Xüsusiyyətləri"
     basics:
       title: |
-        <b>📱 Basic Quoting</b>
+        <b>📱 Əsas Sitatlaşma</b>
 
-        <b>Private chat:</b>
-        Forward me any message → get a sticker!
+        <b>Qruplarda:</b>
+        İstənilən mesaja <code>/q</code> ilə cavab verin
 
-        <b>Groups:</b>
-        Reply <code>/q</code> to any message
+        <b>Şəxsidə:</b>
+        Mesajları mənə yönləndirin
 
-        <b>Multiple messages:</b>
-        <code>/q 3</code> — the replied message + 2 below it
-        <code>/q -3</code> — the replied message + 2 above it
-
-        <b>Image format:</b>
-        <code>/q img</code> — PNG instead of sticker
+        <b>Çoxlu mesajlar:</b>
+        <code>/q 3</code> — cavab verilən mesaj + 2 aşağıda
+        <code>/q -3</code> — cavab verilən mesaj + 2 yuxarıda
     colors:
       title: |
-        <b>🎨 Colors & Styles</b>
+        <b>🎨 Rənglər və Üslublar</b>
 
-        <b>Named colors:</b>
+        <b>Əsas rənglər:</b>
         <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
 
-        <b>Custom hex:</b>
-        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+        <b>Xüsusi rəng:</b>
+        <code>/q #ff69b4</code>
 
-        <b>Special:</b>
-        <code>/q random</code> — surprise gradient
-        <code>/q transparent</code> — no background
+        <b>Təsadüfi rəng:</b>
+        <code>/q random</code>
 
-        <b>Emoji styles:</b>
-        Apple, Google, Twitter, JoyPixels, Blob
-        Set with <code>/qb apple</code>
+        <b>Gradient:</b>
+        <code>/q red//blue</code>
     media:
       title: |
-        <b>🖼 Media in Quotes</b>
+        <b>🖼 Media Seçimləri</b>
 
-        <b>Include media:</b>
-        <code>/q m</code> — adds images/videos
+        <b>Media daxil et:</b>
+        <code>/q m</code> və ya <code>/q media</code>
 
-        <b>Crop media:</b>
-        <code>/q c</code> — crops to fit
+        <b>Media kəs:</b>
+        <code>/q c</code> və ya <code>/q crop</code>
 
-        <b>Show replies:</b>
-        <code>/q r</code> — includes replied message
+        <b>Cavabları göstər:</b>
+        <code>/q r</code> və ya <code>/q reply</code>
 
-        <b>HD quality:</b>
-        <code>/q s3.2</code> — higher resolution
-
-        <b>Combine them:</b>
-        <code>/q m r red</code> — media + replies + color
+        <b>Şəkil olaraq:</b>
+        <code>/q img</code> və ya <code>/q png</code>
     group:
       title: |
-        <b>👥 Group Features</b>
+        <b>👥 Qrup Xüsusiyyətləri</b>
 
-        <b>Rate quotes:</b>
-        👍👎 buttons on quotes
-        Enable: <code>/qrate</code>
+        <b>Adminlər üçün:</b>
+        • <code>/qcolor blue</code> — standart rəng
+        • <code>/qrate</code> — reytinqi aktivləşdir
+        • <code>/qs</code> — stiker paketinə saxla
 
-        <b>Top quotes:</b>
-        <code>/qtop</code> — best rated quotes
-
-        <b>Random quote:</b>
-        <code>/qrand</code> — random from top
-
-        <b>Group sticker pack:</b>
-        <code>/qs 💜</code> — save to pack
-        <code>/qd</code> — remove from pack
+        <b>Hamı üçün:</b>
+        • <code>/qtop</code> — ən yaxşı sitatlar
+        • <code>/qrand</code> — təsadüfi sitat
 onboarding:
   welcome:
     title: |
-      <b>Welcome! 👋</b>
+      <b>Salam! 👋</b>
 
-      I turn chat messages into beautiful quote stickers.
-      Let me show you how it works!
+      Mən adi söhbət mesajlarını möhtəşəm sitat stikerlərinə çevirirəm.
+
+      ✨ <b>Necə işlədiyini göstərim!</b>
     btn:
-      start: "Let's Go! →"
-      skip: "Skip Tutorial"
+      start: "Başlayaq! →"
+      skip: "Dərsliyi keç"
   step1:
     title: |
-      <b>Step 1 of 2</b> 📨
+      <b>Addım 1: Mesaj yönləndir</b>
 
-      Forward me any message from a chat.
-      I'll turn it into a quote sticker!
+      İndi mənə istənilən söhbət mesajını yönləndirin.
+
+      💡 <i>Məsləhət: Bir neçə mesajı eyni anda yönləndirə bilərsiniz!</i>
     waiting: |
       Waiting for your message...
       Just forward something from any chat!
   step2:
     title: |
-      <b>Amazing! 🎉</b>
+      <b>Əla! Budur sitatınız! ✨</b>
 
-      You just created your first quote!
-
-      <b>In groups</b>, use <code>/q</code> as a reply to any message.
-
-      Ready to try more features?
+      Qruplarda sadəcə <code>/q</code> istifadə edərək istənilən mesaja cavab verin.
     btn:
       menu: "Open Menu"
       add_group: "Qrupa əlavə etmək"
   complete:
     title: |
-      <b>You're all set! ✨</b>
+      <b>Hazırsınız! 🎉</b>
 
-      Now you know the basics. Add me to a group or explore all features in the menu.
+      İndi əsasları bilirsiniz. Daha çox xüsusiyyət üçün menyunu kəşf edin!
 quick_action:
   remake: "🔄"
   tooltip:
