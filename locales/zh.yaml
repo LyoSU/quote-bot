@@ -100,11 +100,11 @@ quote:
     <b>完成！</b> 表情符号样式更改为：<code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 我们的报价服务暂时不可用。请稍后再试。
+      😕 引用服务暂时不可用。请稍后再试。
 
       如果问题仍然存在，请查看@LyBlog以获取更新。
     rate_limit: |
-      ⏳ 请求过多！请等待${seconds}秒后再创建新的报价。
+      ⏳ 请求过多！请等待${seconds}秒后再创建新的引用。
     file_too_large: |
       📸 媒体文件太大（最大5MB）。尝试使用较小的图像或视频。
     invalid_format: |
@@ -219,9 +219,9 @@ sticker:
   delete_random:
     suc: 已从随机集合中移除 🗑
     error: |
-      <b>无法移除报价 😕</b>
+      <b>无法移除引用 😕</b>
       ${error}
-    not_found: 此报价不在数据库中 🤔
+    not_found: 此引用不在数据库中 🤔
   empty_forward: |
     请回复您想保存的贴纸、照片或图片✨
   fstik: |

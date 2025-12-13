@@ -69,7 +69,7 @@ help: |
   • 絵文字サフィックス変更: <code>/qemoji</code>（ステッカーの絵文字サフィックス変更）
   • 絵文字スタイル:
       • クラシック: <code>/qb apple</code>, <code>/qb google</code>
-      • オルト: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • 代替: <code>/qb twitter</code>, <code>/qb joypixels</code>
       • レトロ: <code>/qb blob</code>
 
   📱 <b>助けが必要？</b>
@@ -229,9 +229,9 @@ sticker:
 rate:
   vote:
     rated: |
-      あなたはこれを ${rateName} します。
+      この引用に ${rateName} しました
     back: |
-      あなたの投票は削除されました
+      投票を取り消しました
   settings:
     enable: |
       引用の評価が有効になりました

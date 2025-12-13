@@ -66,7 +66,7 @@ help: |
   • 스티커 팩에 저장: <code>/qs [이모지]</code>
   • 스티커 제거: <code>/qd</code> (스티커에 답장)
   • 무작위 인용 빈도: <code>/qgab [숫자]</code>
-  • 이모지 접두사 변경: <code>/qemoji</code> (스티커 이모지 접미사 변경)
+  • 이모지 접미사 변경: <code>/qemoji</code> (스티커 이모지 접미사 변경)
   • 이모지 스타일:
       • 클래식: <code>/qb apple</code>, <code>/qb google</code>
       • 대체: <code>/qb twitter</code>, <code>/qb joypixels</code>

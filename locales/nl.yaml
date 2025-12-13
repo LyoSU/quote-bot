@@ -38,7 +38,7 @@ help: |
   🎨 <b>Je Citaat Aanpassen</b>
 
   • Kleuren:
-      • Basis: <code>/q rood</code> (of blauw, groen, enz.)
+      • Basis: <code>/q red</code> (of blue, green, enz.)
       • Aangepast: <code>/q #[hex kleurcode]</code> (bijv. <code>/q #cbafff</code>)
       • Willekeurig: <code>/q random</code>
   • Media: Voeg afbeeldingen/video's uit het geciteerde bericht toe met <code>/q m</code> of <code>/q media</code>

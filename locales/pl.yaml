@@ -106,7 +106,7 @@ quote:
     rate_limit: |
       ⏳ Zbyt wiele żądań! Proszę czekać ${seconds} sekund przed utworzeniem kolejnego cytatu.
     file_too_large: |
-      📸 Plik multimedialny jest zbyt duży (mak. 5 MB). Spróbuj użyć mniejszego obrazu lub wideo.
+      📸 Plik multimedialny jest zbyt duży (maks. 5 MB). Spróbuj użyć mniejszego obrazu lub wideo.
     invalid_format: |
       ❌ Nieobsługiwany format pliku. Obsługuję:
       • Obrazy (JPG, PNG, WEBP)
@@ -159,7 +159,7 @@ quote:
       Jest problem z paczką naklejek. Tworzę nowy cytat...
     sticker_set_full: |
       📦 <b>Paczka naklejek pełna</b>
-      Paczka naklejek osiągnęła swoje limit. Twój cytat zostanie wysłany jako zwykła naklejka.
+      Paczka naklejek osiągnęła swój limit. Twój cytat zostanie wysłany jako zwykła naklejka.
     bot_blocked: |
       🚫 <b>Bot zablokowany</b>
       Zablokowałeś tego bota. Odblokuj go, aby otrzymać cytaty.

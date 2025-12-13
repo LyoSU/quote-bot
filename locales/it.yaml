@@ -1,5 +1,5 @@
 ---
-language_name: '🇮🇹'
+language_name: '🇮🇹 Italiano'
 description:
   short: |
     Trasforma qualsiasi messaggio in uno splendido sticker di citazione! ✨
@@ -106,11 +106,11 @@ quote:
     <b>Fatto!</b> Stile emoji cambiato in: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Il servizio di quotazioni è temporaneamente non disponibile. Per favore, riprova tra qualche minuto.
+      😕 Il servizio citazioni è temporaneamente non disponibile. Per favore, riprova tra qualche minuto.
 
       Se il problema persiste, controlla @LyBlog per aggiornamenti.
     rate_limit: |
-      ⏳ Troppe richieste! Attendi ${seconds} secondi prima di creare un'altra quotazione.
+      ⏳ Troppe richieste! Attendi ${seconds} secondi prima di creare un'altra citazione.
     file_too_large: |
       📸 Il file multimediale è troppo grande (max 5MB). Prova a usare un'immagine o un video più piccolo.
     invalid_format: |
@@ -225,7 +225,7 @@ sticker:
     suc: Rimosso dalla collezione casuale 🗑
     error: |
       <b>Oops!</b> Impossibile rimuovere lo sticker:\n<pre>${error}</pre>
-    not_found: Questa quotazione non è nel database 🤔
+    not_found: Questa citazione non è nel database 🤔
   empty_forward: |
     Per favore, rispondi a uno sticker, foto o immagine che vuoi salvare ✨
   fstik: |

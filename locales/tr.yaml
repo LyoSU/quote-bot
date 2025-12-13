@@ -156,10 +156,10 @@ quote:
       • Gruptan çıkarıldım
     sticker_set_invalid: |
       🔄 <b>Çıkartma Paketi Sorunu</b>
-      Çıkartma paketinde bir sorun var. Yeni bir teklif oluşturuluyor...
+      Çıkartma paketinde bir sorun var. Yeni bir alıntı oluşturuluyor...
     sticker_set_full: |
       📦 <b>Çıkartma Paketi Dolu</b>
-      Çıkartma paketi sınırına ulaştı. Teklifiniz normal bir çıkartma olarak gönderilecektir.
+      Çıkartma paketi sınırına ulaştı. Alıntınız normal bir çıkartma olarak gönderilecektir.
     bot_blocked: |
       🚫 <b>Bot Engellendi</b>
       Bu botu engellediniz. Alıntıları almak için engelini kaldırın.
@@ -239,7 +239,7 @@ rate:
       Alıntı değerlendirme devre dışı bırakıldı
 random:
   empty: |
-    Bu grupta henüz yüksek puanlı teklifler yok! Bazı mesajları değerlendirmeye başlayın
+    Bu grupta henüz yüksek puanlı alıntılar yok! Bazı mesajları değerlendirmeye başlayın
   gab: |
     Rastgele alıntı sıklığı ${gab} olarak ayarlandı ✨
 hidden:
