@@ -25,63 +25,58 @@ start: |
 
   想要更改颜色、样式等？当您准备好发现所有创意可能性时请输入 /help！ 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot：快速 & 简单的引言！✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  在 Telegram 中将消息转换为时尚的引言。操作如下：
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>基本引言</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • 回复 & 引言：回复一条消息并键入<code>/q</code>来引用它。
+  • 多条引言：回复多条消息中的第一条，键入<code>/q [number]</code>（例如，<code>/q 3</code>）来引用多条。
+  • 转发 & 引言：将一条消息转发到机器人来直接引用它。
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>自定义您的引言</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • 颜色：
+      • 基本：<code>/q red</code>（或蓝色、绿色等）
+      • 自定义：<code>/q #[hex color code]</code>（例如，<code>/q #cbafff</code>）
+      • 随机：<code>/q random</code>
+  • 媒体： 使用<code>/q m</code>或<code>/q media</code>在引用的消息中包含图片、视频
+      • 裁剪媒体：使用<code>/q c</code>或<code>/q crop</code>裁剪媒体。
+  • 保留回复：显示正在回复的消息使用<code>/q r</code>或<code>/q reply</code>
+  • 图片格式：使用<code>/q i</code>或<code>/q img</code>或<code>/q p</code>或<code>/q png</code>来引用图片（而不是贴纸）。
 
-  🤖 <b>AI Modes</b>
-  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-  • Change AI Style: Use <code>/qai [style]</code> (admin only)
-  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
+  💡 <b>酷组合</b>
 
-  💡 <b>Cool Combinations</b>
+  • 带回复的白色引言：<code>/q 3 white rp</code>
+  • 高质量的红色图片：<code>/q i red</code>
+  • 带媒体 & 回复的引言：<code>/q r 2 #cbafff m</code>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  ⚙️ <b>更多选项</b>
 
-  ⚙️ <b>More Options</b>
+  • 评分引言：<code>/q rate</code>（如果在群组中启用）
+  • 随机引言：<code>/qrand</code>（如果在群组中启用）
+  • 顶级引言：<code>/qtop</code>（如果在群组中启用）
+  • 更改语言：<code>/lang</code>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  🎯 <b>群组管理员设置</b>（仅限群组管理员）
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  • 默认颜色：<code>/qcolor [color]</code>
+  • 启用评分：<code>/qrate</code>
+  • 保存到贴纸包：<code>/qs [emoji]</code>
+  • 移除贴纸：<code>/qd</code>（回复贴纸）
+  • 随机引言频率：<code>/qgab [number]</code>
+  • 表情后缀更改：<code>/qemoji</code>（更改贴纸表情后缀）
+  • 表情风格：
+      • 经典：<code>/qb apple</code>, <code>/qb google</code>
+      • 替代：<code>/qb twitter</code>, <code>/qb joypixels</code>
+      • 复古：<code>/qb blob</code>
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • Retro: <code>/qb blob</code>
+  📱 <b>需要帮助?</b>
 
-  📱 <b>Need Help?</b>
-
-  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
-  • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • 博客：<a href="https://t.me/LyBlog">@LyBlog</a>
+  • GitHub：<a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+  • 支持：<code>/donate</code>
 help_group: |
   <b>你好！👋</b>
   我将在此群组内创建美丽的引语——只需在回复的消息中使用<code>/q</code>！
@@ -105,11 +100,11 @@ quote:
     <b>完成！</b> 表情符号样式更改为：<code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 我们的报价服务暂时不可用。请稍后再试。
+      😕 引用服务暂时不可用。请稍后再试。
 
       如果问题仍然存在，请查看@LyBlog以获取更新。
     rate_limit: |
-      ⏳ 请求过多！请等待${seconds}秒后再创建新的报价。
+      ⏳ 请求过多！请等待${seconds}秒后再创建新的引用。
     file_too_large: |
       📸 媒体文件太大（最大5MB）。尝试使用较小的图像或视频。
     invalid_format: |
@@ -224,9 +219,9 @@ sticker:
   delete_random:
     suc: 已从随机集合中移除 🗑
     error: |
-      <b>无法移除报价 😕</b>
+      <b>无法移除引用 😕</b>
       ${error}
-    not_found: 此报价不在数据库中 🤔
+    not_found: 此引用不在数据库中 🤔
   empty_forward: |
     请回复您想保存的贴纸、照片或图片✨
   fstik: |
@@ -354,139 +349,121 @@ aimode:
 menu:
   title: |
     <b>🎨 QuotLyBot</b>
-
-    Transform messages into stunning quote stickers!
+    将消息转换为精美的引用贴纸！
   btn:
-    features: "✨ Features"
-    settings: "⚙️ Settings"
-    help: "📚 Commands"
-    language: "🌍 Language"
-    back: "← Back"
-    add_group: "➕ Add to Group"
+    features: "✨ 功能"
+    settings: "⚙️ 设置"
+    help: "📚 命令"
+    language: "🌍 语言"
+    back: "← 返回"
+    add_group: "➕ 添加到群组"
   settings:
     title: |
-      <b>⚙️ Settings</b>
-
-      Configure your quote preferences:
+      <b>⚙️ 设置</b>
+      管理您的偏好设置：
     btn:
       color: "🎨 Default Color"
       emoji_style: "😊 Emoji Style"
-      privacy: "🔒 Privacy"
-      back: "← Back"
+      privacy: "🔒 隐私"
+      back: "← 返回"
   features:
     title: |
-      <b>✨ What can I do?</b>
-
-      Tap any feature to learn more:
+      <b>✨ 我能做什么？</b>
+      点击功能了解更多：
     btn:
-      basics: "📱 Basics"
-      colors: "🎨 Colors & Styles"
-      media: "🖼 Media"
-      group: "👥 Group Features"
+      basics: "📱 基础"
+      colors: "🎨 颜色与样式"
+      media: "🖼 媒体"
+      group: "👥 群组功能"
     basics:
       title: |
-        <b>📱 Basic Quoting</b>
+        <b>📱 基本引用</b>
 
-        <b>Private chat:</b>
-        Forward me any message → get a sticker!
+        <b>在群组中：</b>
+        回复任何消息并使用 <code>/q</code>
 
-        <b>Groups:</b>
-        Reply <code>/q</code> to any message
+        <b>在私聊中：</b>
+        转发消息给我
 
-        <b>Multiple messages:</b>
-        <code>/q 3</code> — the replied message + 2 below it
-        <code>/q -3</code> — the replied message + 2 above it
-
-        <b>Image format:</b>
-        <code>/q img</code> — PNG instead of sticker
+        <b>多条消息：</b>
+        <code>/q 3</code> — 回复的消息 + 下方2条
+        <code>/q -3</code> — 回复的消息 + 上方2条
     colors:
       title: |
-        <b>🎨 Colors & Styles</b>
+        <b>🎨 颜色与样式</b>
 
-        <b>Named colors:</b>
+        <b>基本颜色：</b>
         <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
 
-        <b>Custom hex:</b>
-        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+        <b>自定义颜色：</b>
+        <code>/q #ff69b4</code>
 
-        <b>Special:</b>
-        <code>/q random</code> — surprise gradient
-        <code>/q transparent</code> — no background
+        <b>随机颜色：</b>
+        <code>/q random</code>
 
-        <b>Emoji styles:</b>
-        Apple, Google, Twitter, JoyPixels, Blob
-        Set with <code>/qb apple</code>
+        <b>渐变：</b>
+        <code>/q red//blue</code>
     media:
       title: |
-        <b>🖼 Media in Quotes</b>
+        <b>🖼 媒体选项</b>
 
-        <b>Include media:</b>
-        <code>/q m</code> — adds images/videos
+        <b>包含媒体：</b>
+        <code>/q m</code> 或 <code>/q media</code>
 
-        <b>Crop media:</b>
-        <code>/q c</code> — crops to fit
+        <b>裁剪媒体：</b>
+        <code>/q c</code> 或 <code>/q crop</code>
 
-        <b>Show replies:</b>
-        <code>/q r</code> — includes replied message
+        <b>显示回复：</b>
+        <code>/q r</code> 或 <code>/q reply</code>
 
-        <b>HD quality:</b>
-        <code>/q s3.2</code> — higher resolution
-
-        <b>Combine them:</b>
-        <code>/q m r red</code> — media + replies + color
+        <b>作为图片：</b>
+        <code>/q img</code> 或 <code>/q png</code>
     group:
       title: |
-        <b>👥 Group Features</b>
+        <b>👥 群组功能</b>
 
-        <b>Rate quotes:</b>
-        👍👎 buttons on quotes
-        Enable: <code>/qrate</code>
+        <b>管理员：</b>
+        • <code>/qcolor blue</code> — 默认颜色
+        • <code>/qrate</code> — 启用评分
+        • <code>/qs</code> — 保存到贴纸包
 
-        <b>Top quotes:</b>
-        <code>/qtop</code> — best rated quotes
-
-        <b>Random quote:</b>
-        <code>/qrand</code> — random from top
-
-        <b>Group sticker pack:</b>
-        <code>/qs 💜</code> — save to pack
-        <code>/qd</code> — remove from pack
+        <b>所有人：</b>
+        • <code>/qtop</code> — 热门引用
+        • <code>/qrand</code> — 随机引用
 onboarding:
   welcome:
     title: |
-      <b>Welcome! 👋</b>
+      <b>你好！👋</b>
 
-      I turn chat messages into beautiful quote stickers.
-      Let me show you how it works!
+      我将普通聊天消息转换为精美的引用贴纸。
+
+      ✨ <b>让我展示它是如何工作的！</b>
     btn:
-      start: "Let's Go! →"
-      skip: "Skip Tutorial"
+      start: "开始吧！→"
+      skip: "跳过教程"
   step1:
     title: |
-      <b>Step 1 of 2</b> 📨
+      <b>步骤1：转发消息</b>
 
-      Forward me any message from a chat.
-      I'll turn it into a quote sticker!
+      现在转发任何聊天消息给我。
+
+      💡 <i>提示：您可以一次转发多条消息！</i>
     waiting: |
       Waiting for your message...
       Just forward something from any chat!
   step2:
     title: |
-      <b>Amazing! 🎉</b>
+      <b>太棒了！这是您的引用！✨</b>
 
-      You just created your first quote!
-
-      <b>In groups</b>, use <code>/q</code> as a reply to any message.
-
-      Ready to try more features?
+      在群组中，只需使用 <code>/q</code> 回复任何消息。
     btn:
       menu: "Open Menu"
       add_group: "添加到群组"
   complete:
     title: |
-      <b>You're all set! ✨</b>
+      <b>准备就绪！🎉</b>
 
-      Now you know the basics. Add me to a group or explore all features in the menu.
+      现在您了解了基础知识。探索菜单发现更多功能！
 quick_action:
   remake: "🔄"
   tooltip:
