@@ -100,7 +100,7 @@ quote:
     <b>Fait !</b> Le style emoji a été changé en : <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Notre service de devis est temporairement indisponible. Veuillez réessayer dans quelques minutes.
+      😕 Notre service de citations est temporairement indisponible. Veuillez réessayer dans quelques minutes.
 
       Si le problème persiste, consultez @LyBlog pour les mises à jour.
     rate_limit: |
