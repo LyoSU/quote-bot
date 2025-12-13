@@ -25,63 +25,58 @@ start: |
 
   色、スタイル、もっと変更したいですか？すべての創造的な可能性を発見する準備ができた時は、/helpと入力してください！ 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: 簡単かつ迅速な引用！ ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  メッセージをスタイリッシュな引用に変換します。方法は次の通りです:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>基本的な引用作成</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • 返信して引用: メッセージに返信し、<code>/q</code>を入力して引用します。
+  • 複数の引用: いくつかのメッセージの最初に返信し、<code>/q [番号]</code>（例: <code>/q 3</code>）を入力して複数を引用します。
+  • 転送して引用: メッセージをボットに転送して直接引用します。
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>引用をカスタマイズ</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • 色:
+      • 基本: <code>/q red</code>（またはblue, greenなど）
+      • カスタム: <code>/q #[色の16進コード]</code>（例: <code>/q #cbafff</code>）
+      • ランダム: <code>/q random</code>
+  • メディア: 引用メッセージから画像/ビデオを含むには<code>/q m</code>または<code>/q media</code>を使用
+      • メディアを切り取る: <code>/q c</code>または<code>/q crop</code>を使用してメディアを切り取ります。
+  • 返信をキープ: 返信されているメッセージを表示するには<code>/q r</code>または<code>/q reply</code>を使用
+  • 画像形式: 画像引用には<code>/q i</code>または<code>/q img</code>または<code>/q p</code>または<code>/q png</code>を使用（ステッカーの代わりに）。
 
-  🤖 <b>AI Modes</b>
-  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-  • Change AI Style: Use <code>/qai [style]</code> (admin only)
-  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
+  💡 <b>クールな組み合わせ</b>
 
-  💡 <b>Cool Combinations</b>
+  • 返信付きの白い引用: <code>/q 3 white rp</code>
+  • 高品質の赤い画像: <code>/q i red s3.2</code>
+  • メディアと返信付きの引用: <code>/q r 2 #cbafff m</code>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  ⚙️ <b>その他のオプション</b>
 
-  ⚙️ <b>More Options</b>
+  • 引用を評価: <code>/q rate</code>（グループで有効の場合）
+  • ランダム引用: <code>/qrand</code>（グループで有効の場合）
+  • トップ引用: <code>/qtop</code>（グループで有効の場合）
+  • 言語変更: <code>/lang</code>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  🎯 <b>グループ管理者設定</b>（グループ管理者のみ）
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  • デフォルトの色: <code>/qcolor [color]</code>
+  • 評価を有効にする: <code>/qrate</code>
+  • ステッカーパックに保存: <code>/qs [emoji]</code>
+  • ステッカーを削除: <code>/qd</code>（ステッカーに返信）
+  • ランダム引用の頻度: <code>/qgab [番号]</code>
+  • 絵文字サフィックス変更: <code>/qemoji</code>（ステッカーの絵文字サフィックス変更）
+  • 絵文字スタイル:
+      • クラシック: <code>/qb apple</code>, <code>/qb google</code>
+      • 代替: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • レトロ: <code>/qb blob</code>
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • Retro: <code>/qb blob</code>
+  📱 <b>助けが必要？</b>
 
-  📱 <b>Need Help?</b>
-
-  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • ブログ: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • サポート: <code>/donate</code>
 help_group: |
   <b>こんにちは！👋</b>
   このグループで美しい引用を作成します。どんなメッセージにも<code>/q</code>を使って返信してください！
@@ -158,7 +153,7 @@ quote:
       <b>可能な理由:</b>
       • ボットをブロックしました
       • グループがボットを制限しています
-      • 私がグループから抜け出されています
+      • グループから削除されました
     sticker_set_invalid: |
       🔄 <b>ステッカー パックの問題</b>
       ステッカー パックに問題があります。新しい引用を作成しています...
@@ -234,9 +229,9 @@ sticker:
 rate:
   vote:
     rated: |
-      あなたはこれを ${rateName} します。
+      この引用に ${rateName} しました
     back: |
-      あなたの投票は削除されました
+      投票を取り消しました
   settings:
     enable: |
       引用の評価が有効になりました
@@ -244,7 +239,7 @@ rate:
       引用の評価が無効化されました
 random:
   empty: |
-    このグループには高評価の引用がまだありません！いくつかのメッセージを評価し始めてください
+    このグループには高評価の引用がまだありません！引用を評価し始めてください
   gab: |
     ランダム引用の頻度が${gab}に設定されました ✨
 hidden:
@@ -354,139 +349,121 @@ aimode:
 menu:
   title: |
     <b>🎨 QuotLyBot</b>
-
-    Transform messages into stunning quote stickers!
+    メッセージを美しい引用ステッカーに変換！
   btn:
-    features: "✨ Features"
-    settings: "⚙️ Settings"
-    help: "📚 Commands"
-    language: "🌍 Language"
-    back: "← Back"
-    add_group: "➕ Add to Group"
+    features: "✨ 機能"
+    settings: "⚙️ 設定"
+    help: "📚 コマンド"
+    language: "🌍 言語"
+    back: "← 戻る"
+    add_group: "➕ グループに追加"
   settings:
     title: |
-      <b>⚙️ Settings</b>
-
-      Configure your quote preferences:
+      <b>⚙️ 設定</b>
+      設定を管理:
     btn:
       color: "🎨 Default Color"
       emoji_style: "😊 Emoji Style"
-      privacy: "🔒 Privacy"
-      back: "← Back"
+      privacy: "🔒 プライバシー"
+      back: "← 戻る"
   features:
     title: |
-      <b>✨ What can I do?</b>
-
-      Tap any feature to learn more:
+      <b>✨ 何ができますか？</b>
+      機能をタップして詳細を確認:
     btn:
-      basics: "📱 Basics"
-      colors: "🎨 Colors & Styles"
-      media: "🖼 Media"
-      group: "👥 Group Features"
+      basics: "📱 基本"
+      colors: "🎨 色とスタイル"
+      media: "🖼 メディア"
+      group: "👥 グループ機能"
     basics:
       title: |
-        <b>📱 Basic Quoting</b>
+        <b>📱 基本的な引用</b>
 
-        <b>Private chat:</b>
-        Forward me any message → get a sticker!
+        <b>グループで:</b>
+        任意のメッセージに<code>/q</code>で返信
 
-        <b>Groups:</b>
-        Reply <code>/q</code> to any message
+        <b>プライベートで:</b>
+        メッセージを私に転送
 
-        <b>Multiple messages:</b>
-        <code>/q 3</code> — the replied message + 2 below it
-        <code>/q -3</code> — the replied message + 2 above it
-
-        <b>Image format:</b>
-        <code>/q img</code> — PNG instead of sticker
+        <b>複数のメッセージ:</b>
+        <code>/q 3</code> — 返信したメッセージ + 下に2つ
+        <code>/q -3</code> — 返信したメッセージ + 上に2つ
     colors:
       title: |
-        <b>🎨 Colors & Styles</b>
+        <b>🎨 色とスタイル</b>
 
-        <b>Named colors:</b>
+        <b>基本色:</b>
         <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
 
-        <b>Custom hex:</b>
-        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+        <b>カスタム色:</b>
+        <code>/q #ff69b4</code>
 
-        <b>Special:</b>
-        <code>/q random</code> — surprise gradient
-        <code>/q transparent</code> — no background
+        <b>ランダム色:</b>
+        <code>/q random</code>
 
-        <b>Emoji styles:</b>
-        Apple, Google, Twitter, JoyPixels, Blob
-        Set with <code>/qb apple</code>
+        <b>グラデーション:</b>
+        <code>/q red//blue</code>
     media:
       title: |
-        <b>🖼 Media in Quotes</b>
+        <b>🖼 メディアオプション</b>
 
-        <b>Include media:</b>
-        <code>/q m</code> — adds images/videos
+        <b>メディアを含める:</b>
+        <code>/q m</code> または <code>/q media</code>
 
-        <b>Crop media:</b>
-        <code>/q c</code> — crops to fit
+        <b>メディアをクロップ:</b>
+        <code>/q c</code> または <code>/q crop</code>
 
-        <b>Show replies:</b>
-        <code>/q r</code> — includes replied message
+        <b>返信を表示:</b>
+        <code>/q r</code> または <code>/q reply</code>
 
-        <b>HD quality:</b>
-        <code>/q s3.2</code> — higher resolution
-
-        <b>Combine them:</b>
-        <code>/q m r red</code> — media + replies + color
+        <b>画像として:</b>
+        <code>/q img</code> または <code>/q png</code>
     group:
       title: |
-        <b>👥 Group Features</b>
+        <b>👥 グループ機能</b>
 
-        <b>Rate quotes:</b>
-        👍👎 buttons on quotes
-        Enable: <code>/qrate</code>
+        <b>管理者向け:</b>
+        • <code>/qcolor blue</code> — デフォルト色
+        • <code>/qrate</code> — 評価を有効化
+        • <code>/qs</code> — ステッカーパックに保存
 
-        <b>Top quotes:</b>
-        <code>/qtop</code> — best rated quotes
-
-        <b>Random quote:</b>
-        <code>/qrand</code> — random from top
-
-        <b>Group sticker pack:</b>
-        <code>/qs 💜</code> — save to pack
-        <code>/qd</code> — remove from pack
+        <b>全員向け:</b>
+        • <code>/qtop</code> — トップ引用
+        • <code>/qrand</code> — ランダム引用
 onboarding:
   welcome:
     title: |
-      <b>Welcome! 👋</b>
+      <b>こんにちは！👋</b>
 
-      I turn chat messages into beautiful quote stickers.
-      Let me show you how it works!
+      普通のチャットメッセージを美しい引用ステッカーに変換します。
+
+      ✨ <b>どのように動作するか見せましょう！</b>
     btn:
-      start: "Let's Go! →"
-      skip: "Skip Tutorial"
+      start: "始めましょう！→"
+      skip: "チュートリアルをスキップ"
   step1:
     title: |
-      <b>Step 1 of 2</b> 📨
+      <b>ステップ1: メッセージを転送</b>
 
-      Forward me any message from a chat.
-      I'll turn it into a quote sticker!
+      今すぐチャットメッセージを私に転送してください。
+
+      💡 <i>ヒント: 一度に複数のメッセージを転送できます！</i>
     waiting: |
       Waiting for your message...
       Just forward something from any chat!
   step2:
     title: |
-      <b>Amazing! 🎉</b>
+      <b>素晴らしい！これがあなたの引用です！✨</b>
 
-      You just created your first quote!
-
-      <b>In groups</b>, use <code>/q</code> as a reply to any message.
-
-      Ready to try more features?
+      グループでは、<code>/q</code>を使って任意のメッセージに返信するだけです。
     btn:
       menu: "Open Menu"
       add_group: "グループに追加："
   complete:
     title: |
-      <b>You're all set! ✨</b>
+      <b>準備完了！🎉</b>
 
-      Now you know the basics. Add me to a group or explore all features in the menu.
+      基本を理解しました。メニューを探索してさらに多くの機能を発見しましょう！
 quick_action:
   remake: "🔄"
   tooltip:
