@@ -304,3 +304,130 @@ rate_limit: |
   <i>稍作休息...</i> 您可以在 ${seconds} 秒后再次使用此命令 ⏳
 
   <i>小提示：在等待的同时，尝试自定义您的最后一个引文，使用</i><code>/q color</code> <i>或</i> <code>/q media</code>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    将消息转换为精美的引用贴纸！
+  btn:
+    features: "✨ 功能"
+    settings: "⚙️ 设置"
+    help: "📚 命令"
+    language: "🌍 语言"
+    back: "← 返回"
+    add_group: "➕ 添加到群组"
+  features:
+    title: |
+      <b>✨ 我能做什么？</b>
+      点击功能了解更多：
+    btn:
+      basics: "📱 基础"
+      colors: "🎨 颜色与样式"
+      media: "🖼 媒体"
+      group: "👥 群组功能"
+    basics:
+      title: |
+        <b>📱 基本引用</b>
+
+        <b>在群组中：</b>
+        回复任何消息并使用 <code>/q</code>
+
+        <b>在私聊中：</b>
+        转发消息给我
+
+        <b>多条消息：</b>
+        <code>/q 3</code> — 回复的消息 + 下方2条
+        <code>/q -3</code> — 回复的消息 + 上方2条
+    colors:
+      title: |
+        <b>🎨 颜色与样式</b>
+
+        <b>基本颜色：</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>自定义颜色：</b>
+        <code>/q #ff69b4</code>
+
+        <b>随机颜色：</b>
+        <code>/q random</code>
+
+        <b>渐变：</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 媒体选项</b>
+
+        <b>包含媒体：</b>
+        <code>/q m</code> 或 <code>/q media</code>
+
+        <b>裁剪媒体：</b>
+        <code>/q c</code> 或 <code>/q crop</code>
+
+        <b>显示回复：</b>
+        <code>/q r</code> 或 <code>/q reply</code>
+
+        <b>作为图片：</b>
+        <code>/q img</code> 或 <code>/q png</code>
+    group:
+      title: |
+        <b>👥 群组功能</b>
+
+        <b>管理员：</b>
+        • <code>/qcolor blue</code> — 默认颜色
+        • <code>/qrate</code> — 启用评分
+        • <code>/qs</code> — 保存到贴纸包
+
+        <b>所有人：</b>
+        • <code>/qtop</code> — 热门引用
+        • <code>/qrand</code> — 随机引用
+  settings:
+    title: |
+      <b>⚙️ 设置</b>
+      管理您的偏好设置：
+    btn:
+      privacy: "🔒 隐私"
+      language: "🌍 语言"
+  help:
+    title: |
+      <b>📚 命令</b>
+
+      <b>基本：</b>
+      • <code>/q</code> — 创建引用
+      • <code>/lang</code> — 更改语言
+      • <code>/donate</code> — 支持开发
+
+      <b>管理员：</b>
+      • <code>/qcolor</code> — 默认颜色
+      • <code>/qrate</code> — 启用评分
+      • <code>/qb</code> — 表情符号样式
+
+onboarding:
+  welcome:
+    title: |
+      <b>你好！👋</b>
+
+      我将普通聊天消息转换为精美的引用贴纸。
+
+      ✨ <b>让我展示它是如何工作的！</b>
+    btn:
+      start: "开始吧！→"
+      skip: "跳过教程"
+  step1:
+    title: |
+      <b>步骤1：转发消息</b>
+
+      现在转发任何聊天消息给我。
+
+      💡 <i>提示：您可以一次转发多条消息！</i>
+  step2:
+    title: |
+      <b>太棒了！这是您的引用！✨</b>
+
+      在群组中，只需使用 <code>/q</code> 回复任何消息。
+    btn:
+      complete: "明白了！✓"
+  complete:
+    title: |
+      <b>准备就绪！🎉</b>
+
+      现在您了解了基础知识。探索菜单发现更多功能！

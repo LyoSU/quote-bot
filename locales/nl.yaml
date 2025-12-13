@@ -304,3 +304,130 @@ rate_limit: |
   <i>Nemen een korte pauze...</i> Je kunt dit commando weer gebruiken in ${seconds} seconden ⏳
 
   <i>Tip: Terwijl je wacht, probeer je laatste citaat aan te passen met </i><code>/q kleur</code> <i>of</i> <code>/q media</code>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Verander berichten in prachtige citaatstickers!
+  btn:
+    features: "✨ Functies"
+    settings: "⚙️ Instellingen"
+    help: "📚 Commando's"
+    language: "🌍 Taal"
+    back: "← Terug"
+    add_group: "➕ Toevoegen aan Groep"
+  features:
+    title: |
+      <b>✨ Wat kan ik doen?</b>
+      Tik op een functie om meer te leren:
+    btn:
+      basics: "📱 Basis"
+      colors: "🎨 Kleuren & Stijlen"
+      media: "🖼 Media"
+      group: "👥 Groepsfuncties"
+    basics:
+      title: |
+        <b>📱 Basis Citeren</b>
+
+        <b>In groepen:</b>
+        Reageer op een bericht met <code>/q</code>
+
+        <b>In privé:</b>
+        Stuur berichten naar mij door
+
+        <b>Meerdere berichten:</b>
+        <code>/q 3</code> — beantwoord bericht + 2 eronder
+        <code>/q -3</code> — beantwoord bericht + 2 erboven
+    colors:
+      title: |
+        <b>🎨 Kleuren & Stijlen</b>
+
+        <b>Basiskleuren:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Aangepaste kleur:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Willekeurige kleur:</b>
+        <code>/q random</code>
+
+        <b>Verloop:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Media Opties</b>
+
+        <b>Media toevoegen:</b>
+        <code>/q m</code> of <code>/q media</code>
+
+        <b>Media bijsnijden:</b>
+        <code>/q c</code> of <code>/q crop</code>
+
+        <b>Antwoorden tonen:</b>
+        <code>/q r</code> of <code>/q reply</code>
+
+        <b>Als afbeelding:</b>
+        <code>/q img</code> of <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Groepsfuncties</b>
+
+        <b>Voor beheerders:</b>
+        • <code>/qcolor blue</code> — standaardkleur
+        • <code>/qrate</code> — beoordeling inschakelen
+        • <code>/qs</code> — opslaan in stickerpakket
+
+        <b>Voor iedereen:</b>
+        • <code>/qtop</code> — topcitaten
+        • <code>/qrand</code> — willekeurig citaat
+  settings:
+    title: |
+      <b>⚙️ Instellingen</b>
+      Beheer je voorkeuren:
+    btn:
+      privacy: "🔒 Privacy"
+      language: "🌍 Taal"
+  help:
+    title: |
+      <b>📚 Commando's</b>
+
+      <b>Basis:</b>
+      • <code>/q</code> — citaat maken
+      • <code>/lang</code> — taal wijzigen
+      • <code>/donate</code> — ontwikkeling steunen
+
+      <b>Voor beheerders:</b>
+      • <code>/qcolor</code> — standaardkleur
+      • <code>/qrate</code> — beoordeling inschakelen
+      • <code>/qb</code> — emoji stijl
+
+onboarding:
+  welcome:
+    title: |
+      <b>Hallo! 👋</b>
+
+      Ik verander gewone chatberichten in prachtige citaatstickers.
+
+      ✨ <b>Laat me je laten zien hoe het werkt!</b>
+    btn:
+      start: "Laten we beginnen! →"
+      skip: "Tutorial overslaan"
+  step1:
+    title: |
+      <b>Stap 1: Stuur een bericht door</b>
+
+      Stuur nu een chatbericht naar mij door.
+
+      💡 <i>Tip: Je kunt meerdere berichten tegelijk doorsturen!</i>
+  step2:
+    title: |
+      <b>Geweldig! Hier is je citaat! ✨</b>
+
+      In groepen gebruik je gewoon <code>/q</code> om op een bericht te reageren.
+    btn:
+      complete: "Begrepen! ✓"
+  complete:
+    title: |
+      <b>Je bent klaar! 🎉</b>
+
+      Nu ken je de basis. Verken het menu om meer functies te ontdekken!

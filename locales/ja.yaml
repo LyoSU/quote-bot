@@ -304,3 +304,130 @@ rate_limit: |
   <i>ちょっとしたブレイク...</i> このコマンドは${seconds}秒後に再度使用できます ⏳
 
   <i>プロのヒント: 待機中に、最後の引用をカスタマイズするのに </i><code>/q color</code> <i>または</i> <code>/q media</code>をお試しください
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    メッセージを美しい引用ステッカーに変換！
+  btn:
+    features: "✨ 機能"
+    settings: "⚙️ 設定"
+    help: "📚 コマンド"
+    language: "🌍 言語"
+    back: "← 戻る"
+    add_group: "➕ グループに追加"
+  features:
+    title: |
+      <b>✨ 何ができますか？</b>
+      機能をタップして詳細を確認:
+    btn:
+      basics: "📱 基本"
+      colors: "🎨 色とスタイル"
+      media: "🖼 メディア"
+      group: "👥 グループ機能"
+    basics:
+      title: |
+        <b>📱 基本的な引用</b>
+
+        <b>グループで:</b>
+        任意のメッセージに<code>/q</code>で返信
+
+        <b>プライベートで:</b>
+        メッセージを私に転送
+
+        <b>複数のメッセージ:</b>
+        <code>/q 3</code> — 返信したメッセージ + 下に2つ
+        <code>/q -3</code> — 返信したメッセージ + 上に2つ
+    colors:
+      title: |
+        <b>🎨 色とスタイル</b>
+
+        <b>基本色:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>カスタム色:</b>
+        <code>/q #ff69b4</code>
+
+        <b>ランダム色:</b>
+        <code>/q random</code>
+
+        <b>グラデーション:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 メディアオプション</b>
+
+        <b>メディアを含める:</b>
+        <code>/q m</code> または <code>/q media</code>
+
+        <b>メディアをクロップ:</b>
+        <code>/q c</code> または <code>/q crop</code>
+
+        <b>返信を表示:</b>
+        <code>/q r</code> または <code>/q reply</code>
+
+        <b>画像として:</b>
+        <code>/q img</code> または <code>/q png</code>
+    group:
+      title: |
+        <b>👥 グループ機能</b>
+
+        <b>管理者向け:</b>
+        • <code>/qcolor blue</code> — デフォルト色
+        • <code>/qrate</code> — 評価を有効化
+        • <code>/qs</code> — ステッカーパックに保存
+
+        <b>全員向け:</b>
+        • <code>/qtop</code> — トップ引用
+        • <code>/qrand</code> — ランダム引用
+  settings:
+    title: |
+      <b>⚙️ 設定</b>
+      設定を管理:
+    btn:
+      privacy: "🔒 プライバシー"
+      language: "🌍 言語"
+  help:
+    title: |
+      <b>📚 コマンド</b>
+
+      <b>基本:</b>
+      • <code>/q</code> — 引用を作成
+      • <code>/lang</code> — 言語を変更
+      • <code>/donate</code> — 開発をサポート
+
+      <b>管理者向け:</b>
+      • <code>/qcolor</code> — デフォルト色
+      • <code>/qrate</code> — 評価を有効化
+      • <code>/qb</code> — 絵文字スタイル
+
+onboarding:
+  welcome:
+    title: |
+      <b>こんにちは！👋</b>
+
+      普通のチャットメッセージを美しい引用ステッカーに変換します。
+
+      ✨ <b>どのように動作するか見せましょう！</b>
+    btn:
+      start: "始めましょう！→"
+      skip: "チュートリアルをスキップ"
+  step1:
+    title: |
+      <b>ステップ1: メッセージを転送</b>
+
+      今すぐチャットメッセージを私に転送してください。
+
+      💡 <i>ヒント: 一度に複数のメッセージを転送できます！</i>
+  step2:
+    title: |
+      <b>素晴らしい！これがあなたの引用です！✨</b>
+
+      グループでは、<code>/q</code>を使って任意のメッセージに返信するだけです。
+    btn:
+      complete: "わかりました！✓"
+  complete:
+    title: |
+      <b>準備完了！🎉</b>
+
+      基本を理解しました。メニューを探索してさらに多くの機能を発見しましょう！

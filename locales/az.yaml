@@ -304,3 +304,130 @@ rate_limit: |
   <i>Qısa bir fasilə...</i> Bu əmrdən yenidən istifadə edə bilərsiniz ${seconds} saniyə ⏳
 
   <i>Mütəxəssis məsləhəti: Tənəffüs edərkən son sitatınızı </i><code>/q color</code> <i>və ya</i> <code>/q media</code> ilə fərdiləşdirməyə çalışın
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Mesajları möhtəşəm sitat stikerlərə çevirin!
+  btn:
+    features: "✨ Xüsusiyyətlər"
+    settings: "⚙️ Parametrlər"
+    help: "📚 Əmrlər"
+    language: "🌍 Dil"
+    back: "← Geri"
+    add_group: "➕ Qrupa əlavə et"
+  features:
+    title: |
+      <b>✨ Nə edə bilərəm?</b>
+      Daha çox öyrənmək üçün xüsusiyyətə toxunun:
+    btn:
+      basics: "📱 Əsaslar"
+      colors: "🎨 Rənglər və Üslublar"
+      media: "🖼 Media"
+      group: "👥 Qrup Xüsusiyyətləri"
+    basics:
+      title: |
+        <b>📱 Əsas Sitatlaşma</b>
+
+        <b>Qruplarda:</b>
+        İstənilən mesaja <code>/q</code> ilə cavab verin
+
+        <b>Şəxsidə:</b>
+        Mesajları mənə yönləndirin
+
+        <b>Çoxlu mesajlar:</b>
+        <code>/q 3</code> — cavab verilən mesaj + 2 aşağıda
+        <code>/q -3</code> — cavab verilən mesaj + 2 yuxarıda
+    colors:
+      title: |
+        <b>🎨 Rənglər və Üslublar</b>
+
+        <b>Əsas rənglər:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Xüsusi rəng:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Təsadüfi rəng:</b>
+        <code>/q random</code>
+
+        <b>Gradient:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Media Seçimləri</b>
+
+        <b>Media daxil et:</b>
+        <code>/q m</code> və ya <code>/q media</code>
+
+        <b>Media kəs:</b>
+        <code>/q c</code> və ya <code>/q crop</code>
+
+        <b>Cavabları göstər:</b>
+        <code>/q r</code> və ya <code>/q reply</code>
+
+        <b>Şəkil olaraq:</b>
+        <code>/q img</code> və ya <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Qrup Xüsusiyyətləri</b>
+
+        <b>Adminlər üçün:</b>
+        • <code>/qcolor blue</code> — standart rəng
+        • <code>/qrate</code> — reytinqi aktivləşdir
+        • <code>/qs</code> — stiker paketinə saxla
+
+        <b>Hamı üçün:</b>
+        • <code>/qtop</code> — ən yaxşı sitatlar
+        • <code>/qrand</code> — təsadüfi sitat
+  settings:
+    title: |
+      <b>⚙️ Parametrlər</b>
+      Seçimlərinizi idarə edin:
+    btn:
+      privacy: "🔒 Gizlilik"
+      language: "🌍 Dil"
+  help:
+    title: |
+      <b>📚 Əmrlər</b>
+
+      <b>Əsas:</b>
+      • <code>/q</code> — sitat yarat
+      • <code>/lang</code> — dili dəyiş
+      • <code>/donate</code> — inkişafa dəstək
+
+      <b>Adminlər üçün:</b>
+      • <code>/qcolor</code> — standart rəng
+      • <code>/qrate</code> — reytinqi aktivləşdir
+      • <code>/qb</code> — emoji üslubu
+
+onboarding:
+  welcome:
+    title: |
+      <b>Salam! 👋</b>
+
+      Mən adi söhbət mesajlarını möhtəşəm sitat stikerlərinə çevirirəm.
+
+      ✨ <b>Necə işlədiyini göstərim!</b>
+    btn:
+      start: "Başlayaq! →"
+      skip: "Dərsliyi keç"
+  step1:
+    title: |
+      <b>Addım 1: Mesaj yönləndir</b>
+
+      İndi mənə istənilən söhbət mesajını yönləndirin.
+
+      💡 <i>Məsləhət: Bir neçə mesajı eyni anda yönləndirə bilərsiniz!</i>
+  step2:
+    title: |
+      <b>Əla! Budur sitatınız! ✨</b>
+
+      Qruplarda sadəcə <code>/q</code> istifadə edərək istənilən mesaja cavab verin.
+    btn:
+      complete: "Anladım! ✓"
+  complete:
+    title: |
+      <b>Hazırsınız! 🎉</b>
+
+      İndi əsasları bilirsiniz. Daha çox xüsusiyyət üçün menyunu kəşf edin!

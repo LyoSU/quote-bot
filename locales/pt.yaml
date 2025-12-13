@@ -308,3 +308,130 @@ rate_limit: |
   <i>Fazendo uma pausa rápida...</i> Você pode usar este comando novamente em ${seconds} segundos ⏳
 
   <i>Dica de profissional: Enquanto espera, tente personalizar sua última citação com </i><code>/q color</code> <i>ou</i> <code>/q media</code>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Transforme mensagens em adesivos de citação incríveis!
+  btn:
+    features: "✨ Recursos"
+    settings: "⚙️ Configurações"
+    help: "📚 Comandos"
+    language: "🌍 Idioma"
+    back: "← Voltar"
+    add_group: "➕ Adicionar ao Grupo"
+  features:
+    title: |
+      <b>✨ O que posso fazer?</b>
+      Toque em um recurso para saber mais:
+    btn:
+      basics: "📱 Básico"
+      colors: "🎨 Cores & Estilos"
+      media: "🖼 Mídia"
+      group: "👥 Recursos do Grupo"
+    basics:
+      title: |
+        <b>📱 Citação Básica</b>
+
+        <b>Em grupos:</b>
+        Responda a qualquer mensagem com <code>/q</code>
+
+        <b>No privado:</b>
+        Encaminhe mensagens para mim
+
+        <b>Várias mensagens:</b>
+        <code>/q 3</code> — mensagem respondida + 2 abaixo
+        <code>/q -3</code> — mensagem respondida + 2 acima
+    colors:
+      title: |
+        <b>🎨 Cores & Estilos</b>
+
+        <b>Cores básicas:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Cor personalizada:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Cor aleatória:</b>
+        <code>/q random</code>
+
+        <b>Degradê:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Opções de Mídia</b>
+
+        <b>Incluir mídia:</b>
+        <code>/q m</code> ou <code>/q media</code>
+
+        <b>Recortar mídia:</b>
+        <code>/q c</code> ou <code>/q crop</code>
+
+        <b>Mostrar respostas:</b>
+        <code>/q r</code> ou <code>/q reply</code>
+
+        <b>Como imagem:</b>
+        <code>/q img</code> ou <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Recursos do Grupo</b>
+
+        <b>Para admins:</b>
+        • <code>/qcolor blue</code> — cor padrão
+        • <code>/qrate</code> — ativar avaliação
+        • <code>/qs</code> — salvar no pacote de adesivos
+
+        <b>Para todos:</b>
+        • <code>/qtop</code> — melhores citações
+        • <code>/qrand</code> — citação aleatória
+  settings:
+    title: |
+      <b>⚙️ Configurações</b>
+      Gerencie suas preferências:
+    btn:
+      privacy: "🔒 Privacidade"
+      language: "🌍 Idioma"
+  help:
+    title: |
+      <b>📚 Comandos</b>
+
+      <b>Básico:</b>
+      • <code>/q</code> — criar citação
+      • <code>/lang</code> — mudar idioma
+      • <code>/donate</code> — apoiar desenvolvimento
+
+      <b>Para admins:</b>
+      • <code>/qcolor</code> — cor padrão
+      • <code>/qrate</code> — ativar avaliação
+      • <code>/qb</code> — estilo de emoji
+
+onboarding:
+  welcome:
+    title: |
+      <b>Olá! 👋</b>
+
+      Eu transformo mensagens de chat comuns em adesivos de citação incríveis.
+
+      ✨ <b>Deixe-me mostrar como funciona!</b>
+    btn:
+      start: "Vamos lá! →"
+      skip: "Pular Tutorial"
+  step1:
+    title: |
+      <b>Passo 1: Encaminhe uma mensagem</b>
+
+      Encaminhe qualquer mensagem de chat para mim agora.
+
+      💡 <i>Dica: Você pode encaminhar várias mensagens de uma vez!</i>
+  step2:
+    title: |
+      <b>Ótimo! Aqui está sua citação! ✨</b>
+
+      Em grupos, basta usar <code>/q</code> para responder a qualquer mensagem.
+    btn:
+      complete: "Entendi! ✓"
+  complete:
+    title: |
+      <b>Você está pronto! 🎉</b>
+
+      Agora você conhece o básico. Explore o menu para descobrir mais recursos!

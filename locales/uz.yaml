@@ -304,3 +304,130 @@ rate_limit: |
   <i>Qisqa tanaffus...</i> ${seconds} soniyadan so'ng yana bu buyruqni ishlatishingiz mumkin ⏳
 
   <i>Pro maslahat: Kutayotgan vaqtingizda o'tgan sitatani </i><code>/q color</code> <i>yoki</i> <code>/q media</code> <i>bilan sozlashga harakat qiling</i>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Xabarlarni ajoyib sitata stikerlariga aylantiring!
+  btn:
+    features: "✨ Xususiyatlar"
+    settings: "⚙️ Sozlamalar"
+    help: "📚 Buyruqlar"
+    language: "🌍 Til"
+    back: "← Orqaga"
+    add_group: "➕ Guruhga qo'shish"
+  features:
+    title: |
+      <b>✨ Nima qila olaman?</b>
+      Ko'proq ma'lumot uchun xususiyatga bosing:
+    btn:
+      basics: "📱 Asoslar"
+      colors: "🎨 Ranglar va Uslublar"
+      media: "🖼 Media"
+      group: "👥 Guruh xususiyatlari"
+    basics:
+      title: |
+        <b>📱 Asosiy Sitata</b>
+
+        <b>Guruhlarda:</b>
+        Har qanday xabarga <code>/q</code> bilan javob bering
+
+        <b>Shaxsiy chatda:</b>
+        Xabarlarni menga yuboring
+
+        <b>Ko'p xabarlar:</b>
+        <code>/q 3</code> — javob berilgan xabar + pastda 2 ta
+        <code>/q -3</code> — javob berilgan xabar + tepada 2 ta
+    colors:
+      title: |
+        <b>🎨 Ranglar va Uslublar</b>
+
+        <b>Asosiy ranglar:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Maxsus rang:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Tasodifiy rang:</b>
+        <code>/q random</code>
+
+        <b>Gradient:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Media Sozlamalari</b>
+
+        <b>Mediani qo'shish:</b>
+        <code>/q m</code> yoki <code>/q media</code>
+
+        <b>Mediani qirqish:</b>
+        <code>/q c</code> yoki <code>/q crop</code>
+
+        <b>Javoblarni ko'rsatish:</b>
+        <code>/q r</code> yoki <code>/q reply</code>
+
+        <b>Rasm sifatida:</b>
+        <code>/q img</code> yoki <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Guruh Xususiyatlari</b>
+
+        <b>Adminlar uchun:</b>
+        • <code>/qcolor blue</code> — standart rang
+        • <code>/qrate</code> — reytingni yoqish
+        • <code>/qs</code> — stiker paketiga saqlash
+
+        <b>Hamma uchun:</b>
+        • <code>/qtop</code> — eng yaxshi sitatalar
+        • <code>/qrand</code> — tasodifiy sitata
+  settings:
+    title: |
+      <b>⚙️ Sozlamalar</b>
+      Sozlamalaringizni boshqaring:
+    btn:
+      privacy: "🔒 Maxfiylik"
+      language: "🌍 Til"
+  help:
+    title: |
+      <b>📚 Buyruqlar</b>
+
+      <b>Asosiy:</b>
+      • <code>/q</code> — sitata yaratish
+      • <code>/lang</code> — tilni o'zgartirish
+      • <code>/donate</code> — rivojlanishni qo'llab-quvvatlash
+
+      <b>Adminlar uchun:</b>
+      • <code>/qcolor</code> — standart rang
+      • <code>/qrate</code> — reytingni yoqish
+      • <code>/qb</code> — emoji uslubi
+
+onboarding:
+  welcome:
+    title: |
+      <b>Salom! 👋</b>
+
+      Oddiy chat xabarlarini ajoyib sitata stikerlariga aylantiraman.
+
+      ✨ <b>Qanday ishlashini ko'rsatay!</b>
+    btn:
+      start: "Boshlaylik! →"
+      skip: "O'rgatishni o'tkazib yuborish"
+  step1:
+    title: |
+      <b>1-qadam: Xabar yuboring</b>
+
+      Menga hozir biron-bir chat xabarini yuboring.
+
+      💡 <i>Maslahat: Bir vaqtning o'zida bir nechta xabar yuborishingiz mumkin!</i>
+  step2:
+    title: |
+      <b>Ajoyib! Mana sitatangiz! ✨</b>
+
+      Guruhlarda shunchaki <code>/q</code> ishlatib har qanday xabarga javob bering.
+    btn:
+      complete: "Tushunarli! ✓"
+  complete:
+    title: |
+      <b>Tayyorsiz! 🎉</b>
+
+      Endi asoslarni bilasiz. Ko'proq xususiyatlarni topish uchun menyuni o'rganing!

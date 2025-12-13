@@ -304,3 +304,130 @@ rate_limit: |
   <i>잠깐 쉬는 중...</i> 이 명령어를 다시 사용하려면 ${seconds}초 기다려 주세요 ⏳
 
   <i>팁: 기다리는 동안 </i><code>/q color</code> <i>또는</i> <code>/q media</code>로 마지막 인용을 커스터마이징해 보세요
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    메시지를 멋진 인용 스티커로 변환하세요!
+  btn:
+    features: "✨ 기능"
+    settings: "⚙️ 설정"
+    help: "📚 명령어"
+    language: "🌍 언어"
+    back: "← 뒤로"
+    add_group: "➕ 그룹에 추가"
+  features:
+    title: |
+      <b>✨ 무엇을 할 수 있나요?</b>
+      기능을 탭하여 자세히 알아보세요:
+    btn:
+      basics: "📱 기본"
+      colors: "🎨 색상 & 스타일"
+      media: "🖼 미디어"
+      group: "👥 그룹 기능"
+    basics:
+      title: |
+        <b>📱 기본 인용</b>
+
+        <b>그룹에서:</b>
+        아무 메시지에 <code>/q</code>로 답장
+
+        <b>개인 채팅에서:</b>
+        메시지를 저에게 전달
+
+        <b>여러 메시지:</b>
+        <code>/q 3</code> — 답장한 메시지 + 아래 2개
+        <code>/q -3</code> — 답장한 메시지 + 위 2개
+    colors:
+      title: |
+        <b>🎨 색상 & 스타일</b>
+
+        <b>기본 색상:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>커스텀 색상:</b>
+        <code>/q #ff69b4</code>
+
+        <b>랜덤 색상:</b>
+        <code>/q random</code>
+
+        <b>그라데이션:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 미디어 옵션</b>
+
+        <b>미디어 포함:</b>
+        <code>/q m</code> 또는 <code>/q media</code>
+
+        <b>미디어 자르기:</b>
+        <code>/q c</code> 또는 <code>/q crop</code>
+
+        <b>답장 표시:</b>
+        <code>/q r</code> 또는 <code>/q reply</code>
+
+        <b>이미지로:</b>
+        <code>/q img</code> 또는 <code>/q png</code>
+    group:
+      title: |
+        <b>👥 그룹 기능</b>
+
+        <b>관리자용:</b>
+        • <code>/qcolor blue</code> — 기본 색상
+        • <code>/qrate</code> — 평가 활성화
+        • <code>/qs</code> — 스티커 팩에 저장
+
+        <b>모든 사용자:</b>
+        • <code>/qtop</code> — 최고 인용
+        • <code>/qrand</code> — 랜덤 인용
+  settings:
+    title: |
+      <b>⚙️ 설정</b>
+      환경 설정 관리:
+    btn:
+      privacy: "🔒 개인정보"
+      language: "🌍 언어"
+  help:
+    title: |
+      <b>📚 명령어</b>
+
+      <b>기본:</b>
+      • <code>/q</code> — 인용 생성
+      • <code>/lang</code> — 언어 변경
+      • <code>/donate</code> — 개발 지원
+
+      <b>관리자용:</b>
+      • <code>/qcolor</code> — 기본 색상
+      • <code>/qrate</code> — 평가 활성화
+      • <code>/qb</code> — 이모지 스타일
+
+onboarding:
+  welcome:
+    title: |
+      <b>안녕하세요! 👋</b>
+
+      일반 채팅 메시지를 멋진 인용 스티커로 변환합니다.
+
+      ✨ <b>어떻게 작동하는지 보여드릴게요!</b>
+    btn:
+      start: "시작하기! →"
+      skip: "튜토리얼 건너뛰기"
+  step1:
+    title: |
+      <b>1단계: 메시지 전달</b>
+
+      지금 저에게 채팅 메시지를 전달해 주세요.
+
+      💡 <i>팁: 한 번에 여러 메시지를 전달할 수 있어요!</i>
+  step2:
+    title: |
+      <b>훌륭해요! 인용이 완성됐어요! ✨</b>
+
+      그룹에서는 <code>/q</code>를 사용하여 아무 메시지에 답장하면 됩니다.
+    btn:
+      complete: "이해했어요! ✓"
+  complete:
+    title: |
+      <b>준비 완료! 🎉</b>
+
+      이제 기본을 알게 되었어요. 메뉴를 탐색하여 더 많은 기능을 발견하세요!

@@ -304,3 +304,130 @@ rate_limit: |
   <i>Istirahat sejenak...</i> Anda dapat menggunakan perintah ini lagi dalam ${seconds} detik ⏳
 
   <i>Tip pro: Sambil menunggu, coba kustomisasi kutipan terakhir Anda dengan </i><code>/q color</code> <i>atau</i> <code>/q media</code>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Ubah pesan menjadi stiker kutipan yang menakjubkan!
+  btn:
+    features: "✨ Fitur"
+    settings: "⚙️ Pengaturan"
+    help: "📚 Perintah"
+    language: "🌍 Bahasa"
+    back: "← Kembali"
+    add_group: "➕ Tambahkan ke Grup"
+  features:
+    title: |
+      <b>✨ Apa yang bisa saya lakukan?</b>
+      Ketuk fitur untuk mempelajari lebih lanjut:
+    btn:
+      basics: "📱 Dasar"
+      colors: "🎨 Warna & Gaya"
+      media: "🖼 Media"
+      group: "👥 Fitur Grup"
+    basics:
+      title: |
+        <b>📱 Dasar Kutipan</b>
+
+        <b>Di grup:</b>
+        Balas pesan apa pun dengan <code>/q</code>
+
+        <b>Di privat:</b>
+        Teruskan pesan kepada saya
+
+        <b>Banyak pesan:</b>
+        <code>/q 3</code> — pesan yang dibalas + 2 di bawah
+        <code>/q -3</code> — pesan yang dibalas + 2 di atas
+    colors:
+      title: |
+        <b>🎨 Warna & Gaya</b>
+
+        <b>Warna dasar:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Warna kustom:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Warna acak:</b>
+        <code>/q random</code>
+
+        <b>Gradien:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Opsi Media</b>
+
+        <b>Sertakan media:</b>
+        <code>/q m</code> atau <code>/q media</code>
+
+        <b>Potong media:</b>
+        <code>/q c</code> atau <code>/q crop</code>
+
+        <b>Tampilkan balasan:</b>
+        <code>/q r</code> atau <code>/q reply</code>
+
+        <b>Sebagai gambar:</b>
+        <code>/q img</code> atau <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Fitur Grup</b>
+
+        <b>Untuk admin:</b>
+        • <code>/qcolor blue</code> — warna default
+        • <code>/qrate</code> — aktifkan rating
+        • <code>/qs</code> — simpan ke paket stiker
+
+        <b>Untuk semua:</b>
+        • <code>/qtop</code> — kutipan teratas
+        • <code>/qrand</code> — kutipan acak
+  settings:
+    title: |
+      <b>⚙️ Pengaturan</b>
+      Kelola preferensi Anda:
+    btn:
+      privacy: "🔒 Privasi"
+      language: "🌍 Bahasa"
+  help:
+    title: |
+      <b>📚 Perintah</b>
+
+      <b>Dasar:</b>
+      • <code>/q</code> — buat kutipan
+      • <code>/lang</code> — ubah bahasa
+      • <code>/donate</code> — dukung pengembangan
+
+      <b>Untuk admin:</b>
+      • <code>/qcolor</code> — warna default
+      • <code>/qrate</code> — aktifkan rating
+      • <code>/qb</code> — gaya emoji
+
+onboarding:
+  welcome:
+    title: |
+      <b>Hai! 👋</b>
+
+      Saya mengubah pesan obrolan biasa menjadi stiker kutipan yang menakjubkan.
+
+      ✨ <b>Biar saya tunjukkan cara kerjanya!</b>
+    btn:
+      start: "Ayo Mulai! →"
+      skip: "Lewati Tutorial"
+  step1:
+    title: |
+      <b>Langkah 1: Teruskan pesan</b>
+
+      Teruskan pesan obrolan apa pun kepada saya sekarang.
+
+      💡 <i>Tips: Anda bisa meneruskan beberapa pesan sekaligus!</i>
+  step2:
+    title: |
+      <b>Hebat! Ini kutipan Anda! ✨</b>
+
+      Di grup, cukup gunakan <code>/q</code> untuk membalas pesan apa pun.
+    btn:
+      complete: "Mengerti! ✓"
+  complete:
+    title: |
+      <b>Anda siap! 🎉</b>
+
+      Sekarang Anda tahu dasarnya. Jelajahi menu untuk menemukan lebih banyak fitur!

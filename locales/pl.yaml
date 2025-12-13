@@ -304,3 +304,130 @@ rate_limit: |
   <i>Krótkie przerwa...</i> Możesz ponownie użyć tej komendy za ${seconds} sekund ⏳
 
   <i>Porada eksperta: Czekając, spróbuj dostosować swój ostatni cytat za pomocą </i><code>/q color</code> <i>lub</i> <code>/q media</code>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Zmień wiadomości w oszałamiające naklejki z cytatami!
+  btn:
+    features: "✨ Funkcje"
+    settings: "⚙️ Ustawienia"
+    help: "📚 Komendy"
+    language: "🌍 Język"
+    back: "← Wstecz"
+    add_group: "➕ Dodaj do Grupy"
+  features:
+    title: |
+      <b>✨ Co mogę zrobić?</b>
+      Dotknij funkcji, aby dowiedzieć się więcej:
+    btn:
+      basics: "📱 Podstawy"
+      colors: "🎨 Kolory i Style"
+      media: "🖼 Media"
+      group: "👥 Funkcje Grupy"
+    basics:
+      title: |
+        <b>📱 Podstawowe Cytowanie</b>
+
+        <b>W grupach:</b>
+        Odpowiedz na dowolną wiadomość z <code>/q</code>
+
+        <b>Prywatnie:</b>
+        Przekaż mi wiadomości
+
+        <b>Wiele wiadomości:</b>
+        <code>/q 3</code> — odpowiedziana wiadomość + 2 poniżej
+        <code>/q -3</code> — odpowiedziana wiadomość + 2 powyżej
+    colors:
+      title: |
+        <b>🎨 Kolory i Style</b>
+
+        <b>Podstawowe kolory:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Niestandardowy kolor:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Losowy kolor:</b>
+        <code>/q random</code>
+
+        <b>Gradient:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Opcje Mediów</b>
+
+        <b>Dołącz media:</b>
+        <code>/q m</code> lub <code>/q media</code>
+
+        <b>Przytnij media:</b>
+        <code>/q c</code> lub <code>/q crop</code>
+
+        <b>Pokaż odpowiedzi:</b>
+        <code>/q r</code> lub <code>/q reply</code>
+
+        <b>Jako obraz:</b>
+        <code>/q img</code> lub <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Funkcje Grupy</b>
+
+        <b>Dla adminów:</b>
+        • <code>/qcolor blue</code> — domyślny kolor
+        • <code>/qrate</code> — włącz oceny
+        • <code>/qs</code> — zapisz do pakietu naklejek
+
+        <b>Dla wszystkich:</b>
+        • <code>/qtop</code> — najlepsze cytaty
+        • <code>/qrand</code> — losowy cytat
+  settings:
+    title: |
+      <b>⚙️ Ustawienia</b>
+      Zarządzaj swoimi preferencjami:
+    btn:
+      privacy: "🔒 Prywatność"
+      language: "🌍 Język"
+  help:
+    title: |
+      <b>📚 Komendy</b>
+
+      <b>Podstawowe:</b>
+      • <code>/q</code> — utwórz cytat
+      • <code>/lang</code> — zmień język
+      • <code>/donate</code> — wspieraj rozwój
+
+      <b>Dla adminów:</b>
+      • <code>/qcolor</code> — domyślny kolor
+      • <code>/qrate</code> — włącz oceny
+      • <code>/qb</code> — styl emoji
+
+onboarding:
+  welcome:
+    title: |
+      <b>Cześć! 👋</b>
+
+      Zamieniam zwykłe wiadomości czatu w oszałamiające naklejki z cytatami.
+
+      ✨ <b>Pozwól mi pokazać, jak to działa!</b>
+    btn:
+      start: "Zaczynamy! →"
+      skip: "Pomiń samouczek"
+  step1:
+    title: |
+      <b>Krok 1: Przekaż wiadomość</b>
+
+      Przekaż mi teraz dowolną wiadomość z czatu.
+
+      💡 <i>Wskazówka: Możesz przekazać wiele wiadomości naraz!</i>
+  step2:
+    title: |
+      <b>Świetnie! Oto twój cytat! ✨</b>
+
+      W grupach po prostu użyj <code>/q</code>, aby odpowiedzieć na dowolną wiadomość.
+    btn:
+      complete: "Rozumiem! ✓"
+  complete:
+    title: |
+      <b>Gotowe! 🎉</b>
+
+      Teraz znasz podstawy. Eksploruj menu, aby odkryć więcej funkcji!

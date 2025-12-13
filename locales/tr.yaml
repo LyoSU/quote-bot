@@ -304,3 +304,130 @@ rate_limit: |
   <i>Kısa bir mola veriyorum...</i> Bu komutu tekrar kullanabilmen için ${seconds} saniye ⏳
 
   <i>Uzman ipucu: Beklerken, son alıntını </i><code>/q color</code> <i>veya</i> <code>/q media</code> <i>ile özelleştirmeyi dene</i>
+
+menu:
+  title: |
+    <b>🎨 QuotLyBot</b>
+    Mesajları muhteşem alıntı çıkartmalarına dönüştürün!
+  btn:
+    features: "✨ Özellikler"
+    settings: "⚙️ Ayarlar"
+    help: "📚 Komutlar"
+    language: "🌍 Dil"
+    back: "← Geri"
+    add_group: "➕ Gruba Ekle"
+  features:
+    title: |
+      <b>✨ Ne yapabilirim?</b>
+      Daha fazla bilgi için bir özelliğe dokunun:
+    btn:
+      basics: "📱 Temel"
+      colors: "🎨 Renkler & Stiller"
+      media: "🖼 Medya"
+      group: "👥 Grup Özellikleri"
+    basics:
+      title: |
+        <b>📱 Temel Alıntılama</b>
+
+        <b>Gruplarda:</b>
+        Herhangi bir mesaja <code>/q</code> ile yanıt verin
+
+        <b>Özelde:</b>
+        Mesajları bana yönlendirin
+
+        <b>Birden fazla mesaj:</b>
+        <code>/q 3</code> — yanıtlanan mesaj + aşağıda 2
+        <code>/q -3</code> — yanıtlanan mesaj + yukarıda 2
+    colors:
+      title: |
+        <b>🎨 Renkler & Stiller</b>
+
+        <b>Temel renkler:</b>
+        <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+        <b>Özel renk:</b>
+        <code>/q #ff69b4</code>
+
+        <b>Rastgele renk:</b>
+        <code>/q random</code>
+
+        <b>Gradyan:</b>
+        <code>/q red//blue</code>
+    media:
+      title: |
+        <b>🖼 Medya Seçenekleri</b>
+
+        <b>Medya ekle:</b>
+        <code>/q m</code> veya <code>/q media</code>
+
+        <b>Medyayı kırp:</b>
+        <code>/q c</code> veya <code>/q crop</code>
+
+        <b>Yanıtları göster:</b>
+        <code>/q r</code> veya <code>/q reply</code>
+
+        <b>Görüntü olarak:</b>
+        <code>/q img</code> veya <code>/q png</code>
+    group:
+      title: |
+        <b>👥 Grup Özellikleri</b>
+
+        <b>Yöneticiler için:</b>
+        • <code>/qcolor blue</code> — varsayılan renk
+        • <code>/qrate</code> — derecelendirmeyi etkinleştir
+        • <code>/qs</code> — çıkartma paketine kaydet
+
+        <b>Herkes için:</b>
+        • <code>/qtop</code> — en iyi alıntılar
+        • <code>/qrand</code> — rastgele alıntı
+  settings:
+    title: |
+      <b>⚙️ Ayarlar</b>
+      Tercihlerinizi yönetin:
+    btn:
+      privacy: "🔒 Gizlilik"
+      language: "🌍 Dil"
+  help:
+    title: |
+      <b>📚 Komutlar</b>
+
+      <b>Temel:</b>
+      • <code>/q</code> — alıntı oluştur
+      • <code>/lang</code> — dili değiştir
+      • <code>/donate</code> — geliştirmeyi destekle
+
+      <b>Yöneticiler için:</b>
+      • <code>/qcolor</code> — varsayılan renk
+      • <code>/qrate</code> — derecelendirmeyi etkinleştir
+      • <code>/qb</code> — emoji stili
+
+onboarding:
+  welcome:
+    title: |
+      <b>Merhaba! 👋</b>
+
+      Sıradan sohbet mesajlarını muhteşem alıntı çıkartmalarına dönüştürüyorum.
+
+      ✨ <b>Nasıl çalıştığını göstereyim!</b>
+    btn:
+      start: "Hadi Başlayalım! →"
+      skip: "Öğreticiyi Atla"
+  step1:
+    title: |
+      <b>Adım 1: Bir mesaj yönlendir</b>
+
+      Şimdi bana herhangi bir sohbet mesajı yönlendirin.
+
+      💡 <i>İpucu: Birden fazla mesajı aynı anda yönlendirebilirsiniz!</i>
+  step2:
+    title: |
+      <b>Harika! İşte alıntınız! ✨</b>
+
+      Gruplarda sadece <code>/q</code> kullanarak herhangi bir mesaja yanıt verin.
+    btn:
+      complete: "Anladım! ✓"
+  complete:
+    title: |
+      <b>Hazırsınız! 🎉</b>
+
+      Artık temelleri biliyorsunuz. Daha fazla özellik keşfetmek için menüyü inceleyin!
