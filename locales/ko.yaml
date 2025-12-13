@@ -25,63 +25,58 @@ start: |
 
   색상, 스타일 등을 변경하고 싶으신가요? 모든 창의적인 가능성을 발견할 준비가 되었을 때 /help를 입력하세요! 🎨
 help: |
-  <b>✨ QuotLyBot: Quick & Easy Quotes! ✨</b>
+  <b>✨ QuotLyBot: 빠르고 쉬운 인용! ✨</b>
 
-  Turn messages into stylish quotes in Telegram. Here's how:
+  Telegram에서 메시지를 스타일리시한 인용으로 바꾸세요. 방법은 다음과 같습니다:
 
-  📱 <b>Basic Quoting</b>
+  📱 <b>기본 인용</b>
 
-  • Reply & Quote:  Reply to a message and type <code>/q</code> to quote it.
-  • Quote Multiple: Reply to the first of several messages, type <code>/q [number]</code> (e.g., <code>/q 3</code>) to quote multiple.
-  • Forward & Quote: Forward a message to the bot to quote it directly.
+  • 답장 및 인용: 메시지에 답장하고 <code>/q</code>를 입력하여 인용하세요.
+  • 여러 개 인용: 여러 메시지 중 첫 번째 메시지에 답장하고 <code>/q [숫자]</code>를 입력하여 (예: <code>/q 3</code>) 여러 개 인용하세요.
+  • 전달 및 인용: 메시지를 봇에 전달하여 직접 인용하세요.
 
-  🎨 <b>Customize Your Quote</b>
+  🎨 <b>인용 맞춤화</b>
 
-  • Colors:
-      • Basic: <code>/q red</code> (or blue, green, etc.)
-      • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
-      • Random: <code>/q random</code>
-  • Media:  Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
-      • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-  • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
-  • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
+  • 색상:
+      • 기본: <code>/q red</code> (또는 blue, green 등)
+      • 사용자 정의: <code>/q #[헥스 색상 코드]</code> (예: <code>/q #cbafff</code>)
+      • 무작위: <code>/q random</code>
+  • 미디어: 인용한 메시지에서 이미지/비디오를 포함하려면 <code>/q m</code> 또는 <code>/q media</code>
+      • 미디어 크롭: <code>/q c</code> 또는 <code>/q crop</code>을 사용하여 미디어를 크롭하세요.
+  • 답장 유지: <code>/q r</code> 또는 <code>/q reply</code>를 사용하여 답장 중인 메시지를 표시합니다.
+  • 이미지 형식: 이미지 인용을 위해 (스티커 대신에) <code>/q i</code>, <code>/q img</code>, <code>/q p</code> 또는 <code>/q png</code>를 사용하세요.
 
-  🤖 <b>AI Modes</b>
-  • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-  • Change AI Style: Use <code>/qai [style]</code> (admin only)
-  • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
+  💡 <b>멋진 조합</b>
 
-  💡 <b>Cool Combinations</b>
+  • 답장이 포함된 하얀색 인용: <code>/q 3 white rp</code>
+  • 고화질 빨간색 이미지: <code>/q i red s3.2</code>
+  • 미디어 및 답장이 포함된 인용: <code>/q r 2 #cbafff m</code>
 
-  • White quote with replies: <code>/q 3 white rp</code>
-  • High-quality red image: <code>/q i red s3.2</code>
-  • Quote with media & replies: <code>/q r 2 #cbafff m</code>
+  ⚙️ <b>추가 옵션</b>
 
-  ⚙️ <b>More Options</b>
+  • 인용 평가: <code>/q rate</code> (그룹에서 활성화된 경우)
+  • 무작위 인용: <code>/qrand</code> (그룹에서 활성화된 경우)
+  • 최고 인용: <code>/qtop</code> (그룹에서 활성화된 경우)
+  • 언어 변경: <code>/lang</code>
 
-  • Rate Quotes: <code>/q rate</code> (if enabled in group)
-  • Random Quote: <code>/qrand</code> (if enabled in group)
-  • Top Quotes: <code>/qtop</code> (if enabled in group)
-  • Change Language: <code>/lang</code>
+  🎯 <b>그룹 관리자 설정</b> (그룹 관리자 전용)
 
-  🎯 <b>Group Admin Settings</b> (for group admins only)
+  • 기본 색상: <code>/qcolor [색상]</code>
+  • 평가 활성화: <code>/qrate</code>
+  • 스티커 팩에 저장: <code>/qs [이모지]</code>
+  • 스티커 제거: <code>/qd</code> (스티커에 답장)
+  • 무작위 인용 빈도: <code>/qgab [숫자]</code>
+  • 이모지 접미사 변경: <code>/qemoji</code> (스티커 이모지 접미사 변경)
+  • 이모지 스타일:
+      • 클래식: <code>/qb apple</code>, <code>/qb google</code>
+      • 대체: <code>/qb twitter</code>, <code>/qb joypixels</code>
+      • 레트로: <code>/qb blob</code>
 
-  • Default Color: <code>/qcolor [color]</code>
-  • Enable Rating: <code>/qrate</code>
-  • Save to Sticker Pack: <code>/qs [emoji]</code>
-  • Remove Sticker: <code>/qd</code> (reply to sticker)
-  • Random Quote Frequency: <code>/qgab [number]</code>
-  • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-  • Emoji Style:
-      • Classic: <code>/qb apple</code>, <code>/qb google</code>
-      • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-      • Retro: <code>/qb blob</code>
+  📱 <b>도움이 필요하신가요?</b>
 
-  📱 <b>Need Help?</b>
-
-  • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+  • 블로그: <a href="https://t.me/LyBlog">@LyBlog</a>
   • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
-  • Support: <code>/donate</code>
+  • 지원: <code>/donate</code>
 help_group: |
   <b>안녕하세요! 👋</b>
   이 그룹에서 아름다운 인용을 만들겠습니다 - 어떤 메시지든 <code>/q</code>로 답장하세요!
@@ -89,7 +84,7 @@ help_group: |
   개인적으로 모든 기능을 알아보세요: <a href="t.me/${username}?start=help">도움 받기</a> ✨
 btn:
   add_group: 그룹에 추가
-  help: 도와주세요
+  help: 도움말
 quote:
   unsupported_message: |
     인용은 이 메시지 유형을 지원하지 않습니다
@@ -105,11 +100,11 @@ quote:
     <b>완료!</b> 이모지 스타일이 변경되었습니다: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 견적 서비스가 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도해주세요.
+      😕 인용 서비스가 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도해주세요.
 
-      문제가 지속되면 @LyBlog에서 업데이트를 확인하세요．
+      문제가 지속되면 @LyBlog에서 업데이트를 확인하세요.
     rate_limit: |
-      ⏳ 요청이 너무 많습니다! 다른 견적을 생성하기 전에 ${seconds}초 기다려 주세요．
+      ⏳ 요청이 너무 많습니다! 다른 인용을 생성하기 전에 ${seconds}초 기다려 주세요.
     file_too_large: |
       📸 미디어 파일이 너무 큽니다 (최대 5MB). 더 작은 이미지나 비디오를 사용해 보세요．
     invalid_format: |
@@ -224,9 +219,9 @@ sticker:
   delete_random:
     suc: 랜덤 컬렉션에서 제거되었습니다 🗑
     error: |
-      <b>견적을 제거할 수 없습니다 😕</b>
+      <b>인용을 제거할 수 없습니다 😕</b>
       ${error}
-    not_found: 이 견적은 데이터베이스에 없습니다 🤔
+    not_found: 이 인용은 데이터베이스에 없습니다 🤔
   empty_forward: |
     저장하고 싶은 스티커, 사진 또는 이미지를 답장하세요 ✨
   fstik: |
@@ -244,7 +239,7 @@ rate:
       인용구 평가가 비활성화되었습니다
 random:
   empty: |
-    이 그룹에는 아직 높은 평가를 받은 인용구가 없습니다! 메시지를 평가해보세요
+    이 그룹에는 아직 높은 평가를 받은 인용구가 없습니다! 인용구를 평가해보세요
   gab: |
     랜덤 인용 빈도가 ${gab}로 설정되었습니다 ✨
 hidden:
@@ -354,139 +349,121 @@ aimode:
 menu:
   title: |
     <b>🎨 QuotLyBot</b>
-
-    Transform messages into stunning quote stickers!
+    메시지를 멋진 인용 스티커로 변환하세요!
   btn:
-    features: "✨ Features"
-    settings: "⚙️ Settings"
-    help: "📚 Commands"
-    language: "🌍 Language"
-    back: "← Back"
-    add_group: "➕ Add to Group"
+    features: "✨ 기능"
+    settings: "⚙️ 설정"
+    help: "📚 명령어"
+    language: "🌍 언어"
+    back: "← 뒤로"
+    add_group: "➕ 그룹에 추가"
   settings:
     title: |
-      <b>⚙️ Settings</b>
-
-      Configure your quote preferences:
+      <b>⚙️ 설정</b>
+      환경 설정 관리:
     btn:
       color: "🎨 Default Color"
       emoji_style: "😊 Emoji Style"
-      privacy: "🔒 Privacy"
-      back: "← Back"
+      privacy: "🔒 개인정보"
+      back: "← 뒤로"
   features:
     title: |
-      <b>✨ What can I do?</b>
-
-      Tap any feature to learn more:
+      <b>✨ 무엇을 할 수 있나요?</b>
+      기능을 탭하여 자세히 알아보세요:
     btn:
-      basics: "📱 Basics"
-      colors: "🎨 Colors & Styles"
-      media: "🖼 Media"
-      group: "👥 Group Features"
+      basics: "📱 기본"
+      colors: "🎨 색상 & 스타일"
+      media: "🖼 미디어"
+      group: "👥 그룹 기능"
     basics:
       title: |
-        <b>📱 Basic Quoting</b>
+        <b>📱 기본 인용</b>
 
-        <b>Private chat:</b>
-        Forward me any message → get a sticker!
+        <b>그룹에서:</b>
+        아무 메시지에 <code>/q</code>로 답장
 
-        <b>Groups:</b>
-        Reply <code>/q</code> to any message
+        <b>개인 채팅에서:</b>
+        메시지를 저에게 전달
 
-        <b>Multiple messages:</b>
-        <code>/q 3</code> — the replied message + 2 below it
-        <code>/q -3</code> — the replied message + 2 above it
-
-        <b>Image format:</b>
-        <code>/q img</code> — PNG instead of sticker
+        <b>여러 메시지:</b>
+        <code>/q 3</code> — 답장한 메시지 + 아래 2개
+        <code>/q -3</code> — 답장한 메시지 + 위 2개
     colors:
       title: |
-        <b>🎨 Colors & Styles</b>
+        <b>🎨 색상 & 스타일</b>
 
-        <b>Named colors:</b>
+        <b>기본 색상:</b>
         <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
 
-        <b>Custom hex:</b>
-        <code>/q #ff5733</code>, <code>/q #cbafff</code>
+        <b>커스텀 색상:</b>
+        <code>/q #ff69b4</code>
 
-        <b>Special:</b>
-        <code>/q random</code> — surprise gradient
-        <code>/q transparent</code> — no background
+        <b>랜덤 색상:</b>
+        <code>/q random</code>
 
-        <b>Emoji styles:</b>
-        Apple, Google, Twitter, JoyPixels, Blob
-        Set with <code>/qb apple</code>
+        <b>그라데이션:</b>
+        <code>/q red//blue</code>
     media:
       title: |
-        <b>🖼 Media in Quotes</b>
+        <b>🖼 미디어 옵션</b>
 
-        <b>Include media:</b>
-        <code>/q m</code> — adds images/videos
+        <b>미디어 포함:</b>
+        <code>/q m</code> 또는 <code>/q media</code>
 
-        <b>Crop media:</b>
-        <code>/q c</code> — crops to fit
+        <b>미디어 자르기:</b>
+        <code>/q c</code> 또는 <code>/q crop</code>
 
-        <b>Show replies:</b>
-        <code>/q r</code> — includes replied message
+        <b>답장 표시:</b>
+        <code>/q r</code> 또는 <code>/q reply</code>
 
-        <b>HD quality:</b>
-        <code>/q s3.2</code> — higher resolution
-
-        <b>Combine them:</b>
-        <code>/q m r red</code> — media + replies + color
+        <b>이미지로:</b>
+        <code>/q img</code> 또는 <code>/q png</code>
     group:
       title: |
-        <b>👥 Group Features</b>
+        <b>👥 그룹 기능</b>
 
-        <b>Rate quotes:</b>
-        👍👎 buttons on quotes
-        Enable: <code>/qrate</code>
+        <b>관리자용:</b>
+        • <code>/qcolor blue</code> — 기본 색상
+        • <code>/qrate</code> — 평가 활성화
+        • <code>/qs</code> — 스티커 팩에 저장
 
-        <b>Top quotes:</b>
-        <code>/qtop</code> — best rated quotes
-
-        <b>Random quote:</b>
-        <code>/qrand</code> — random from top
-
-        <b>Group sticker pack:</b>
-        <code>/qs 💜</code> — save to pack
-        <code>/qd</code> — remove from pack
+        <b>모든 사용자:</b>
+        • <code>/qtop</code> — 최고 인용
+        • <code>/qrand</code> — 랜덤 인용
 onboarding:
   welcome:
     title: |
-      <b>Welcome! 👋</b>
+      <b>안녕하세요! 👋</b>
 
-      I turn chat messages into beautiful quote stickers.
-      Let me show you how it works!
+      일반 채팅 메시지를 멋진 인용 스티커로 변환합니다.
+
+      ✨ <b>어떻게 작동하는지 보여드릴게요!</b>
     btn:
-      start: "Let's Go! →"
-      skip: "Skip Tutorial"
+      start: "시작하기! →"
+      skip: "튜토리얼 건너뛰기"
   step1:
     title: |
-      <b>Step 1 of 2</b> 📨
+      <b>1단계: 메시지 전달</b>
 
-      Forward me any message from a chat.
-      I'll turn it into a quote sticker!
+      지금 저에게 채팅 메시지를 전달해 주세요.
+
+      💡 <i>팁: 한 번에 여러 메시지를 전달할 수 있어요!</i>
     waiting: |
       Waiting for your message...
       Just forward something from any chat!
   step2:
     title: |
-      <b>Amazing! 🎉</b>
+      <b>훌륭해요! 인용이 완성됐어요! ✨</b>
 
-      You just created your first quote!
-
-      <b>In groups</b>, use <code>/q</code> as a reply to any message.
-
-      Ready to try more features?
+      그룹에서는 <code>/q</code>를 사용하여 아무 메시지에 답장하면 됩니다.
     btn:
       menu: "Open Menu"
       add_group: "그룹에 추가"
   complete:
     title: |
-      <b>You're all set! ✨</b>
+      <b>준비 완료! 🎉</b>
 
-      Now you know the basics. Add me to a group or explore all features in the menu.
+      이제 기본을 알게 되었어요. 메뉴를 탐색하여 더 많은 기능을 발견하세요!
 quick_action:
   remake: "🔄"
   tooltip:
