@@ -1,3 +1,6 @@
+const { handleOnboardingCallback } = require('./onboarding')
+const { handleMenuCallback } = require('./menu')
+
 module.exports = {
   handleStart: require('./start'),
   handleHelp: require('./help'),
@@ -26,5 +29,7 @@ module.exports = {
   handleDonate: require('./donate'),
   handlePing: require('./ping'),
   handleChatMember: require('./chat-member'),
-  handleInlineQuery: require('./inline-query')
+  handleInlineQuery: require('./inline-query'),
+  handleOnboardingCallback,
+  handleMenuCallback
 }

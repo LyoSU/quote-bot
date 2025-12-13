@@ -1161,6 +1161,14 @@ ${JSON.stringify(messageForAIContext)}
             }
           })
         }
+
+        // Show onboarding step 2 after first quote in private chat
+        if (sendResult && ctx.chat.type === 'private') {
+          const { isInOnboarding, showOnboardingStep2 } = require('./onboarding')
+          if (isInOnboarding(ctx)) {
+            await showOnboardingStep2(ctx)
+          }
+        }
       } else if (generate.headers['quote-type'] === 'image') {
         await ctx.replyWithPhoto({
           source: image,

@@ -33,7 +33,9 @@ const {
   handlePing,
   handleChatMember,
   handleInlineQuery,
-  handleDeleteRandom
+  handleDeleteRandom,
+  handleOnboardingCallback,
+  handleMenuCallback
 } = require('./handlers')
 const { getUser, getGroup } = require('./helpers')
 
@@ -263,6 +265,10 @@ bot.hears(/^\/(qgab) (\d+)/, onlyGroup, onlyAdmin, handleGabSettings)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
+
+// Onboarding & Menu callbacks
+bot.action(/^onboarding:(.*)/, handleOnboardingCallback)
+bot.action(/^menu:(.*)/, handleMenuCallback)
 
 // bot.on('new_chat_members', (ctx, next) => {
 //   if (ctx.message.new_chat_member.id === ctx.botInfo.id) return handleHelp(ctx)
