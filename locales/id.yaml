@@ -38,30 +38,30 @@ help: |
   🎨 <b>Kustomisasi Kutipan Anda</b>
 
   • Warna:
-      • Dasar: <code>/q merah</code> (atau biru, hijau, dll.)
+      • Dasar: <code>/q red</code> (atau blue, green, dll.)
       • Kustom: <code>/q #[kode warna hex]</code> (misalnya, <code>/q #cbafff</code>)
-      • Acak: <code>/q acak</code>
+      • Acak: <code>/q random</code>
   • Media: Sertakan gambar/video dari pesan yang dikutip dengan <code>/q m</code> atau <code>/q media</code>
-      • Potong Media: Gunakan <code>/q c</code> atau <code>/q potong</code> untuk memotong media.
-  • Pertahankan Balasan: Tampilkan pesan yang dibalas dengan <code>/q r</code> atau <code>/q balas</code>
+      • Potong Media: Gunakan <code>/q c</code> atau <code>/q crop</code> untuk memotong media.
+  • Pertahankan Balasan: Tampilkan pesan yang dibalas dengan <code>/q r</code> atau <code>/q reply</code>
   • Format Gambar: Gunakan <code>/q i</code> atau <code>/q img</code> atau <code>/q p</code> atau <code>/q png</code> untuk kutipan gambar (alih-alih stiker).
 
   💡 <b>Kombinasi Keren</b>
 
-  • Kutipan putih dengan balasan: <code>/q 3 putih rp</code>
-  • Gambar merah berkualitas tinggi: <code>/q i merah s3.2</code>
+  • Kutipan putih dengan balasan: <code>/q 3 white rp</code>
+  • Gambar merah berkualitas tinggi: <code>/q i red s3.2</code>
   • Kutipan dengan media & balasan: <code>/q r 2 #cbafff m</code>
 
   ⚙️ <b>Opsi Lainnya</b>
 
-  • Nilai Kutipan: <code>/q nilai</code> (jika diaktifkan dalam grup)
+  • Nilai Kutipan: <code>/q rate</code> (jika diaktifkan dalam grup)
   • Kutipan Acak: <code>/qrand</code> (jika diaktifkan dalam grup)
   • Kutipan Teratas: <code>/qtop</code> (jika diaktifkan dalam grup)
   • Ubah Bahasa: <code>/lang</code>
 
   🎯 <b>Pengaturan Admin Grup</b> (hanya untuk admin grup)
 
-  • Warna Default: <code>/qwarna [warna]</code>
+  • Warna Default: <code>/qcolor [color]</code>
   • Aktifkan Penilaian: <code>/qrate</code>
   • Simpan ke Paket Stiker: <code>/qs [emoji]</code>
   • Hapus Stiker: <code>/qd</code> (balas ke stiker)
