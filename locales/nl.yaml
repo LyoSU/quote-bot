@@ -100,11 +100,11 @@ quote:
     <b>Klaar!</b> Emoji stijl gewijzigd naar: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Onze offerteservice is tijdelijk niet beschikbaar. Probeer het over een paar minuten opnieuw.
+      😕 Onze citaatservice is tijdelijk niet beschikbaar. Probeer het over een paar minuten opnieuw.
 
       Als het probleem aanhoudt, controleer @LyBlog voor updates.
     rate_limit: |
-      ⏳ Te veel aanvragen! Wacht ${seconds} seconden voordat u een nieuwe offerte creëert.
+      ⏳ Te veel aanvragen! Wacht ${seconds} seconden voordat je een nieuw citaat maakt.
     file_too_large: |
       📸 Het mediabestand is te groot (maximaal 5MB). Probeer een kleinere afbeelding of video te gebruiken.
     invalid_format: |
@@ -162,7 +162,7 @@ quote:
       Het stickerpakket heeft zijn limiet bereikt. Je quote wordt als een normale sticker verzonden.
     bot_blocked: |
       🚫 <b>Bot Geblokkeerd</b>
-      Je hebt deze bot geblokkeerd. Deblokkeer de bot om offertes te ontvangen.
+      Je hebt deze bot geblokkeerd. Deblokkeer de bot om citaten te ontvangen.
     user_deactivated: |
       👤 <b>Accountprobleem</b>
       Het doelgebruikersaccount is gedeactiveerd of verwijderd.
@@ -219,9 +219,9 @@ sticker:
   delete_random:
     suc: Verwijderd uit willekeurige verzameling 🗑
     error: |
-      <b>Kon de offerte niet verwijderen 😕</b>
+      <b>Kon het citaat niet verwijderen 😕</b>
       ${error}
-    not_found: Deze offerte staat niet in de database 🤔
+    not_found: Dit citaat staat niet in de database 🤔
   empty_forward: |
     Reageer op een sticker, foto of afbeelding die je wilt opslaan ✨
   fstik: |
@@ -234,12 +234,12 @@ rate:
       Je stem is verwijderd
   settings:
     enable: |
-      Offertes beoordeling staat aan
+      Citaatbeoordeling staat aan
     disable: |
-      Offertes beoordelen is uitgeschakeld
+      Citaatbeoordeling is uitgeschakeld
 random:
   empty: |
-    Nog geen hoog beoordeelde quotes in deze groep! Begin met het beoordelen van enkele berichten
+    Nog geen hoog beoordeelde quotes in deze groep! Begin met het beoordelen van quotes
   gab: |
     Frequentie voor willekeurige citaat ingesteld op ${gab} ✨
 hidden:
@@ -301,9 +301,9 @@ only_group: |
   <b>⚠️ Groepscommando</b>
   Deze functie werkt alleen in groepschats.
 rate_limit: |
-  <i>Nemen een korte pauze...</i> Je kunt dit commando weer gebruiken in ${seconds} seconden ⏳
+  <i>Even een korte pauze...</i> Je kunt dit commando weer gebruiken over ${seconds} seconden ⏳
 
-  <i>Tip: Terwijl je wacht, probeer je laatste citaat aan te passen met </i><code>/q kleur</code> <i>of</i> <code>/q media</code>
+  <i>Tip: Terwijl je wacht, probeer je laatste citaat aan te passen met </i><code>/q color</code> <i>of</i> <code>/q media</code>
 
 menu:
   title: |

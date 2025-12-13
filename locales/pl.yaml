@@ -1,5 +1,5 @@
 ---
-language_name: '🇵🇱 Polskie'
+language_name: '🇵🇱 Polski'
 description:
   short: |
     Zamień dowolną wiadomość w piękną naklejkę z cytatem! ✨
@@ -239,7 +239,7 @@ rate:
       Ocena cytatów została wyłączona
 random:
   empty: |
-    W tej grupie nie ma jeszcze cytatów o wysokiej ocenie! Zacznij oceniać wiadomości
+    W tej grupie nie ma jeszcze cytatów o wysokiej ocenie! Zacznij oceniać cytaty
   gab: |
     Częstotliwość losowych cytatów ustawiona na ${gab} ✨
 hidden:

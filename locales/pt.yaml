@@ -1,5 +1,5 @@
 ---
-language_name: '🇧🇷'
+language_name: '🇧🇷 Português'
 description:
   short: |
     Transforme qualquer mensagem em um lindo adesivo de citação! ✨
@@ -90,7 +90,7 @@ help_group: |
   Descubra todos os meus recursos em particular: <a href="t.me/${username}?start=help">Obter Ajuda</a> ✨
 btn:
   add_group: Adicionar ao grupo
-  help: Referencia
+  help: Ajuda
 quote:
   unsupported_message: |
     Este tipo de mensagem não é suportado para citação
@@ -243,7 +243,7 @@ rate:
       A avaliação de citação foi desativada
 random:
   empty: |
-    Ainda não há citações altamente avaliadas neste grupo! Comece a avaliar algumas mensagens
+    Ainda não há citações altamente avaliadas neste grupo! Comece a avaliar citações
   gab: |
     Frequência de citação aleatória definida para ${gab} ✨
 hidden:
@@ -286,7 +286,7 @@ donate:
   successful: |
     <b>Obrigado pelo seu apoio! 💜</b>
     Você está ajudando a tornar o QuotLyBot ainda melhor!
-  pay: '💜 Telegram de pagamento'
+  pay: '💜 Pagar via Telegram'
   other: 'Outros Métodos'
 emoji:
   info: |

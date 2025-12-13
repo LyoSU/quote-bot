@@ -1,5 +1,5 @@
 ---
-language_name: '🇯🇵 日本人'
+language_name: '🇯🇵 日本語'
 description:
   short: |
     メッセージを美しい引用ステッカーに変えましょう！✨
@@ -83,7 +83,7 @@ help_group: |
 
   プライベートで全機能を学びましょう: <a href="t.me/${username}?start=help">ヘルプを取得</a> ✨
 btn:
-  add_group: グループに追加：
+  add_group: グループに追加
   help: ヘルプ
 quote:
   unsupported_message: |
@@ -153,7 +153,7 @@ quote:
       <b>可能な理由:</b>
       • ボットをブロックしました
       • グループがボットを制限しています
-      • 私がグループから抜け出されています
+      • グループから削除されました
     sticker_set_invalid: |
       🔄 <b>ステッカー パックの問題</b>
       ステッカー パックに問題があります。新しい引用を作成しています...
@@ -239,7 +239,7 @@ rate:
       引用の評価が無効化されました
 random:
   empty: |
-    このグループには高評価の引用がまだありません！いくつかのメッセージを評価し始めてください
+    このグループには高評価の引用がまだありません！引用を評価し始めてください
   gab: |
     ランダム引用の頻度が${gab}に設定されました ✨
 hidden:
@@ -282,7 +282,7 @@ donate:
   successful: |
     <b>サポートありがとうございます！💜</b>
     QuotLyBotのさらなる進化を支援いただけて嬉しいです！
-  pay: '💜 ペイテレグラム'
+  pay: '💜 Telegramで支払う'
   other: '他の方法'
 emoji:
   info: |

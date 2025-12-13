@@ -239,7 +239,7 @@ rate:
       Evaluasi kutipan telah dinonaktifkan
 random:
   empty: |
-    Belum ada kutipan dengan penilaian tinggi di grup ini! Mulailah menilai beberapa pesan
+    Belum ada kutipan dengan penilaian tinggi di grup ini! Mulailah menilai kutipan
   gab: |
     Frekuensi kutipan acak diatur ke ${gab} ✨
 hidden:

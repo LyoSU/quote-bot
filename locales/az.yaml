@@ -84,7 +84,7 @@ help_group: |
   Bütün xüsusiyyətlərimi xüsusi öyrənin: <a href="t.me/${username}?start=help">Yardım Alın</a> ✨
 btn:
   add_group: Qrupa əlavə etmək
-  help: Istinad
+  help: Kömək
 quote:
   unsupported_message: |
     Bu mesaj növü sitat üçün dəstəklənmir
@@ -210,7 +210,7 @@ sticker:
       telegram: |
         <b>Stikeri silmək alınmadı 😕</b>
         ${reason}
-      not_found: Artıq stikerdən paketdə yoxdur 🤔
+      not_found: Stiker artıq paketdə yoxdur 🤔
       rights: Bu stikeri silmək üçün mənim icazəm yoxdur 🔒
       generic: |
         Nəsə səhv oldu. Zəhmət olmasa, yenidən cəhd edin ⚠️
@@ -295,7 +295,7 @@ emoji:
     Sizin emojiniz bütün yeni sitatlara əlavə ediləcək ✨
   done: Emoji stili yeniləndi! ✨
 only_admin: |
-  <b>⚠️ Administrator Ölçməsi Lazımdır</b>
+  <b>⚠️ Administrator İcazəsi Lazımdır</b>
   Bu əmr yalnız qrup administratorları tərəfindən istifadə edilə bilər.
 only_group: |
   <b>⚠️ Qrup Əmri</b>
