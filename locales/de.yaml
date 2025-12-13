@@ -38,9 +38,9 @@ help: |
   🎨 <b>Gestalte dein Zitat</b>
 
   • Farben:
-      • Einfach: <code>/q rot</code> (oder blau, grün, etc.)
+      • Einfach: <code>/q red</code> (oder blue, green, etc.)
       • Benutzerdefiniert: <code>/q #[Hex-Farbcode]</code> (z.B. <code>/q #cbafff</code>)
-      • Zufällig: <code>/q zufällig</code>
+      • Zufällig: <code>/q random</code>
   • Medien: Füge Bilder/Videos aus der zitierten Nachricht mit <code>/q m</code> oder <code>/q media</code> hinzu
       • Medien zuschneiden: Verwende <code>/q c</code> oder <code>/q crop</code>, um die Medien zuzuschneiden.
   • Antworten beibehalten: Zeige die Nachricht, auf die geantwortet wird, mit <code>/q r</code> oder <code>/q reply</code> an
@@ -48,8 +48,8 @@ help: |
 
   💡 <b>Coole Kombinationen</b>
 
-  • Weißes Zitat mit Antworten: <code>/q 3 weiß rp</code>
-  • Hochwertiges rotes Bild: <code>/q i rot s3.2</code>
+  • Weißes Zitat mit Antworten: <code>/q 3 white rp</code>
+  • Hochwertiges rotes Bild: <code>/q i red s3.2</code>
   • Zitat mit Medien & Antworten: <code>/q r 2 #cbafff m</code>
 
   ⚙️ <b>Weitere Optionen</b>
@@ -79,9 +79,9 @@ help: |
   • Unterstützung: <code>/donate</code>
 help_group: |
   <b>Hallo! 👋</b>
-  Ich werde in dieser Gruppe schöne Zitate erstellen - einfach <code>/q</code> als Antwort auf eine Nachricht verwenden!
+  Ich erstelle schöne Zitate in dieser Gruppe - einfach <code>/q</code> als Antwort auf eine Nachricht verwenden!
 
-  Lernen Sie alle meine Funktionen im Privaten kennen: <a href="t.me/${username}?start=help">Hilfe bekommen</a> ✨
+  Lerne alle meine Funktionen im Privaten kennen: <a href="t.me/${username}?start=help">Hilfe bekommen</a> ✨
 btn:
   add_group: Zur Gruppe hinzufügen
   help: Hilfe
@@ -100,13 +100,13 @@ quote:
     <b>Fertig!</b> Emoji-Stil geändert zu: <code>${emojiBrand}</code> ✨
   errors:
     api_down: |
-      😕 Unser Angebotsdienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es in ein paar Minuten erneut.
+      😕 Unser Zitat-Service ist vorübergehend nicht verfügbar. Bitte versuche es in ein paar Minuten erneut.
 
-      Wenn das Problem weiterhin besteht, überprüfen Sie @LyBlog für Updates.
+      Wenn das Problem weiterhin besteht, schau auf @LyBlog für Updates.
     rate_limit: |
-      ⏳ Zu viele Anfragen! Bitte warten Sie ${seconds} Sekunden, bevor Sie ein weiteres Angebot erstellen.
+      ⏳ Zu viele Anfragen! Bitte warte ${seconds} Sekunden, bevor du ein weiteres Zitat erstellst.
     file_too_large: |
-      📸 Die Mediendatei ist zu groß (max 5 MB). Versuchen Sie, ein kleineres Bild oder Video zu verwenden.
+      📸 Die Mediendatei ist zu groß (max 5 MB). Versuche, ein kleineres Bild oder Video zu verwenden.
     invalid_format: |
       ❌ Nicht unterstütztes Dateiformat. Ich unterstütze:
       • Bilder (JPG, PNG, WEBP)
@@ -219,9 +219,9 @@ sticker:
   delete_random:
     suc: Von der zufälligen Sammlung entfernt 🗑
     error: |
-      <b>Konnte das Angebot nicht entfernen 😕</b>
+      <b>Konnte das Zitat nicht entfernen 😕</b>
       ${error}
-    not_found: Dieses Angebot befindet sich nicht in der Datenbank 🤔
+    not_found: Dieses Zitat befindet sich nicht in der Datenbank 🤔
   empty_forward: |
     Bitte antworten Sie auf einen Sticker, ein Foto oder ein Bild, das Sie speichern möchten ✨
   fstik: |
@@ -282,7 +282,7 @@ donate:
   successful: |
     <b>Danke für Ihre Unterstützung! 💜</b>
     Sie helfen mit, QuotLyBot noch besser zu machen!
-  pay: ':lila Herz: Zahlen Sie per Telegram'
+  pay: '💜 Per Telegram zahlen'
   other: 'Andere Optionen'
 emoji:
   info: |
