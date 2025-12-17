@@ -903,7 +903,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.5-flash-lite-preview-09-2025',
+      model: 'tngtech/tng-r1t-chimera',
       messages: [
         {
           role: 'system',
