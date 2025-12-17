@@ -911,7 +911,8 @@ ${JSON.stringify(messageForAIContext)}
         },
         ...messageForAI
       ],
-      max_tokens: 150,
+      max_tokens: 600,
+
       temperature: 0.7,
       retry: 3
     })
