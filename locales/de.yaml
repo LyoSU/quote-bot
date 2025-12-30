@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Ups!</b> Etwas ist schiefgelaufen:\n<pre>${error}</pre>
   delete:
     suc: Von Ihrem <a href="${link}">Gruppen-Stickerpack</a> entfernt 🗑
+    empty_reply: Bitte antworten Sie auf einen Sticker, den Sie löschen möchten 🗑
     error:
       telegram: |
         <b>Sticker konnte nicht entfernt werden 😕</b>
