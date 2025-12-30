@@ -206,6 +206,7 @@ sticker:
       telegram: <b>이런!</b> 문제가 발생했습니다:\n<pre>${error}</pre>
   delete:
     suc: <a href="${link}">그룹 스티커 팩</a>에서 제거되었습니다 🗑
+    empty_reply: 삭제하려는 스티커에 답장해 주세요 🗑
     error:
       telegram: |
         <b>스티커 제거 실패 😕</b>
