@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Oops!</b> Bir şeyler ters gitti:\n<pre>${error}</pre>
   delete:
     suc: <a href="${link}">Grup çıkartma paketinizden</a> kaldırıldı 🗑
+    empty_reply: Lütfen silmek istediğiniz bir çıkartmaya yanıt verin 🗑
     error:
       telegram: |
         <b>Çıkartma kaldırılamadı 😕</b>
