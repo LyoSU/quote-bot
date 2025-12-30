@@ -206,6 +206,7 @@ sticker:
       telegram: <b>糟糕！</b> 出现错误：\n<pre>${error}</pre>
   delete:
     suc: 已从您的<a href="${link}">群组贴纸包</a>中移除 🗑
+    empty_reply: 请回复您想删除的贴纸 🗑
     error:
       telegram: |
         <b>无法移除贴纸 😕</b>
