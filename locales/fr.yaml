@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Oups !</b> Quelque chose s'est mal passé:\n<pre>${error}</pre>
   delete:
     suc: Supprimé de votre <a href="${link}">pack d'autocollants du groupe</a> 🗑
+    empty_reply: Veuillez répondre à un autocollant que vous souhaitez supprimer 🗑
     error:
       telegram: |
         <b>Impossible de supprimer l'autocollant 😕</b>
