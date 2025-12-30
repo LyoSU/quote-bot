@@ -206,6 +206,7 @@ sticker:
       telegram: <b>¡Vaya!</b> Algo salió mal:\n<pre>${error}</pre>
   delete:
     suc: Eliminado de tu <a href="${link}">pack de stickers del grupo</a> 🗑
+    empty_reply: Por favor, responde a un sticker que quieras eliminar 🗑
     error:
       telegram: |
         <b>Falló al eliminar el sticker 😕</b>

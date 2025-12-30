@@ -211,6 +211,7 @@ sticker:
       telegram: <b>Oops!</b> Something went wrong:\n<pre>${error}</pre>
   delete:
     suc: Removed from your <a href="${link}">group sticker pack</a> 🗑
+    empty_reply: Please reply to a sticker you'd like to delete 🗑
     error:
       telegram: |
         <b>Failed to remove sticker 😕</b>

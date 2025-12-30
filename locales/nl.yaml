@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Oeps!</b> Er ging iets mis:\n<pre>${error}</pre>
   delete:
     suc: Verwijderd uit je <a href="${link}">groepssticker pakket</a> 🗑
+    empty_reply: Antwoord op een sticker die je wilt verwijderen 🗑
     error:
       telegram: |
         <b>Oeps!</b> Sticker kon niet worden verwijderd:

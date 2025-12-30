@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Oops!</b> Bir şey səhv getdi:\n<pre>${error}</pre>
   delete:
     suc: <a href="${link}">Qrupun stikerpaka</a>dan çıxarıldı 🗑
+    empty_reply: Zəhmət olmasa silmək istədiyiniz stikerə cavab verin 🗑
     error:
       telegram: |
         <b>Stikeri silmək alınmadı 😕</b>

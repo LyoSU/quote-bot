@@ -3,12 +3,12 @@ module.exports = async ctx => {
   let result
 
   if (!ctx.message.reply_to_message) {
-    return ctx.replyWithHTML(ctx.i18n.t('sticker.empty_forward'))
+    return ctx.replyWithHTML(ctx.i18n.t('sticker.delete.empty_reply'))
   }
 
   const replyMessage = ctx.message.reply_to_message
   if (!replyMessage.sticker) {
-    return ctx.replyWithHTML(ctx.i18n.t('sticker.empty_forward'))
+    return ctx.replyWithHTML(ctx.i18n.t('sticker.delete.empty_reply'))
   }
 
   // Check if sticker is from group's sticker set

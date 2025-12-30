@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Ups!</b> Ada yang salah:\n<pre>${error}</pre>
   delete:
     suc: Dihapus dari <a href="${link}">paket stiker grup</a> Anda 🗑
+    empty_reply: Silakan balas stiker yang ingin Anda hapus 🗑
     error:
       telegram: |
         <b>Gagal menghapus stiker 😕</b>

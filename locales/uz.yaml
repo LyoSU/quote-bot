@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Oops!</b> Nimadir xato ketdi:\n<pre>${error}</pre>
   delete:
     suc: <a href="${link}">Guruh stikerlari to'plamidan</a> olib tashlandi 🗑
+    empty_reply: Iltimos, o'chirmoqchi bo'lgan stikerga javob bering 🗑
     error:
       telegram: |
         <b>Stiker o'chirib bo'lmadi 😕</b>

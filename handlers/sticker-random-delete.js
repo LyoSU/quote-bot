@@ -28,10 +28,10 @@ module.exports = async ctx => {
         })
       }
     } else {
-      result = ctx.i18n.t('sticker.empty_forward')
+      result = ctx.i18n.t('sticker.delete.empty_reply')
     }
   } else {
-    result = ctx.i18n.t('sticker.empty_forward')
+    result = ctx.i18n.t('sticker.delete.empty_reply')
   }
 
   if (result) {

@@ -212,6 +212,7 @@ sticker:
       telegram: <b>Ops!</b> Algo deu errado:\n<pre>${error}</pre>
   delete:
     suc: Removido do seu <a href="${link}">pacote de adesivos do grupo</a> 🗑
+    empty_reply: Por favor, responda a um adesivo que deseja excluir 🗑
     error:
       telegram: |
         <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>${error}</pre>

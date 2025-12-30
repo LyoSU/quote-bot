@@ -206,6 +206,7 @@ sticker:
       telegram: <b>おっと！</b> 何かがうまくいかなかったようです:\n<pre>${error}</pre>
   delete:
     suc: <a href="${link}">グループステッカーパック</a>から削除されました 🗑
+    empty_reply: 削除したいステッカーに返信してください 🗑
     error:
       telegram: |
         <b>ステッカーの削除に失敗しました 😕</b>

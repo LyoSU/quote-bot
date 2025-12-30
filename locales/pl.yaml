@@ -206,6 +206,7 @@ sticker:
       telegram: <b>Ups!</b> Coś poszło nie tak:\n<pre>${error}</pre>
   delete:
     suc: Usunięto z Twojego <a href="${link}">pakietu naklejek grupy</a> 🗑
+    empty_reply: Proszę odpowiedzieć na naklejkę, którą chcesz usunąć 🗑
     error:
       telegram: |
         <b>Nie udało się usunąć naklejki 😕</b>
