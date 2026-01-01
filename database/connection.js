@@ -5,6 +5,12 @@ const MAX_RETRY_ATTEMPTS = 10
 const RETRY_DELAY = 5000
 let isConnecting = false
 
+// Promise that resolves when DB is connected
+let readyResolve
+const readyPromise = new Promise((resolve) => {
+  readyResolve = resolve
+})
+
 const connectWithRetry = async () => {
   if (isConnecting) {
     // Wait for ongoing connection with timeout to prevent deadlock
@@ -42,6 +48,7 @@ const connectWithRetry = async () => {
     console.log('Successfully connected to MongoDB')
     retryCount = 0 // Reset on successful connection
     isConnecting = false
+    readyResolve() // Signal that DB is ready
   } catch (error) {
     isConnecting = false
     retryCount++
@@ -81,4 +88,6 @@ process.on('SIGINT', async () => {
   process.exit(0)
 })
 
+// Export connection with ready promise
+mongoose.connection.readyPromise = readyPromise
 module.exports = mongoose.connection

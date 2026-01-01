@@ -2,7 +2,8 @@ const collections = require('./models')
 const connection = require('./connection')
 
 const db = {
-  connection
+  connection,
+  ready: connection.readyPromise
 }
 
 Object.keys(collections).forEach((collectionName) => {

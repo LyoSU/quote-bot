@@ -62,7 +62,7 @@ class TelegramProcessor {
     })
   }
 
-  createTDLibProxy() {
+  createTDLibProxy () {
     // Create proxy that sends TDLib requests through Redis
     return new Proxy({}, {
       get: (target, prop) => {
@@ -227,6 +227,11 @@ class TelegramProcessor {
 
   async start () {
     try {
+      // Wait for database to be ready before processing
+      logWithTimestamp('Waiting for MongoDB connection...')
+      await db.ready
+      logWithTimestamp('MongoDB connected')
+
       await this.redis.connect()
       await this.tdlibRedis.connect()
 
