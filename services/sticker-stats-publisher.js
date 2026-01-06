@@ -185,13 +185,7 @@ class StickerStatsPublisher {
       }
     }
 
-    // Run multi with callback
-    await new Promise((resolve, reject) => {
-      multi.exec_RENAMED((err, results) => {
-        if (err) reject(err)
-        else resolve(results)
-      })
-    })
+    await multi.exec()
   }
 
   /**
