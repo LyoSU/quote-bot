@@ -290,22 +290,9 @@ bot.action(/set_language:(.*)/, handleLanguage)
 
 bot.use(handleAiMode)
 
-// bot.on('sticker', rateLimit({
-//   window: 1000 * 60,
-//   limit: 1,
-//   keyGenerator: (ctx) => ctx.from.id,
-//   onLimitExceeded: (ctx, next) => {
-//     return next()
-//   }
-// }), handleSticker)
-// bot.on('text', rateLimit({
-//   window: 1000 * 60,
-//   limit: 1,
-//   keyGenerator: (ctx) => ctx.from.id,
-//   onLimitExceeded: (ctx, next) => {
-//     return next()
-//   }
-// }), handleSticker)
+// Sticker stats collection middleware (runs on all messages)
+// Tracks sticker usage and custom emoji for fstikbot catalog
+bot.use(handleSticker)
 
 bot.on('message', Composer.privateChat(handleQuote))
 
