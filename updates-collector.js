@@ -2,6 +2,7 @@ require('dotenv').config({ path: './.env' })
 
 const { Telegraf } = require('telegraf')
 const Redis = require('ioredis')
+const StickerStatsPublisher = require('./services/sticker-stats-publisher')
 
 const logWithTimestamp = (message) => {
   console.log(`[${new Date().toISOString()}] [COLLECTOR] ${message}`)
@@ -174,6 +175,13 @@ class TelegramCollector {
       // Start TDLib server
       this.startTDLibServer()
 
+      // Start sticker stats publisher
+      this.stickerPublisher = new StickerStatsPublisher({
+        redis: this.redis
+      })
+      this.stickerPublisher.start()
+      logWithTimestamp('Sticker stats publisher started')
+
       logWithTimestamp('Starting Telegram collector...')
       await this.bot.launch()
 
@@ -206,6 +214,9 @@ class TelegramCollector {
 
   async stop() {
     logWithTimestamp('Stopping collector...')
+    if (this.stickerPublisher) {
+      this.stickerPublisher.stop()
+    }
     this.bot.stop('SIGTERM')
     await this.redis.quit()
     if (this.tdlibRedis) await this.tdlibRedis.quit()
