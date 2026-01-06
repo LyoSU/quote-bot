@@ -38,27 +38,26 @@ async function trackStickerUsage (setName, userId, chatId) {
   const hour = Math.floor(Date.now() / 3600000) // Current hour bucket
 
   try {
-    const pipe = redis.pipeline()
+    // Use multi() for atomic execution, returns promise on exec()
+    const multi = redis.multi()
 
     // HyperLogLog for unique users (memory efficient ~12KB per key)
-    pipe.pfadd(`${PREFIX}:hll:${setName}:users`, String(userId))
-    pipe.expire(`${PREFIX}:hll:${setName}:users`, DATA_EXPIRE_TIME)
+    multi.pfadd(`${PREFIX}:hll:${setName}:users`, String(userId))
+    multi.expire(`${PREFIX}:hll:${setName}:users`, DATA_EXPIRE_TIME)
 
     // HyperLogLog for unique groups
-    pipe.pfadd(`${PREFIX}:hll:${setName}:groups`, String(chatId))
-    pipe.expire(`${PREFIX}:hll:${setName}:groups`, DATA_EXPIRE_TIME)
+    multi.pfadd(`${PREFIX}:hll:${setName}:groups`, String(chatId))
+    multi.expire(`${PREFIX}:hll:${setName}:groups`, DATA_EXPIRE_TIME)
 
     // Hourly bucket for velocity calculation
-    pipe.hincrby(`${PREFIX}:hourly:${hour}:${setName}`, 'count', 1)
-    pipe.expire(`${PREFIX}:hourly:${hour}:${setName}`, HOURLY_EXPIRE_TIME)
+    multi.hincrby(`${PREFIX}:hourly:${hour}:${setName}`, 'count', 1)
+    multi.expire(`${PREFIX}:hourly:${hour}:${setName}`, HOURLY_EXPIRE_TIME)
 
     // Total usage counter (sorted set)
-    pipe.zincrby(`${PREFIX}:sticker_sets`, 1, setName)
+    multi.zincrby(`${PREFIX}:sticker_sets`, 1, setName)
 
-    // Run all commands
-    await new Promise((resolve, reject) => {
-      pipe.then(resolve).catch(reject)
-    })
+    // Execute all commands
+    await multi.exec()
   } catch (error) {
     // Don't throw - stats collection shouldn't break the bot
     console.error('Error tracking sticker usage:', error.message)

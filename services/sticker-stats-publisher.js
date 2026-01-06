@@ -171,22 +171,26 @@ class StickerStatsPublisher {
   async cleanupPublishedSets (setNames) {
     if (setNames.length === 0) return
 
-    const pipe = this.redis.pipeline()
+    const multi = this.redis.multi()
 
     for (const name of setNames) {
-      pipe.del(`${PREFIX}:hll:${name}:users`)
-      pipe.del(`${PREFIX}:hll:${name}:groups`)
-      pipe.zrem(`${PREFIX}:sticker_sets`, name)
+      multi.del(`${PREFIX}:hll:${name}:users`)
+      multi.del(`${PREFIX}:hll:${name}:groups`)
+      multi.zrem(`${PREFIX}:sticker_sets`, name)
 
       // Clean up hourly buckets
       const currentHour = Math.floor(Date.now() / 3600000)
       for (let h = 0; h < 25; h++) {
-        pipe.del(`${PREFIX}:hourly:${currentHour - h}:${name}`)
+        multi.del(`${PREFIX}:hourly:${currentHour - h}:${name}`)
       }
     }
 
+    // Run multi with callback
     await new Promise((resolve, reject) => {
-      pipe.then(resolve).catch(reject)
+      multi.exec_RENAMED((err, results) => {
+        if (err) reject(err)
+        else resolve(results)
+      })
     })
   }
 
