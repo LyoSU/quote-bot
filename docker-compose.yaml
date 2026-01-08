@@ -21,8 +21,6 @@ services:
     env_file: .env
     restart: always
     command: node updates-worker.js
-    deploy:
-      replicas: 4
     depends_on:
       - redis
       - collector
