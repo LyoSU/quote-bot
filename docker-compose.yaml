@@ -19,6 +19,8 @@ services:
   worker-1:
     build: .
     env_file: .env
+    environment:
+      - WORKER_INDEX=0
     restart: always
     command: node updates-worker.js
     depends_on:
@@ -35,6 +37,8 @@ services:
   worker-2:
     build: .
     env_file: .env
+    environment:
+      - WORKER_INDEX=1
     restart: always
     command: node updates-worker.js
     depends_on:
@@ -51,6 +55,8 @@ services:
   worker-3:
     build: .
     env_file: .env
+    environment:
+      - WORKER_INDEX=2
     restart: always
     command: node updates-worker.js
     depends_on:

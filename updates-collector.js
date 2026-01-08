@@ -59,7 +59,7 @@ class TelegramCollector {
 
         // Get chat ID for consistent worker assignment
         const chatId = this.getChatId(update)
-        const workerIndex = Math.abs(chatId) % 4 // 4 workers from ecosystem config
+        const workerIndex = Math.abs(chatId) % 3 // 3 workers from docker-compose
         const queueName = `telegram:updates:worker:${workerIndex}`
 
         // Push to specific worker queue
@@ -163,7 +163,7 @@ class TelegramCollector {
       await this.redis.connect()
 
       // Clear worker queues and reset stats
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 3; i++) {
         await this.redis.del(`telegram:updates:worker:${i}`)
       }
       await this.redis.set('telegram:collected_count', 0)
@@ -190,7 +190,7 @@ class TelegramCollector {
 
           // Get queue sizes for all workers
           const queueSizes = []
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < 3; i++) {
             const size = await this.redis.llen(`telegram:updates:worker:${i}`)
             queueSizes.push(size)
           }
