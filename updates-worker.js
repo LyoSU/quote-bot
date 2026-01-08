@@ -41,6 +41,7 @@ class TelegramProcessor {
     this.workerId = process.env.WORKER_INDEX || process.env.pm_id || process.pid
     this.workerIndex = process.env.WORKER_INDEX !== undefined ? parseInt(process.env.WORKER_INDEX) : (this.workerId % 3)
     this.queueName = `telegram:updates:worker:${this.workerIndex}`
+    this.pendingTDLibRequests = new Map() // Track pending TDLib requests
 
     this.setupRedisEvents()
     this.setupBot()
@@ -54,6 +55,28 @@ class TelegramProcessor {
     this.redis.on('error', (error) => {
       errorWithTimestamp('Redis error:', error.message)
     })
+
+    // Setup TDLib response handler once
+    this.tdlibRedis.on('message', (channel, message) => {
+      if (channel === 'tdlib:responses') {
+        try {
+          const response = JSON.parse(message)
+          const pending = this.pendingTDLibRequests.get(response.id)
+          if (pending) {
+            this.pendingTDLibRequests.delete(response.id)
+            clearTimeout(pending.timeout)
+            if (response.error) {
+              pending.reject(new Error(response.error))
+            } else {
+              pending.resolve(response.result)
+            }
+          }
+        } catch (error) {
+          // Ignore parse errors
+        }
+      }
+    })
+    })
   }
 
   createTDLibProxy () {
@@ -62,7 +85,7 @@ class TelegramProcessor {
       get: (target, prop) => {
         return (...args) => {
           return new Promise((resolve, reject) => {
-            const requestId = Date.now() + Math.random()
+            const requestId = `${this.workerId}-${Date.now()}-${Math.random()}`
 
             // Send request through Redis
             const request = {
@@ -71,38 +94,17 @@ class TelegramProcessor {
               args: args
             }
 
-            this.redis.publish('tdlib:requests', JSON.stringify(request))
-
-            // Listen for response on separate connection
-            const responseHandler = (channel, message) => {
-              if (channel === 'tdlib:responses') {
-                try {
-                  const response = JSON.parse(message)
-                  if (response.id === requestId) {
-                    this.tdlibRedis.unsubscribe('tdlib:responses')
-                    this.tdlibRedis.removeListener('message', responseHandler)
-
-                    if (response.error) {
-                      reject(new Error(response.error))
-                    } else {
-                      resolve(response.result)
-                    }
-                  }
-                } catch (error) {
-                  // Ignore parse errors
-                }
-              }
-            }
-
-            this.tdlibRedis.subscribe('tdlib:responses')
-            this.tdlibRedis.on('message', responseHandler)
-
-            // Timeout after 5 seconds
-            setTimeout(() => {
-              this.tdlibRedis.unsubscribe('tdlib:responses')
-              this.tdlibRedis.removeListener('message', responseHandler)
+            // Set timeout
+            const timeout = setTimeout(() => {
+              this.pendingTDLibRequests.delete(requestId)
               reject(new Error(`TDLib ${prop} timeout`))
             }, 5000)
+
+            // Store pending request
+            this.pendingTDLibRequests.set(requestId, { resolve, reject, timeout })
+
+            // Publish request
+            this.redis.publish('tdlib:requests', JSON.stringify(request))
           })
         }
       }
@@ -228,6 +230,9 @@ class TelegramProcessor {
 
       await this.redis.connect()
       await this.tdlibRedis.connect()
+
+      // Subscribe to TDLib responses once after connection
+      await this.tdlibRedis.subscribe('tdlib:responses')
 
       logWithTimestamp(`Starting Telegram processor (Worker ${this.workerId}[${this.workerIndex}] -> ${this.queueName})...`)
 
