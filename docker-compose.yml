@@ -1,41 +1,57 @@
-version: '3'
+version: '3.8'
 
 services:
-    bot:
-        build:
-            context: .
-        env_file: .env
-        restart: always
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "10m"
-                max-file: "3"
-        networks:
-            - quotly
-        command: node index.js
-    mongo:
-        restart: always
-        image: mongo:4
-        volumes:
-            - mongo-volume:/data/db
-        ports:
-            - 127.0.0.1:27017:27017
-        networks:
-            - quotly
-    redis:
-        image: redis:7.2.5-alpine
-        restart: unless-stopped
-        profiles:
-            - dev
-        networks:
-            - quotly
-    
+  collector:
+    build: .
+    env_file: .env
+    restart: always
+    command: node updates-collector.js
+    depends_on:
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - quotly
+
+  worker:
+    build: .
+    env_file: .env
+    restart: always
+    command: node updates-worker.js
+    deploy:
+      replicas: 4
+    depends_on:
+      - redis
+      - collector
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - quotly
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    networks:
+      - quotly
+
+  mongo:
+    image: mongo:4
+    restart: always
+    volumes:
+      - mongo-volume:/data/db
+    networks:
+      - quotly
+
 volumes:
-    mongo-volume:
-        driver: 'local'
+  mongo-volume:
+    driver: 'local'
 
 networks:
-    quotly:
-        external: true
-        
+  quotly:
+    driver: bridge

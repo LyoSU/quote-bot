@@ -1,12 +1,22 @@
-FROM nikolaik/python-nodejs:python3.11-nodejs20 AS builder
+FROM node:22-bookworm
 
-ENV NODE_WORKDIR /app
-WORKDIR $NODE_WORKDIR
+WORKDIR /app
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN apt-get update && apt-get install -y build-essential gcc wget git libvips && rm -rf /var/lib/apt/lists/*
+# Install dependencies for native modules
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libvips-dev \
+    python3 \
+    && rm -rf /var/lib/apt/lists/*
 
+# Copy package files
 COPY package.json package-lock.json ./
-RUN npm install && npm install sharp@0.30.5 && npm install tdl-tdlib-addon --build-from-source
 
-ADD . $NODE_WORKDIR
+# Install dependencies
+RUN npm ci
+
+# Copy source
+COPY . .
+
+# Default command (overridden in docker-compose)
+CMD ["node", "updates-collector.js"]
