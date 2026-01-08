@@ -1,5 +1,3 @@
-const got = require('got')
-
 /**
  * Send ad to user via Gramads API
  * @param {number} chatId - Telegram chat ID
@@ -16,21 +14,25 @@ const sendGramadsAd = async (chatId) => {
 
     const sendPostDto = { SendToChatId: chatId }
 
-    const response = await got.post('https://api.gramads.net/ad/SendPost', {
-      json: sendPostDto,
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000)
+
+    const response = await fetch('https://api.gramads.net/ad/SendPost', {
+      method: 'POST',
+      body: JSON.stringify(sendPostDto),
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `bearer ${token}`
       },
-      timeout: {
-        request: 10000 // 10 second timeout
-      }
+      signal: controller.signal
     })
 
-    if (response.statusCode === 200) {
-      // Removed success log to reduce spam
-      return JSON.parse(response.body)
+    clearTimeout(timeoutId)
+
+    if (response.ok) {
+      return await response.json()
     } else {
-      console.warn(`Gramads API returned status ${response.statusCode} for chat ${chatId}`)
+      console.warn(`Gramads API returned status ${response.status} for chat ${chatId}`)
       return null
     }
   } catch (error) {

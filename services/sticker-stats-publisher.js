@@ -12,7 +12,6 @@
  * - Retry mechanism with exponential backoff
  */
 
-const got = require('got')
 const { createRedisClient } = require('../utils/redis')
 
 const PREFIX = 'quotly'
@@ -195,18 +194,28 @@ class StickerStatsPublisher {
     }
 
     try {
-      const response = await got.post(`${this.apiUri}/publishStickerSetBatch`, {
-        json: {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000)
+
+      const response = await fetch(`${this.apiUri}/publishStickerSetBatch`, {
+        method: 'POST',
+        body: JSON.stringify({
           token: this.botToken,
           stickerSets: batch,
           source: CONFIG.SOURCE_ID,
           timestamp: Date.now()
-        },
-        timeout: { request: 30000 },
-        retry: { limit: 2 }
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal
       })
 
-      const result = JSON.parse(response.body)
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+
+      const result = await response.json()
       console.log(`Publisher: Sent ${batch.length} sets - created: ${result.results?.created || 0}, updated: ${result.results?.updated || 0}`)
       return true
     } catch (error) {

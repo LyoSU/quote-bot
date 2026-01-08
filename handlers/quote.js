@@ -1,7 +1,6 @@
 const Markup = require('telegraf/markup')
 const Telegram = require('telegraf/telegram')
 const fs = require('fs')
-const got = require('got')
 const {
   OpenAI
 } = require('openai')
@@ -980,10 +979,14 @@ ${JSON.stringify(messageForAIContext)}
 
   const quoteApiUri = flag.html ? process.env.QUOTE_API_URI_HTML : process.env.QUOTE_API_URI
 
-  const generate = await got.post(
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 30 * 1000)
+
+  const generate = await fetch(
     `${quoteApiUri}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
     {
-      json: {
+      method: 'POST',
+      body: JSON.stringify({
         type,
         format,
         backgroundColor,
@@ -992,18 +995,19 @@ ${JSON.stringify(messageForAIContext)}
         scale: flag.scale || scale,
         messages: quoteMessages,
         emojiBrand
-      },
-      responseType: 'buffer',
-      timeout: {
-        request: 30 * 1000 // 30 seconds
-      },
-      retry: {
-        limit: 2,
-        methods: ['POST'],
-        statusCodes: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]
-      }
+      }),
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal
     }
-  ).catch((error) => handleQuoteError(ctx, error))
+  ).then(async (res) => {
+    clearTimeout(timeoutId)
+    if (!res.ok) {
+      const error = new Error(`HTTP ${res.status}`)
+      error.response = { body: await res.text() }
+      throw error
+    }
+    return { body: Buffer.from(await res.arrayBuffer()) }
+  }).catch((error) => handleQuoteError(ctx, error))
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
