@@ -16,7 +16,39 @@ services:
     networks:
       - quotly
 
-  worker:
+  worker-1:
+    build: .
+    env_file: .env
+    restart: always
+    command: node updates-worker.js
+    depends_on:
+      - redis
+      - collector
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - quotly
+
+  worker-2:
+    build: .
+    env_file: .env
+    restart: always
+    command: node updates-worker.js
+    depends_on:
+      - redis
+      - collector
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - quotly
+
+  worker-3:
     build: .
     env_file: .env
     restart: always
