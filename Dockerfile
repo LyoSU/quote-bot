@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install --omit=dev
 
 # Copy source
 COPY . .
