@@ -1006,7 +1006,12 @@ ${JSON.stringify(messageForAIContext)}
       error.response = { body: await res.text() }
       throw error
     }
-    return { body: Buffer.from(await res.arrayBuffer()) }
+    return {
+      body: Buffer.from(await res.arrayBuffer()),
+      headers: {
+        'quote-type': res.headers.get('quote-type') || type
+      }
+    }
   }).catch((error) => handleQuoteError(ctx, error))
 
   if (generate.error) {
