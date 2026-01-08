@@ -76,14 +76,6 @@ services:
     networks:
       - quotly
 
-  mongo:
-    image: mongo:4
-    restart: always
-    volumes:
-      - mongo-volume:/data/db
-    networks:
-      - quotly
-
 volumes:
   mongo-volume:
     driver: 'local'
