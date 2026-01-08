@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './.env' })
 
 const { Telegraf } = require('telegraf')
-const Redis = require('ioredis')
+const { createRedisClient } = require('./utils/redis')
 const StickerStatsPublisher = require('./services/sticker-stats-publisher')
 
 const logWithTimestamp = (message) => {
@@ -19,12 +19,9 @@ class TelegramCollector {
     })
 
     // Single Redis connection for all operations
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT || 6379,
+    this.redis = createRedisClient({
       retryDelayOnFailover: 100,
-      maxRetriesPerRequest: 3,
-      lazyConnect: true
+      maxRetriesPerRequest: 3
     })
 
 
@@ -92,11 +89,10 @@ class TelegramCollector {
     const tdlib = require('./helpers/tdlib')
 
     // Create separate connection for TDLib pub/sub
-    this.tdlibRedis = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT || 6379,
+    this.tdlibRedis = createRedisClient({
       retryDelayOnFailover: 100,
-      maxRetriesPerRequest: 3
+      maxRetriesPerRequest: 3,
+      lazyConnect: false
     })
 
     // Subscribe to TDLib requests from workers

@@ -13,7 +13,7 @@
  */
 
 const got = require('got')
-const Redis = require('ioredis')
+const { createRedisClient } = require('../utils/redis')
 
 const PREFIX = 'quotly'
 
@@ -32,10 +32,7 @@ const CONFIG = {
 
 class StickerStatsPublisher {
   constructor (options = {}) {
-    this.redis = options.redis || new Redis({
-      host: process.env.REDIS_HOST || '127.0.0.1',
-      port: process.env.REDIS_PORT || 6379
-    })
+    this.redis = options.redis || createRedisClient({ lazyConnect: false })
 
     this.apiUri = options.apiUri || process.env.FSTIK_API_URI
     this.botToken = options.botToken || process.env.BOT_TOKEN

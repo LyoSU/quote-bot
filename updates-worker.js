@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './.env' })
 
 const { Telegraf } = require('telegraf')
-const Redis = require('ioredis')
+const { createRedisClient } = require('./utils/redis')
 const { db } = require('./database')
 const { stats } = require('./middlewares')
 
@@ -22,21 +22,15 @@ class TelegramProcessor {
     })
 
     // Main Redis connection for queue and stats
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT || 6379,
+    this.redis = createRedisClient({
       retryDelayOnFailover: 100,
-      maxRetriesPerRequest: 3,
-      lazyConnect: true
+      maxRetriesPerRequest: 3
     })
 
     // Separate connection for TDLib pub/sub
-    this.tdlibRedis = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT || 6379,
+    this.tdlibRedis = createRedisClient({
       retryDelayOnFailover: 100,
-      maxRetriesPerRequest: 3,
-      lazyConnect: true
+      maxRetriesPerRequest: 3
     })
 
     this.isProcessing = false
