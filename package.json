@@ -26,7 +26,7 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "prebuilt-tdlib": "^0.1008037.0",
+    "prebuilt-tdlib": "^0.1008059.0",
     "dotenv": "^16.4.7",
     "emoji-db": "^14.0.1",
     "enot-node": "^1.0.1",

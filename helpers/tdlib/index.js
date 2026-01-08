@@ -4,13 +4,13 @@ const tdDirectory = path.resolve(__dirname, 'data')
 
 try {
   const { getTdjson } = require('prebuilt-tdlib')
-  tdl.configure({ tdjson: getTdjson(), verbosityLevel: 0 })
+  const tdjsonPath = getTdjson()
+  console.log('Using prebuilt-tdlib from:', tdjsonPath)
+  tdl.configure({ tdjson: tdjsonPath, verbosityLevel: 0 })
 } catch (err) {
-  if (err.code === 'MODULE_NOT_FOUND') {
-    tdl.configure({ libdir: tdDirectory, verbosityLevel: 0 })
-  } else {
-    throw err
-  }
+  console.error('prebuilt-tdlib error:', err.message)
+  console.log('Falling back to local libtdjson.so at:', tdDirectory)
+  tdl.configure({ libdir: tdDirectory, verbosityLevel: 0 })
 }
 
 let client = null
