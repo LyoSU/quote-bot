@@ -24,8 +24,7 @@ const quoteSchema = Schema({
       name: String,
       vote: [{
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        index: true
+        ref: 'User'
       }]
     }],
     score: {
@@ -33,10 +32,12 @@ const quoteSchema = Schema({
     }
   }
 }, {
-  timestamps: true,
-  indexes: [
-    { group: 1, 'rate.score': -1, _id: -1 }
-  ]
+  timestamps: true
 })
+
+// Indexes for common queries
+quoteSchema.index({ group: 1 })
+quoteSchema.index({ group: 1, 'rate.score': -1 })
+quoteSchema.index({ 'rate.votes.vote': 1, 'rate.score': -1 })
 
 module.exports = quoteSchema

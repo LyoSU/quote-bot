@@ -5,63 +5,70 @@ const redis = createRedisClient({ lazyConnect: false })
 
 const WINDOW_SIZE_SEC = 60
 const UPDATE_INTERVAL_MS = 1000 * 30
-const TTL_SECONDS = 120 // 2 minutes TTL for all Redis keys
-const KEY_PREFIX = 'quote:stats:' // Prefix for all Redis keys
+const TTL_SECONDS = 120
+const KEY_PREFIX = 'quote:stats:'
+const BATCH_FLUSH_INTERVAL = 2000 // Flush every 2 seconds
 
 class HighLoadStats {
   constructor () {
     this.lastUpdateTimestamp = Date.now()
     this.currentStats = {
-      requests: {
-        rps: 0,
-        avgTime: 0,
-        percentile95: 0
-      },
-      messages: {
-        mps: 0,
-        avgTime: 0,
-        percentile95: 0
-      },
-      queue: {
-        pending: 0
-      }
+      requests: { rps: 0, avgTime: 0, percentile95: 0 },
+      messages: { mps: 0, avgTime: 0, percentile95: 0 },
+      queue: { pending: 0 }
     }
+    // Local batch for stats
+    this.batch = { requests: [], messages: [] }
+    this.startBatchFlush()
   }
 
   getKey (key) {
     return `${KEY_PREFIX}${key}`
   }
 
-  async recordRequest (duration, isMessage = false) {
-    const now = Date.now()
-    const bucket = Math.floor(now / 1000)
+  startBatchFlush () {
+    this.batchInterval = setInterval(() => this.flushBatch(), BATCH_FLUSH_INTERVAL)
+  }
 
-    const type = isMessage ? 'messages' : 'requests'
+  async flushBatch () {
+    const { requests, messages } = this.batch
+    this.batch = { requests: [], messages: [] }
 
-    const pipeline = redis.pipeline()
-
-    pipeline.zadd(this.getKey(`${type}:time`), bucket, bucket)
-    pipeline.expire(this.getKey(`${type}:time`), TTL_SECONDS)
-
-    pipeline.hincrby(this.getKey(`${type}:${bucket}`), 'count', 1)
-    pipeline.hincrby(this.getKey(`${type}:${bucket}`), 'totalDuration', duration)
-    pipeline.expire(this.getKey(`${type}:${bucket}`), TTL_SECONDS)
-
-    pipeline.zadd(this.getKey(`${type}:responseTimes`), duration, duration)
-    pipeline.expire(this.getKey(`${type}:responseTimes`), TTL_SECONDS)
-
-    // Add timeout to prevent hanging on Redis operations
-    const pipelinePromise = pipeline.exec()
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Redis pipeline timeout')), 5000)
-    )
+    if (requests.length === 0 && messages.length === 0) return
 
     try {
-      await Promise.race([pipelinePromise, timeoutPromise])
+      const pipeline = redis.pipeline()
+      const now = Date.now()
+      const bucket = Math.floor(now / 1000)
+
+      for (const type of ['requests', 'messages']) {
+        const items = type === 'requests' ? requests : messages
+        if (items.length === 0) continue
+
+        const totalDuration = items.reduce((sum, d) => sum + d, 0)
+
+        pipeline.zadd(this.getKey(`${type}:time`), bucket, bucket)
+        pipeline.expire(this.getKey(`${type}:time`), TTL_SECONDS)
+        pipeline.hincrby(this.getKey(`${type}:${bucket}`), 'count', items.length)
+        pipeline.hincrby(this.getKey(`${type}:${bucket}`), 'totalDuration', totalDuration)
+        pipeline.expire(this.getKey(`${type}:${bucket}`), TTL_SECONDS)
+
+        // Add max duration as representative sample
+        const maxDuration = Math.max(...items)
+        pipeline.zadd(this.getKey(`${type}:responseTimes`), maxDuration, maxDuration)
+        pipeline.expire(this.getKey(`${type}:responseTimes`), TTL_SECONDS)
+      }
+
+      await pipeline.exec()
     } catch (error) {
-      console.error('Redis pipeline error:', error)
-      // Don't throw, just log the error to prevent request failures
+      // Silent fail - stats are not critical
     }
+  }
+
+  recordRequest (duration, isMessage = false) {
+    // Non-blocking: just add to local batch
+    const type = isMessage ? 'messages' : 'requests'
+    this.batch[type].push(duration)
   }
 
   async updateQueueSize (size) {
@@ -135,33 +142,28 @@ class HighLoadStats {
   }
 
   startPeriodicUpdate () {
-    // Prevent multiple intervals
-    if (this.updateInterval) {
-      clearInterval(this.updateInterval)
-    }
-
+    if (this.updateInterval) clearInterval(this.updateInterval)
     this.updateInterval = setInterval(() => this.updateAndLogStats(), UPDATE_INTERVAL_MS)
 
-    // Cleanup on process exit
-    process.once('SIGTERM', () => {
-      if (this.updateInterval) {
-        clearInterval(this.updateInterval)
-      }
+    // Single cleanup handler for all intervals
+    process.once('SIGTERM', async () => {
+      if (this.updateInterval) clearInterval(this.updateInterval)
+      if (this.batchInterval) clearInterval(this.batchInterval)
+      await this.flushBatch().catch(() => {})
     })
   }
 
   middleware () {
     return async (ctx, next) => {
       const startMs = Date.now()
-
-      ctx.stats = JSON.parse(JSON.stringify(this.currentStats))
+      ctx.stats = this.currentStats
 
       try {
         await next()
       } finally {
         const duration = Date.now() - startMs
         const isMessage = !ctx.state.emptyRequest
-        await this.recordRequest(duration, isMessage)
+        this.recordRequest(duration, isMessage) // Non-blocking
       }
     }
   }

@@ -137,6 +137,15 @@ const generateRandomColor = () => {
 }
 
 const minIdsInChat = {}
+// Cleanup stale entries every 30 seconds
+setInterval(() => {
+  const now = Date.now()
+  for (const key of Object.keys(minIdsInChat)) {
+    if (minIdsInChat[key].ts && now - minIdsInChat[key].ts > 10000) {
+      delete minIdsInChat[key]
+    }
+  }
+}, 30000)
 
 const handleQuoteError = async (ctx, error) => {
   console.error('Quote error:', error)
@@ -317,12 +326,18 @@ module.exports = async (ctx, next) => {
   }
 
   if (ctx.chat.type === 'private') {
-    // flag.reply = true
-    if (!minIdsInChat[ctx.from.id]) minIdsInChat[ctx.from.id] = ctx.message.message_id
-    minIdsInChat[ctx.from.id] = Math.min(minIdsInChat[ctx.from.id], ctx.message.message_id)
-    await sleep(300)
-    if (minIdsInChat[ctx.from.id] !== ctx.message.message_id) return next()
-    delete minIdsInChat[ctx.from.id]
+    const userId = ctx.from.id
+    const msgId = ctx.message.message_id
+    if (!minIdsInChat[userId]) {
+      minIdsInChat[userId] = { id: msgId, ts: Date.now() }
+    } else {
+      minIdsInChat[userId].id = Math.min(minIdsInChat[userId].id, msgId)
+      minIdsInChat[userId].ts = Date.now()
+    }
+    // Short delay to batch forwarded messages
+    await sleep(150)
+    if (minIdsInChat[userId]?.id !== msgId) return next()
+    delete minIdsInChat[userId]
   }
 
   ctx.replyWithChatAction('choose_sticker')

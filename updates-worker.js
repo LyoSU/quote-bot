@@ -1,9 +1,20 @@
 require('dotenv').config({ path: './.env' })
 
+const fs = require('fs')
 const { Telegraf } = require('telegraf')
 const { createRedisClient } = require('./utils/redis')
 const { db } = require('./database')
 const { stats } = require('./middlewares')
+
+// Cache config at startup
+let cachedConfig = {}
+try {
+  if (fs.existsSync('./config.json')) {
+    cachedConfig = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+  }
+} catch (error) {
+  console.error('Error loading config:', error.message)
+}
 
 const logWithTimestamp = (message) => {
   const workerId = process.env.pm_id || process.pid
@@ -36,7 +47,7 @@ class TelegramProcessor {
     this.isProcessing = false
     this.processedCount = 0
     this.errorCount = 0
-    this.concurrentLimit = 100 // Process up to 100 updates concurrently per worker
+    this.concurrentLimit = 50 // Process up to 50 updates concurrently per worker
     this.activePromises = new Set() // Track active processing promises
     this.workerId = process.env.WORKER_INDEX || process.env.pm_id || process.pid
     this.workerIndex = process.env.WORKER_INDEX !== undefined ? parseInt(process.env.WORKER_INDEX) : (this.workerId % 3)
@@ -114,20 +125,7 @@ class TelegramProcessor {
     // Set up database and config context
     this.bot.use(async (ctx, next) => {
       ctx.db = db
-
-      // Load config synchronously (cached)
-      try {
-        const fs = require('fs')
-        if (fs.existsSync('./config.json')) {
-          const configData = fs.readFileSync('./config.json', 'utf8')
-          ctx.config = JSON.parse(configData)
-        } else {
-          ctx.config = {}
-        }
-      } catch (error) {
-        ctx.config = {}
-      }
-
+      ctx.config = cachedConfig
       return next()
     })
 

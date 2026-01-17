@@ -4,6 +4,10 @@ const { createRedisClient } = require('../utils/redis')
 // Redis connection setup
 const redis = createRedisClient()
 
+// Cache for custom emoji sticker sets (reduces API calls)
+const emojiSetCache = new Map()
+const EMOJI_CACHE_TTL = 3600000 // 1 hour
+
 // Connect on first use
 let redisConnected = false
 const ensureRedisConnected = async () => {
@@ -85,15 +89,29 @@ module.exports = async (ctx, next) => {
 
     if (customEmoji.length > 0) {
       try {
-        const emojiStickers = await ctx.telegram.callApi('getCustomEmojiStickers', {
-          custom_emoji_ids: customEmoji
-        })
+        // Check cache first
+        const uncachedEmoji = customEmoji.filter(id => !emojiSetCache.has(id))
+        
+        if (uncachedEmoji.length > 0) {
+          const emojiStickers = await ctx.telegram.callApi('getCustomEmojiStickers', {
+            custom_emoji_ids: uncachedEmoji
+          })
+          
+          // Cache results
+          for (const sticker of emojiStickers) {
+            if (sticker.custom_emoji_id && sticker.set_name) {
+              emojiSetCache.set(sticker.custom_emoji_id, sticker.set_name)
+              setTimeout(() => emojiSetCache.delete(sticker.custom_emoji_id), EMOJI_CACHE_TTL)
+            }
+          }
+        }
 
-        const uniqueSets = new Set(
-          emojiStickers
-            .map(sticker => sticker.set_name)
-            .filter(Boolean)
-        )
+        // Collect unique sets from cache
+        const uniqueSets = new Set()
+        for (const emojiId of customEmoji) {
+          const setName = emojiSetCache.get(emojiId)
+          if (setName) uniqueSets.add(setName)
+        }
 
         for (const setName of uniqueSets) {
           trackStickerUsage(setName, ctx.from.id, ctx.chat.id)

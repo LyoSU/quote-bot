@@ -110,16 +110,16 @@ const updateGroupAndUser = async (ctx, next) => {
   await Promise.all([getUser(ctx), getGroup(ctx)]);
   await next(ctx);
   if (ctx.state.emptyRequest === false) {
-    // Don't await save operations to prevent blocking
+    // Save only if documents were modified
     const savePromises = []
-    if (ctx.session.userInfo && typeof ctx.session.userInfo.save === 'function') {
+    if (ctx.session.userInfo?.isModified?.()) {
       savePromises.push(ctx.session.userInfo.save().catch(() => {}))
     }
-    if (ctx.group && ctx.group.info && typeof ctx.group.info.save === 'function') {
+    if (ctx.group?.info?.isModified?.()) {
       savePromises.push(ctx.group.info.save().catch(() => {}))
     }
     if (savePromises.length > 0) {
-      Promise.all(savePromises).catch(() => {}) // Fire and forget
+      Promise.all(savePromises).catch(() => {})
     }
   }
 };
@@ -146,7 +146,9 @@ bot.use(
   Composer.privateChat(async (ctx, next) => {
     await getUser(ctx)
     await next(ctx).then(() => {
-      ctx.session.userInfo.save().catch(() => {})
+      if (ctx.session.userInfo?.isModified?.()) {
+        ctx.session.userInfo.save().catch(() => {})
+      }
     })
   })
 )
