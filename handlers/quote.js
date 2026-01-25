@@ -917,7 +917,7 @@ ${JSON.stringify(messageForAIContext)}
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'tngtech/tng-r1t-chimera',
+      model: 'x-ai/grok-4.1-fast',
       messages: [
         {
           role: 'system',
