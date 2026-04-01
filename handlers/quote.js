@@ -642,14 +642,27 @@ module.exports = async (ctx, next) => {
       message.chatId = hashCode(quoteMessage.from.name)
     }
 
-    let avatarImage = true
-    if (!diffUser || (ctx.me && ctx.me === quoteMessage.from.username && index > 0)) {
-      avatarImage = false
+    // Name on first message in streak, avatar on last
+    const isFirstInStreak = diffUser && !(ctx.me && ctx.me === quoteMessage.from.username && index > 0)
+
+    // Look ahead: is the NEXT message from the same sender?
+    let nextSenderId = null
+    const nextMsg = messages[parseInt(index) + 1]
+    if (nextMsg) {
+      if (nextMsg.forward_sender_name) nextSenderId = hashCode(nextMsg.forward_sender_name)
+      else if (nextMsg.forward_from_chat) nextSenderId = nextMsg.forward_from_chat.id
+      else if (nextMsg.forward_from) nextSenderId = nextMsg.forward_from.id
+      else if (nextMsg.sender_chat) nextSenderId = nextMsg.sender_chat.id
+      else if (nextMsg.from) nextSenderId = nextMsg.from.id
+    }
+    const isLastInStreak = !nextMsg || nextSenderId !== messageFrom.id
+
+    if (isFirstInStreak) {
+      message.from = messageFrom
+    } else {
       messageFrom.name = false
     }
-
-    if (avatarImage) message.avatar = avatarImage
-    if (messageFrom && messageFrom.name !== false) message.from = messageFrom
+    if (isLastInStreak) message.avatar = true
     if (text) message.text = text
 
     // Forward label: only show in groups, in DMs treat as own message
