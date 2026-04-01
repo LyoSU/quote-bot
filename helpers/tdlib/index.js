@@ -323,7 +323,7 @@ function getMessages (chatID, messageIds) {
                     messageForwardOriginMessageImport: 'message_import'
                   }
                   message.forward_origin = {
-                    type: originMap[origin._] || origin._,
+                    type: originMap[origin._] || 'unknown',
                     date: messageInfo.forward_info.date
                   }
                   if (chatInfo[forwarderId]) {
@@ -336,8 +336,10 @@ function getMessages (chatID, messageIds) {
                 }
               }
 
-              // sender_tag — user role/custom title in supergroups (TDLib field)
+              // sender_tag / author_signature — user role or channel signature
+              // TDLib may expose sender_tag in newer versions; author_signature is the standard field
               if (messageInfo.sender_tag) message.sender_tag = messageInfo.sender_tag
+              else if (messageInfo.author_signature) message.sender_tag = messageInfo.author_signature
               if (messageInfo.author_signature) message.author_signature = messageInfo.author_signature
 
               let entities

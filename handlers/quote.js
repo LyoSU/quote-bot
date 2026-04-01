@@ -489,7 +489,7 @@ module.exports = async (ctx, next) => {
   }
 
   let lastSenderId = null
-  for (const index in messages) {
+  for (let index = 0; index < messages.length; index++) {
     const quoteMessage = messages[index]
 
     if (quoteMessage?.message_id === undefined) {
@@ -647,7 +647,7 @@ module.exports = async (ctx, next) => {
 
     // Look ahead: is the NEXT message from the same sender?
     let nextSenderId = null
-    const nextMsg = messages[parseInt(index) + 1]
+    const nextMsg = messages[index + 1]
     if (nextMsg) {
       // Mirror the same sender resolution order as the main loop
       if (nextMsg.origin) {
