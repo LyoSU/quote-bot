@@ -26,7 +26,6 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "prebuilt-tdlib": "^0.1008059.0",
     "dotenv": "^16.4.7",
     "emoji-db": "^14.0.1",
     "enot-node": "^1.0.1",
@@ -35,6 +34,7 @@
     "limax": "^4.1.0",
     "mongoose": "^8.9.3",
     "openai": "^4.77.0",
+    "prebuilt-tdlib": "^0.1008062.2",
     "prom-client": "^15.1.3",
     "sharp": "^0.33.5",
     "tdl": "^8.0.2",

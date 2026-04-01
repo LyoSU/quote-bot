@@ -692,8 +692,14 @@ module.exports = async (ctx, next) => {
     }
 
     // Sender tag (user role/custom title in group)
+    // Available from Bot API 9.5+ (sender_tag field) and TDLib newer versions
+    // Falls back to author_signature for channel posts
     if (quoteMessage.sender_tag) {
       message.senderTag = quoteMessage.sender_tag
+    } else if (quoteMessage.author_signature) {
+      message.senderTag = quoteMessage.author_signature
+    } else if (messageFrom.author_signature) {
+      message.senderTag = messageFrom.author_signature
     }
 
     if (!flag.privacy && message.from) {
