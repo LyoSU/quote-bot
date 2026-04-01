@@ -609,8 +609,8 @@ module.exports = async (ctx, next) => {
 
     if (quoteMessage.quote) {
       text = quoteMessage.quote.text
-
       message.entities = quoteMessage.quote.entities
+      message.isQuote = true
     }
 
     if (!text) {
@@ -651,6 +651,25 @@ module.exports = async (ctx, next) => {
     if (avatarImage) message.avatar = avatarImage
     if (messageFrom && messageFrom.name !== false) message.from = messageFrom
     if (text) message.text = text
+
+    // Forward label: only show in groups, in DMs treat as own message
+    const isForwarded = !!(quoteMessage.forward_from || quoteMessage.forward_from_chat || quoteMessage.forward_sender_name || quoteMessage.forward_origin)
+    if (isForwarded && ctx.chat.type !== 'private') {
+      let forwardFromName = ''
+      if (quoteMessage.forward_from) {
+        forwardFromName = [quoteMessage.forward_from.first_name, quoteMessage.forward_from.last_name].filter(Boolean).join(' ') || quoteMessage.forward_from.title || ''
+      } else if (quoteMessage.forward_from_chat) {
+        forwardFromName = quoteMessage.forward_from_chat.title || ''
+      } else if (quoteMessage.forward_sender_name) {
+        forwardFromName = quoteMessage.forward_sender_name
+      }
+      message.forward = { label: forwardFromName ? `Forwarded from ${forwardFromName}` : 'Forwarded message' }
+    }
+
+    // Sender tag (user role/custom title in group)
+    if (quoteMessage.sender_tag) {
+      message.senderTag = quoteMessage.sender_tag
+    }
 
     if (!flag.privacy && message.from) {
       if (ctx.group && ctx.group.info && ctx.group.info.settings && ctx.group.info.settings.privacy && !ctx.chat.username) {

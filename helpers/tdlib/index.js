@@ -309,7 +309,36 @@ function getMessages (chatID, messageIds) {
                   }
                 }
                 if (messageInfo.forward_info.origin.sender_name) message.forward_sender_name = messageInfo.forward_info.origin.sender_name
+
+                // forward_origin for Bot API compatibility
+                const origin = messageInfo.forward_info.origin
+                if (origin) {
+                  const originMap = {
+                    messageSenderUser: 'user',
+                    messageForwardOriginUser: 'user',
+                    messageSenderChat: 'chat',
+                    messageForwardOriginChat: 'chat',
+                    messageForwardOriginChannel: 'channel',
+                    messageForwardOriginHiddenUser: 'hidden_user',
+                    messageForwardOriginMessageImport: 'message_import'
+                  }
+                  message.forward_origin = {
+                    type: originMap[origin._] || origin._,
+                    date: messageInfo.forward_info.date
+                  }
+                  if (chatInfo[forwarderId]) {
+                    if (message.forward_origin.type === 'user') message.forward_origin.sender_user = chatInfo[forwarderId]
+                    else if (message.forward_origin.type === 'channel') message.forward_origin.chat = chatInfo[forwarderId]
+                    else message.forward_origin.sender_chat = chatInfo[forwarderId]
+                  }
+                  if (origin.sender_name) message.forward_origin.sender_user_name = origin.sender_name
+                  if (origin.author_signature) message.forward_origin.author_signature = origin.author_signature
+                }
               }
+
+              // sender_tag — user role/custom title in supergroups (TDLib field)
+              if (messageInfo.sender_tag) message.sender_tag = messageInfo.sender_tag
+              if (messageInfo.author_signature) message.author_signature = messageInfo.author_signature
 
               let entities
 
