@@ -643,24 +643,36 @@ module.exports = async (ctx, next) => {
     }
 
     // Name on first message in streak, avatar on last
-    const isFirstInStreak = diffUser && !(ctx.me && ctx.me === quoteMessage.from.username && index > 0)
+    const isFirstInStreak = diffUser && !(ctx.me && quoteMessage.from && ctx.me === quoteMessage.from.username && index > 0)
 
     // Look ahead: is the NEXT message from the same sender?
     let nextSenderId = null
     const nextMsg = messages[parseInt(index) + 1]
     if (nextMsg) {
-      if (nextMsg.forward_sender_name) nextSenderId = hashCode(nextMsg.forward_sender_name)
-      else if (nextMsg.forward_from_chat) nextSenderId = nextMsg.forward_from_chat.id
-      else if (nextMsg.forward_from) nextSenderId = nextMsg.forward_from.id
-      else if (nextMsg.sender_chat) nextSenderId = nextMsg.sender_chat.id
-      else if (nextMsg.from) nextSenderId = nextMsg.from.id
+      // Mirror the same sender resolution order as the main loop
+      if (nextMsg.origin) {
+        if (nextMsg.origin.type === 'user' && nextMsg.origin.sender_user) nextSenderId = nextMsg.origin.sender_user.id
+        else if (nextMsg.origin.type === 'hidden_user') nextSenderId = hashCode(nextMsg.origin.sender_user_name)
+        else if (nextMsg.origin.type === 'chat' && nextMsg.origin.sender_chat) nextSenderId = nextMsg.origin.sender_chat.id
+        else if (nextMsg.origin.type === 'channel' && nextMsg.origin.chat) nextSenderId = nextMsg.origin.chat.id
+      }
+      if (!nextSenderId) {
+        if (nextMsg.forward_sender_name) nextSenderId = hashCode(nextMsg.forward_sender_name)
+        else if (nextMsg.forward_from_chat) nextSenderId = nextMsg.forward_from_chat.id
+        else if (nextMsg.forward_from) nextSenderId = nextMsg.forward_from.id
+        else if (nextMsg.sender_chat) nextSenderId = nextMsg.sender_chat.id
+        else if (nextMsg.from) nextSenderId = nextMsg.from.id
+      }
     }
     const isLastInStreak = !nextMsg || nextSenderId !== messageFrom.id
 
-    if (isFirstInStreak) {
-      message.from = messageFrom
-    } else {
-      messageFrom.name = false
+    // Always pass from (needed for avatar/color), control name separately
+    message.from = { ...messageFrom }
+    if (!isFirstInStreak) {
+      message.from.name = false
+      delete message.from.first_name
+      delete message.from.last_name
+      delete message.from.title
     }
     if (isLastInStreak) message.avatar = true
     if (text) message.text = text
