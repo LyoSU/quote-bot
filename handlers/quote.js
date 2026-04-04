@@ -642,29 +642,8 @@ module.exports = async (ctx, next) => {
       message.chatId = hashCode(quoteMessage.from.name)
     }
 
-    // Name on first message in streak, avatar on last
+    // Name on first message in streak
     const isFirstInStreak = diffUser && !(ctx.me && quoteMessage.from && ctx.me === quoteMessage.from.username && index > 0)
-
-    // Look ahead: is the NEXT message from the same sender?
-    let nextSenderId = null
-    const nextMsg = messages[index + 1]
-    if (nextMsg) {
-      // Mirror the same sender resolution order as the main loop
-      if (nextMsg.origin) {
-        if (nextMsg.origin.type === 'user' && nextMsg.origin.sender_user) nextSenderId = nextMsg.origin.sender_user.id
-        else if (nextMsg.origin.type === 'hidden_user') nextSenderId = hashCode(nextMsg.origin.sender_user_name)
-        else if (nextMsg.origin.type === 'chat' && nextMsg.origin.sender_chat) nextSenderId = nextMsg.origin.sender_chat.id
-        else if (nextMsg.origin.type === 'channel' && nextMsg.origin.chat) nextSenderId = nextMsg.origin.chat.id
-      }
-      if (!nextSenderId) {
-        if (nextMsg.forward_sender_name) nextSenderId = hashCode(nextMsg.forward_sender_name)
-        else if (nextMsg.forward_from_chat) nextSenderId = nextMsg.forward_from_chat.id
-        else if (nextMsg.forward_from) nextSenderId = nextMsg.forward_from.id
-        else if (nextMsg.sender_chat) nextSenderId = nextMsg.sender_chat.id
-        else if (nextMsg.from) nextSenderId = nextMsg.from.id
-      }
-    }
-    const isLastInStreak = !nextMsg || nextSenderId !== messageFrom.id
 
     // Always pass from (needed for avatar/color), control name separately
     message.from = { ...messageFrom }
@@ -679,7 +658,7 @@ module.exports = async (ctx, next) => {
       }
       message.from.name = false
     }
-    if (isLastInStreak) message.avatar = true
+    message.avatar = true
     if (text) message.text = text
 
     // Forward label: only show in groups, in DMs treat as own message
@@ -825,6 +804,13 @@ module.exports = async (ctx, next) => {
     quoteMessages.push(message)
 
     lastSenderId = messageFrom.id
+  }
+
+  // Avatar on last message in streak only
+  for (let i = 0; i < quoteMessages.length - 1; i++) {
+    if (quoteMessages[i].chatId === quoteMessages[i + 1].chatId) {
+      quoteMessages[i].avatar = false
+    }
   }
 
   if (flag.ai) {
