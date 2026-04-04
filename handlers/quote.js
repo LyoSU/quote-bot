@@ -458,6 +458,16 @@ module.exports = async (ctx, next) => {
     messages = messages.filter((message) => !(message.from && message.from.is_bot && message.from.username === ctx.me))
   }
 
+  // In PM batch mode, filter out non-forwarded command messages (e.g. /q sent after forwards)
+  if (ctx.chat.type === 'private' && !isCommand) {
+    messages = messages.filter((message) => {
+      if (!message) return false
+      const isForwarded = !!(message.forward_from || message.forward_from_chat || message.forward_sender_name || message.forward_origin)
+      if (!isForwarded && message.text && message.text.startsWith('/')) return false
+      return true
+    })
+  }
+
   // In private chat, if TDLib returned no usable messages, fall back to Bot API data
   if (ctx.chat.type === 'private' && messages.length === 0 && firstMessage) {
     messages.push(firstMessage)
