@@ -7,7 +7,6 @@ module.exports = {
   handleAdv: require('./adv'),
   handleModerateAdv: require('./adv-moderate'),
   handleQuote: require('./quote'),
-  handleImageToQuote: require('./image-to-quote'),
   handleGetQuote: require('./get'),
   handleTopQuote: require('./top'),
   handleRandomQuote: require('./random'),

@@ -11,7 +11,6 @@ const {
   handleAdv,
   handleModerateAdv,
   handleQuote,
-  handleImageToQuote,
   handleGetQuote,
   handleTopQuote,
   handleRandomQuote,
@@ -244,16 +243,7 @@ bot.use((ctx, next) => {
   return next()
 })
 
-bot.on(['photo', 'document'], Composer.privateChat((ctx, next) => {
-  if (!ctx.message.caption && !ctx.message.media_group_id) {
-    return handleImageToQuote(ctx, next)
-  }
-  return next()
-}))
-
 bot.command('q', handleQuote)
-bot.command('qi', handleImageToQuote)
-bot.command('quote_image', handleImageToQuote)
 bot.hears(/\/q_(.*)/, handleGetQuote)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, handleFstik)
 bot.hears(/^\/qs(?:\s([^\s]+)|)/, onlyGroup, onlyAdmin, handleSave)
