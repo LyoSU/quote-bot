@@ -669,10 +669,13 @@ module.exports = async (ctx, next) => {
     // Always pass from (needed for avatar/color), control name separately
     message.from = { ...messageFrom }
     if (!isFirstInStreak) {
-      if (!message.from.first_name && message.from.name) {
-        const nameParts = message.from.name.split(' ')
-        message.from.first_name = nameParts[0]
-        if (nameParts.length > 1) message.from.last_name = nameParts.slice(1).join(' ')
+      if (!message.from.first_name) {
+        const nameSource = message.from.name || message.from.title
+        if (nameSource && typeof nameSource === 'string') {
+          const nameParts = nameSource.split(' ')
+          message.from.first_name = nameParts[0]
+          if (nameParts.length > 1) message.from.last_name = nameParts.slice(1).join(' ')
+        }
       }
       message.from.name = false
     }
