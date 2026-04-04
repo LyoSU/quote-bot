@@ -458,6 +458,11 @@ module.exports = async (ctx, next) => {
     messages = messages.filter((message) => !(message.from && message.from.is_bot && message.from.username === ctx.me))
   }
 
+  // In private chat, if TDLib returned no usable messages, fall back to Bot API data
+  if (ctx.chat.type === 'private' && messages.length === 0 && firstMessage) {
+    messages.push(firstMessage)
+  }
+
   // Send Gramads ad after messages are collected to prevent ads from being included in quotes
   if (ctx.chat.type === 'private' && ctx.from && (ctx.from.language_code === 'ru' || (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings && ctx.session.userInfo.settings.locale === 'ru'))) {
     sendGramadsAd(ctx.from.id).catch(() => {})
