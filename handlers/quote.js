@@ -458,21 +458,6 @@ module.exports = async (ctx, next) => {
     messages = messages.filter((message) => !(message.from && message.from.is_bot && message.from.username === ctx.me))
   }
 
-  // In PM batch mode, filter out non-forwarded command messages (e.g. /q sent after forwards)
-  if (ctx.chat.type === 'private' && !isCommand) {
-    messages = messages.filter((message) => {
-      if (!message) return false
-      const isForwarded = !!(message.forward_from || message.forward_from_chat || message.forward_sender_name || message.forward_origin)
-      if (!isForwarded && message.text && message.text.startsWith('/')) return false
-      return true
-    })
-  }
-
-  // In private chat, if TDLib returned no usable messages, fall back to Bot API data
-  if (ctx.chat.type === 'private' && messages.length === 0 && firstMessage) {
-    messages.push(firstMessage)
-  }
-
   // Send Gramads ad after messages are collected to prevent ads from being included in quotes
   if (ctx.chat.type === 'private' && ctx.from && (ctx.from.language_code === 'ru' || (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings && ctx.session.userInfo.settings.locale === 'ru'))) {
     sendGramadsAd(ctx.from.id).catch(() => {})
@@ -684,6 +669,11 @@ module.exports = async (ctx, next) => {
     // Always pass from (needed for avatar/color), control name separately
     message.from = { ...messageFrom }
     if (!isFirstInStreak) {
+      if (!message.from.first_name && message.from.name) {
+        const nameParts = message.from.name.split(' ')
+        message.from.first_name = nameParts[0]
+        if (nameParts.length > 1) message.from.last_name = nameParts.slice(1).join(' ')
+      }
       message.from.name = false
     }
     if (isLastInStreak) message.avatar = true
