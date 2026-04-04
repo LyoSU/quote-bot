@@ -685,9 +685,6 @@ module.exports = async (ctx, next) => {
     message.from = { ...messageFrom }
     if (!isFirstInStreak) {
       message.from.name = false
-      delete message.from.first_name
-      delete message.from.last_name
-      delete message.from.title
     }
     if (isLastInStreak) message.avatar = true
     if (text) message.text = text
