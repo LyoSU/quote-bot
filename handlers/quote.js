@@ -673,6 +673,25 @@ module.exports = async (ctx, next) => {
         forwardFromName = quoteMessage.forward_sender_name
       }
       message.forward = { label: forwardFromName ? `Forwarded from ${forwardFromName}` : 'Forwarded message' }
+
+      // In groups, show the actual forwarder as sender (not the original author)
+      // The original author is already displayed in the forward label
+      const forwarder = quoteMessage.sender_chat || quoteMessage.from
+      if (forwarder) {
+        const fwdName = forwarder.first_name
+          ? [forwarder.first_name, forwarder.last_name].filter(Boolean).join(' ')
+          : (forwarder.title || forwarder.name || '')
+        message.from = {
+          id: forwarder.id,
+          first_name: forwarder.first_name || forwarder.title,
+          last_name: forwarder.last_name,
+          username: forwarder.username,
+          name: isFirstInStreak ? fwdName : false,
+          photo: forwarder.photo
+        }
+        message.chatId = forwarder.id
+        messageFrom = forwarder
+      }
     }
 
     // Sender tag (user role/custom title in group)
