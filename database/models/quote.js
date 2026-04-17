@@ -35,8 +35,9 @@ const quoteSchema = Schema({
   timestamps: true
 })
 
-// Indexes for common queries
-quoteSchema.index({ group: 1 })
+// Indexes for common queries.
+// { group: 1 } is intentionally omitted — the compound index below serves
+// group-only lookups via its leading prefix.
 quoteSchema.index({ group: 1, 'rate.score': -1 })
 quoteSchema.index({ 'rate.votes.vote': 1, 'rate.score': -1 })
 
