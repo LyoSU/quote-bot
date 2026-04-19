@@ -43,7 +43,12 @@ const connectWithRetry = async () => {
       socketTimeoutMS: 45000,
       maxIdleTimeMS: 30000,
       retryWrites: true,
-      retryReads: true
+      retryReads: true,
+      // Indexes are managed out-of-band (see docs/runbooks/). On 77M-row
+      // collections, mongoose's default ensureIndexes() at boot is wasted
+      // work and slows worker startup.
+      autoIndex: false,
+      autoCreate: false
     })
     console.log('Successfully connected to MongoDB')
     retryCount = 0 // Reset on successful connection
