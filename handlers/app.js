@@ -4,10 +4,18 @@ const deepLink = require('../helpers/deep-link')
 // /app — short-circuit to the webapp. In a group: links to that group's
 // feed. Elsewhere: links to the user's personal root.
 module.exports = async ctx => {
-  const botUsername = ctx.botInfo && ctx.botInfo.username
-  if (!botUsername) return
+  // Prefer the cached botInfo seeded in handler.js; fall back to a live
+  // getMe() so the command doesn't silently drop if the middleware cache
+  // hasn't primed yet.
+  const botUsername =
+    (ctx.botInfo && ctx.botInfo.username) ||
+    (await ctx.telegram.getMe().then((m) => m && m.username).catch(() => null))
+  if (!botUsername) {
+    console.warn('[app] could not resolve bot username')
+    return
+  }
 
-  const inGroup = ctx.group && ctx.group.info && ctx.group.info._id
+  const inGroup = !!(ctx.group && ctx.group.info && ctx.group.info._id)
   const url = inGroup
     ? deepLink.forGroup(botUsername, String(ctx.group.info._id))
     : deepLink.forRoot(botUsername)

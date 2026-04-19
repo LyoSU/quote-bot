@@ -129,7 +129,9 @@ const updateGroupAndUser = async (ctx, next) => {
     // Save only if documents were modified
     const savePromises = []
     if (ctx.session.userInfo?.isModified?.()) {
-      savePromises.push(ctx.session.userInfo.save().catch(() => {}))
+      savePromises.push(ctx.session.userInfo.save().catch((err) => {
+        console.warn('[session] userInfo.save failed:', err && err.message)
+      }))
     }
     if (ctx.group?.info?.isModified?.()) {
       // quoteCounter is owned by atomic $inc in handlers/quote.js — the in-memory
@@ -137,7 +139,9 @@ const updateGroupAndUser = async (ctx, next) => {
       // $inc). Strip it from the save so we never stomp the atomic counter.
       ctx.group.info.unmarkModified('quoteCounter')
       if (ctx.group.info.isModified()) {
-        savePromises.push(ctx.group.info.save().catch(() => {}))
+        savePromises.push(ctx.group.info.save().catch((err) => {
+          console.warn('[session] group.info.save failed:', err && err.message)
+        }))
       }
     }
     if (savePromises.length > 0) {
@@ -169,7 +173,9 @@ bot.use(
     await getUser(ctx)
     await next(ctx).then(() => {
       if (ctx.session.userInfo?.isModified?.()) {
-        ctx.session.userInfo.save().catch(() => {})
+        ctx.session.userInfo.save().catch((err) => {
+          console.warn('[session:pm] userInfo.save failed:', err && err.message)
+        })
       }
     })
   })
