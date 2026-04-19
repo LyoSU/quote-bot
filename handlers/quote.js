@@ -1223,6 +1223,33 @@ ${JSON.stringify(messageForAIContext)}
           } catch (err) {
             console.error('[quote] Quote.create failed', { global_id: globalId }, err)
           }
+
+          // Track (group, telegram_id) presence in GroupMember for webapp lookups.
+          // Fire-and-forget: failures here must not fail quote creation.
+          try {
+            const quoterTgId = ctx.session.userInfo && ctx.session.userInfo.telegram_id
+            const authorTgIds = (doc.authors || [])
+              .map(a => a && a.telegram_id)
+              .filter(id => typeof id === 'number' && id > 0)
+            const uniqueIds = [...new Set([quoterTgId, ...authorTgIds].filter(id => typeof id === 'number' && id > 0))]
+            if (uniqueIds.length > 0) {
+              await ctx.db.GroupMember.bulkWrite(
+                uniqueIds.map(tgId => ({
+                  updateOne: {
+                    filter: { group: groupInfo._id, telegram_id: tgId },
+                    update: { $setOnInsert: { group: groupInfo._id, telegram_id: tgId, firstSeenAt: new Date() } },
+                    upsert: true
+                  }
+                })),
+                { ordered: false }
+              )
+            }
+          } catch (err) {
+            // Duplicate key errors are expected and harmless (ordered:false continues).
+            if (!err || err.code !== 11000) {
+              console.error('[quote] GroupMember upsert failed', err)
+            }
+          }
         }
 
         // Show onboarding step 2 after first quote in private chat
