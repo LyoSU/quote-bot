@@ -32,5 +32,6 @@ module.exports = {
   handleOnboardingCallback,
   handleMenuCallback,
   handleArchive: (...args) => require('./qarchive')(...args),
-  handleForget: (...args) => require('./qforget')(...args)
+  handleForget: (...args) => require('./qforget')(...args),
+  handleApp: require('./app')
 }

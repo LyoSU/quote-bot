@@ -1,5 +1,6 @@
 const Markup = require('telegraf/markup')
 const { randomInt } = require('crypto')
+const deepLink = require('../helpers/deep-link')
 
 module.exports = async (ctx, next) => {
   if (!ctx.group.info) {
@@ -37,14 +38,26 @@ module.exports = async (ctx, next) => {
 
   if (adv) advKeyboard = Markup.urlButton(adv.text, adv.link)
 
+  // Link straight to the picked quote when we have both local_id and the
+  // bot username (populated by telegraf after launch).
+  const appButton = (quote.local_id != null && ctx.botInfo && ctx.botInfo.username)
+    ? Markup.urlButton(
+      ctx.i18n.t('app.open_quote'),
+      deepLink.forQuote(ctx.botInfo.username, String(ctx.group.info._id), quote.local_id)
+    )
+    : null
+
+  const rows = [
+    [
+      Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length || ''}`, 'rate:👍'),
+      Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length || ''}`, 'rate:👎')
+    ]
+  ]
+  if (appButton) rows.push([appButton])
+  if (advKeyboard) rows.push([advKeyboard])
+
   await ctx.replyWithDocument(quote.file_id, {
-    reply_markup: Markup.inlineKeyboard([
-      [
-        Markup.callbackButton(`👍 ${quote.rate.votes[0].vote.length || ''}`, 'rate:👍'),
-        Markup.callbackButton(`👎 ${quote.rate.votes[1].vote.length || ''}`, 'rate:👎')
-      ],
-      advKeyboard ? [advKeyboard] : []
-    ]),
+    reply_markup: Markup.inlineKeyboard(rows),
     reply_to_message_id: ctx.message.message_id,
     allow_sending_without_reply: true
   })

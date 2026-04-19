@@ -264,6 +264,14 @@ top:
   info: |
     <b>✨ Top Quoted Messages</b>
   open: View Top Quotes
+app:
+  open_quote: ✨ Open quote
+  open_group: 📚 All quotes in group
+  open_root: 💫 My groups
+  info: |
+    <b>It all lives in the app too 💬</b>
+
+    Flip through quotes, dig into the archive, chase the tops — one tap away. Hit the button ↓
 donate:
   info: |
     <b>Support QuotLyBot's Development! ☕</b>

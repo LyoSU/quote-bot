@@ -24,6 +24,7 @@ const openai = new OpenAI({
 })
 
 const { sendGramadsAd } = require('../helpers/gramads')
+const deepLink = require('../helpers/deep-link')
 const denormalizeQuote = require('../utils/denormalize-quote')
 
 // Config will be loaded asynchronously through context
@@ -1222,6 +1223,36 @@ ${JSON.stringify(messageForAIContext)}
             await ctx.db.Quote.create(doc)
           } catch (err) {
             console.error('[quote] Quote.create failed', { global_id: globalId }, err)
+          }
+
+          // Append "Open in app" deep-link button once we have a localId.
+          // Done via editMessageReplyMarkup to avoid reshuffling the four
+          // sticker-send branches above; catch() ignores rare edit failures
+          // (e.g. business_message context) — core delivery already succeeded.
+          if (sendResult && localId != null && ctx.botInfo && ctx.botInfo.username) {
+            try {
+              const rows = []
+              if (rateEnabled) {
+                rows.push([
+                  Markup.callbackButton('👍', 'rate:👍'),
+                  Markup.callbackButton('👎', 'rate:👎')
+                ])
+              }
+              rows.push([
+                Markup.urlButton(
+                  ctx.i18n.t('app.open_quote'),
+                  deepLink.forQuote(ctx.botInfo.username, String(groupInfo._id), localId)
+                )
+              ])
+              await ctx.telegram.editMessageReplyMarkup(
+                sendResult.chat.id,
+                sendResult.message_id,
+                undefined,
+                Markup.inlineKeyboard(rows)
+              ).catch(() => {})
+            } catch (err) {
+              console.error('[quote] deep-link markup update failed', err)
+            }
           }
 
           // Track (group, telegram_id) presence in GroupMember for webapp lookups.

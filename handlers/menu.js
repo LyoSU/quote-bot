@@ -1,4 +1,5 @@
 const Markup = require('telegraf/markup')
+const deepLink = require('../helpers/deep-link')
 
 async function showMainMenu (ctx, getMe, isEdit = false) {
   if (!getMe) {
@@ -6,6 +7,9 @@ async function showMainMenu (ctx, getMe, isEdit = false) {
   }
 
   const keyboard = Markup.inlineKeyboard([
+    [
+      Markup.urlButton(ctx.i18n.t('app.open_root'), deepLink.forRoot(getMe.username))
+    ],
     [
       Markup.callbackButton(ctx.i18n.t('menu.btn.features'), 'menu:features'),
       Markup.callbackButton(ctx.i18n.t('menu.btn.settings'), 'menu:settings')
