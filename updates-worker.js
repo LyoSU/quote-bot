@@ -122,6 +122,18 @@ class TelegramProcessor {
   }
 
   setupBot () {
+    // Idempotent boot-time seed of the quote counter. $setOnInsert is a no-op
+    // once the document exists, so concurrent workers racing here is safe.
+    db.ready.then(() =>
+      db.Counter.findOneAndUpdate(
+        { _id: 'quote' },
+        { $setOnInsert: { seq: 0 } },
+        { upsert: true }
+      )
+    ).catch(err => {
+      errorWithTimestamp('[boot] failed to seed Counter{_id:quote}', err.message || err)
+    })
+
     // Set up database and config context
     this.bot.use(async (ctx, next) => {
       ctx.db = db
