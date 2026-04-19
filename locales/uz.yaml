@@ -259,6 +259,14 @@ top:
   info: |
     <b>✨ Eng Ko'p Sitatasi Keltirilgan Xabarlar</b>
   open: Eng Yuqori Sitatalarni Ko'rish
+app:
+  open_quote: '✨ Open quote'
+  open_group: '📚 All quotes in group'
+  open_root: '💫 My groups'
+  info: |
+    <b>It all lives in the app too 💬</b>
+
+    Flip through quotes, dig into the archive, chase the tops — one tap away. Hit the button ↓
 donate:
   info: |
     <b>QuotLyBot rivojlanishini qo'llab-quvvatlang! ☕</b>
