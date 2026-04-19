@@ -428,6 +428,7 @@ module.exports = async (ctx, next) => {
       }))
     }
 
+    const tCollectStart = Date.now()
     try {
       const tdlibMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
         const m = []
@@ -449,6 +450,7 @@ module.exports = async (ctx, next) => {
         })
       }
     }
+    ctx.state.collectMs = Date.now() - tCollectStart
   }
 
   messages = messages.filter((message) => message && Object.keys(message).length !== 0)
@@ -982,22 +984,23 @@ ${JSON.stringify(messageForAIContext)}
 
   const quoteApiUri = flag.html ? process.env.QUOTE_API_URI_HTML : process.env.QUOTE_API_URI
 
-  // Allocate quote IDs in parallel with the slow webp generation.
-  // Counter $incs are ~5-10ms single-doc indexed writes; fetch is 500-2000ms.
-  // On counter failure we degrade gracefully — sticker still sends, no deep-link
-  // button, no Quote doc (consistent with pre-V2 behaviour for legacy chats).
+  // Allocate local_id (per-group quote counter) in parallel with the slow
+  // webp generation. Needed pre-send so the "Open in app" button has a URL.
+  //
+  // global_id (Counter{_id:'quote'}) is NOT allocated here — it's a single
+  // shared document across the whole DB and $inc on it serializes under load.
+  // We allocate it post-send inside setImmediate, which is fine: global_id
+  // only lives on the Quote doc, not on any user-visible reply.
   const hasGroup = !!(ctx.group && ctx.group.info)
-  // Only Group $inc on the critical path. The global Counter $inc is a single
-  // shared document; under load its document-level lock serializes writes from
-  // every worker and can add 1-3s p99 latency. Counter is allocated post-send
-  // inside persistQuoteArtifacts where the latency is invisible to the user.
-  // Group $inc is per-group so contention is bounded.
-  const idsPromise = hasGroup
+  const tIdsStart = Date.now()
+  const localIdPromise = hasGroup
     ? ctx.db.Group.findByIdAndUpdate(
         ctx.group.info._id,
         { $inc: { quoteCounter: 1 } },
         { new: true, projection: { quoteCounter: 1 } }
-      ).then(g => g && g.quoteCounter).catch((err) => {
+      )
+      .then(g => g && g.quoteCounter)
+      .catch((err) => {
         console.error('[quote] Group $inc failed', err)
         return null
       })
@@ -1006,6 +1009,7 @@ ${JSON.stringify(messageForAIContext)}
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), 30 * 1000)
 
+  const tGenerateStart = Date.now()
   const generatePromise = fetch(
     `${quoteApiUri}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
     {
@@ -1038,9 +1042,9 @@ ${JSON.stringify(messageForAIContext)}
     }
   }).catch((error) => handleQuoteError(ctx, error))
 
-  const tParallelStart = Date.now()
-  const [generate, localId] = await Promise.all([generatePromise, idsPromise])
-  const parallel_ms = Date.now() - tParallelStart
+  const [generate, localId] = await Promise.all([generatePromise, localIdPromise])
+  const generateMs = Date.now() - tGenerateStart
+  const idsMs = Date.now() - tIdsStart
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
@@ -1093,6 +1097,7 @@ ${JSON.stringify(messageForAIContext)}
         })
 
         let sendResult
+        const tSendStart = Date.now()
 
         if (flag.privacy) {
           sendResult = await ctx.replyWithSticker({
@@ -1189,6 +1194,8 @@ ${JSON.stringify(messageForAIContext)}
           }
         }
 
+        const sendMs = sendResult ? Date.now() - tSendStart : null
+
         if (sendResult && hasGroup) {
           const groupInfo = ctx.group.info
           const storeText = groupInfo.settings?.archive?.storeText ?? true
@@ -1200,8 +1207,6 @@ ${JSON.stringify(messageForAIContext)}
             file_unique_id: sendResult.sticker.file_unique_id
           }
           if (localId != null) doc.local_id = localId
-          // global_id is allocated inside persistQuoteArtifacts (post-send) to
-          // keep the Counter shared-doc contention off the critical path.
 
           let denorm = null
           if (storeText) {
@@ -1228,7 +1233,6 @@ ${JSON.stringify(messageForAIContext)}
               doc.source = denorm.source
             } else {
               console.warn('[quote] payload exceeds 1MB cap, skipping archive fields', {
-                file_unique_id: doc.file_unique_id,
                 payloadBytes
               })
             }
@@ -1250,7 +1254,20 @@ ${JSON.stringify(messageForAIContext)}
             .filter(id => typeof id === 'number' && id > 0)
           const memberTgIds = [...new Set([quoterTgId, ...authorTgIds].filter(id => typeof id === 'number' && id > 0))]
 
-          setImmediate(() => {
+          // global_id allocation moved off the critical path. Counter{_id:'quote'}
+          // is one shared doc across the whole DB — $inc on it serializes under
+          // load. Attach global_id to doc before Quote.create, still off hot path.
+          setImmediate(async () => {
+            try {
+              const counter = await ctx.db.Counter.findOneAndUpdate(
+                { _id: 'quote' },
+                { $inc: { seq: 1 } },
+                { new: true, upsert: true, projection: { seq: 1 } }
+              )
+              if (counter && counter.seq != null) doc.global_id = counter.seq
+            } catch (err) {
+              console.error('[quote] Counter $inc failed', err)
+            }
             persistQuoteArtifacts({
               db: ctx.db,
               doc,
@@ -1265,7 +1282,10 @@ ${JSON.stringify(messageForAIContext)}
         if (sendResult) {
           console.log('[quote:timing]', {
             total_ms: Date.now() - t0,
-            parallel_ms,
+            collect_ms: ctx.state.collectMs ?? null,
+            generate_ms: generateMs,
+            ids_ms: idsMs,
+            send_ms: sendMs,
             chat_type: ctx.chat.type,
             had_button: localId != null,
             had_group: hasGroup
