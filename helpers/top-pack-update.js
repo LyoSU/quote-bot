@@ -19,7 +19,8 @@ module.exports = async (db, group, quote) => {
   if (group.topSet && group.topSet.lastUpdate && (Date.now() - group.topSet.lastUpdate.getTime()) < 60 * 15) return
 
   group.topSet.lastUpdate = new Date()
-  await group.save()
+  // Targeted update — group.save() would race with concurrent $inc on quoteCounter.
+  await db.Group.updateOne({ _id: group._id }, { $set: { 'topSet.lastUpdate': group.topSet.lastUpdate } })
 
   const topQuote = await db.Quote.find({
     group,
@@ -153,5 +154,6 @@ module.exports = async (db, group, quote) => {
     }
   }
 
-  await group.save()
+  // Persist only the topSet subtree — don't touch other fields (quoteCounter, members, etc.).
+  await db.Group.updateOne({ _id: group._id }, { $set: { topSet: group.topSet } })
 }

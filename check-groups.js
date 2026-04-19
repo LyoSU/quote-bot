@@ -11,10 +11,13 @@ const checkGroup = async (group) => {
     return error.response
   })
   if (result) {
-    if (result.ok !== false) group.available.active = true
-    else group.available.active = false
-    group.available.check = true
-    await group.save()
+    const active = result.ok !== false
+    // Targeted update — a full group.save() would race with concurrent
+    // $inc writes on quoteCounter from the live bot.
+    await db.Group.updateOne(
+      { _id: group._id },
+      { $set: { 'available.active': active, 'available.check': true } }
+    )
   }
   return { group_id: group.group_id, result }
 }

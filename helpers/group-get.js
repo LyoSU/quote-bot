@@ -1,36 +1,42 @@
+// Resolves ctx.group.info for the current chat. Upserts the Group doc so
+// subsequent atomic ops (e.g. $inc on quoteCounter in handlers/quote.js)
+// always hit a persisted row. Never calls .save() on the Mongoose doc — a
+// full-doc save would race with concurrent $inc writes and overwrite fields
+// outside this handler's ownership (quoteCounter, topSet, etc.).
+
 module.exports = async ctx => {
-  let group
-
-  if (!ctx.group.info) {
-    // Check if database is connected before query
-    if (ctx.db.connection.readyState !== 1) {
-      console.warn('Database not ready, skipping group lookup')
-      return false
-    }
-    group = await ctx.db.Group.findOne({ group_id: ctx.chat.id })
-  } else {
-    group = ctx.group.info
+  if (ctx.db.connection.readyState !== 1) {
+    console.warn('Database not ready, skipping group lookup')
+    return false
   }
 
-  if (!group) {
-    group = new ctx.db.Group()
-    group.group_id = ctx.chat.id
-  }
+  const group = await ctx.db.Group.findOneAndUpdate(
+    { group_id: ctx.chat.id },
+    {
+      $set: {
+        title: ctx.chat.title,
+        username: ctx.chat.username,
+        updatedAt: new Date()
+      },
+      $setOnInsert: {
+        group_id: ctx.chat.id
+      }
+    },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  )
 
-  group.title = ctx.chat.title
-  group.username = ctx.chat.username
-  group.settings = group.settings || new ctx.db.Group().settings
-
-  if (!group.username && !group.invite_link) {
-    // group.invite_link = await ctx.telegram.exportChatInviteLink(ctx.chat.id).catch(() => {})
-  }
-
-  group.updatedAt = new Date()
   ctx.group.info = group
-  if (ctx.group.info.settings.locale) ctx.i18n.locale(ctx.group.info.settings.locale)
-  else if (ctx.i18n.languageCode) {
-    ctx.group.info.settings.locale = ctx.i18n.shortLanguageCode ? ctx.i18n.shortLanguageCode : ctx.i18n.languageCode
-    await group.save()
+
+  if (group.settings && group.settings.locale) {
+    ctx.i18n.locale(group.settings.locale)
+  } else if (ctx.i18n.languageCode) {
+    const locale = ctx.i18n.shortLanguageCode || ctx.i18n.languageCode
+    await ctx.db.Group.updateOne(
+      { _id: group._id },
+      { $set: { 'settings.locale': locale } }
+    )
+    if (!group.settings) group.settings = {}
+    group.settings.locale = locale
   }
 
   return true
