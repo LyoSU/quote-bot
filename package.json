@@ -4,7 +4,7 @@
   "description": "Telegram quote bot",
   "main": "updates-collector.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test utils/",
     "start": "node updates-collector.js",
     "start:worker": "node updates-worker.js",
     "pm2": "pm2 start ecosystem.config.js",
