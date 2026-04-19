@@ -27,6 +27,7 @@ const deepLink = require('../helpers/deep-link')
 const denormalizeQuote = require('../utils/denormalize-quote')
 const buildQuoteReplyMarkup = require('../utils/build-quote-reply-markup')
 const persistQuoteArtifacts = require('../utils/persist-quote-artifacts')
+const persistUserSetting = require('../helpers/persist-user-setting')
 
 // Config will be loaded asynchronously through context
 let config = null
@@ -257,6 +258,7 @@ const handleQuoteError = async (ctx, error) => {
     // Reset sticker set and try again without custom pack
     if (ctx.session && ctx.session.userInfo) {
       ctx.session.userInfo.tempStickerSet.create = false
+      persistUserSetting(ctx, { 'tempStickerSet.create': false })
     }
     return handleQuote(ctx)
   }
@@ -266,6 +268,7 @@ const handleQuoteError = async (ctx, error) => {
 }
 
 module.exports = async (ctx, next) => {
+  const t0 = Date.now()
   // Use config from context if available, fallback to local config
   const currentConfig = ctx.config || config || { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
   const flag = {
@@ -1117,6 +1120,10 @@ ${JSON.stringify(messageForAIContext)}
 
             ctx.session.userInfo.tempStickerSet.name = packName
             ctx.session.userInfo.tempStickerSet.create = created
+            persistUserSetting(ctx, {
+              'tempStickerSet.name': packName,
+              'tempStickerSet.create': created
+            })
           }
 
           let packOwnerId
@@ -1146,6 +1153,7 @@ ${JSON.stringify(messageForAIContext)}
               console.error(error)
               if (error.description === 'Bad Request: STICKERSET_INVALID') {
                 ctx.session.userInfo.tempStickerSet.create = false
+                persistUserSetting(ctx, { 'tempStickerSet.create': false })
               }
             })
 
@@ -1255,6 +1263,7 @@ ${JSON.stringify(messageForAIContext)}
         // Tracked in docs/superpowers/specs/2026-04-19-quote-hot-path-redesign.md §5.
         if (sendResult) {
           console.log('[quote:timing]', {
+            total_ms: Date.now() - t0,
             chat_type: ctx.chat.type,
             had_button: localId != null,
             had_group: hasGroup
