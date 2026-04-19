@@ -663,18 +663,37 @@ module.exports = async (ctx, next) => {
     message.avatar = true
     if (text) message.text = text
 
-    // Forward label: only show in groups, in DMs treat as own message
+    // Forward label: only show in groups, in DMs treat as own message.
+    // Keep `label` for quote-api image rendering; also surface `name` and
+    // `from` so the webapp can render the Telegram-style block with an
+    // avatar circle of the original source.
     const isForwarded = !!(quoteMessage.forward_from || quoteMessage.forward_from_chat || quoteMessage.forward_sender_name || quoteMessage.forward_origin)
     if (isForwarded && ctx.chat.type !== 'private') {
       let forwardFromName = ''
+      let forwardFrom
       if (quoteMessage.forward_from) {
         forwardFromName = [quoteMessage.forward_from.first_name, quoteMessage.forward_from.last_name].filter(Boolean).join(' ') || quoteMessage.forward_from.title || ''
+        forwardFrom = {
+          id: quoteMessage.forward_from.id,
+          username: quoteMessage.forward_from.username,
+          kind: 'user'
+        }
       } else if (quoteMessage.forward_from_chat) {
         forwardFromName = quoteMessage.forward_from_chat.title || ''
+        forwardFrom = {
+          id: quoteMessage.forward_from_chat.id,
+          username: quoteMessage.forward_from_chat.username,
+          kind: 'chat'
+        }
       } else if (quoteMessage.forward_sender_name) {
         forwardFromName = quoteMessage.forward_sender_name
+        forwardFrom = { kind: 'hidden' }
       }
-      message.forward = { label: forwardFromName ? `Forwarded from ${forwardFromName}` : 'Forwarded message' }
+      message.forward = {
+        label: forwardFromName ? `Forwarded from ${forwardFromName}` : 'Forwarded message',
+        name: forwardFromName || undefined,
+        from: forwardFrom
+      }
 
       // In groups, show the actual forwarder as sender (not the original author)
       // The original author is already displayed in the forward label
