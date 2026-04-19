@@ -987,23 +987,21 @@ ${JSON.stringify(messageForAIContext)}
   // On counter failure we degrade gracefully — sticker still sends, no deep-link
   // button, no Quote doc (consistent with pre-V2 behaviour for legacy chats).
   const hasGroup = !!(ctx.group && ctx.group.info)
+  // Only Group $inc on the critical path. The global Counter $inc is a single
+  // shared document; under load its document-level lock serializes writes from
+  // every worker and can add 1-3s p99 latency. Counter is allocated post-send
+  // inside persistQuoteArtifacts where the latency is invisible to the user.
+  // Group $inc is per-group so contention is bounded.
   const idsPromise = hasGroup
-    ? Promise.all([
-        ctx.db.Group.findByIdAndUpdate(
-          ctx.group.info._id,
-          { $inc: { quoteCounter: 1 } },
-          { new: true, projection: { quoteCounter: 1 } }
-        ).then(g => g && g.quoteCounter),
-        ctx.db.Counter.findOneAndUpdate(
-          { _id: 'quote' },
-          { $inc: { seq: 1 } },
-          { new: true, upsert: true, projection: { seq: 1 } }
-        ).then(c => c && c.seq)
-      ]).catch((err) => {
-        console.error('[quote] ID allocation failed', err)
-        return [null, null]
+    ? ctx.db.Group.findByIdAndUpdate(
+        ctx.group.info._id,
+        { $inc: { quoteCounter: 1 } },
+        { new: true, projection: { quoteCounter: 1 } }
+      ).then(g => g && g.quoteCounter).catch((err) => {
+        console.error('[quote] Group $inc failed', err)
+        return null
       })
-    : Promise.resolve([null, null])
+    : Promise.resolve(null)
 
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), 30 * 1000)
@@ -1040,7 +1038,9 @@ ${JSON.stringify(messageForAIContext)}
     }
   }).catch((error) => handleQuoteError(ctx, error))
 
-  const [generate, [localId, globalId]] = await Promise.all([generatePromise, idsPromise])
+  const tParallelStart = Date.now()
+  const [generate, localId] = await Promise.all([generatePromise, idsPromise])
+  const parallel_ms = Date.now() - tParallelStart
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
@@ -1200,7 +1200,8 @@ ${JSON.stringify(messageForAIContext)}
             file_unique_id: sendResult.sticker.file_unique_id
           }
           if (localId != null) doc.local_id = localId
-          if (globalId != null) doc.global_id = globalId
+          // global_id is allocated inside persistQuoteArtifacts (post-send) to
+          // keep the Counter shared-doc contention off the critical path.
 
           let denorm = null
           if (storeText) {
@@ -1227,7 +1228,7 @@ ${JSON.stringify(messageForAIContext)}
               doc.source = denorm.source
             } else {
               console.warn('[quote] payload exceeds 1MB cap, skipping archive fields', {
-                global_id: globalId,
+                file_unique_id: doc.file_unique_id,
                 payloadBytes
               })
             }
@@ -1264,6 +1265,7 @@ ${JSON.stringify(messageForAIContext)}
         if (sendResult) {
           console.log('[quote:timing]', {
             total_ms: Date.now() - t0,
+            parallel_ms,
             chat_type: ctx.chat.type,
             had_button: localId != null,
             had_group: hasGroup
