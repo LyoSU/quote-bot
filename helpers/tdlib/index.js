@@ -159,7 +159,30 @@ function getSupergroup (supergroupID) {
   })
 }
 
+// In-memory cache of resolved chat/user info. getMessages issues 2-3 getChat
+// per message (sender, chat, forwarder); for a 50-message forward batch from
+// the same user that's ~150 identical TDLib round-trips. With a 60s TTL the
+// batch collapses to 1-3 real calls + cached hits.
+const chatCache = new Map()
+const CHAT_CACHE_TTL_MS = 60_000
+
+setInterval(() => {
+  const cutoff = Date.now() - CHAT_CACHE_TTL_MS
+  for (const [k, v] of chatCache) if (v.ts < cutoff) chatCache.delete(k)
+}, 5 * 60_000).unref()
+
 function getChat (chatID) {
+  const cached = chatCache.get(chatID)
+  if (cached && (Date.now() - cached.ts) < CHAT_CACHE_TTL_MS) {
+    return Promise.resolve(cached.value)
+  }
+  return getChatRaw(chatID).then((value) => {
+    chatCache.set(chatID, { value, ts: Date.now() })
+    return value
+  })
+}
+
+function getChatRaw (chatID) {
   return new Promise((resolve, reject) => {
     sendMethod('getChat', {
       chat_id: chatID
