@@ -1,3 +1,5 @@
+const persistUserSetting = require('../helpers/persist-user-setting')
+
 module.exports = async ctx => {
   let emojiBrand = 'apple'
 
@@ -18,6 +20,7 @@ module.exports = async ctx => {
     ctx.group.info.settings.quote.emojiBrand = emojiBrand
   } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings) {
     ctx.session.userInfo.settings.quote.emojiBrand = emojiBrand
+    persistUserSetting(ctx, { 'settings.quote.emojiBrand': emojiBrand })
   }
 
   await ctx.replyWithHTML(ctx.i18n.t('quote.set_emoji_brand', { emojiBrand }), {

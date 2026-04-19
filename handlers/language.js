@@ -3,6 +3,7 @@ const path = require('path')
 const Markup = require('telegraf/markup')
 const I18n = require('telegraf-i18n')
 const handleHelp = require('./help')
+const persistUserSetting = require('../helpers/persist-user-setting')
 
 const i18n = new I18n({
   directory: path.resolve(__dirname, '../locales'),
@@ -60,6 +61,7 @@ module.exports = async ctx => {
         ctx.state.answerCbQuery = [locales[ctx.match[1]].flag]
 
         ctx.session.userInfo.settings.locale = ctx.match[1]
+        persistUserSetting(ctx, { 'settings.locale': ctx.match[1] })
         ctx.i18n.locale(ctx.match[1])
         await handleHelp(ctx)
       }
