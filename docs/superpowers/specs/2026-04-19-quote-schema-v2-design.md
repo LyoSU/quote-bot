@@ -49,12 +49,14 @@ payload: {
 
 // Денормалізовані поля (з payload.messages, для швидких запитів)
 text: String,                                    // join усіх .text повідомлень через "\n\n"
-authors: [{                                      // унікальні автори всіх повідомлень у цитаті
-  telegram_id: { type: Number, index: true },
+authors: [{                                      // унікальні автори всіх повідомлень — усе, що handler видав
+  _id: false,
+  telegram_id: Number,                           // real user / channel / hashed fallback
   first_name: String,
   last_name: String,
   username: String,
-  name: String,                                  // готове ім'я для fallback-рендеру
+  title: String,                                 // для sender_chat / каналів
+  name: String,                                  // завжди заповнений display name
 }],
 hasVoice: { type: Boolean, default: false },    // 🎤 badge filter
 hasMedia: { type: Boolean, default: false },    // photo/video/sticker присутні
@@ -71,9 +73,22 @@ source: {
 local_id: { type: Number },                      // per-group #142
 global_id: { type: Number },                     // наскрізна нумерація (Hall of Fame seed)
 
+// Tombstones / стани
+forgottenAt: Date,                               // /qforget timestamp — відрізняє forgotten від legacy
+
 // Прапорці
 // legacy: не зберігаємо як поле, дивись розділ "Legacy як virtual" нижче
 ```
+
+**`forgottenAt` — для чого:** дозволяє одному запиту відрізнити три стани цитати:
+
+| Стан | `payload` | `forgottenAt` | Що це |
+|---|---|---|---|
+| Active (new) | exists | absent | нормальна V2+ цитата |
+| Legacy | absent | absent | до міграції, ніколи не мала тексту |
+| Forgotten | absent | exists | автор попросив `/qforget` |
+
+Без `forgottenAt` legacy і forgotten виглядають однаково — webapp не може показати "автор видалив цю цитату" замість "ця цитата до архіву".
 
 **Існуючі поля** (`group`, `user`, `file_id`, `file_unique_id`, `rate`) — без змін. `user` залишається як "хто запустив /q" (quotedBy семантично), перейменування не робимо — дорого і непотрібно.
 
@@ -252,6 +267,16 @@ if (sendResult && ctx.group?.info) {
 ```js
 // З quoteMessages і вхідного ctx.message витягує read-optimized поля.
 // Викликається раз, при збереженні. Ніколи не оновлюється — цитата immutable.
+// Display-name fallback: handlers/quote.js:659 може ставити .name = false
+// для non-first-in-streak, тому читаємо з first_name/title у пріоритеті.
+function pickDisplayName(from) {
+  if (!from) return null
+  if (from.first_name) return [from.first_name, from.last_name].filter(Boolean).join(' ')
+  if (from.title) return from.title
+  if (typeof from.name === 'string') return from.name
+  return null
+}
+
 module.exports = function denormalizeQuote(quoteMessages, ctxMessage, { privacy = false } = {}) {
   let hasVoice = false
   let hasMedia = false
@@ -263,26 +288,33 @@ module.exports = function denormalizeQuote(quoteMessages, ctxMessage, { privacy 
     if (m.text) texts.push(m.text)
   }
 
-  // Privacy-gated fields
   let authors = []
-  let source = { date: ctxMessage.reply_to_message?.date
-    ? new Date(ctxMessage.reply_to_message.date * 1000)
-    : new Date() }
+  let source = {
+    date: ctxMessage.reply_to_message?.date
+      ? new Date(ctxMessage.reply_to_message.date * 1000)
+      : new Date()
+  }
 
   if (!privacy) {
     const seen = new Set()
     for (const m of quoteMessages) {
       const from = m.from
-      if (from?.id && !seen.has(from.id)) {
-        seen.add(from.id)
-        authors.push({
-          telegram_id: from.id,
-          first_name: from.first_name,
-          last_name: from.last_name,
-          username: from.username,
-          name: from.name || [from.first_name, from.last_name].filter(Boolean).join(' ') || from.title,
-        })
-      }
+      const name = pickDisplayName(from)
+      if (!name) continue
+
+      // Dedup: id if available, else name. Те, що handler дав — те і пишемо.
+      const key = from?.id != null ? `id:${from.id}` : `name:${name}`
+      if (seen.has(key)) continue
+      seen.add(key)
+
+      authors.push({
+        telegram_id: from?.id,           // real user / channel / hashed — що є
+        first_name: from?.first_name,
+        last_name: from?.last_name,
+        username: from?.username,
+        title: from?.title,              // для channels / sender_chat
+        name,
+      })
     }
     source.chat_id = ctxMessage.chat?.id
     source.message_ids = quoteMessages.map(m => m.message_id).filter(Boolean)
@@ -298,6 +330,14 @@ module.exports = function denormalizeQuote(quoteMessages, ctxMessage, { privacy 
   }
 }
 ```
+
+**Ключові рішення денорму:**
+
+- **Усі автори, яких handler видав** — пишемо як є. Real users, QuotAI, канали, форварди, hashCode-стаби. Webapp і архів отримують точну картину того, що юзер бачив у згенерованому стікері.
+- **Dedup за `from.id`** (якщо є), інакше за display name — один автор у multi-message цитаті не дублюється.
+- **Схема `authors[].telegram_id` не unique** — колізії між реальним telegram_id і hashCode теоретично можливі, але рідкісні. Webapp показує автора через name; query "усі цитати цього автора" через `{authors.telegram_id: X, group: Y}` працює як best-effort filter.
+- **`title` окремим полем** — для channels/sender_chat handler дає `.title` замість `.first_name`. Webapp може рендерити їх як "Канал X" з іншим візуалом.
+- **Fallback на `from.name` (string only)** — handler може ставити `.name = false` для streak, тому типова перевірка.
 
 **Важливо:** `payload.messages` — це вже оброблений масив (з privacy-хешами імен, forward-лейблами, ref до media thumbnails). Зберігаємо його **після** всього pre-processing'у, щоб webapp рендер був ідентичний тому, що юзер бачив.
 
@@ -374,7 +414,7 @@ if (Buffer.byteLength(payloadJson, 'utf8') > 1_000_000) {  // 1MB soft cap
 ```js
 Quote.updateOne({ _id }, {
   $unset: { payload: 1, text: 1, authors: 1, source: 1 },
-  $set: { hasVoice: false, hasMedia: false }
+  $set: { hasVoice: false, hasMedia: false, forgottenAt: new Date() }
 })
 ```
 
@@ -453,13 +493,114 @@ Data loss: нуль. Всі нові-стиль цитати мають повн
 | Rolling deploy — суміш старих/нових worker'ів | низька | Старі worker'и пишуть без нових полів — це OK (backward compat). Нові worker'и читають старі docs — теж OK (optional fields). Тест: штучно запустити старий + новий handler і перевірити обидва запити. |
 | `quoteMessages` мутується після/під час write | середня (є post-processing на стр. 828-833 `avatar = false`) | Після post-processing — перед `Quote.create` — зберігаємо. Deep clone не потрібен, але треба перевірити послідовність викликів: post-process → store → send. |
 
-## Те, що свідомо НЕ додаємо у V2
+## Future compatibility — що V3+ потребуватиме і чому це не потрібно пре-бейкати
 
-- `archiveStatus: 'private'|'pending_public'|'public'|'removed'` — тільки у V3 Hall of Fame. Додамо з default `'private'`.
-- `style` snapshot — preview читає поточні group settings. Якщо style-drift стане проблемою (користувачі скаржаться), додамо окремою міграцією.
-- `waveform` для voice — генерується клієнтом з audio URL під час рендеру плеєра.
-- `media` (photo/video context) — не в дизайні V2 webapp. Додамо разом із медіа-цитатами.
-- Перейменування `user` → `quotedBy` — косметика, непотрібне, масова зміна.
+Прокрутив roadmap-doc (V2/V3 планів) і для кожної майбутньої фічі перевірив: "чи буде потім боляче додати на 77М+ доків, якщо не зарезервувати зараз?" Ось результати.
+
+### Те, що перевірили і ДОДАЛИ у V2
+
+| Фіча V3+ | Що додано зараз | Чому не далі |
+|---|---|---|
+| Hall of Fame ID-хук (#48393) | `global_id` | Bash.org culture — потрібен рано, щоб був довгий. |
+| Per-quote identity | `local_id` | `#142` у дизайні, без нього webapp безпорадний. |
+| Forget vs legacy distinction | `forgottenAt: Date` | Без цього V3-archiveStatus не розрізнить два стани. |
+| `/q X` на 5+ повідомлень | `authors: [...]`, `messageCount` (масиви, не scalar) | Переробляти `author: {}` на `authors: []` — болюча міграція. |
+| AI-filter на feed | Філтр synthetic у `denormalizeQuote` | Щоб `QuotAI` не потрапляв в авторів — V3 feed не треба буде чистити. |
+| Payload eволюція (new media types) | `payload.version: Number` | Одна поле економить V4 міграцію. |
+
+### Те, що перевірили і НЕ додаємо (+ рецепт V3 migration, щоб було видно: "боляче" не буде)
+
+**1. `archiveStatus: 'private' | 'public' | 'removed'` (Hall of Fame)**
+
+- **Чому не зараз:** + ~15 байт на кожну цитату × мільйони = зайве, поки фіча не активна. Усі V2 цитати `private` за замовчуванням — немає чого вибирати зараз.
+- **V3 migration plan:** додаємо поле з default `'private'`. Існуючі доки без `archiveStatus` — код трактує як `'private'` через `$or: [{archiveStatus: 'public'}, {archiveStatus: null}]` у запитах Hall of Fame (або просто `{archiveStatus: 'public'}` — Hall of Fame показує тільки opt-in'ені, а opt-in — це тільки нові після V3).
+- **Біль:** 0. Нуль `updateMany`. Нові доки одразу мають значення.
+
+**2. `publishedAt: Date`, `anonymous: Boolean`, `moderatedBy: User` (Hall of Fame deep-метадата)**
+
+- **Чому не зараз:** Нема Hall of Fame до V3. Кожне поле optional, додається чисто.
+- **V3 migration:** додати разом із `archiveStatus`. Всі нові opt-in'ени заповнюють при публікації, старі ніколи не мали.
+- **Біль:** 0.
+
+**3. `kind: 'manual' | 'ai' | 'auto'` (джерело цитати)**
+
+- **Чому не зараз:** V2 webapp не фільтрує по цьому. AI-цитати і так відрізняються — `payload.messages` містить synthetic author (фільтрується у денормі). Якщо знадобиться в UI — додамо через filter на `authors[].telegram_id < TELEGRAM_USER_ID_MIN` (але ми його вже виключили — значить простіше додати `kind` тоді).
+- **Коли треба:** V3 auto-detect quotable messages — тоді третій тип `'auto'` буде важливий.
+- **V3 migration:** додати з default `'manual'`. Одразу правильно для нових. Старі `undefined` → треба один `updateMany({payload: {$exists: true}, kind: {$exists: false}}, {$set: {kind: 'manual'}})` — кілька мільйонів доків, прийнятно в вікні.
+- **Біль:** низький, керований.
+
+**4. `language: String` (ISO-639, для TTS, перекладу, AI)**
+
+- **Чому не зараз:** Потребує детекції (franc чи подібне), додає dependency, не використовується у V2 webapp. Для voice-цитат Gemini вже повертає мову — можна зберігати у `payload.voice.language` коли цей шлях буде.
+- **V3 migration:** додати + detection-скрипт на нові цитати (не всі 77М, тільки останні N з payload). Cheap.
+- **Біль:** низький.
+
+**5. `tags: [String]` (AI auto-categorization)**
+
+- **Чому не зараз:** Не в roadmap. Speculative.
+- **V3 migration:** optional array, додаємо коли фіча з'явиться.
+- **Біль:** 0.
+
+**6. `Quote.schemaVersion: Number` (окремо від `payload.version`)**
+
+- **Чому не зараз:** `payload` exists vs absent уже розрізняє "v1 legacy" vs "v2+". `payload.version` розрізняє форму payload. Цього достатньо. Додавати top-level — спекулятивно.
+- **Якщо знадобиться:** додамо з default `2` на нові; старі без поля = версія 1.
+- **Біль:** 0.
+
+**7. User-level notifications `User.settings.notifications.whenQuoted: Boolean`**
+
+- **Чому не зараз:** Це User-модель, не Quote. V2 фіча "тебе процитували в DM" додасть поле разом із handler'ом. Розділені concerns.
+- **Біль:** 0.
+
+**8. Premium subscription fields на User (`tier`, `expiresAt`, `starsSpent`)**
+
+- **Чому не зараз:** V3 Stars monetization. User-модель, не Quote. Coupling нуль.
+- **Біль:** 0.
+
+**9. `viewCount`, `lastViewedAt` на Quote**
+
+- **Чому не зараз (і ніколи):** Write amplification — кожен open в webapp = Mongo write. Hot quotes генерують сотні writes/hour, блокують рейтинг-апдейти. Якщо треба аналітика — окрема collection `QuoteViews` з TTL.
+- **Біль:** — (не треба).
+
+**10. Seasonal top performance (`/qtop week|month`)**
+
+- **Чому не зараз:** `{group: 1, createdAt: -1}` + in-memory sort по `rate.score` прийнятно до певного масштабу групи. Існуючий `{group: 1, 'rate.score': -1}` покриває `/qtop all`.
+- **Коли треба:** якщо EXPLAIN покаже IXSCAN + SORT стадію замість merge — додати `{group: 1, createdAt: -1, 'rate.score': -1}` compound. Partial для нових.
+- **Біль:** низький — окремий index build.
+
+**11. `style` snapshot per quote**
+
+- **Чому не зараз:** `payload` вже містить `backgroundColor`, `emojiBrand`, `scale`. Саме це — style snapshot. Якщо style group setting зміниться — payload лишається "мабон той, який юзер бачив" на момент генерації. Style preservation is free.
+- **Біль:** 0 (вже вирішено).
+
+**12. Коментарі до цитат (Bash.org-style discussion)**
+
+- **Чому не зараз:** Не в roadmap. V3+ якщо коли.
+- **Migration plan:** окрема collection `QuoteComments` з `quote: ObjectId`. Нуль змін у Quote schema.
+- **Біль:** 0.
+
+**13. Re-render через quote-api для style editor (V2+ fine)**
+
+- **Схема готова:** `payload` зберігається, POST в `/generate.webp` з ним дає ту саму .webp (поки file_id's не застарів).
+- **Біль:** залежить від file_id expiry, не від schema.
+
+## Архітектурні принципи, які дотримано (і чому це важливо для V3+)
+
+1. **Один payload = один json blob = одна міграція шляхом version bump.** Не розпорошуємо render-стан по десятку полів.
+2. **Денорм — read-only cache, ніколи не source of truth.** При будь-якому розходженні — перебудовується зі `payload`, без втрат.
+3. **Ніякого `updateMany` на мільйони docs у V2.** Усі V3 розширення будуть add-only optional fields.
+4. **Partial indexes завжди, коли поле може бути absent.** Розмір індексу пропорційний до docs з полем.
+5. **Privacy default вбудовано, не як afterthought.** `flag.privacy` → денорм не зберігає telegram_id — і це так само для V3 публікації (якщо privacy group, ніколи не потрапить у Hall of Fame без re-opt-in).
+6. **Fire-and-forget mutations.** Quote після creation — immutable (крім rate.votes і `/qforget`). V3 features (notifications, archive transitions) додають окремі колекції/поля, а не редагують існуючі.
+
+## Те, що свідомо НЕ додаємо у V2 (короткий список — детальне у Future compatibility вище)
+
+- `archiveStatus`, `publishedAt`, `anonymous` — V3 Hall of Fame.
+- `kind`, `language`, `tags` — додаємо з конкретною фічею.
+- `waveform` для voice — клієнт генерує.
+- `media` subschema (photo/video) — не в дизайні V2, у payload і так є.
+- Перейменування `user` → `quotedBy` — косметика.
+- User-model поля (notifications, subscription) — окремий concern.
 
 ## Критерії успіху V2-схеми
 
