@@ -26,6 +26,8 @@ const openai = new OpenAI({
 const { sendGramadsAd } = require('../helpers/gramads')
 const deepLink = require('../helpers/deep-link')
 const denormalizeQuote = require('../utils/denormalize-quote')
+const buildQuoteReplyMarkup = require('../utils/build-quote-reply-markup')
+const persistQuoteArtifacts = require('../utils/persist-quote-artifacts')
 
 // Config will be loaded asynchronously through context
 let config = null
@@ -989,10 +991,33 @@ ${JSON.stringify(messageForAIContext)}
 
   const quoteApiUri = flag.html ? process.env.QUOTE_API_URI_HTML : process.env.QUOTE_API_URI
 
+  // Allocate quote IDs in parallel with the slow webp generation.
+  // Counter $incs are ~5-10ms single-doc indexed writes; fetch is 500-2000ms.
+  // On counter failure we degrade gracefully — sticker still sends, no deep-link
+  // button, no Quote doc (consistent with pre-V2 behaviour for legacy chats).
+  const hasGroup = !!(ctx.group && ctx.group.info)
+  const idsPromise = hasGroup
+    ? Promise.all([
+        ctx.db.Group.findByIdAndUpdate(
+          ctx.group.info._id,
+          { $inc: { quoteCounter: 1 } },
+          { new: true, projection: { quoteCounter: 1 } }
+        ).then(g => g && g.quoteCounter),
+        ctx.db.Counter.findOneAndUpdate(
+          { _id: 'quote' },
+          { $inc: { seq: 1 } },
+          { new: true, upsert: true, projection: { seq: 1 } }
+        ).then(c => c && c.seq)
+      ]).catch((err) => {
+        console.error('[quote] ID allocation failed', err)
+        return [null, null]
+      })
+    : Promise.resolve([null, null])
+
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), 30 * 1000)
 
-  const generate = await fetch(
+  const generatePromise = fetch(
     `${quoteApiUri}/generate.webp?botToken=${process.env.BOT_TOKEN}`,
     {
       method: 'POST',
@@ -1023,6 +1048,8 @@ ${JSON.stringify(messageForAIContext)}
       }
     }
   }).catch((error) => handleQuoteError(ctx, error))
+
+  const [generate, [localId, globalId]] = await Promise.all([generatePromise, idsPromise])
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
@@ -1064,14 +1091,15 @@ ${JSON.stringify(messageForAIContext)}
     const image = generate.body
     try {
       if (generate.headers['quote-type'] === 'quote') {
-        let replyMarkup = {}
-
-        if (ctx.group && ctx.group.info && ctx.group.info.settings && (ctx.group.info.settings.rate || flag.rate)) {
-          replyMarkup = Markup.inlineKeyboard([
-            Markup.callbackButton('👍', 'rate:👍'),
-            Markup.callbackButton('👎', 'rate:👎')
-          ])
-        }
+        const rateEnabled = !!(ctx.group && ctx.group.info && ctx.group.info.settings && (ctx.group.info.settings.rate || flag.rate))
+        const deepLinkUrl = (localId != null && hasGroup && ctx.botInfo && ctx.botInfo.username)
+          ? deepLink.forQuote(ctx.botInfo.username, String(ctx.group.info._id), localId)
+          : null
+        const replyMarkup = buildQuoteReplyMarkup({
+          rateEnabled,
+          deepLinkUrl,
+          openInAppLabel: deepLinkUrl ? ctx.i18n.t('app.open_quote') : null
+        })
 
         let sendResult
 
@@ -1083,7 +1111,7 @@ ${JSON.stringify(messageForAIContext)}
             emoji: emojis,
             reply_to_message_id: ctx.message.message_id,
             allow_sending_without_reply: true,
-            reply_markup: replyMarkup,
+            ...replyMarkup,
             business_connection_id: ctx.update?.business_message?.business_connection_id
           })
         } else {
@@ -1119,7 +1147,7 @@ ${JSON.stringify(messageForAIContext)}
               emoji: emojis,
               reply_to_message_id: ctx.message.message_id,
               allow_sending_without_reply: true,
-              reply_markup: replyMarkup,
+              ...replyMarkup,
               business_connection_id: ctx.update?.business_message?.business_connection_id
             })
           } else {
@@ -1159,34 +1187,15 @@ ${JSON.stringify(messageForAIContext)}
             sendResult = await ctx.replyWithSticker(sticketSet.stickers[sticketSet.stickers.length - 1].file_id, {
               reply_to_message_id: ctx.message.message_id,
               allow_sending_without_reply: true,
-              reply_markup: replyMarkup,
+              ...replyMarkup,
               business_connection_id: ctx.update?.business_message?.business_connection_id
             })
           }
         }
 
-        if (sendResult && ctx.group && ctx.group.info) {
+        if (sendResult && hasGroup) {
           const groupInfo = ctx.group.info
           const storeText = groupInfo.settings?.archive?.storeText ?? true
-          const rateEnabled = !!(groupInfo.settings.rate || flag.rate)
-
-          let localId, globalId
-          try {
-            ;[localId, globalId] = await Promise.all([
-              ctx.db.Group.findByIdAndUpdate(
-                groupInfo._id,
-                { $inc: { quoteCounter: 1 } },
-                { new: true, projection: { quoteCounter: 1 } }
-              ).then(g => g && g.quoteCounter),
-              ctx.db.Counter.findOneAndUpdate(
-                { _id: 'quote' },
-                { $inc: { seq: 1 } },
-                { new: true, upsert: true, projection: { seq: 1 } }
-              ).then(c => c && c.seq)
-            ])
-          } catch (err) {
-            console.error('[quote] ID allocation failed, proceeding without IDs', err)
-          }
 
           const doc = {
             group: groupInfo,
@@ -1197,6 +1206,7 @@ ${JSON.stringify(messageForAIContext)}
           if (localId != null) doc.local_id = localId
           if (globalId != null) doc.global_id = globalId
 
+          let denorm = null
           if (storeText) {
             const payload = {
               version: 1,
@@ -1213,8 +1223,7 @@ ${JSON.stringify(messageForAIContext)}
             const payloadBytes = Buffer.byteLength(JSON.stringify(payload), 'utf8')
             if (payloadBytes <= 1_000_000) {
               doc.payload = payload
-
-              const denorm = denormalizeQuote(quoteMessages, ctx.message, { privacy: !!flag.privacy })
+              denorm = denormalizeQuote(quoteMessages, ctx.message, { privacy: !!flag.privacy })
               doc.authors = denorm.authors
               doc.hasVoice = denorm.hasVoice
               doc.hasMedia = denorm.hasMedia
@@ -1238,70 +1247,30 @@ ${JSON.stringify(messageForAIContext)}
             }
           }
 
-          try {
-            await ctx.db.Quote.create(doc)
-          } catch (err) {
-            console.error('[quote] Quote.create failed', { global_id: globalId }, err)
-          }
+          const quoterTgId = ctx.session.userInfo && ctx.session.userInfo.telegram_id
+          const authorTgIds = ((denorm && denorm.authors) || [])
+            .map(a => a && a.telegram_id)
+            .filter(id => typeof id === 'number' && id > 0)
+          const memberTgIds = [...new Set([quoterTgId, ...authorTgIds].filter(id => typeof id === 'number' && id > 0))]
 
-          // Append "Open in app" deep-link button once we have a localId.
-          // Done via editMessageReplyMarkup to avoid reshuffling the four
-          // sticker-send branches above; catch() ignores rare edit failures
-          // (e.g. business_message context) — core delivery already succeeded.
-          if (sendResult && localId != null && ctx.botInfo && ctx.botInfo.username) {
-            try {
-              const rows = []
-              if (rateEnabled) {
-                rows.push([
-                  Markup.callbackButton('👍', 'rate:👍'),
-                  Markup.callbackButton('👎', 'rate:👎')
-                ])
-              }
-              rows.push([
-                Markup.urlButton(
-                  ctx.i18n.t('app.open_quote'),
-                  deepLink.forQuote(ctx.botInfo.username, String(groupInfo._id), localId)
-                )
-              ])
-              await ctx.telegram.editMessageReplyMarkup(
-                sendResult.chat.id,
-                sendResult.message_id,
-                undefined,
-                Markup.inlineKeyboard(rows)
-              ).catch((err) => {
-                console.warn('[quote] editMessageReplyMarkup failed', err && err.description)
-              })
-            } catch (err) {
-              console.error('[quote] deep-link markup update failed', err)
-            }
-          }
+          setImmediate(() => {
+            persistQuoteArtifacts({
+              db: ctx.db,
+              doc,
+              groupId: groupInfo._id,
+              memberTgIds
+            })
+          })
+        }
 
-          // Track (group, telegram_id) presence in GroupMember for webapp lookups.
-          // Fire-and-forget: failures here must not fail quote creation.
-          try {
-            const quoterTgId = ctx.session.userInfo && ctx.session.userInfo.telegram_id
-            const authorTgIds = (doc.authors || [])
-              .map(a => a && a.telegram_id)
-              .filter(id => typeof id === 'number' && id > 0)
-            const uniqueIds = [...new Set([quoterTgId, ...authorTgIds].filter(id => typeof id === 'number' && id > 0))]
-            if (uniqueIds.length > 0) {
-              await ctx.db.GroupMember.bulkWrite(
-                uniqueIds.map(tgId => ({
-                  updateOne: {
-                    filter: { group: groupInfo._id, telegram_id: tgId },
-                    update: { $setOnInsert: { group: groupInfo._id, telegram_id: tgId, firstSeenAt: new Date() } },
-                    upsert: true
-                  }
-                })),
-                { ordered: false }
-              )
-            }
-          } catch (err) {
-            // Duplicate key errors are expected and harmless (ordered:false continues).
-            if (!err || err.code !== 11000) {
-              console.error('[quote] GroupMember upsert failed', err)
-            }
-          }
+        // Temporary perf probe — strip after 48h of stable readings.
+        // Tracked in docs/superpowers/specs/2026-04-19-quote-hot-path-redesign.md §5.
+        if (sendResult) {
+          console.log('[quote:timing]', {
+            chat_type: ctx.chat.type,
+            had_button: localId != null,
+            had_group: hasGroup
+          })
         }
 
         // Show onboarding step 2 after first quote in private chat
