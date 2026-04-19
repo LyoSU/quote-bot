@@ -258,6 +258,7 @@ bot.command('qemoji', onlyAdmin, handleEmoji)
 bot.hears(/^\/(qgab) (\d+)/, onlyGroup, onlyAdmin, handleGabSettings)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
 bot.command('qarchive', onlyGroup, onlyAdmin, handleArchive)
+bot.command('qforget', onlyGroup, handleForget)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
 

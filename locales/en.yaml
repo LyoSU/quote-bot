@@ -498,3 +498,10 @@ qarchive:
   status_on: "Current state: <b>enabled</b>.\n\n<code>/qarchive off</code> — disable"
   status_off: "Current state: <b>disabled</b>.\n\n<code>/qarchive on</code> — enable"
   usage: "Toggle quote text archive for this group.\n\n<code>/qarchive on</code> or <code>/qarchive off</code>"
+qforget:
+  usage: "Specify the quote number: <code>/qforget 142</code>"
+  not_found: "Quote #${local} not found in this group."
+  not_author: "Only the quote author can forget it."
+  forgotten: "✅ Quote #${local} forgotten. Sticker and votes remain, but text and author are removed from the archive."
+  already_forgotten: "Quote #${local} was already forgotten."
+  not_yet_archived: "Quote #${local} has no text (created before the archive)."

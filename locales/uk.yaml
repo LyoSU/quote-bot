@@ -451,3 +451,10 @@ qarchive:
   status_on: "Поточний стан: <b>увімкнено</b>.\n\n<code>/qarchive off</code> — вимкнути"
   status_off: "Поточний стан: <b>вимкнено</b>.\n\n<code>/qarchive on</code> — увімкнути"
   usage: "Перемикач архіву тексту цитат для цієї групи.\n\n<code>/qarchive on</code> або <code>/qarchive off</code>"
+qforget:
+  usage: "Вкажіть номер цитати: <code>/qforget 142</code>"
+  not_found: "Цитату #${local} не знайдено в цій групі."
+  not_author: "Лише автор цитати може її видалити."
+  forgotten: "✅ Цитату #${local} забуто. Стікер і голоси залишаються, але текст і автор прибрано з архіву."
+  already_forgotten: "Цитату #${local} вже було забуто."
+  not_yet_archived: "Цитата #${local} не має тексту (була створена до архіву)."
