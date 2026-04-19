@@ -992,18 +992,22 @@ ${JSON.stringify(messageForAIContext)}
   // We allocate it post-send inside setImmediate, which is fine: global_id
   // only lives on the Quote doc, not on any user-visible reply.
   const hasGroup = !!(ctx.group && ctx.group.info)
-  const tIdsStart = Date.now()
+  let idsMs = 0
   const localIdPromise = hasGroup
-    ? ctx.db.Group.findByIdAndUpdate(
-        ctx.group.info._id,
-        { $inc: { quoteCounter: 1 } },
-        { new: true, projection: { quoteCounter: 1 } }
-      )
-      .then(g => g && g.quoteCounter)
-      .catch((err) => {
-        console.error('[quote] Group $inc failed', err)
-        return null
-      })
+    ? (() => {
+        const t = Date.now()
+        return ctx.db.Group.findByIdAndUpdate(
+          ctx.group.info._id,
+          { $inc: { quoteCounter: 1 } },
+          { new: true, projection: { quoteCounter: 1 } }
+        )
+        .then(g => { idsMs = Date.now() - t; return g && g.quoteCounter })
+        .catch((err) => {
+          idsMs = Date.now() - t
+          console.error('[quote] Group $inc failed', err)
+          return null
+        })
+      })()
     : Promise.resolve(null)
 
   const controller = new AbortController()
@@ -1044,7 +1048,6 @@ ${JSON.stringify(messageForAIContext)}
 
   const [generate, localId] = await Promise.all([generatePromise, localIdPromise])
   const generateMs = Date.now() - tGenerateStart
-  const idsMs = Date.now() - tIdsStart
 
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
