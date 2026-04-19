@@ -325,7 +325,13 @@ module.exports = async (ctx, next) => {
     if (flag.scale) flag.scale = flag.scale.match(/s([+-]?(?:\d*\.)?\d+)/)[1]
   }
 
-  if (ctx.chat.type === 'private') {
+  // Batch forwarded messages in DM: Telegram sends separate updates for each
+  // forwarded message, but the user intends them as one quote. Only the
+  // message with the lowest message_id wins the 150ms window; the rest bail.
+  //
+  // Skipped for explicit /q commands (single intent, nothing to batch) and
+  // when there's a reply_to_message (user is targeting a specific message).
+  if (ctx.chat.type === 'private' && !isCommand && !ctx.message.reply_to_message) {
     const userId = ctx.from.id
     const msgId = ctx.message.message_id
     if (!minIdsInChat[userId]) {
@@ -334,7 +340,6 @@ module.exports = async (ctx, next) => {
       minIdsInChat[userId].id = Math.min(minIdsInChat[userId].id, msgId)
       minIdsInChat[userId].ts = Date.now()
     }
-    // Short delay to batch forwarded messages
     await sleep(150)
     if (minIdsInChat[userId]?.id !== msgId) return next()
     delete minIdsInChat[userId]
