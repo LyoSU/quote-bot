@@ -59,7 +59,6 @@ const quoteSchema = new Schema({
 
   // V2 additions — all optional, legacy docs keep working.
   payload: payloadSchema,
-  text: String,
   authors: [authorSchema],
   hasVoice: { type: Boolean, default: false },
   hasMedia: { type: Boolean, default: false },

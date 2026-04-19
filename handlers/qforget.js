@@ -46,7 +46,7 @@ module.exports = async (ctx) => {
   await ctx.db.Quote.updateOne(
     { _id: quote._id },
     {
-      $unset: { payload: 1, text: 1, authors: 1, source: 1 },
+      $unset: { payload: 1, authors: 1, source: 1 },
       $set: { hasVoice: false, hasMedia: false, forgottenAt: new Date() }
     }
   )

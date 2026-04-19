@@ -82,15 +82,6 @@ test('dedup by name when id absent', () => {
   assert.equal(result.authors.length, 1)
 })
 
-test('text joins multi-message with blank line', () => {
-  const msgs = [
-    { from: realUser(1, 'A', null, null), text: 'one' },
-    { from: realUser(2, 'B', null, null), text: 'two' }
-  ]
-  const result = denormalizeQuote(msgs, { chat: { id: -100500 } })
-  assert.equal(result.text, 'one\n\ntwo')
-})
-
 test('hasVoice and hasMedia flags', () => {
   const msgs = [
     { from: realUser(1, 'A', null, null), voice: { duration: 10 } },
@@ -101,7 +92,7 @@ test('hasVoice and hasMedia flags', () => {
   assert.equal(result.hasMedia, true)
 })
 
-test('privacy mode: authors empty, no chat_id, text preserved', () => {
+test('privacy mode: authors empty, no chat_id, source.date preserved', () => {
   const msgs = [
     { from: realUser(1234567890, 'Дмитро', 'Ш', 'dmshev'), text: 'secret' }
   ]
@@ -109,7 +100,7 @@ test('privacy mode: authors empty, no chat_id, text preserved', () => {
   assert.deepEqual(result.authors, [])
   assert.equal(result.source.chat_id, undefined)
   assert.deepEqual(result.source.message_ids, undefined)
-  assert.equal(result.text, 'secret')
+  assert.ok(result.source.date instanceof Date)
 })
 
 test('from.name === false (streak non-first) still resolves display name via first_name', () => {
@@ -144,8 +135,8 @@ test('source.message_ids collected from quoteMessages', () => {
 test('empty quoteMessages returns zero state', () => {
   const result = denormalizeQuote([], { chat: { id: -100500 } })
   assert.deepEqual(result.authors, [])
-  assert.equal(result.text, '')
   assert.equal(result.messageCount, 0)
   assert.equal(result.hasVoice, false)
   assert.equal(result.hasMedia, false)
+  assert.equal(result.text, undefined)
 })

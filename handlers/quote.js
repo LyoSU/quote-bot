@@ -1195,7 +1195,6 @@ ${JSON.stringify(messageForAIContext)}
               doc.payload = payload
 
               const denorm = denormalizeQuote(quoteMessages, ctx.message, { privacy: !!flag.privacy })
-              doc.text = denorm.text
               doc.authors = denorm.authors
               doc.hasVoice = denorm.hasVoice
               doc.hasMedia = denorm.hasMedia

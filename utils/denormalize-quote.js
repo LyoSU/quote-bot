@@ -15,12 +15,10 @@ function pickDisplayName (from) {
 module.exports = function denormalizeQuote (quoteMessages, ctxMessage, { privacy = false } = {}) {
   let hasVoice = false
   let hasMedia = false
-  const texts = []
 
   for (const m of quoteMessages) {
     if (m.voice) hasVoice = true
     if (m.media) hasMedia = true
-    if (m.text) texts.push(m.text)
   }
 
   const authors = []
@@ -55,7 +53,6 @@ module.exports = function denormalizeQuote (quoteMessages, ctxMessage, { privacy
   }
 
   return {
-    text: texts.join('\n\n'),
     authors,
     hasVoice,
     hasMedia,
