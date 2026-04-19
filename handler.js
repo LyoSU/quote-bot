@@ -117,7 +117,13 @@ const updateGroupAndUser = async (ctx, next) => {
       savePromises.push(ctx.session.userInfo.save().catch(() => {}))
     }
     if (ctx.group?.info?.isModified?.()) {
-      savePromises.push(ctx.group.info.save().catch(() => {}))
+      // quoteCounter is owned by atomic $inc in handlers/quote.js — the in-memory
+      // value on this doc can be stale (loaded from session or from before the
+      // $inc). Strip it from the save so we never stomp the atomic counter.
+      ctx.group.info.unmarkModified('quoteCounter')
+      if (ctx.group.info.isModified()) {
+        savePromises.push(ctx.group.info.save().catch(() => {}))
+      }
     }
     if (savePromises.length > 0) {
       Promise.all(savePromises).catch(() => {})
