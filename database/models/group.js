@@ -43,6 +43,12 @@ const groupSchema = Schema({
     aiMode: {
       type: String,
       default: 'sarcastic'
+    },
+    archive: {
+      storeText: {
+        type: Boolean,
+        default: true
+      }
     }
   },
   stickerSet: {
@@ -75,6 +81,10 @@ const groupSchema = Schema({
   available: {
     check: Boolean,
     active: Boolean
+  },
+  quoteCounter: {
+    type: Number,
+    default: 0
   }
 }, {
   timestamps: true
