@@ -492,3 +492,9 @@ quick_action:
   remake: "🔄"
   tooltip:
     remake: "Recreate with different style"
+qarchive:
+  on: "✅ Quote text archive <b>enabled</b>. New quotes will be stored with text and author."
+  off: "⏸ Quote text archive <b>disabled</b>. New quotes will store only the sticker and rating."
+  status_on: "Current state: <b>enabled</b>.\n\n<code>/qarchive off</code> — disable"
+  status_off: "Current state: <b>disabled</b>.\n\n<code>/qarchive on</code> — enable"
+  usage: "Toggle quote text archive for this group.\n\n<code>/qarchive on</code> or <code>/qarchive off</code>"

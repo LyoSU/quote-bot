@@ -30,5 +30,7 @@ module.exports = {
   handleChatMember: require('./chat-member'),
   handleInlineQuery: require('./inline-query'),
   handleOnboardingCallback,
-  handleMenuCallback
+  handleMenuCallback,
+  handleArchive: (...args) => require('./qarchive')(...args),
+  handleForget: (...args) => require('./qforget')(...args)
 }

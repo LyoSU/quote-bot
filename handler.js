@@ -34,7 +34,9 @@ const {
   handleInlineQuery,
   handleDeleteRandom,
   handleOnboardingCallback,
-  handleMenuCallback
+  handleMenuCallback,
+  handleArchive,
+  handleForget
 } = require('./handlers')
 const { getUser, getGroup } = require('./helpers')
 
@@ -255,6 +257,7 @@ bot.hears(/^\/(hidden)/, onlyAdmin, handleSettingsHidden)
 bot.command('qemoji', onlyAdmin, handleEmoji)
 bot.hears(/^\/(qgab) (\d+)/, onlyGroup, onlyAdmin, handleGabSettings)
 bot.hears(/^\/(qrate)/, onlyGroup, onlyAdmin, handleSettingsRate)
+bot.command('qarchive', onlyGroup, onlyAdmin, handleArchive)
 bot.action(/^(rate):(👍|👎)/, handleRate)
 bot.action(/^(irate):(.*):(👍|👎)/, handleRate)
 
