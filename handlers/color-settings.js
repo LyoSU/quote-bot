@@ -1,3 +1,5 @@
+const persistUserSetting = require('../helpers/persist-user-setting')
+
 module.exports = async ctx => {
   let backgroundColor = '//#292232'
   if (ctx.match && ctx.match[1] === '#' && ctx.match[2]) {
@@ -8,6 +10,7 @@ module.exports = async ctx => {
     ctx.group.info.settings.quote.backgroundColor = backgroundColor
   } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings) {
     ctx.session.userInfo.settings.quote.backgroundColor = backgroundColor
+    persistUserSetting(ctx, { 'settings.quote.backgroundColor': backgroundColor })
   }
 
   await ctx.replyWithHTML(ctx.i18n.t('quote.set_background_color', { backgroundColor }), {

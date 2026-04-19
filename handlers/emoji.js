@@ -1,3 +1,5 @@
+const persistUserSetting = require('../helpers/persist-user-setting')
+
 module.exports = async ctx => {
   const uncleanUserInput = ctx.message.text.substring(0, 15)
 
@@ -17,6 +19,7 @@ module.exports = async ctx => {
     ctx.group.info.settings.quote.emojiSuffix = emoji
   } else if (ctx.session && ctx.session.userInfo && ctx.session.userInfo.settings) {
     ctx.session.userInfo.settings.quote.emojiSuffix = emoji
+    persistUserSetting(ctx, { 'settings.quote.emojiSuffix': emoji })
   }
 
   await ctx.replyWithHTML(ctx.i18n.t('emoji.done'), {

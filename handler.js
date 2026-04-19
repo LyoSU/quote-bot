@@ -122,17 +122,34 @@ bot.use(
   )
 )
 
+// Snapshot current Telegram profile state — written via targeted updateOne
+// (not full-doc save) so concurrent workers handling parallel updates from
+// the same user can't race into a VersionError.
+const syncUserProfileFields = (ctx) => {
+  if (!ctx.from || !ctx.session.userInfo || !ctx.session.userInfo._id) return null
+  const $set = {
+    first_name: ctx.from.first_name,
+    last_name: ctx.from.last_name,
+    full_name: `${ctx.from.first_name}${ctx.from.last_name ? ` ${ctx.from.last_name}` : ''}`,
+    username: ctx.from.username,
+    updatedAt: new Date()
+  }
+  if (ctx.chat && ctx.chat.type === 'private') $set.status = 'member'
+  return ctx.db.User.updateOne({ _id: ctx.session.userInfo._id }, { $set }).catch((err) => {
+    console.warn('[session] User.updateOne failed:', err && err.message)
+  })
+}
+
 const updateGroupAndUser = async (ctx, next) => {
   await Promise.all([getUser(ctx), getGroup(ctx)]);
   await next(ctx);
   if (ctx.state.emptyRequest === false) {
-    // Save only if documents were modified
     const savePromises = []
-    if (ctx.session.userInfo?.isModified?.()) {
-      savePromises.push(ctx.session.userInfo.save().catch((err) => {
-        console.warn('[session] userInfo.save failed:', err && err.message)
-      }))
-    }
+    const profileWrite = syncUserProfileFields(ctx)
+    if (profileWrite) savePromises.push(profileWrite)
+
+    // Group: settings/stickerSet may be mutated by handlers via in-memory writes.
+    // unmarkModified('quoteCounter') keeps the atomic $inc in handlers/quote.js safe.
     if (ctx.group?.info?.isModified?.()) {
       // quoteCounter is owned by atomic $inc in handlers/quote.js — the in-memory
       // value on this doc can be stale (loaded from session or from before the
@@ -172,11 +189,8 @@ bot.use(
   Composer.privateChat(async (ctx, next) => {
     await getUser(ctx)
     await next(ctx).then(() => {
-      if (ctx.session.userInfo?.isModified?.()) {
-        ctx.session.userInfo.save().catch((err) => {
-          console.warn('[session:pm] userInfo.save failed:', err && err.message)
-        })
-      }
+      const profileWrite = syncUserProfileFields(ctx)
+      if (profileWrite) profileWrite.catch(() => {})
     })
   })
 )
