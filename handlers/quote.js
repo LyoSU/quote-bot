@@ -44,12 +44,6 @@ const initConfig = async () => {
 
 initConfig()
 
-// for create global sticker pack
-// telegram.createNewStickerSet(66478514, 'created_by_QuotLyBot', 'Created by @QuotLyBot', {
-//   png_sticker: { source: 'placeholder.png' },
-//   emojis: '💜'
-// }).then(console.log)
-
 let botInfo
 let clearStickerPackTimer
 
@@ -543,11 +537,6 @@ module.exports = async (ctx, next) => {
           ctx.forwardCache.set(forwardCacheKey, sarchForwardName)
         }
 
-        // if (sarchForwardName.length === 0) {
-        //   sarchForwardName = await ctx.db.User.find({
-        //     $expr: { $eq: [quoteMessage.forward_sender_name, { $concat: ['$first_name', ' ', '$last_name'] }] }
-        //   })
-        // }
         if (sarchForwardName.length === 1) {
           messageFrom = {
             id: sarchForwardName[0].telegram_id,
