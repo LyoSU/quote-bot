@@ -4,7 +4,7 @@
   "description": "Telegram quote bot",
   "main": "updates-collector.js",
   "scripts": {
-    "test": "node --test utils/",
+    "test": "node --test 'utils/*.test.js'",
     "start": "node updates-collector.js",
     "start:worker": "node updates-worker.js",
     "pm2": "pm2 start ecosystem.config.js",
