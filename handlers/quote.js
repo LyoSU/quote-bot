@@ -24,6 +24,7 @@ const openai = new OpenAI({
 })
 
 const { sendGramadsAd } = require('../helpers/gramads')
+const denormalizeQuote = require('../utils/denormalize-quote')
 
 // Config will be loaded asynchronously through context
 let config = null
@@ -1144,21 +1145,85 @@ ${JSON.stringify(messageForAIContext)}
           }
         }
 
-        if (sendResult && ctx.group && ctx.group.info && (ctx.group.info.settings.rate || flag.rate)) {
-          // Use insertOne for better performance than save()
-          await ctx.db.Quote.create({
-            group: ctx.group.info,
+        if (sendResult && ctx.group && ctx.group.info) {
+          const groupInfo = ctx.group.info
+          const storeText = groupInfo.settings?.archive?.storeText ?? true
+          const rateEnabled = !!(groupInfo.settings.rate || flag.rate)
+
+          let localId, globalId
+          try {
+            ;[localId, globalId] = await Promise.all([
+              ctx.db.Group.findByIdAndUpdate(
+                groupInfo._id,
+                { $inc: { quoteCounter: 1 } },
+                { new: true, projection: { quoteCounter: 1 } }
+              ).then(g => g && g.quoteCounter),
+              ctx.db.Counter.findOneAndUpdate(
+                { _id: 'quote' },
+                { $inc: { seq: 1 } },
+                { new: true, upsert: true, projection: { seq: 1 } }
+              ).then(c => c && c.seq)
+            ])
+          } catch (err) {
+            console.error('[quote] ID allocation failed, proceeding without IDs', err)
+          }
+
+          const doc = {
+            group: groupInfo,
             user: ctx.session.userInfo,
             file_id: sendResult.sticker.file_id,
-            file_unique_id: sendResult.sticker.file_unique_id,
-            rate: {
+            file_unique_id: sendResult.sticker.file_unique_id
+          }
+          if (localId != null) doc.local_id = localId
+          if (globalId != null) doc.global_id = globalId
+
+          if (storeText) {
+            const payload = {
+              version: 1,
+              messages: quoteMessages,
+              backgroundColor,
+              emojiBrand,
+              scale: flag.scale || scale,
+              width,
+              height,
+              type,
+              format
+            }
+
+            const payloadBytes = Buffer.byteLength(JSON.stringify(payload), 'utf8')
+            if (payloadBytes <= 1_000_000) {
+              doc.payload = payload
+
+              const denorm = denormalizeQuote(quoteMessages, ctx.message, { privacy: !!flag.privacy })
+              doc.text = denorm.text
+              doc.authors = denorm.authors
+              doc.hasVoice = denorm.hasVoice
+              doc.hasMedia = denorm.hasMedia
+              doc.messageCount = denorm.messageCount
+              doc.source = denorm.source
+            } else {
+              console.warn('[quote] payload exceeds 1MB cap, skipping archive fields', {
+                global_id: globalId,
+                payloadBytes
+              })
+            }
+          }
+
+          if (rateEnabled) {
+            doc.rate = {
               votes: [
                 { name: '👍', vote: [] },
                 { name: '👎', vote: [] }
               ],
               score: 0
             }
-          })
+          }
+
+          try {
+            await ctx.db.Quote.create(doc)
+          } catch (err) {
+            console.error('[quote] Quote.create failed', { global_id: globalId }, err)
+          }
         }
 
         // Show onboarding step 2 after first quote in private chat
