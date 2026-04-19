@@ -391,13 +391,16 @@ if (Buffer.byteLength(payloadJson, 'utf8') > 1_000_000) {  // 1MB soft cap
 
 ## Нотатки про file_id у payload
 
-`payload.messages[*].from.photo`, `media`, `voice.waveform` можуть містити `file_id`, який Telegram періодично ротує (file_unique_id стабільний). Наслідки:
+`payload.messages[*].from.photo`, `media`, `voice` містять `file_id` — він **завжди валідний для скачування** через Bot API / TDLib. Важливий нюанс: `file_id` **не можна використовувати для порівняння файлів** (два різних file_id можуть вказувати на один файл), для dedup/порівняння є `file_unique_id`.
 
-- **Rerender з payload у quote-api** — може не спрацювати через 24h-тижні для деяких медіа. Для V2 webapp re-render не робимо (style editor це V3+).
-- **Webapp показ bubble** — не потребує media-file_id; аватар генерується як gradient з `from.id`, media thumbnail ми і так не рендеримо у bubble з дизайну.
-- **Для `/quote` детального екрану з voice-плеєром** — потрібен свіжий аудіо file_id. Рішення: не кешуємо у payload; при відкритті webapp — server-side свіжий `getFile` через TDLib. Повільно? Так. Але це runtime-concern, не schema-concern.
+Наслідки для V2:
 
-**Висновок:** file_id у payload — "best-effort", не гарантія. Webapp має fallback-поведінку. Не блокуючий ризик для V2.
+- **Re-render з payload у quote-api** працює — quote-api при download використовує file_id як download handle.
+- **Webapp bubble** не потребує media-file_id напряму; аватар — gradient з `from.id`.
+- **Voice player у webapp** може скачати аудіо за file_id з payload, стрімити клієнту.
+- **Порівняння стікерів / dedup** — через `file_unique_id` (уже є на Quote як unique index), не через `file_id`.
+
+**Висновок:** file_id у payload — надійний для download. Жодних fallback'ів у V2 не потрібно.
 
 ## Команди для користувачів
 
@@ -488,7 +491,7 @@ Data loss: нуль. Всі нові-стиль цитати мають повн
 | `Group.quoteCounter` lock для дуже активної групи | середня (DevHub UA-тип) | Для однієї групи writes серіалізуються, але це саме те, що нам треба для монотонності. Якщо хот — accept. |
 | Payload надто великий → 16MB Mongo limit | дуже низька | 1MB soft cap у handler'і (див. вище). |
 | Privacy leak через `authors[]` | середня якщо забути `flag.privacy` check | Явний тест на privacy-режим перед деплоєм. Unit-тест на `denormalizeQuote(msgs, {privacy: true})`. |
-| Stale `file_id` у payload → broken re-render | висока з часом | Re-render не в V2. У V3 — refresh через TDLib getFile перед використанням. |
+| Плутанина file_id vs file_unique_id у порівняннях | низька | Документовано: `file_id` — download handle (стабільний для download), `file_unique_id` — для dedup. У Quote схемі `file_unique_id` unique, не `file_id`. |
 | Index build блокує writes на 77М | середня без background | Всі індекси з `{ background: true }` і тільки у вікні низького навантаження. |
 | Rolling deploy — суміш старих/нових worker'ів | низька | Старі worker'и пишуть без нових полів — це OK (backward compat). Нові worker'и читають старі docs — теж OK (optional fields). Тест: штучно запустити старий + новий handler і перевірити обидва запити. |
 | `quoteMessages` мутується після/під час write | середня (є post-processing на стр. 828-833 `avatar = false`) | Після post-processing — перед `Quote.create` — зберігаємо. Deep clone не потрібен, але треба перевірити послідовність викликів: post-process → store → send. |
@@ -581,8 +584,8 @@ Data loss: нуль. Всі нові-стиль цитати мають повн
 
 **13. Re-render через quote-api для style editor (V2+ fine)**
 
-- **Схема готова:** `payload` зберігається, POST в `/generate.webp` з ним дає ту саму .webp (поки file_id's не застарів).
-- **Біль:** залежить від file_id expiry, не від schema.
+- **Схема готова:** `payload` зберігається, POST в `/generate.webp` з ним дає ту саму .webp. file_id стабільний для download у Bot API / TDLib.
+- **Біль:** 0 — schema вже тримає все необхідне.
 
 ## Архітектурні принципи, які дотримано (і чому це важливо для V3+)
 
@@ -613,7 +616,7 @@ Data loss: нуль. Всі нові-стиль цитати мають повн
 7. Старі цитати (77М) не ламають запити webapp; `quote.legacy` virtual повертає true.
 8. Webapp може зробити запит `{ group, local_id: 142 }` і знайти цитату унікально через partial unique index.
 9. `/qforget` не видаляє документ — unset-ить payload/text/authors/source, зберігає стікер і рейт.
-10. `POST quote-api/generate.webp` з `{ messages: quote.payload.messages, backgroundColor: ..., scale: ..., ... }` повертає ідентичний .webp тому, що юзер отримав у чаті (re-render fidelity) — для цитат, де file_id ще не застарів.
+10. `POST quote-api/generate.webp` з `{ messages: quote.payload.messages, backgroundColor: ..., scale: ..., ... }` повертає ідентичний .webp тому, що юзер отримав у чаті (re-render fidelity).
 
 ## Non-goals у цьому спеку
 
