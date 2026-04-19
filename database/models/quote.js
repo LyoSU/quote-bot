@@ -104,9 +104,5 @@ quoteSchema.index(
   { 'authors.telegram_id': 1, group: 1 },
   { partialFilterExpression: { 'authors.0': { $exists: true } } }
 )
-// Groups where a user acted as quoter (/q initiator). Used by the webapp
-// "My groups" resolver so a user sees groups they've been active in even when
-// they haven't been quoted themselves yet.
-quoteSchema.index({ user: 1, group: 1 })
 
 module.exports = quoteSchema
