@@ -37,8 +37,12 @@ const connectWithRetry = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      maxPoolSize: 10,
-      minPoolSize: 1,
+      // Each /q issues ~8 Mongo ops (session user/group lookup, Group $inc,
+      // Counter $inc, Quote.create, GroupMember bulkWrite, User.updateOne).
+      // Under 40 /q/sec the old pool of 10 exhausted — session reads stalled
+      // waiting for a free connection, inflating user-visible latency.
+      maxPoolSize: 50,
+      minPoolSize: 5,
       serverSelectionTimeoutMS: 10000,
       socketTimeoutMS: 45000,
       maxIdleTimeMS: 30000,

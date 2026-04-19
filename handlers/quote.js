@@ -1205,83 +1205,89 @@ ${JSON.stringify(messageForAIContext)}
         const sendMs = sendResult ? Date.now() - tSendStart : null
 
         if (sendResult && hasGroup) {
+          // Capture minimal refs for the async job; all CPU work (JSON size
+          // check, denormalization, member dedup) runs off the hot path.
           const groupInfo = ctx.group.info
           const storeText = groupInfo.settings?.archive?.storeText ?? true
-
-          const doc = {
-            group: groupInfo,
-            user: ctx.session.userInfo,
-            file_id: sendResult.sticker.file_id,
-            file_unique_id: sendResult.sticker.file_unique_id
-          }
-          if (localId != null) doc.local_id = localId
-
-          let denorm = null
-          if (storeText) {
-            const payload = {
-              version: 1,
-              messages: quoteMessages,
-              backgroundColor,
-              emojiBrand,
-              scale: flag.scale || scale,
-              width,
-              height,
-              type,
-              format
-            }
-
-            const payloadBytes = Buffer.byteLength(JSON.stringify(payload), 'utf8')
-            if (payloadBytes <= 1_000_000) {
-              doc.payload = payload
-              denorm = denormalizeQuote(quoteMessages, ctx.message, { privacy: !!flag.privacy })
-              doc.authors = denorm.authors
-              doc.hasVoice = denorm.hasVoice
-              doc.hasMedia = denorm.hasMedia
-              doc.messageCount = denorm.messageCount
-              doc.source = denorm.source
-            } else {
-              console.warn('[quote] payload exceeds 1MB cap, skipping archive fields', {
-                payloadBytes
-              })
-            }
+          const privacy = !!flag.privacy
+          const sticker = sendResult.sticker
+          const userInfo = ctx.session.userInfo
+          const message = ctx.message
+          const packaging = {
+            backgroundColor,
+            emojiBrand,
+            scale: flag.scale || scale,
+            width,
+            height,
+            type,
+            format
           }
 
-          if (rateEnabled) {
-            doc.rate = {
-              votes: [
-                { name: '👍', vote: [] },
-                { name: '👎', vote: [] }
-              ],
-              score: 0
-            }
-          }
-
-          const quoterTgId = ctx.session.userInfo && ctx.session.userInfo.telegram_id
-          const authorTgIds = ((denorm && denorm.authors) || [])
-            .map(a => a && a.telegram_id)
-            .filter(id => typeof id === 'number' && id > 0)
-          const memberTgIds = [...new Set([quoterTgId, ...authorTgIds].filter(id => typeof id === 'number' && id > 0))]
-
-          // global_id allocation moved off the critical path. Counter{_id:'quote'}
-          // is one shared doc across the whole DB — $inc on it serializes under
-          // load. Attach global_id to doc before Quote.create, still off hot path.
           setImmediate(async () => {
             try {
-              const counter = await ctx.db.Counter.findOneAndUpdate(
-                { _id: 'quote' },
-                { $inc: { seq: 1 } },
-                { new: true, upsert: true, projection: { seq: 1 } }
-              )
-              if (counter && counter.seq != null) doc.global_id = counter.seq
+              const doc = {
+                group: groupInfo,
+                user: userInfo,
+                file_id: sticker.file_id,
+                file_unique_id: sticker.file_unique_id
+              }
+              if (localId != null) doc.local_id = localId
+
+              let denorm = null
+              if (storeText) {
+                const payload = { version: 1, messages: quoteMessages, ...packaging }
+                const payloadBytes = Buffer.byteLength(JSON.stringify(payload), 'utf8')
+                if (payloadBytes <= 1_000_000) {
+                  doc.payload = payload
+                  denorm = denormalizeQuote(quoteMessages, message, { privacy })
+                  doc.authors = denorm.authors
+                  doc.hasVoice = denorm.hasVoice
+                  doc.hasMedia = denorm.hasMedia
+                  doc.messageCount = denorm.messageCount
+                  doc.source = denorm.source
+                } else {
+                  console.warn('[quote] payload exceeds 1MB cap, skipping archive fields', {
+                    payloadBytes
+                  })
+                }
+              }
+
+              if (rateEnabled) {
+                doc.rate = {
+                  votes: [
+                    { name: '👍', vote: [] },
+                    { name: '👎', vote: [] }
+                  ],
+                  score: 0
+                }
+              }
+
+              const quoterTgId = userInfo && userInfo.telegram_id
+              const authorTgIds = ((denorm && denorm.authors) || [])
+                .map(a => a && a.telegram_id)
+                .filter(id => typeof id === 'number' && id > 0)
+              const memberTgIds = [...new Set([quoterTgId, ...authorTgIds].filter(id => typeof id === 'number' && id > 0))]
+
+              try {
+                const counter = await ctx.db.Counter.findOneAndUpdate(
+                  { _id: 'quote' },
+                  { $inc: { seq: 1 } },
+                  { new: true, upsert: true, projection: { seq: 1 } }
+                )
+                if (counter && counter.seq != null) doc.global_id = counter.seq
+              } catch (err) {
+                console.error('[quote] Counter $inc failed', err)
+              }
+
+              await persistQuoteArtifacts({
+                db: ctx.db,
+                doc,
+                groupId: groupInfo._id,
+                memberTgIds
+              })
             } catch (err) {
-              console.error('[quote] Counter $inc failed', err)
+              console.error('[quote] post-send job failed', err)
             }
-            persistQuoteArtifacts({
-              db: ctx.db,
-              doc,
-              groupId: groupInfo._id,
-              memberTgIds
-            })
           })
         }
 
