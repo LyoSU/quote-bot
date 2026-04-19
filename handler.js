@@ -45,6 +45,20 @@ const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min
 
 const bot = new Composer();
 
+// Populate ctx.botInfo for handlers that need bot username (e.g. deep-link
+// builder). Workers run bot.handleUpdate directly without calling .launch(),
+// so telegraf never populates botInfo itself. Cached per worker process.
+let cachedBotInfo = null
+bot.use(async (ctx, next) => {
+  if (!ctx.botInfo) {
+    if (!cachedBotInfo) {
+      cachedBotInfo = await ctx.telegram.getMe().catch(() => null)
+    }
+    if (cachedBotInfo) ctx.botInfo = cachedBotInfo
+  }
+  return next()
+})
+
 // bot.use(require('./middlewares/metrics'))
 
 bot.command('json', ({ replyWithHTML, message }) =>

@@ -1249,7 +1249,9 @@ ${JSON.stringify(messageForAIContext)}
                 sendResult.message_id,
                 undefined,
                 Markup.inlineKeyboard(rows)
-              ).catch(() => {})
+              ).catch((err) => {
+                console.warn('[quote] editMessageReplyMarkup failed', err && err.description)
+              })
             } catch (err) {
               console.error('[quote] deep-link markup update failed', err)
             }
