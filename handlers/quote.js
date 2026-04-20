@@ -128,6 +128,73 @@ const hashCode = (s) => {
   return h
 }
 
+// Look up a hidden-user forward by their displayed name in our DB and return
+// a full sender object (id + tdlib/Bot-API enrichment). Called only when the
+// user opted into `hidden` mode — otherwise we synthesize a stable pseudo-id
+// from the name. Cached per-context to survive big forward batches.
+const enrichHiddenUser = async (ctx, name) => {
+  const cacheKey = `forward_${name}`
+  if (!ctx.forwardCache) ctx.forwardCache = new Map()
+
+  let matches
+  if (ctx.forwardCache.has(cacheKey)) {
+    matches = ctx.forwardCache.get(cacheKey)
+  } else {
+    matches = await ctx.db.User.find({ full_name: name }).limit(2).lean()
+    ctx.forwardCache.set(cacheKey, matches)
+  }
+
+  if (matches.length !== 1) {
+    return { id: hashCode(name), name }
+  }
+
+  const match = matches[0]
+  const enriched = (await ctx.tdlib.getUser(match.telegram_id).catch(() => null))
+    || (await ctx.tg.getChat(match.telegram_id).catch(console.error))
+  return enriched || {
+    id: match.telegram_id,
+    name,
+    username: match.username || null
+  }
+}
+
+const stubFromName = (name) => ({ id: hashCode(name), name })
+
+const senderFromChat = (sc) => ({
+  id: sc.id,
+  name: sc.title,
+  username: sc.username || null,
+  photo: sc.photo
+})
+
+// MessageOrigin → internal "sender" shape.
+// Handles all four subtypes per Bot API spec (messageOriginUser /
+// HiddenUser / Chat / Channel). `forward_origin` lives on forwarded messages;
+// `origin` lives on ExternalReplyInfo — identical schema, different field
+// name. Returns null if origin is missing or unrecognized so callers can
+// fall through to legacy fields.
+const resolveMessageOrigin = (origin) => {
+  if (!origin) return null
+  if (origin.type === 'user' && origin.sender_user) return origin.sender_user
+  if (origin.type === 'hidden_user') {
+    return {
+      id: hashCode(origin.sender_user_name || ''),
+      name: origin.sender_user_name
+    }
+  }
+  if (origin.type === 'chat' && origin.sender_chat) {
+    const from = { ...origin.sender_chat }
+    if (origin.author_signature) from.author_signature = origin.author_signature
+    return from
+  }
+  if (origin.type === 'channel' && origin.chat) {
+    const from = { ...origin.chat }
+    if (origin.author_signature) from.author_signature = origin.author_signature
+    return from
+  }
+  return null
+}
+
 const generateRandomColor = () => {
   const rawColor = (Math.floor(Math.random() * 16777216)).toString(16)
   const color = '0'.repeat(6 - rawColor.length) + rawColor
@@ -507,97 +574,48 @@ module.exports = async (ctx, next) => {
 
     let messageFrom
 
-    if (quoteMessage.origin) {
-      if (quoteMessage.origin.type === "user" && quoteMessage.origin.sender_user) {
-      messageFrom = quoteMessage.origin.sender_user;
-      } else if (quoteMessage.origin.type === "hidden_user") {
-      messageFrom = {
-        id: hashCode(quoteMessage.origin.sender_user_name),
-        name: quoteMessage.origin.sender_user_name
-      };
-      } else if (quoteMessage.origin.type === "chat" && quoteMessage.origin.sender_chat) {
-      messageFrom = quoteMessage.origin.sender_chat;
-      if (quoteMessage.origin.author_signature) {
-        messageFrom.author_signature = quoteMessage.origin.author_signature;
-      }
-      } else if (quoteMessage.origin.type === "channel") {
-      messageFrom = quoteMessage.origin.chat;
-      if (quoteMessage.origin.author_signature) {
-        messageFrom.author_signature = quoteMessage.origin.author_signature;
-      }
-      } else if (quoteMessage.origin.sender) {
-      // Fallback for backward compatibility
-      messageFrom = quoteMessage.origin.sender;
-      }
-    }
+    // Sender attribution, in priority order. The modern path is MessageOrigin
+    // (forward_origin on forwards, .origin on ExternalReplyInfo — same schema,
+    // different field name per Bot API). Legacy fields only fire when origin
+    // didn't produce a sender. The hidden_user branch optionally enriches via
+    // DB lookup when `flag.hidden` is on.
+    const mainOrigin = quoteMessage.forward_origin || quoteMessage.origin
+    messageFrom = resolveMessageOrigin(mainOrigin)
 
-    if (quoteMessage.forward_sender_name) {
-      if (flag.hidden) {
-        // Cache forward name lookups
-        const forwardCacheKey = `forward_${quoteMessage.forward_sender_name}`
-        if (!ctx.forwardCache) ctx.forwardCache = new Map()
+    const fwdName = quoteMessage.forward_sender_name
+    const canEnrichHidden = flag.hidden && fwdName && (mainOrigin?.type === 'hidden_user' || !messageFrom)
+    if (canEnrichHidden) messageFrom = await enrichHiddenUser(ctx, fwdName)
 
-        let sarchForwardName
-        if (ctx.forwardCache.has(forwardCacheKey)) {
-          sarchForwardName = ctx.forwardCache.get(forwardCacheKey)
-        } else {
-          sarchForwardName = await ctx.db.User.find({
-            full_name: quoteMessage.forward_sender_name
-          }).limit(2).lean()
-          ctx.forwardCache.set(forwardCacheKey, sarchForwardName)
-        }
-
-        if (sarchForwardName.length === 1) {
-          messageFrom = {
-            id: sarchForwardName[0].telegram_id,
-            name: quoteMessage.forward_sender_name,
-            username: sarchForwardName[0].username || null
-          }
-
-          let getHiddenChat
-
-          getHiddenChat = await ctx.tdlib.getUser(messageFrom.id).catch(() => {})
-
-          if (!getHiddenChat) {
-            getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
-          }
-
-          if (getHiddenChat) messageFrom = getHiddenChat
-        } else {
-          messageFrom = {
-            id: hashCode(quoteMessage.forward_sender_name),
-            name: quoteMessage.forward_sender_name
-          }
-        }
-      } else {
-        messageFrom = {
-          id: hashCode(quoteMessage.forward_sender_name),
-          name: quoteMessage.forward_sender_name
-        }
-      }
-    } else if (quoteMessage.forward_from_chat) {
-      messageFrom = quoteMessage.forward_from_chat
-    } else if (quoteMessage.forward_from) {
-      messageFrom = quoteMessage.forward_from
-    } else if (quoteMessage.sender_chat) {
-      messageFrom = {
-        id: quoteMessage.sender_chat.id,
-        name: quoteMessage.sender_chat.title,
-        username: quoteMessage.sender_chat.username || null,
-        photo: quoteMessage.sender_chat.photo
-      }
-    } else if (quoteMessage.from) {
-      messageFrom = quoteMessage.from
+    if (!messageFrom) {
+      if (fwdName) messageFrom = stubFromName(fwdName)
+      else if (quoteMessage.forward_from_chat) messageFrom = quoteMessage.forward_from_chat
+      else if (quoteMessage.forward_from) messageFrom = quoteMessage.forward_from
+      else if (quoteMessage.sender_chat) messageFrom = senderFromChat(quoteMessage.sender_chat)
+      else if (quoteMessage.from) messageFrom = quoteMessage.from
     }
 
     if (messageFrom.title) messageFrom.name = messageFrom.title
     if (messageFrom.first_name) messageFrom.name = messageFrom.first_name
     if (messageFrom.last_name) messageFrom.name += ' ' + messageFrom.last_name
 
+    // Forward detection is done once up front so the streak check below can
+    // use the *effective* sender id (forwarder in groups, original author in
+    // DMs). Previously `diffUser` was computed against the pre-override
+    // messageFrom, which misattributed streaks for consecutive forwards.
+    const isForwarded = !!(quoteMessage.forward_from || quoteMessage.forward_from_chat || quoteMessage.forward_sender_name || quoteMessage.forward_origin)
+    const groupForwarder = (isForwarded && ctx.chat.type !== 'private')
+      ? (quoteMessage.sender_chat || quoteMessage.from)
+      : null
+    const effectiveSenderId = groupForwarder?.id ?? messageFrom.id
+
     let diffUser = true
-    if (lastSenderId !== null && messageFrom.id === lastSenderId) diffUser = false
+    if (lastSenderId !== null && effectiveSenderId === lastSenderId) diffUser = false
 
     const message = {}
+    // Preserve the Telegram timestamp so the archive shows when the message
+    // was actually sent, not when the quote was generated (denormalize-quote
+    // reads this as the authoritative source.date for DMs).
+    if (quoteMessage.date) message.date = quoteMessage.date
 
     let text
 
@@ -615,11 +633,25 @@ module.exports = async (ctx, next) => {
       message.isQuote = true
     }
 
+    // Align with Telegram: captioned media should show BOTH caption and media.
+    // The legacy rule was "only attach media when text is absent", which
+    // silently dropped photos/videos from the most common message shape
+    // (photo + caption). We now include media whenever the message has any,
+    // and only use `mediaCrop` for the text-absent case so quote-api knows
+    // to size the sticker around the image rather than the caption.
+    const hasAnyMedia = !!(quoteMessage.photo || quoteMessage.sticker || quoteMessage.animation
+      || quoteMessage.video || quoteMessage.video_note || quoteMessage.document
+      || quoteMessage.audio || quoteMessage.voice)
     if (!text) {
       flag.media = true
       message.mediaCrop = flag.crop || false
+    } else if (hasAnyMedia) {
+      flag.media = true
     }
-    if (flag.media && quoteMessage.photo) message.media = quoteMessage.photo
+    if (flag.media && quoteMessage.photo) {
+      message.media = quoteMessage.photo
+      message.mediaType = 'photo'
+    }
     if (flag.media && quoteMessage.sticker) {
       message.media = [quoteMessage.sticker]
       if (quoteMessage.sticker.is_video) {
@@ -627,9 +659,26 @@ module.exports = async (ctx, next) => {
       }
       message.mediaType = 'sticker'
     }
-    if (flag.media && (quoteMessage.animation || quoteMessage.video)) {
-      const { thumbnail } = quoteMessage.animation || quoteMessage.video
-      message.media = [thumbnail]
+    if (flag.media && quoteMessage.animation) {
+      message.media = [quoteMessage.animation.thumbnail].filter(Boolean)
+      message.mediaType = 'animation'
+    } else if (flag.media && quoteMessage.video) {
+      message.media = [quoteMessage.video.thumbnail].filter(Boolean)
+      message.mediaType = 'video'
+    }
+    if (flag.media && quoteMessage.video_note) {
+      message.media = [quoteMessage.video_note.thumbnail].filter(Boolean)
+      message.mediaType = 'video_note'
+    }
+    if (flag.media && quoteMessage.document) {
+      // Document covers arbitrary files. If Telegram built a preview, we use
+      // it; otherwise webapp's MediaPlaceholder falls back to a chip.
+      if (quoteMessage.document.thumbnail) message.media = [quoteMessage.document.thumbnail]
+      message.mediaType = 'document'
+    }
+    if (flag.media && quoteMessage.audio) {
+      if (quoteMessage.audio.thumbnail) message.media = [quoteMessage.audio.thumbnail]
+      message.mediaType = 'audio'
     }
     if (flag.media && quoteMessage.voice) {
       message.voice = {
@@ -637,6 +686,9 @@ module.exports = async (ctx, next) => {
         duration: quoteMessage.voice.duration || 0
       }
     }
+    // Propagate the media-spoiler flag (Bot API 7.0+) so the webapp can
+    // render a blurred preview matching Telegram's native "tap to reveal".
+    if (quoteMessage.has_media_spoiler) message.hasMediaSpoiler = true
 
     if (messageFrom.id) {
       message.chatId = messageFrom.id
@@ -667,27 +719,48 @@ module.exports = async (ctx, next) => {
     // Keep `label` for quote-api image rendering; also surface `name` and
     // `from` so the webapp can render the Telegram-style block with an
     // avatar circle of the original source.
-    const isForwarded = !!(quoteMessage.forward_from || quoteMessage.forward_from_chat || quoteMessage.forward_sender_name || quoteMessage.forward_origin)
     if (isForwarded && ctx.chat.type !== 'private') {
       let forwardFromName = ''
       let forwardFrom
-      if (quoteMessage.forward_from) {
-        forwardFromName = [quoteMessage.forward_from.first_name, quoteMessage.forward_from.last_name].filter(Boolean).join(' ') || quoteMessage.forward_from.title || ''
-        forwardFrom = {
-          id: quoteMessage.forward_from.id,
-          username: quoteMessage.forward_from.username,
-          kind: 'user'
+      // Prefer forward_origin (Bot API 7.0+) — covers cases where Telegram
+      // no longer fills the legacy fields (hidden users, some channel posts).
+      const fwdOriginRaw = quoteMessage.forward_origin
+      if (fwdOriginRaw) {
+        if (fwdOriginRaw.type === 'user' && fwdOriginRaw.sender_user) {
+          const u = fwdOriginRaw.sender_user
+          forwardFromName = [u.first_name, u.last_name].filter(Boolean).join(' ') || u.title || ''
+          forwardFrom = { id: u.id, username: u.username, kind: 'user' }
+        } else if (fwdOriginRaw.type === 'hidden_user') {
+          forwardFromName = fwdOriginRaw.sender_user_name || ''
+          forwardFrom = { kind: 'hidden' }
+        } else if (fwdOriginRaw.type === 'chat' || fwdOriginRaw.type === 'channel') {
+          const c = fwdOriginRaw.chat || fwdOriginRaw.sender_chat
+          if (c) {
+            forwardFromName = c.title || ''
+            forwardFrom = { id: c.id, username: c.username, kind: 'chat' }
+          }
         }
-      } else if (quoteMessage.forward_from_chat) {
-        forwardFromName = quoteMessage.forward_from_chat.title || ''
-        forwardFrom = {
-          id: quoteMessage.forward_from_chat.id,
-          username: quoteMessage.forward_from_chat.username,
-          kind: 'chat'
+      }
+      // Fall back to legacy fields if origin was absent or malformed.
+      if (!forwardFrom) {
+        if (quoteMessage.forward_from) {
+          forwardFromName = [quoteMessage.forward_from.first_name, quoteMessage.forward_from.last_name].filter(Boolean).join(' ') || quoteMessage.forward_from.title || ''
+          forwardFrom = {
+            id: quoteMessage.forward_from.id,
+            username: quoteMessage.forward_from.username,
+            kind: 'user'
+          }
+        } else if (quoteMessage.forward_from_chat) {
+          forwardFromName = quoteMessage.forward_from_chat.title || ''
+          forwardFrom = {
+            id: quoteMessage.forward_from_chat.id,
+            username: quoteMessage.forward_from_chat.username,
+            kind: 'chat'
+          }
+        } else if (quoteMessage.forward_sender_name) {
+          forwardFromName = quoteMessage.forward_sender_name
+          forwardFrom = { kind: 'hidden' }
         }
-      } else if (quoteMessage.forward_sender_name) {
-        forwardFromName = quoteMessage.forward_sender_name
-        forwardFrom = { kind: 'hidden' }
       }
       message.forward = {
         label: forwardFromName ? `Forwarded from ${forwardFromName}` : 'Forwarded message',
@@ -695,23 +768,23 @@ module.exports = async (ctx, next) => {
         from: forwardFrom
       }
 
-      // In groups, show the actual forwarder as sender (not the original author)
-      // The original author is already displayed in the forward label
-      const forwarder = quoteMessage.sender_chat || quoteMessage.from
-      if (forwarder) {
-        const fwdName = forwarder.first_name
-          ? [forwarder.first_name, forwarder.last_name].filter(Boolean).join(' ')
-          : (forwarder.title || forwarder.name || '')
+      // In groups, show the actual forwarder as sender (not the original author).
+      // The original author is already displayed in the forward label. The
+      // `groupForwarder` was computed up-top so streak detection used its id.
+      if (groupForwarder) {
+        const fwdName = groupForwarder.first_name
+          ? [groupForwarder.first_name, groupForwarder.last_name].filter(Boolean).join(' ')
+          : (groupForwarder.title || groupForwarder.name || '')
         message.from = {
-          id: forwarder.id,
-          first_name: forwarder.first_name || forwarder.title,
-          last_name: forwarder.last_name,
-          username: forwarder.username,
+          id: groupForwarder.id,
+          first_name: groupForwarder.first_name || groupForwarder.title,
+          last_name: groupForwarder.last_name,
+          username: groupForwarder.username,
           name: isFirstInStreak ? fwdName : false,
-          photo: forwarder.photo
+          photo: groupForwarder.photo
         }
-        message.chatId = forwarder.id
-        messageFrom = forwarder
+        message.chatId = groupForwarder.id
+        messageFrom = groupForwarder
       }
     }
 
@@ -747,65 +820,23 @@ module.exports = async (ctx, next) => {
 
     message.replyMessage = {}
     if (flag.reply && quoteMessage.reply_to_message) {
-      const replyMessageInfo = quoteMessage.reply_to_message
+      const r = quoteMessage.reply_to_message
 
-      // Determine reply sender using the same logic as main message
-      let replyMessageFrom
+      // Reply attribution: same logic as main message sender, factored
+      // through the shared helpers so both paths stay in lockstep.
+      const replyOrigin = r.forward_origin || r.origin
+      let replyMessageFrom = resolveMessageOrigin(replyOrigin)
 
-      if (replyMessageInfo.forward_sender_name) {
-        if (flag.hidden) {
-          // Cache forward name lookups
-          const forwardCacheKey = `forward_${replyMessageInfo.forward_sender_name}`
-          if (!ctx.forwardCache) ctx.forwardCache = new Map()
+      const replyFwdName = r.forward_sender_name
+      const enrichReplyHidden = flag.hidden && replyFwdName && (replyOrigin?.type === 'hidden_user' || !replyMessageFrom)
+      if (enrichReplyHidden) replyMessageFrom = await enrichHiddenUser(ctx, replyFwdName)
 
-          let sarchForwardName
-          if (ctx.forwardCache.has(forwardCacheKey)) {
-            sarchForwardName = ctx.forwardCache.get(forwardCacheKey)
-          } else {
-            sarchForwardName = await ctx.db.User.find({
-              full_name: replyMessageInfo.forward_sender_name
-            }).limit(2).lean()
-            ctx.forwardCache.set(forwardCacheKey, sarchForwardName)
-          }
-
-          if (sarchForwardName.length === 1) {
-            replyMessageFrom = {
-              id: sarchForwardName[0].telegram_id,
-              name: replyMessageInfo.forward_sender_name,
-              username: sarchForwardName[0].username || null
-            }
-
-            let getHiddenChat
-            getHiddenChat = await ctx.tdlib.getUser(replyMessageFrom.id).catch(() => {})
-            if (!getHiddenChat) {
-              getHiddenChat = await ctx.tg.getChat(sarchForwardName[0].telegram_id).catch(console.error)
-            }
-            if (getHiddenChat) replyMessageFrom = getHiddenChat
-          } else {
-            replyMessageFrom = {
-              id: hashCode(replyMessageInfo.forward_sender_name),
-              name: replyMessageInfo.forward_sender_name
-            }
-          }
-        } else {
-          replyMessageFrom = {
-            id: hashCode(replyMessageInfo.forward_sender_name),
-            name: replyMessageInfo.forward_sender_name
-          }
-        }
-      } else if (replyMessageInfo.forward_from_chat) {
-        replyMessageFrom = replyMessageInfo.forward_from_chat
-      } else if (replyMessageInfo.forward_from) {
-        replyMessageFrom = replyMessageInfo.forward_from
-      } else if (replyMessageInfo.sender_chat) {
-        replyMessageFrom = {
-          id: replyMessageInfo.sender_chat.id,
-          name: replyMessageInfo.sender_chat.title,
-          username: replyMessageInfo.sender_chat.username || null,
-          photo: replyMessageInfo.sender_chat.photo
-        }
-      } else if (replyMessageInfo.from) {
-        replyMessageFrom = replyMessageInfo.from
+      if (!replyMessageFrom) {
+        if (replyFwdName) replyMessageFrom = stubFromName(replyFwdName)
+        else if (r.forward_from_chat) replyMessageFrom = r.forward_from_chat
+        else if (r.forward_from) replyMessageFrom = r.forward_from
+        else if (r.sender_chat) replyMessageFrom = senderFromChat(r.sender_chat)
+        else if (r.from) replyMessageFrom = r.from
       }
 
       if (replyMessageFrom) {
@@ -821,9 +852,22 @@ module.exports = async (ctx, next) => {
         }
       }
 
-      if (replyMessageInfo.text) message.replyMessage.text = replyMessageInfo.text
-      if (replyMessageInfo.caption) message.replyMessage.text = replyMessageInfo.caption
-      if (replyMessageInfo.entities) message.replyMessage.entities = replyMessageInfo.entities
+      message.replyMessage.text = r.text || r.caption || undefined
+      message.replyMessage.entities = r.entities || r.caption_entities || undefined
+
+      // Save reply media metadata so the webapp can render a Telegram-style
+      // preview (thumbnail + kind label). Without this, reply-to-media shows
+      // only an ellipsis when the replied message had no text caption.
+      const smallestThumb = (arr) => Array.isArray(arr) && arr[0]?.file_id
+      const stickerThumb = r.sticker && (r.sticker.thumb?.file_id || r.sticker.thumbnail?.file_id)
+      if (r.photo) message.replyMessage.media = { kind: 'photo', fileId: smallestThumb(r.photo) || undefined }
+      else if (r.sticker) message.replyMessage.media = { kind: 'sticker', fileId: stickerThumb || undefined }
+      else if (r.animation) message.replyMessage.media = { kind: 'animation', fileId: r.animation.thumbnail?.file_id }
+      else if (r.video) message.replyMessage.media = { kind: 'video', fileId: r.video.thumbnail?.file_id }
+      else if (r.video_note) message.replyMessage.media = { kind: 'video_note', fileId: r.video_note.thumbnail?.file_id }
+      else if (r.voice) message.replyMessage.media = { kind: 'voice', duration: r.voice.duration }
+      else if (r.audio) message.replyMessage.media = { kind: 'audio', duration: r.audio.duration }
+      else if (r.document) message.replyMessage.media = { kind: 'document', fileId: r.document.thumbnail?.file_id }
     }
 
     if (!message.text && !message.media && !message.voice) {

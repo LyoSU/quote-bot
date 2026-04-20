@@ -140,3 +140,103 @@ test('empty quoteMessages returns zero state', () => {
   assert.equal(result.hasMedia, false)
   assert.equal(result.text, undefined)
 })
+
+test('source.date prefers first message date over reply_to_message.date', () => {
+  // Group case: ctxMessage.reply_to_message.date is the replied-to message
+  // timestamp, but if we already have it on quoteMessages[0].date we should
+  // use that — it's the authoritative one bot actually snapshotted.
+  const msgs = [{ from: realUser(1, 'A', null, null), text: 'x', date: 1800000000 }]
+  const result = denormalizeQuote(msgs, {
+    chat: { id: -100500 },
+    reply_to_message: { date: 1745000000 }
+  })
+  assert.equal(result.source.date.getTime(), 1800000000 * 1000)
+})
+
+test('source.date falls back to reply_to_message then now when messages lack date', () => {
+  const result = denormalizeQuote([{ from: realUser(1, 'A', null, null), text: 'x' }], {
+    chat: { id: -100500 },
+    reply_to_message: { date: 1745000000 }
+  })
+  assert.equal(result.source.date.getTime(), 1745000000 * 1000)
+})
+
+test('forwarded message credits BOTH forwarder and original author', () => {
+  // In groups, handlers/quote.js sets m.from = forwarder and m.forward = { name, from: { id, kind } }.
+  // denormalizeQuote must include both so archive search lands on either one.
+  const msgs = [{
+    from: realUser(100, 'Forwarder', null, 'fwd'),
+    forward: {
+      name: 'Original Poster',
+      from: { id: 999, username: 'op', kind: 'user' }
+    },
+    text: 'quoted words'
+  }]
+  const result = denormalizeQuote(msgs, { chat: { id: -100500 } })
+  const ids = result.authors.map(a => a.telegram_id).sort()
+  assert.deepEqual(ids, [100, 999])
+  const names = result.authors.map(a => a.name).sort()
+  assert.deepEqual(names, ['Forwarder', 'Original Poster'])
+})
+
+test('forwarded hidden user (no id) still credited by name', () => {
+  const msgs = [{
+    from: realUser(100, 'Forwarder', null, 'fwd'),
+    forward: { name: 'Anonymous' }, // no .from.id — hidden user case
+    text: 'x'
+  }]
+  const result = denormalizeQuote(msgs, { chat: { id: -100500 } })
+  const names = result.authors.map(a => a.name).sort()
+  assert.deepEqual(names, ['Anonymous', 'Forwarder'])
+  // The anonymous-forward entry must not accidentally inherit forwarder's id
+  const anon = result.authors.find(a => a.name === 'Anonymous')
+  assert.equal(anon.telegram_id, undefined)
+})
+
+test('forwarded channel post credits channel as title-bearing author', () => {
+  const msgs = [{
+    from: realUser(100, 'Forwarder', null, 'fwd'),
+    forward: {
+      name: 'Telegram News',
+      from: { id: -1001234, username: 'telegram', kind: 'chat' }
+    },
+    text: 'announcement'
+  }]
+  const result = denormalizeQuote(msgs, { chat: { id: -100500 } })
+  const channelAuthor = result.authors.find(a => a.telegram_id === -1001234)
+  assert.ok(channelAuthor)
+  assert.equal(channelAuthor.title, 'Telegram News')
+  assert.equal(channelAuthor.username, 'telegram')
+})
+
+test('reply-to-voice counts as hasVoice for archive search', () => {
+  const msgs = [{
+    from: realUser(1, 'A', null, null),
+    text: 'reply text',
+    replyMessage: { media: { kind: 'voice', duration: 5 } }
+  }]
+  const result = denormalizeQuote(msgs, { chat: { id: -100500 } })
+  assert.equal(result.hasVoice, true)
+  assert.equal(result.hasMedia, false)
+})
+
+test('reply-to-photo counts as hasMedia', () => {
+  const msgs = [{
+    from: realUser(1, 'A', null, null),
+    text: 'reply text',
+    replyMessage: { media: { kind: 'photo', fileId: 'f1' } }
+  }]
+  const result = denormalizeQuote(msgs, { chat: { id: -100500 } })
+  assert.equal(result.hasMedia, true)
+  assert.equal(result.hasVoice, false)
+})
+
+test('privacy mode strips forwarded authors too', () => {
+  const msgs = [{
+    from: realUser(100, 'Forwarder', null, 'fwd'),
+    forward: { name: 'Original', from: { id: 999, kind: 'user' } },
+    text: 'x'
+  }]
+  const result = denormalizeQuote(msgs, { chat: { id: -100500 } }, { privacy: true })
+  assert.deepEqual(result.authors, [])
+})

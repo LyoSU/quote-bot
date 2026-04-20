@@ -371,16 +371,34 @@ function getMessages (chatID, messageIds) {
                 message.text = messageInfo.content.text.text
                 entities = messageInfo.content.text.entities
               } else if (messageInfo.content) {
+                // Maps TDLib content discriminators to Bot-API-compatible field
+                // names. Handlers downstream read messages in Bot API shape, so
+                // we normalize here. Extending this map to new types requires
+                // a matching branch below to build the per-type `media` payload.
                 const mediaType = {
                   messageText: 'text',
                   messagePhoto: 'photo',
                   messageSticker: 'sticker',
                   messageVoiceNote: 'voice',
                   messageVideo: 'video',
-                  messageAnimation: 'animation'
+                  messageAnimation: 'animation',
+                  messageDocument: 'document',
+                  messageAudio: 'audio',
+                  messageVideoNote: 'video_note'
                 }
 
                 const type = mediaType[messageInfo.content._]
+
+                // Normalize a TDLib Thumbnail into the PhotoSize-shaped field
+                // the Bot API exposes. Returns undefined if no thumbnail is set.
+                const buildThumb = (thumb) => {
+                  if (!thumb || !thumb.file) return undefined
+                  return {
+                    file_id: thumb.file.remote.id,
+                    file_unique_id: thumb.file.remote.unique_id,
+                    file_size: thumb.file.size
+                  }
+                }
 
                 if (type) {
                   let media
@@ -388,7 +406,7 @@ function getMessages (chatID, messageIds) {
                   if (type === 'text') {
                     message.text = messageInfo.content.text.text
                     entities = messageInfo.content.text.entities
-                  } else if (messageInfo.content.voice_note) {
+                  } else if (type === 'voice') {
                     const { voice_note } = messageInfo.content
                     const waveform = decodeWaveform(Buffer.from(voice_note.waveform, 'base64'))
 
@@ -397,42 +415,67 @@ function getMessages (chatID, messageIds) {
                       waveform,
                       duration: voice_note.duration
                     }
-                  } else if (messageInfo.content[type].sizes) {
-                    media = messageInfo.content[type].sizes.map((size) => {
-                      return {
-                        file_id: size[type].remote.id,
-                        file_unique_id: size[type].remote.unique_id,
-                        file_size: size[type].size,
-                        height: size.height,
-                        width: size.width
-                      }
-                    })
-                  } else if (['video', 'animation'].includes(type) && messageInfo.content[type].thumbnail) {
-                    const { file } = messageInfo.content[type].thumbnail
-                    media = {
-                      thumbnail: {
-                        file_id: file.remote.id,
-                        file_unique_id: file.remote.unique_id,
-                        file_size: file.size
-                      }
-                    }
-                  } else if (['sticker'].includes(type)) {
-                    const sticker = messageInfo.content[type]
+                  } else if (type === 'photo' && messageInfo.content.photo.sizes) {
+                    media = messageInfo.content.photo.sizes.map((size) => ({
+                      file_id: size.photo.remote.id,
+                      file_unique_id: size.photo.remote.unique_id,
+                      file_size: size.photo.size,
+                      height: size.height,
+                      width: size.width
+                    }))
+                  } else if (type === 'sticker') {
+                    const sticker = messageInfo.content.sticker
                     media = {
                       file_id: sticker.sticker.remote.id,
                       is_animated: sticker.format._ === 'stickerFormatTgs',
                       is_video: sticker.format._ === 'stickerFormatWebm',
-                      thumb: {
-                        file_id: sticker.thumbnail.file.remote.id
-                      }
+                      // Keep `thumb` for existing downstream code; also expose
+                      // `thumbnail` for Bot API 6.4+ parity.
+                      thumb: sticker.thumbnail ? { file_id: sticker.thumbnail.file.remote.id } : undefined,
+                      thumbnail: buildThumb(sticker.thumbnail)
                     }
-                  } else {
+                  } else if (type === 'video' || type === 'animation') {
+                    const obj = messageInfo.content[type]
+                    const inner = obj[type]
                     media = {
-                      file_id: messageInfo.content[type][type].remote.id,
-                      file_unique_id: messageInfo.content[type][type].remote.unique_id,
-                      file_size: messageInfo.content[type][type].size,
-                      height: messageInfo.content[type].height,
-                      width: messageInfo.content[type].width
+                      thumbnail: buildThumb(obj.thumbnail)
+                    }
+                    if (inner?.remote) {
+                      media.file_id = inner.remote.id
+                      media.file_unique_id = inner.remote.unique_id
+                      media.file_size = inner.size
+                    }
+                    if (typeof obj.width === 'number') media.width = obj.width
+                    if (typeof obj.height === 'number') media.height = obj.height
+                    if (typeof obj.duration === 'number') media.duration = obj.duration
+                  } else if (type === 'document' || type === 'audio' || type === 'video_note') {
+                    const obj = messageInfo.content[type]
+                    media = {
+                      thumbnail: buildThumb(obj.thumbnail)
+                    }
+                    // Inner file field name differs: document.document, audio.audio,
+                    // video_note.video — all remote.id.
+                    const innerKey = type === 'video_note' ? 'video' : type
+                    const inner = obj[innerKey]
+                    if (inner?.remote) {
+                      media.file_id = inner.remote.id
+                      media.file_unique_id = inner.remote.unique_id
+                      media.file_size = inner.size
+                    }
+                    if (typeof obj.duration === 'number') media.duration = obj.duration
+                    if (typeof obj.length === 'number') media.length = obj.length
+                    if (obj.file_name) media.file_name = obj.file_name
+                    if (obj.mime_type) media.mime_type = obj.mime_type
+                  } else {
+                    // Fallback: old generic path, kept so unknown-but-mapped
+                    // types don't silently become unsupportedMessage.
+                    const obj = messageInfo.content[type]
+                    media = {
+                      file_id: obj[type]?.remote?.id,
+                      file_unique_id: obj[type]?.remote?.unique_id,
+                      file_size: obj[type]?.size,
+                      height: obj.height,
+                      width: obj.width
                     }
                   }
 
@@ -477,7 +520,10 @@ function getMessages (chatID, messageIds) {
                   }
 
                   if (entity.type === 'text_link') entity.url = entityInfo.type.url
-                  if (entity.type === 'text_mention') entity.user = entityInfo.type.user_id
+                  // Bot API text_mention exposes user as `{ id, first_name, ... }`;
+                  // TDLib gives just the user_id. Wrap it so downstream (webapp
+                  // entity-text) can read `e.user?.id` uniformly.
+                  if (entity.type === 'text_mention') entity.user = { id: entityInfo.type.user_id }
                   if (entity.type === 'custom_emoji') entity.custom_emoji_id = entityInfo.type.custom_emoji_id
 
                   return entity
