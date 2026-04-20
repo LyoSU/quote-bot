@@ -4,9 +4,14 @@
  * One-off cleanup: renumber quotes in groups that have duplicate local_id
  * values (leftover from a pre-fix race on quoteCounter).
  *
- * Strategy: for each group, find quotes with local_id set, sort by createdAt
- * ascending, and rewrite local_id as 1..N. Then set group.quoteCounter to N
- * so new quotes continue the sequence. Skips groups with no duplicates.
+ * Strategy: for each group, stream quotes with local_id set via cursor,
+ * sort by createdAt ascending, and rewrite local_id as 1..N in 1000-op
+ * batches. Then advance group.quoteCounter via $max (never regresses, safe
+ * against concurrent $inc from the live bot). Skips groups with no duplicates.
+ *
+ * Safe to run with the bot live — the bot's atomic $inc keeps issuing fresh
+ * local_ids, and $max ensures we never hand out a number below what's already
+ * in flight.
  *
  * Dry run by default — pass --apply to write. Safe to re-run; idempotent once
  * local_ids are unique within a group.
@@ -36,57 +41,84 @@ async function main() {
   console.log(APPLY ? '[APPLY] writing changes' : '[DRY RUN] no writes — pass --apply to persist')
 
   // Find groups whose quotes have at least one duplicate local_id.
-  const dupAgg = await Quote.aggregate([
-    { $match: { local_id: { $exists: true, $ne: null } } },
-    { $group: { _id: { group: '$group', local_id: '$local_id' }, n: { $sum: 1 } } },
-    { $match: { n: { $gt: 1 } } },
-    { $group: { _id: '$_id.group', collisions: { $sum: 1 } } },
-  ])
+  // allowDiskUse is mandatory at production scale: $group over tens of
+  // millions of docs blows the 100MB in-memory limit without it.
+  // $project trims docs before the expensive group stage.
+  const tAgg = Date.now()
+  console.log('scanning for duplicate local_ids (this is the slow part — expect minutes on large collections)…')
+  const dupAgg = await Quote.aggregate(
+    [
+      { $match: { local_id: { $exists: true, $ne: null } } },
+      { $project: { _id: 0, group: 1, local_id: 1 } },
+      { $group: { _id: { group: '$group', local_id: '$local_id' }, n: { $sum: 1 } } },
+      { $match: { n: { $gt: 1 } } },
+      { $group: { _id: '$_id.group', collisions: { $sum: 1 } } },
+    ],
+    { allowDiskUse: true },
+  )
 
-  console.log(`groups with duplicate local_id: ${dupAgg.length}`)
+  console.log(`groups with duplicate local_id: ${dupAgg.length} (scan took ${((Date.now() - tAgg) / 1000).toFixed(1)}s)`)
 
   let groupsFixed = 0
   let quotesRenumbered = 0
+  const total = dupAgg.length
+  const tStart = Date.now()
 
-  for (const { _id: groupId, collisions } of dupAgg) {
-    const quotes = await Quote.find({ group: groupId, local_id: { $exists: true, $ne: null } })
+  for (const [idx, { _id: groupId, collisions }] of dupAgg.entries()) {
+    const done = idx + 1
+    const pct = total > 0 ? ((done / total) * 100).toFixed(1) : '100.0'
+    const prefix = `[${done}/${total} ${pct}%]`
+    // Stream via cursor — loading all quotes of a huge group into RAM would
+    // OOM on DevHub-sized archives (millions of docs per group).
+    const cursor = Quote.find({ group: groupId, local_id: { $exists: true, $ne: null } })
       .sort({ createdAt: 1, _id: 1 })
-      .select({ _id: 1, local_id: 1, createdAt: 1 })
+      .select({ _id: 1, local_id: 1 })
       .lean()
+      .cursor({ batchSize: 1000 })
 
-    const ops = []
-    quotes.forEach((q, i) => {
-      const target = i + 1
-      if (q.local_id !== target) {
+    let i = 0
+    let queued = 0
+    let ops = []
+
+    for await (const q of cursor) {
+      i++
+      if (q.local_id !== i) {
         ops.push({
           updateOne: {
             filter: { _id: q._id },
-            update: { $set: { local_id: target } },
+            update: { $set: { local_id: i } },
           },
         })
+        queued++
       }
-    })
+      if (ops.length >= 1000) {
+        if (APPLY) await Quote.bulkWrite(ops, { ordered: false })
+        ops = []
+      }
+    }
+    if (ops.length && APPLY) await Quote.bulkWrite(ops, { ordered: false })
 
-    const maxLocalId = quotes.length
+    const maxLocalId = i
+    const elapsed = (Date.now() - tStart) / 1000
+    const eta = done > 0 && done < total ? ((elapsed / done) * (total - done)).toFixed(0) : '0'
     console.log(
-      `group ${groupId}: ${quotes.length} quotes, ${collisions} collisions, ${ops.length} updates, counter→${maxLocalId}`,
+      `${prefix} group ${groupId}: ${i} quotes, ${collisions} collisions, ${queued} updates, counter→≥${maxLocalId}, eta ${eta}s`,
     )
 
-    if (APPLY && ops.length > 0) {
-      await Quote.bulkWrite(ops, { ordered: false })
-      await Group.updateOne({ _id: groupId }, { $set: { quoteCounter: maxLocalId } })
-      groupsFixed++
-      quotesRenumbered += ops.length
-    } else if (APPLY) {
-      // No renumbering needed but advance counter if it's behind.
-      await Group.updateOne(
-        { _id: groupId, quoteCounter: { $lt: maxLocalId } },
-        { $set: { quoteCounter: maxLocalId } },
-      )
+    if (APPLY) {
+      // $max, not $set: live bot's atomic $inc may have advanced the counter
+      // past maxLocalId while we streamed. $set would regress it and the next
+      // insert would collide with a local_id we just assigned.
+      await Group.updateOne({ _id: groupId }, { $max: { quoteCounter: maxLocalId } })
+      if (queued > 0) {
+        groupsFixed++
+        quotesRenumbered += queued
+      }
     }
   }
 
-  console.log(`done. groups fixed: ${groupsFixed}, quotes renumbered: ${quotesRenumbered}`)
+  const totalElapsed = ((Date.now() - tStart) / 1000).toFixed(1)
+  console.log(`done in ${totalElapsed}s. groups fixed: ${groupsFixed}, quotes renumbered: ${quotesRenumbered}`)
   await mongoose.disconnect()
 }
 
