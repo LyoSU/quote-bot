@@ -641,7 +641,7 @@ module.exports = async (ctx, next) => {
     // to size the sticker around the image rather than the caption.
     const hasAnyMedia = !!(quoteMessage.photo || quoteMessage.sticker || quoteMessage.animation
       || quoteMessage.video || quoteMessage.video_note || quoteMessage.document
-      || quoteMessage.audio || quoteMessage.voice)
+      || quoteMessage.audio || quoteMessage.voice || quoteMessage.paid_media || quoteMessage.story)
     if (!text) {
       flag.media = true
       message.mediaCrop = flag.crop || false
@@ -686,9 +686,37 @@ module.exports = async (ctx, next) => {
         duration: quoteMessage.voice.duration || 0
       }
     }
+    // Paid media (Bot API 7.5+). PaidMediaInfo wraps an array of items —
+    // each PaidMediaPhoto / PaidMediaVideo / PaidMediaPreview. We surface
+    // the first media's thumbnail and tag it so the webapp can overlay a
+    // stars-badge and "paid" label.
+    if (flag.media && quoteMessage.paid_media) {
+      const first = quoteMessage.paid_media.paid_media?.[0]
+      if (first?.type === 'photo' && Array.isArray(first.photo)) {
+        message.media = first.photo
+        message.mediaType = 'paid_photo'
+      } else if (first?.type === 'video' && first.video?.thumbnail) {
+        message.media = [first.video.thumbnail]
+        message.mediaType = 'paid_video'
+      } else if (first?.type === 'preview') {
+        message.mediaType = 'paid_preview'
+      }
+      message.paidStars = quoteMessage.paid_media.star_count
+    }
+    // Story forwards (Bot API 7.0+). The Story object only carries chat
+    // and id — no preview bytes — so we attribute to the chat and tag
+    // type='story' for the webapp to render a dedicated badge.
+    if (quoteMessage.story) {
+      messageFrom = quoteMessage.story.chat
+      message.mediaType = 'story'
+      message.storyId = quoteMessage.story.id
+    }
     // Propagate the media-spoiler flag (Bot API 7.0+) so the webapp can
     // render a blurred preview matching Telegram's native "tap to reveal".
     if (quoteMessage.has_media_spoiler) message.hasMediaSpoiler = true
+    // Caption-above-media is a Telegram 10.0 UI hint — preserved for the
+    // webapp so it can position the caption before the thumbnail.
+    if (quoteMessage.show_caption_above_media) message.captionAboveMedia = true
 
     if (messageFrom.id) {
       message.chatId = messageFrom.id
