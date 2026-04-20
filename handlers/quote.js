@@ -653,37 +653,62 @@ module.exports = async (ctx, next) => {
       message.mediaType = 'photo'
     }
     if (flag.media && quoteMessage.sticker) {
-      message.media = [quoteMessage.sticker]
-      if (quoteMessage.sticker.is_video) {
-        message.media = [quoteMessage.sticker.thumb]
-      }
+      const sticker = quoteMessage.sticker
+      // Static stickers (.webp) render as <img>; video stickers (.webm)
+      // stream as <video> with a thumbnail poster; animated stickers (.tgs =
+      // gzipped Lottie JSON) are rendered by the webapp's TgsPlayer, which
+      // ungzips and hands the JSON to lottie-web. For all three we save
+      // the thumb (static preview) and the actual sticker file_id.
+      const thumb = sticker.thumb || sticker.thumbnail
+      message.media = sticker.is_video || sticker.is_animated
+        ? [thumb].filter(Boolean)
+        : [sticker]
       message.mediaType = 'sticker'
+      message.stickerIsAnimated = !!sticker.is_animated
+      message.stickerIsVideo = !!sticker.is_video
+      if (sticker.is_video || sticker.is_animated) message.mediaFileId = sticker.file_id
     }
+    // Save BOTH the thumbnail (for static preview) and the actual media's
+    // file_id + mime_type so the webapp can switch to an inline <video> /
+    // <audio> player on user interaction. Streams through /api/tg/file.
     if (flag.media && quoteMessage.animation) {
       message.media = [quoteMessage.animation.thumbnail].filter(Boolean)
       message.mediaType = 'animation'
+      message.mediaFileId = quoteMessage.animation.file_id
+      message.mediaMimeType = quoteMessage.animation.mime_type
     } else if (flag.media && quoteMessage.video) {
       message.media = [quoteMessage.video.thumbnail].filter(Boolean)
       message.mediaType = 'video'
+      message.mediaFileId = quoteMessage.video.file_id
+      message.mediaMimeType = quoteMessage.video.mime_type
     }
     if (flag.media && quoteMessage.video_note) {
       message.media = [quoteMessage.video_note.thumbnail].filter(Boolean)
       message.mediaType = 'video_note'
+      message.mediaFileId = quoteMessage.video_note.file_id
     }
     if (flag.media && quoteMessage.document) {
-      // Document covers arbitrary files. If Telegram built a preview, we use
-      // it; otherwise webapp's MediaPlaceholder falls back to a chip.
       if (quoteMessage.document.thumbnail) message.media = [quoteMessage.document.thumbnail]
       message.mediaType = 'document'
+      message.mediaFileId = quoteMessage.document.file_id
+      message.mediaMimeType = quoteMessage.document.mime_type
+      message.mediaFileName = quoteMessage.document.file_name
     }
     if (flag.media && quoteMessage.audio) {
       if (quoteMessage.audio.thumbnail) message.media = [quoteMessage.audio.thumbnail]
       message.mediaType = 'audio'
+      message.mediaFileId = quoteMessage.audio.file_id
+      message.mediaMimeType = quoteMessage.audio.mime_type
+      message.audioTitle = quoteMessage.audio.title
+      message.audioPerformer = quoteMessage.audio.performer
+      message.audioDuration = quoteMessage.audio.duration
     }
     if (flag.media && quoteMessage.voice) {
       message.voice = {
         waveform: quoteMessage.voice.waveform || [],
-        duration: quoteMessage.voice.duration || 0
+        duration: quoteMessage.voice.duration || 0,
+        fileId: quoteMessage.voice.file_id,
+        mimeType: quoteMessage.voice.mime_type
       }
     }
     // Paid media (Bot API 7.5+). PaidMediaInfo wraps an array of items —
