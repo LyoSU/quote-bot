@@ -1,5 +1,7 @@
 const Markup = require('telegraf/markup')
 const deepLink = require('../helpers/deep-link')
+const { showLanguagePicker } = require('./language')
+const handlePrivacy = require('./privacy-settings')
 
 async function showMainMenu (ctx, getMe, isEdit = false) {
   if (!getMe) {
@@ -139,11 +141,9 @@ async function handleMenuCallback (ctx) {
       }).catch(() => {})
       break
 
-    case 'language': {
-      const handleLanguage = require('./language')
-      await handleLanguage(ctx)
+    case 'language':
+      await showLanguagePicker(ctx, { edit: true, backCallback: 'menu:main' })
       return
-    }
 
     case 'set_color':
       await ctx.editMessageText(
@@ -172,12 +172,10 @@ async function handleMenuCallback (ctx) {
       }).catch(() => {})
       break
 
-    case 'set_privacy': {
-      const handlePrivacy = require('./privacy-settings')
+    case 'set_privacy':
       await handlePrivacy(ctx)
       await showMainMenu(ctx, getMe, false)
       return
-    }
   }
 
   ctx.state.answerCbQuery = []

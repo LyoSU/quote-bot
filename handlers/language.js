@@ -40,7 +40,33 @@ const getLocales = () => {
   return localesCache
 }
 
-module.exports = async ctx => {
+const LANG_PICKER_TEXT = '🇺🇸 Choose language\n\nHelp with translation: https://crwd.in/QuotLyBot'
+
+async function showLanguagePicker (ctx, { edit = false, backCallback = null } = {}) {
+  const locales = getLocales()
+  const buttons = Object.keys(locales).map((key) =>
+    Markup.callbackButton(locales[key].flag, `set_language:${key}`)
+  )
+
+  const rows = []
+  for (let i = 0; i < buttons.length; i += 2) {
+    rows.push(buttons.slice(i, i + 2))
+  }
+  if (backCallback) {
+    rows.push([Markup.callbackButton(ctx.i18n.t('menu.btn.back'), backCallback)])
+  }
+
+  const options = { reply_markup: Markup.inlineKeyboard(rows) }
+
+  if (edit && ctx.callbackQuery) {
+    ctx.state.answerCbQuery = []
+    await ctx.editMessageText(LANG_PICKER_TEXT, options).catch(() => {})
+  } else {
+    await ctx.reply(LANG_PICKER_TEXT, options)
+  }
+}
+
+const handleLanguage = async ctx => {
   const locales = getLocales()
 
   if (ctx.updateType === 'callback_query') {
@@ -67,16 +93,9 @@ module.exports = async ctx => {
       }
     }
   } else {
-    const button = []
-
-    Object.keys(locales).map((key) => {
-      button.push(Markup.callbackButton(locales[key].flag, `set_language:${key}`))
-    })
-
-    ctx.reply('🇺🇸 Choose language\n\nHelp with translation: https://crwd.in/QuotLyBot', {
-      reply_markup: Markup.inlineKeyboard(button, {
-        columns: 2
-      })
-    })
+    await showLanguagePicker(ctx)
   }
 }
+
+module.exports = handleLanguage
+module.exports.showLanguagePicker = showLanguagePicker
