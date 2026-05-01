@@ -333,32 +333,32 @@ aimode:
       name: "🧠 Filósofo"
       description: "Pensamentos profundos e reflexões filosóficas"
     comedian:
-      name: "😂 Comedian"
-      description: "Funny jokes and comedic comments"
+      name: "😂 Comediante"
+      description: "Piadas engraçadas e comentários humorísticos"
     poet:
-      name: "📝 Poet"
-      description: "Poetic lines and beautiful metaphors"
+      name: "📝 Poeta"
+      description: "Versos poéticos e belas metáforas"
     motivator:
-      name: "💪 Motivator"
-      description: "Motivating and inspiring messages"
+      name: "💪 Motivador"
+      description: "Mensagens motivadoras e inspiradoras"
     conspiracy:
-      name: "🕵️ Conspiracy Theorist"
+      name: "🕵️ Teórico da Conspiração"
       description: "Conspiracy theories and suspicious comments"
     critic:
-      name: "🎭 Critic"
-      description: "Critical reviews and ratings for everything"
+      name: "🎭 Crítico"
+      description: "Análises e avaliações críticas de tudo"
     boomer:
       name: "👴 Boomer"
-      description: "Old-school comments from older generation"
+      description: ""
     zoomer:
       name: "😎 Zoomer"
-      description: "Youth slang and trendy phrases"
+      description: "Gírias e expressões da moda entre os jovens"
     academic:
-      name: "🎓 Academic"
+      name: "🎓 Acadêmico"
       description: "Fatos científicos e comentários acadêmicos"
     memer:
       name: "🐸 Memer"
-      description: "Meme phrases and internet culture"
+      description: "Frases de memes e cultura da internet"
 menu:
   title: |
     <b>🎨 QuotLyBot</b>
@@ -375,8 +375,8 @@ menu:
       <b>⚙️ Configurações</b>
       Gerencie suas preferências:
     btn:
-      color: "🎨 Default Color"
-      emoji_style: "😊 Emoji Style"
+      color: "🎨 Cor padrão"
+      emoji_style: "😊 Estilo do Emoji"
       privacy: "🔒 Privacidade"
       back: "← Voltar"
   features:
@@ -462,8 +462,8 @@ onboarding:
 
       💡 <i>Dica: Você pode encaminhar várias mensagens de uma vez!</i>
     waiting: |
-      Waiting for your message...
-      Just forward something from any chat!
+      Aguardando sua mensagem...
+      Basta encaminhar algo de qualquer chat!
   step2:
     title: |
       <b>Ótimo! Aqui está sua citação! ✨</b>
