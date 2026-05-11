@@ -29,7 +29,12 @@ module.exports = {
         NODE_ENV: 'production',
         REDIS_HOST: 'localhost',
         REDIS_PORT: '6379',
-        WORKER_QUEUES
+        WORKER_QUEUES,
+        // TDLib uses the SAME bot token as Telegraf polling — running both
+        // splits updates between them and breaks guest_message delivery.
+        // Disabled until TDLib is migrated to a user-account session in a
+        // separate process. handleQuote degrades to single-message mode.
+        DISABLE_TDLIB: '1'
       }
     },
     {
@@ -54,7 +59,12 @@ module.exports = {
         NODE_ENV: 'production',
         REDIS_HOST: 'localhost',
         REDIS_PORT: '6379',
-        WORKER_QUEUES
+        WORKER_QUEUES,
+        // TDLib uses the SAME bot token as Telegraf polling — running both
+        // splits updates between them and breaks guest_message delivery.
+        // Disabled until TDLib is migrated to a user-account session in a
+        // separate process. handleQuote degrades to single-message mode.
+        DISABLE_TDLIB: '1'
       }
     }
   ]
