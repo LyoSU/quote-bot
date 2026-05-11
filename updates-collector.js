@@ -140,6 +140,17 @@ class TelegramCollector {
     if (update.chosen_inline_result) return update.chosen_inline_result.from.id
     if (update.shipping_query) return update.shipping_query.from.id
     if (update.pre_checkout_query) return update.pre_checkout_query.from.id
+    if (update.business_message) return update.business_message.chat?.id || update.business_message.from?.id
+    // Guest mode (Bot API 10.0): pin worker by the summoning chat so concurrent
+    // guest queries from the same chat hit the same worker (better cache locality
+    // and predictable rate-limiting). The chat is foreign — we are not a member —
+    // but its id is still a stable hashing key.
+    if (update.guest_message) {
+      return update.guest_message.guest_bot_caller_chat?.id
+        || update.guest_message.chat?.id
+        || update.guest_message.guest_bot_caller_user?.id
+        || update.guest_message.from?.id
+    }
 
     // Fallback to update_id if no chat found
     return update.update_id
@@ -149,6 +160,11 @@ class TelegramCollector {
     // Higher priority for commands
     if (update.message?.text?.startsWith('/')) {
       return 10
+    }
+    // Guest queries have a hard server-side TTL (~30s) — bump them above
+    // ordinary text so they don't starve behind a backlog.
+    if (update.guest_message) {
+      return 9
     }
     // Medium priority for replies
     if (update.message?.reply_to_message) {
@@ -179,7 +195,38 @@ class TelegramCollector {
       logWithTimestamp('Sticker stats publisher started')
 
       logWithTimestamp('Starting Telegram collector...')
-      await this.bot.launch()
+      // Bot API 10.0 introduced `guest_message`, which (like `business_*`) is
+      // NOT included in the default allowed_updates set. We must enumerate
+      // everything we want explicitly — omitting a type silently drops it.
+      await this.bot.launch({
+        polling: {
+          allowedUpdates: [
+            'message',
+            'edited_message',
+            'channel_post',
+            'edited_channel_post',
+            'business_connection',
+            'business_message',
+            'edited_business_message',
+            'deleted_business_messages',
+            'message_reaction',
+            'message_reaction_count',
+            'inline_query',
+            'chosen_inline_result',
+            'callback_query',
+            'shipping_query',
+            'pre_checkout_query',
+            'poll',
+            'poll_answer',
+            'my_chat_member',
+            'chat_member',
+            'chat_join_request',
+            'chat_boost',
+            'removed_chat_boost',
+            'guest_message'
+          ]
+        }
+      })
 
       logWithTimestamp('Telegram collector started successfully')
 

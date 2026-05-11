@@ -28,6 +28,8 @@ const denormalizeQuote = require('../utils/denormalize-quote')
 const buildQuoteReplyMarkup = require('../utils/build-quote-reply-markup')
 const persistQuoteArtifacts = require('../utils/persist-quote-artifacts')
 const persistUserSetting = require('../helpers/persist-user-setting')
+const guestMode = require('../helpers/guest-mode')
+const mongoose = require('mongoose')
 
 // Config will be loaded asynchronously through context
 let config = null
@@ -338,6 +340,7 @@ module.exports = async (ctx, next) => {
   const t0 = Date.now()
   // Use config from context if available, fallback to local config
   const currentConfig = ctx.config || config || { globalStickerSet: { save_sticker_count: 10, name: 'default' } }
+  const isGuestCtx = guestMode.isGuest(ctx)
   const flag = {
     count: false,
     reply: false,
@@ -347,7 +350,10 @@ module.exports = async (ctx, next) => {
     color: false,
     scale: false,
     crop: false,
-    privacy: false,
+    // Guest queries arrive from foreign chats — we have no chat membership and
+    // no way to opt-in callers, so the safest default is to anonymise media
+    // attribution as if the user had passed the `privacy` flag explicitly.
+    privacy: !!isGuestCtx,
     ai: false,
     html: false,
     aiQuery: false,
@@ -500,29 +506,39 @@ module.exports = async (ctx, next) => {
       }))
     }
 
-    const tCollectStart = Date.now()
-    try {
-      const tdlibMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
-        const m = []
-        for (let i = 0; i < messageCount; i++) {
-          m.push(startMessage + i)
+    // In guest mode the bot is NOT a chat member and TDLib (running as a user
+    // account) likely cannot see the foreign chat either. Skip the history
+    // fetch entirely — we only have the caller's own message (and possibly
+    // its reply_to_message), which is the same situation as a DM single-shot.
+    if (isGuestCtx) {
+      if (firstMessage && firstMessage.message_id) messages.push(firstMessage)
+      // reply_to_message, if any, was already attributed via firstMessage path.
+      ctx.state.collectMs = 0
+    } else {
+      const tCollectStart = Date.now()
+      try {
+        const tdlibMessages = await ctx.tdlib.getMessages(ctx.message.chat.id, (() => {
+          const m = []
+          for (let i = 0; i < messageCount; i++) {
+            m.push(startMessage + i)
+          }
+          return m
+        })())
+        messages.push(...tdlibMessages)
+      } catch (error) {
+        console.error('TDLib getMessages failed:', error.message)
+        // Fallback: use only the replied message if available
+        if (firstMessage) {
+          messages.push(firstMessage)
+        } else {
+          return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'), {
+            reply_to_message_id: ctx.message.message_id,
+            allow_sending_without_reply: true
+          })
         }
-        return m
-      })())
-      messages.push(...tdlibMessages)
-    } catch (error) {
-      console.error('TDLib getMessages failed:', error.message)
-      // Fallback: use only the replied message if available
-      if (firstMessage) {
-        messages.push(firstMessage)
-      } else {
-        return ctx.replyWithHTML(ctx.i18n.t('quote.errors.api_down'), {
-          reply_to_message_id: ctx.message.message_id,
-          allow_sending_without_reply: true
-        })
       }
+      ctx.state.collectMs = Date.now() - tCollectStart
     }
-    ctx.state.collectMs = Date.now() - tCollectStart
   }
 
   messages = messages.filter((message) => message && Object.keys(message).length !== 0)
@@ -1151,6 +1167,14 @@ ${JSON.stringify(messageForAIContext)}
   const [generate, localId] = await Promise.all([generatePromise, localIdPromise])
   const generateMs = Date.now() - tGenerateStart
 
+  // generatePromise can resolve to:
+  //   { body, headers }            — happy path
+  //   <Message>                    — handleQuoteError's replyWithHTML result
+  //   null                         — guest proxy swallows transient failures
+  // The .error / .body / .headers reads below all assume an object, so
+  // bail early on null to avoid a TypeError.
+  if (!generate) return
+
   if (generate.error) {
     if (generate.error.response && generate.error.response.body) {
       let errorMessage = 'API Error'
@@ -1195,11 +1219,33 @@ ${JSON.stringify(messageForAIContext)}
         const deepLinkUrl = (localId != null && hasGroup && ctx.botInfo && ctx.botInfo.username)
           ? deepLink.forQuote(ctx.botInfo.username, String(ctx.group.info._id), localId)
           : null
-        const replyMarkup = buildQuoteReplyMarkup({
-          rateEnabled,
-          deepLinkUrl,
-          openInAppLabel: deepLinkUrl ? ctx.i18n.t('app.open_quote') : null
-        })
+        let replyMarkup
+        // Pre-compute the Quote _id for guest mode so we can attach `irate:`
+        // callback buttons (which require the quote doc to exist when the
+        // user taps). We mint the ObjectId synchronously and persist the doc
+        // in a background setImmediate after answerGuestQuery — same trick
+        // the inline-query path relies on, but inverted: there the quote
+        // already exists; here we create it just-in-time.
+        let guestQuoteId = null
+        if (isGuestCtx) {
+          guestQuoteId = new mongoose.Types.ObjectId()
+          const buttons = [
+            [
+              { text: '👍 0', callback_data: `irate:${guestQuoteId}:👍` },
+              { text: '👎 0', callback_data: `irate:${guestQuoteId}:👎` }
+            ]
+          ]
+          if (ctx.botInfo && ctx.botInfo.username) {
+            buttons.push([{ text: 'Open Quotly →', url: `https://t.me/${ctx.botInfo.username}` }])
+          }
+          replyMarkup = { reply_markup: { inline_keyboard: buttons } }
+        } else {
+          replyMarkup = buildQuoteReplyMarkup({
+            rateEnabled,
+            deepLinkUrl,
+            openInAppLabel: deepLinkUrl ? ctx.i18n.t('app.open_quote') : null
+          })
+        }
 
         let sendResult
         const tSendStart = Date.now()
@@ -1300,6 +1346,55 @@ ${JSON.stringify(messageForAIContext)}
         }
 
         const sendMs = sendResult ? Date.now() - tSendStart : null
+
+        // Guest mode: persist a slim Quote doc (no group) so the irate:<id>
+        // callback we just attached can find it. We mint _id synchronously
+        // above; here we only race against the user actually tapping the
+        // button before the doc is committed — Mongo write latency is
+        // single-digit ms, button tap is human-time, so the order is safe.
+        //
+        // sendResult from a guest answer is a SentGuestMessage
+        // { inline_message_id }, not a Message — so we have no sticker file_id
+        // from it; we use the same file_id we pre-fetched via the proxy.
+        if (sendResult && isGuestCtx && guestQuoteId) {
+          const stickerFileId = sendResult.sticker && sendResult.sticker.file_id
+          const stickerUniqueId = sendResult.sticker && sendResult.sticker.file_unique_id
+          // The guest proxy in helpers/guest-mode.js returns SentGuestMessage
+          // (no sticker field). We get file_id/file_unique_id from the
+          // intermediate upload it did — surface them via ctx.state.guest.
+          const fileId = stickerFileId || ctx.state.guest?.lastStickerFileId
+          const fileUniqueId = stickerUniqueId || ctx.state.guest?.lastStickerFileUniqueId
+          if (fileId && fileUniqueId) {
+            const userInfo = ctx.session && ctx.session.userInfo
+            const callerChat = ctx.state.guest.callerChat
+            const payload = { version: 1, messages: quoteMessages, backgroundColor, emojiBrand, scale: flag.scale || scale, width, height, type, format }
+            const denorm = denormalizeQuote(quoteMessages, ctx.message, { privacy: !!flag.privacy })
+            const doc = new ctx.db.Quote({
+              _id: guestQuoteId,
+              user: userInfo && userInfo._id,
+              file_id: fileId,
+              file_unique_id: fileUniqueId,
+              payload,
+              authors: denorm.authors,
+              hasVoice: denorm.hasVoice,
+              hasMedia: denorm.hasMedia,
+              messageCount: denorm.messageCount,
+              source: callerChat
+                ? { chat_id: callerChat.id, message_ids: denorm.source ? denorm.source.message_ids : [], date: denorm.source ? denorm.source.date : undefined }
+                : denorm.source,
+              rate: { votes: [ { name: '👍', vote: [] }, { name: '👎', vote: [] } ], score: 0 }
+            })
+            setImmediate(() => {
+              doc.save().catch((err) => {
+                // Duplicate file_unique_id is possible — bot may have produced
+                // an identical quote earlier (same source). The pre-minted _id
+                // makes recovery hard; we just log and move on. The callback
+                // will silently no-op for the duplicate path.
+                console.warn('[guest] quote.save failed:', err && err.message)
+              })
+            })
+          }
+        }
 
         if (sendResult && hasGroup) {
           // Capture minimal refs for the async job; all CPU work (JSON size

@@ -18,6 +18,7 @@ A powerful Telegram bot that creates beautiful quote stickers from chat messages
 - **Health Monitoring**: Built-in health checks and monitoring
 - **Business API**: Support for Telegram Business connections
 - **Inline Queries**: Works in inline mode
+- **Guest Mode** (Bot API 10.0+): Mention the bot in any chat *without adding it as a member* — reply to a message + `@quotlybot` and the bot drops a quote sticker straight into the chat. Enable in BotFather → bot settings → "Guest Mode".
 - **Statistics**: Usage tracking and analytics
 
 ## Installation 📦
