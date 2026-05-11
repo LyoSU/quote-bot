@@ -96,6 +96,10 @@ class TelegramCollector {
   }
 
   startTDLibServer() {
+    if (process.env.DISABLE_TDLIB === '1') {
+      logWithTimestamp('TDLib disabled via DISABLE_TDLIB=1 — workers requesting tdlib methods will receive a "client not available" error and fall back to single-message handling.')
+      return
+    }
     // Initialize TDLib only in collector process
     const tdlib = require('./helpers/tdlib')
 

@@ -100,8 +100,18 @@ const reconnectClient = () => {
   }, RECONNECT_DELAY * reconnectAttempts) // Exponential backoff
 }
 
-// Initial connection
-connectClient()
+// TDLib logs in with the same BOT_TOKEN as Telegraf polling. Telegram only
+// allows ONE active getUpdates/MTProto session per bot token at a time — when
+// both clients run together, updates get split between them and some (e.g.
+// guest_message) never reach Telegraf. Set DISABLE_TDLIB=1 to skip the
+// connection while we work on a longer-term split (TDLib should run as a
+// user account in a dedicated process, not the bot token, so it can read
+// history without contending for bot updates).
+if (process.env.DISABLE_TDLIB === '1') {
+  console.warn('[tdlib] DISABLE_TDLIB=1 — skipping client login. handleQuote will fall back to single-message mode for groups.')
+} else {
+  connectClient()
+}
 
 function sendMethod (method, parm) {
   return new Promise((resolve, reject) => {
