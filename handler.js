@@ -124,10 +124,13 @@ bot.use(async (ctx, next) => {
   const gm = ctx.update?.guest_message
   if (!gm) return next()
 
+  console.log(`[guest] worker received qid=${gm.guest_query_id} from=${gm.from?.id} text=${JSON.stringify((gm.text || '').slice(0, 80))} hasReply=${!!gm.reply_to_message}`)
+
   // Defensive: a guest update without query_id is unusable — we can't reply,
   // and we shouldn't fall through to ordinary handlers since there's no chat
   // we're a member of. Silently drop.
   if (!gm.guest_query_id) {
+    console.warn('[guest] worker dropped: no guest_query_id')
     return Promise.resolve()
   }
 
@@ -220,6 +223,8 @@ bot.use(async (ctx, next) => {
   // Detect command AFTER normalisation so whitelist routing is consistent.
   const commandMatch = text.match(/^\/([a-zA-Z0-9_]+)(?:\s|$)/)
   const command = commandMatch ? commandMatch[1].toLowerCase() : null
+
+  console.log(`[guest] routing command=${command} normalisedText=${JSON.stringify(text.slice(0, 80))}`)
 
   ctx.update.message.text = text
   // Mark explicit-/command vs synthetic-from-mention so future debugging can

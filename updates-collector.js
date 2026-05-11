@@ -68,6 +68,13 @@ class TelegramCollector {
         // Track globally in Redis
         await this.redis.incr('telegram:collected_count')
 
+        // Surface guest_message arrivals at collector level so we can tell
+        // "Telegram never sent us a guest update" from "worker dropped it
+        // silently". Cheap and per-mention only — guest traffic is low.
+        if (update.guest_message) {
+          logWithTimestamp(`[guest] received qid=${update.guest_message.guest_query_id} from=${update.guest_message.from?.id} chat=${update.guest_message.guest_bot_caller_chat?.id} text=${JSON.stringify((update.guest_message.text || '').slice(0, 80))} hasReply=${!!update.guest_message.reply_to_message}`)
+        }
+
         // Don't log each update - only batch stats
 
       } catch (error) {
