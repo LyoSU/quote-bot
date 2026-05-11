@@ -124,19 +124,14 @@ bot.use(async (ctx, next) => {
   const gm = ctx.update?.guest_message
   if (!gm) return next()
 
-  console.log(`[guest] worker received qid=${gm.guest_query_id} from=${gm.from?.id} text=${JSON.stringify((gm.text || '').slice(0, 80))} hasReply=${!!gm.reply_to_message}`)
-
-  // Defensive: a guest update without query_id is unusable — we can't reply,
-  // and we shouldn't fall through to ordinary handlers since there's no chat
-  // we're a member of. Silently drop.
-  if (!gm.guest_query_id) {
-    console.warn('[guest] worker dropped: no guest_query_id')
-    return Promise.resolve()
-  }
+  // No query_id ⇒ no way to reply, and the chat is foreign so we mustn't
+  // fall through to ordinary handlers. Silently drop.
+  if (!gm.guest_query_id) return
 
   // Mirror onto ctx.update.message so existing handlers (which look at
-  // ctx.message) just work. Carry caller user/chat as the message's from/chat
-  // — this matches the actual structure Telegram sends.
+  // ctx.message) just work. The inbound guest_message carries the caller as
+  // standard `from` and `chat` fields — `guest_bot_caller_*` are reserved
+  // for OUTBOUND messages the bot sends via answerGuestQuery.
   //
   // We forcibly retag chat.type → 'private' because handleQuote uses chat.type
   // to decide between the "single message in DM" path and the "fetch history
@@ -145,12 +140,12 @@ bot.use(async (ctx, next) => {
   // path is the only one that produces correct results.
   ctx.update.message = gm
   if (gm.chat) {
-    ctx.update.message.chat = { ...gm.chat, type: 'private', _guest_original_type: gm.chat.type }
+    ctx.update.message.chat = { ...gm.chat, type: 'private' }
   }
   ctx.state.guest = {
     queryId: gm.guest_query_id,
-    callerUser: gm.guest_bot_caller_user || gm.from || null,
-    callerChat: gm.guest_bot_caller_chat || gm.chat || null,
+    callerUser: gm.from || null,
+    callerChat: gm.chat || null,
     message: gm
   }
 
@@ -187,12 +182,10 @@ bot.use(async (ctx, next) => {
   //
   // We also keep the original /command form working (/q, /q@bot, /help, /start).
   let text = rawText
-  let isExplicitCommand = false
 
   // 1. Classic /q[@bot] command form takes precedence.
   const slashCmd = rawText.match(/^\/([a-zA-Z0-9_]+)(?:@([a-zA-Z0-9_]+))?(?:\s|$)/)
   if (slashCmd) {
-    isExplicitCommand = true
     // Drop the @botname suffix from the command so handleQuote's tokenizer
     // sees just "/q args".
     if (slashCmd[2] && botUsername && slashCmd[2].toLowerCase() === botUsername.toLowerCase()) {
@@ -224,12 +217,7 @@ bot.use(async (ctx, next) => {
   const commandMatch = text.match(/^\/([a-zA-Z0-9_]+)(?:\s|$)/)
   const command = commandMatch ? commandMatch[1].toLowerCase() : null
 
-  console.log(`[guest] routing command=${command} normalisedText=${JSON.stringify(text.slice(0, 80))}`)
-
   ctx.update.message.text = text
-  // Mark explicit-/command vs synthetic-from-mention so future debugging can
-  // tell them apart in logs. No behaviour change downstream.
-  ctx.state.guest.viaExplicitCommand = isExplicitCommand
 
   const tFromI18n = (key, vars) => {
     try { return ctx.i18n.t(key, vars) } catch (_) { return null }

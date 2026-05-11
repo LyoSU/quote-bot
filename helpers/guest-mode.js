@@ -165,58 +165,28 @@ const answerGuestDocument = (ctx, fileId, extra = {}) => {
   return answerGuestQuery(ctx, result)
 }
 
-// Upload a freshly-generated webp/image buffer to a chat the bot owns
-// (admin's DM or a log chat), and return the resulting sticker file_id.
+// Upload a freshly-generated webp buffer and return its file_id + file_unique_id.
 //
 // answerGuestQuery({type:'sticker', sticker_file_id}) requires a pre-existing
 // file_id — we cannot upload bytes in one call. The cheapest way to mint a
 // file_id is to push the webp into our own globalStickerSet, snapshot the
-// file_id, then schedule a delayed deletion (the periodic cleaner in
-// handlers/quote.js handles this for free).
-const uploadStickerForGuest = async (ctx, buffer) => {
-  const cfg = (ctx.config && ctx.config.globalStickerSet) || null
-  if (!cfg) throw new Error('uploadStickerForGuest: no globalStickerSet in config')
-
-  const me = ctx.botInfo || await ctx.telegram.getMe()
-  const setName = (cfg.name || 'default') + me.username
-
-  // The "owner" of the pack — has to be a real user. Reuse the configured
-  // sticker-set owner; that account must have started the bot at least once.
-  const ownerId = cfg.ownerId
-  if (!ownerId) throw new Error('uploadStickerForGuest: missing globalStickerSet.ownerId')
-
-  // Use the same call shape handlers/quote.js relies on — telegraf 3.x speaks
-  // the legacy png_sticker+emojis variant of addStickerToSet, and the existing
-  // bot stickerset was created against it. Don't switch to the modern
-  // sticker/emoji_list form here; that would diverge from the cleanup logic.
-  await ctx.telegram.addStickerToSet(ownerId, setName.toLowerCase(), {
-    png_sticker: { source: buffer },
-    emojis: '💬'
-  }, true)
-
-  const set = await ctx.telegram.getStickerSet(setName)
-  const last = set.stickers[set.stickers.length - 1]
-  if (!last) throw new Error('uploadStickerForGuest: sticker set is empty after add')
-  return last.file_id
-}
-
-// Same as uploadStickerForGuest but returns both ids — needed by the
-// quote.js guest-persist path so the Quote doc has the right unique key.
+// resulting sticker, then let the periodic cleaner in handlers/quote.js
+// prune old entries.
 //
 // Concurrency: multiple workers can push into the shared globalStickerSet
 // in parallel. Taking `stickers[last]` blindly would race and hand caller A
 // caller B's sticker. We instead snapshot the set's file_unique_id list
 // BEFORE adding, then compute the set difference AFTER — Telegram derives
 // file_unique_id from file content, and our webp bytes are unique per
-// quote (message ids + dates + entities differ), so the new sticker
-// has a unique id that didn't exist before our call.
-const uploadStickerForGuestWithMeta = async (ctx, buffer) => {
+// quote (message ids + dates + entities differ), so the new sticker has
+// a unique id that didn't exist before our call.
+const uploadStickerForGuest = async (ctx, buffer) => {
   const cfg = (ctx.config && ctx.config.globalStickerSet) || null
-  if (!cfg) throw new Error('uploadStickerForGuestWithMeta: no globalStickerSet in config')
+  if (!cfg) throw new Error('uploadStickerForGuest: no globalStickerSet in config')
   const me = ctx.botInfo || await ctx.telegram.getMe()
   const setName = (cfg.name || 'default') + me.username
   const ownerId = cfg.ownerId
-  if (!ownerId) throw new Error('uploadStickerForGuestWithMeta: missing globalStickerSet.ownerId')
+  if (!ownerId) throw new Error('uploadStickerForGuest: missing globalStickerSet.ownerId')
 
   const setBefore = await ctx.telegram.getStickerSet(setName).catch(() => ({ stickers: [] }))
   const beforeIds = new Set((setBefore.stickers || []).map((s) => s.file_unique_id))
@@ -233,10 +203,10 @@ const uploadStickerForGuestWithMeta = async (ctx, buffer) => {
   // raced an add concurrently; the newest one in the pack is more likely
   // ours but not guaranteed. Log so we can spot it in prod metrics.
   if (newCandidates.length > 1) {
-    console.warn('[guest] uploadStickerForGuestWithMeta: concurrent add detected, picking latest', { newCount: newCandidates.length })
+    console.warn('[guest] uploadStickerForGuest: concurrent add detected, picking latest', { newCount: newCandidates.length })
   }
   const ours = newCandidates[newCandidates.length - 1] || setAfter.stickers[setAfter.stickers.length - 1]
-  if (!ours) throw new Error('uploadStickerForGuestWithMeta: sticker set is empty after add')
+  if (!ours) throw new Error('uploadStickerForGuest: sticker set is empty after add')
   return { fileId: ours.file_id, fileUniqueId: ours.file_unique_id }
 }
 
@@ -290,7 +260,7 @@ const wrapGuestProxy = (ctx) => {
       return answerGuestArticle(ctx, '⚠️ Unable to send sticker via guest mode.')
     }
     try {
-      const { fileId, fileUniqueId } = await uploadStickerForGuestWithMeta(ctx, buf)
+      const { fileId, fileUniqueId } = await uploadStickerForGuest(ctx, buf)
       ctx.state.guest.lastStickerFileId = fileId
       ctx.state.guest.lastStickerFileUniqueId = fileUniqueId
       return answerGuestSticker(ctx, fileId, cleanExtra)
@@ -326,7 +296,6 @@ module.exports = {
   answerGuestPhoto,
   answerGuestDocument,
   uploadStickerForGuest,
-  uploadStickerForGuestWithMeta,
   wrapGuestProxy,
   Markup
 }

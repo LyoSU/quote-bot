@@ -12,6 +12,11 @@ const errorWithTimestamp = (message, ...args) => {
   console.error(`[${new Date().toISOString()}] [COLLECTOR] ${message}`, ...args)
 }
 
+// Number of Redis queues the collector shards updates into. MUST match the
+// number of worker instances (see ecosystem.config.js); divergence wedges
+// updates whose chatId hashes into an unread queue.
+const WORKER_QUEUES = parseInt(process.env.WORKER_QUEUES, 10) || 3
+
 class TelegramCollector {
   constructor() {
     this.bot = new Telegraf(process.env.BOT_TOKEN, {
@@ -59,7 +64,7 @@ class TelegramCollector {
 
         // Get chat ID for consistent worker assignment
         const chatId = this.getChatId(update)
-        const workerIndex = Math.abs(chatId) % 3 // 3 workers from docker-compose
+        const workerIndex = Math.abs(chatId) % WORKER_QUEUES
         const queueName = `telegram:updates:worker:${workerIndex}`
 
         // Push to specific worker queue
@@ -67,13 +72,6 @@ class TelegramCollector {
 
         // Track globally in Redis
         await this.redis.incr('telegram:collected_count')
-
-        // Surface guest_message arrivals at collector level so we can tell
-        // "Telegram never sent us a guest update" from "worker dropped it
-        // silently". Cheap and per-mention only — guest traffic is low.
-        if (update.guest_message) {
-          logWithTimestamp(`[guest] received qid=${update.guest_message.guest_query_id} from=${update.guest_message.from?.id} chat=${update.guest_message.guest_bot_caller_chat?.id} text=${JSON.stringify((update.guest_message.text || '').slice(0, 80))} hasReply=${!!update.guest_message.reply_to_message}`)
-        }
 
         // Don't log each update - only batch stats
 
@@ -148,15 +146,12 @@ class TelegramCollector {
     if (update.shipping_query) return update.shipping_query.from.id
     if (update.pre_checkout_query) return update.pre_checkout_query.from.id
     if (update.business_message) return update.business_message.chat?.id || update.business_message.from?.id
-    // Guest mode (Bot API 10.0): pin worker by the summoning chat so concurrent
-    // guest queries from the same chat hit the same worker (better cache locality
-    // and predictable rate-limiting). The chat is foreign — we are not a member —
-    // but its id is still a stable hashing key.
+    // Guest mode (Bot API 10.0): the inbound guest_message carries the
+    // summoning user/chat in the standard `from`/`chat` Message fields
+    // — `guest_bot_caller_*` are only set on OUTBOUND messages the bot
+    // sends via answerGuestQuery. Hash by chat for cache locality.
     if (update.guest_message) {
-      return update.guest_message.guest_bot_caller_chat?.id
-        || update.guest_message.chat?.id
-        || update.guest_message.guest_bot_caller_user?.id
-        || update.guest_message.from?.id
+      return update.guest_message.chat?.id || update.guest_message.from?.id
     }
 
     // Fallback to update_id if no chat found
@@ -186,7 +181,7 @@ class TelegramCollector {
       await this.redis.connect()
 
       // Clear worker queues and reset stats
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < WORKER_QUEUES; i++) {
         await this.redis.del(`telegram:updates:worker:${i}`)
       }
       await this.redis.set('telegram:collected_count', 0)
@@ -201,7 +196,7 @@ class TelegramCollector {
       this.stickerPublisher.start()
       logWithTimestamp('Sticker stats publisher started')
 
-      logWithTimestamp('Starting Telegram collector...')
+      logWithTimestamp(`Starting Telegram collector... (WORKER_QUEUES=${WORKER_QUEUES})`)
       // Bot API 10.0 introduced `guest_message`, which (like `business_*`) is
       // NOT included in the default allowed_updates set. We must enumerate
       // everything we want explicitly — omitting a type silently drops it.
@@ -230,21 +225,7 @@ class TelegramCollector {
         'removed_chat_boost',
         'guest_message'
       ]
-      logWithTimestamp(`allowed_updates → ${allowedUpdates.join(',')}`)
-
-      // Defensive: webhook + polling are mutually exclusive. If a webhook is
-      // still registered (e.g. from a previous deployment), polling will
-      // silently get zero updates. launch() calls deleteWebhook internally
-      // already, but we log the previous state for debugging.
-      try {
-        const whInfo = await this.bot.telegram.getWebhookInfo()
-        logWithTimestamp(`webhook before launch: url="${whInfo.url || ''}" pending=${whInfo.pending_update_count} allowed=${JSON.stringify(whInfo.allowed_updates || null)}`)
-      } catch (e) {
-        logWithTimestamp(`getWebhookInfo failed: ${e.message}`)
-      }
-
       await this.bot.launch({ polling: { allowedUpdates } })
-      logWithTimestamp('bot.launch() resolved — polling started')
 
       logWithTimestamp('Telegram collector started successfully')
 
@@ -255,7 +236,7 @@ class TelegramCollector {
 
           // Get queue sizes for all workers
           const queueSizes = []
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < WORKER_QUEUES; i++) {
             const size = await this.redis.llen(`telegram:updates:worker:${i}`)
             queueSizes.push(size)
           }

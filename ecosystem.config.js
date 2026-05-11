@@ -1,7 +1,14 @@
+// IMPORTANT: WORKER_QUEUES must equal the number of worker instances. The
+// collector shards updates across Redis queues by (chatId % WORKER_QUEUES);
+// each worker drains exactly one queue determined by pm_id % WORKER_QUEUES.
+// If counts diverge (e.g. WORKER_QUEUES=3 but instances=4), some queues end
+// up unread and updates wedge there indefinitely.
+const WORKER_QUEUES = '4'
+
 module.exports = {
   apps: [
     {
-      name: 'updates-collector',
+      name: 'quotly-poller',
       script: './updates-collector.js',
       instances: 1, // Only one collector needed
       exec_mode: 'fork',
@@ -15,18 +22,20 @@ module.exports = {
       env: {
         NODE_ENV: 'development',
         REDIS_HOST: 'localhost',
-        REDIS_PORT: '6379'
+        REDIS_PORT: '6379',
+        WORKER_QUEUES
       },
       env_production: {
         NODE_ENV: 'production',
         REDIS_HOST: 'localhost',
-        REDIS_PORT: '6379'
+        REDIS_PORT: '6379',
+        WORKER_QUEUES
       }
     },
     {
-      name: 'updates-workers',
+      name: 'quotly-worker',
       script: './updates-worker.js',
-      instances: 4, // Optimize for 1000 RPS average load
+      instances: 4, // Must match WORKER_QUEUES above.
       exec_mode: 'cluster', // Can use cluster for CPU intensive tasks
       max_memory_restart: '2000M',
       watch: false,
@@ -38,12 +47,14 @@ module.exports = {
       env: {
         NODE_ENV: 'development',
         REDIS_HOST: 'localhost',
-        REDIS_PORT: '6379'
+        REDIS_PORT: '6379',
+        WORKER_QUEUES
       },
       env_production: {
         NODE_ENV: 'production',
         REDIS_HOST: 'localhost',
-        REDIS_PORT: '6379'
+        REDIS_PORT: '6379',
+        WORKER_QUEUES
       }
     }
   ]

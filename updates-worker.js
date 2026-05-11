@@ -49,8 +49,12 @@ class TelegramProcessor {
     this.errorCount = 0
     this.concurrentLimit = 50 // Process up to 50 updates concurrently per worker
     this.activePromises = new Set() // Track active processing promises
+    // Worker queue selection. Must match the collector's WORKER_QUEUES env
+    // (see ecosystem.config.js) and the instances: N declared there. Any
+    // queue without a dedicated worker is unread.
+    const queueCount = parseInt(process.env.WORKER_QUEUES, 10) || 3
     this.workerId = process.env.WORKER_INDEX || process.env.pm_id || process.pid
-    this.workerIndex = process.env.WORKER_INDEX !== undefined ? parseInt(process.env.WORKER_INDEX) : (this.workerId % 3)
+    this.workerIndex = process.env.WORKER_INDEX !== undefined ? parseInt(process.env.WORKER_INDEX) : (this.workerId % queueCount)
     this.queueName = `telegram:updates:worker:${this.workerIndex}`
     this.pendingTDLibRequests = new Map() // Track pending TDLib requests
 
@@ -153,14 +157,6 @@ class TelegramProcessor {
     // Add main handler
     const handler = require('./handler')
     this.bot.use(handler)
-    // Confirm guest helpers are loadable. If this throws, the worker would
-    // crash early instead of silently swallowing guest_message updates.
-    try {
-      require('./helpers/guest-mode')
-      logWithTimestamp('guest-mode handler loaded')
-    } catch (err) {
-      errorWithTimestamp('guest-mode handler FAILED to load:', err.message)
-    }
 
     // Error handling
     this.bot.catch((err, ctx) => {
