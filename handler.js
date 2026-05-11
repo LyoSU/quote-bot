@@ -128,10 +128,6 @@ bot.use(async (ctx, next) => {
   // fall through to ordinary handlers. Silently drop.
   if (!gm.guest_query_id) return
 
-  // Match the collector-side guest log so we can chase a request end-to-end
-  // across processes by qid.
-  console.log(`[guest] handling qid=${gm.guest_query_id} text=${JSON.stringify((gm.text || '').slice(0, 60))}`)
-
   // Mirror onto ctx.update.message so existing handlers (which look at
   // ctx.message) just work. The inbound guest_message carries the caller as
   // standard `from` and `chat` fields — `guest_bot_caller_*` are reserved

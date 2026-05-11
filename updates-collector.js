@@ -73,13 +73,6 @@ class TelegramCollector {
         // Track globally in Redis
         await this.redis.incr('telegram:collected_count')
 
-        // Guest mode is a new (Bot API 10.0) and rare path — surface every
-        // arrival so we can correlate "user mentioned bot" with "did the
-        // pipeline see it". One line per mention; low volume in practice.
-        if (update.guest_message) {
-          const gm = update.guest_message
-          logWithTimestamp(`[guest] update_id=${update.update_id} qid=${gm.guest_query_id} from=${gm.from?.id} chat=${gm.chat?.id} hasReply=${!!gm.reply_to_message} → queue ${workerIndex}`)
-        }
 
       } catch (error) {
         errorWithTimestamp('Error collecting update:', error.message)
@@ -96,10 +89,6 @@ class TelegramCollector {
   }
 
   startTDLibServer() {
-    if (process.env.DISABLE_TDLIB === '1') {
-      logWithTimestamp('TDLib disabled via DISABLE_TDLIB=1 — workers requesting tdlib methods will receive a "client not available" error and fall back to single-message handling.')
-      return
-    }
     // Initialize TDLib only in collector process
     const tdlib = require('./helpers/tdlib')
 
