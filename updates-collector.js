@@ -73,7 +73,13 @@ class TelegramCollector {
         // Track globally in Redis
         await this.redis.incr('telegram:collected_count')
 
-        // Don't log each update - only batch stats
+        // Guest mode is a new (Bot API 10.0) and rare path — surface every
+        // arrival so we can correlate "user mentioned bot" with "did the
+        // pipeline see it". One line per mention; low volume in practice.
+        if (update.guest_message) {
+          const gm = update.guest_message
+          logWithTimestamp(`[guest] update_id=${update.update_id} qid=${gm.guest_query_id} from=${gm.from?.id} chat=${gm.chat?.id} hasReply=${!!gm.reply_to_message} → queue ${workerIndex}`)
+        }
 
       } catch (error) {
         errorWithTimestamp('Error collecting update:', error.message)
