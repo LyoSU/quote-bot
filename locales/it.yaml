@@ -494,3 +494,36 @@ qforget:
   forgotten: "✅ Quote #${local} forgotten. Sticker and votes remain, but text and author are removed from the archive."
   already_forgotten: "Quote #${local} was already forgotten."
   not_yet_archived: "Quote #${local} has no text (created before the archive)."
+guest:
+  hint: |
+    <b>Quotly — guest mode 💬</b>
+
+    I can make a quote sticker from any message <i>without</i> being a chat member.
+
+    <b>How to use:</b>
+    1. Reply to the message you want to quote
+    2. In your reply write <code>@${username}</code>
+    3. Done — I'll drop a quote sticker right in the chat
+
+    <b>Optional args (just like /q):</b>
+    • <code>@${username} r</code> — include the message I'm replying to
+    • <code>@${username} red</code> — set background colour
+    • <code>@${username} rate</code> — add 👍 / 👎 buttons
+    • <code>@${username} p</code> — render as a PNG
+
+    For the full experience open me in PM.
+  hint_short: "How Quotly works in guest mode"
+  need_reply: |
+    <b>Almost there! 🪄</b>
+
+    To make a quote I need a message to quote — reply to one and mention <code>@${username}</code>.
+
+    Example: tap "Reply" on a message → type <code>@${username}</code> → send.
+  need_reply_short: "Reply to a message and mention the bot"
+  empty_query: |
+    <b>Quotly here 💜</b>
+
+    Reply to any message in this chat and mention <code>@${username}</code> to turn it into a quote sticker.
+
+    Tap below to open me in PM for the full feature set.
+  open_in_pm: "Open in Quotly →"
