@@ -247,7 +247,7 @@ class TelegramProcessor {
       // Subscribe to TDLib responses once after connection
       await this.tdlibRedis.subscribe('tdlib:responses')
 
-      logWithTimestamp(`Starting Telegram processor (Worker ${this.workerId}[${this.workerIndex}] -> ${this.queueName})...`)
+      logWithTimestamp(`Starting Telegram processor (Worker pm_id=${this.workerId} → queue ${this.workerIndex} of WORKER_QUEUES=${process.env.WORKER_QUEUES || '3 (default)'}, key=${this.queueName})`)
 
       // Start processing loop
       this.startProcessing()
