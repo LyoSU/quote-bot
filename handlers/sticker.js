@@ -1,21 +1,17 @@
 /* eslint-disable camelcase */
 const { createRedisClient } = require('../utils/redis')
 
-// Redis connection setup
-const redis = createRedisClient()
+// Eager connect — the previous lazy guard (`if (!connected) await connect()`)
+// raced under cluster mode with concurrent updates: two simultaneous calls
+// both saw `connected=false`, both invoked .connect(), and the second one
+// threw "Redis is already connecting/connected", surfacing as a Bot error
+// on every update. Connecting at module load is single-threaded per worker
+// and avoids the race entirely.
+const redis = createRedisClient({ lazyConnect: false })
 
 // Cache for custom emoji sticker sets (reduces API calls)
 const emojiSetCache = new Map()
 const EMOJI_CACHE_TTL = 3600000 // 1 hour
-
-// Connect on first use
-let redisConnected = false
-const ensureRedisConnected = async () => {
-  if (!redisConnected) {
-    await redis.connect()
-    redisConnected = true
-  }
-}
 
 // Constants
 const PREFIX = 'quotly'
@@ -69,8 +65,6 @@ async function trackStickerUsage (setName, userId, chatId) {
  * Lightweight - only collects data, publishing is done separately
  */
 module.exports = async (ctx, next) => {
-  await ensureRedisConnected()
-
   // Track regular stickers
   if (ctx.message?.sticker?.set_name) {
     trackStickerUsage(
