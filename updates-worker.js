@@ -153,6 +153,14 @@ class TelegramProcessor {
     // Add main handler
     const handler = require('./handler')
     this.bot.use(handler)
+    // Confirm guest helpers are loadable. If this throws, the worker would
+    // crash early instead of silently swallowing guest_message updates.
+    try {
+      require('./helpers/guest-mode')
+      logWithTimestamp('guest-mode handler loaded')
+    } catch (err) {
+      errorWithTimestamp('guest-mode handler FAILED to load:', err.message)
+    }
 
     // Error handling
     this.bot.catch((err, ctx) => {

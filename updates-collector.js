@@ -205,35 +205,46 @@ class TelegramCollector {
       // Bot API 10.0 introduced `guest_message`, which (like `business_*`) is
       // NOT included in the default allowed_updates set. We must enumerate
       // everything we want explicitly — omitting a type silently drops it.
-      await this.bot.launch({
-        polling: {
-          allowedUpdates: [
-            'message',
-            'edited_message',
-            'channel_post',
-            'edited_channel_post',
-            'business_connection',
-            'business_message',
-            'edited_business_message',
-            'deleted_business_messages',
-            'message_reaction',
-            'message_reaction_count',
-            'inline_query',
-            'chosen_inline_result',
-            'callback_query',
-            'shipping_query',
-            'pre_checkout_query',
-            'poll',
-            'poll_answer',
-            'my_chat_member',
-            'chat_member',
-            'chat_join_request',
-            'chat_boost',
-            'removed_chat_boost',
-            'guest_message'
-          ]
-        }
-      })
+      const allowedUpdates = [
+        'message',
+        'edited_message',
+        'channel_post',
+        'edited_channel_post',
+        'business_connection',
+        'business_message',
+        'edited_business_message',
+        'deleted_business_messages',
+        'message_reaction',
+        'message_reaction_count',
+        'inline_query',
+        'chosen_inline_result',
+        'callback_query',
+        'shipping_query',
+        'pre_checkout_query',
+        'poll',
+        'poll_answer',
+        'my_chat_member',
+        'chat_member',
+        'chat_join_request',
+        'chat_boost',
+        'removed_chat_boost',
+        'guest_message'
+      ]
+      logWithTimestamp(`allowed_updates → ${allowedUpdates.join(',')}`)
+
+      // Defensive: webhook + polling are mutually exclusive. If a webhook is
+      // still registered (e.g. from a previous deployment), polling will
+      // silently get zero updates. launch() calls deleteWebhook internally
+      // already, but we log the previous state for debugging.
+      try {
+        const whInfo = await this.bot.telegram.getWebhookInfo()
+        logWithTimestamp(`webhook before launch: url="${whInfo.url || ''}" pending=${whInfo.pending_update_count} allowed=${JSON.stringify(whInfo.allowed_updates || null)}`)
+      } catch (e) {
+        logWithTimestamp(`getWebhookInfo failed: ${e.message}`)
+      }
+
+      await this.bot.launch({ polling: { allowedUpdates } })
+      logWithTimestamp('bot.launch() resolved — polling started')
 
       logWithTimestamp('Telegram collector started successfully')
 
