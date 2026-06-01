@@ -1,0 +1,106 @@
+import { describe, it, expect } from 'vitest'
+import { buildQuoteMessage, buildReplyMessage } from './build-message'
+import type { Sender } from './sender'
+
+const alice: Sender = { id: 1, first_name: 'Alice', last_name: 'A', username: 'alice' }
+
+describe('buildQuoteMessage', () => {
+  it('shows the name on the first message of a streak', () => {
+    const m = buildQuoteMessage({
+      source: { text: 'hi' },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('hi')
+    expect(m.from?.name).toBe('Alice A')
+    expect(m.chatId).toBe(1)
+    expect(m.avatar).toBe(true)
+  })
+
+  it('suppresses the name on streak continuation', () => {
+    const m = buildQuoteMessage({
+      source: { text: 'again' },
+      from: alice,
+      isFirstInStreak: false,
+      showReply: true,
+      crop: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.from?.name).toBe(false)
+    expect(m.from?.first_name).toBe('Alice')
+  })
+
+  it('prefers caption over text and attaches media', () => {
+    const m = buildQuoteMessage({
+      source: { caption: 'cap', caption_entities: [], photo: [{ file_id: 'p', file_unique_id: 'u', width: 1, height: 1 }] },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('cap')
+    expect(m.mediaType).toBe('photo')
+  })
+
+  it('falls back to unsupported text when there is no content', () => {
+    const m = buildQuoteMessage({
+      source: {},
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('Unsupported')
+    expect(m.entities).toEqual([{ type: 'italic', offset: 0, length: 'Unsupported'.length }])
+  })
+
+  it('adds a forward label and sender tag', () => {
+    const m = buildQuoteMessage({
+      source: { text: 'x', sender_tag: 'Admin' },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      forward: { label: 'Forwarded from Bob' },
+      crop: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.forward).toEqual({ label: 'Forwarded from Bob' })
+    expect(m.senderTag).toBe('Admin')
+  })
+
+  it('marks an explicit quote selection', () => {
+    const m = buildQuoteMessage({
+      source: { text: 'full', quote: { text: 'part' } },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('part')
+    expect(m.isQuote).toBe(true)
+  })
+})
+
+describe('buildReplyMessage', () => {
+  it('maps reply text, name and chatId', () => {
+    const r = buildReplyMessage({ text: 'orig' }, { id: 7, first_name: 'Bob' })
+    expect(r).toMatchObject({ name: 'Bob', chatId: 7, text: 'orig' })
+  })
+
+  it('synthesizes chatId from name when sender has no id', () => {
+    const r = buildReplyMessage({ text: 'x' }, { name: 'Ghost' })
+    expect(r.name).toBe('Ghost')
+    expect(typeof r.chatId).toBe('number')
+  })
+
+  it('captures reply media kind', () => {
+    const r = buildReplyMessage({ photo: [{ file_id: 'pp' }] }, null)
+    expect(r.media).toEqual({ kind: 'photo', fileId: 'pp' })
+  })
+})

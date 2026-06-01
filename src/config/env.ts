@@ -1,0 +1,93 @@
+import 'dotenv/config'
+import { z } from 'zod'
+
+/**
+ * Single source of truth for runtime configuration.
+ *
+ * Everything the process needs is read from the environment, validated here,
+ * and exported as a typed, frozen object. If anything is missing or malformed
+ * the process dies immediately with a readable report — no `undefined`
+ * surfacing deep in a request handler hours later. This replaces the old
+ * `config.json` file-read + in-memory cache.
+ *
+ * Only variables the current foundation needs are declared. Each later
+ * sub-project (db, redis, quote-api, tdlib, …) extends this schema with its
+ * own keys.
+ */
+export const EnvSchema = z.object({
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  LOG_LEVEL: z
+    .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'])
+    .default('info'),
+
+  /** Telegram Bot API token. The one thing we cannot run without. */
+  BOT_TOKEN: z.string().min(1, 'BOT_TOKEN is required'),
+
+  /** MongoDB connection string. */
+  MONGODB_URI: z.string().min(1, 'MONGODB_URI is required'),
+
+  /**
+   * Mongo connection pool ceiling. Each /q fans out to ~8 ops; under load a
+   * small pool stalls session reads behind a free connection. Default mirrors
+   * the tuned production value.
+   */
+  MONGO_MAX_POOL: z.coerce.number().int().positive().default(50),
+
+  /** How often aggregated RPS/latency stats are written to the Stats collection. */
+  STATS_FLUSH_MS: z.coerce.number().int().positive().default(60_000),
+
+  /** quote-api base URL (the image renderer). */
+  QUOTE_API_URI: z.string().min(1, 'QUOTE_API_URI is required'),
+
+  /** How many stickers to keep in a pack before trimming the oldest. */
+  STICKER_KEEP_COUNT: z.coerce.number().int().positive().default(10),
+
+  /** Mini App deep-link config (https://t.me/<bot>/<short>?startapp=...). */
+  MINI_APP_SHORT_NAME: z.string().default('app'),
+  MINI_APP_URL: z.string().optional(),
+
+  /** TDLib credentials (https://my.telegram.org). Optional — TDLib is disabled without them. */
+  TELEGRAM_API_ID: z.coerce.number().int().positive().optional(),
+  TELEGRAM_API_HASH: z.string().optional(),
+  /** Hard kill-switch for TDLib regardless of credentials. Accepts 1/true. */
+  DISABLE_TDLIB: z
+    .string()
+    .optional()
+    .transform((v) => v === '1' || v === 'true'),
+
+  /** gramads token (https://gramads.net). Ads are shown only to ru-locale users in PM. */
+  GRAMADS_TOKEN: z.string().optional(),
+
+  /** Bot owner's Telegram id. Gates privileged commands (e.g. /refund). */
+  ADMIN_ID: z.coerce.number().int().positive().optional(),
+
+  /** Port for the health + Prometheus metrics HTTP endpoint. */
+  HEALTH_PORT: z.coerce.number().int().positive().default(3000),
+
+  /**
+   * Max updates the runner processes concurrently across all chats.
+   * Per-chat ordering is still guaranteed by sequentialize().
+   */
+  BOT_CONCURRENCY: z.coerce.number().int().positive().default(500),
+})
+
+export type AppConfig = Readonly<z.infer<typeof EnvSchema>>
+
+function loadConfig(): AppConfig {
+  const parsed = EnvSchema.safeParse(process.env)
+
+  if (!parsed.success) {
+    // The logger isn't up yet (it depends on this config), so print plainly.
+    const report = parsed.error.issues
+      .map((issue) => `  • ${issue.path.join('.') || '(root)'}: ${issue.message}`)
+      .join('\n')
+    console.error(`\n✖ Invalid environment configuration:\n${report}\n`)
+    process.exit(1)
+  }
+
+  return Object.freeze(parsed.data)
+}
+
+export const config = loadConfig()
+
+export const isProduction = config.NODE_ENV === 'production'

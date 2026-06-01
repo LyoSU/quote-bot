@@ -1,13 +1,13 @@
-version: '3.8'
-
 services:
-  collector:
+  bot:
     build: .
     env_file: .env
     restart: always
-    command: node updates-collector.js
-    depends_on:
-      - redis
+    # Single long-polling process; @grammyjs/runner handles concurrency.
+    command: node dist/index.js
+    ports:
+      # Health + Prometheus metrics (HEALTH_PORT, default 3000).
+      - "3000:3000"
     logging:
       driver: "json-file"
       options:
@@ -15,70 +15,6 @@ services:
         max-file: "3"
     networks:
       - quotly
-
-  worker-1:
-    build: .
-    env_file: .env
-    environment:
-      - WORKER_INDEX=0
-    restart: always
-    command: node updates-worker.js
-    depends_on:
-      - redis
-      - collector
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    networks:
-      - quotly
-
-  worker-2:
-    build: .
-    env_file: .env
-    environment:
-      - WORKER_INDEX=1
-    restart: always
-    command: node updates-worker.js
-    depends_on:
-      - redis
-      - collector
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    networks:
-      - quotly
-
-  worker-3:
-    build: .
-    env_file: .env
-    environment:
-      - WORKER_INDEX=2
-    restart: always
-    command: node updates-worker.js
-    depends_on:
-      - redis
-      - collector
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    networks:
-      - quotly
-
-  redis:
-    image: redis:7-alpine
-    restart: always
-    networks:
-      - quotly
-
-volumes:
-  mongo-volume:
-    driver: 'local'
 
 networks:
   quotly:

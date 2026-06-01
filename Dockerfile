@@ -2,21 +2,17 @@ FROM node:22-bookworm
 
 WORKDIR /app
 
-# Install dependencies for native modules
+# Build toolchain for native addons (tdl / prebuilt-tdlib).
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libvips-dev \
     python3 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy package files
 COPY package*.json ./
+RUN npm install
 
-# Install dependencies
-RUN npm install --omit=dev
-
-# Copy source
 COPY . .
+RUN npm run build
 
-# Default command (overridden in docker-compose)
-CMD ["node", "updates-collector.js"]
+# Single long-polling process (the runner handles concurrency internally).
+CMD ["node", "dist/index.js"]

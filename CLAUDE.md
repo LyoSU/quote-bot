@@ -2,113 +2,57 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Common Development Commands
+## What this is
 
-### Running the Bot
-- **Start**: `npm start` (runs `node index.js`)
-- **Development**: `node index.js` (direct execution)
-- **PM2 Production**: `pm2 start ecosystem.config.js` (cluster mode with health checker)
-- **Docker**: `docker compose --profile dev up -d` (requires quote-api setup)
+A Telegram quote-sticker bot. As of v2 it is a **from-scratch rewrite** in **TypeScript + grammY** (the legacy Telegraf 3 cluster bot was removed). One long-polling process; no Redis, no master/worker sharding, no AI features.
 
-### Code Quality
-- **Lint**: `npx eslint .` (ESLint with Standard config)
-- **Test**: No test suite configured (displays error message)
+## Commands
 
-### Process Management
-- **Health Check**: Bot runs health endpoint on port configured in environment
-- **Monitoring**: Uses PM2 ecosystem config with auto-restart and memory limits
+- **Dev**: `npm run dev` (tsx watch on `src/index.ts`)
+- **Build**: `npm run build` (tsc → `dist/`, then copies `src/i18n/locales` → `dist/i18n/locales`)
+- **Run (prod)**: `npm start` (`node dist/index.js`)
+- **Typecheck**: `npm run typecheck` (`tsc --noEmit`) — this is the quality gate (strict, no `any`)
+- **Test**: `npm test` (vitest); `npm run test:watch`
+- **Regenerate TDLib types**: `npm run tdlib:types`
 
-## Architecture Overview
+There is no ESLint setup for the TS code; `tsc --strict` is the gate.
 
-### Cluster Architecture
-The bot uses Node.js cluster mode with a master-worker pattern:
+## Architecture
 
-- **Master Process** (`master.js`): Handles load balancing, queue management, TDLib operations, and health monitoring
-- **Worker Processes** (`worker.js`): Process individual Telegram updates
-- **Queue Manager** (`queueManager.js`): Manages update queues with priority handling and backpressure
+Single process. `src/index.ts` is the composition root (the only file that wires concrete pieces): config → DB → bot core → context + features → polling → health.
 
-### Key Components
+Update flow: `fastPath` (drops ~95% group noise before any DB) → `sequentialize` (per-chat ordering, by chat id) → logger/timing → `contextMiddleware` (resolves `ctx.user`/`ctx.group`) → `i18nMiddleware` (Fluent locale negotiation) → `features`.
 
-#### Bot Framework
-- **Telegraf**: Main bot framework with middleware-based architecture
-- **TDLib Integration**: Uses `helpers/tdlib/` for advanced Telegram features
-- **Internationalization**: Multi-language support via `locales/` directory
+### Layers (never import "upward")
 
-#### Quote Generation System
-- **Quote API**: External service for generating quote images (quote-api repo)
-- **AI Integration**: OpenAI/Anthropic APIs for smart message selection and content generation
-- **Sticker Management**: Dynamic sticker pack creation and cleanup
+- `src/config/env.ts` — zod-validated, frozen config; fail-fast on bad env.
+- `src/core/` — `bot` (throttler + auto-retry + fast-path + sequentialize + error boundary), `runner` (long polling, allowed_updates), `logger` (pino), `metrics` (prom-client), `shutdown`, `lru`, `types` (`BotContext`).
+- `src/db/` — Mongoose models (schema kept **1:1 with production**), `repositories/` (atomic `updateOne`/`findOneAndUpdate`, never full-doc `.save()`), `member-tracker`, dedicated `connection`.
+- `src/services/` — `tdlib` (in-process via `tdl` + `prebuilt-tdlib`, circuit breaker, Bot-API-shaped output), `quote-api` (HTTP client for the renderer), `sticker`, `stats`, `gab`, `gramads`.
+- `src/middlewares/` — `fast-path`, `context`, `guards` (`onlyGroup`/`onlyAdmin`).
+- `src/features/` — `quote` (the core pipeline + `/q_<id>`, rate, random, top), `settings`, `shell` (start/help/menu/app/lang), `payments` (Telegram Stars), `inline`, `fstik`, `ping`. Aggregated in `src/features/index.ts` (order matters: specific handlers before the quote private-chat catch-all).
+- `src/i18n/` — `@grammyjs/i18n` (Fluent), 19 locales in `locales/*.ftl`.
+- `src/health/` — health + `/metrics` HTTP endpoint.
 
-#### Database Layer
-- **MongoDB**: Uses Mongoose for data modeling
-- **Models**: User, Group, Quote, Stats, Advertisement, Invoice models
-- **Caching**: In-memory caching for privacy settings and forward lookups
+### The `/q` pipeline (`src/features/quote/`)
 
-#### Message Processing
-- **Handler System**: Modular handlers in `handlers/` directory
-- **Middleware**: Rate limiting, stats collection, session management
-- **Update Distribution**: Consistent hashing for worker assignment
+`index.ts` orchestrates: `parse-args` → resolve render options (`render`, `color`) → select source messages (`select`, via TDLib for count > 1) → `assemble` (sender resolution, streaks, forward labels, privacy) → `build-message` (pure per-message → renderer shape) → `quote-api` render → `send` (sticker direct / photo / document / guest) → `persist` (off the hot path: Counter `global_id`, per-group `local_id`, `denormalize`, rating votes). Modules are small and pure where possible; randomness/time are injected for testing.
 
-### Core Features
+### Auto-gab (`src/services/gab` + `features/quote/random.ts`)
 
-#### Quote Generation
-- **Multi-format**: Supports WebP stickers, PNG images, and documents
-- **AI-powered**: Smart message selection using natural language queries
-- **Customization**: Background colors, emoji brands, scaling options
-- **Privacy**: Configurable privacy settings for user anonymization
+Occasionally resurfaces a top quote on a lively group moment, biased to a quote **authored by someone currently speaking** ("throwback"). The hot-path check is O(1) (in-memory activity LRU + probability + 60s cooldown + ≥2 active speakers); the real work (one indexed `$sample`) runs at most once per cooldown per group. Speaker activity is recorded on the fast-path noise branch — no per-message DB.
 
-#### Bot Management
-- **Health Monitoring**: Circuit breaker pattern for TDLib operations
-- **Adaptive Scaling**: Dynamic worker count based on CPU and queue load
-- **Rate Limiting**: Per-user and per-chat rate limiting
-- **Error Handling**: Comprehensive error handling with user-friendly messages
+## Commands the bot exposes (syntax kept 1:1 with the legacy bot)
 
-#### Advanced Features
-- **Business API**: Support for Telegram Business connections
-- **Inline Queries**: Inline bot functionality
-- **Advertisement System**: Built-in ad management
-- **Statistics**: Usage tracking and analytics
+`/q [flags]` (r/reply, p/png, i/img, rate, h/hidden, m/media, c/crop, s/stories, `s<n>` scale, `<int>` count, color), `/q_<id>`, rate/irate buttons, `/qrand`, `/qtop`, `/qcolor`, `/qb`, `/qemoji`, `/hidden`, `/privacy`, `/qrate`, `/qgab`, `/qarchive`, `/qforget`, `/start`, `/help`, `/app`, `/lang`, `/donate`, `/refund` (owner-only), `/qs`. Guest mode via `guest_message`.
 
-## Configuration
+## Configuration (env, validated in `src/config/env.ts`)
 
-### Environment Variables
-- `BOT_TOKEN`: Telegram bot token
-- `OPENAI_API_KEY`: OpenRouter API key for AI features
-- `ANTHROPIC_API_KEY`: Anthropic API key for AI features
-- `QUOTE_API_URI`: Quote generation API endpoint
-- `MAX_WORKERS`: Number of worker processes
-- `WORKER_HANDLER_TIMEOUT`: Timeout for worker operations
+`BOT_TOKEN`, `MONGODB_URI` (required), `QUOTE_API_URI` (required), `MONGO_MAX_POOL`, `STATS_FLUSH_MS`, `STICKER_KEEP_COUNT`, `MINI_APP_SHORT_NAME`, `MINI_APP_URL`, `TELEGRAM_API_ID`/`TELEGRAM_API_HASH`, `DISABLE_TDLIB`, `HEALTH_PORT`, `BOT_CONCURRENCY`, `GRAMADS_TOKEN`, `ADMIN_ID`, `LOG_LEVEL`, `NODE_ENV`.
 
-### Database
-- MongoDB connection configured in `database/connection.js`
-- Models defined in `database/models/`
+## Conventions
 
-### TDLib Setup
-- Requires TDLib binary at `helpers/tdlib/data/libtdjson.so`
-- Can use prebuilt-tdlib npm package or manual compilation
-
-## Development Notes
-
-### Adding New Features
-- Handlers go in `handlers/` directory
-- Database models in `database/models/`
-- Middleware in `middlewares/`
-- Utilities in `utils/`
-
-### Message Flow
-1. Update received by master process
-2. Distributed to worker based on user/chat ID hash
-3. Worker processes update through handler middleware chain
-4. Database operations handled asynchronously
-
-### Performance Considerations
-- Uses cluster mode for horizontal scaling
-- Queue management prevents memory overflow
-- Caching reduces database queries
-- Circuit breaker prevents TDLib cascade failures
-
-### AI Integration
-- Smart message selection with GPT-4 models
-- Image processing for AI analysis
-- Context-aware response generation
-- Fallback handling for API failures
+- Strict TypeScript, no `any`. Boundary casts on Telegram data (`as RawMessage`) are acceptable; casts hiding real mismatches are not.
+- Atomic DB writes only (no full-doc `.save()` → avoids VersionError).
+- Don't reintroduce dropped pieces: Redis, cluster/worker sharding, the in-house ad system, AI features, HTML render mode, Stripe/Freekassa. Ads = gramads only (ru-locale + private chat). Payments = Telegram Stars (XTR) only.
+- New work: handlers in `src/features/`, services in `src/services/`, models in `src/db/models/`. Keep modules small and testable.
