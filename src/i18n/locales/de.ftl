@@ -376,3 +376,94 @@ onboarding-complete-title =
     <b>Alles bereit! ✨</b>
 
     Jetzt kennen Sie die Grundlagen. Fügen Sie mich einer Gruppe hinzu oder entdecken Sie alle Funktionen im Menü.
+sticker-save-error-too_large = Das Bild ist zu groß (max. 2048×2048). Versuche es mit einem kleineren 📐
+app-open_quote = ✨ Zitat öffnen
+app-open_group = 📚 Alle Zitate der Gruppe
+app-open_root = 💫 Meine Gruppen
+app-info =
+    <b>Alles lebt auch in der App 💬</b>
+
+    Blättere durch Zitate, durchstöbere das Archiv, jage den Tops hinterher — alles nur einen Tipp entfernt. Drücke den Button ↓
+aimode-title = 🤖 <b>KI-Modi</b>
+aimode-current = Aktueller Modus: { $mode }
+aimode-available = <b>Verfügbare Modi:</b>
+aimode-unknown = ❌ Unbekannter Modus: <code>{ $mode }</code>
+aimode-available_list = Verfügbar: { $modes }
+aimode-success = ✅ KI-Modus geändert zu: { $mode }
+aimode-error = ❌ Fehler beim Speichern der Einstellungen
+aimode-modes-sarcastic-name = 😏 Sarkastisch
+aimode-modes-sarcastic-description = Sarkastische und witzige Kommentare mit schwarzem Humor
+aimode-modes-philosopher-name = 🧠 Philosoph
+aimode-modes-philosopher-description = Tiefgründige Gedanken und philosophische Betrachtungen
+aimode-modes-comedian-name = 😂 Komiker
+aimode-modes-comedian-description = Lustige Witze und komische Kommentare
+aimode-modes-poet-name = 📝 Dichter
+aimode-modes-poet-description = Poetische Zeilen und schöne Metaphern
+aimode-modes-motivator-name = 💪 Motivator
+aimode-modes-motivator-description = Motivierende und inspirierende Botschaften
+aimode-modes-conspiracy-name = 🕵️ Verschwörungstheoretiker
+aimode-modes-conspiracy-description = Verschwörungstheorien und verdächtige Kommentare
+aimode-modes-critic-name = 🎭 Kritiker
+aimode-modes-critic-description = Kritische Rezensionen und Bewertungen für alles
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Altmodische Kommentare aus der älteren Generation
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Jugendslang und angesagte Phrasen
+aimode-modes-academic-name = 🎓 Akademiker
+aimode-modes-academic-description = Wissenschaftliche Fakten und akademische Kommentare
+aimode-modes-memer-name = 🐸 Memer
+aimode-modes-memer-description = Meme-Phrasen und Internetkultur
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Mit anderem Stil neu erstellen
+qarchive-on = ✅ Zitattext-Archiv <b>aktiviert</b>. Neue Zitate werden mit Text und Autor gespeichert.
+qarchive-off = ⏸ Zitattext-Archiv <b>deaktiviert</b>. Neue Zitate speichern nur den Sticker und die Bewertung.
+qarchive-status_on =
+    Aktueller Zustand: <b>aktiviert</b>.
+
+    <code>/qarchive off</code> — deaktivieren
+qarchive-status_off =
+    Aktueller Zustand: <b>deaktiviert</b>.
+
+    <code>/qarchive on</code> — aktivieren
+qarchive-usage =
+    Zitattext-Archiv für diese Gruppe umschalten.
+
+    <code>/qarchive on</code> oder <code>/qarchive off</code>
+qforget-usage = Gib die Zitatnummer an: <code>/qforget 142</code>
+qforget-not_found = Zitat #{ $local } wurde in dieser Gruppe nicht gefunden.
+qforget-not_author = Nur der Autor des Zitats kann es vergessen.
+qforget-forgotten = ✅ Zitat #{ $local } vergessen. Sticker und Stimmen bleiben erhalten, aber Text und Autor werden aus dem Archiv entfernt.
+qforget-already_forgotten = Zitat #{ $local } wurde bereits vergessen.
+qforget-not_yet_archived = Zitat #{ $local } hat keinen Text (vor dem Archiv erstellt).
+guest-hint =
+    <b>Quotly — Gastmodus 💬</b>
+
+    Ich kann aus jeder Nachricht einen Zitat-Sticker erstellen, <i>ohne</i> Chatmitglied zu sein.
+
+    <b>So geht's:</b>
+    1. Antworte auf die Nachricht, die du zitieren möchtest
+    2. Schreibe in deiner Antwort <code>@{ $username }</code>
+    3. Fertig — ich lege einen Zitat-Sticker direkt in den Chat
+
+    <b>Optionale Argumente (genau wie /q):</b>
+    • <code>@{ $username } r</code> — die Nachricht einbeziehen, auf die ich antworte
+    • <code>@{ $username } red</code> — Hintergrundfarbe festlegen
+    • <code>@{ $username } rate</code> — 👍 / 👎 Buttons hinzufügen
+    • <code>@{ $username } p</code> — als PNG rendern
+
+    Für das volle Erlebnis öffne mich im PN-Chat.
+guest-hint_short = Wie Quotly im Gastmodus funktioniert
+guest-need_reply =
+    <b>Fast geschafft! 🪄</b>
+
+    Um ein Zitat zu erstellen, brauche ich eine Nachricht zum Zitieren — antworte auf eine und erwähne <code>@{ $username }</code>.
+
+    Beispiel: Tippe auf „Antworten" bei einer Nachricht → schreibe <code>@{ $username }</code> → senden.
+guest-need_reply_short = Antworte auf eine Nachricht und erwähne den Bot
+guest-empty_query =
+    <b>Quotly ist da 💜</b>
+
+    Antworte auf eine beliebige Nachricht in diesem Chat und erwähne <code>@{ $username }</code>, um sie in einen Zitat-Sticker zu verwandeln.
+
+    Tippe unten, um mich im PN-Chat für den vollen Funktionsumfang zu öffnen.
+guest-open_in_pm = In Quotly öffnen →

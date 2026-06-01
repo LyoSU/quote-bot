@@ -186,6 +186,7 @@ quote-image_to_quote-errors-api_error = ❌ Text recognition error. Please try a
 quote-image_to_quote-errors-rate_limit = ⏳ Too many requests! Please wait { $seconds } seconds before trying again.
 sticker-save-suc = Successfully added to your <a href="{ $link }">group sticker pack</a> ✨
 sticker-save-error-animated = Sorry, I can't save animated stickers yet 😅
+sticker-save-error-too_large = The image is too big (max 2048×2048). Try a smaller one 📐
 sticker-save-error-need_creator = <b>Almost there!</b> { $creator } needs to send me a message first to save stickers
 sticker-save-error-telegram = <b>Oops!</b> Something went wrong:\n<pre>{ $error }</pre>
 sticker-delete-suc = Removed from your <a href="{ $link }">group sticker pack</a> 🗑

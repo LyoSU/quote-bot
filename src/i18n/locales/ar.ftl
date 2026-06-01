@@ -364,3 +364,102 @@ onboarding-complete-title =
     <b>أنت جاهز! 🎉</b>
 
     الآن أنت تعرف الأساسيات. استكشف القائمة لاكتشاف المزيد من الميزات!
+sticker-save-error-too_large = الصورة كبيرة جداً (الحد الأقصى 2048×2048). جرّب صورة أصغر 📐
+app-open_quote = ✨ فتح الاقتباس
+app-open_group = 📚 كل الاقتباسات في المجموعة
+app-open_root = 💫 مجموعاتي
+app-info =
+    <b>كل هذا موجود في التطبيق أيضاً 💬</b>
+
+    تصفّح الاقتباسات، ونقّب في الأرشيف، وطارد القوائم الأعلى — بلمسة واحدة. اضغط الزر ↓
+aimode-title = 🤖 <b>أوضاع الذكاء الاصطناعي</b>
+aimode-current = الوضع الحالي: { $mode }
+aimode-available = <b>الأوضاع المتاحة:</b>
+aimode-unknown = ❌ وضع غير معروف: <code>{ $mode }</code>
+aimode-available_list = المتاحة: { $modes }
+aimode-success = ✅ تم تغيير وضع الذكاء الاصطناعي إلى: { $mode }
+aimode-error = ❌ خطأ في حفظ الإعدادات
+aimode-modes-sarcastic-name = 😏 ساخر
+aimode-modes-sarcastic-description = تعليقات ساخرة وذكية بروح دعابة سوداء
+aimode-modes-philosopher-name = 🧠 فيلسوف
+aimode-modes-philosopher-description = أفكار عميقة وتأملات فلسفية
+aimode-modes-comedian-name = 😂 كوميدي
+aimode-modes-comedian-description = نكات مضحكة وتعليقات كوميدية
+aimode-modes-poet-name = 📝 شاعر
+aimode-modes-poet-description = أبيات شعرية واستعارات جميلة
+aimode-modes-motivator-name = 💪 مُحفّز
+aimode-modes-motivator-description = رسائل محفّزة وملهمة
+aimode-modes-conspiracy-name = 🕵️ مُنظّر مؤامرات
+aimode-modes-conspiracy-description = نظريات مؤامرة وتعليقات مريبة
+aimode-modes-critic-name = 🎭 ناقد
+aimode-modes-critic-description = مراجعات نقدية وتقييمات لكل شيء
+aimode-modes-boomer-name = 👴 جيل قديم
+aimode-modes-boomer-description = تعليقات بأسلوب قديم من الجيل الأكبر
+aimode-modes-zoomer-name = 😎 جيل زد
+aimode-modes-zoomer-description = لغة الشباب العامية والعبارات الرائجة
+aimode-modes-academic-name = 🎓 أكاديمي
+aimode-modes-academic-description = حقائق علمية وتعليقات أكاديمية
+aimode-modes-memer-name = 🐸 صانع ميمات
+aimode-modes-memer-description = عبارات الميمات وثقافة الإنترنت
+menu-settings-btn-color = 🎨 اللون الافتراضي
+menu-settings-btn-emoji_style = 😊 نمط الإيموجي
+menu-settings-btn-back = ← رجوع
+onboarding-step1-waiting =
+    في انتظار رسالتك...
+    فقط أعد توجيه أي شيء من أي محادثة!
+onboarding-step2-btn-menu = فتح القائمة
+onboarding-step2-btn-add_group = إضافة إلى مجموعة
+quick_action-remake = 🔄
+quick_action-tooltip-remake = إعادة الإنشاء بنمط مختلف
+qarchive-on = ✅ تم <b>تفعيل</b> أرشيف نص الاقتباسات. ستُحفظ الاقتباسات الجديدة مع النص والمؤلف.
+qarchive-off = ⏸ تم <b>تعطيل</b> أرشيف نص الاقتباسات. ستحفظ الاقتباسات الجديدة الملصق والتقييم فقط.
+qarchive-status_on =
+    الحالة الحالية: <b>مُفعّل</b>.
+
+    <code>/qarchive off</code> — للتعطيل
+qarchive-status_off =
+    الحالة الحالية: <b>مُعطّل</b>.
+
+    <code>/qarchive on</code> — للتفعيل
+qarchive-usage =
+    تبديل أرشيف نص الاقتباسات لهذه المجموعة.
+
+    <code>/qarchive on</code> أو <code>/qarchive off</code>
+qforget-usage = حدّد رقم الاقتباس: <code>/qforget 142</code>
+qforget-not_found = الاقتباس رقم #{ $local } غير موجود في هذه المجموعة.
+qforget-not_author = يمكن لمؤلف الاقتباس فقط نسيانه.
+qforget-forgotten = ✅ تم نسيان الاقتباس رقم #{ $local }. يبقى الملصق والأصوات، لكن يُزال النص والمؤلف من الأرشيف.
+qforget-already_forgotten = الاقتباس رقم #{ $local } كان منسياً بالفعل.
+qforget-not_yet_archived = الاقتباس رقم #{ $local } ليس له نص (أُنشئ قبل وجود الأرشيف).
+guest-hint =
+    <b>Quotly — وضع الضيف 💬</b>
+
+    يمكنني صنع ملصق اقتباس من أي رسالة <i>دون</i> أن أكون عضواً في المحادثة.
+
+    <b>طريقة الاستخدام:</b>
+    1. ردّ على الرسالة التي تريد اقتباسها
+    2. في ردّك اكتب <code>@{ $username }</code>
+    3. تمّ — سأضع ملصق اقتباس مباشرة في المحادثة
+
+    <b>وسائط اختيارية (تماماً مثل /q):</b>
+    • <code>@{ $username } r</code> — تضمين الرسالة التي أرد عليها
+    • <code>@{ $username } red</code> — تحديد لون الخلفية
+    • <code>@{ $username } rate</code> — إضافة أزرار 👍 / 👎
+    • <code>@{ $username } p</code> — العرض كصورة PNG
+
+    للتجربة الكاملة افتحني في محادثة خاصة.
+guest-hint_short = كيف يعمل Quotly في وضع الضيف
+guest-need_reply =
+    <b>أوشكت على الانتهاء! 🪄</b>
+
+    لصنع اقتباس أحتاج رسالة لاقتباسها — ردّ على واحدة واذكر <code>@{ $username }</code>.
+
+    مثال: اضغط "رد" على رسالة → اكتب <code>@{ $username }</code> → أرسل.
+guest-need_reply_short = ردّ على رسالة واذكر البوت
+guest-empty_query =
+    <b>Quotly هنا 💜</b>
+
+    ردّ على أي رسالة في هذه المحادثة واذكر <code>@{ $username }</code> لتحويلها إلى ملصق اقتباس.
+
+    اضغط أدناه لفتحي في محادثة خاصة للحصول على المجموعة الكاملة من الميزات.
+guest-open_in_pm = افتح في Quotly →

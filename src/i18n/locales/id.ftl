@@ -364,3 +364,103 @@ onboarding-complete-title =
     <b>Anda siap! 🎉</b>
 
     Sekarang Anda tahu dasarnya. Jelajahi menu untuk menemukan lebih banyak fitur!
+
+aimode-title = 🤖 <b>Mode AI</b>
+aimode-current = Mode saat ini: { $mode }
+aimode-available = <b>Mode yang tersedia:</b>
+aimode-unknown = ❌ Mode tidak dikenal: <code>{ $mode }</code>
+aimode-available_list = Tersedia: { $modes }
+aimode-success = ✅ Mode AI diubah menjadi: { $mode }
+aimode-error = ❌ Gagal menyimpan pengaturan
+aimode-modes-sarcastic-name = 😏 Sarkastis
+aimode-modes-sarcastic-description = Komentar sarkastis dan jenaka dengan humor gelap
+aimode-modes-philosopher-name = 🧠 Filsuf
+aimode-modes-philosopher-description = Pemikiran mendalam dan refleksi filosofis
+aimode-modes-comedian-name = 😂 Komedian
+aimode-modes-comedian-description = Lelucon lucu dan komentar jenaka
+aimode-modes-poet-name = 📝 Penyair
+aimode-modes-poet-description = Bait puitis dan metafora yang indah
+aimode-modes-motivator-name = 💪 Motivator
+aimode-modes-motivator-description = Pesan yang memotivasi dan menginspirasi
+aimode-modes-conspiracy-name = 🕵️ Teoris Konspirasi
+aimode-modes-conspiracy-description = Teori konspirasi dan komentar yang mencurigakan
+aimode-modes-critic-name = 🎭 Kritikus
+aimode-modes-critic-description = Ulasan kritis dan penilaian untuk segala hal
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Komentar gaya lama dari generasi tua
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Bahasa gaul anak muda dan frasa kekinian
+aimode-modes-academic-name = 🎓 Akademis
+aimode-modes-academic-description = Fakta ilmiah dan komentar akademis
+aimode-modes-memer-name = 🐸 Memer
+aimode-modes-memer-description = Frasa meme dan budaya internet
+app-open_quote = ✨ Buka kutipan
+app-open_group = 📚 Semua kutipan di grup
+app-open_root = 💫 Grup saya
+app-info =
+    <b>Semuanya juga ada di aplikasi 💬</b>
+
+    Telusuri kutipan, gali arsip, kejar yang teratas — hanya satu ketukan. Tekan tombol ↓
+menu-settings-btn-color = 🎨 Warna Default
+menu-settings-btn-emoji_style = 😊 Gaya Emoji
+menu-settings-btn-back = ← Kembali
+onboarding-step1-waiting =
+    Menunggu pesan Anda...
+    Cukup teruskan sesuatu dari obrolan mana pun!
+onboarding-step2-btn-menu = Buka Menu
+onboarding-step2-btn-add_group = Tambahkan ke Grup
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Buat ulang dengan gaya berbeda
+qarchive-on = ✅ Arsip teks kutipan <b>aktif</b>. Kutipan baru akan disimpan beserta teks dan penulisnya.
+qarchive-off = ⏸ Arsip teks kutipan <b>nonaktif</b>. Kutipan baru hanya akan menyimpan stiker dan penilaian.
+qarchive-status_on =
+    Keadaan saat ini: <b>aktif</b>.
+
+    <code>/qarchive off</code> — nonaktifkan
+qarchive-status_off =
+    Keadaan saat ini: <b>nonaktif</b>.
+
+    <code>/qarchive on</code> — aktifkan
+qarchive-usage =
+    Alihkan arsip teks kutipan untuk grup ini.
+
+    <code>/qarchive on</code> atau <code>/qarchive off</code>
+qforget-usage = Tentukan nomor kutipan: <code>/qforget 142</code>
+qforget-not_found = Kutipan #{ $local } tidak ditemukan di grup ini.
+qforget-not_author = Hanya penulis kutipan yang dapat melupakannya.
+qforget-forgotten = ✅ Kutipan #{ $local } dilupakan. Stiker dan suara tetap ada, tetapi teks dan penulis dihapus dari arsip.
+qforget-already_forgotten = Kutipan #{ $local } sudah dilupakan.
+qforget-not_yet_archived = Kutipan #{ $local } tidak memiliki teks (dibuat sebelum arsip ada).
+guest-hint =
+    <b>Quotly — mode tamu 💬</b>
+
+    Saya dapat membuat stiker kutipan dari pesan apa pun <i>tanpa</i> menjadi anggota obrolan.
+
+    <b>Cara penggunaan:</b>
+    1. Balas pesan yang ingin Anda kutip
+    2. Dalam balasan Anda tulis <code>@{ $username }</code>
+    3. Selesai — saya akan mengirim stiker kutipan langsung di obrolan
+
+    <b>Argumen opsional (sama seperti /q):</b>
+    • <code>@{ $username } r</code> — sertakan pesan yang saya balas
+    • <code>@{ $username } red</code> — atur warna latar belakang
+    • <code>@{ $username } rate</code> — tambahkan tombol 👍 / 👎
+    • <code>@{ $username } p</code> — render sebagai PNG
+
+    Untuk pengalaman penuh, buka saya di PM.
+guest-hint_short = Cara kerja Quotly dalam mode tamu
+guest-need_reply =
+    <b>Hampir selesai! 🪄</b>
+
+    Untuk membuat kutipan saya perlu pesan untuk dikutip — balas salah satu dan sebut <code>@{ $username }</code>.
+
+    Contoh: ketuk "Balas" pada sebuah pesan → ketik <code>@{ $username }</code> → kirim.
+guest-need_reply_short = Balas pesan dan sebut bot
+guest-empty_query =
+    <b>Quotly di sini 💜</b>
+
+    Balas pesan apa pun di obrolan ini dan sebut <code>@{ $username }</code> untuk mengubahnya menjadi stiker kutipan.
+
+    Ketuk di bawah untuk membuka saya di PM demi set fitur lengkap.
+guest-open_in_pm = Buka di Quotly →
+sticker-save-error-too_large = Gambar terlalu besar (maks 2048×2048). Coba yang lebih kecil 📐

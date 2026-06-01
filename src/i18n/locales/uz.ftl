@@ -364,3 +364,102 @@ onboarding-complete-title =
     <b>Tayyorsiz! 🎉</b>
 
     Endi asoslarni bilasiz. Ko'proq xususiyatlarni topish uchun menyuni o'rganing!
+app-open_quote = ✨ Iqtibosni ochish
+app-open_group = 📚 Guruhdagi barcha iqtiboslar
+app-open_root = 💫 Mening guruhlarim
+app-info =
+    <b>Bularning hammasi ilovada ham bor 💬</b>
+
+    Iqtiboslarni varaqlang, arxivni o'rganing, eng yaxshilarini izlang — bir bosishda. Quyidagi tugmani bosing ↓
+aimode-title = 🤖 <b>AI rejimlari</b>
+aimode-current = Joriy rejim: { $mode }
+aimode-available = <b>Mavjud rejimlar:</b>
+aimode-unknown = ❌ Noma'lum rejim: <code>{ $mode }</code>
+aimode-available_list = Mavjud: { $modes }
+aimode-success = ✅ AI rejimi o'zgartirildi: { $mode }
+aimode-error = ❌ Sozlamalarni saqlashda xatolik
+aimode-modes-sarcastic-name = 😏 Kinoyali
+aimode-modes-sarcastic-description = Qora hazil bilan kinoyali va o'tkir izohlar
+aimode-modes-philosopher-name = 🧠 Faylasuf
+aimode-modes-philosopher-description = Chuqur fikrlar va falsafiy mulohazalar
+aimode-modes-comedian-name = 😂 Hajviy
+aimode-modes-comedian-description = Kulgili hazillar va hajviy izohlar
+aimode-modes-poet-name = 📝 Shoir
+aimode-modes-poet-description = She'riy satrlar va go'zal metaforalar
+aimode-modes-motivator-name = 💪 Motivator
+aimode-modes-motivator-description = Ilhomlantiruvchi va ruhlantiruvchi xabarlar
+aimode-modes-conspiracy-name = 🕵️ Fitna nazariyotchisi
+aimode-modes-conspiracy-description = Fitna nazariyalari va shubhali izohlar
+aimode-modes-critic-name = 🎭 Tanqidchi
+aimode-modes-critic-description = Hamma narsaga tanqidiy sharhlar va baholar
+aimode-modes-boomer-name = 👴 Bumer
+aimode-modes-boomer-description = Keksa avloddan eski uslubdagi izohlar
+aimode-modes-zoomer-name = 😎 Zumer
+aimode-modes-zoomer-description = Yoshlar jargoni va zamonaviy iboralar
+aimode-modes-academic-name = 🎓 Akademik
+aimode-modes-academic-description = Ilmiy faktlar va akademik sharhlar
+aimode-modes-memer-name = 🐸 Memer
+aimode-modes-memer-description = Mem iboralari va internet madaniyati
+menu-settings-btn-color = 🎨 Standart rang
+menu-settings-btn-emoji_style = 😊 Emoji uslubi
+menu-settings-btn-back = ← Orqaga
+onboarding-step1-waiting =
+    Xabaringizni kutyapman...
+    Shunchaki istalgan suhbatdan biror narsani yo'naltiring!
+onboarding-step2-btn-menu = Menyuni ochish
+onboarding-step2-btn-add_group = Guruhga qo'shish
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Boshqa uslubda qayta yaratish
+qarchive-on = ✅ Iqtibos matni arxivi <b>yoqildi</b>. Yangi iqtiboslar matn va muallif bilan saqlanadi.
+qarchive-off = ⏸ Iqtibos matni arxivi <b>o'chirildi</b>. Yangi iqtiboslar faqat stiker va bahoni saqlaydi.
+qarchive-status_on =
+    Joriy holat: <b>yoqilgan</b>.
+
+    <code>/qarchive off</code> — o'chirish
+qarchive-status_off =
+    Joriy holat: <b>o'chirilgan</b>.
+
+    <code>/qarchive on</code> — yoqish
+qarchive-usage =
+    Ushbu guruh uchun iqtibos matni arxivini yoqing yoki o'chiring.
+
+    <code>/qarchive on</code> yoki <code>/qarchive off</code>
+qforget-usage = Iqtibos raqamini ko'rsating: <code>/qforget 142</code>
+qforget-not_found = #{ $local } raqamli iqtibos bu guruhda topilmadi.
+qforget-not_author = Iqtibosni faqat uning muallifi unuta oladi.
+qforget-forgotten = ✅ #{ $local } raqamli iqtibos unutildi. Stiker va ovozlar qoladi, lekin matn va muallif arxivdan olib tashlanadi.
+qforget-already_forgotten = #{ $local } raqamli iqtibos allaqachon unutilgan edi.
+qforget-not_yet_archived = #{ $local } raqamli iqtibosda matn yo'q (arxivdan oldin yaratilgan).
+guest-hint =
+    <b>Quotly — mehmon rejimi 💬</b>
+
+    Suhbat a'zosi bo'lmasdan <i>istalgan</i> xabardan iqtibos stikerini yarata olaman.
+
+    <b>Qanday foydalanish kerak:</b>
+    1. Iqtibos qilmoqchi bo'lgan xabaringizga javob bering
+    2. Javobingizda <code>@{ $username }</code> deb yozing
+    3. Tayyor — iqtibos stikerini to'g'ridan-to'g'ri suhbatga yuboraman
+
+    <b>Ixtiyoriy argumentlar (/q kabi):</b>
+    • <code>@{ $username } r</code> — javob berayotgan xabarimni qo'shish
+    • <code>@{ $username } red</code> — fon rangini belgilash
+    • <code>@{ $username } rate</code> — 👍 / 👎 tugmalarini qo'shish
+    • <code>@{ $username } p</code> — PNG sifatida chizish
+
+    To'liq tajriba uchun meni shaxsiy xabarda oching.
+guest-hint_short = Quotly mehmon rejimida qanday ishlaydi
+guest-need_reply =
+    <b>Ozgina qoldi! 🪄</b>
+
+    Iqtibos yaratish uchun menga iqtibos qilinadigan xabar kerak — biriga javob bering va <code>@{ $username }</code> ni eslatib o'ting.
+
+    Misol: xabarda "Javob berish"ni bosing → <code>@{ $username }</code> deb yozing → yuboring.
+guest-need_reply_short = Xabarga javob bering va botni eslatib o'ting
+guest-empty_query =
+    <b>Quotly shu yerda 💜</b>
+
+    Ushbu suhbatdagi istalgan xabarga javob bering va uni iqtibos stikeriga aylantirish uchun <code>@{ $username }</code> ni eslatib o'ting.
+
+    To'liq imkoniyatlar uchun meni shaxsiy xabarda ochish uchun quyiga bosing.
+guest-open_in_pm = Quotly-da ochish →
+sticker-save-error-too_large = Rasm juda katta (maksimum 2048×2048). Kichikrog'ini sinab ko'ring 📐

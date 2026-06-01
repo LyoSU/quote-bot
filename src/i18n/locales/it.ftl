@@ -366,3 +366,104 @@ onboarding-complete-title =
     <b>Sei pronto! 🎉</b>
 
     Ora conosci le basi. Esplora il menu per scoprire più funzionalità!
+
+aimode-title = 🤖 <b>Modalità IA</b>
+aimode-current = Modalità corrente: { $mode }
+aimode-available = <b>Modalità disponibili:</b>
+aimode-unknown = ❌ Modalità sconosciuta: <code>{ $mode }</code>
+aimode-available_list = Disponibili: { $modes }
+aimode-success = ✅ Modalità IA cambiata in: { $mode }
+aimode-error = ❌ Errore durante il salvataggio delle impostazioni
+aimode-modes-sarcastic-name = 😏 Sarcastico
+aimode-modes-sarcastic-description = Commenti sarcastici e arguti con umorismo nero
+aimode-modes-philosopher-name = 🧠 Filosofo
+aimode-modes-philosopher-description = Pensieri profondi e riflessioni filosofiche
+aimode-modes-comedian-name = 😂 Comico
+aimode-modes-comedian-description = Battute divertenti e commenti comici
+aimode-modes-poet-name = 📝 Poeta
+aimode-modes-poet-description = Versi poetici e bellissime metafore
+aimode-modes-motivator-name = 💪 Motivatore
+aimode-modes-motivator-description = Messaggi motivanti e ispiratori
+aimode-modes-conspiracy-name = 🕵️ Teorico del complotto
+aimode-modes-conspiracy-description = Teorie del complotto e commenti sospettosi
+aimode-modes-critic-name = 🎭 Critico
+aimode-modes-critic-description = Recensioni critiche e valutazioni per ogni cosa
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Commenti vecchio stile della vecchia generazione
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Slang giovanile e frasi alla moda
+aimode-modes-academic-name = 🎓 Accademico
+aimode-modes-academic-description = Fatti scientifici e commenti accademici
+aimode-modes-memer-name = 🐸 Memer
+aimode-modes-memer-description = Frasi da meme e cultura di internet
+app-open_quote = ✨ Apri citazione
+app-open_group = 📚 Tutte le citazioni del gruppo
+app-open_root = 💫 I miei gruppi
+app-info =
+    <b>Tutto vive anche nell'app 💬</b>
+
+    Sfoglia le citazioni, esplora l'archivio, scopri le migliori — a un tocco di distanza. Premi il pulsante ↓
+menu-settings-btn-color = 🎨 Colore predefinito
+menu-settings-btn-emoji_style = 😊 Stile emoji
+menu-settings-btn-back = ← Indietro
+onboarding-step1-waiting =
+    In attesa del tuo messaggio...
+    Inoltrami qualcosa da una chat qualsiasi!
+onboarding-step2-btn-menu = Apri menu
+onboarding-step2-btn-add_group = Aggiungi al gruppo
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Ricrea con uno stile diverso
+qarchive-on = ✅ Archivio testo citazioni <b>attivato</b>. Le nuove citazioni verranno salvate con testo e autore.
+qarchive-off = ⏸ Archivio testo citazioni <b>disattivato</b>. Le nuove citazioni salveranno solo lo sticker e la valutazione.
+qarchive-status_on =
+    Stato attuale: <b>attivato</b>.
+
+    <code>/qarchive off</code> — disattiva
+qarchive-status_off =
+    Stato attuale: <b>disattivato</b>.
+
+    <code>/qarchive on</code> — attiva
+qarchive-usage =
+    Attiva/disattiva l'archivio testo citazioni per questo gruppo.
+
+    <code>/qarchive on</code> oppure <code>/qarchive off</code>
+qforget-usage = Specifica il numero della citazione: <code>/qforget 142</code>
+qforget-not_found = Citazione #{ $local } non trovata in questo gruppo.
+qforget-not_author = Solo l'autore della citazione può dimenticarla.
+qforget-forgotten = ✅ Citazione #{ $local } dimenticata. Lo sticker e i voti rimangono, ma testo e autore vengono rimossi dall'archivio.
+qforget-already_forgotten = La citazione #{ $local } era già stata dimenticata.
+qforget-not_yet_archived = La citazione #{ $local } non ha testo (creata prima dell'archivio).
+guest-hint =
+    <b>Quotly — modalità ospite 💬</b>
+
+    Posso creare uno sticker citazione da qualsiasi messaggio <i>senza</i> essere membro della chat.
+
+    <b>Come si usa:</b>
+    1. Rispondi al messaggio che vuoi citare
+    2. Nella tua risposta scrivi <code>@{ $username }</code>
+    3. Fatto — lascerò uno sticker citazione direttamente nella chat
+
+    <b>Argomenti opzionali (proprio come /q):</b>
+    • <code>@{ $username } r</code> — includi il messaggio a cui sto rispondendo
+    • <code>@{ $username } red</code> — imposta il colore di sfondo
+    • <code>@{ $username } rate</code> — aggiungi pulsanti 👍 / 👎
+    • <code>@{ $username } p</code> — renderizza come PNG
+
+    Per l'esperienza completa aprimi in chat privata.
+guest-hint_short = Come funziona Quotly in modalità ospite
+guest-need_reply =
+    <b>Ci siamo quasi! 🪄</b>
+
+    Per creare una citazione mi serve un messaggio da citare — rispondi a uno e menziona <code>@{ $username }</code>.
+
+    Esempio: tocca "Rispondi" su un messaggio → scrivi <code>@{ $username }</code> → invia.
+guest-need_reply_short = Rispondi a un messaggio e menziona il bot
+guest-empty_query =
+    <b>Quotly qui 💜</b>
+
+    Rispondi a qualsiasi messaggio in questa chat e menziona <code>@{ $username }</code> per trasformarlo in uno sticker citazione.
+
+    Tocca qui sotto per aprirmi in chat privata e accedere a tutte le funzionalità.
+guest-open_in_pm = Apri in Quotly →
+
+sticker-save-error-too_large = L'immagine è troppo grande (max 2048×2048). Provane una più piccola 📐

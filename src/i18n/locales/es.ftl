@@ -376,3 +376,94 @@ onboarding-complete-title =
     <b>¡Todo listo! ✨</b>
 
     Ya conoces lo básico. Añádeme a un grupo o explora todas las funciones en el menú.
+sticker-save-error-too_large = La imagen es demasiado grande (máx. 2048×2048). Prueba con una más pequeña 📐
+app-open_quote = ✨ Abrir cita
+app-open_group = 📚 Todas las citas del grupo
+app-open_root = 💫 Mis grupos
+app-info =
+    <b>Todo vive también en la app 💬</b>
+
+    Hojea las citas, explora el archivo, persigue los tops — a un toque de distancia. Pulsa el botón ↓
+aimode-title = 🤖 <b>Modos de IA</b>
+aimode-current = Modo actual: { $mode }
+aimode-available = <b>Modos disponibles:</b>
+aimode-unknown = ❌ Modo desconocido: <code>{ $mode }</code>
+aimode-available_list = Disponibles: { $modes }
+aimode-success = ✅ Modo de IA cambiado a: { $mode }
+aimode-error = ❌ Error al guardar la configuración
+aimode-modes-sarcastic-name = 😏 Sarcástico
+aimode-modes-sarcastic-description = Comentarios sarcásticos e ingeniosos con humor negro
+aimode-modes-philosopher-name = 🧠 Filósofo
+aimode-modes-philosopher-description = Pensamientos profundos y reflexiones filosóficas
+aimode-modes-comedian-name = 😂 Comediante
+aimode-modes-comedian-description = Chistes graciosos y comentarios cómicos
+aimode-modes-poet-name = 📝 Poeta
+aimode-modes-poet-description = Versos poéticos y bellas metáforas
+aimode-modes-motivator-name = 💪 Motivador
+aimode-modes-motivator-description = Mensajes motivadores e inspiradores
+aimode-modes-conspiracy-name = 🕵️ Conspiranoico
+aimode-modes-conspiracy-description = Teorías conspirativas y comentarios sospechosos
+aimode-modes-critic-name = 🎭 Crítico
+aimode-modes-critic-description = Reseñas críticas y valoraciones de todo
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Comentarios a la antigua de la generación mayor
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Jerga juvenil y frases de moda
+aimode-modes-academic-name = 🎓 Académico
+aimode-modes-academic-description = Datos científicos y comentarios académicos
+aimode-modes-memer-name = 🐸 Memero
+aimode-modes-memer-description = Frases de memes y cultura de internet
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Recrear con un estilo diferente
+qarchive-on = ✅ Archivo de texto de citas <b>activado</b>. Las nuevas citas se guardarán con texto y autor.
+qarchive-off = ⏸ Archivo de texto de citas <b>desactivado</b>. Las nuevas citas guardarán solo el sticker y la valoración.
+qarchive-status_on =
+    Estado actual: <b>activado</b>.
+
+    <code>/qarchive off</code> — desactivar
+qarchive-status_off =
+    Estado actual: <b>desactivado</b>.
+
+    <code>/qarchive on</code> — activar
+qarchive-usage =
+    Alterna el archivo de texto de citas para este grupo.
+
+    <code>/qarchive on</code> o <code>/qarchive off</code>
+qforget-usage = Indica el número de la cita: <code>/qforget 142</code>
+qforget-not_found = La cita #{ $local } no se encontró en este grupo.
+qforget-not_author = Solo el autor de la cita puede olvidarla.
+qforget-forgotten = ✅ Cita #{ $local } olvidada. El sticker y los votos permanecen, pero el texto y el autor se eliminan del archivo.
+qforget-already_forgotten = La cita #{ $local } ya había sido olvidada.
+qforget-not_yet_archived = La cita #{ $local } no tiene texto (creada antes del archivo).
+guest-hint =
+    <b>Quotly — modo invitado 💬</b>
+
+    Puedo crear un sticker de cita a partir de cualquier mensaje <i>sin</i> ser miembro del chat.
+
+    <b>Cómo usar:</b>
+    1. Responde al mensaje que quieras citar
+    2. En tu respuesta escribe <code>@{ $username }</code>
+    3. Listo — soltaré un sticker de cita justo en el chat
+
+    <b>Argumentos opcionales (igual que /q):</b>
+    • <code>@{ $username } r</code> — incluir el mensaje al que respondo
+    • <code>@{ $username } red</code> — establecer el color de fondo
+    • <code>@{ $username } rate</code> — añadir botones 👍 / 👎
+    • <code>@{ $username } p</code> — renderizar como PNG
+
+    Para la experiencia completa, ábreme en un chat privado.
+guest-hint_short = Cómo funciona Quotly en modo invitado
+guest-need_reply =
+    <b>¡Casi listo! 🪄</b>
+
+    Para crear una cita necesito un mensaje que citar — responde a uno y menciona <code>@{ $username }</code>.
+
+    Ejemplo: pulsa «Responder» en un mensaje → escribe <code>@{ $username }</code> → envía.
+guest-need_reply_short = Responde a un mensaje y menciona al bot
+guest-empty_query =
+    <b>Quotly por aquí 💜</b>
+
+    Responde a cualquier mensaje de este chat y menciona <code>@{ $username }</code> para convertirlo en un sticker de cita.
+
+    Pulsa abajo para abrirme en un chat privado y acceder a todas las funciones.
+guest-open_in_pm = Abrir en Quotly →

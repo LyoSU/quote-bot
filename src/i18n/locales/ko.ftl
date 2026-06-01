@@ -364,3 +364,103 @@ onboarding-complete-title =
     <b>준비 완료! 🎉</b>
 
     이제 기본을 알게 되었어요. 메뉴를 탐색하여 더 많은 기능을 발견하세요!
+
+aimode-title = 🤖 <b>AI 모드</b>
+aimode-current = 현재 모드: { $mode }
+aimode-available = <b>사용 가능한 모드:</b>
+aimode-unknown = ❌ 알 수 없는 모드: <code>{ $mode }</code>
+aimode-available_list = 사용 가능: { $modes }
+aimode-success = ✅ AI 모드가 다음으로 변경되었습니다: { $mode }
+aimode-error = ❌ 설정 저장에 실패했습니다
+aimode-modes-sarcastic-name = 😏 빈정대는 사람
+aimode-modes-sarcastic-description = 다크 유머가 담긴 빈정대고 재치 있는 코멘트
+aimode-modes-philosopher-name = 🧠 철학자
+aimode-modes-philosopher-description = 깊은 사색과 철학적 성찰
+aimode-modes-comedian-name = 😂 코미디언
+aimode-modes-comedian-description = 재미있는 농담과 코믹한 코멘트
+aimode-modes-poet-name = 📝 시인
+aimode-modes-poet-description = 시적인 구절과 아름다운 은유
+aimode-modes-motivator-name = 💪 동기부여가
+aimode-modes-motivator-description = 동기를 부여하고 영감을 주는 메시지
+aimode-modes-conspiracy-name = 🕵️ 음모론자
+aimode-modes-conspiracy-description = 음모론과 수상쩍은 코멘트
+aimode-modes-critic-name = 🎭 비평가
+aimode-modes-critic-description = 모든 것에 대한 비판적인 리뷰와 평가
+aimode-modes-boomer-name = 👴 부머
+aimode-modes-boomer-description = 윗세대의 옛날식 코멘트
+aimode-modes-zoomer-name = 😎 주머
+aimode-modes-zoomer-description = 젊은 층의 은어와 유행어
+aimode-modes-academic-name = 🎓 학자
+aimode-modes-academic-description = 과학적 사실과 학술적 코멘트
+aimode-modes-memer-name = 🐸 밈 제작자
+aimode-modes-memer-description = 밈 문구와 인터넷 문화
+app-open_quote = ✨ 인용구 열기
+app-open_group = 📚 그룹의 모든 인용구
+app-open_root = 💫 내 그룹
+app-info =
+    <b>모든 것은 앱에도 있습니다 💬</b>
+
+    인용구를 넘겨보고, 아카이브를 파헤치고, 인기 항목을 쫓아보세요 — 한 번의 탭으로. 버튼을 누르세요 ↓
+menu-settings-btn-color = 🎨 기본 색상
+menu-settings-btn-emoji_style = 😊 이모지 스타일
+menu-settings-btn-back = ← 뒤로
+onboarding-step1-waiting =
+    메시지를 기다리는 중...
+    아무 채팅에서든 무언가를 전달해 주세요!
+onboarding-step2-btn-menu = 메뉴 열기
+onboarding-step2-btn-add_group = 그룹에 추가
+quick_action-remake = 🔄
+quick_action-tooltip-remake = 다른 스타일로 다시 만들기
+qarchive-on = ✅ 인용구 텍스트 아카이브가 <b>활성화</b>되었습니다. 새 인용구는 텍스트 및 작성자와 함께 저장됩니다.
+qarchive-off = ⏸ 인용구 텍스트 아카이브가 <b>비활성화</b>되었습니다. 새 인용구는 스티커와 평점만 저장합니다.
+qarchive-status_on =
+    현재 상태: <b>활성화됨</b>.
+
+    <code>/qarchive off</code> — 비활성화
+qarchive-status_off =
+    현재 상태: <b>비활성화됨</b>.
+
+    <code>/qarchive on</code> — 활성화
+qarchive-usage =
+    이 그룹의 인용구 텍스트 아카이브를 전환합니다.
+
+    <code>/qarchive on</code> 또는 <code>/qarchive off</code>
+qforget-usage = 인용구 번호를 지정하세요: <code>/qforget 142</code>
+qforget-not_found = 인용구 #{ $local } 을(를) 이 그룹에서 찾을 수 없습니다.
+qforget-not_author = 인용구 작성자만 잊을 수 있습니다.
+qforget-forgotten = ✅ 인용구 #{ $local } 을(를) 잊었습니다. 스티커와 투표는 남지만 텍스트와 작성자는 아카이브에서 제거됩니다.
+qforget-already_forgotten = 인용구 #{ $local } 은(는) 이미 잊혀졌습니다.
+qforget-not_yet_archived = 인용구 #{ $local } 에는 텍스트가 없습니다(아카이브 이전에 생성됨).
+guest-hint =
+    <b>Quotly — 게스트 모드 💬</b>
+
+    채팅 멤버가 <i>아니어도</i> 어떤 메시지로든 인용구 스티커를 만들 수 있습니다.
+
+    <b>사용 방법:</b>
+    1. 인용하고 싶은 메시지에 답장하세요
+    2. 답장에 <code>@{ $username }</code> 을(를) 입력하세요
+    3. 완료 — 채팅에 인용구 스티커를 바로 보내드립니다
+
+    <b>선택 인자 (/q 와 동일):</b>
+    • <code>@{ $username } r</code> — 답장 대상 메시지 포함
+    • <code>@{ $username } red</code> — 배경색 설정
+    • <code>@{ $username } rate</code> — 👍 / 👎 버튼 추가
+    • <code>@{ $username } p</code> — PNG로 렌더링
+
+    모든 기능을 경험하려면 PM에서 열어주세요.
+guest-hint_short = 게스트 모드에서 Quotly가 작동하는 방식
+guest-need_reply =
+    <b>거의 다 됐어요! 🪄</b>
+
+    인용구를 만들려면 인용할 메시지가 필요합니다 — 메시지에 답장하고 <code>@{ $username }</code> 을(를) 멘션하세요.
+
+    예: 메시지에서 "답장"을 탭 → <code>@{ $username }</code> 입력 → 전송.
+guest-need_reply_short = 메시지에 답장하고 봇을 멘션하세요
+guest-empty_query =
+    <b>Quotly입니다 💜</b>
+
+    이 채팅의 아무 메시지에 답장하고 <code>@{ $username }</code> 을(를) 멘션하면 인용구 스티커로 바뀝니다.
+
+    모든 기능을 사용하려면 아래를 탭하여 PM에서 열어주세요.
+guest-open_in_pm = Quotly에서 열기 →
+sticker-save-error-too_large = 이미지가 너무 큽니다(최대 2048×2048). 더 작은 것을 시도해 보세요 📐

@@ -364,3 +364,104 @@ onboarding-complete-title =
     <b>Je bent klaar! 🎉</b>
 
     Nu ken je de basis. Verken het menu om meer functies te ontdekken!
+
+aimode-title = 🤖 <b>IA-modi</b>
+aimode-current = Huidige modus: { $mode }
+aimode-available = <b>Beschikbare modi:</b>
+aimode-unknown = ❌ Onbekende modus: <code>{ $mode }</code>
+aimode-available_list = Beschikbaar: { $modes }
+aimode-success = ✅ IA-modus gewijzigd naar: { $mode }
+aimode-error = ❌ Fout bij het opslaan van de instellingen
+aimode-modes-sarcastic-name = 😏 Sarcastisch
+aimode-modes-sarcastic-description = Sarcastische en gevatte opmerkingen met zwarte humor
+aimode-modes-philosopher-name = 🧠 Filosoof
+aimode-modes-philosopher-description = Diepe gedachten en filosofische overpeinzingen
+aimode-modes-comedian-name = 😂 Komiek
+aimode-modes-comedian-description = Grappige grappen en komische opmerkingen
+aimode-modes-poet-name = 📝 Dichter
+aimode-modes-poet-description = Poëtische regels en mooie metaforen
+aimode-modes-motivator-name = 💪 Motivator
+aimode-modes-motivator-description = Motiverende en inspirerende berichten
+aimode-modes-conspiracy-name = 🕵️ Complotdenker
+aimode-modes-conspiracy-description = Complottheorieën en verdachte opmerkingen
+aimode-modes-critic-name = 🎭 Criticus
+aimode-modes-critic-description = Kritische recensies en beoordelingen van alles
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Ouderwetse opmerkingen van de oudere generatie
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Jongerentaal en trendy uitdrukkingen
+aimode-modes-academic-name = 🎓 Academicus
+aimode-modes-academic-description = Wetenschappelijke feiten en academisch commentaar
+aimode-modes-memer-name = 🐸 Memer
+aimode-modes-memer-description = Memezinnen en internetcultuur
+app-open_quote = ✨ Citaat openen
+app-open_group = 📚 Alle citaten in de groep
+app-open_root = 💫 Mijn groepen
+app-info =
+    <b>Het leeft allemaal ook in de app 💬</b>
+
+    Blader door citaten, duik in het archief, jaag op de toppers — één tik verwijderd. Druk op de knop ↓
+menu-settings-btn-color = 🎨 Standaardkleur
+menu-settings-btn-emoji_style = 😊 Emoji-stijl
+menu-settings-btn-back = ← Terug
+onboarding-step1-waiting =
+    Wachten op je bericht...
+    Stuur me gewoon iets door uit een willekeurige chat!
+onboarding-step2-btn-menu = Menu openen
+onboarding-step2-btn-add_group = Toevoegen aan groep
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Opnieuw maken met een andere stijl
+qarchive-on = ✅ Citaattekst-archief <b>ingeschakeld</b>. Nieuwe citaten worden opgeslagen met tekst en auteur.
+qarchive-off = ⏸ Citaattekst-archief <b>uitgeschakeld</b>. Nieuwe citaten slaan alleen de sticker en beoordeling op.
+qarchive-status_on =
+    Huidige staat: <b>ingeschakeld</b>.
+
+    <code>/qarchive off</code> — uitschakelen
+qarchive-status_off =
+    Huidige staat: <b>uitgeschakeld</b>.
+
+    <code>/qarchive on</code> — inschakelen
+qarchive-usage =
+    Citaattekst-archief voor deze groep in- of uitschakelen.
+
+    <code>/qarchive on</code> of <code>/qarchive off</code>
+qforget-usage = Geef het citaatnummer op: <code>/qforget 142</code>
+qforget-not_found = Citaat #{ $local } niet gevonden in deze groep.
+qforget-not_author = Alleen de auteur van het citaat kan het vergeten.
+qforget-forgotten = ✅ Citaat #{ $local } vergeten. De sticker en stemmen blijven, maar tekst en auteur worden uit het archief verwijderd.
+qforget-already_forgotten = Citaat #{ $local } was al vergeten.
+qforget-not_yet_archived = Citaat #{ $local } heeft geen tekst (aangemaakt vóór het archief).
+guest-hint =
+    <b>Quotly — gastmodus 💬</b>
+
+    Ik kan een citaatsticker maken van elk bericht <i>zonder</i> lid te zijn van de chat.
+
+    <b>Hoe te gebruiken:</b>
+    1. Antwoord op het bericht dat je wilt citeren
+    2. Schrijf in je antwoord <code>@{ $username }</code>
+    3. Klaar — ik plaats een citaatsticker direct in de chat
+
+    <b>Optionele argumenten (net als /q):</b>
+    • <code>@{ $username } r</code> — voeg het bericht toe waarop ik antwoord
+    • <code>@{ $username } red</code> — stel de achtergrondkleur in
+    • <code>@{ $username } rate</code> — voeg 👍 / 👎 knoppen toe
+    • <code>@{ $username } p</code> — render als een PNG
+
+    Voor de volledige ervaring open je me in een privéchat.
+guest-hint_short = Hoe Quotly werkt in gastmodus
+guest-need_reply =
+    <b>Bijna klaar! 🪄</b>
+
+    Om een citaat te maken heb ik een bericht nodig om te citeren — antwoord op er een en vermeld <code>@{ $username }</code>.
+
+    Voorbeeld: tik op "Antwoorden" bij een bericht → typ <code>@{ $username }</code> → verstuur.
+guest-need_reply_short = Antwoord op een bericht en vermeld de bot
+guest-empty_query =
+    <b>Quotly hier 💜</b>
+
+    Antwoord op een bericht in deze chat en vermeld <code>@{ $username }</code> om er een citaatsticker van te maken.
+
+    Tik hieronder om me in een privéchat te openen voor alle functies.
+guest-open_in_pm = Openen in Quotly →
+
+sticker-save-error-too_large = De afbeelding is te groot (max 2048×2048). Probeer een kleinere 📐

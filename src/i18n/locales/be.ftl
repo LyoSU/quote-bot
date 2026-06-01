@@ -364,3 +364,102 @@ onboarding-complete-title =
     <b>Вы гатовы! 🎉</b>
 
     Цяпер вы ведаеце асновы. Даследуйце меню, каб адкрыць больш магчымасцей!
+sticker-save-error-too_large = Выява занадта вялікая (макс. 2048×2048). Паспрабуйце меншую 📐
+app-open_quote = ✨ Адкрыць цытату
+app-open_group = 📚 Усе цытаты ў групе
+app-open_root = 💫 Мае групы
+app-info =
+    <b>Усё гэта жыве і ў дадатку 💬</b>
+
+    Гартайце цытаты, капайцеся ў архіве, гойсайце за топамі — усё ў адзін дотык. Націсніце кнопку ↓
+aimode-title = 🤖 <b>Рэжымы ШІ</b>
+aimode-current = Бягучы рэжым: { $mode }
+aimode-available = <b>Даступныя рэжымы:</b>
+aimode-unknown = ❌ Невядомы рэжым: <code>{ $mode }</code>
+aimode-available_list = Даступныя: { $modes }
+aimode-success = ✅ Рэжым ШІ зменены на: { $mode }
+aimode-error = ❌ Памылка захавання налад
+aimode-modes-sarcastic-name = 😏 Саркастычны
+aimode-modes-sarcastic-description = Саркастычныя і дасціпныя каментары з чорным гумарам
+aimode-modes-philosopher-name = 🧠 Філосаф
+aimode-modes-philosopher-description = Глыбокія думкі і філасофскія развагі
+aimode-modes-comedian-name = 😂 Комік
+aimode-modes-comedian-description = Смешныя жарты і камедыйныя каментары
+aimode-modes-poet-name = 📝 Паэт
+aimode-modes-poet-description = Паэтычныя радкі і прыгожыя метафары
+aimode-modes-motivator-name = 💪 Матыватар
+aimode-modes-motivator-description = Матывацыйныя і натхняльныя паведамленні
+aimode-modes-conspiracy-name = 🕵️ Канспіролаг
+aimode-modes-conspiracy-description = Тэорыі змоў і падазроныя каментары
+aimode-modes-critic-name = 🎭 Крытык
+aimode-modes-critic-description = Крытычныя агляды і ацэнкі на ўсё
+aimode-modes-boomer-name = 👴 Бумер
+aimode-modes-boomer-description = Старасвецкія каментары ад старэйшага пакалення
+aimode-modes-zoomer-name = 😎 Зумер
+aimode-modes-zoomer-description = Маладзёжны слэнг і трэндавыя фразы
+aimode-modes-academic-name = 🎓 Акадэмік
+aimode-modes-academic-description = Навуковыя факты і акадэмічныя каментары
+aimode-modes-memer-name = 🐸 Мемер
+aimode-modes-memer-description = Мемныя фразы і інтэрнэт-культура
+menu-settings-btn-color = 🎨 Колер па змаўчанні
+menu-settings-btn-emoji_style = 😊 Стыль эмодзі
+menu-settings-btn-back = ← Назад
+onboarding-step1-waiting =
+    Чакаю вашага паведамлення...
+    Проста перашліце што-небудзь з любога чату!
+onboarding-step2-btn-menu = Адкрыць меню
+onboarding-step2-btn-add_group = Дадаць у групу
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Перастварыць з іншым стылем
+qarchive-on = ✅ Архіў тэксту цытат <b>уключаны</b>. Новыя цытаты будуць захоўвацца з тэкстам і аўтарам.
+qarchive-off = ⏸ Архіў тэксту цытат <b>выключаны</b>. Новыя цытаты будуць захоўваць толькі стыкер і рэйтынг.
+qarchive-status_on =
+    Бягучы стан: <b>уключаны</b>.
+
+    <code>/qarchive off</code> — выключыць
+qarchive-status_off =
+    Бягучы стан: <b>выключаны</b>.
+
+    <code>/qarchive on</code> — уключыць
+qarchive-usage =
+    Пераключыце архіў тэксту цытат для гэтай групы.
+
+    <code>/qarchive on</code> або <code>/qarchive off</code>
+qforget-usage = Укажыце нумар цытаты: <code>/qforget 142</code>
+qforget-not_found = Цытата #{ $local } не знойдзена ў гэтай групе.
+qforget-not_author = Толькі аўтар цытаты можа яе забыць.
+qforget-forgotten = ✅ Цытата #{ $local } забытая. Стыкер і галасы застаюцца, але тэкст і аўтар выдалены з архіва.
+qforget-already_forgotten = Цытата #{ $local } ужо была забытая.
+qforget-not_yet_archived = Цытата #{ $local } не мае тэксту (створана да з'яўлення архіва).
+guest-hint =
+    <b>Quotly — гасцявы рэжым 💬</b>
+
+    Я магу зрабіць стыкер-цытату з любога паведамлення <i>без</i> уваходжання ў чат.
+
+    <b>Як карыстацца:</b>
+    1. Адкажыце на паведамленне, якое хочаце працытаваць
+    2. У сваім адказе напішыце <code>@{ $username }</code>
+    3. Гатова — я кіну стыкер-цытату прама ў чат
+
+    <b>Дадатковыя аргументы (як у /q):</b>
+    • <code>@{ $username } r</code> — уключыць паведамленне, на якое я адказваю
+    • <code>@{ $username } red</code> — задаць колер фону
+    • <code>@{ $username } rate</code> — дадаць кнопкі 👍 / 👎
+    • <code>@{ $username } p</code> — адмаляваць як PNG
+
+    Для поўнага вопыту адкрыйце мяне ў асабістым чаце.
+guest-hint_short = Як Quotly працуе ў гасцявым рэжыме
+guest-need_reply =
+    <b>Амаль гатова! 🪄</b>
+
+    Каб зрабіць цытату, мне патрэбна паведамленне для цытавання — адкажыце на яго і згадайце <code>@{ $username }</code>.
+
+    Прыклад: націсніце "Адказаць" на паведамленні → напішыце <code>@{ $username }</code> → адпраўце.
+guest-need_reply_short = Адкажыце на паведамленне і згадайце бота
+guest-empty_query =
+    <b>Quotly тут 💜</b>
+
+    Адкажыце на любое паведамленне ў гэтым чаце і згадайце <code>@{ $username }</code>, каб ператварыць яго ў стыкер-цытату.
+
+    Націсніце ніжэй, каб адкрыць мяне ў асабістым чаце для поўнага набору функцый.
+guest-open_in_pm = Адкрыць у Quotly →

@@ -38,6 +38,12 @@ export async function updateGroupSettings(
   await Group.updateOne({ _id: groupId }, { $set })
 }
 
+/** Sets (or clears) the group's sticker pack short name. */
+export async function setGroupStickerSet(groupId: Types.ObjectId, name: string | null): Promise<void> {
+  if (name) await Group.updateOne({ _id: groupId }, { $set: { 'stickerSet.name': name, 'stickerSet.create': true } })
+  else await Group.updateOne({ _id: groupId }, { $unset: { stickerSet: 1 } })
+}
+
 /** Atomically bumps the per-group quote counter and returns the new value. */
 export async function incrementQuoteCounter(groupId: Types.ObjectId): Promise<number> {
   const updated = await Group.findOneAndUpdate(

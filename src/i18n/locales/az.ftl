@@ -364,3 +364,102 @@ onboarding-complete-title =
     <b>Hazırsınız! 🎉</b>
 
     İndi əsasları bilirsiniz. Daha çox xüsusiyyət üçün menyunu kəşf edin!
+app-open_quote = ✨ Sitatı aç
+app-open_group = 📚 Qrupdakı bütün sitatlar
+app-open_root = 💫 Mənim qruplarım
+app-info =
+    <b>Bunların hamısı tətbiqdə də var 💬</b>
+
+    Sitatları vərəqlə, arxivi araşdır, ən yaxşıların ardınca düş — bir toxunuş bəs edir. Aşağıdakı düyməyə bas ↓
+aimode-title = 🤖 <b>AI Rejimləri</b>
+aimode-current = Hazırkı rejim: { $mode }
+aimode-available = <b>Mövcud rejimlər:</b>
+aimode-unknown = ❌ Naməlum rejim: <code>{ $mode }</code>
+aimode-available_list = Mövcud: { $modes }
+aimode-success = ✅ AI rejimi dəyişdirildi: { $mode }
+aimode-error = ❌ Parametrləri saxlayarkən xəta
+aimode-modes-sarcastic-name = 😏 Sarkastik
+aimode-modes-sarcastic-description = Qara yumorla dolu sarkastik və hazırcavab şərhlər
+aimode-modes-philosopher-name = 🧠 Filosof
+aimode-modes-philosopher-description = Dərin düşüncələr və fəlsəfi mülahizələr
+aimode-modes-comedian-name = 😂 Komediyaçı
+aimode-modes-comedian-description = Gülməli zarafatlar və komik şərhlər
+aimode-modes-poet-name = 📝 Şair
+aimode-modes-poet-description = Şeir misraları və gözəl metaforalar
+aimode-modes-motivator-name = 💪 Motivator
+aimode-modes-motivator-description = Motivasiya verən və ruhlandıran mesajlar
+aimode-modes-conspiracy-name = 🕵️ Sui-qəsd nəzəriyyəçisi
+aimode-modes-conspiracy-description = Sui-qəsd nəzəriyyələri və şübhəli şərhlər
+aimode-modes-critic-name = 🎭 Tənqidçi
+aimode-modes-critic-description = Hər şeyə tənqidi rəylər və qiymətləndirmələr
+aimode-modes-boomer-name = 👴 Bumer
+aimode-modes-boomer-description = Yaşlı nəsildən köhnə üslublu şərhlər
+aimode-modes-zoomer-name = 😎 Zumer
+aimode-modes-zoomer-description = Gənclik jarqonu və dəbdə olan ifadələr
+aimode-modes-academic-name = 🎓 Akademik
+aimode-modes-academic-description = Elmi faktlar və akademik şərhlər
+aimode-modes-memer-name = 🐸 Memer
+aimode-modes-memer-description = Mem ifadələri və internet mədəniyyəti
+menu-settings-btn-color = 🎨 Standart rəng
+menu-settings-btn-emoji_style = 😊 Emoji üslubu
+menu-settings-btn-back = ← Geri
+onboarding-step1-waiting =
+    Mesajınızı gözləyirəm...
+    Sadəcə istənilən söhbətdən nəsə yönləndirin!
+onboarding-step2-btn-menu = Menyunu aç
+onboarding-step2-btn-add_group = Qrupa əlavə et
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Fərqli üslubda yenidən yarat
+qarchive-on = ✅ Sitat mətni arxivi <b>aktivləşdirildi</b>. Yeni sitatlar mətn və müəlliflə birlikdə saxlanılacaq.
+qarchive-off = ⏸ Sitat mətni arxivi <b>deaktivləşdirildi</b>. Yeni sitatlar yalnız stiker və qiymətləndirməni saxlayacaq.
+qarchive-status_on =
+    Hazırkı vəziyyət: <b>aktiv</b>.
+
+    <code>/qarchive off</code> — deaktivləşdir
+qarchive-status_off =
+    Hazırkı vəziyyət: <b>deaktiv</b>.
+
+    <code>/qarchive on</code> — aktivləşdir
+qarchive-usage =
+    Bu qrup üçün sitat mətni arxivini açıb-bağlayın.
+
+    <code>/qarchive on</code> və ya <code>/qarchive off</code>
+qforget-usage = Sitat nömrəsini göstərin: <code>/qforget 142</code>
+qforget-not_found = #{ $local } nömrəli sitat bu qrupda tapılmadı.
+qforget-not_author = Sitatı yalnız müəllifi unuda bilər.
+qforget-forgotten = ✅ #{ $local } nömrəli sitat unuduldu. Stiker və səslər qalır, lakin mətn və müəllif arxivdən silinir.
+qforget-already_forgotten = #{ $local } nömrəli sitat artıq unudulmuşdu.
+qforget-not_yet_archived = #{ $local } nömrəli sitatın mətni yoxdur (arxivdən əvvəl yaradılıb).
+guest-hint =
+    <b>Quotly — qonaq rejimi 💬</b>
+
+    Söhbət üzvü olmadan <i>istənilən</i> mesajdan sitat stikeri yarada bilərəm.
+
+    <b>Necə istifadə etməli:</b>
+    1. Sitat gətirmək istədiyiniz mesaja cavab verin
+    2. Cavabınızda <code>@{ $username }</code> yazın
+    3. Hazırdır — sitat stikerini birbaşa söhbətə göndərəcəyəm
+
+    <b>İxtiyari arqumentlər (/q kimi):</b>
+    • <code>@{ $username } r</code> — cavab verdiyim mesajı daxil et
+    • <code>@{ $username } red</code> — fon rəngini təyin et
+    • <code>@{ $username } rate</code> — 👍 / 👎 düymələri əlavə et
+    • <code>@{ $username } p</code> — PNG kimi göstər
+
+    Tam təcrübə üçün məni şəxsi mesajda açın.
+guest-hint_short = Quotly qonaq rejimində necə işləyir
+guest-need_reply =
+    <b>Az qalıb! 🪄</b>
+
+    Sitat yaratmaq üçün sitat gətiriləcək mesaj lazımdır — birinə cavab verin və <code>@{ $username }</code> qeyd edin.
+
+    Nümunə: mesajda "Cavabla"ya toxunun → <code>@{ $username }</code> yazın → göndərin.
+guest-need_reply_short = Mesaja cavab verin və botu qeyd edin
+guest-empty_query =
+    <b>Quotly buradadır 💜</b>
+
+    Bu söhbətdəki istənilən mesaja cavab verin və onu sitat stikerinə çevirmək üçün <code>@{ $username }</code> qeyd edin.
+
+    Tam funksiya dəsti üçün məni şəxsi mesajda açmaq üçün aşağıya toxunun.
+guest-open_in_pm = Quotly-də aç →
+sticker-save-error-too_large = Şəkil çox böyükdür (maksimum 2048×2048). Daha kiçiyini sınayın 📐

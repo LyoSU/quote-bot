@@ -364,3 +364,102 @@ onboarding-complete-title =
     <b>准备就绪！🎉</b>
 
     现在您了解了基础知识。探索菜单发现更多功能！
+app-open_quote = ✨ 打开引用
+app-open_group = 📚 群组中的所有引用
+app-open_root = 💫 我的群组
+app-info =
+    <b>这一切也都在应用中 💬</b>
+
+    翻阅引用、深入存档、追逐榜单——一键即达。点击下方按钮 ↓
+aimode-title = 🤖 <b>AI 模式</b>
+aimode-current = 当前模式：{ $mode }
+aimode-available = <b>可用模式：</b>
+aimode-unknown = ❌ 未知模式：<code>{ $mode }</code>
+aimode-available_list = 可用：{ $modes }
+aimode-success = ✅ AI 模式已更改为：{ $mode }
+aimode-error = ❌ 保存设置时出错
+aimode-modes-sarcastic-name = 😏 讽刺者
+aimode-modes-sarcastic-description = 带有黑色幽默的讽刺机智评论
+aimode-modes-philosopher-name = 🧠 哲学家
+aimode-modes-philosopher-description = 深刻的思考和哲学反思
+aimode-modes-comedian-name = 😂 喜剧演员
+aimode-modes-comedian-description = 有趣的笑话和喜剧评论
+aimode-modes-poet-name = 📝 诗人
+aimode-modes-poet-description = 诗意的句子和优美的比喻
+aimode-modes-motivator-name = 💪 激励者
+aimode-modes-motivator-description = 激励人心、鼓舞士气的话语
+aimode-modes-conspiracy-name = 🕵️ 阴谋论者
+aimode-modes-conspiracy-description = 阴谋论和可疑评论
+aimode-modes-critic-name = 🎭 评论家
+aimode-modes-critic-description = 对一切的批评性评论和评分
+aimode-modes-boomer-name = 👴 老一辈
+aimode-modes-boomer-description = 来自老一代人的老派评论
+aimode-modes-zoomer-name = 😎 Z世代
+aimode-modes-zoomer-description = 年轻人的俚语和潮流短语
+aimode-modes-academic-name = 🎓 学者
+aimode-modes-academic-description = 科学事实和学术评论
+aimode-modes-memer-name = 🐸 梗图达人
+aimode-modes-memer-description = 梗图短语和网络文化
+menu-settings-btn-color = 🎨 默认颜色
+menu-settings-btn-emoji_style = 😊 表情符号风格
+menu-settings-btn-back = ← 返回
+onboarding-step1-waiting =
+    正在等待您的消息……
+    只需从任意聊天转发点什么过来！
+onboarding-step2-btn-menu = 打开菜单
+onboarding-step2-btn-add_group = 添加到群组
+quick_action-remake = 🔄
+quick_action-tooltip-remake = 用不同风格重新生成
+qarchive-on = ✅ 引用文本存档<b>已启用</b>。新引用将连同文本和作者一起存储。
+qarchive-off = ⏸ 引用文本存档<b>已禁用</b>。新引用将仅存储贴纸和评分。
+qarchive-status_on =
+    当前状态：<b>已启用</b>。
+
+    <code>/qarchive off</code> — 禁用
+qarchive-status_off =
+    当前状态：<b>已禁用</b>。
+
+    <code>/qarchive on</code> — 启用
+qarchive-usage =
+    切换此群组的引用文本存档。
+
+    <code>/qarchive on</code> 或 <code>/qarchive off</code>
+qforget-usage = 请指定引用编号：<code>/qforget 142</code>
+qforget-not_found = 在此群组中未找到引用 #{ $local }。
+qforget-not_author = 只有引用作者才能将其遗忘。
+qforget-forgotten = ✅ 引用 #{ $local } 已遗忘。贴纸和投票保留，但文本和作者已从存档中移除。
+qforget-already_forgotten = 引用 #{ $local } 此前已被遗忘。
+qforget-not_yet_archived = 引用 #{ $local } 没有文本（创建于存档之前）。
+guest-hint =
+    <b>Quotly — 访客模式 💬</b>
+
+    无需成为聊天成员，我也能把任意消息做成引用贴纸。
+
+    <b>使用方法：</b>
+    1. 回复您想引用的消息
+    2. 在回复中输入 <code>@{ $username }</code>
+    3. 完成——我会直接在聊天里发出一张引用贴纸
+
+    <b>可选参数（与 /q 相同）：</b>
+    • <code>@{ $username } r</code> — 包含我所回复的消息
+    • <code>@{ $username } red</code> — 设置背景颜色
+    • <code>@{ $username } rate</code> — 添加 👍 / 👎 按钮
+    • <code>@{ $username } p</code> — 渲染为 PNG
+
+    想体验完整功能，请在私聊中打开我。
+guest-hint_short = Quotly 在访客模式下如何工作
+guest-need_reply =
+    <b>就差一步了！🪄</b>
+
+    要制作引用，我需要一条可供引用的消息——回复一条消息并提及 <code>@{ $username }</code>。
+
+    示例：在某条消息上点击“回复”→ 输入 <code>@{ $username }</code> → 发送。
+guest-need_reply_short = 回复一条消息并提及机器人
+guest-empty_query =
+    <b>Quotly 在此 💜</b>
+
+    回复此聊天中的任意消息并提及 <code>@{ $username }</code>，即可将其变成引用贴纸。
+
+    点击下方在私聊中打开我，获取完整功能。
+guest-open_in_pm = 在 Quotly 中打开 →
+sticker-save-error-too_large = 图片太大了（最大 2048×2048）。请尝试小一点的 📐

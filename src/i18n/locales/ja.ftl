@@ -364,3 +364,103 @@ onboarding-complete-title =
     <b>準備完了！🎉</b>
 
     基本を理解しました。メニューを探索してさらに多くの機能を発見しましょう！
+
+aimode-title = 🤖 <b>AIモード</b>
+aimode-current = 現在のモード: { $mode }
+aimode-available = <b>利用可能なモード:</b>
+aimode-unknown = ❌ 不明なモード: <code>{ $mode }</code>
+aimode-available_list = 利用可能: { $modes }
+aimode-success = ✅ AIモードを次に変更しました: { $mode }
+aimode-error = ❌ 設定の保存に失敗しました
+aimode-modes-sarcastic-name = 😏 皮肉屋
+aimode-modes-sarcastic-description = ブラックユーモアを交えた皮肉で機知に富んだコメント
+aimode-modes-philosopher-name = 🧠 哲学者
+aimode-modes-philosopher-description = 深い思索と哲学的な考察
+aimode-modes-comedian-name = 😂 コメディアン
+aimode-modes-comedian-description = 面白い冗談とコミカルなコメント
+aimode-modes-poet-name = 📝 詩人
+aimode-modes-poet-description = 詩的な一節と美しい比喩
+aimode-modes-motivator-name = 💪 モチベーター
+aimode-modes-motivator-description = やる気を起こさせ、心を奮い立たせるメッセージ
+aimode-modes-conspiracy-name = 🕵️ 陰謀論者
+aimode-modes-conspiracy-description = 陰謀論と疑わしいコメント
+aimode-modes-critic-name = 🎭 批評家
+aimode-modes-critic-description = あらゆるものへの批判的なレビューと評価
+aimode-modes-boomer-name = 👴 ブーマー
+aimode-modes-boomer-description = 年配世代による古風なコメント
+aimode-modes-zoomer-name = 😎 ズーマー
+aimode-modes-zoomer-description = 若者のスラングと流行りのフレーズ
+aimode-modes-academic-name = 🎓 学者
+aimode-modes-academic-description = 科学的事実と学術的なコメント
+aimode-modes-memer-name = 🐸 ミーマー
+aimode-modes-memer-description = ミームのフレーズとインターネット文化
+app-open_quote = ✨ 引用を開く
+app-open_group = 📚 グループ内のすべての引用
+app-open_root = 💫 マイグループ
+app-info =
+    <b>すべてはアプリの中にもあります 💬</b>
+
+    引用をめくり、アーカイブを掘り下げ、トップを追いかける — ワンタップで。ボタンを押してください ↓
+menu-settings-btn-color = 🎨 デフォルトの色
+menu-settings-btn-emoji_style = 😊 絵文字スタイル
+menu-settings-btn-back = ← 戻る
+onboarding-step1-waiting =
+    メッセージを待っています...
+    どのチャットからでも何か転送してください！
+onboarding-step2-btn-menu = メニューを開く
+onboarding-step2-btn-add_group = グループに追加
+quick_action-remake = 🔄
+quick_action-tooltip-remake = 別のスタイルで作り直す
+qarchive-on = ✅ 引用テキストのアーカイブが<b>有効</b>になりました。新しい引用はテキストと作成者とともに保存されます。
+qarchive-off = ⏸ 引用テキストのアーカイブが<b>無効</b>になりました。新しい引用はステッカーと評価のみを保存します。
+qarchive-status_on =
+    現在の状態: <b>有効</b>。
+
+    <code>/qarchive off</code> — 無効にする
+qarchive-status_off =
+    現在の状態: <b>無効</b>。
+
+    <code>/qarchive on</code> — 有効にする
+qarchive-usage =
+    このグループの引用テキストアーカイブを切り替えます。
+
+    <code>/qarchive on</code> または <code>/qarchive off</code>
+qforget-usage = 引用番号を指定してください: <code>/qforget 142</code>
+qforget-not_found = 引用 #{ $local } はこのグループで見つかりませんでした。
+qforget-not_author = 引用の作成者のみが忘れさせることができます。
+qforget-forgotten = ✅ 引用 #{ $local } を忘れました。ステッカーと投票は残りますが、テキストと作成者はアーカイブから削除されます。
+qforget-already_forgotten = 引用 #{ $local } はすでに忘れられています。
+qforget-not_yet_archived = 引用 #{ $local } にはテキストがありません（アーカイブ導入前に作成されました）。
+guest-hint =
+    <b>Quotly — ゲストモード 💬</b>
+
+    チャットのメンバーで<i>なくても</i>、どんなメッセージからでも引用ステッカーを作れます。
+
+    <b>使い方:</b>
+    1. 引用したいメッセージに返信する
+    2. 返信の中に <code>@{ $username }</code> と書く
+    3. 完了 — チャットに引用ステッカーを直接送ります
+
+    <b>オプション引数（/q と同じ）:</b>
+    • <code>@{ $username } r</code> — 返信先のメッセージを含める
+    • <code>@{ $username } red</code> — 背景色を設定する
+    • <code>@{ $username } rate</code> — 👍 / 👎 ボタンを追加する
+    • <code>@{ $username } p</code> — PNGとしてレンダリングする
+
+    フル機能を体験するにはPMで開いてください。
+guest-hint_short = ゲストモードでのQuotlyの使い方
+guest-need_reply =
+    <b>あと少し！🪄</b>
+
+    引用を作るには引用するメッセージが必要です — メッセージに返信して <code>@{ $username }</code> とメンションしてください。
+
+    例: メッセージの「返信」をタップ → <code>@{ $username }</code> と入力 → 送信。
+guest-need_reply_short = メッセージに返信してボットをメンションしてください
+guest-empty_query =
+    <b>Quotlyです 💜</b>
+
+    このチャットの任意のメッセージに返信して <code>@{ $username }</code> とメンションすると、引用ステッカーに変わります。
+
+    フル機能を使うには下をタップしてPMで開いてください。
+guest-open_in_pm = Quotlyで開く →
+sticker-save-error-too_large = 画像が大きすぎます（最大 2048×2048）。もっと小さいものを試してください 📐

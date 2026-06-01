@@ -364,3 +364,104 @@ onboarding-complete-title =
     <b>Gotowe! 🎉</b>
 
     Teraz znasz podstawy. Eksploruj menu, aby odkryć więcej funkcji!
+
+aimode-title = 🤖 <b>Tryby SI</b>
+aimode-current = Bieżący tryb: { $mode }
+aimode-available = <b>Dostępne tryby:</b>
+aimode-unknown = ❌ Nieznany tryb: <code>{ $mode }</code>
+aimode-available_list = Dostępne: { $modes }
+aimode-success = ✅ Tryb SI zmieniony na: { $mode }
+aimode-error = ❌ Błąd podczas zapisywania ustawień
+aimode-modes-sarcastic-name = 😏 Sarkastyczny
+aimode-modes-sarcastic-description = Sarkastyczne i dowcipne komentarze z czarnym humorem
+aimode-modes-philosopher-name = 🧠 Filozof
+aimode-modes-philosopher-description = Głębokie myśli i refleksje filozoficzne
+aimode-modes-comedian-name = 😂 Komik
+aimode-modes-comedian-description = Zabawne żarty i komediowe komentarze
+aimode-modes-poet-name = 📝 Poeta
+aimode-modes-poet-description = Poetyckie wersy i piękne metafory
+aimode-modes-motivator-name = 💪 Motywator
+aimode-modes-motivator-description = Motywujące i inspirujące wiadomości
+aimode-modes-conspiracy-name = 🕵️ Spiskowiec
+aimode-modes-conspiracy-description = Teorie spiskowe i podejrzliwe komentarze
+aimode-modes-critic-name = 🎭 Krytyk
+aimode-modes-critic-description = Krytyczne recenzje i oceny wszystkiego
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Staroszkolne komentarze starszego pokolenia
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Młodzieżowy slang i modne zwroty
+aimode-modes-academic-name = 🎓 Naukowiec
+aimode-modes-academic-description = Fakty naukowe i akademickie komentarze
+aimode-modes-memer-name = 🐸 Memiarz
+aimode-modes-memer-description = Memowe frazy i kultura internetowa
+app-open_quote = ✨ Otwórz cytat
+app-open_group = 📚 Wszystkie cytaty w grupie
+app-open_root = 💫 Moje grupy
+app-info =
+    <b>Wszystko żyje także w aplikacji 💬</b>
+
+    Przeglądaj cytaty, zanurz się w archiwum, poluj na najlepsze — o jedno dotknięcie. Naciśnij przycisk ↓
+menu-settings-btn-color = 🎨 Domyślny kolor
+menu-settings-btn-emoji_style = 😊 Styl emoji
+menu-settings-btn-back = ← Wstecz
+onboarding-step1-waiting =
+    Czekam na twoją wiadomość...
+    Po prostu prześlij mi coś z dowolnego czatu!
+onboarding-step2-btn-menu = Otwórz menu
+onboarding-step2-btn-add_group = Dodaj do grupy
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Utwórz ponownie w innym stylu
+qarchive-on = ✅ Archiwum tekstu cytatów <b>włączone</b>. Nowe cytaty będą zapisywane z tekstem i autorem.
+qarchive-off = ⏸ Archiwum tekstu cytatów <b>wyłączone</b>. Nowe cytaty będą zapisywać tylko naklejkę i ocenę.
+qarchive-status_on =
+    Aktualny stan: <b>włączone</b>.
+
+    <code>/qarchive off</code> — wyłącz
+qarchive-status_off =
+    Aktualny stan: <b>wyłączone</b>.
+
+    <code>/qarchive on</code> — włącz
+qarchive-usage =
+    Przełącz archiwum tekstu cytatów dla tej grupy.
+
+    <code>/qarchive on</code> lub <code>/qarchive off</code>
+qforget-usage = Podaj numer cytatu: <code>/qforget 142</code>
+qforget-not_found = Cytat #{ $local } nie został znaleziony w tej grupie.
+qforget-not_author = Tylko autor cytatu może o nim zapomnieć.
+qforget-forgotten = ✅ Cytat #{ $local } zapomniany. Naklejka i głosy pozostają, ale tekst i autor zostają usunięte z archiwum.
+qforget-already_forgotten = Cytat #{ $local } został już zapomniany.
+qforget-not_yet_archived = Cytat #{ $local } nie ma tekstu (utworzony przed archiwum).
+guest-hint =
+    <b>Quotly — tryb gościa 💬</b>
+
+    Mogę stworzyć naklejkę z cytatem z dowolnej wiadomości <i>bez</i> bycia członkiem czatu.
+
+    <b>Jak używać:</b>
+    1. Odpowiedz na wiadomość, którą chcesz zacytować
+    2. W swojej odpowiedzi napisz <code>@{ $username }</code>
+    3. Gotowe — wrzucę naklejkę z cytatem prosto na czat
+
+    <b>Opcjonalne argumenty (tak jak /q):</b>
+    • <code>@{ $username } r</code> — dołącz wiadomość, na którą odpowiadam
+    • <code>@{ $username } red</code> — ustaw kolor tła
+    • <code>@{ $username } rate</code> — dodaj przyciski 👍 / 👎
+    • <code>@{ $username } p</code> — renderuj jako PNG
+
+    Aby uzyskać pełne możliwości, otwórz mnie w wiadomości prywatnej.
+guest-hint_short = Jak działa Quotly w trybie gościa
+guest-need_reply =
+    <b>Już prawie! 🪄</b>
+
+    Aby stworzyć cytat, potrzebuję wiadomości do zacytowania — odpowiedz na jakąś i wspomnij <code>@{ $username }</code>.
+
+    Przykład: dotknij „Odpowiedz" na wiadomości → wpisz <code>@{ $username }</code> → wyślij.
+guest-need_reply_short = Odpowiedz na wiadomość i wspomnij bota
+guest-empty_query =
+    <b>Quotly tutaj 💜</b>
+
+    Odpowiedz na dowolną wiadomość w tym czacie i wspomnij <code>@{ $username }</code>, aby zamienić ją w naklejkę z cytatem.
+
+    Dotknij poniżej, aby otworzyć mnie w wiadomości prywatnej i uzyskać dostęp do wszystkich funkcji.
+guest-open_in_pm = Otwórz w Quotly →
+
+sticker-save-error-too_large = Obraz jest za duży (maks. 2048×2048). Spróbuj mniejszego 📐

@@ -364,3 +364,103 @@ onboarding-complete-title =
     <b>Hazırsınız! 🎉</b>
 
     Artık temelleri biliyorsunuz. Daha fazla özellik keşfetmek için menüyü inceleyin!
+
+sticker-save-error-too_large = Görsel çok büyük (en fazla 2048×2048). Daha küçüğünü deneyin 📐
+app-open_quote = ✨ Alıntıyı aç
+app-open_group = 📚 Gruptaki tüm alıntılar
+app-open_root = 💫 Gruplarım
+app-info =
+    <b>Hepsi uygulamada da var 💬</b>
+
+    Alıntıları karıştırın, arşivi kurcalayın, zirvenin peşine düşün — tek dokunuş uzağınızda. Butona dokunun ↓
+aimode-title = 🤖 <b>Yapay Zekâ Modları</b>
+aimode-current = Geçerli mod: { $mode }
+aimode-available = <b>Kullanılabilir modlar:</b>
+aimode-unknown = ❌ Bilinmeyen mod: <code>{ $mode }</code>
+aimode-available_list = Kullanılabilir: { $modes }
+aimode-success = ✅ Yapay zekâ modu şuna değiştirildi: { $mode }
+aimode-error = ❌ Ayarlar kaydedilirken hata oluştu
+aimode-modes-sarcastic-name = 😏 Alaycı
+aimode-modes-sarcastic-description = Kara mizahlı, alaycı ve zekice yorumlar
+aimode-modes-philosopher-name = 🧠 Filozof
+aimode-modes-philosopher-description = Derin düşünceler ve felsefi yansımalar
+aimode-modes-comedian-name = 😂 Komedyen
+aimode-modes-comedian-description = Komik şakalar ve esprili yorumlar
+aimode-modes-poet-name = 📝 Şair
+aimode-modes-poet-description = Şiirsel dizeler ve güzel metaforlar
+aimode-modes-motivator-name = 💪 Motivatör
+aimode-modes-motivator-description = Motive edici ve ilham verici mesajlar
+aimode-modes-conspiracy-name = 🕵️ Komplo Teorisyeni
+aimode-modes-conspiracy-description = Komplo teorileri ve şüpheli yorumlar
+aimode-modes-critic-name = 🎭 Eleştirmen
+aimode-modes-critic-description = Her şey için eleştirel değerlendirmeler ve puanlar
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Eski kuşaktan eski usul yorumlar
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Gençlik argosu ve trend ifadeler
+aimode-modes-academic-name = 🎓 Akademisyen
+aimode-modes-academic-description = Bilimsel gerçekler ve akademik yorumlar
+aimode-modes-memer-name = 🐸 Mizahçı
+aimode-modes-memer-description = Mizah cümleleri ve internet kültürü
+menu-settings-btn-color = 🎨 Varsayılan renk
+menu-settings-btn-emoji_style = 😊 Emoji stili
+menu-settings-btn-back = ← Geri
+onboarding-step1-waiting =
+    Mesajınız bekleniyor...
+    Herhangi bir sohbetten bir şey iletmeniz yeterli!
+onboarding-step2-btn-menu = Menüyü aç
+onboarding-step2-btn-add_group = Gruba ekle
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Farklı bir stille yeniden oluştur
+qarchive-on = ✅ Alıntı metni arşivi <b>etkin</b>. Yeni alıntılar metin ve yazarıyla birlikte saklanacak.
+qarchive-off = ⏸ Alıntı metni arşivi <b>devre dışı</b>. Yeni alıntılar yalnızca sticker ve puanı saklayacak.
+qarchive-status_on =
+    Geçerli durum: <b>etkin</b>.
+
+    <code>/qarchive off</code> — devre dışı bırak
+qarchive-status_off =
+    Geçerli durum: <b>devre dışı</b>.
+
+    <code>/qarchive on</code> — etkinleştir
+qarchive-usage =
+    Bu grup için alıntı metni arşivini aç/kapat.
+
+    <code>/qarchive on</code> veya <code>/qarchive off</code>
+qforget-usage = Alıntı numarasını belirtin: <code>/qforget 142</code>
+qforget-not_found = #{ $local } numaralı alıntı bu grupta bulunamadı.
+qforget-not_author = Bir alıntıyı yalnızca yazarı unutturabilir.
+qforget-forgotten = ✅ #{ $local } numaralı alıntı unutuldu. Sticker ve oylar kalır, ancak metin ve yazar arşivden kaldırılır.
+qforget-already_forgotten = #{ $local } numaralı alıntı zaten unutulmuştu.
+qforget-not_yet_archived = #{ $local } numaralı alıntının metni yok (arşivden önce oluşturulmuş).
+guest-hint =
+    <b>Quotly — misafir modu 💬</b>
+
+    Sohbete üye olmadan <i>herhangi</i> bir mesajdan alıntı sticker'ı oluşturabilirim.
+
+    <b>Nasıl kullanılır:</b>
+    1. Alıntılamak istediğiniz mesajı yanıtlayın
+    2. Yanıtınızda <code>@{ $username }</code> yazın
+    3. Tamam — alıntı sticker'ını doğrudan sohbete bırakırım
+
+    <b>İsteğe bağlı argümanlar (tıpkı /q gibi):</b>
+    • <code>@{ $username } r</code> — yanıtladığım mesajı dahil et
+    • <code>@{ $username } red</code> — arka plan rengini ayarla
+    • <code>@{ $username } rate</code> — 👍 / 👎 butonları ekle
+    • <code>@{ $username } p</code> — PNG olarak oluştur
+
+    Tüm deneyim için beni PM'de açın.
+guest-hint_short = Quotly misafir modunda nasıl çalışır
+guest-need_reply =
+    <b>Az kaldı! 🪄</b>
+
+    Bir alıntı oluşturmak için alıntılayacağım bir mesaja ihtiyacım var — birini yanıtlayın ve <code>@{ $username }</code> ifadesinden bahsedin.
+
+    Örnek: bir mesajda "Yanıtla"ya dokunun → <code>@{ $username }</code> yazın → gönderin.
+guest-need_reply_short = Bir mesajı yanıtlayın ve botu etiketleyin
+guest-empty_query =
+    <b>Quotly burada 💜</b>
+
+    Bu sohbetteki herhangi bir mesajı yanıtlayın ve onu alıntı sticker'ına dönüştürmek için <code>@{ $username }</code> ifadesinden bahsedin.
+
+    Tüm özellikler için beni PM'de açmak üzere aşağıya dokunun.
+guest-open_in_pm = Quotly'de aç →
