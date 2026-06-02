@@ -69,10 +69,17 @@ describe('extractMedia', () => {
     expect(r.mediaFileId).toBe('pdf')
   })
 
-  it('leaves media empty for an unrenderable document (caller falls back to unsupported text)', () => {
+  it('emits no media array for an unrenderable document (so the unsupported-text fallback fires)', () => {
     const r = extractMedia({ document: { mime_type: 'application/pdf' } }, opts)
     expect(r.mediaType).toBe('document')
-    expect(r.media).toEqual([])
+    expect(r.media).toBeUndefined()
+  })
+
+  it('emits no media array for a thumbnail-less animation (avoids a blank quote)', () => {
+    const r = extractMedia({ animation: { file_id: 'a', mime_type: 'video/mp4' } }, opts)
+    expect(r.mediaType).toBe('animation')
+    expect(r.media).toBeUndefined() // empty [] would be truthy → blank render
+    expect(r.mediaFileId).toBe('a') // still kept for the webapp
   })
 
   it('surfaces paid photo media + the star price', () => {

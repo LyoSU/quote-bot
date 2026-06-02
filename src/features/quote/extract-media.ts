@@ -184,6 +184,12 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
     out.voice = { waveform: src.voice.waveform ?? [], duration: src.voice.duration ?? 0 }
   }
 
+  // An empty media array is still truthy: it would both suppress the
+  // "unsupported message" text fallback AND make the renderer enter its media
+  // branch with `media[0] === undefined`, producing a blank quote. Drop it so a
+  // thumbnail-less video/animation/document degrades to text (or unsupported).
+  if (Array.isArray(out.media) && out.media.length === 0) out.media = undefined
+
   if (src.has_media_spoiler) out.hasMediaSpoiler = true
   if (src.show_caption_above_media) out.captionAboveMedia = true
 
