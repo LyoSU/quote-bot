@@ -55,6 +55,12 @@ describe('extractMedia', () => {
     expect(r.mediaFileName).toBe('cat.gif')
   })
 
+  it('renders a thumbnail-less image document by file extension when the mime is missing', () => {
+    const r = extractMedia({ document: { file_id: 'gifid', file_name: 'meme.GIF' } }, opts)
+    expect(r.mediaType).toBe('photo')
+    expect(r.media).toEqual([{ file_id: 'gifid' }])
+  })
+
   it('keeps a non-image document as a document with its thumbnail', () => {
     const thumb = { file_id: 't', file_unique_id: 'tu', width: 1, height: 1 }
     const r = extractMedia({ document: { file_id: 'pdf', mime_type: 'application/pdf', thumbnail: thumb } }, opts)

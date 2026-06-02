@@ -84,6 +84,17 @@ function thumbList(file: ThumbedFile | undefined): QuoteMediaFile[] {
   return file?.thumbnail ? [file.thumbnail] : []
 }
 
+const IMAGE_EXT_RE = /\.(gif|png|jpe?g|webp|bmp|tiff?|heic|heif|avif)$/i
+
+/**
+ * A document that is really just an image (a .gif/.png/… sent as a file). We
+ * detect it by mime first, then by file extension — Telegram sometimes omits or
+ * mislabels the mime on documents, so the name is a necessary fallback.
+ */
+function isImageDocument(d: ThumbedFile): boolean {
+  return Boolean(d.mime_type?.startsWith('image/') || (d.file_name && IMAGE_EXT_RE.test(d.file_name)))
+}
+
 /** Carries the real file's id/mime/name so the webapp can stream it (and the renderer can fall back to it). */
 function fileMeta(out: ExtractedMedia, file: ThumbedFile): void {
   if (file.file_id) out.mediaFileId = file.file_id
@@ -132,10 +143,12 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
     fileMeta(out, src.video_note)
   } else if (src.document) {
     const d = src.document
-    if (d.mime_type?.startsWith('image/') && d.file_id) {
-      // A .gif/.png/.webp sent as a file is just an image — render it as a photo.
-      // (Its own thumbnail is a tiny static preview and is often absent, which is
-      // why the old `[thumbnail]`-only path produced an empty bubble.)
+    if (isImageDocument(d) && d.file_id) {
+      // A .gif/.png/.webp sent as a file is just an image — render it as a photo
+      // straight from the document's own file id. (Its thumbnail is a tiny static
+      // preview and is often absent, which is why the old `[thumbnail]`-only path
+      // produced an empty bubble. The renderer fetches the file by id and decodes
+      // it via sharp, so animated GIFs render their first frame fine.)
       out.media = [{ file_id: d.file_id }]
       out.mediaType = 'photo'
     } else {
