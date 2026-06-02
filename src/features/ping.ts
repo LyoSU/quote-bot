@@ -1,6 +1,7 @@
 import { Composer } from 'grammy'
 import type { BotContext } from '../core/types'
-import { updateDuration, updatesTotal } from '../core/metrics'
+import { registry, updateDuration, updatesTotal } from '../core/metrics'
+import { requestRate } from '../core/rate-meter'
 
 /**
  * /ping — liveness check + a live performance snapshot.
@@ -75,11 +76,13 @@ ping.command('ping', async (ctx) => {
   const sent = await ctx.reply('🏓 pong…')
   const rtt = Math.max(0, Date.now() - sent.date * 1000)
 
-  const [dur, upd, hook] = await Promise.all([
+  const [dur, upd, hook, allMetrics] = await Promise.all([
     updateDuration.get(),
     updatesTotal.get(),
     // Even under long polling this reports the backlog Telegram is holding for us.
     ctx.api.getWebhookInfo().catch(() => ({ pending_update_count: 0 })),
+    // Event-loop lag (collected by prom-client) is the truest saturation signal.
+    registry.getMetricsAsJSON(),
   ])
   const { buckets, sum, count } = aggregateHistogram(dur.values as MetricValue[])
   const avg = count ? sum / count : 0
@@ -92,17 +95,19 @@ ping.command('ping', async (ctx) => {
   const handled = relevant + gab
   const noisePct = total ? (noise / total) * 100 : 0
   const rss = Math.round(process.memoryUsage().rss / 1_048_576)
+  const lagSec =
+    (allMetrics.find((m) => m.name === 'nodejs_eventloop_lag_p99_seconds')?.values[0]?.value as number | undefined) ?? 0
+  const rps = requestRate.rate()
 
   const body = [
-    `⏱ latency`,
-    `   avg  ${count ? ms(avg) : '—'}`,
-    `   p95  ${count ? ms(p95) : '—'}`,
+    `⚡ load · rps ${rps.toFixed(2)} · loop-lag ${ms(lagSec)}`,
+    `⏱ latency · avg ${count ? ms(avg) : '—'} · p95 ${count ? ms(p95) : '—'}`,
     `📊 updates  (uptime ${uptime(process.uptime())})`,
-    `   handled       ${group(handled)}`,
+    `   handled        ${group(handled)}`,
     `   noise dropped  ${noisePct.toFixed(1)} %  (${group(noise)})`,
     `   gab fires      ${group(gab)}`,
     `   queue pending  ${group(hook.pending_update_count ?? 0)}`,
-    `🧠 memory  ${rss} MB rss`,
+    `🧠 memory ${rss} MB rss`,
   ].join('\n')
 
   await ctx.api

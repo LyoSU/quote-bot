@@ -8,6 +8,7 @@ import type { BotContext } from './types'
 import { registerErrorBoundary } from './errors'
 import { fastPath } from '../middlewares/fast-path'
 import { updateDuration } from './metrics'
+import { requestRate } from './rate-meter'
 
 /**
  * Builds the bot with the CORE middleware stack only. It deliberately knows
@@ -42,6 +43,7 @@ export function createBot(): Bot<BotContext> {
       chatId: ctx.chat?.id,
       userId: ctx.from?.id,
     })
+    requestRate.tick()
     const stop = updateDuration.startTimer()
     try {
       await next()
