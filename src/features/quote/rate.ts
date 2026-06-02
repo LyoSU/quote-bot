@@ -3,15 +3,44 @@ import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { Quote, type QuoteDoc } from '../../db/models'
 
-type Vote = { name: string; vote: Types.ObjectId[] }
+// Vote entries are usually ObjectIds, but legacy data also holds raw string
+// ids — compare/store defensively rather than assuming ObjectId methods exist.
+type Vote = { name: string; vote: (Types.ObjectId | string)[] }
 
-function ensureVotes(quote: QuoteDoc): Vote[] {
+export function ensureVotes(quote: Pick<QuoteDoc, 'rate'>): Vote[] {
   const votes = quote.rate?.votes as Vote[] | undefined
   if (votes && votes.length >= 2) return votes
   return [
     { name: '👍', vote: [] },
     { name: '👎', vote: [] },
   ]
+}
+
+/**
+ * Toggles `userId`'s vote on `rateName` (mutating `votes` in place) and returns
+ * what happened. Comparison is string-based so it works whether stored votes
+ * are ObjectIds (new) or raw strings (legacy). Pure → unit-tested.
+ */
+export function applyVote(
+  votes: Vote[],
+  userId: Types.ObjectId | string,
+  rateName: string,
+): 'rated' | 'back' | null {
+  const userIdStr = userId.toString()
+  let result: 'rated' | 'back' | null = null
+  for (const rate of votes) {
+    const idx = rate.vote.findIndex((v) => String(v) === userIdStr)
+    if (idx > -1) rate.vote.splice(idx, 1)
+    if (rate.name === rateName) {
+      if (idx > -1) {
+        result = 'back'
+      } else {
+        result = 'rated'
+        rate.vote.push(userId)
+      }
+    }
+  }
+  return result
 }
 
 /**
@@ -49,20 +78,9 @@ async function handleRate(ctx: BotContext, kind: 'rate' | 'irate'): Promise<void
   }
 
   const votes = ensureVotes(quote)
-  let resultText = ''
-
-  for (const rate of votes) {
-    const idx = rate.vote.findIndex((v) => v.equals(userId))
-    if (idx > -1) rate.vote.splice(idx, 1)
-    if (rate.name === rateName) {
-      if (idx > -1) {
-        resultText = ctx.t('rate-vote-back')
-      } else {
-        resultText = ctx.t('rate-vote-rated', { rateName })
-        rate.vote.push(userId)
-      }
-    }
-  }
+  const outcome = applyVote(votes, userId, rateName)
+  const resultText =
+    outcome === 'back' ? ctx.t('rate-vote-back') : outcome === 'rated' ? ctx.t('rate-vote-rated', { rateName }) : ''
 
   const score = votes[0]!.vote.length - votes[1]!.vote.length
   await Quote.updateOne({ _id: quote._id }, { $set: { 'rate.votes': votes, 'rate.score': score } }).catch(() => {})
