@@ -102,6 +102,17 @@ export interface QuoteMessage {
   mediaCrop?: boolean
   stickerIsAnimated?: boolean
   stickerIsVideo?: boolean
+  /** Real file behind a non-photo bubble (video/gif/audio) — for the webapp player + renderer fallback. */
+  mediaFileId?: string
+  mediaMimeType?: string
+  mediaFileName?: string
+  /** Paid media (Bot API 7.5+) unlock price, in Telegram Stars. */
+  paidStars?: number
+  /** Story forward: the source story id. */
+  storyId?: number
+  /** Telegram UI hints preserved for the webapp. */
+  hasMediaSpoiler?: boolean
+  captionAboveMedia?: boolean
   voice?: QuoteVoice
   senderTag?: string
   replyMessage?: QuoteReplyMessage

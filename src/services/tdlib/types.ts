@@ -97,6 +97,9 @@ export interface TdMessage {
   audio?: TdMediaFile
   video_note?: TdMediaFile
 
+  /** "Tap to reveal" media spoiler flag. */
+  has_media_spoiler?: boolean
+
   /** Set when the content type has no Bot-API mapping. */
   unsupportedMessage?: boolean
 }

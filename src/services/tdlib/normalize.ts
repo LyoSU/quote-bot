@@ -158,6 +158,7 @@ export function normalizeContent(content: Td.MessageContent): Partial<TdMessage>
     case 'messagePhoto':
       out.photo = normalizePhoto(content.photo)
       applyCaption(out, content.caption)
+      if (content.has_spoiler) out.has_media_spoiler = true
       break
     case 'messageSticker':
       out.sticker = normalizeSticker(content.sticker)
@@ -173,18 +174,30 @@ export function normalizeContent(content: Td.MessageContent): Partial<TdMessage>
     case 'messageVideo':
       out.video = fileToMedia(
         content.video.video,
-        { width: content.video.width, height: content.video.height, duration: content.video.duration },
+        {
+          width: content.video.width,
+          height: content.video.height,
+          duration: content.video.duration,
+          mime_type: content.video.mime_type,
+        },
         content.video.thumbnail,
       )
       applyCaption(out, content.caption)
+      if (content.has_spoiler) out.has_media_spoiler = true
       break
     case 'messageAnimation':
       out.animation = fileToMedia(
         content.animation.animation,
-        { width: content.animation.width, height: content.animation.height, duration: content.animation.duration },
+        {
+          width: content.animation.width,
+          height: content.animation.height,
+          duration: content.animation.duration,
+          mime_type: content.animation.mime_type,
+        },
         content.animation.thumbnail,
       )
       applyCaption(out, content.caption)
+      if (content.has_spoiler) out.has_media_spoiler = true
       break
     case 'messageDocument':
       out.document = fileToMedia(

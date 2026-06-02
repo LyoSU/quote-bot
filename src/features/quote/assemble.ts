@@ -16,6 +16,8 @@ interface RawSender extends Sender {
 /** Structural source message — both native Bot API and TdMessage satisfy it. */
 export interface RawMessage extends QuoteSource {
   message_id?: number
+  /** Channel post auto-forwarded into its linked discussion group (not a user forward). */
+  is_automatic_forward?: boolean
   from?: RawSender
   sender_chat?: ChatLike & { title?: string }
   forward_from?: RawSender
@@ -47,6 +49,10 @@ export interface AssembledQuote {
 }
 
 function isForwarded(raw: RawMessage): boolean {
+  // A channel post auto-forwarded into its linked discussion group is shown by
+  // Telegram as authored by the channel, not as a "Forwarded from" message — so
+  // we don't tag it as a forward (no label, channel stays the plain author).
+  if (raw.is_automatic_forward) return false
   return Boolean(raw.forward_from || raw.forward_from_chat || raw.forward_sender_name || raw.forward_origin)
 }
 
@@ -91,6 +97,9 @@ function buildForward(raw: RawMessage): QuoteForward | undefined {
 
 /** Resolve the effective sender for a message (forward attribution + hidden enrichment). */
 async function resolveSender(raw: RawMessage, deps: AssembleDeps): Promise<Sender> {
+  // A forwarded story is attributed to the story's chat, not the forwarder.
+  if (raw.story?.chat) return senderFromChat(raw.story.chat)
+
   const mainOrigin = raw.forward_origin ?? raw.origin
   let from = resolveMessageOrigin(mainOrigin)
 

@@ -4,7 +4,16 @@ import type { QuoteMediaFile, QuoteMediaType, QuoteMessageMedia, QuoteVoice } fr
 /** A file with a thumbnail (video/animation/document/audio share this shape). */
 interface ThumbedFile {
   file_id?: string
+  mime_type?: string
+  file_name?: string
   thumbnail?: PhotoSize
+}
+
+/** A single item inside a paid-media album (Bot API 7.5+): photo / video / blurred preview. */
+interface PaidMediaItem {
+  type: string
+  photo?: PhotoSize[]
+  video?: ThumbedFile
 }
 
 /** Structural view of a message's media — both native and TDLib messages satisfy it. */
@@ -23,6 +32,11 @@ export interface MediaSource {
   document?: ThumbedFile
   audio?: ThumbedFile
   voice?: { waveform?: number[]; duration?: number }
+  paid_media?: { star_count?: number; paid_media?: PaidMediaItem[] }
+  story?: { id?: number; chat?: { id: number; title?: string } }
+  /** Telegram "tap to reveal" blur + caption-above-media UI hints. */
+  has_media_spoiler?: boolean
+  show_caption_above_media?: boolean
 }
 
 export interface ExtractedMedia {
@@ -31,6 +45,16 @@ export interface ExtractedMedia {
   mediaCrop?: boolean
   stickerIsAnimated?: boolean
   stickerIsVideo?: boolean
+  /** The real file behind a non-photo bubble — lets the webapp stream the actual video/gif/audio. */
+  mediaFileId?: string
+  mediaMimeType?: string
+  mediaFileName?: string
+  /** Paid media (Bot API 7.5+): the unlock price in Telegram Stars. */
+  paidStars?: number
+  /** Story forward: the source story id (preview is attributed to its chat). */
+  storyId?: number
+  hasMediaSpoiler?: boolean
+  captionAboveMedia?: boolean
   voice?: QuoteVoice
 }
 
@@ -50,12 +74,21 @@ function hasAnyMedia(src: MediaSource): boolean {
       src.video_note ||
       src.document ||
       src.audio ||
-      src.voice,
+      src.voice ||
+      src.paid_media ||
+      src.story,
   )
 }
 
 function thumbList(file: ThumbedFile | undefined): QuoteMediaFile[] {
   return file?.thumbnail ? [file.thumbnail] : []
+}
+
+/** Carries the real file's id/mime/name so the webapp can stream it (and the renderer can fall back to it). */
+function fileMeta(out: ExtractedMedia, file: ThumbedFile): void {
+  if (file.file_id) out.mediaFileId = file.file_id
+  if (file.mime_type) out.mediaMimeType = file.mime_type
+  if (file.file_name) out.mediaFileName = file.file_name
 }
 
 /**
@@ -88,23 +121,58 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
   } else if (src.animation) {
     out.media = thumbList(src.animation)
     out.mediaType = 'animation'
+    fileMeta(out, src.animation)
   } else if (src.video) {
     out.media = thumbList(src.video)
     out.mediaType = 'video'
+    fileMeta(out, src.video)
   } else if (src.video_note) {
     out.media = thumbList(src.video_note)
     out.mediaType = 'video_note'
+    fileMeta(out, src.video_note)
   } else if (src.document) {
-    out.media = thumbList(src.document)
-    out.mediaType = 'document'
+    const d = src.document
+    if (d.mime_type?.startsWith('image/') && d.file_id) {
+      // A .gif/.png/.webp sent as a file is just an image — render it as a photo.
+      // (Its own thumbnail is a tiny static preview and is often absent, which is
+      // why the old `[thumbnail]`-only path produced an empty bubble.)
+      out.media = [{ file_id: d.file_id }]
+      out.mediaType = 'photo'
+    } else {
+      out.media = thumbList(d)
+      out.mediaType = 'document'
+    }
+    fileMeta(out, d)
   } else if (src.audio) {
     out.media = thumbList(src.audio)
     out.mediaType = 'audio'
+    fileMeta(out, src.audio)
+  } else if (src.paid_media) {
+    // Paid media (Bot API 7.5+): surface the first item's preview and the price.
+    const first = src.paid_media.paid_media?.[0]
+    if (first?.type === 'photo' && first.photo) {
+      out.media = first.photo
+      out.mediaType = 'paid_photo'
+    } else if (first?.type === 'video' && first.video?.thumbnail) {
+      out.media = [first.video.thumbnail]
+      out.mediaType = 'paid_video'
+    } else {
+      out.mediaType = 'paid_preview'
+    }
+    if (typeof src.paid_media.star_count === 'number') out.paidStars = src.paid_media.star_count
+  } else if (src.story) {
+    // A story forward carries no preview bytes — tag it; the sender is resolved
+    // to the story's chat upstream (assemble).
+    out.mediaType = 'story'
+    if (typeof src.story.id === 'number') out.storyId = src.story.id
   }
 
   if (src.voice) {
     out.voice = { waveform: src.voice.waveform ?? [], duration: src.voice.duration ?? 0 }
   }
+
+  if (src.has_media_spoiler) out.hasMediaSpoiler = true
+  if (src.show_caption_above_media) out.captionAboveMedia = true
 
   return out
 }

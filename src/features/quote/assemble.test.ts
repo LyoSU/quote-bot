@@ -56,6 +56,29 @@ describe('assembleQuoteMessages', () => {
     expect(out.messages[0]?.forward?.label).toBe('Forwarded from Ghost')
   })
 
+  it('does not tag an auto-forwarded channel post as a forward', async () => {
+    // A channel post in its linked discussion group: auto-forward + channel origin.
+    const m = msg({
+      text: 'channel post',
+      from: undefined,
+      is_automatic_forward: true,
+      sender_chat: { id: -100123, title: 'My Channel' },
+      forward_from_chat: { id: -100123, title: 'My Channel' },
+      forward_origin: { type: 'channel', chat: { id: -100123, name: 'My Channel' } },
+    })
+    const out = await assembleQuoteMessages([m], deps())
+    expect(out.messages[0]?.forward).toBeUndefined() // no "Forwarded from" label
+    expect(out.messages[0]?.from?.name).toBe('My Channel') // channel stays the author
+  })
+
+  it('attributes a forwarded story to its chat', async () => {
+    const m = msg({ text: undefined, from: { id: 5, first_name: 'Fwder' }, story: { id: 3, chat: { id: -100777, title: 'Story Channel' } } })
+    const out = await assembleQuoteMessages([m], deps({ chatType: 'private' }))
+    expect(out.messages[0]?.from?.name).toBe('Story Channel')
+    expect(out.messages[0]?.mediaType).toBe('story')
+    expect(out.messages[0]?.storyId).toBe(3)
+  })
+
   it('omits the reply block unless showReply is set', async () => {
     const m = msg({ reply_to_message: { text: 'orig', from: { id: 9, first_name: 'B' } } })
     const off = await assembleQuoteMessages([m], deps({ chatType: 'private', showReply: false }))
