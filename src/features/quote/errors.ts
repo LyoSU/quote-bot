@@ -46,7 +46,15 @@ export async function handleQuoteError(
   const reply = (key: string, vars?: Record<string, string | number>): Promise<void> =>
     replyHtml(ctx, ctx.t(key, vars), replyToMessageId)
 
-  ctx.logger.warn({ err }, 'quote generation failed')
+  // Expected backpressure / permission states are logged at debug (a user-facing
+  // message is still sent); only genuine faults warrant a warn with the stack.
+  const isBackpressure = err instanceof QuoteApiError && err.status === 429
+  const isBenignTg =
+    err instanceof GrammyError &&
+    (err.error_code === 403 ||
+      err.error_code === 429 ||
+      /not enough rights|chat write forbidden|forbidden|blocked|deactivated/i.test(err.description))
+  ctx.logger[isBackpressure || isBenignTg ? 'debug' : 'warn']({ err }, 'quote generation failed')
 
   if (err instanceof GrammyError) {
     const d = err.description.toLowerCase()

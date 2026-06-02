@@ -116,7 +116,11 @@ class TdlibService {
         c.invoke({ _: 'getMessages', chat_id: chatId, message_ids: messageIds.map(toTdlibMessageId) }),
       )
     } catch (err) {
-      log.warn({ err, chatId }, 'getMessages failed')
+      // "Chat not found" is expected: the TDLib user account isn't a member of
+      // this group, so it can't read history — the caller falls back to the
+      // single native message. Not actionable → debug, not warn.
+      const expected = err instanceof Error && /chat not found/i.test(err.message)
+      log[expected ? 'debug' : 'warn']({ err, chatId }, 'getMessages failed')
       return []
     }
 
