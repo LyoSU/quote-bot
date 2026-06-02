@@ -10,6 +10,7 @@ import { deepLink } from '../../helpers/deep-link'
 import { assembleQuoteMessages, type AssembleDeps, type RawMessage } from './assemble'
 import { handleQuoteError, replyHtml } from './errors'
 import { parseQuoteArgs } from './parse-args'
+import { pmBatcher } from './pm-batch'
 import { persistQuote, type QuotePayload } from './persist'
 import {
   resolveBackgroundColor,
@@ -69,24 +70,19 @@ async function handleQuote(ctx: BotContext): Promise<void> {
     return
   }
 
-  const group = ctx.group
-  const user = ctx.user
+  // In private chat, a forward or album part may be the first of a burst the
+  // user wants merged into one quote — and a `/q` typed right after a forward
+  // should re-quote that batch with its flags rather than spawn a second quote.
+  // The batcher owns those cases; everything else renders inline immediately.
+  if (!isGuest && ctx.chat?.type === 'private') {
+    if (pmBatcher.handle(ctx, trigger, flag, (c, sources, f) => renderQuote(c, sources, f, { isGuest: false }))) {
+      return
+    }
+  }
+
   const chatType = isGuest ? 'private' : (ctx.chat?.type ?? 'private')
   const isPrivate = chatType === 'private'
   const chatId = isGuest ? (trigger.chat?.id ?? 0) : (ctx.chat?.id ?? 0)
-
-  // ---- Resolve render options (group overrides user) ----
-  const bgSetting = pickSetting(group?.settings?.quote?.backgroundColor, user?.settings?.quote?.backgroundColor)
-  const emojiSuffix = pickSetting(group?.settings?.quote?.emojiSuffix, user?.settings?.quote?.emojiSuffix)
-  const emojiBrandSetting = pickSetting(group?.settings?.quote?.emojiBrand, user?.settings?.quote?.emojiBrand)
-
-  const spec = resolveRenderSpec(flag)
-  const backgroundColor = resolveBackgroundColor(flag.color, bgSetting)
-  const emojiBrand = resolveEmojiBrand(emojiBrandSetting)
-  const emojis = resolveStickerEmojis(emojiSuffix)
-
-  const hidden = flag.hidden || Boolean(group?.settings?.hidden) || Boolean(user?.settings?.hidden)
-  const groupPrivacy = Boolean(group?.settings?.privacy) || isGuest
 
   // ---- Select source messages ----
   const { messages: sources } = await selectSourceMessages({
@@ -102,6 +98,49 @@ async function handleQuote(ctx: BotContext): Promise<void> {
     await replyHtml(ctx, ctx.t('quote-empty_forward'), replyToId)
     return
   }
+
+  await renderQuote(ctx, sources, flag, { isGuest, replyToId, trigger })
+}
+
+interface RenderOpts {
+  isGuest: boolean
+  /** Message id to thread the reply to (omitted for PM batches and guest mode). */
+  replyToId?: number
+  /** The original trigger message — used for guest preset + persist metadata. */
+  trigger?: RawMessage & { chat?: { id: number; type?: string } }
+}
+
+/**
+ * Renders an already-selected list of source messages into a quote and sends
+ * it. Split out of {@link handleQuote} so the PM batcher can drive the same
+ * pipeline with a debounced batch of forwarded/album messages.
+ */
+async function renderQuote(
+  ctx: BotContext,
+  sources: RawMessage[],
+  flag: ReturnType<typeof parseQuoteArgs>,
+  opts: RenderOpts,
+): Promise<void> {
+  const { isGuest, replyToId } = opts
+  const trigger = opts.trigger
+  const group = ctx.group
+  const user = ctx.user
+  const chatType = isGuest ? 'private' : (ctx.chat?.type ?? 'private')
+  const isPrivate = chatType === 'private'
+  const chatId = isGuest ? (trigger?.chat?.id ?? 0) : (ctx.chat?.id ?? 0)
+
+  // ---- Resolve render options (group overrides user) ----
+  const bgSetting = pickSetting(group?.settings?.quote?.backgroundColor, user?.settings?.quote?.backgroundColor)
+  const emojiSuffix = pickSetting(group?.settings?.quote?.emojiSuffix, user?.settings?.quote?.emojiSuffix)
+  const emojiBrandSetting = pickSetting(group?.settings?.quote?.emojiBrand, user?.settings?.quote?.emojiBrand)
+
+  const spec = resolveRenderSpec(flag)
+  const backgroundColor = resolveBackgroundColor(flag.color, bgSetting)
+  const emojiBrand = resolveEmojiBrand(emojiBrandSetting)
+  const emojis = resolveStickerEmojis(emojiSuffix)
+
+  const hidden = flag.hidden || Boolean(group?.settings?.hidden) || Boolean(user?.settings?.hidden)
+  const groupPrivacy = Boolean(group?.settings?.privacy) || isGuest
 
   // Ads: ru-locale, private chat only. Fired after collection so the ad message
   // can't be swept into the quote. Fully detached from the response.
@@ -221,7 +260,7 @@ async function handleQuote(ctx: BotContext): Promise<void> {
     }
     const ctxMessage = {
       chat: { id: chatId },
-      reply_to_message: trigger.reply_to_message ? { date: trigger.reply_to_message.date } : undefined,
+      reply_to_message: trigger?.reply_to_message ? { date: trigger.reply_to_message.date } : undefined,
     }
 
     if (group) {
