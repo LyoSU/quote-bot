@@ -1,4 +1,4 @@
-import { Composer, InlineKeyboard } from 'grammy'
+import { Composer } from 'grammy'
 import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { User } from '../../db/models'
@@ -230,23 +230,16 @@ async function renderQuote(
   const presetId = isGuest ? new Types.ObjectId() : undefined
   const rateEnabled = Boolean(group && ((group.settings?.rate ?? true) || flag.rate))
 
-  let replyMarkup: { reply_markup?: InlineKeyboard }
-  if (isGuest) {
-    // No rating in guest mode — just the attribution link.
-    replyMarkup = ctx.me?.username
-      ? { reply_markup: new InlineKeyboard().url('Quotly →', `https://t.me/${ctx.me.username}`) }
-      : {}
-  } else {
-    const deepLinkUrl =
-      group && localId != null && ctx.me?.username
-        ? deepLink.forQuote(ctx.me.username, group._id.toString(), localId)
-        : null
-    replyMarkup = buildQuoteReplyMarkup({
-      rateEnabled,
-      deepLinkUrl,
-      openInAppLabel: deepLinkUrl ? ctx.t('app-open_quote') : null,
-    })
-  }
+  // Guest mode ends up with no buttons: no group → no rating and no deep link.
+  const deepLinkUrl =
+    group && localId != null && ctx.me?.username
+      ? deepLink.forQuote(ctx.me.username, group._id.toString(), localId)
+      : null
+  const replyMarkup = buildQuoteReplyMarkup({
+    rateEnabled,
+    deepLinkUrl,
+    openInAppLabel: deepLinkUrl ? ctx.t('app-open_quote') : null,
+  })
 
   // ---- Send ----
   let sendResult
