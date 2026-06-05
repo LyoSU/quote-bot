@@ -9,6 +9,7 @@ import { generateQuote } from '../../services/quote-api/client'
 import { deepLink } from '../../helpers/deep-link'
 import { assembleQuoteMessages, type AssembleDeps, type RawMessage } from './assemble'
 import { handleQuoteError, replyHtml } from './errors'
+import { isOwnGuestMessage } from './guest'
 import { parseQuoteArgs } from './parse-args'
 import { pmBatcher } from './pm-batch'
 import { persistQuote, type QuotePayload } from './persist'
@@ -67,6 +68,15 @@ async function handleQuote(ctx: BotContext): Promise<void> {
   // Guest mode has no chat history — it can only quote a replied message.
   if (isGuest && !trigger.reply_to_message) {
     await replyHtml(ctx, ctx.t('guest-need_reply', { username: ctx.me?.username ?? '' }))
+    return
+  }
+
+  // A guest mention under one of the bot's own messages (its quote sticker)
+  // would quote the quote — and every further mention would extend the chain.
+  // Drop it silently; an accidental tag shouldn't produce anything.
+  const guestReply = ctx.guestMessage?.reply_to_message
+  if (guestReply && isOwnGuestMessage(guestReply, ctx.me?.id)) {
+    ctx.logger.debug('guest self-quote ignored')
     return
   }
 
