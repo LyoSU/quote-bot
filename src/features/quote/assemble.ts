@@ -31,6 +31,8 @@ export interface AssembleDeps {
   chatType: string
   hidden: boolean
   crop: boolean
+  /** The `m | media` flag: keep media even for a partial quote. */
+  forceMedia: boolean
   /** Render the replied-to message block (the `reply` flag). */
   showReply: boolean
   unsupportedText: string
@@ -170,6 +172,7 @@ export async function assembleQuoteMessages(
         showReply: deps.showReply,
         forward,
         crop: deps.crop,
+        forceMedia: deps.forceMedia,
         unsupportedText: deps.unsupportedText,
       }),
     )

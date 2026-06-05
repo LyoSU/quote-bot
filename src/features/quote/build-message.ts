@@ -65,6 +65,8 @@ export interface BuildQuoteMessageParams {
   forward?: QuoteForward
   /** The `crop` flag. */
   crop: boolean
+  /** The `m | media` flag: keep media even for a partial quote. */
+  forceMedia: boolean
   /** Localized fallback text for unsupported content. */
   unsupportedText: string
 }
@@ -98,7 +100,7 @@ export function buildReplyMessage(reply: ReplySource, from: Sender | null): Quot
  * resolved senders. Pure — all DB/TDLib resolution happens upstream.
  */
 export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage {
-  const { source, from, replyFrom, isFirstInStreak, showReply, forward, crop, unsupportedText } = params
+  const { source, from, replyFrom, isFirstInStreak, showReply, forward, crop, forceMedia, unsupportedText } = params
 
   // Text: caption wins over text; an explicit quote selection wins over both.
   let text = source.text
@@ -116,7 +118,11 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
     out.isQuote = true
   }
 
-  Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
+  // A partial quote is about the selected text — drop the media (Telegram
+  // behaves the same), unless the user explicitly asked for it with `m`.
+  if (!source.quote || forceMedia) {
+    Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
+  }
 
   const name = composeName(from)
   const fromOut: QuoteMessageFrom = {

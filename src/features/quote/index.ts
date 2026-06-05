@@ -155,6 +155,7 @@ async function renderQuote(
     chatType,
     hidden,
     crop: flag.crop,
+    forceMedia: flag.media,
     showReply: flag.reply,
     unsupportedText: ctx.t('quote-unsupported_message'),
     groupPrivacy,

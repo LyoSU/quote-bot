@@ -7,6 +7,7 @@ function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
     chatType: 'supergroup',
     hidden: false,
     crop: false,
+    forceMedia: false,
     showReply: false,
     unsupportedText: 'Unsupported',
     groupPrivacy: false,

@@ -12,6 +12,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: true,
       crop: false,
+      forceMedia: false,
       unsupportedText: 'Unsupported',
     })
     expect(m.text).toBe('hi')
@@ -27,6 +28,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: false,
       showReply: true,
       crop: false,
+      forceMedia: false,
       unsupportedText: 'Unsupported',
     })
     expect(m.from?.name).toBe(false)
@@ -40,6 +42,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: true,
       crop: false,
+      forceMedia: false,
       unsupportedText: 'Unsupported',
     })
     expect(m.text).toBe('cap')
@@ -53,6 +56,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: true,
       crop: false,
+      forceMedia: false,
       unsupportedText: 'Unsupported',
     })
     expect(m.text).toBe('Unsupported')
@@ -67,6 +71,7 @@ describe('buildQuoteMessage', () => {
       showReply: true,
       forward: { label: 'Forwarded from Bob' },
       crop: false,
+      forceMedia: false,
       unsupportedText: 'Unsupported',
     })
     expect(m.forward).toEqual({ label: 'Forwarded from Bob' })
@@ -80,10 +85,48 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: true,
       crop: false,
+      forceMedia: false,
       unsupportedText: 'Unsupported',
     })
     expect(m.text).toBe('part')
     expect(m.isQuote).toBe(true)
+  })
+
+  it('drops media for a partial quote', () => {
+    const m = buildQuoteMessage({
+      source: {
+        caption: 'full caption',
+        photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
+        quote: { text: 'part' },
+      },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('part')
+    expect(m.isQuote).toBe(true)
+    expect(m.media).toBeUndefined()
+  })
+
+  it('keeps media for a partial quote when the m flag is set', () => {
+    const m = buildQuoteMessage({
+      source: {
+        caption: 'full caption',
+        photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
+        quote: { text: 'part' },
+      },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: true,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('part')
+    expect(m.media).toBeDefined()
   })
 })
 
