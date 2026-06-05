@@ -3,7 +3,7 @@ import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { User } from '../../db/models'
 import { incrementQuoteCounter } from '../../db/repositories/group-repository'
-import { tdlib } from '../../services/tdlib'
+import { botApi } from '../../services/bot-api'
 import { sendGramadsAd, shouldShowAds } from '../../services/gramads'
 import { generateQuote } from '../../services/quote-api/client'
 import { deepLink } from '../../helpers/deep-link'
@@ -92,7 +92,7 @@ async function handleQuote(ctx: BotContext): Promise<void> {
     isGuest,
     count: flag.count,
     needReply: flag.reply,
-    fetcher: tdlib,
+    fetcher: botApi,
   })
 
   if (sources.length === 0) {
@@ -152,7 +152,6 @@ async function renderQuote(
 
   // ---- Assemble into renderer messages ----
   const privacyCache = new Map<number, boolean>()
-  const statusCache = new Map<number, string | undefined>()
   const deps: AssembleDeps = {
     chatType,
     hidden,
@@ -162,13 +161,7 @@ async function renderQuote(
     unsupportedText: ctx.t('quote-unsupported_message'),
     groupPrivacy,
     enrichHidden: (name) => resolveHiddenSender(name),
-    getUserEmojiStatus: async (telegramId) => {
-      if (!tdlib.isHealthy()) return undefined
-      if (statusCache.has(telegramId)) return statusCache.get(telegramId)
-      const status = (await tdlib.getUser(telegramId))?.emoji_status
-      statusCache.set(telegramId, status)
-      return status
-    },
+    getUserEmojiStatus: (telegramId) => botApi.getUserEmojiStatus(telegramId),
     isUserPrivate: async (telegramId) => {
       const cached = privacyCache.get(telegramId)
       if (cached !== undefined) return cached

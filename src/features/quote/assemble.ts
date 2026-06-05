@@ -41,8 +41,8 @@ export interface AssembleDeps {
   /** Whether a quoted user enabled privacy mode. */
   isUserPrivate: (telegramId: number) => Promise<boolean>
   /**
-   * Premium emoji status (custom_emoji_id) for a user — TDLib-only data,
-   * never present on Bot API User objects. Best-effort.
+   * Premium emoji status (custom_emoji_id) for a user — served by the custom
+   * Bot API server's getUserInfo, never present on native updates. Best-effort.
    */
   getUserEmojiStatus: (telegramId: number) => Promise<string | undefined>
   /** Group-level privacy (forces anonymization for the whole quote). */

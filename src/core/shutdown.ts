@@ -11,7 +11,7 @@ interface Resource {
 const resources: Resource[] = []
 
 /**
- * Register a resource to be closed on shutdown (db, redis, tdlib, http server).
+ * Register a resource to be closed on shutdown (db, http server).
  * Resources are closed in reverse registration order (LIFO), mirroring setup.
  */
 export function onShutdown(name: string, close: Closer): void {

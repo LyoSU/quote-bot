@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest'
 import { selectSourceMessages, type MessageFetcher, type SelectParams } from './select'
-import type { TdMessage } from '../../services/tdlib'
+import type { ApiMessage } from '../../services/bot-api'
 
 type Trigger = SelectParams['trigger']
 
-function fetcher(messages: TdMessage[], healthy = true): MessageFetcher {
+function fetcher(messages: ApiMessage[], healthy = true): MessageFetcher {
   return { isHealthy: () => healthy, getMessages: vi.fn(async () => messages) }
 }
 

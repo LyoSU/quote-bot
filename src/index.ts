@@ -9,7 +9,6 @@ import { contextMiddleware } from './middlewares/context'
 import { i18nMiddleware } from './i18n'
 import { features } from './features'
 import { statsService } from './services/stats/stats-service'
-import { tdlib } from './services/tdlib'
 
 /**
  * Composition root. The only file allowed to wire concrete pieces together;
@@ -33,7 +32,6 @@ async function main(): Promise<void> {
   logger.info({ username: bot.botInfo.username, id: bot.botInfo.id }, 'Bot authorized')
 
   statsService.start()
-  tdlib.init() // connects in the background; never blocks startup
   const runner = startRunner(bot)
 
   const health = startHealthServer({

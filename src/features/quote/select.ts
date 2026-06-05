@@ -1,10 +1,10 @@
 import type { RawMessage } from './assemble'
-import type { TdMessage } from '../../services/tdlib'
+import type { ApiMessage } from '../../services/bot-api'
 
-/** The subset of the TDLib service the selector needs (kept small for testing). */
+/** The subset of the Bot API service the selector needs (kept small for testing). */
 export interface MessageFetcher {
   isHealthy(): boolean
-  getMessages(chatId: number, messageIds: number[]): Promise<TdMessage[]>
+  getMessages(chatId: number, messageIds: number[]): Promise<ApiMessage[]>
 }
 
 export interface SelectParams {
@@ -19,9 +19,9 @@ export interface SelectParams {
   /** `flag.count` (negative = quote backwards). */
   count?: number
   /**
-   * The `r | reply` flag. The Bot API only nests `reply_to_message` one
+   * The `r | reply` flag. Native updates only nest `reply_to_message` one
    * level deep, so showing the quoted message's own reply block requires a
-   * TDLib fetch even for a single message.
+   * server-side fetch even for a single message.
    */
   needReply?: boolean
   fetcher: MessageFetcher
@@ -43,15 +43,15 @@ function clampCount(raw: number | undefined): { count: number; backwards: boolea
 
 /**
  * Decides which source messages a `/q` covers and fetches the extra ones via
- * TDLib when a count > 1 is requested.
+ * the Bot API server's getMessages when a count > 1 is requested.
  *
  * The matrix (ported from the legacy handler, minus the AI path):
  *   - reply present              → start at the replied message
  *   - private chat, no reply     → quote the trigger message itself
  *   - group, no reply            → nothing (caller shows `empty_forward`)
  *   - external reply (channel…)  → quote that, tagged with the trigger id
- *   - guest / count==1 / no TDLib→ just the rich native message
- *   - otherwise                  → TDLib range fetch, native message as fallback
+ *   - guest / count==1 / no srv  → just the rich native message
+ *   - otherwise                  → server range fetch, native message as fallback
  */
 export async function selectSourceMessages(params: SelectParams): Promise<Selection> {
   const { trigger, chatId, isPrivate, isGuest, fetcher } = params
@@ -79,12 +79,13 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   // `quote` only ever appears on reply messages).
   if (isGuest || count === 1 || !fetcher.isHealthy()) {
     // The r flag needs the quoted message's own reply linkage, which the
-    // native object never carries — graft it from TDLib onto the native
-    // message (still the richer base). Best-effort: TDLib down → no block.
+    // native object never carries — graft it from a server fetch onto the
+    // native message (still the richer base). Best-effort: server can't see
+    // it → no block.
     if (params.needReply && !isGuest && fetcher.isHealthy() && !firstMessage.reply_to_message) {
       const [fetched] = await fetcher
         .getMessages(chatId, [firstMessage.message_id])
-        .catch(() => [] as TdMessage[])
+        .catch(() => [] as ApiMessage[])
       if (fetched?.reply_to_message) {
         firstMessage = { ...firstMessage, reply_to_message: fetched.reply_to_message }
       }
@@ -96,7 +97,7 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   const startId = backwards ? firstMessage.message_id - (count - 1) : firstMessage.message_id
   const ids = Array.from({ length: count }, (_, i) => startId + i)
 
-  const fetched = await fetcher.getMessages(chatId, ids).catch(() => [] as TdMessage[])
+  const fetched = await fetcher.getMessages(chatId, ids).catch(() => [] as ApiMessage[])
   const messages: RawMessage[] = fetched.length > 0 ? fetched : [firstMessage]
 
   if (trigger.quote && messages[0]) messages[0] = { ...messages[0], quote: trigger.quote }
