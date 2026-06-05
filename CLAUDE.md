@@ -13,7 +13,6 @@ A Telegram quote-sticker bot. As of v2 it is a **from-scratch rewrite** in **Typ
 - **Run (prod)**: `npm start` (`node dist/index.js`)
 - **Typecheck**: `npm run typecheck` (`tsc --noEmit`) — this is the quality gate (strict, no `any`)
 - **Test**: `npm test` (vitest); `npm run test:watch`
-- **Regenerate TDLib types**: `npm run tdlib:types`
 
 There is no ESLint setup for the TS code; `tsc --strict` is the gate.
 
@@ -28,7 +27,7 @@ Update flow: `fastPath` (drops ~95% group noise before any DB) → `sequentializ
 - `src/config/env.ts` — zod-validated, frozen config; fail-fast on bad env.
 - `src/core/` — `bot` (throttler + auto-retry + fast-path + sequentialize + error boundary), `runner` (long polling, allowed_updates), `logger` (pino), `metrics` (prom-client), `shutdown`, `lru`, `types` (`BotContext`).
 - `src/db/` — Mongoose models (schema kept **1:1 with production**), `repositories/` (atomic `updateOne`/`findOneAndUpdate`, never full-doc `.save()`), `member-tracker`, dedicated `connection`.
-- `src/services/` — `tdlib` (in-process via `tdl` + `prebuilt-tdlib`, circuit breaker, Bot-API-shaped output), `quote-api` (HTTP client for the renderer), `sticker`, `stats`, `gab`, `gramads`.
+- `src/services/` — `bot-api` (thin HTTP client for the self-hosted Bot API server's custom methods `getMessages`/`getUserInfo`; degrades gracefully against the Telegram cloud), `quote-api` (HTTP client for the renderer), `sticker`, `stats`, `gab`, `gramads`.
 - `src/middlewares/` — `fast-path`, `context`, `guards` (`onlyGroup`/`onlyAdmin`).
 - `src/features/` — `quote` (the core pipeline + `/q_<id>`, rate, random, top), `settings`, `shell` (start/help/menu/app/lang), `payments` (Telegram Stars), `inline`, `fstik`, `ping`. Aggregated in `src/features/index.ts` (order matters: specific handlers before the quote private-chat catch-all).
 - `src/i18n/` — `@grammyjs/i18n` (Fluent), 19 locales in `locales/*.ftl`.
@@ -36,7 +35,7 @@ Update flow: `fastPath` (drops ~95% group noise before any DB) → `sequentializ
 
 ### The `/q` pipeline (`src/features/quote/`)
 
-`index.ts` orchestrates: `parse-args` → resolve render options (`render`, `color`) → select source messages (`select`, via TDLib for count > 1) → `assemble` (sender resolution, streaks, forward labels, privacy) → `build-message` (pure per-message → renderer shape) → `quote-api` render → `send` (sticker direct / photo / document / guest) → `persist` (off the hot path: Counter `global_id`, per-group `local_id`, `denormalize`, rating votes). Modules are small and pure where possible; randomness/time are injected for testing.
+`index.ts` orchestrates: `parse-args` → resolve render options (`render`, `color`) → select source messages (`select`, via the Bot API server for count > 1) → `assemble` (sender resolution, streaks, forward labels, privacy) → `build-message` (pure per-message → renderer shape) → `quote-api` render → `send` (sticker direct / photo / document / guest) → `persist` (off the hot path: Counter `global_id`, per-group `local_id`, `denormalize`, rating votes). Modules are small and pure where possible; randomness/time are injected for testing.
 
 ### Auto-gab (`src/services/gab` + `features/quote/random.ts`)
 
@@ -48,7 +47,7 @@ Occasionally resurfaces a top quote on a lively group moment, biased to a quote 
 
 ## Configuration (env, validated in `src/config/env.ts`)
 
-`BOT_TOKEN`, `MONGODB_URI` (required), `QUOTE_API_URI` (required), `MONGO_MAX_POOL`, `STATS_FLUSH_MS`, `STICKER_KEEP_COUNT`, `MINI_APP_SHORT_NAME`, `MINI_APP_URL`, `TELEGRAM_API_ID`/`TELEGRAM_API_HASH`, `DISABLE_TDLIB`, `HEALTH_PORT`, `BOT_CONCURRENCY`, `GRAMADS_TOKEN`, `ADMIN_ID`, `LOG_LEVEL`, `NODE_ENV`.
+`BOT_TOKEN`, `MONGODB_URI` (required), `QUOTE_API_URI` (required), `MONGO_MAX_POOL`, `STATS_FLUSH_MS`, `STICKER_KEEP_COUNT`, `MINI_APP_SHORT_NAME`, `MINI_APP_URL`, `BOT_API_ROOT` (self-hosted Bot API server; cloud by default), `HEALTH_PORT`, `BOT_CONCURRENCY`, `GRAMADS_TOKEN`, `ADMIN_ID`, `LOG_LEVEL`, `NODE_ENV`.
 
 ## Conventions
 
