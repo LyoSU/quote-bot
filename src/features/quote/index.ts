@@ -9,7 +9,8 @@ import { generateQuote } from '../../services/quote-api/client'
 import { deepLink } from '../../helpers/deep-link'
 import { assembleQuoteMessages, type AssembleDeps, type RawMessage } from './assemble'
 import { handleQuoteError, replyHtml } from './errors'
-import { isOwnGuestMessage } from './guest'
+import { bareMentionArgs } from './mention'
+import { isOwnMessage } from './own-message'
 import { parseQuoteArgs } from './parse-args'
 import { pmBatcher } from './pm-batch'
 import { persistQuote, type QuotePayload } from './persist'
@@ -34,15 +35,16 @@ function pickSetting(...values: (string | null | undefined)[]): string | undefin
   return undefined
 }
 
-/** Resolves the `/q` argument string from a command, guest mention, or forward. */
-function extractArgString(ctx: BotContext, rawText: string, isGuest: boolean): string {
+/** Resolves the `/q` argument string from a command, mention, or forward. */
+function extractArgString(ctx: BotContext, rawText: string, mentionForm: boolean): string {
   let text = rawText
   const username = ctx.me?.username
   if (username) text = text.replace(new RegExp(`@${username}\\b`, 'ig'), '').trim()
 
   if (/^\/q(\s|$)/i.test(text)) return text.replace(/^\/q\s*/i, '')
-  // Guest mention form ("@bot rate") carries flags; a plain DM forward does not.
-  return isGuest ? text : ''
+  // Mention forms ("@bot rate" — guest or the group alias) carry flags; a
+  // plain DM forward does not.
+  return mentionForm ? text : ''
 }
 
 /**
@@ -63,7 +65,14 @@ async function handleQuote(ctx: BotContext): Promise<void> {
 
   const replyToId = trigger.message_id
   const rawText = trigger.text ?? trigger.caption ?? ''
-  const flag = parseQuoteArgs(extractArgString(ctx, rawText, isGuest))
+  const isGroupChat = ctx.chat?.type === 'group' || ctx.chat?.type === 'supergroup'
+  // The group alias: a bare "@bot [flags]" message routed here by the mention
+  // handler below. Its flag string is the text minus the mention.
+  const isGroupMention =
+    !isGuest &&
+    isGroupChat &&
+    bareMentionArgs(rawText, ctx.message?.entities, ctx.me?.username) !== null
+  const flag = parseQuoteArgs(extractArgString(ctx, rawText, isGuest || isGroupMention))
 
   // Guest mode has no chat history — it can only quote a replied message.
   if (isGuest && !trigger.reply_to_message) {
@@ -75,7 +84,7 @@ async function handleQuote(ctx: BotContext): Promise<void> {
   // would quote the quote — and every further mention would extend the chain.
   // Drop it silently; an accidental tag shouldn't produce anything.
   const guestReply = ctx.guestMessage?.reply_to_message
-  if (guestReply && isOwnGuestMessage(guestReply, ctx.me?.id)) {
+  if (guestReply && isOwnMessage(guestReply, ctx.me?.id)) {
     ctx.logger.debug('guest self-quote ignored')
     return
   }
@@ -326,6 +335,23 @@ quoteFeature.on('guest_message', handleQuote)
 quoteFeature.on('business_message:text', async (ctx, next) => {
   if (ctx.businessMessage?.text?.startsWith('/q')) return handleQuote(ctx)
   return next()
+})
+
+// Group alias: a bare "@bot [flags]" message acts as /q. Chatter that merely
+// names the bot falls through; a mention with nothing to quote (no reply) or
+// under the bot's own message (the quote loop) is dropped silently.
+quoteFeature.on('message:text', async (ctx, next) => {
+  if (ctx.chat?.type !== 'group' && ctx.chat?.type !== 'supergroup') return next()
+  const args = bareMentionArgs(ctx.message.text, ctx.message.entities, ctx.me?.username)
+  if (args === null) return next()
+
+  const reply = ctx.message.reply_to_message
+  if (!reply) return
+  if (isOwnMessage(reply, ctx.me?.id)) {
+    ctx.logger.debug('group mention self-quote ignored')
+    return
+  }
+  return handleQuote(ctx)
 })
 
 registerGetQuote(quoteFeature)
