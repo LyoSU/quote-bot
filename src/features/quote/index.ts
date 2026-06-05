@@ -91,6 +91,7 @@ async function handleQuote(ctx: BotContext): Promise<void> {
     isPrivate,
     isGuest,
     count: flag.count,
+    needReply: flag.reply,
     fetcher: tdlib,
   })
 

@@ -18,6 +18,12 @@ export interface SelectParams {
   isGuest: boolean
   /** `flag.count` (negative = quote backwards). */
   count?: number
+  /**
+   * The `r | reply` flag. The Bot API only nests `reply_to_message` one
+   * level deep, so showing the quoted message's own reply block requires a
+   * TDLib fetch even for a single message.
+   */
+  needReply?: boolean
   fetcher: MessageFetcher
 }
 
@@ -72,6 +78,17 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   // message — in the same-chat case that's the reply itself (a Bot API
   // `quote` only ever appears on reply messages).
   if (isGuest || count === 1 || !fetcher.isHealthy()) {
+    // The r flag needs the quoted message's own reply linkage, which the
+    // native object never carries — graft it from TDLib onto the native
+    // message (still the richer base). Best-effort: TDLib down → no block.
+    if (params.needReply && !isGuest && fetcher.isHealthy() && !firstMessage.reply_to_message) {
+      const [fetched] = await fetcher
+        .getMessages(chatId, [firstMessage.message_id])
+        .catch(() => [] as TdMessage[])
+      if (fetched?.reply_to_message) {
+        firstMessage = { ...firstMessage, reply_to_message: fetched.reply_to_message }
+      }
+    }
     if (trigger.quote) firstMessage = { ...firstMessage, quote: trigger.quote }
     return { messages: [firstMessage] }
   }
