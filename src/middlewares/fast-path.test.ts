@@ -57,6 +57,15 @@ describe('isRelevantUpdate', () => {
     expect(isRelevantUpdate(c)).toBe(true)
   })
 
+  it('accepts a mention typed in a different case than the username', () => {
+    const c = ctx({
+      me: { id: 42, username: 'QuotLyBot' },
+      chat: { type: 'supergroup' },
+      message: { text: '@quotlybot', entities: [{ type: 'mention', offset: 0, length: 10 }] },
+    })
+    expect(isRelevantUpdate(c)).toBe(true)
+  })
+
   it('ignores a mention of a different bot', () => {
     const c = ctx({
       chat: { type: 'supergroup' },

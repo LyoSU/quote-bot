@@ -66,13 +66,15 @@ export function isRelevantUpdate(ctx: BotContext): boolean {
   // 2) A reply to one of the bot's own messages.
   if (msg.reply_to_message?.from?.id === ctx.me.id) return true
 
-  // 3) An @mention of the bot anywhere in the text/caption.
+  // 3) An @mention of the bot anywhere in the text/caption. Telegram marks
+  // mention entities case-insensitively ("@quotlybot" mentions "QuotLyBot"),
+  // so the comparison must be too — same as bareMentionArgs downstream.
   const text = msg.text ?? msg.caption
   if (text && msg.entities) {
-    const username = ctx.me.username
+    const lowerName = ctx.me.username?.toLowerCase()
     const mentionsBot = msg.entities.some((e) => {
       if (e.type === 'mention') {
-        return text.slice(e.offset + 1, e.offset + e.length) === username
+        return text.slice(e.offset + 1, e.offset + e.length).toLowerCase() === lowerName
       }
       if (e.type === 'text_mention') {
         return e.user?.id === ctx.me.id
