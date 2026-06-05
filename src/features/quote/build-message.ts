@@ -48,6 +48,7 @@ export interface QuoteSource extends MediaSource {
   reply_to_message?: ReplySource
   sender_tag?: string
   author_signature?: string
+  via_bot?: { username?: string }
   date?: number
 }
 
@@ -148,6 +149,8 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
 
   const senderTag = source.sender_tag ?? source.author_signature ?? from.author_signature
   if (senderTag) out.senderTag = senderTag
+
+  if (source.via_bot?.username) out.viaBot = source.via_bot.username
 
   if (text) out.text = text
   if (entities) out.entities = entities

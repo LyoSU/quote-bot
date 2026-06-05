@@ -115,6 +115,8 @@ export interface QuoteMessage {
   captionAboveMedia?: boolean
   voice?: QuoteVoice
   senderTag?: string
+  /** Inline-bot attribution — renderer shows a grey "via @bot" next to the name. */
+  viaBot?: string
   replyMessage?: QuoteReplyMessage
 }
 
