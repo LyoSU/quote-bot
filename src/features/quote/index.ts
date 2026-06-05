@@ -219,12 +219,11 @@ async function renderQuote(
   const rateEnabled = Boolean(group && ((group.settings?.rate ?? true) || flag.rate))
 
   let replyMarkup: { reply_markup?: InlineKeyboard }
-  if (isGuest && presetId) {
-    const kb = new InlineKeyboard()
-      .text('👍 0', `irate:${presetId.toString()}:👍`)
-      .text('👎 0', `irate:${presetId.toString()}:👎`)
-    if (ctx.me?.username) kb.row().url('Quotly →', `https://t.me/${ctx.me.username}`)
-    replyMarkup = { reply_markup: kb }
+  if (isGuest) {
+    // No rating in guest mode — just the attribution link.
+    replyMarkup = ctx.me?.username
+      ? { reply_markup: new InlineKeyboard().url('Quotly →', `https://t.me/${ctx.me.username}`) }
+      : {}
   } else {
     const deepLinkUrl =
       group && localId != null && ctx.me?.username
@@ -297,7 +296,7 @@ async function renderQuote(
         payload,
         ctxMessage,
         privacy: assembled.privacy,
-        rateEnabled: true,
+        rateEnabled: false,
         storeText: true,
         // The chat the bot was summoned in is the guest message's own `chat`
         // (guest_bot_caller_chat only exists on messages the guest bot sent).

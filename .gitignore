@@ -112,3 +112,7 @@ helpers/tdlib/data
 config.json
 
 .DS_Store
+# Local tooling / runtime artifacts
+.codegraph/
+.cursor/
+src/services/tdlib/data/
