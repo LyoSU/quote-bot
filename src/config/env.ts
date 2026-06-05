@@ -11,8 +11,7 @@ import { z } from 'zod'
  * `config.json` file-read + in-memory cache.
  *
  * Only variables the current foundation needs are declared. Each later
- * sub-project (db, redis, quote-api, tdlib, …) extends this schema with its
- * own keys.
+ * sub-project (db, quote-api, …) extends this schema with its own keys.
  */
 export const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
@@ -46,14 +45,16 @@ export const EnvSchema = z.object({
   MINI_APP_SHORT_NAME: z.string().default('app'),
   MINI_APP_URL: z.string().optional(),
 
-  /** TDLib credentials (https://my.telegram.org). Optional — TDLib is disabled without them. */
-  TELEGRAM_API_ID: z.coerce.number().int().positive().optional(),
-  TELEGRAM_API_HASH: z.string().optional(),
-  /** Hard kill-switch for TDLib regardless of credentials. Accepts 1/true. */
-  DISABLE_TDLIB: z
-    .string()
-    .optional()
-    .transform((v) => v === '1' || v === 'true'),
+  /**
+   * Bot API server root. Defaults to the Telegram cloud. Pointing it at the
+   * self-hosted fork (e.g. https://tg-api.yuri.ly) routes ALL bot traffic
+   * through it and unlocks the custom methods (getMessages, getUserInfo)
+   * used for multi-message quotes and premium emoji statuses.
+   */
+  BOT_API_ROOT: z
+    .url()
+    .default('https://api.telegram.org')
+    .transform((v) => v.replace(/\/+$/, '')),
 
   /** gramads token (https://gramads.net). Ads are shown only to ru-locale users in PM. */
   GRAMADS_TOKEN: z.string().optional(),
