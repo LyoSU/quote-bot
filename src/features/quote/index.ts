@@ -299,7 +299,9 @@ async function renderQuote(
         privacy: assembled.privacy,
         rateEnabled: true,
         storeText: true,
-        callerChat: ctx.guestMessage?.guest_bot_caller_chat,
+        // The chat the bot was summoned in is the guest message's own `chat`
+        // (guest_bot_caller_chat only exists on messages the guest bot sent).
+        callerChat: ctx.guestMessage?.chat,
       })
     }
   }

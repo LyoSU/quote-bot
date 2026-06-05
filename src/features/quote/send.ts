@@ -62,9 +62,31 @@ async function sendToChat(params: SendQuoteParams): Promise<SendResult> {
  */
 async function sendToGuest(params: SendQuoteParams, api: Api): Promise<SendResult> {
   const { ctx, image, emojis, presetId } = params
-  const caller = ctx.guestMessage?.guest_bot_caller_user
+  // The summoning user is the guest message's `from`; `guest_bot_caller_user`
+  // only ever appears on messages the guest bot itself sent (the attribution
+  // header), never on the incoming update.
+  const caller = ctx.guestMessage?.from
   const botUsername = ctx.me.username
-  if (!caller || !botUsername) return { sent: false }
+
+  // Whatever happens, the query must be answered — silence reads as a dead bot.
+  const answerWithPmArticle = (): Promise<void> =>
+    ctx
+      .answerGuestQuery({
+        type: 'article',
+        id: 'pm',
+        title: 'Quotly',
+        input_message_content: { message_text: ctx.t('guest-open_in_pm') },
+        ...(botUsername
+          ? { reply_markup: new InlineKeyboard().url('Quotly →', `https://t.me/${botUsername}`) }
+          : {}),
+      })
+      .then(() => {})
+      .catch(() => {})
+
+  if (!caller || !botUsername) {
+    await answerWithPmArticle()
+    return { sent: false }
+  }
 
   const name = packName(`g${Math.abs(caller.id)}_by_`, botUsername).toLowerCase()
   const title = `Created by @${botUsername}`
@@ -85,17 +107,7 @@ async function sendToGuest(params: SendQuoteParams, api: Api): Promise<SendResul
     return { sent: true, fileId: last.file_id, fileUniqueId: last.file_unique_id }
   } catch (err) {
     ctx.logger.debug({ err }, 'guest sticker staging failed')
-    await ctx
-      .answerGuestQuery({
-        type: 'article',
-        id: 'pm',
-        title: 'Quotly',
-        input_message_content: { message_text: ctx.t('guest-open_in_pm') },
-        ...(botUsername
-          ? { reply_markup: new InlineKeyboard().url('Quotly →', `https://t.me/${botUsername}`) }
-          : {}),
-      })
-      .catch(() => {})
+    await answerWithPmArticle()
     return { sent: false }
   }
 }
