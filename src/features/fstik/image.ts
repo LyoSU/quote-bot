@@ -21,7 +21,7 @@ export async function downloadTelegramFile(api: Api, fileId: string): Promise<Bu
   const file = await api.getFile(fileId)
   if (!file.file_path) throw new Error('file has no path')
 
-  const url = `https://api.telegram.org/file/bot${config.BOT_TOKEN}/${file.file_path}`
+  const url = `${config.BOT_API_ROOT}/file/bot${config.BOT_TOKEN}/${file.file_path}`
   const res = await fetch(url, { signal: AbortSignal.timeout(DOWNLOAD_TIMEOUT_MS) })
   if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`)
 

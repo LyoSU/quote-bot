@@ -24,7 +24,9 @@ import { requestRate } from './rate-meter'
  * and auto-retry (handles 429 retry_after) — no hand-rolled timeout wrappers.
  */
 export function createBot(): Bot<BotContext> {
-  const bot = new Bot<BotContext>(config.BOT_TOKEN)
+  const bot = new Bot<BotContext>(config.BOT_TOKEN, {
+    client: { apiRoot: config.BOT_API_ROOT },
+  })
 
   // --- Outgoing resilience -------------------------------------------------
   bot.api.config.use(apiThrottler())
