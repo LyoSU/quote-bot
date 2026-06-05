@@ -98,7 +98,7 @@ export function buildReplyMessage(reply: ReplySource, from: Sender | null): Quot
 
 /**
  * Assembles a single {@link QuoteMessage} from a source message and already
- * resolved senders. Pure — all DB/TDLib resolution happens upstream.
+ * resolved senders. Pure — all DB/server resolution happens upstream.
  */
 export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage {
   const { source, from, replyFrom, isFirstInStreak, showReply, forward, crop, forceMedia, unsupportedText } = params

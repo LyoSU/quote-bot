@@ -13,7 +13,7 @@ interface RawSender extends Sender {
   is_bot?: boolean
 }
 
-/** Structural source message — both native Bot API and TdMessage satisfy it. */
+/** Structural source message — both native Bot API and ApiMessage satisfy it. */
 export interface RawMessage extends QuoteSource {
   message_id?: number
   /** Channel post auto-forwarded into its linked discussion group (not a user forward). */
@@ -36,7 +36,7 @@ export interface AssembleDeps {
   /** Render the replied-to message block (the `reply` flag). */
   showReply: boolean
   unsupportedText: string
-  /** Resolve a hidden-user forward by display name (DB + TDLib). */
+  /** Resolve a hidden-user forward by display name (DB lookup). */
   enrichHidden: (name: string) => Promise<Sender | null>
   /** Whether a quoted user enabled privacy mode. */
   isUserPrivate: (telegramId: number) => Promise<boolean>
@@ -148,7 +148,7 @@ export async function assembleQuoteMessages(
     let from = await resolveSender(raw, deps)
 
     // Premium emoji status rides next to the name; the Bot API never
-    // includes it, so resolve through TDLib (positive id = real user).
+    // includes it, so resolve through the Bot API server (positive id = real user).
     if (!from.emoji_status && typeof from.id === 'number' && from.id > 0) {
       const status = await deps.getUserEmojiStatus(from.id)
       if (status) from = { ...from, emoji_status: status }

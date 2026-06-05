@@ -45,7 +45,7 @@ describe('selectSourceMessages', () => {
 
   it('grafts the nested reply via the server when the r flag needs it', async () => {
     // Native updates never nest reply_to_message inside reply_to_message — the
-    // reply flag must fetch the quoted message through TDLib.
+    // reply flag must fetch the quoted message through the server.
     const nested = { message_id: 5, text: 'root', date: 0 }
     const td = fetcher([{ message_id: 10, text: 'hi', date: 0, reply_to_message: nested } as ApiMessage])
     const sel = await selectSourceMessages({

@@ -16,7 +16,7 @@ interface PaidMediaItem {
   video?: ThumbedFile
 }
 
-/** Structural view of a message's media — both native and TDLib messages satisfy it. */
+/** Structural view of a message's media — both native and server-fetched messages satisfy it. */
 export interface MediaSource {
   photo?: PhotoSize[]
   sticker?: {

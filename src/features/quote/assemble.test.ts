@@ -40,9 +40,9 @@ describe('assembleQuoteMessages', () => {
     expect(out.messages[1]?.avatar).toBe(true)
   })
 
-  it('enriches the sender with a premium emoji status via TDLib', async () => {
+  it('enriches the sender with a premium emoji status via the server', async () => {
     // The Bot API User object never carries an emoji status — it must be
-    // resolved through TDLib for the native (count=1) path.
+    // resolved through getUserInfo for the native (count=1) path.
     const getUserEmojiStatus = vi.fn(async (id: number) => (id === 1 ? '5260463297979504556' : undefined))
     const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getUserEmojiStatus }))
     expect(out.messages[0]?.from?.emoji_status).toBe('5260463297979504556')
