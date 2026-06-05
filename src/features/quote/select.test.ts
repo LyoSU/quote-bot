@@ -30,6 +30,19 @@ describe('selectSourceMessages', () => {
     expect(sel.messages[0]?.message_id).toBe(10)
   })
 
+  it('carries the partial-quote selection onto the replied message', async () => {
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply, quote: { text: 'part' } }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 1,
+      fetcher: fetcher([]),
+    })
+    expect(sel.messages[0]?.message_id).toBe(10)
+    expect(sel.messages[0]?.quote?.text).toBe('part')
+  })
+
   it('quotes the trigger itself in a private chat with no reply', async () => {
     const t = trigger()
     const sel = await selectSourceMessages({ trigger: t, chatId: 5, isPrivate: true, isGuest: false, fetcher: fetcher([]) })

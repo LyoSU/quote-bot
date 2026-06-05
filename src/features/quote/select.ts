@@ -68,8 +68,11 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   if (!firstMessage || firstMessage.message_id === undefined) return { messages: [] }
 
   // Single message — keep the native object (richest entities/media).
+  // A manual quote selection (message.quote) always belongs to the quoted
+  // message — in the same-chat case that's the reply itself (a Bot API
+  // `quote` only ever appears on reply messages).
   if (isGuest || count === 1 || !fetcher.isHealthy()) {
-    if (trigger.quote && !reply) firstMessage = { ...firstMessage, quote: trigger.quote }
+    if (trigger.quote) firstMessage = { ...firstMessage, quote: trigger.quote }
     return { messages: [firstMessage] }
   }
 
