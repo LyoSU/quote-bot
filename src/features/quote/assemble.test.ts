@@ -13,6 +13,7 @@ function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
     groupPrivacy: false,
     enrichHidden: vi.fn(async () => null),
     isUserPrivate: vi.fn(async () => false),
+    getUserEmojiStatus: vi.fn(async () => undefined),
     ...over,
   }
 }
@@ -37,6 +38,15 @@ describe('assembleQuoteMessages', () => {
     // avatar shown once: first suppressed because next is same sender
     expect(out.messages[0]?.avatar).toBe(false)
     expect(out.messages[1]?.avatar).toBe(true)
+  })
+
+  it('enriches the sender with a premium emoji status via TDLib', async () => {
+    // The Bot API User object never carries an emoji status — it must be
+    // resolved through TDLib for the native (count=1) path.
+    const getUserEmojiStatus = vi.fn(async (id: number) => (id === 1 ? '5260463297979504556' : undefined))
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getUserEmojiStatus }))
+    expect(out.messages[0]?.from?.emoji_status).toBe('5260463297979504556')
+    expect(getUserEmojiStatus).toHaveBeenCalledWith(1)
   })
 
   it('marks privacy when a quoted user is private', async () => {

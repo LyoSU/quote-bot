@@ -16,6 +16,9 @@ const log = logger.child({ module: 'tdlib' })
  */
 const chatCache = new LruCache<number, TdChat>(5_000, 60_000)
 
+/** getUser cache — sender enrichment (premium emoji status) hits this per quote. */
+const userCache = new LruCache<number, TdUser>(5_000, 60_000)
+
 function usernameOf(usernames: Td.usernames | undefined): string | undefined {
   if (!usernames) return undefined
   return usernames.editable_username || usernames.active_usernames[0]
@@ -47,9 +50,11 @@ class TdlibService {
   }
 
   async getUser(userId: number): Promise<TdUser | undefined> {
+    const cached = userCache.get(userId)
+    if (cached) return cached
     try {
       const u = await tdlibClient.run('getUser', (c) => c.invoke({ _: 'getUser', user_id: userId }))
-      return {
+      const user: TdUser = {
         id: u.id,
         first_name: u.first_name,
         last_name: u.last_name || undefined,
@@ -59,6 +64,8 @@ class TdlibService {
             ? u.emoji_status.type.custom_emoji_id
             : undefined,
       }
+      userCache.set(userId, user)
+      return user
     } catch (err) {
       log.debug({ err, userId }, 'getUser failed')
       return undefined

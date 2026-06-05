@@ -40,6 +40,11 @@ export interface AssembleDeps {
   enrichHidden: (name: string) => Promise<Sender | null>
   /** Whether a quoted user enabled privacy mode. */
   isUserPrivate: (telegramId: number) => Promise<boolean>
+  /**
+   * Premium emoji status (custom_emoji_id) for a user — TDLib-only data,
+   * never present on Bot API User objects. Best-effort.
+   */
+  getUserEmojiStatus: (telegramId: number) => Promise<string | undefined>
   /** Group-level privacy (forces anonymization for the whole quote). */
   groupPrivacy: boolean
 }
@@ -140,7 +145,14 @@ export async function assembleQuoteMessages(
   for (const raw of sources) {
     if (raw.message_id === undefined) continue
 
-    const from = await resolveSender(raw, deps)
+    let from = await resolveSender(raw, deps)
+
+    // Premium emoji status rides next to the name; the Bot API never
+    // includes it, so resolve through TDLib (positive id = real user).
+    if (!from.emoji_status && typeof from.id === 'number' && from.id > 0) {
+      const status = await deps.getUserEmojiStatus(from.id)
+      if (status) from = { ...from, emoji_status: status }
+    }
 
     const groupForwarder = isForwarded(raw) && !isPrivateChat ? (raw.sender_chat ?? raw.from) : null
     const effectiveSenderId = groupForwarder?.id ?? from.id ?? null

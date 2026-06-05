@@ -152,6 +152,7 @@ async function renderQuote(
 
   // ---- Assemble into renderer messages ----
   const privacyCache = new Map<number, boolean>()
+  const statusCache = new Map<number, string | undefined>()
   const deps: AssembleDeps = {
     chatType,
     hidden,
@@ -161,6 +162,13 @@ async function renderQuote(
     unsupportedText: ctx.t('quote-unsupported_message'),
     groupPrivacy,
     enrichHidden: (name) => resolveHiddenSender(name),
+    getUserEmojiStatus: async (telegramId) => {
+      if (!tdlib.isHealthy()) return undefined
+      if (statusCache.has(telegramId)) return statusCache.get(telegramId)
+      const status = (await tdlib.getUser(telegramId))?.emoji_status
+      statusCache.set(telegramId, status)
+      return status
+    },
     isUserPrivate: async (telegramId) => {
       const cached = privacyCache.get(telegramId)
       if (cached !== undefined) return cached
