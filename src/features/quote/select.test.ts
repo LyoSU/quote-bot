@@ -43,11 +43,11 @@ describe('selectSourceMessages', () => {
     expect(sel.messages[0]?.quote?.text).toBe('part')
   })
 
-  it('grafts the nested reply via TDLib when the r flag needs it', async () => {
-    // Bot API never nests reply_to_message inside reply_to_message — the
+  it('grafts the nested reply via the server when the r flag needs it', async () => {
+    // Native updates never nest reply_to_message inside reply_to_message — the
     // reply flag must fetch the quoted message through TDLib.
     const nested = { message_id: 5, text: 'root', date: 0 }
-    const td = fetcher([{ message_id: 10, text: 'hi', date: 0, reply_to_message: nested } as TdMessage])
+    const td = fetcher([{ message_id: 10, text: 'hi', date: 0, reply_to_message: nested } as ApiMessage])
     const sel = await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply }),
       chatId: -100,
@@ -63,7 +63,7 @@ describe('selectSourceMessages', () => {
   })
 
   it('falls back to the native message when the reply fetch fails', async () => {
-    const td: MessageFetcher = { isHealthy: () => true, getMessages: vi.fn(async () => { throw new Error('td down') }) }
+    const td: MessageFetcher = { isHealthy: () => true, getMessages: vi.fn(async () => { throw new Error('server down') }) }
     const sel = await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply }),
       chatId: -100,
@@ -87,7 +87,7 @@ describe('selectSourceMessages', () => {
     expect(sel.messages).toHaveLength(0)
   })
 
-  it('fetches a range via TDLib when count > 1 and healthy', async () => {
+  it('fetches a range via the server when count > 1 and healthy', async () => {
     const td = fetcher([
       { message_id: 10, date: 0 },
       { message_id: 11, date: 0 },
@@ -104,7 +104,7 @@ describe('selectSourceMessages', () => {
     expect(sel.messages).toHaveLength(2)
   })
 
-  it('falls back to the native message when TDLib is unhealthy', async () => {
+  it('falls back to the native message when the server is unavailable', async () => {
     const sel = await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply }),
       chatId: -100,
@@ -117,7 +117,7 @@ describe('selectSourceMessages', () => {
     expect(sel.messages[0]?.message_id).toBe(10)
   })
 
-  it('never calls TDLib in guest mode', async () => {
+  it('never calls the server in guest mode', async () => {
     const td = fetcher([])
     await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply }),

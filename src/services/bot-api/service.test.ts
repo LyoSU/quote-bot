@@ -14,7 +14,7 @@ function service(fetchFn: typeof fetch, root = 'https://tg-api.example.com'): Bo
 
 describe('BotApiService.getMessages', () => {
   it('POSTs to the custom method and returns the result', async () => {
-    const fetchFn = vi.fn(async () =>
+    const fetchFn = vi.fn<typeof fetch>(async () =>
       jsonResponse({ ok: true, result: [{ message_id: 10, date: 0, text: 'hi' }] }),
     )
     const out = await service(fetchFn).getMessages(-100500, [10, 11])
@@ -25,7 +25,7 @@ describe('BotApiService.getMessages', () => {
   })
 
   it('returns [] on an API error instead of throwing', async () => {
-    const fetchFn = vi.fn(async () =>
+    const fetchFn = vi.fn<typeof fetch>(async () =>
       jsonResponse({ ok: false, error_code: 400, description: 'Bad Request: messages to get not found' }),
     )
     await expect(service(fetchFn).getMessages(1, [1])).resolves.toEqual([])
@@ -42,7 +42,7 @@ describe('BotApiService.getMessages', () => {
 
 describe('BotApiService.getUserEmojiStatus', () => {
   it('returns the status and caches the lookup', async () => {
-    const fetchFn = vi.fn(async () =>
+    const fetchFn = vi.fn<typeof fetch>(async () =>
       jsonResponse({ ok: true, result: { id: 1, first_name: 'A', emoji_status_custom_emoji_id: '52313' } }),
     )
     const svc = service(fetchFn)
@@ -52,7 +52,7 @@ describe('BotApiService.getUserEmojiStatus', () => {
   })
 
   it('caches "no status" too', async () => {
-    const fetchFn = vi.fn(async () => jsonResponse({ ok: true, result: { id: 2, first_name: 'B' } }))
+    const fetchFn = vi.fn<typeof fetch>(async () => jsonResponse({ ok: true, result: { id: 2, first_name: 'B' } }))
     const svc = service(fetchFn)
     await expect(svc.getUserEmojiStatus(2)).resolves.toBeUndefined()
     await expect(svc.getUserEmojiStatus(2)).resolves.toBeUndefined()
@@ -60,7 +60,7 @@ describe('BotApiService.getUserEmojiStatus', () => {
   })
 
   it('returns undefined when the call fails', async () => {
-    const fetchFn = vi.fn(async () => jsonResponse({ ok: false, error_code: 404, description: 'Not Found' }))
+    const fetchFn = vi.fn<typeof fetch>(async () => jsonResponse({ ok: false, error_code: 404, description: 'Not Found' }))
     await expect(service(fetchFn).getUserEmojiStatus(1)).resolves.toBeUndefined()
   })
 })
