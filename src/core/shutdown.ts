@@ -10,6 +10,19 @@ interface Resource {
 
 const resources: Resource[] = []
 
+type ShutdownFn = (signal: string, exitCode?: number) => void
+let triggerShutdown: ShutdownFn | null = null
+
+/**
+ * Programmatic shutdown for fatal-but-detectable states (e.g. the Bot API
+ * session got logged out): drains in-flight work like a signal would, then
+ * exits with the given code so the supervisor restarts the process.
+ */
+export function requestShutdown(reason: string, exitCode = 1): void {
+  if (triggerShutdown) triggerShutdown(reason, exitCode)
+  else process.exit(exitCode)
+}
+
 /**
  * Register a resource to be closed on shutdown (db, http server).
  * Resources are closed in reverse registration order (LIFO), mirroring setup.
@@ -50,6 +63,8 @@ export function installSignalHandlers(runner: RunnerHandle): void {
       process.exit(exitCode)
     }
   }
+
+  triggerShutdown = (signal, exitCode) => void shutdown(signal, exitCode)
 
   process.once('SIGINT', () => void shutdown('SIGINT'))
   process.once('SIGTERM', () => void shutdown('SIGTERM'))

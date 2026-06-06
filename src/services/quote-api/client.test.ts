@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { generateQuote, QuoteApiError, QuoteApiUnavailableError } from './client'
+import { config } from '../../config/env'
 import type { QuoteGenerationRequest } from './types'
 
 const request: QuoteGenerationRequest = { type: 'quote', messages: [{ text: 'hi' }] }
@@ -28,6 +29,23 @@ describe('generateQuote', () => {
     expect(result.quoteType).toBe('quote')
     expect(result.width).toBe(512)
     expect(result.height).toBe(320)
+  })
+
+  it('sends the bot token and API root so the renderer never falls back to the cloud', async () => {
+    const fetchMock = vi.fn(async () =>
+      new Response(new Uint8Array([1]), {
+        status: 200,
+        headers: { 'content-type': 'image/webp', 'quote-type': 'quote', 'quote-width': '1', 'quote-height': '1' },
+      }),
+    )
+    vi.stubGlobal('fetch', fetchMock)
+
+    await generateQuote(request)
+
+    const [, init] = fetchMock.mock.calls[0] as unknown as [string, { body: string }]
+    const body = JSON.parse(init.body) as Record<string, unknown>
+    expect(body['botToken']).toBe(config.BOT_TOKEN)
+    expect(body['apiRoot']).toBe(config.BOT_API_ROOT)
   })
 
   it('throws QuoteApiError with the parsed message on a 400', async () => {

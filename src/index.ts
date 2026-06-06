@@ -30,7 +30,10 @@ async function main(): Promise<void> {
   bot.use(features)
 
   await bot.init() // fetch getMe so ctx.me is available inside handlers
-  logger.info({ username: bot.botInfo.username, id: bot.botInfo.id }, 'Bot authorized')
+  logger.info(
+    { username: bot.botInfo.username, id: bot.botInfo.id, apiRoot: config.BOT_API_ROOT },
+    'Bot authorized',
+  )
 
   statsService.start()
   const runner = startRunner(bot)

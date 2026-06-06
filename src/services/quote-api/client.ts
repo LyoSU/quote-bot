@@ -67,8 +67,10 @@ export async function generateQuote(request: QuoteGenerationRequest): Promise<Qu
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // Token goes in the body (quote-api merges query+body into props), never
-      // the URL — keeps the secret out of access logs.
-      body: JSON.stringify({ ...request, botToken: config.BOT_TOKEN }),
+      // the URL — keeps the secret out of access logs. apiRoot rides along so
+      // the renderer downloads media/avatars through the same Bot API server —
+      // a cloud fallback with a locally logged-in token gets "Logged out".
+      body: JSON.stringify({ ...request, botToken: config.BOT_TOKEN, apiRoot: config.BOT_API_ROOT }),
       signal: AbortSignal.timeout(GENERATE_TIMEOUT_MS),
     })
   } catch (err) {

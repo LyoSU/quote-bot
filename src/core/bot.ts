@@ -9,6 +9,7 @@ import { registerErrorBoundary } from './errors'
 import { fastPath } from '../middlewares/fast-path'
 import { updateDuration } from './metrics'
 import { networkRetry } from './network-retry'
+import { pollGuard } from './poll-guard'
 import { pollWatch } from './poll-watch'
 import { requestRate } from './rate-meter'
 
@@ -36,6 +37,7 @@ export function createBot(): Bot<BotContext> {
 
   // --- Outgoing resilience -------------------------------------------------
   bot.api.config.use(pollWatch.transformer())
+  bot.api.config.use(pollGuard.transformer())
   bot.api.config.use(apiThrottler())
   bot.api.config.use(networkRetry({ attempts: 5, maxDelayMs: 8_000 }))
   bot.api.config.use(autoRetry({ maxRetryAttempts: 3, maxDelaySeconds: 5, rethrowHttpErrors: true }))
