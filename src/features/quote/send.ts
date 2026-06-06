@@ -36,12 +36,31 @@ function replyOptions(params: SendQuoteParams): {
   }
 }
 
+/**
+ * Telegram rejects photos with width+height > 10000 or an aspect ratio > 20
+ * (PHOTO_INVALID_DIMENSIONS) — long quotes rendered as images hit both.
+ * Reads the dimensions straight from the PNG IHDR header.
+ */
+function fitsPhotoLimits(image: Buffer): boolean {
+  const isPng = image.length >= 24 && image.readUInt32BE(0) === 0x89504e47
+  if (!isPng) return true
+  const width = image.readUInt32BE(16)
+  const height = image.readUInt32BE(20)
+  if (width === 0 || height === 0) return true
+  return width + height <= 10_000 && Math.max(width, height) / Math.min(width, height) <= 20
+}
+
 /** Delivers a non-guest quote (sticker/photo/document) and returns its file ids. */
 async function sendToChat(params: SendQuoteParams): Promise<SendResult> {
   const { ctx, image, delivery } = params
   const opts = replyOptions(params)
 
   if (delivery === 'photo') {
+    if (!fitsPhotoLimits(image)) {
+      ctx.logger.debug('Quote exceeds Telegram photo limits, sending as document')
+      await ctx.replyWithDocument(new InputFile(image, 'quote.png'), opts)
+      return { sent: true }
+    }
     await ctx.replyWithPhoto(new InputFile(image, 'quote.png'), opts)
     return { sent: true }
   }

@@ -50,6 +50,64 @@ function params(ctx: BotContext): SendQuoteParams {
   }
 }
 
+/** Minimal valid PNG header: signature + IHDR with the given dimensions. */
+function png(width: number, height: number): Buffer {
+  const buf = Buffer.alloc(24)
+  buf.writeUInt32BE(0x89504e47, 0) // \x89PNG
+  buf.writeUInt32BE(0x0d0a1a0a, 4)
+  buf.writeUInt32BE(13, 8) // IHDR length
+  buf.write('IHDR', 12)
+  buf.writeUInt32BE(width, 16)
+  buf.writeUInt32BE(height, 20)
+  return buf
+}
+
+function chatCtx(): {
+  ctx: BotContext
+  replyWithPhoto: ReturnType<typeof vi.fn>
+  replyWithDocument: ReturnType<typeof vi.fn>
+} {
+  const replyWithPhoto = vi.fn(async () => ({}))
+  const replyWithDocument = vi.fn(async () => ({}))
+  const ctx = {
+    replyWithPhoto,
+    replyWithDocument,
+    logger: { debug: vi.fn(), warn: vi.fn() },
+  } as unknown as BotContext
+  return { ctx, replyWithPhoto, replyWithDocument }
+}
+
+describe('sendQuote (photo delivery)', () => {
+  it('sends a photo when dimensions fit Telegram limits', async () => {
+    const { ctx, replyWithPhoto, replyWithDocument } = chatCtx()
+
+    const result = await sendQuote({ ...params(ctx), image: png(512, 800), delivery: 'photo' })
+
+    expect(result.sent).toBe(true)
+    expect(replyWithPhoto).toHaveBeenCalledTimes(1)
+    expect(replyWithDocument).not.toHaveBeenCalled()
+  })
+
+  it('falls back to a document when width+height exceeds 10000 (PHOTO_INVALID_DIMENSIONS)', async () => {
+    const { ctx, replyWithPhoto, replyWithDocument } = chatCtx()
+
+    const result = await sendQuote({ ...params(ctx), image: png(512, 11_000), delivery: 'photo' })
+
+    expect(result.sent).toBe(true)
+    expect(replyWithPhoto).not.toHaveBeenCalled()
+    expect(replyWithDocument).toHaveBeenCalledTimes(1)
+  })
+
+  it('falls back to a document when the aspect ratio exceeds 20', async () => {
+    const { ctx, replyWithPhoto, replyWithDocument } = chatCtx()
+
+    const result = await sendQuote({ ...params(ctx), image: png(300, 6_500), delivery: 'photo' })
+
+    expect(result.sent).toBe(true)
+    expect(replyWithDocument).toHaveBeenCalledTimes(1)
+  })
+})
+
 describe('sendQuote (guest mode)', () => {
   beforeEach(() => {
     vi.mocked(stickerService.stageSticker).mockClear()

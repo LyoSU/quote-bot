@@ -13,6 +13,10 @@ function buildFullName(from: TelegramUser): string {
  * Resolves the User row for an incoming sender, creating it on first contact.
  * Returns a plain (lean) object — handlers read it; writes go through the
  * targeted helpers below, never through a full-document save.
+ *
+ * Creation is an atomic upsert: sequentialize orders updates per *chat*, so
+ * the same new user active in two chats races — a find-then-insert threw
+ * E11000 on the telegram_id index and killed the losing update.
  */
 export async function getOrCreateUser(from: TelegramUser, isPrivate: boolean): Promise<UserDoc> {
   const existing = await User.findOne({ telegram_id: from.id }).lean<UserDoc>()
@@ -21,15 +25,23 @@ export async function getOrCreateUser(from: TelegramUser, isPrivate: boolean): P
     return existing
   }
 
-  const created = await User.create({
-    telegram_id: from.id,
-    first_name: from.first_name,
-    last_name: from.last_name,
-    full_name: buildFullName(from),
-    username: from.username,
-    ...(isPrivate ? { status: 'member' } : {}),
-  })
-  return created.toObject<UserDoc>()
+  const created = await User.findOneAndUpdate(
+    { telegram_id: from.id },
+    {
+      $setOnInsert: {
+        telegram_id: from.id,
+        first_name: from.first_name,
+        last_name: from.last_name,
+        full_name: buildFullName(from),
+        username: from.username,
+        ...(isPrivate ? { status: 'member' } : {}),
+      },
+    },
+    { upsert: true, new: true, setDefaultsOnInsert: true },
+  ).lean<UserDoc>()
+
+  // upsert + new:true guarantees a document.
+  return created as UserDoc
 }
 
 /**
