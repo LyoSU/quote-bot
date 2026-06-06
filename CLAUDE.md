@@ -47,7 +47,7 @@ Occasionally resurfaces a top quote on a lively group moment, biased to a quote 
 
 ## Configuration (env, validated in `src/config/env.ts`)
 
-`BOT_TOKEN`, `MONGODB_URI` (required), `QUOTE_API_URI` (required), `MONGO_MAX_POOL`, `STATS_FLUSH_MS`, `STICKER_KEEP_COUNT`, `MINI_APP_SHORT_NAME`, `MINI_APP_URL`, `BOT_API_ROOT` (self-hosted Bot API server; cloud by default), `HEALTH_PORT`, `BOT_CONCURRENCY`, `GRAMADS_TOKEN`, `ADMIN_ID`, `LOG_LEVEL`, `NODE_ENV`.
+`BOT_TOKEN`, `MONGODB_URI` (required), `QUOTE_API_URI` (required), `MONGO_MAX_POOL`, `STATS_FLUSH_MS`, `MINI_APP_SHORT_NAME`, `MINI_APP_URL`, `BOT_API_ROOT` (self-hosted Bot API server; cloud by default), `HEALTH_PORT`, `BOT_CONCURRENCY`, `GRAMADS_TOKEN`, `ADMIN_ID`, `LOG_LEVEL`, `NODE_ENV`.
 
 ## Conventions
 

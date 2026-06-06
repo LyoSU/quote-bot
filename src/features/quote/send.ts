@@ -57,8 +57,10 @@ async function sendToChat(params: SendQuoteParams): Promise<SendResult> {
 /**
  * Guest delivery. `answerGuestQuery` needs an existing `sticker_file_id`, so we
  * stage the sticker into a per-caller pack to obtain one, then answer with a
- * cached-sticker result. Falls back to an "open in PM" article when staging
- * isn't possible (e.g. the caller never started the bot).
+ * cached-sticker result. The staged sticker is discarded as soon as the answer
+ * is out (privacy — the pack is publicly viewable; the sent message keeps its
+ * own reference to the file). Falls back to an "open in PM" article when
+ * staging isn't possible (e.g. the caller never started the bot).
  */
 async function sendToGuest(params: SendQuoteParams, api: Api): Promise<SendResult> {
   const { ctx, image, emojis, presetId } = params
@@ -91,24 +93,30 @@ async function sendToGuest(params: SendQuoteParams, api: Api): Promise<SendResul
   const name = packName(`g${Math.abs(caller.id)}_by_`, botUsername).toLowerCase()
   const title = `Created by @${botUsername}`
 
+  let staged
   try {
-    await stickerService.addSticker(api, { ownerId: caller.id, name, title, webp: image, emojis })
-    const set = await api.getStickerSet(name)
-    const last = set.stickers[set.stickers.length - 1]
-    if (!last) throw new Error('sticker set empty after add')
-
-    await ctx.answerGuestQuery({
-      type: 'sticker',
-      id: presetId ?? 'q',
-      sticker_file_id: last.file_id,
-      ...params.replyMarkup,
-    })
-    stickerService.scheduleTrim(api, name)
-    return { sent: true, fileId: last.file_id, fileUniqueId: last.file_unique_id }
+    staged = await stickerService.stageSticker(api, { ownerId: caller.id, name, title, webp: image, emojis })
   } catch (err) {
     ctx.logger.debug({ err }, 'guest sticker staging failed')
     await answerWithPmArticle()
     return { sent: false }
+  }
+
+  try {
+    await ctx.answerGuestQuery({
+      type: 'sticker',
+      id: presetId ?? 'q',
+      sticker_file_id: staged.file_id,
+      ...params.replyMarkup,
+    })
+    return { sent: true, fileId: staged.file_id, fileUniqueId: staged.file_unique_id }
+  } catch (err) {
+    ctx.logger.debug({ err }, 'guest answer failed')
+    await answerWithPmArticle()
+    return { sent: false }
+  } finally {
+    // Answered or not, the quote must leave the pack immediately.
+    stickerService.discardSticker(api, name, staged.file_id)
   }
 }
 

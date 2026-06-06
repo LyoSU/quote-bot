@@ -38,9 +38,6 @@ export const EnvSchema = z.object({
   /** quote-api base URL (the image renderer). */
   QUOTE_API_URI: z.string().min(1, 'QUOTE_API_URI is required'),
 
-  /** How many stickers to keep in a pack before trimming the oldest. */
-  STICKER_KEEP_COUNT: z.coerce.number().int().positive().default(10),
-
   /** Mini App deep-link config (https://t.me/<bot>/<short>?startapp=...). */
   MINI_APP_SHORT_NAME: z.string().default('app'),
   MINI_APP_URL: z.string().optional(),
