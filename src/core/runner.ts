@@ -35,6 +35,12 @@ export function startRunner(bot: Bot<BotContext>): RunnerHandle {
   return run(bot, {
     runner: {
       fetch: { allowed_updates: ALLOWED_UPDATES },
+      // networkRetry already logs each failed getUpdates cycle through pino;
+      // the runner's own console.error would duplicate it past the logger.
+      silent: true,
+      // Constant pause between retry cycles. The default exponential backoff
+      // grows unbounded, delaying recovery after a long Bot API outage.
+      retryInterval: 5_000,
     },
     sink: {
       concurrency: config.BOT_CONCURRENCY,

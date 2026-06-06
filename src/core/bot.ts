@@ -8,6 +8,8 @@ import type { BotContext } from './types'
 import { registerErrorBoundary } from './errors'
 import { fastPath } from '../middlewares/fast-path'
 import { updateDuration } from './metrics'
+import { networkRetry } from './network-retry'
+import { pollWatch } from './poll-watch'
 import { requestRate } from './rate-meter'
 
 /**
@@ -20,8 +22,12 @@ import { requestRate } from './rate-meter'
  *   2. sequentialize   — per-chat ordering, cross-chat parallelism (relevant only)
  *   3. logger + timing — context-rich child logger; measure handler latency
  *
- * Outgoing API calls go through a throttler (respects Telegram's rate limits)
- * and auto-retry (handles 429 retry_after) — no hand-rolled timeout wrappers.
+ * Outgoing API calls go through a throttler (respects Telegram's rate limits),
+ * networkRetry (bridges Bot API server restarts: capped, logged) and auto-retry
+ * (handles 429 retry_after). auto-retry rethrows HttpError — its own network
+ * handling is silent and unbounded, which hid local-server outages for up to
+ * an hour. Transformers installed later run first, so the chain is
+ * autoRetry → networkRetry → throttler → fetch.
  */
 export function createBot(): Bot<BotContext> {
   const bot = new Bot<BotContext>(config.BOT_TOKEN, {
@@ -29,8 +35,10 @@ export function createBot(): Bot<BotContext> {
   })
 
   // --- Outgoing resilience -------------------------------------------------
+  bot.api.config.use(pollWatch.transformer())
   bot.api.config.use(apiThrottler())
-  bot.api.config.use(autoRetry({ maxRetryAttempts: 3, maxDelaySeconds: 5 }))
+  bot.api.config.use(networkRetry({ attempts: 5, maxDelayMs: 8_000 }))
+  bot.api.config.use(autoRetry({ maxRetryAttempts: 3, maxDelaySeconds: 5, rethrowHttpErrors: true }))
 
   // --- 1. Cheap noise filter ----------------------------------------------
   bot.use(fastPath)

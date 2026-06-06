@@ -17,6 +17,14 @@ export const updatesTotal = new Counter({
   registers: [registry],
 })
 
+/** Network-level failures (HttpError) talking to the Bot API server. */
+export const networkErrorsTotal = new Counter({
+  name: 'bot_network_errors_total',
+  help: 'Network errors while calling the Bot API, by method',
+  labelNames: ['method'] as const,
+  registers: [registry],
+})
+
 /** Wall-clock time spent in the handler chain for relevant updates. */
 export const updateDuration = new Histogram({
   name: 'bot_update_duration_seconds',

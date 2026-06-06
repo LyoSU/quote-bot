@@ -26,7 +26,7 @@ export function onShutdown(name: string, close: Closer): void {
 export function installSignalHandlers(runner: RunnerHandle): void {
   let shuttingDown = false
 
-  const shutdown = async (signal: string): Promise<void> => {
+  const shutdown = async (signal: string, exitCode = 0): Promise<void> => {
     if (shuttingDown) return
     shuttingDown = true
     logger.info({ signal }, 'Graceful shutdown started')
@@ -46,7 +46,8 @@ export function installSignalHandlers(runner: RunnerHandle): void {
       }
     } finally {
       logger.info('Shutdown complete')
-      process.exit(0)
+      // Non-zero on fatal paths so `restart: on-failure` policies kick in.
+      process.exit(exitCode)
     }
   }
 
@@ -55,10 +56,10 @@ export function installSignalHandlers(runner: RunnerHandle): void {
 
   process.on('uncaughtException', (err) => {
     logger.fatal({ err }, 'uncaughtException — shutting down')
-    void shutdown('uncaughtException')
+    void shutdown('uncaughtException', 1)
   })
   process.on('unhandledRejection', (reason) => {
     logger.fatal({ err: reason }, 'unhandledRejection — shutting down')
-    void shutdown('unhandledRejection')
+    void shutdown('unhandledRejection', 1)
   })
 }
