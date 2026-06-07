@@ -17,6 +17,18 @@ export const updatesTotal = new Counter({
   registers: [registry],
 })
 
+/**
+ * getUpdates polls by wire outcome. `empty` climbing while `updates` flatlines
+ * is the signature of a Bot API server that polls fine but delivers nothing
+ * (lost Telegram session / queue stuck elsewhere) — invisible to error counts.
+ */
+export const pollsTotal = new Counter({
+  name: 'bot_getupdates_total',
+  help: 'getUpdates polls, by outcome (updates | empty | error)',
+  labelNames: ['outcome'] as const,
+  registers: [registry],
+})
+
 /** Network-level failures (HttpError) talking to the Bot API server. */
 export const networkErrorsTotal = new Counter({
   name: 'bot_network_errors_total',
