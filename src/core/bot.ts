@@ -39,14 +39,16 @@ export function createBot(opts: CreateBotOptions = {}): Bot<BotContext> {
   const bot = new Bot<BotContext>(config.BOT_TOKEN, {
     client: {
       apiRoot: config.BOT_API_ROOT,
-      // grammY's default HTTP timeout is 500s. The runner long-polls with a 30s
-      // window, so a healthy getUpdates returns well within ~30s. When the
-      // connection silently half-opens (the response lost in the Cloudflare /
-      // traefik path in front of the local server), the default makes the bot
-      // wait the full 500s on a dead socket — observed as 8-minute dead spells
-      // with the queue frozen. Capping just above the long-poll window turns
-      // that into a ~10s blip the runner recovers from on a fresh connection.
-      timeoutSeconds: 40,
+      // grammY's default HTTP timeout is 500s. The runner long-polls with a
+      // shortened 10s window (see runner.ts), so this caps how long the bot
+      // waits on a SILENTLY half-open socket — the response lost somewhere in
+      // the Cloudflare/traefik path in front of the remote Bot API server,
+      // leaving the connection alive but dead. The default 500s turned each
+      // such half-open into an 8-minute dead spell with the queue frozen.
+      // 20s (2× the long-poll window) detects it deterministically — no false
+      // timeouts on a legitimately empty long-poll, recovery on a fresh
+      // connection within ~20s instead of minutes.
+      timeoutSeconds: 20,
       ...(opts.fetchFn ? { fetch: opts.fetchFn } : {}),
     },
   })

@@ -34,7 +34,13 @@ const ALLOWED_UPDATES: ReadonlyArray<Exclude<keyof Update, 'update_id'>> = [
 export function startRunner(bot: Bot<BotContext>): RunnerHandle {
   return run(bot, {
     runner: {
-      fetch: { allowed_updates: ALLOWED_UPDATES },
+      // Shorten the long-poll window from grammY's 30s default to 10s. The bot
+      // is rarely idle, so getUpdates almost always returns immediately with a
+      // batch — the wait only applies during genuine lulls. A shorter window
+      // lets the client timeout (20s, see core/bot) sit just above it, so a
+      // silently half-open connection is detected in ~20s instead of minutes,
+      // without ever falsely killing an empty poll.
+      fetch: { allowed_updates: ALLOWED_UPDATES, timeout: 10 },
       // networkRetry already logs each failed getUpdates cycle through pino;
       // the runner's own console.error would duplicate it past the logger.
       silent: true,
