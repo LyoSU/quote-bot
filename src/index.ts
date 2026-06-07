@@ -20,6 +20,11 @@ import { statsService } from './services/stats/stats-service'
  */
 async function main(): Promise<void> {
   logger.info({ env: config.NODE_ENV }, 'Starting quote-bot on grammY')
+  if (process.env['BOT_API_ROOT'] === undefined) {
+    // Catches a lost .env / stripped PM2 env early — silently polling the
+    // cloud with a locally migrated token yields only "Logged out".
+    logger.warn('BOT_API_ROOT is not set — ALL bot traffic goes to the Telegram cloud')
+  }
 
   await waitForDatabase()
   logger.info('Database ready')

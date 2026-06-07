@@ -1,5 +1,12 @@
-import 'dotenv/config'
+import { resolve } from 'node:path'
+import { config as loadDotenv } from 'dotenv'
 import { z } from 'zod'
+
+// Anchor .env to the project root, NOT process.cwd(): under PM2/cron the
+// process may start from any directory, and a silently missed .env flips
+// BOT_API_ROOT back to the cloud default — the poller then asks
+// api.telegram.org, which answers "Logged out" for a locally migrated token.
+loadDotenv({ path: resolve(__dirname, '../../.env') })
 
 /**
  * Single source of truth for runtime configuration.
