@@ -25,23 +25,32 @@ export async function getOrCreateUser(from: TelegramUser, isPrivate: boolean): P
     return existing
   }
 
-  const created = await User.findOneAndUpdate(
-    { telegram_id: from.id },
-    {
-      $setOnInsert: {
-        telegram_id: from.id,
-        first_name: from.first_name,
-        last_name: from.last_name,
-        full_name: buildFullName(from),
-        username: from.username,
-        ...(isPrivate ? { status: 'member' } : {}),
+  try {
+    const created = await User.findOneAndUpdate(
+      { telegram_id: from.id },
+      {
+        $setOnInsert: {
+          telegram_id: from.id,
+          first_name: from.first_name,
+          last_name: from.last_name,
+          full_name: buildFullName(from),
+          username: from.username,
+          ...(isPrivate ? { status: 'member' } : {}),
+        },
       },
-    },
-    { upsert: true, new: true, setDefaultsOnInsert: true },
-  ).lean<UserDoc>()
+      { upsert: true, new: true, setDefaultsOnInsert: true },
+    ).lean<UserDoc>()
 
-  // upsert + new:true guarantees a document.
-  return created as UserDoc
+    // upsert + new:true guarantees a document.
+    return created as UserDoc
+  } catch (err) {
+    // Mongo < 4.2 can still surface E11000 when two upserts race. The winner's
+    // document exists by now, so one re-read settles it.
+    if ((err as { code?: number }).code !== 11000) throw err
+    const winner = await User.findOne({ telegram_id: from.id }).lean<UserDoc>()
+    if (!winner) throw err
+    return winner
+  }
 }
 
 /**

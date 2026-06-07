@@ -58,7 +58,9 @@ export async function handleQuoteError(
 
   if (err instanceof GrammyError) {
     const d = err.description.toLowerCase()
-    if (err.error_code === 429) return reply('quote-errors-rate_limit', { seconds: 30 })
+    // 429 from the chat: auto-retry already waited its ≤5s budget, so the chat
+    // is throttled for longer — a reply would just burn another 429.
+    if (err.error_code === 429) return
     if (d.includes('not enough rights to send documents')) return reply('quote-errors-no_rights_send_documents')
     if (d.includes('not enough rights to send stickers')) return reply('quote-errors-no_rights_send_stickers')
     if (d.includes('not enough rights to send photos')) return reply('quote-errors-no_rights_send_photos')

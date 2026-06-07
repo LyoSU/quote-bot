@@ -58,6 +58,23 @@ describe('getOrCreateUser', () => {
     )
   })
 
+  it('survives an upsert duplicate-key race by re-reading the winner', async () => {
+    // Mongo < 4.2 can still surface E11000 when two upserts race; the doc is
+    // guaranteed to exist afterwards, so a single re-read resolves it.
+    const winner = { _id: 'u1', telegram_id: 42 }
+    vi.mocked(User.findOne)
+      .mockReturnValueOnce(lean(null) as never)
+      .mockReturnValueOnce(lean(winner) as never)
+    vi.mocked(User.findOneAndUpdate).mockReturnValue({
+      lean: () => Promise.reject(Object.assign(new Error('E11000 duplicate key'), { code: 11000 })),
+    } as never)
+
+    const user = await getOrCreateUser(FROM, false)
+
+    expect(user).toBe(winner)
+    expect(User.findOne).toHaveBeenCalledTimes(2)
+  })
+
   it('does not mark group-only users as members', async () => {
     vi.mocked(User.findOne).mockReturnValue(lean(null) as never)
     vi.mocked(User.findOneAndUpdate).mockReturnValue(lean({ _id: 'u1', telegram_id: 42 }) as never)

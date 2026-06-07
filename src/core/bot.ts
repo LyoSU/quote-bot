@@ -30,9 +30,17 @@ import { requestRate } from './rate-meter'
  * an hour. Transformers installed later run first, so the chain is
  * autoRetry → networkRetry → throttler → fetch.
  */
-export function createBot(): Bot<BotContext> {
+export interface CreateBotOptions {
+  /** Injectable for tests — exercises the real transformer chain offline. */
+  fetchFn?: typeof fetch
+}
+
+export function createBot(opts: CreateBotOptions = {}): Bot<BotContext> {
   const bot = new Bot<BotContext>(config.BOT_TOKEN, {
-    client: { apiRoot: config.BOT_API_ROOT },
+    client: {
+      apiRoot: config.BOT_API_ROOT,
+      ...(opts.fetchFn ? { fetch: opts.fetchFn } : {}),
+    },
   })
 
   // --- Outgoing resilience -------------------------------------------------
