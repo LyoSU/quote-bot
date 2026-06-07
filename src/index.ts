@@ -4,6 +4,7 @@ import { createBot } from './core/bot'
 import { startRunner } from './core/runner'
 import { installSignalHandlers, onShutdown } from './core/shutdown'
 import { pollWatch } from './core/poll-watch'
+import { registerPollingGauges } from './core/metrics'
 import { startHealthServer } from './health/server'
 import { waitForDatabase, isDatabaseReady } from './db/connection'
 import { contextMiddleware } from './middlewares/context'
@@ -42,6 +43,7 @@ async function main(): Promise<void> {
 
   statsService.start()
   const runner = startRunner(bot)
+  registerPollingGauges(runner, pollWatch)
 
   const health = startHealthServer({
     // pollWatch catches the case the runner can't see: the Bot API server is

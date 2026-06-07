@@ -28,6 +28,11 @@ export class PollWatch {
     return nowMs - this.lastOkMs <= this.maxAgeMs
   }
 
+  /** Seconds since the last successful poll — exported as a Prometheus gauge. */
+  ageSeconds(nowMs: number = Date.now()): number {
+    return Math.round((nowMs - this.lastOkMs) / 1000)
+  }
+
   /** API transformer that marks freshness on every successful getUpdates. */
   transformer(): Transformer {
     return async (prev, method, payload, signal) => {

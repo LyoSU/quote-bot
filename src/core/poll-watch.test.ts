@@ -14,6 +14,13 @@ describe('PollWatch', () => {
     expect(watch.isFresh(T0 + 90_001)).toBe(false)
   })
 
+  it('reports the age of the last successful poll in seconds', () => {
+    const watch = new PollWatch(90_000, T0)
+    expect(watch.ageSeconds(T0 + 45_000)).toBe(45)
+    watch.markOk(T0 + 60_000)
+    expect(watch.ageSeconds(T0 + 61_000)).toBe(1)
+  })
+
   it('markOk refreshes the window', () => {
     const watch = new PollWatch(90_000, T0)
     watch.markOk(T0 + 60_000)

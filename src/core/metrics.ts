@@ -1,4 +1,4 @@
-import { Registry, collectDefaultMetrics, Counter, Histogram } from 'prom-client'
+import { Registry, collectDefaultMetrics, Counter, Gauge, Histogram } from 'prom-client'
 
 /**
  * Prometheus registry. Exposed over HTTP at /metrics (see health/server).
@@ -24,6 +24,35 @@ export const networkErrorsTotal = new Counter({
   labelNames: ['method'] as const,
   registers: [registry],
 })
+
+/**
+ * Polling-health gauges, sampled on each /metrics scrape. Together they
+ * separate the two ways the bot can "stop collecting updates":
+ *   - in_flight pinned at the concurrency cap + poll age growing → the sink is
+ *     saturated (handlers stuck behind the per-group send throttler);
+ *   - in_flight near zero + poll age growing → polling itself is dead.
+ */
+export function registerPollingGauges(
+  runner: { size(): number },
+  poll: { ageSeconds(): number },
+): void {
+  new Gauge({
+    name: 'bot_runner_in_flight',
+    help: 'Updates currently being processed by the runner sink',
+    registers: [registry],
+    collect() {
+      this.set(runner.size())
+    },
+  })
+  new Gauge({
+    name: 'bot_poll_age_seconds',
+    help: 'Seconds since the last successful getUpdates',
+    registers: [registry],
+    collect() {
+      this.set(poll.ageSeconds())
+    },
+  })
+}
 
 /** Wall-clock time spent in the handler chain for relevant updates. */
 export const updateDuration = new Histogram({
