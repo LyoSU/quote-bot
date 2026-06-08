@@ -313,10 +313,16 @@ async function renderQuote(
 
 /** Looks up a hidden-forward sender by their display name (archive enrichment). */
 async function resolveHiddenSender(name: string): Promise<Sender | null> {
-  const u = await User.findOne({ full_name: name })
+  const matches = await User.find({ full_name: name })
     .select('telegram_id first_name last_name username')
-    .lean<{ telegram_id: number; first_name?: string; last_name?: string; username?: string }>()
-  if (!u) return null
+    .limit(2)
+    .lean<{ telegram_id: number; first_name?: string; last_name?: string; username?: string }[]>()
+  // Only enrich on an unambiguous match. An ambiguous display name (≥2 users)
+  // must not be guessed — returning null lets resolveSender fall back to a
+  // hashed stub that keeps the verbatim forwarded name, instead of binding the
+  // quote to an arbitrary same-named account (wrong id/avatar/username).
+  if (matches.length !== 1) return null
+  const u = matches[0]!
   return { id: u.telegram_id, first_name: u.first_name, last_name: u.last_name, username: u.username }
 }
 
