@@ -94,7 +94,13 @@ async function handleQuote(ctx: BotContext): Promise<void> {
   // should re-quote that batch with its flags rather than spawn a second quote.
   // The batcher owns those cases; everything else renders inline immediately.
   if (!isGuest && ctx.chat?.type === 'private') {
-    if (pmBatcher.handle(ctx, trigger, flag, (c, sources, f) => renderQuote(c, sources, f, { isGuest: false }))) {
+    // Thread the quote onto the first forwarded message (lowest message_id),
+    // matching the legacy bot — a PM forward should reply to what it quotes.
+    if (
+      pmBatcher.handle(ctx, trigger, flag, (c, sources, f) =>
+        renderQuote(c, sources, f, { isGuest: false, replyToId: sources[0]?.message_id }),
+      )
+    ) {
       return
     }
   }
@@ -124,7 +130,10 @@ async function handleQuote(ctx: BotContext): Promise<void> {
 
 interface RenderOpts {
   isGuest: boolean
-  /** Message id to thread the reply to (omitted for PM batches and guest mode). */
+  /**
+   * Message id to thread the reply to: the `/q` trigger inline, the first
+   * forwarded message for a PM batch. Omitted only for guest mode.
+   */
   replyToId?: number
   /** The original trigger message — used for guest preset + persist metadata. */
   trigger?: RawMessage & { chat?: { id: number; type?: string } }

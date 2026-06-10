@@ -66,15 +66,18 @@ function chatCtx(): {
   ctx: BotContext
   replyWithPhoto: ReturnType<typeof vi.fn>
   replyWithDocument: ReturnType<typeof vi.fn>
+  replyWithSticker: ReturnType<typeof vi.fn>
 } {
   const replyWithPhoto = vi.fn(async () => ({}))
   const replyWithDocument = vi.fn(async () => ({}))
+  const replyWithSticker = vi.fn(async () => ({ sticker: { file_id: 'sid', file_unique_id: 'suid' } }))
   const ctx = {
     replyWithPhoto,
     replyWithDocument,
+    replyWithSticker,
     logger: { debug: vi.fn(), warn: vi.fn() },
   } as unknown as BotContext
-  return { ctx, replyWithPhoto, replyWithDocument }
+  return { ctx, replyWithPhoto, replyWithDocument, replyWithSticker }
 }
 
 describe('sendQuote (photo delivery)', () => {
@@ -105,6 +108,27 @@ describe('sendQuote (photo delivery)', () => {
 
     expect(result.sent).toBe(true)
     expect(replyWithDocument).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('sendQuote (reply threading)', () => {
+  it('threads the sticker onto the source message when replyToMessageId is set', async () => {
+    const { ctx, replyWithSticker } = chatCtx()
+
+    const result = await sendQuote({ ...params(ctx), replyToMessageId: 4242 })
+
+    expect(result.sent).toBe(true)
+    expect(result.fileId).toBe('sid')
+    const opts = replyWithSticker.mock.calls[0]![1]
+    expect(opts.reply_parameters).toEqual({ message_id: 4242, allow_sending_without_reply: true })
+  })
+
+  it('omits reply_parameters when there is nothing to reply to', async () => {
+    const { ctx, replyWithSticker } = chatCtx()
+
+    await sendQuote(params(ctx))
+
+    expect(replyWithSticker.mock.calls[0]![1].reply_parameters).toBeUndefined()
   })
 })
 
