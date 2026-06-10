@@ -63,6 +63,34 @@ describe('buildQuoteMessage', () => {
     expect(m.entities).toEqual([{ type: 'italic', offset: 0, length: 'Unsupported'.length }])
   })
 
+  it('keeps a text-less document as a document row (not unsupported)', () => {
+    const m = buildQuoteMessage({
+      source: { document: { file_id: 'pdf', mime_type: 'application/pdf', file_name: 'report.pdf', file_size: 2048 } },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBeUndefined()
+    expect(m.document).toEqual({ file_name: 'report.pdf', file_size: 2048 })
+  })
+
+  it('keeps a text-less audio as an audio row (not unsupported)', () => {
+    const m = buildQuoteMessage({
+      source: { audio: { file_id: 'aud', title: 'Song', performer: 'Artist', duration: 100 } },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBeUndefined()
+    expect(m.audio).toEqual({ title: 'Song', performer: 'Artist', duration: 100 })
+  })
+
   it('adds a forward label and sender tag', () => {
     const m = buildQuoteMessage({
       source: { text: 'x', sender_tag: 'Admin' },

@@ -160,7 +160,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
 
   if (forward) out.forward = forward
 
-  if (!out.text && !out.media && !out.voice) {
+  if (!out.text && !out.media && !out.voice && !out.document && !out.audio) {
     out.text = unsupportedText
     out.entities = [{ type: 'italic', offset: 0, length: unsupportedText.length }]
   }

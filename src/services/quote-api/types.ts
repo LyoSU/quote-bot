@@ -100,6 +100,8 @@ export interface QuoteMessage {
   media?: QuoteMessageMedia
   mediaType?: QuoteMediaType
   mediaCrop?: boolean
+  /** Video/animation duration (s) — the renderer's play-badge label. */
+  mediaDuration?: number
   stickerIsAnimated?: boolean
   stickerIsVideo?: boolean
   /** Real file behind a non-photo bubble (video/gif/audio) — for the webapp player + renderer fallback. */
@@ -114,6 +116,10 @@ export interface QuoteMessage {
   hasMediaSpoiler?: boolean
   captionAboveMedia?: boolean
   voice?: QuoteVoice
+  /** Non-image file → renderer draws a Telegram-style document row. */
+  document?: QuoteDocument
+  /** Audio file → renderer draws a Telegram-style audio row. */
+  audio?: QuoteAudio
   senderTag?: string
   /** Inline-bot attribution — renderer shows a grey "via @bot" next to the name. */
   viaBot?: string
@@ -123,6 +129,19 @@ export interface QuoteMessage {
 export interface QuoteVoice {
   waveform: number[]
   duration: number
+}
+
+export interface QuoteDocument {
+  file_name?: string
+  file_size?: number
+}
+
+export interface QuoteAudio {
+  title?: string
+  performer?: string
+  duration?: number
+  /** Cover art — the renderer fetches it by file id. */
+  thumb?: { file_id?: string }
 }
 
 export interface QuoteGenerationRequest {

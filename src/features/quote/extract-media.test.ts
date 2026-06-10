@@ -38,13 +38,14 @@ describe('extractMedia', () => {
     expect(r.stickerIsVideo).toBe(true)
   })
 
-  it('extracts a video thumbnail and keeps the real file id/mime', () => {
+  it('extracts a video thumbnail and keeps the real file id/mime + duration', () => {
     const thumb = { file_id: 't', file_unique_id: 'tu', width: 1, height: 1 }
-    const r = extractMedia({ video: { file_id: 'v', mime_type: 'video/mp4', thumbnail: thumb } }, opts)
+    const r = extractMedia({ video: { file_id: 'v', mime_type: 'video/mp4', duration: 42, thumbnail: thumb } }, opts)
     expect(r.mediaType).toBe('video')
     expect(r.media).toEqual([thumb])
     expect(r.mediaFileId).toBe('v')
     expect(r.mediaMimeType).toBe('video/mp4')
+    expect(r.mediaDuration).toBe(42) // feeds the renderer's video play-badge label
   })
 
   it('renders an image document (.gif/.png sent as a file) as a photo', () => {
@@ -61,25 +62,46 @@ describe('extractMedia', () => {
     expect(r.media).toEqual([{ file_id: 'gifid' }])
   })
 
-  it('keeps a non-image document as a document with its thumbnail', () => {
+  it('renders a non-image document as a document row (name + size), not a thumbnail bubble', () => {
     const thumb = { file_id: 't', file_unique_id: 'tu', width: 1, height: 1 }
-    const r = extractMedia({ document: { file_id: 'pdf', mime_type: 'application/pdf', thumbnail: thumb } }, opts)
-    expect(r.mediaType).toBe('document')
-    expect(r.media).toEqual([thumb])
-    expect(r.mediaFileId).toBe('pdf')
+    const r = extractMedia(
+      { document: { file_id: 'pdf', mime_type: 'application/pdf', file_name: 'report.pdf', file_size: 2048, thumbnail: thumb } },
+      opts,
+    )
+    expect(r.document).toEqual({ file_name: 'report.pdf', file_size: 2048 })
+    expect(r.media).toBeUndefined() // the row is the bubble content; no media image
+    expect(r.mediaType).toBeUndefined()
+    expect(r.mediaFileId).toBe('pdf') // still kept for the webapp
   })
 
-  it('emits no media array for an unrenderable document (so the unsupported-text fallback fires)', () => {
-    const r = extractMedia({ document: { mime_type: 'application/pdf' } }, opts)
-    expect(r.mediaType).toBe('document')
+  it('renders a thumbnail-less document as a document row (no more unsupported fallback)', () => {
+    const r = extractMedia({ document: { file_id: 'pdf', mime_type: 'application/pdf', file_name: 'x.pdf' } }, opts)
+    expect(r.document).toEqual({ file_name: 'x.pdf' })
+  })
+
+  it('renders an audio message as an audio row (title / performer · duration)', () => {
+    const thumb = { file_id: 'cover', file_unique_id: 'cu', width: 1, height: 1 }
+    const r = extractMedia(
+      { audio: { file_id: 'aud', title: 'Водограй', performer: 'Івасюк', duration: 215, thumbnail: thumb } },
+      opts,
+    )
+    expect(r.audio).toEqual({ title: 'Водограй', performer: 'Івасюк', duration: 215, thumb: { file_id: 'cover' } })
     expect(r.media).toBeUndefined()
+    expect(r.mediaType).toBeUndefined()
+    expect(r.mediaFileId).toBe('aud')
   })
 
-  it('emits no media array for a thumbnail-less animation (avoids a blank quote)', () => {
+  it('renders a thumbnail-less animation by handing the renderer the file id (decodable gif frame)', () => {
     const r = extractMedia({ animation: { file_id: 'a', mime_type: 'video/mp4' } }, opts)
     expect(r.mediaType).toBe('animation')
-    expect(r.media).toBeUndefined() // empty [] would be truthy → blank render
-    expect(r.mediaFileId).toBe('a') // still kept for the webapp
+    expect(r.media).toEqual([{ file_id: 'a' }]) // renderer tries to decode a frame instead of "unsupported"
+    expect(r.mediaFileId).toBe('a')
+  })
+
+  it('prefers the animation thumbnail when present (static preview)', () => {
+    const thumb = { file_id: 't', file_unique_id: 'tu', width: 1, height: 1 }
+    const r = extractMedia({ animation: { file_id: 'a', mime_type: 'video/mp4', thumbnail: thumb } }, opts)
+    expect(r.media).toEqual([thumb])
   })
 
   it('surfaces paid photo media + the star price', () => {

@@ -1,11 +1,24 @@
 import type { PhotoSize } from 'grammy/types'
-import type { QuoteMediaFile, QuoteMediaType, QuoteMessageMedia, QuoteVoice } from '../../services/quote-api/types'
+import type {
+  QuoteAudio,
+  QuoteDocument,
+  QuoteMediaFile,
+  QuoteMediaType,
+  QuoteMessageMedia,
+  QuoteVoice,
+} from '../../services/quote-api/types'
 
 /** A file with a thumbnail (video/animation/document/audio share this shape). */
 interface ThumbedFile {
   file_id?: string
   mime_type?: string
   file_name?: string
+  file_size?: number
+  /** Video/animation/audio length, in seconds. */
+  duration?: number
+  /** Audio tags. */
+  title?: string
+  performer?: string
   thumbnail?: PhotoSize
 }
 
@@ -43,6 +56,8 @@ export interface ExtractedMedia {
   media?: QuoteMessageMedia
   mediaType?: QuoteMediaType
   mediaCrop?: boolean
+  /** Video/animation duration (s) — the renderer's play-badge label. */
+  mediaDuration?: number
   stickerIsAnimated?: boolean
   stickerIsVideo?: boolean
   /** The real file behind a non-photo bubble — lets the webapp stream the actual video/gif/audio. */
@@ -56,6 +71,8 @@ export interface ExtractedMedia {
   hasMediaSpoiler?: boolean
   captionAboveMedia?: boolean
   voice?: QuoteVoice
+  document?: QuoteDocument
+  audio?: QuoteAudio
 }
 
 export interface ExtractMediaOptions {
@@ -130,12 +147,19 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
     out.stickerIsAnimated = Boolean(s.is_animated)
     out.stickerIsVideo = Boolean(s.is_video)
   } else if (src.animation) {
-    out.media = thumbList(src.animation)
+    const a = src.animation
+    // A GIF is an mp4 animation. The renderer paints a static frame from the
+    // thumbnail; when Telegram omits it, hand over the file id so the renderer
+    // can still try to decode a frame (a real .gif decodes via sharp). Without
+    // this the bubble had no media at all and degraded to "unsupported".
+    out.media = a.thumbnail ? [a.thumbnail] : a.file_id ? [{ file_id: a.file_id }] : []
     out.mediaType = 'animation'
-    fileMeta(out, src.animation)
+    if (typeof a.duration === 'number') out.mediaDuration = a.duration
+    fileMeta(out, a)
   } else if (src.video) {
     out.media = thumbList(src.video)
     out.mediaType = 'video'
+    if (typeof src.video.duration === 'number') out.mediaDuration = src.video.duration
     fileMeta(out, src.video)
   } else if (src.video_note) {
     out.media = thumbList(src.video_note)
@@ -152,14 +176,24 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
       out.media = [{ file_id: d.file_id }]
       out.mediaType = 'photo'
     } else {
-      out.media = thumbList(d)
-      out.mediaType = 'document'
+      // A real document (pdf, zip, …) renders as a Telegram-style row (icon +
+      // name + size), not a thumbnail bubble — so a thumbnail-less file is no
+      // longer "unsupported".
+      out.document = {}
+      if (d.file_name) out.document.file_name = d.file_name
+      if (typeof d.file_size === 'number') out.document.file_size = d.file_size
     }
     fileMeta(out, d)
   } else if (src.audio) {
-    out.media = thumbList(src.audio)
-    out.mediaType = 'audio'
-    fileMeta(out, src.audio)
+    // Audio renders as a Telegram-style row (cover/note disc + title/performer ·
+    // duration), with the cover fetched from the thumbnail by file id.
+    const a = src.audio
+    out.audio = {}
+    if (a.title) out.audio.title = a.title
+    if (a.performer) out.audio.performer = a.performer
+    if (typeof a.duration === 'number') out.audio.duration = a.duration
+    if (a.thumbnail?.file_id) out.audio.thumb = { file_id: a.thumbnail.file_id }
+    fileMeta(out, a)
   } else if (src.paid_media) {
     // Paid media (Bot API 7.5+): surface the first item's preview and the price.
     const first = src.paid_media.paid_media?.[0]
