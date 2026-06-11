@@ -63,7 +63,7 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   // carrying the trigger's id + manual quote selection.
   if (!reply && trigger.external_reply) {
     const ext: RawMessage = { ...trigger.external_reply, message_id: trigger.message_id }
-    if (trigger.quote) ext.quote = trigger.quote
+    if (trigger.quote) ext.selection = trigger.quote
     return { messages: [ext] }
   }
 
@@ -74,9 +74,10 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   if (!firstMessage || firstMessage.message_id === undefined) return { messages: [] }
 
   // Single message — keep the native object (richest entities/media).
-  // A manual quote selection (message.quote) always belongs to the quoted
-  // message — in the same-chat case that's the reply itself (a Bot API
-  // `quote` only ever appears on reply messages).
+  // The TRIGGER's `quote` is the user's manual selection — a fragment of the
+  // replied (quoted) message, carried as `selection`. A `quote` already on the
+  // source itself means something else entirely: that message quoted a
+  // fragment of ITS parent — buildQuoteMessage shows it on the reply block.
   if (isGuest || count === 1 || !fetcher.isHealthy()) {
     // The r flag needs the quoted message's own reply linkage, which the
     // native object never carries — graft it from a server fetch onto the
@@ -90,7 +91,7 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
         firstMessage = { ...firstMessage, reply_to_message: fetched.reply_to_message }
       }
     }
-    if (trigger.quote) firstMessage = { ...firstMessage, quote: trigger.quote }
+    if (trigger.quote) firstMessage = { ...firstMessage, selection: trigger.quote }
     return { messages: [firstMessage] }
   }
 
@@ -100,6 +101,12 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   const fetched = await fetcher.getMessages(chatId, ids).catch(() => [] as ApiMessage[])
   const messages: RawMessage[] = fetched.length > 0 ? fetched : [firstMessage]
 
-  if (trigger.quote && messages[0]) messages[0] = { ...messages[0], quote: trigger.quote }
+  // The selection belongs to the replied message — in a backwards range
+  // that's the LAST of the fetched ids, not messages[0].
+  if (trigger.quote) {
+    const anchorId = firstMessage.message_id
+    const i = messages.findIndex((m) => m.message_id === anchorId)
+    if (i !== -1) messages[i] = { ...messages[i], selection: trigger.quote }
+  }
   return { messages }
 }

@@ -108,7 +108,7 @@ describe('buildQuoteMessage', () => {
 
   it('marks an explicit quote selection', () => {
     const m = buildQuoteMessage({
-      source: { text: 'full', quote: { text: 'part' } },
+      source: { text: 'full', selection: { text: 'part' } },
       from: alice,
       isFirstInStreak: true,
       showReply: true,
@@ -125,7 +125,7 @@ describe('buildQuoteMessage', () => {
       source: {
         caption: 'full caption',
         photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
-        quote: { text: 'part' },
+        selection: { text: 'part' },
       },
       from: alice,
       isFirstInStreak: true,
@@ -144,7 +144,7 @@ describe('buildQuoteMessage', () => {
       source: {
         caption: 'full caption',
         photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
-        quote: { text: 'part' },
+        selection: { text: 'part' },
       },
       from: alice,
       isFirstInStreak: true,
@@ -155,6 +155,67 @@ describe('buildQuoteMessage', () => {
     })
     expect(m.text).toBe('part')
     expect(m.media).toBeDefined()
+  })
+
+  it("never renders the message's own reply-quote as its body", () => {
+    // A Bot API `quote` on the source is the fragment its author quoted from
+    // the PARENT message — someone else's words. The body must stay the
+    // author's own text.
+    const m = buildQuoteMessage({
+      source: {
+        text: 'my own reply',
+        quote: { text: 'parent fragment' },
+        reply_to_message: { text: 'parent full text' },
+      },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: false,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('my own reply')
+    expect(m.isQuote).toBeUndefined()
+  })
+
+  it("keeps media when the source carries its own reply-quote", () => {
+    const m = buildQuoteMessage({
+      source: {
+        caption: 'cap',
+        photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
+        quote: { text: 'parent fragment' },
+      },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: false,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('cap')
+    expect(m.media).toBeDefined()
+  })
+
+  it("shows the source's own reply-quote fragment on the reply block", () => {
+    // Telegram renders a reply-with-quote header with the quoted fragment,
+    // not the parent's full text — match that.
+    const m = buildQuoteMessage({
+      source: {
+        text: 'my own reply',
+        quote: { text: 'parent fragment', entities: [{ type: 'bold', offset: 0, length: 6 }] },
+        reply_to_message: { text: 'parent full text', entities: [{ type: 'italic', offset: 0, length: 4 }] },
+      },
+      from: alice,
+      replyFrom: { id: 7, first_name: 'Bob' },
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('my own reply')
+    expect(m.replyMessage).toMatchObject({ name: 'Bob', text: 'parent fragment' })
+    expect(m.replyMessage?.entities).toEqual([{ type: 'bold', offset: 0, length: 6 }])
   })
 })
 
@@ -173,5 +234,14 @@ describe('buildReplyMessage', () => {
   it('captures reply media kind', () => {
     const r = buildReplyMessage({ photo: [{ file_id: 'pp' }] }, null)
     expect(r.media).toEqual({ kind: 'photo', fileId: 'pp' })
+  })
+
+  it('prefers the quoted fragment over the full reply text', () => {
+    const r = buildReplyMessage({ text: 'full', entities: [{ type: 'italic', offset: 0, length: 4 }] }, null, {
+      text: 'frag',
+    })
+    expect(r.text).toBe('frag')
+    // The reply's own entities have offsets into the full text — never mix them in.
+    expect(r.entities).toBeUndefined()
   })
 })

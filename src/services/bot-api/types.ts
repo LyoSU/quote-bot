@@ -81,6 +81,8 @@ export interface ApiMessage {
   sender_chat?: ApiChat
   chat?: ApiChat
   reply_to_message?: ApiMessage
+  /** Reply-with-quote: the fragment of the replied message this one quoted. */
+  quote?: { text: string; entities?: MessageEntity[] }
 
   forward_from?: ApiUser & { is_bot?: boolean }
   forward_from_chat?: ApiChat

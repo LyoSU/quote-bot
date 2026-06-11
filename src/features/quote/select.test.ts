@@ -40,7 +40,24 @@ describe('selectSourceMessages', () => {
       fetcher: fetcher([]),
     })
     expect(sel.messages[0]?.message_id).toBe(10)
-    expect(sel.messages[0]?.quote?.text).toBe('part')
+    expect(sel.messages[0]?.selection?.text).toBe('part')
+  })
+
+  it("keeps the replied message's own reply-quote out of the selection", async () => {
+    // The target itself was a reply-with-quote: its `quote` is a fragment of
+    // ITS parent, not a selection of its own text.
+    const sel = await selectSourceMessages({
+      trigger: trigger({
+        reply_to_message: { ...reply, quote: { text: 'parent fragment' } },
+      }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 1,
+      fetcher: fetcher([]),
+    })
+    expect(sel.messages[0]?.selection).toBeUndefined()
+    expect(sel.messages[0]?.quote?.text).toBe('parent fragment')
   })
 
   it('grafts the nested reply via the server when the r flag needs it', async () => {
@@ -140,7 +157,7 @@ describe('selectSourceMessages', () => {
     })
     expect(sel.messages[0]?.message_id).toBe(20)
     expect(sel.messages[0]?.text).toBe('from channel')
-    expect(sel.messages[0]?.quote?.text).toBe('q')
+    expect(sel.messages[0]?.selection?.text).toBe('q')
   })
 
   it('quotes backwards for a negative count', async () => {
@@ -155,5 +172,42 @@ describe('selectSourceMessages', () => {
     })
     // start = 10 - (3 - 1) = 8 → [8, 9, 10]
     expect(td.getMessages).toHaveBeenCalledWith(-100, [8, 9, 10])
+  })
+
+  it('attaches the selection to the replied message in a range fetch', async () => {
+    const td = fetcher([
+      { message_id: 10, date: 0 },
+      { message_id: 11, date: 0 },
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply, quote: { text: 'part' } }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 2,
+      fetcher: td,
+    })
+    expect(sel.messages[0]?.selection?.text).toBe('part')
+    expect(sel.messages[1]?.selection).toBeUndefined()
+  })
+
+  it('attaches the selection to the replied message in a backwards range', async () => {
+    // Backwards from message 10: [8, 9, 10] — the replied message is LAST,
+    // and the manual quote selection belongs to it, not to messages[0].
+    const td = fetcher([
+      { message_id: 8, date: 0 },
+      { message_id: 9, date: 0 },
+      { message_id: 10, date: 0 },
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply, quote: { text: 'part' } }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: -3,
+      fetcher: td,
+    })
+    expect(sel.messages[0]?.selection).toBeUndefined()
+    expect(sel.messages[2]?.selection?.text).toBe('part')
   })
 })

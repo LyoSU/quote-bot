@@ -20,6 +20,12 @@ export interface ReplySource {
   caption?: string
   entities?: MessageEntity[]
   caption_entities?: MessageEntity[]
+  /**
+   * Present when this message was itself a reply-with-quote — a fragment of
+   * ITS parent. Matters once the message is promoted to a quote source
+   * (`reply as RawMessage` in select); the reply block itself ignores it.
+   */
+  quote?: { text: string; entities?: MessageEntity[] }
   photo?: { file_id: string }[]
   sticker?: { thumb?: { file_id: string }; thumbnail?: { file_id: string } }
   animation?: { thumbnail?: { file_id: string } }
@@ -44,6 +50,13 @@ export interface QuoteSource extends MediaSource {
   caption?: string
   entities?: MessageEntity[]
   caption_entities?: MessageEntity[]
+  /** Manual fragment selection from the `/q` trigger — a fragment of THIS message's text. */
+  selection?: { text: string; entities?: MessageEntity[] }
+  /**
+   * The message's own reply-with-quote (Bot API `quote`) — a fragment of its
+   * PARENT message, i.e. someone else's words. Shown on the reply block only,
+   * never as this message's body.
+   */
   quote?: { text: string; entities?: MessageEntity[] }
   reply_to_message?: ReplySource
   sender_tag?: string
@@ -84,13 +97,19 @@ function replyMediaKind(reply: ReplySource): QuoteReplyMedia | undefined {
   return undefined
 }
 
-export function buildReplyMessage(reply: ReplySource, from: Sender | null): QuoteReplyMessage {
+export function buildReplyMessage(
+  reply: ReplySource,
+  from: Sender | null,
+  quote?: { text: string; entities?: MessageEntity[] },
+): QuoteReplyMessage {
   const name = from ? composeName(from) : undefined
   const out: QuoteReplyMessage = {}
   if (name !== undefined) out.name = name
   if (from) out.chatId = from.id ?? hashCode(name ?? '')
-  out.text = reply.text || reply.caption || undefined
-  out.entities = reply.entities ?? reply.caption_entities
+  // A reply-with-quote shows the quoted fragment, like Telegram's own header.
+  // Its entities replace the reply's: those offsets index into the full text.
+  out.text = quote?.text || reply.text || reply.caption || undefined
+  out.entities = quote ? quote.entities : (reply.entities ?? reply.caption_entities)
   const media = replyMediaKind(reply)
   if (media) out.media = media
   return out
@@ -113,15 +132,15 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
 
   const out: QuoteMessage = { avatar: true }
   if (typeof source.date === 'number') out.date = source.date
-  if (source.quote) {
-    text = source.quote.text
-    entities = source.quote.entities
+  if (source.selection) {
+    text = source.selection.text
+    entities = source.selection.entities
     out.isQuote = true
   }
 
   // A partial quote is about the selected text — drop the media (Telegram
   // behaves the same), unless the user explicitly asked for it with `m`.
-  if (!source.quote || forceMedia) {
+  if (!source.selection || forceMedia) {
     Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
   }
 
@@ -156,7 +175,9 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   if (entities) out.entities = entities
 
   out.replyMessage =
-    showReply && source.reply_to_message ? buildReplyMessage(source.reply_to_message, replyFrom ?? null) : {}
+    showReply && source.reply_to_message
+      ? buildReplyMessage(source.reply_to_message, replyFrom ?? null, source.quote)
+      : {}
 
   if (forward) out.forward = forward
 
