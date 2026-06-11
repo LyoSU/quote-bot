@@ -54,7 +54,10 @@ function extractArgString(ctx: BotContext, rawText: string, mentionForm: boolean
  */
 async function handleQuote(ctx: BotContext): Promise<void> {
   const isGuest = Boolean(ctx.guestMessage)
-  const trigger = (ctx.guestMessage ?? ctx.message) as
+  // ctx.message is strictly update.message — a business_message update only
+  // populates ctx.businessMessage, so it must be a fallback here or the
+  // registered business `/q` handler silently does nothing.
+  const trigger = (ctx.guestMessage ?? ctx.message ?? ctx.businessMessage) as
     | (RawMessage & {
         external_reply?: RawMessage
         quote?: { text: string; entities?: import('grammy/types').MessageEntity[] }

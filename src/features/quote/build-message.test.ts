@@ -21,6 +21,19 @@ describe('buildQuoteMessage', () => {
     expect(m.avatar).toBe(true)
   })
 
+  it('carries the source message_id through (denormalize reads it)', () => {
+    const m = buildQuoteMessage({
+      source: { message_id: 42, text: 'hi' },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: false,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.message_id).toBe(42)
+  })
+
   it('suppresses the name on streak continuation', () => {
     const m = buildQuoteMessage({
       source: { text: 'again' },

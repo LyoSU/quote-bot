@@ -99,6 +99,21 @@ describe('selectSourceMessages', () => {
     expect(sel.messages[0]?.message_id).toBe(20)
   })
 
+  it('never applies the trigger quote to the trigger itself', async () => {
+    // A trigger `quote` is a fragment of the message it REPLIES to. With no
+    // reply the trigger is the source — its quote must not become a selection
+    // of its own text.
+    const sel = await selectSourceMessages({
+      trigger: trigger({ quote: { text: 'parent fragment' } }),
+      chatId: 5,
+      isPrivate: true,
+      isGuest: false,
+      fetcher: fetcher([]),
+    })
+    expect(sel.messages[0]?.message_id).toBe(20)
+    expect(sel.messages[0]?.selection).toBeUndefined()
+  })
+
   it('returns nothing for a group message with no reply', async () => {
     const sel = await selectSourceMessages({ trigger: trigger(), chatId: -1, isPrivate: false, isGuest: false, fetcher: fetcher([]) })
     expect(sel.messages).toHaveLength(0)

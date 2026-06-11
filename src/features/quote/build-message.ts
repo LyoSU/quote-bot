@@ -46,6 +46,7 @@ export interface ReplySource {
 
 /** Structural view of the source message buildQuoteMessage consumes. */
 export interface QuoteSource extends MediaSource {
+  message_id?: number
   text?: string
   caption?: string
   entities?: MessageEntity[]
@@ -131,6 +132,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   }
 
   const out: QuoteMessage = { avatar: true }
+  if (typeof source.message_id === 'number') out.message_id = source.message_id
   if (typeof source.date === 'number') out.date = source.date
   if (source.selection) {
     text = source.selection.text

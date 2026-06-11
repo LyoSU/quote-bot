@@ -58,6 +58,9 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   const { count, backwards } = clampCount(params.count)
 
   const reply = trigger.reply_to_message
+  // The trigger's `quote` is always a fragment of the message it REPLIES to —
+  // with no reply linkage it can't describe anything we're about to quote.
+  const selection = reply ? trigger.quote : undefined
 
   // An external reply (a message in a chat the bot isn't in) is quoted directly,
   // carrying the trigger's id + manual quote selection.
@@ -91,7 +94,7 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
         firstMessage = { ...firstMessage, reply_to_message: fetched.reply_to_message }
       }
     }
-    if (trigger.quote) firstMessage = { ...firstMessage, selection: trigger.quote }
+    if (selection) firstMessage = { ...firstMessage, selection }
     return { messages: [firstMessage] }
   }
 
@@ -103,10 +106,10 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
 
   // The selection belongs to the replied message — in a backwards range
   // that's the LAST of the fetched ids, not messages[0].
-  if (trigger.quote) {
+  if (selection) {
     const anchorId = firstMessage.message_id
     const i = messages.findIndex((m) => m.message_id === anchorId)
-    if (i !== -1) messages[i] = { ...messages[i], selection: trigger.quote }
+    if (i !== -1) messages[i] = { ...messages[i], selection }
   }
   return { messages }
 }
