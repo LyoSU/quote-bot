@@ -30,3 +30,20 @@ export function buildQuoteReplyMarkup(
 
   return hasRows ? { reply_markup: keyboard } : {}
 }
+
+/** A previously stored quote, as needed to rebuild its rating keyboard. */
+export interface RatedQuote {
+  rate?: { votes?: { vote?: unknown[] }[] | null } | null
+}
+
+/**
+ * Builds the `👍 N / 👎 M` rating keyboard for a resent stored quote (`/q_<id>`,
+ * `/qrand`, auto-gab), with an optional "open in app" row.
+ */
+export function buildRatingKeyboard(quote: RatedQuote, deepLinkRow?: { url: string; label: string }): InlineKeyboard {
+  const up = quote.rate?.votes?.[0]?.vote?.length ?? 0
+  const down = quote.rate?.votes?.[1]?.vote?.length ?? 0
+  const keyboard = new InlineKeyboard().text(`👍 ${up || ''}`.trim(), 'rate:👍').text(`👎 ${down || ''}`.trim(), 'rate:👎')
+  if (deepLinkRow) keyboard.row().url(deepLinkRow.label, deepLinkRow.url)
+  return keyboard
+}

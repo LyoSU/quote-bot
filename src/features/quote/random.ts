@@ -1,10 +1,11 @@
-import { Composer, InlineKeyboard } from 'grammy'
+import { Composer, type InlineKeyboard } from 'grammy'
 import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { Group, Quote } from '../../db/models'
 import { deepLink } from '../../helpers/deep-link'
 import { onlyGroup } from '../../middlewares/guards'
 import { activeSpeakers, rememberFired } from '../../services/gab'
+import { buildRatingKeyboard } from './reply-markup'
 
 interface SampledQuote {
   _id: Types.ObjectId
@@ -43,13 +44,14 @@ async function sampleQuote(
 }
 
 function ratingKeyboard(ctx: BotContext, quote: SampledQuote): InlineKeyboard {
-  const up = quote.rate?.votes?.[0]?.vote?.length ?? 0
-  const down = quote.rate?.votes?.[1]?.vote?.length ?? 0
-  const kb = new InlineKeyboard().text(`👍 ${up || ''}`.trim(), 'rate:👍').text(`👎 ${down || ''}`.trim(), 'rate:👎')
-  if (quote.local_id != null && ctx.group && ctx.me?.username) {
-    kb.row().url(ctx.t('app-open_quote'), deepLink.forQuote(ctx.me.username, ctx.group._id.toString(), quote.local_id))
-  }
-  return kb
+  const deepLinkRow =
+    quote.local_id != null && ctx.group && ctx.me?.username
+      ? {
+          url: deepLink.forQuote(ctx.me.username, ctx.group._id.toString(), quote.local_id),
+          label: ctx.t('app-open_quote'),
+        }
+      : undefined
+  return buildRatingKeyboard(quote, deepLinkRow)
 }
 
 /**
