@@ -13,9 +13,20 @@ interface SampledQuote {
   rate?: { votes?: { vote?: unknown[] }[] }
 }
 
+/** Chance of biasing toward a "throwback" (quote authored by someone present). */
+const THROWBACK_CHANCE = 0.5
+
 /** Samples one highly-rated quote, optionally biased to a present author. */
-async function sampleQuote(groupId: Types.ObjectId, preferAuthors: number[]): Promise<SampledQuote | undefined> {
-  if (preferAuthors.length > 0) {
+async function sampleQuote(
+  groupId: Types.ObjectId,
+  preferAuthors: number[],
+  rng: () => number = Math.random,
+): Promise<SampledQuote | undefined> {
+  // Active speakers are usually quoted a lot, so this branch wins on nearly
+  // every gab fire — only try it part of the time, otherwise auto-gab ends up
+  // sampling a much narrower pool (only quotes with saved author metadata)
+  // than /qrand, which always samples the full pool below.
+  if (preferAuthors.length > 0 && rng() < THROWBACK_CHANCE) {
     const [byPresent] = (await Quote.aggregate([
       // `authors.0 exists` lets the planner use the partial
       // { 'authors.telegram_id': 1, group: 1 } index.
