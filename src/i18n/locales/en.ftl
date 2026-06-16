@@ -317,6 +317,32 @@ menu-settings-btn-color = 🎨 Default Color
 menu-settings-btn-emoji_style = 😊 Emoji Style
 menu-settings-btn-privacy = 🔒 Privacy
 menu-settings-btn-back = ← Back
+menu-settings-color-info =
+    <b>🎨 Default Color</b>
+
+    Set the background used for every new quote:
+
+    <b>Named colors:</b>
+    <code>/qcolor red</code>, <code>/qcolor blue</code>
+
+    <b>Custom hex:</b>
+    <code>/qcolor #ff5733</code>
+
+    <b>Special:</b>
+    <code>/qcolor random</code> — surprise gradient
+    <code>/qcolor transparent</code> — no background
+
+    Reset to default: <code>/qcolor</code>
+menu-settings-privacy-info =
+    <b>🔒 Privacy</b>
+
+    <b>Privacy mode:</b>
+    <code>/privacy</code> — hide your name and avatar in quotes
+
+    <b>Sender search:</b>
+    <code>/hidden</code> — stop attributing forwarded messages to you
+
+    Run a command again to toggle it back off.
 menu-features-title =
     <b>✨ What can I do?</b>
 

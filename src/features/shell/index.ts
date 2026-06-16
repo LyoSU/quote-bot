@@ -212,7 +212,10 @@ shellFeature.callbackQuery(/^menu:(.+)$/, async (ctx) => {
       await editPanel(ctx, 'emoji-info', back('menu:settings'))
       break
     case 'set_color':
-      await editPanel(ctx, 'menu-settings-btn-color', back('menu:settings'))
+      await editPanel(ctx, 'menu-settings-color-info', back('menu:settings'))
+      break
+    case 'set_privacy':
+      await editPanel(ctx, 'menu-settings-privacy-info', back('menu:settings'))
       break
     default: {
       const page = action.replace(/^f_/, '')
