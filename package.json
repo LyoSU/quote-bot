@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
-    "build": "tsc -p tsconfig.build.json && cp -R src/i18n/locales dist/i18n/locales && cp -R src/services/sticker/assets dist/services/sticker/assets",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp -R src/i18n/locales dist/i18n/locales && cp -R src/services/sticker/assets dist/services/sticker/assets",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
