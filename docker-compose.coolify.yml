@@ -1,12 +1,13 @@
 # Coolify deployment compose for quote-bot (hetzner-auction) — grammy-rewrite.
-# This branch's Dockerfile builds dist/ and runs the grammY bot (dist/index.js),
-# the user-facing @QuotLyBot (the old PM2 "quote-bot"). Long-polling, no inbound
-# webhook. Reaches the quote-api container via the host's published port. The bot
-# uses external MongoDB + the self-hosted Bot API (BOT_API_ROOT); it does not use
-# Redis or TDLib (those belong to the separate collector subsystem, not deployed).
+# Builds the grammY bot (dist/index.js), the user-facing @QuotLyBot. Long-polling,
+# no inbound webhook. Reaches quote-api via the host's published port. Uses
+# external MongoDB + self-hosted Bot API (BOT_API_ROOT); no Redis/TDLib (those
+# belong to the separate collector subsystem, not deployed here).
 services:
   quote-bot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.coolify
     restart: unless-stopped
     env_file:
       - .env
