@@ -1,0 +1,22 @@
+# Coolify deployment compose for quote-bot (hetzner-auction).
+# Long-polling bot (no inbound webhook). Reaches the quote-api container via the
+# host's published port (both run on hetzner-auction). TDLib logs in as a bot
+# from BOT_TOKEN, so its data dir is a fresh persistent volume (the old 4.1 GB
+# was just regenerable cache). Durable data is in external MongoDB.
+services:
+  quote-bot:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - QUOTE_API_URI=http://host.docker.internal:4888
+      - QUOTE_API_URI_HTML=http://host.docker.internal:4889
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - quote-bot-tdlib:/app/helpers/tdlib/data
+    ports:
+      - "3000:3000"   # METRICS_PORT (Prometheus)
+volumes:
+  quote-bot-tdlib:
