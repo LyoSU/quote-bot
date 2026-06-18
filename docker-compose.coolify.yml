@@ -1,8 +1,9 @@
 # Coolify deployment compose for quote-bot (hetzner-auction) — grammy-rewrite.
 # Builds the grammY bot (dist/index.js), the user-facing @QuotLyBot. Long-polling,
-# no inbound webhook. Reaches quote-api via the host's published port. Uses
-# external MongoDB + self-hosted Bot API (BOT_API_ROOT); no Redis/TDLib (those
-# belong to the separate collector subsystem, not deployed here).
+# no inbound webhook. Reaches quote-api over the shared `quote-shared` docker
+# network by DNS name (host-gateway is blocked by ufw on hz). Uses external
+# MongoDB + self-hosted Bot API (BOT_API_ROOT); no Redis/TDLib (those belong to
+# the separate collector subsystem, not deployed here).
 services:
   quote-bot:
     build:
@@ -12,9 +13,17 @@ services:
     env_file:
       - .env
     environment:
-      - QUOTE_API_URI=http://host.docker.internal:4888
-      - QUOTE_API_URI_HTML=http://host.docker.internal:4889
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - QUOTE_API_URI=http://quote-api:4888
+      - QUOTE_API_URI_HTML=http://quote-api:4889
     ports:
       - "3000:3000"   # METRICS_PORT
+    networks:
+      - quote-shared
+
+# Shared bridge with quote-api (see that app's compose). Provides both
+# service-name DNS to quote-api and egress (Mongo, Bot API). Pre-created on the
+# host; external so both Coolify compose projects can attach.
+networks:
+  quote-shared:
+    name: quote-shared
+    external: true
