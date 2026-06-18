@@ -1,13 +1,13 @@
 # Coolify deployment compose for quote-bot (hetzner-auction).
-# Long-polling bot (no inbound webhook). Reaches the quote-api container via the
-# host's published port. TDLib logs in as a bot from BOT_TOKEN (fresh data
-# volume — old 4.1 GB was regenerable cache). The updates-collector needs Redis;
-# host redis binds 127.0.0.1 only and holds just non-critical counters/cache
-# used solely by this bot, so a self-contained sidecar is used. Durable data is
-# in external MongoDB.
+# IMPORTANT: the repo's default CMD is the stats collector (updates-collector.js);
+# the user-facing grammY bot is dist/index.js — run that here (matches the old
+# PM2 "quote-bot" process). Long-polling, no inbound webhook. Reaches quote-api
+# via the host's published port. TDLib logs in as a bot from BOT_TOKEN. Durable
+# data is in external MongoDB; Redis is used for caching/the bot's internal needs.
 services:
   quote-bot:
     build: .
+    command: node dist/index.js
     restart: unless-stopped
     env_file:
       - .env
@@ -23,7 +23,7 @@ services:
     depends_on:
       - redis
     ports:
-      - "3000:3000"   # METRICS_PORT (Prometheus)
+      - "3000:3000"   # METRICS_PORT
   redis:
     image: redis:7-alpine
     restart: unless-stopped
