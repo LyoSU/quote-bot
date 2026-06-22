@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest'
 import {
   buildHubKeyboard,
   nextBrand,
-  nextColor,
   nextGab,
   nextPartialMode,
   COLOR_PRESETS,
@@ -17,6 +16,9 @@ const view = (over: Partial<QuoteSettingsView> = {}): QuoteSettingsView => ({
   brand: 'apple',
   suffix: '💜',
   gab: 800,
+  media: false,
+  showReply: false,
+  crop: false,
   privacy: false,
   hidden: true,
   rate: true,
@@ -39,11 +41,6 @@ describe('cyclers', () => {
   it('cycles emoji brands and wraps around', () => {
     expect(nextBrand('apple')).toBe('google')
     expect(nextBrand('blob')).toBe('apple')
-  })
-
-  it('cycles colors through presets; an unknown value starts at the first', () => {
-    expect(nextColor(COLOR_PRESETS[0]!.value)).toBe(COLOR_PRESETS[1]!.value)
-    expect(nextColor('#ffffff')).toBe(COLOR_PRESETS[0]!.value)
   })
 
   it('cycles gab presets; an unknown value starts at the first', () => {
@@ -72,5 +69,23 @@ describe('buildHubKeyboard', () => {
     expect(cb).toContain('qs:cycle:partial')
     expect(cb).toContain('qs:toggle:privacy')
     expect(cb).toContain('qs:suffix')
+  })
+
+  it('opens the color sub-panel instead of cycling, and offers the default-behaviour toggles', () => {
+    const cb = callbacks(buildHubKeyboard(view(), t))
+    expect(cb).toContain('qs:color')
+    expect(cb).not.toContain('qs:cycle:color')
+    expect(cb).toContain('qs:toggle:media')
+    expect(cb).toContain('qs:toggle:reply')
+    expect(cb).toContain('qs:toggle:crop')
+  })
+})
+
+describe('COLOR_PRESETS', () => {
+  it('has unique values and a distinct swatch each', () => {
+    const values = COLOR_PRESETS.map((p) => p.value)
+    const swatches = COLOR_PRESETS.map((p) => p.swatch)
+    expect(new Set(values).size).toBe(values.length)
+    expect(new Set(swatches).size).toBe(swatches.length)
   })
 })

@@ -13,15 +13,28 @@ const ADMIN_STATUSES = new Set(['creator', 'administrator'])
 export const PARTIAL_MODES: PartialQuoteMode[] = ['framed', 'plain', 'off']
 export const EMOJI_BRANDS = ['apple', 'google', 'twitter', 'joypixels', 'blob']
 
-/** Background presets shown as colored swatches; `/qcolor` still sets custom ones. */
+/**
+ * Background presets shown as colored swatches in the color sub-panel. Deep,
+ * Telegram-flavoured tones (the renderer's `//#hex` auto-gradient keeps them
+ * rich and readable with white text); `/qcolor` still sets fully custom ones.
+ * The default (`//#292232`) maps to 🟣 so an unset background shows a swatch.
+ */
 export const COLOR_PRESETS = [
-  { swatch: '⚫', value: DEFAULT_BACKGROUND },
-  { swatch: '🔵', value: '//#1b2a4a' },
-  { swatch: '🟢', value: '//#15321f' },
-  { swatch: '🟣', value: '//#2d1b3d' },
-  { swatch: '🔴', value: '//#3d1620' },
-  { swatch: '⚪', value: 'transparent' },
-  { swatch: '🎲', value: 'random' },
+  { swatch: '🟣', value: DEFAULT_BACKGROUND }, // deep violet (default)
+  { swatch: '🔵', value: '//#17212b' }, // Telegram night blue
+  { swatch: '🩵', value: '//#13303a' }, // teal
+  { swatch: '🟢', value: '//#15321f' }, // forest green
+  { swatch: '🟡', value: '//#3a3110' }, // amber
+  { swatch: '🟠', value: '//#3d2410' }, // orange
+  { swatch: '🔴', value: '//#3d1620' }, // wine red
+  { swatch: '🩷', value: '//#3a1528' }, // magenta pink
+  { swatch: '🟤', value: '//#33240f' }, // brown
+  { swatch: '⚫', value: '//#1c1c1e' }, // graphite
+  { swatch: '🩶', value: '//#2b2f33' }, // slate grey
+  { swatch: '⬜', value: 'white' }, // plain white (solid)
+  { swatch: '⬛', value: '#17212b' }, // plain dark (solid, Telegram night)
+  { swatch: '⚪', value: 'transparent' }, // no background
+  { swatch: '🎲', value: 'random' }, // surprise gradient
 ] as const
 
 /** Auto-quote frequency presets (`randomQuoteGab` ≈ 1-in-N chance; 0 = off). */
@@ -44,10 +57,6 @@ export function nextPartialMode(mode: PartialQuoteMode): PartialQuoteMode {
 }
 export function nextBrand(brand: string): string {
   return nextIn(EMOJI_BRANDS, brand)
-}
-export function nextColor(value: string): string {
-  const i = COLOR_PRESETS.findIndex((p) => p.value === value)
-  return COLOR_PRESETS[(i + 1) % COLOR_PRESETS.length]!.value
 }
 export function nextGab(value: number): number {
   const i = GAB_PRESETS.findIndex((p) => p.value === value)
@@ -74,6 +83,9 @@ export interface QuoteSettingsView {
   brand: string
   suffix: string
   gab: number
+  media: boolean
+  showReply: boolean
+  crop: boolean
   privacy: boolean
   hidden: boolean
   rate: boolean
@@ -90,6 +102,9 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       brand: s?.quote?.emojiBrand ?? 'apple',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
       gab: s?.randomQuoteGab ?? 800,
+      media: s?.quote?.media ?? false,
+      showReply: s?.quote?.showReply ?? false,
+      crop: s?.quote?.crop ?? false,
       privacy: s?.privacy ?? false,
       hidden: s?.hidden ?? true,
       rate: s?.rate ?? true,
@@ -105,6 +120,9 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       brand: s?.quote?.emojiBrand ?? 'apple',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
       gab: 0,
+      media: s?.quote?.media ?? false,
+      showReply: s?.quote?.showReply ?? false,
+      crop: s?.quote?.crop ?? false,
       privacy: s?.privacy ?? false,
       hidden: s?.hidden ?? true,
       rate: false,
@@ -128,7 +146,7 @@ export function buildHubKeyboard(view: QuoteSettingsView, t: Translate): InlineK
   const kb = new InlineKeyboard()
     .text(`${t('qs-row-partial')}: ${partialLabel}`, 'qs:cycle:partial')
     .row()
-    .text(`${t('qs-row-color')}: ${colorSwatch(view.color)}`, 'qs:cycle:color')
+    .text(`${t('qs-row-color')}: ${colorSwatch(view.color)}`, 'qs:color')
     .row()
     .text(`${t('qs-row-brand')}: ${capitalize(view.brand)}`, 'qs:cycle:brand')
     .row()
@@ -136,15 +154,22 @@ export function buildHubKeyboard(view: QuoteSettingsView, t: Translate): InlineK
   if (view.scope === 'group') kb.text(`${t('qs-row-gab')}: ${gabLabel}`, 'qs:cycle:gab').row()
   kb.text(`${t('qs-row-suffix')}: ${view.suffix}`, 'qs:suffix').row()
 
-  kb.text(`${t('qs-row-privacy')}: ${onOff(view.privacy)}`, 'qs:toggle:privacy')
-    .text(`${t('qs-row-hidden')}: ${onOff(view.hidden)}`, 'qs:toggle:hidden')
-    .row()
-
+  // Boolean toggles, two per row. Group-only ones are appended for groups.
+  const toggles: { key: string; on: boolean }[] = [
+    { key: 'media', on: view.media },
+    { key: 'reply', on: view.showReply },
+    { key: 'crop', on: view.crop },
+    { key: 'privacy', on: view.privacy },
+    { key: 'hidden', on: view.hidden },
+  ]
   if (view.scope === 'group') {
-    kb.text(`${t('qs-row-rate')}: ${onOff(view.rate)}`, 'qs:toggle:rate')
-      .text(`${t('qs-row-archive')}: ${onOff(view.archive)}`, 'qs:toggle:archive')
-      .row()
+    toggles.push({ key: 'rate', on: view.rate }, { key: 'archive', on: view.archive })
   }
+  toggles.forEach((tg, i) => {
+    kb.text(`${t(`qs-row-${tg.key}`)}: ${onOff(tg.on)}`, `qs:toggle:${tg.key}`)
+    if (i % 2 === 1) kb.row()
+  })
+  if (toggles.length % 2 === 1) kb.row()
 
   kb.text(t('menu-btn-language'), 'menu:language').text(t('menu-btn-back'), 'menu:main')
   return kb
@@ -157,6 +182,17 @@ function suffixKeyboard(t: Translate): InlineKeyboard {
     if (i % 4 === 3) kb.row()
   })
   kb.row().text(t('qs-suffix-random'), 'qs:suffix:set:random')
+  kb.row().text(t('menu-btn-back'), 'qs:open')
+  return kb
+}
+
+/** Background-color sub-panel: a grid of swatches, set by preset index. */
+function colorKeyboard(t: Translate): InlineKeyboard {
+  const kb = new InlineKeyboard()
+  COLOR_PRESETS.forEach((preset, i) => {
+    kb.text(preset.swatch, `qs:color:set:${i}`)
+    if (i % 5 === 4) kb.row()
+  })
   kb.row().text(t('menu-btn-back'), 'qs:open')
   return kb
 }
@@ -220,7 +256,7 @@ quoteSettingsMenu.callbackQuery('qs:open', async (ctx) => {
 })
 
 // Cycle a multi-value setting to its next preset.
-quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|color|brand|gab)$/, async (ctx) => {
+quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|brand|gab)$/, async (ctx) => {
   const key = ctx.match?.[1]
   const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
   if (!view || !key) {
@@ -230,9 +266,6 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|color|brand|gab)$/, async (c
   if (key === 'partial') {
     view.partialMode = nextPartialMode(view.partialMode)
     await writeSetting(ctx, 'settings.quote.partialMode', view.partialMode)
-  } else if (key === 'color') {
-    view.color = nextColor(view.color)
-    await writeSetting(ctx, 'settings.quote.backgroundColor', view.color)
   } else if (key === 'brand') {
     view.brand = nextBrand(view.brand)
     await writeSetting(ctx, 'settings.quote.emojiBrand', view.brand)
@@ -245,14 +278,23 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|color|brand|gab)$/, async (c
 })
 
 // Flip a boolean setting.
-quoteSettingsMenu.callbackQuery(/^qs:toggle:(privacy|hidden|rate|archive)$/, async (ctx) => {
+quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|privacy|hidden|rate|archive)$/, async (ctx) => {
   const key = ctx.match?.[1]
   const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
   if (!view || !key) {
     await ctx.answerCallbackQuery().catch(() => {})
     return
   }
-  if (key === 'privacy') {
+  if (key === 'media') {
+    view.media = !view.media
+    await writeSetting(ctx, 'settings.quote.media', view.media)
+  } else if (key === 'reply') {
+    view.showReply = !view.showReply
+    await writeSetting(ctx, 'settings.quote.showReply', view.showReply)
+  } else if (key === 'crop') {
+    view.crop = !view.crop
+    await writeSetting(ctx, 'settings.quote.crop', view.crop)
+  } else if (key === 'privacy') {
     view.privacy = !view.privacy
     await writeSetting(ctx, 'settings.privacy', view.privacy)
   } else if (key === 'hidden') {
@@ -265,6 +307,34 @@ quoteSettingsMenu.callbackQuery(/^qs:toggle:(privacy|hidden|rate|archive)$/, asy
     view.archive = !view.archive
     await writeSetting(ctx, 'settings.archive.storeText', view.archive)
   }
+  await renderFromView(ctx, view, true)
+  await ctx.answerCallbackQuery().catch(() => {})
+})
+
+// Open the background-color sub-panel.
+quoteSettingsMenu.callbackQuery('qs:color', async (ctx) => {
+  if (await isAdmin(ctx)) {
+    await ctx
+      .editMessageText(ctx.t('qs-color-title'), {
+        parse_mode: 'HTML',
+        link_preview_options: { is_disabled: true },
+        reply_markup: colorKeyboard((k) => ctx.t(k)),
+      })
+      .catch(() => {})
+  }
+  await ctx.answerCallbackQuery().catch(() => {})
+})
+
+// Pick a background-color preset (by index) and return to the hub.
+quoteSettingsMenu.callbackQuery(/^qs:color:set:(\d+)$/, async (ctx) => {
+  const preset = COLOR_PRESETS[Number(ctx.match?.[1])]
+  const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
+  if (!view || !preset) {
+    await ctx.answerCallbackQuery().catch(() => {})
+    return
+  }
+  view.color = preset.value
+  await writeSetting(ctx, 'settings.quote.backgroundColor', preset.value)
   await renderFromView(ctx, view, true)
   await ctx.answerCallbackQuery().catch(() => {})
 })

@@ -32,6 +32,10 @@ export interface QuoteSettings {
   emojiSuffix?: string | null
   emojiBrand?: string | null
   partialMode?: PartialQuoteMode | null
+  /** Default-on for the `m`/`r`/`c` flags (the command flag still overrides). */
+  media?: boolean | null
+  showReply?: boolean | null
+  crop?: boolean | null
 }
 
 /**

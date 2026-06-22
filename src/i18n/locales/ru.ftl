@@ -278,6 +278,10 @@ qs-partial-framed = Рамка
 qs-partial-plain = Без рамки
 qs-partial-off = Всё сообщение
 qs-row-color = 🎨 Цвет
+qs-color-title =
+    <b>🎨 Фон</b>
+
+    Выбери цвет или задай свой командой <code>/qcolor #ff5733</code>.
 qs-row-brand = 😀 Бренд эмодзи
 qs-row-gab = 🔁 Авто-цитата
 qs-gab-off = Выключено
@@ -285,6 +289,9 @@ qs-gab-often = Часто
 qs-gab-sometimes = Иногда
 qs-gab-rarely = Редко
 qs-row-suffix = 💟 Эмодзи стикера
+qs-row-media = 📎 Медиа
+qs-row-reply = 💬 Показ reply
+qs-row-crop = 🖼 Обрезать медиа
 qs-row-privacy = 🔒 Приватность
 qs-row-hidden = 🕵 Поиск отправителя
 qs-row-rate = ⭐ Оценки

@@ -345,6 +345,10 @@ qs-partial-framed = Framed
 qs-partial-plain = No frame
 qs-partial-off = Full message
 qs-row-color = 🎨 Color
+qs-color-title =
+    <b>🎨 Background</b>
+
+    Pick a color, or set a custom one with <code>/qcolor #ff5733</code>.
 qs-row-brand = 😀 Emoji brand
 qs-row-gab = 🔁 Auto-quote
 qs-gab-off = Off
@@ -352,6 +356,9 @@ qs-gab-often = Often
 qs-gab-sometimes = Sometimes
 qs-gab-rarely = Rarely
 qs-row-suffix = 💟 Sticker emoji
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Show reply
+qs-row-crop = 🖼 Crop media
 qs-row-privacy = 🔒 Privacy
 qs-row-hidden = 🕵 Sender search
 qs-row-rate = ⭐ Ratings

@@ -174,6 +174,12 @@ async function renderQuote(
 
   const hidden = flag.hidden || Boolean(group?.settings?.hidden) || Boolean(user?.settings?.hidden)
   const groupPrivacy = Boolean(group?.settings?.privacy) || isGuest
+
+  // Per-quote flags (m/r/c) can be turned on by default via settings; the
+  // explicit flag still takes precedence (there's no negative flag to turn off).
+  const defaultMedia = Boolean(group?.settings?.quote?.media) || Boolean(user?.settings?.quote?.media)
+  const defaultReply = Boolean(group?.settings?.quote?.showReply) || Boolean(user?.settings?.quote?.showReply)
+  const defaultCrop = Boolean(group?.settings?.quote?.crop) || Boolean(user?.settings?.quote?.crop)
   const quoteMode =
     (pickSetting(group?.settings?.quote?.partialMode, user?.settings?.quote?.partialMode) as
       | PartialQuoteMode
@@ -192,9 +198,9 @@ async function renderQuote(
   const deps: AssembleDeps = {
     chatType,
     hidden,
-    crop: flag.crop,
-    forceMedia: flag.media,
-    showReply: flag.reply,
+    crop: flag.crop || defaultCrop,
+    forceMedia: flag.media || defaultMedia,
+    showReply: flag.reply || defaultReply,
     unsupportedText: ctx.t('quote-unsupported_message'),
     groupPrivacy,
     quoteMode,
