@@ -1,7 +1,7 @@
 import { Composer } from 'grammy'
 import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
-import { User } from '../../db/models'
+import { GroupMember, User } from '../../db/models'
 import { incrementQuoteCounter } from '../../db/repositories/group-repository'
 import { botApi } from '../../services/bot-api'
 import { sendGramadsAd, shouldShowAds } from '../../services/gramads'
@@ -183,6 +183,7 @@ async function renderQuote(
 
   // ---- Assemble into renderer messages ----
   const privacyCache = new Map<number, boolean>()
+  const memberCache = new Map<number, boolean>()
   const deps: AssembleDeps = {
     chatType,
     hidden,
@@ -202,6 +203,15 @@ async function renderQuote(
       const isPriv = Boolean(u?.settings?.privacy)
       privacyCache.set(telegramId, isPriv)
       return isPriv
+    },
+    isGroupMember: async (telegramId) => {
+      if (!group) return false
+      const cached = memberCache.get(telegramId)
+      if (cached !== undefined) return cached
+      const found = await GroupMember.exists({ group: group._id, telegram_id: telegramId })
+      const isMember = found !== null
+      memberCache.set(telegramId, isMember)
+      return isMember
     },
   }
 

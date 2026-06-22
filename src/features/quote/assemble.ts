@@ -47,6 +47,12 @@ export interface AssembleDeps {
   getUserEmojiStatus: (telegramId: number) => Promise<string | undefined>
   /** Group-level privacy (forces anonymization for the whole quote). */
   groupPrivacy: boolean
+  /**
+   * Whether a user is a known member of the current group. Used to attribute a
+   * forward to its original author (instead of the forwarder + label) when that
+   * author belongs to this group. Never called in private chats.
+   */
+  isGroupMember: (telegramId: number) => Promise<boolean>
 }
 
 export interface AssembledQuote {
@@ -102,6 +108,14 @@ function buildForward(raw: RawMessage): QuoteForward | undefined {
   return { label: name ? `Forwarded from ${name}` : 'Forwarded message', name: name || undefined, from }
 }
 
+/** Telegram id of a forward's original author, only when it is an identifiable user. */
+function forwardOriginUserId(raw: RawMessage): number | undefined {
+  const origin = raw.forward_origin ?? raw.origin
+  if (origin?.type === 'user' && origin.sender_user?.id) return origin.sender_user.id
+  if (raw.forward_from?.id) return raw.forward_from.id
+  return undefined
+}
+
 /** Resolve the effective sender for a message (forward attribution + hidden enrichment). */
 async function resolveSender(raw: RawMessage, deps: AssembleDeps): Promise<Sender> {
   // A forwarded story is attributed to the story's chat, not the forwarder.
@@ -154,7 +168,18 @@ export async function assembleQuoteMessages(
       if (status) from = { ...from, emoji_status: status }
     }
 
-    const groupForwarder = isForwarded(raw) && !isPrivateChat ? (raw.sender_chat ?? raw.from) : null
+    const forwarded = isForwarded(raw) && !isPrivateChat
+
+    // When the forward's original author is a member of this group, attribute
+    // the quote to that author directly (no forwarder, no label) — as if the
+    // message were posted here. Falls back to forwarder attribution otherwise.
+    let attributeToOrigin = false
+    if (forwarded) {
+      const originUserId = forwardOriginUserId(raw)
+      if (originUserId !== undefined) attributeToOrigin = await deps.isGroupMember(originUserId)
+    }
+
+    const groupForwarder = forwarded && !attributeToOrigin ? (raw.sender_chat ?? raw.from) : null
     const effectiveSenderId = groupForwarder?.id ?? from.id ?? null
     const isFirstInStreak = lastSenderId === null || effectiveSenderId !== lastSenderId
 
@@ -163,7 +188,7 @@ export async function assembleQuoteMessages(
       if (await deps.isUserPrivate(from.id)) privacy = true
     }
 
-    const forward = isForwarded(raw) && !isPrivateChat ? buildForward(raw) : undefined
+    const forward = forwarded && !attributeToOrigin ? buildForward(raw) : undefined
     const displayFrom: Sender = groupForwarder
       ? {
           id: groupForwarder.id,

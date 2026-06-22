@@ -14,6 +14,7 @@ function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
     enrichHidden: vi.fn(async () => null),
     isUserPrivate: vi.fn(async () => false),
     getUserEmojiStatus: vi.fn(async () => undefined),
+    isGroupMember: vi.fn(async () => false),
     ...over,
   }
 }
@@ -65,6 +66,32 @@ describe('assembleQuoteMessages', () => {
     const m = msg({ forward_origin: { type: 'hidden_user', sender_user_name: 'Ghost' } })
     const out = await assembleQuoteMessages([m], deps())
     expect(out.messages[0]?.forward?.label).toBe('Forwarded from Ghost')
+  })
+
+  it('attributes a group forward to the original author when they are a group member', async () => {
+    // Someone in the group forwarded a message originally written by another
+    // member: the quote should be attributed to that original member, with no
+    // forwarder author and no "Forwarded from" label.
+    const m = msg({
+      from: { id: 50, first_name: 'Forwarder' },
+      forward_origin: { type: 'user', sender_user: { id: 7, first_name: 'Orig' } },
+    })
+    const isGroupMember = vi.fn(async (id: number) => id === 7)
+    const out = await assembleQuoteMessages([m], deps({ isGroupMember }))
+    expect(isGroupMember).toHaveBeenCalledWith(7)
+    expect(out.messages[0]?.from?.id).toBe(7)
+    expect(out.messages[0]?.from?.name).toBe('Orig')
+    expect(out.messages[0]?.forward).toBeUndefined()
+  })
+
+  it('keeps forwarder attribution + label when the original author is not a group member', async () => {
+    const m = msg({
+      from: { id: 50, first_name: 'Forwarder' },
+      forward_origin: { type: 'user', sender_user: { id: 7, first_name: 'Orig' } },
+    })
+    const out = await assembleQuoteMessages([m], deps({ isGroupMember: vi.fn(async () => false) }))
+    expect(out.messages[0]?.from?.name).toBe('Forwarder')
+    expect(out.messages[0]?.forward?.label).toBe('Forwarded from Orig')
   })
 
   it('does not tag an auto-forwarded channel post as a forward', async () => {
