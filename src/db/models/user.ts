@@ -22,6 +22,7 @@ const userSchema = new Schema(
         backgroundColor: { type: String },
         emojiSuffix: { type: String },
         emojiBrand: { type: String },
+        partialMode: { type: String },
       },
       hidden: { type: Boolean, default: true },
       privacy: { type: Boolean, default: false },

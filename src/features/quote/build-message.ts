@@ -7,6 +7,7 @@ import type {
   QuoteReplyMessage,
 } from '../../services/quote-api/types'
 import { extractMedia, type MediaSource } from './extract-media'
+import type { PartialQuoteMode } from './render'
 import { composeName, hashCode, type ChatLike, type OriginLike, type Sender } from './sender'
 
 /**
@@ -84,6 +85,8 @@ export interface BuildQuoteMessageParams {
   forceMedia: boolean
   /** Localized fallback text for unsupported content. */
   unsupportedText: string
+  /** How to treat a manual partial-quote selection. Defaults to `framed`. */
+  quoteMode?: PartialQuoteMode
 }
 
 function replyMediaKind(reply: ReplySource): QuoteReplyMedia | undefined {
@@ -122,6 +125,7 @@ export function buildReplyMessage(
  */
 export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage {
   const { source, from, replyFrom, isFirstInStreak, showReply, forward, crop, forceMedia, unsupportedText } = params
+  const quoteMode = params.quoteMode ?? 'framed'
 
   // Text: caption wins over text; an explicit quote selection wins over both.
   let text = source.text
@@ -134,15 +138,19 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   const out: QuoteMessage = { avatar: true }
   if (typeof source.message_id === 'number') out.message_id = source.message_id
   if (typeof source.date === 'number') out.date = source.date
-  if (source.selection) {
-    text = source.selection.text
-    entities = source.selection.entities
-    out.isQuote = true
+
+  // `off` quotes the whole message — pretend there's no manual selection.
+  const selection = quoteMode === 'off' ? undefined : source.selection
+  if (selection) {
+    text = selection.text
+    entities = selection.entities
+    // `plain` shows the fragment without the quote frame/highlight.
+    if (quoteMode === 'framed') out.isQuote = true
   }
 
   // A partial quote is about the selected text — drop the media (Telegram
   // behaves the same), unless the user explicitly asked for it with `m`.
-  if (!source.selection || forceMedia) {
+  if (!selection || forceMedia) {
     Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
   }
 

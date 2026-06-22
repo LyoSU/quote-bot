@@ -20,6 +20,7 @@ const groupSchema = new Schema(
         backgroundColor: { type: String },
         emojiSuffix: { type: String },
         emojiBrand: { type: String },
+        partialMode: { type: String },
       },
       rate: { type: Boolean, default: true },
       hidden: { type: Boolean, default: true },

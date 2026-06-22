@@ -3,6 +3,7 @@ import type { BotContext } from '../core/types'
 import { ping } from './ping'
 import { shellFeature } from './shell'
 import { settingsFeature } from './settings'
+import { quoteSettingsMenu } from './settings/menu'
 import { paymentsFeature } from './payments'
 import { inlineFeature } from './inline'
 import { fstikFeature } from './fstik'
@@ -21,6 +22,7 @@ export const features = new Composer<BotContext>()
 features.use(ping)
 features.use(shellFeature)
 features.use(settingsFeature)
+features.use(quoteSettingsMenu)
 features.use(paymentsFeature)
 features.use(inlineFeature)
 features.use(fstikFeature)

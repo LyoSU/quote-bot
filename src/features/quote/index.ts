@@ -19,6 +19,7 @@ import {
   resolveEmojiBrand,
   resolveRenderSpec,
   resolveStickerEmojis,
+  type PartialQuoteMode,
 } from './render'
 import { buildQuoteReplyMarkup } from './reply-markup'
 import { selectSourceMessages } from './select'
@@ -173,6 +174,10 @@ async function renderQuote(
 
   const hidden = flag.hidden || Boolean(group?.settings?.hidden) || Boolean(user?.settings?.hidden)
   const groupPrivacy = Boolean(group?.settings?.privacy) || isGuest
+  const quoteMode =
+    (pickSetting(group?.settings?.quote?.partialMode, user?.settings?.quote?.partialMode) as
+      | PartialQuoteMode
+      | undefined) ?? 'framed'
 
   // Ads: ru-locale, private chat only. Fired after collection so the ad message
   // can't be swept into the quote. Fully detached from the response.
@@ -192,6 +197,7 @@ async function renderQuote(
     showReply: flag.reply,
     unsupportedText: ctx.t('quote-unsupported_message'),
     groupPrivacy,
+    quoteMode,
     enrichHidden: (name) => resolveHiddenSender(name),
     getUserEmojiStatus: (telegramId) => botApi.getUserEmojiStatus(telegramId),
     isUserPrivate: async (telegramId) => {

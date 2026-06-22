@@ -170,6 +170,60 @@ describe('buildQuoteMessage', () => {
     expect(m.media).toBeDefined()
   })
 
+  it("plain mode shows the selected fragment without the quote frame", () => {
+    const m = buildQuoteMessage({
+      source: { text: 'full', selection: { text: 'part' } },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+      quoteMode: 'plain',
+    })
+    expect(m.text).toBe('part')
+    expect(m.isQuote).toBeUndefined()
+  })
+
+  it("plain mode still drops media for a partial quote", () => {
+    const m = buildQuoteMessage({
+      source: {
+        caption: 'full caption',
+        photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
+        selection: { text: 'part' },
+      },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+      quoteMode: 'plain',
+    })
+    expect(m.text).toBe('part')
+    expect(m.media).toBeUndefined()
+  })
+
+  it("off mode ignores the selection: full text and media kept", () => {
+    const m = buildQuoteMessage({
+      source: {
+        caption: 'full caption',
+        photo: [{ file_id: 'p', file_unique_id: 'pu', width: 1, height: 1 }],
+        selection: { text: 'part' },
+      },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+      quoteMode: 'off',
+    })
+    expect(m.text).toBe('full caption')
+    expect(m.isQuote).toBeUndefined()
+    expect(m.media).toBeDefined()
+  })
+
   it("never renders the message's own reply-quote as its body", () => {
     // A Bot API `quote` on the source is the fragment its author quoted from
     // the PARENT message — someone else's words. The body must stay the

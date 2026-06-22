@@ -62,16 +62,9 @@ help =
 
     🎯 <b>Настройки Администратора Группы</b> (только для администраторов группы)
 
-    • Цвет По Умолчанию: <code>/qcolor [цвет]</code>
-    • Включить Оценку: <code>/qrate</code>
+    • Все настройки цитат: <code>/qsettings</code> — цвет, стиль эмодзи, приватность, оценки, режим частичного цитирования и другое, всё кнопками.
     • Сохранить в Пакет Наклеек: <code>/qs [эмодзи]</code>
     • Удалить Наклейку: <code>/qd</code> (ответьте на наклейку)
-    • Частота Случайных Цитат: <code>/qgab [число]</code>
-    • Изменение Суффикса Эмодзи: <code>/qemoji</code> (измените суффикс эмодзи наклейки)
-    • Стиль Эмодзи:
-        • Классический: <code>/qb apple</code>, <code>/qb google</code>
-        • Альтернативный: <code>/qb twitter</code>, <code>/qb joypixels</code>
-        • Ретро: <code>/qb blob</code>
 
     📱 <b>Нужна Помощь?</b>
 
@@ -276,6 +269,31 @@ menu-settings-btn-color = 🎨 Цвет
 menu-settings-btn-emoji_style = 😊 Стиль эмодзи
 menu-settings-btn-privacy = 🔒 Приватность
 menu-settings-btn-back = ← Назад
+qs-title =
+    <b>⚙️ Настройки цитат</b>
+
+    Нажми, чтобы изменить. Изменения действуют на каждую новую цитату здесь.
+qs-row-partial = ✂️ Частичная цитата
+qs-partial-framed = Рамка
+qs-partial-plain = Без рамки
+qs-partial-off = Всё сообщение
+qs-row-color = 🎨 Цвет
+qs-row-brand = 😀 Бренд эмодзи
+qs-row-gab = 🔁 Авто-цитата
+qs-gab-off = Выключено
+qs-gab-often = Часто
+qs-gab-sometimes = Иногда
+qs-gab-rarely = Редко
+qs-row-suffix = 💟 Эмодзи стикера
+qs-row-privacy = 🔒 Приватность
+qs-row-hidden = 🕵 Поиск отправителя
+qs-row-rate = ⭐ Оценки
+qs-row-archive = 🗂 Архив текста
+qs-suffix-title =
+    <b>💟 Эмодзи стикера</b>
+
+    Выбери ниже или задай свой командой <code>/qemoji 🔥</code>.
+qs-suffix-random = 🎲 Случайный
 menu-features-title =
     <b>✨ Что я умею?</b>
 

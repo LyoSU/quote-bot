@@ -17,11 +17,21 @@ export interface RenderSpec {
 /** Default emoji associated with a generated sticker. */
 export const DEFAULT_STICKER_EMOJI = '💜'
 
+/**
+ * How a manual partial-quote selection (`/q` on a fragment of a replied message)
+ * is rendered:
+ *   - `framed` — show the fragment with the quote frame/highlight (current default).
+ *   - `plain`  — show the fragment, but without the frame marking.
+ *   - `off`    — ignore the selection entirely, quote the whole message.
+ */
+export type PartialQuoteMode = 'framed' | 'plain' | 'off'
+
 /** Quote-level settings that survive in the DB (user or group `settings.quote`). */
 export interface QuoteSettings {
   backgroundColor?: string | null
   emojiSuffix?: string | null
   emojiBrand?: string | null
+  partialMode?: PartialQuoteMode | null
 }
 
 /**

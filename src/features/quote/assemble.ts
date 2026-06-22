@@ -1,5 +1,6 @@
 import type { QuoteForward, QuoteMessage } from '../../services/quote-api/types'
 import { buildQuoteMessage, type QuoteSource, type ReplySource } from './build-message'
+import type { PartialQuoteMode } from './render'
 import {
   resolveMessageOrigin,
   senderFromChat,
@@ -53,6 +54,8 @@ export interface AssembleDeps {
    * author belongs to this group. Never called in private chats.
    */
   isGroupMember: (telegramId: number) => Promise<boolean>
+  /** How to treat a manual partial-quote selection (group/user setting). */
+  quoteMode: PartialQuoteMode
 }
 
 export interface AssembledQuote {
@@ -211,6 +214,7 @@ export async function assembleQuoteMessages(
         crop: deps.crop,
         forceMedia: deps.forceMedia,
         unsupportedText: deps.unsupportedText,
+        quoteMode: deps.quoteMode,
       }),
     )
 

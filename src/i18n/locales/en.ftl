@@ -67,16 +67,9 @@ help =
 
     🎯 <b>Group Admin Settings</b> (for group admins only)
 
-    • Default Color: <code>/qcolor [color]</code>
-    • Enable Rating: <code>/qrate</code>
+    • All quote settings: <code>/qsettings</code> — colors, emoji style, privacy, ratings, partial-quote mode and more, all with buttons.
     • Save to Sticker Pack: <code>/qs [emoji]</code>
     • Remove Sticker: <code>/qd</code> (reply to sticker)
-    • Random Quote Frequency: <code>/qgab [number]</code>
-    • Emoji Suffix Change: <code>/qemoji</code> (change sticker emoji suffix)
-    • Emoji Style:
-        • Classic: <code>/qb apple</code>, <code>/qb google</code>
-        • Alt: <code>/qb twitter</code>, <code>/qb joypixels</code>
-        • Retro: <code>/qb blob</code>
 
     📱 <b>Need Help?</b>
 
@@ -343,6 +336,31 @@ menu-settings-privacy-info =
     <code>/hidden</code> — stop attributing forwarded messages to you
 
     Run a command again to toggle it back off.
+qs-title =
+    <b>⚙️ Quote settings</b>
+
+    Tap to change. Changes apply to every new quote here.
+qs-row-partial = ✂️ Partial quote
+qs-partial-framed = Framed
+qs-partial-plain = No frame
+qs-partial-off = Full message
+qs-row-color = 🎨 Color
+qs-row-brand = 😀 Emoji brand
+qs-row-gab = 🔁 Auto-quote
+qs-gab-off = Off
+qs-gab-often = Often
+qs-gab-sometimes = Sometimes
+qs-gab-rarely = Rarely
+qs-row-suffix = 💟 Sticker emoji
+qs-row-privacy = 🔒 Privacy
+qs-row-hidden = 🕵 Sender search
+qs-row-rate = ⭐ Ratings
+qs-row-archive = 🗂 Text archive
+qs-suffix-title =
+    <b>💟 Sticker emoji</b>
+
+    Pick one below, or set a custom emoji with <code>/qemoji 🔥</code>.
+qs-suffix-random = 🎲 Random
 menu-features-title =
     <b>✨ What can I do?</b>
 

@@ -15,6 +15,7 @@ function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
     isUserPrivate: vi.fn(async () => false),
     getUserEmojiStatus: vi.fn(async () => undefined),
     isGroupMember: vi.fn(async () => false),
+    quoteMode: 'framed',
     ...over,
   }
 }

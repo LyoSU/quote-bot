@@ -62,16 +62,9 @@ help =
 
     🎯 <b>Налаштування Адміністратора Групи</b> (тільки для адміністраторів групи)
 
-    • Колір за Замовчуванням: <code>/qcolor [колір]</code>
-    • Увімкнути Оцінювання: <code>/qrate</code>
+    • Усі налаштування цитат: <code>/qsettings</code> — колір, стиль емодзі, приватність, оцінки, режим часткового цитування й інше, усе кнопками.
     • Зберегти в Пакет Стікерів: <code>/qs [емодзі]</code>
     • Видалити Стікер: <code>/qd</code> (у відповідь на стікер)
-    • Частота Випадкових Цитат: <code>/qgab [число]</code>
-    • Змінити Емодзі Стікера: <code>/qemoji</code>
-    • Стиль Емодзі:
-        • Класичний: <code>/qb apple</code>, <code>/qb google</code>
-        • Альтернативний: <code>/qb twitter</code>, <code>/qb joypixels</code>
-        • Ретро: <code>/qb blob</code>
 
     📱 <b>Потрібна Допомога?</b>
 
@@ -282,6 +275,31 @@ menu-settings-btn-color = 🎨 Колір
 menu-settings-btn-emoji_style = 😊 Стиль емодзі
 menu-settings-btn-privacy = 🔒 Приватність
 menu-settings-btn-back = ← Назад
+qs-title =
+    <b>⚙️ Налаштування цитат</b>
+
+    Тисни, щоб змінити. Зміни діють на кожну нову цитату тут.
+qs-row-partial = ✂️ Часткова цитата
+qs-partial-framed = Рамка
+qs-partial-plain = Без рамки
+qs-partial-off = Повне повідомлення
+qs-row-color = 🎨 Колір
+qs-row-brand = 😀 Бренд емодзі
+qs-row-gab = 🔁 Авто-цитата
+qs-gab-off = Вимкнено
+qs-gab-often = Часто
+qs-gab-sometimes = Інколи
+qs-gab-rarely = Рідко
+qs-row-suffix = 💟 Емодзі стікера
+qs-row-privacy = 🔒 Приватність
+qs-row-hidden = 🕵 Пошук відправника
+qs-row-rate = ⭐ Оцінки
+qs-row-archive = 🗂 Архів тексту
+qs-suffix-title =
+    <b>💟 Емодзі стікера</b>
+
+    Обери нижче або задай свій командою <code>/qemoji 🔥</code>.
+qs-suffix-random = 🎲 Випадковий
 menu-features-title =
     <b>✨ Що я вмію?</b>
 

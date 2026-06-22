@@ -28,7 +28,7 @@ function mainMenuKeyboard(ctx: BotContext): InlineKeyboard {
     .url(ctx.t('app-open_root'), deepLink.forRoot(username))
     .row()
     .text(ctx.t('menu-btn-features'), 'menu:features')
-    .text(ctx.t('menu-btn-settings'), 'menu:settings')
+    .text(ctx.t('menu-btn-settings'), 'qs:open')
     .row()
     .text(ctx.t('menu-btn-help'), 'menu:help')
     .text(ctx.t('menu-btn-language'), 'menu:language')
@@ -189,33 +189,11 @@ shellFeature.callbackQuery(/^menu:(.+)$/, async (ctx) => {
           .text(ctx.t('menu-btn-back'), 'menu:main'),
       )
       break
-    case 'settings':
-      await editPanel(
-        ctx,
-        'menu-settings-title',
-        new InlineKeyboard()
-          .text(ctx.t('menu-settings-btn-color'), 'menu:set_color')
-          .text(ctx.t('menu-settings-btn-emoji_style'), 'menu:set_emoji')
-          .row()
-          .text(ctx.t('menu-settings-btn-privacy'), 'menu:set_privacy')
-          .row()
-          .text(ctx.t('menu-btn-back'), 'menu:main'),
-      )
-      break
     case 'help':
       await editPanel(ctx, 'help', back('menu:main'))
       break
     case 'language':
       await showLanguagePicker(ctx, { edit: true, backCallback: 'menu:main' })
-      break
-    case 'set_emoji':
-      await editPanel(ctx, 'emoji-info', back('menu:settings'))
-      break
-    case 'set_color':
-      await editPanel(ctx, 'menu-settings-color-info', back('menu:settings'))
-      break
-    case 'set_privacy':
-      await editPanel(ctx, 'menu-settings-privacy-info', back('menu:settings'))
       break
     default: {
       const page = action.replace(/^f_/, '')
