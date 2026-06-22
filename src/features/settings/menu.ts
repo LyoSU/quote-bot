@@ -4,13 +4,14 @@ import { onlyAdmin } from '../../middlewares/guards'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { DEFAULT_BACKGROUND } from '../quote/color'
-import { DEFAULT_STICKER_EMOJI, type PartialQuoteMode } from '../quote/render'
+import { DEFAULT_STICKER_EMOJI, type PartialQuoteMode, type QuoteFormatPref } from '../quote/render'
 
 const ADMIN_STATUSES = new Set(['creator', 'administrator'])
 
 // ---- Presets (pure, exported for tests) ----
 
 export const PARTIAL_MODES: PartialQuoteMode[] = ['framed', 'plain', 'off']
+export const FORMATS: QuoteFormatPref[] = ['sticker', 'image', 'png']
 export const EMOJI_BRANDS = ['apple', 'google', 'twitter', 'joypixels', 'blob']
 
 /**
@@ -55,6 +56,9 @@ function nextIn<T>(arr: readonly T[], current: T): T {
 export function nextPartialMode(mode: PartialQuoteMode): PartialQuoteMode {
   return nextIn(PARTIAL_MODES, mode)
 }
+export function nextFormat(format: QuoteFormatPref): QuoteFormatPref {
+  return nextIn(FORMATS, format)
+}
 export function nextBrand(brand: string): string {
   return nextIn(EMOJI_BRANDS, brand)
 }
@@ -79,6 +83,7 @@ function capitalize(s: string): string {
 export interface QuoteSettingsView {
   scope: 'group' | 'user'
   partialMode: PartialQuoteMode
+  format: QuoteFormatPref
   color: string
   brand: string
   suffix: string
@@ -98,6 +103,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
     return {
       scope: 'group',
       partialMode: (s?.quote?.partialMode as PartialQuoteMode | undefined) ?? 'framed',
+      format: (s?.quote?.format as QuoteFormatPref | undefined) ?? 'sticker',
       color: s?.quote?.backgroundColor ?? DEFAULT_BACKGROUND,
       brand: s?.quote?.emojiBrand ?? 'apple',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
@@ -116,6 +122,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
     return {
       scope: 'user',
       partialMode: (s?.quote?.partialMode as PartialQuoteMode | undefined) ?? 'framed',
+      format: (s?.quote?.format as QuoteFormatPref | undefined) ?? 'sticker',
       color: s?.quote?.backgroundColor ?? DEFAULT_BACKGROUND,
       brand: s?.quote?.emojiBrand ?? 'apple',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
@@ -132,49 +139,113 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
   return null
 }
 
+/** The view a fresh group/user starts with — also what "reset" restores. */
+function defaultView(scope: 'group' | 'user'): QuoteSettingsView {
+  return {
+    scope,
+    partialMode: 'framed',
+    format: 'sticker',
+    color: DEFAULT_BACKGROUND,
+    brand: 'apple',
+    suffix: DEFAULT_STICKER_EMOJI,
+    gab: scope === 'group' ? 800 : 0,
+    media: false,
+    showReply: false,
+    crop: false,
+    privacy: false,
+    hidden: true,
+    rate: scope === 'group',
+    archive: scope === 'group',
+  }
+}
+
+/** Settings paths written by "reset", restoring schema defaults. */
+const RESET_QUOTE: Record<string, unknown> = {
+  'settings.quote.backgroundColor': DEFAULT_BACKGROUND,
+  'settings.quote.emojiBrand': 'apple',
+  'settings.quote.emojiSuffix': DEFAULT_STICKER_EMOJI,
+  'settings.quote.partialMode': 'framed',
+  'settings.quote.format': 'sticker',
+  'settings.quote.media': false,
+  'settings.quote.showReply': false,
+  'settings.quote.crop': false,
+  'settings.privacy': false,
+  'settings.hidden': true,
+}
+const RESET_GROUP: Record<string, unknown> = {
+  ...RESET_QUOTE,
+  'settings.rate': true,
+  'settings.randomQuoteGab': 800,
+  'settings.archive.storeText': true,
+}
+
+// ---- Categories ----
+
+/** Each setting lives in one category sub-panel, which carries its description. */
+export type Category = 'appearance' | 'content' | 'privacy' | 'group'
+
+const CATEGORY_OF: Record<string, Category> = {
+  format: 'appearance',
+  brand: 'appearance',
+  partial: 'content',
+  reply: 'content',
+  media: 'content',
+  crop: 'content',
+  privacy: 'privacy',
+  hidden: 'privacy',
+  rate: 'group',
+  gab: 'group',
+  archive: 'group',
+}
+
 // ---- Keyboards (pure given a view + translator) ----
 
 type Translate = (key: string) => string
 
-/** Builds the hub keyboard. Group-only rows (gab/rate/archive) are omitted for users. */
-export function buildHubKeyboard(view: QuoteSettingsView, t: Translate): InlineKeyboard {
-  const onOff = (b: boolean): string => (b ? '✓' : '✕')
-  const partialLabel = t(`qs-partial-${view.partialMode}`)
-  const gKey = gabKey(view.gab)
-  const gabLabel = gKey ? t(`qs-gab-${gKey}`) : String(view.gab)
-
+/** Top-level menu: one button per category + reset, with explanations on each panel. */
+export function buildMainMenu(view: QuoteSettingsView, t: Translate): InlineKeyboard {
   const kb = new InlineKeyboard()
-    .text(`${t('qs-row-partial')}: ${partialLabel}`, 'qs:cycle:partial')
+    .text(t('qs-cat-appearance'), 'qs:cat:appearance')
+    .text(t('qs-cat-content'), 'qs:cat:content')
     .row()
-    .text(`${t('qs-row-color')}: ${colorSwatch(view.color)}`, 'qs:color')
-    .row()
-    .text(`${t('qs-row-brand')}: ${capitalize(view.brand)}`, 'qs:cycle:brand')
-    .row()
-
-  if (view.scope === 'group') kb.text(`${t('qs-row-gab')}: ${gabLabel}`, 'qs:cycle:gab').row()
-  kb.text(`${t('qs-row-suffix')}: ${view.suffix}`, 'qs:suffix').row()
-
-  // Boolean toggles, two per row. Group-only ones are appended for groups.
-  const toggles: { key: string; on: boolean }[] = [
-    { key: 'media', on: view.media },
-    { key: 'reply', on: view.showReply },
-    { key: 'crop', on: view.crop },
-    { key: 'privacy', on: view.privacy },
-    { key: 'hidden', on: view.hidden },
-  ]
-  if (view.scope === 'group') {
-    toggles.push({ key: 'rate', on: view.rate }, { key: 'archive', on: view.archive })
-  }
-  toggles.forEach((tg, i) => {
-    kb.text(`${t(`qs-row-${tg.key}`)}: ${onOff(tg.on)}`, `qs:toggle:${tg.key}`)
-    if (i % 2 === 1) kb.row()
-  })
-  if (toggles.length % 2 === 1) kb.row()
-
+    .text(t('qs-cat-privacy'), 'qs:cat:privacy')
+  if (view.scope === 'group') kb.text(t('qs-cat-group'), 'qs:cat:group')
+  kb.row().text(t('qs-btn-reset'), 'qs:reset').row()
   kb.text(t('menu-btn-language'), 'menu:language').text(t('menu-btn-back'), 'menu:main')
   return kb
 }
 
+/** A category sub-panel: its controls (showing current values) + back to the menu. */
+export function buildCategoryKeyboard(cat: Category, view: QuoteSettingsView, t: Translate): InlineKeyboard {
+  const onOff = (b: boolean): string => (b ? t('qs-on') : t('qs-off'))
+  const kb = new InlineKeyboard()
+
+  if (cat === 'appearance') {
+    kb.text(`${t('qs-row-format')}: ${t(`qs-format-${view.format}`)}`, 'qs:cycle:format').row()
+    kb.text(`${t('qs-row-color')}: ${colorSwatch(view.color)}`, 'qs:color').row()
+    kb.text(`${t('qs-row-brand')}: ${capitalize(view.brand)}`, 'qs:cycle:brand').row()
+    kb.text(`${t('qs-row-suffix')}: ${view.suffix}`, 'qs:suffix').row()
+  } else if (cat === 'content') {
+    kb.text(`${t('qs-row-partial')}: ${t(`qs-partial-${view.partialMode}`)}`, 'qs:cycle:partial').row()
+    kb.text(`${t('qs-row-reply')}: ${onOff(view.showReply)}`, 'qs:toggle:reply').row()
+    kb.text(`${t('qs-row-media')}: ${onOff(view.media)}`, 'qs:toggle:media').row()
+    kb.text(`${t('qs-row-crop')}: ${onOff(view.crop)}`, 'qs:toggle:crop').row()
+  } else if (cat === 'privacy') {
+    kb.text(`${t('qs-row-privacy')}: ${onOff(view.privacy)}`, 'qs:toggle:privacy').row()
+    kb.text(`${t('qs-row-hidden')}: ${onOff(view.hidden)}`, 'qs:toggle:hidden').row()
+  } else if (cat === 'group') {
+    const gKey = gabKey(view.gab)
+    const gabLabel = gKey ? t(`qs-gab-${gKey}`) : String(view.gab)
+    kb.text(`${t('qs-row-rate')}: ${onOff(view.rate)}`, 'qs:toggle:rate').row()
+    kb.text(`${t('qs-row-gab')}: ${gabLabel}`, 'qs:cycle:gab').row()
+    kb.text(`${t('qs-row-archive')}: ${onOff(view.archive)}`, 'qs:toggle:archive').row()
+  }
+
+  kb.text(t('menu-btn-back'), 'qs:open')
+  return kb
+}
+
+/** Emoji-grid picker reused by the appearance sub-panels; back returns there. */
 function suffixKeyboard(t: Translate): InlineKeyboard {
   const kb = new InlineKeyboard()
   SUFFIX_PRESETS.forEach((emoji, i) => {
@@ -182,18 +253,17 @@ function suffixKeyboard(t: Translate): InlineKeyboard {
     if (i % 4 === 3) kb.row()
   })
   kb.row().text(t('qs-suffix-random'), 'qs:suffix:set:random')
-  kb.row().text(t('menu-btn-back'), 'qs:open')
+  kb.row().text(t('menu-btn-back'), 'qs:cat:appearance')
   return kb
 }
 
-/** Background-color sub-panel: a grid of swatches, set by preset index. */
 function colorKeyboard(t: Translate): InlineKeyboard {
   const kb = new InlineKeyboard()
   COLOR_PRESETS.forEach((preset, i) => {
     kb.text(preset.swatch, `qs:color:set:${i}`)
     if (i % 5 === 4) kb.row()
   })
-  kb.row().text(t('menu-btn-back'), 'qs:open')
+  kb.row().text(t('menu-btn-back'), 'qs:cat:appearance')
   return kb
 }
 
@@ -212,21 +282,25 @@ function htmlOpts(ctx: BotContext): {
   }
 }
 
-/** Renders (or re-renders, when editing a callback message) the hub for a given view. */
-async function renderFromView(ctx: BotContext, view: QuoteSettingsView, edit: boolean): Promise<void> {
-  const reply_markup = buildHubKeyboard(view, (k) => ctx.t(k))
+/** Edits the current callback message, or sends a fresh one for the /qsettings command. */
+async function show(ctx: BotContext, bodyKey: string, reply_markup: InlineKeyboard, edit: boolean): Promise<void> {
   if (edit && ctx.callbackQuery) {
     await ctx
-      .editMessageText(ctx.t('qs-title'), { parse_mode: 'HTML', link_preview_options: { is_disabled: true }, reply_markup })
+      .editMessageText(ctx.t(bodyKey), { parse_mode: 'HTML', link_preview_options: { is_disabled: true }, reply_markup })
       .catch(() => {})
     return
   }
-  await ctx.reply(ctx.t('qs-title'), { ...htmlOpts(ctx), reply_markup })
+  await ctx.reply(ctx.t(bodyKey), { ...htmlOpts(ctx), reply_markup })
 }
 
-async function renderHub(ctx: BotContext, edit: boolean): Promise<void> {
-  const view = resolveView(ctx)
-  if (view) await renderFromView(ctx, view, edit)
+async function renderMain(ctx: BotContext, view: QuoteSettingsView, edit: boolean): Promise<void> {
+  await show(ctx, 'qs-title', buildMainMenu(view, (k) => ctx.t(k)), edit)
+}
+
+async function renderCategory(ctx: BotContext, cat: Category, view: QuoteSettingsView, edit: boolean): Promise<void> {
+  // No group panel in private chats — fall back to the menu.
+  if (cat === 'group' && view.scope !== 'group') return renderMain(ctx, view, edit)
+  await show(ctx, `qs-cat-${cat}-desc`, buildCategoryKeyboard(cat, view, (k) => ctx.t(k)), edit)
 }
 
 /** In groups, callbacks bypass the command guard — re-check admin here. */
@@ -238,6 +312,12 @@ async function isAdmin(ctx: BotContext): Promise<boolean> {
   return Boolean(member && ADMIN_STATUSES.has(member.status))
 }
 
+/** Resolves the view only for an authorized admin; answers the callback otherwise. */
+async function authorizedView(ctx: BotContext): Promise<QuoteSettingsView | null> {
+  if (await isAdmin(ctx)) return resolveView(ctx)
+  return null
+}
+
 /** Persists one settings path to the group (preferred) or user doc. */
 async function writeSetting(ctx: BotContext, path: string, value: unknown): Promise<void> {
   if (ctx.group) await updateGroupSettings(ctx.group._id, { [path]: value })
@@ -246,19 +326,42 @@ async function writeSetting(ctx: BotContext, path: string, value: unknown): Prom
 
 export const quoteSettingsMenu = new Composer<BotContext>()
 
-// /qsettings — open the interactive quote-settings hub.
-quoteSettingsMenu.command('qsettings', onlyAdmin, (ctx) => renderHub(ctx, false))
+// /qsettings — open the interactive quote-settings menu.
+quoteSettingsMenu.command('qsettings', onlyAdmin, async (ctx) => {
+  const view = resolveView(ctx)
+  if (view) await renderMain(ctx, view, false)
+})
 
-// Open from the main menu (shell repoints its Settings button here).
+// Top-level menu (also reached from the shell's Settings button).
 quoteSettingsMenu.callbackQuery('qs:open', async (ctx) => {
-  if (await isAdmin(ctx)) await renderHub(ctx, true)
+  const view = await authorizedView(ctx)
+  if (view) await renderMain(ctx, view, true)
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
-// Cycle a multi-value setting to its next preset.
-quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|brand|gab)$/, async (ctx) => {
+// Open a category sub-panel.
+quoteSettingsMenu.callbackQuery(/^qs:cat:(appearance|content|privacy|group)$/, async (ctx) => {
+  const view = await authorizedView(ctx)
+  if (view) await renderCategory(ctx, ctx.match![1] as Category, view, true)
+  await ctx.answerCallbackQuery().catch(() => {})
+})
+
+// Reset all quote settings to their defaults.
+quoteSettingsMenu.callbackQuery('qs:reset', async (ctx) => {
+  if (!(await isAdmin(ctx))) {
+    await ctx.answerCallbackQuery().catch(() => {})
+    return
+  }
+  if (ctx.group) await updateGroupSettings(ctx.group._id, RESET_GROUP)
+  else if (ctx.user) await updateUserSettings(ctx.user._id, RESET_QUOTE)
+  await renderMain(ctx, defaultView(ctx.group ? 'group' : 'user'), true)
+  await ctx.answerCallbackQuery({ text: ctx.t('qs-reset-done') }).catch(() => {})
+})
+
+// Cycle a multi-value setting to its next preset, staying in its category.
+quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|format|brand|gab)$/, async (ctx) => {
   const key = ctx.match?.[1]
-  const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
+  const view = await authorizedView(ctx)
   if (!view || !key) {
     await ctx.answerCallbackQuery().catch(() => {})
     return
@@ -266,6 +369,9 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|brand|gab)$/, async (ctx) =>
   if (key === 'partial') {
     view.partialMode = nextPartialMode(view.partialMode)
     await writeSetting(ctx, 'settings.quote.partialMode', view.partialMode)
+  } else if (key === 'format') {
+    view.format = nextFormat(view.format)
+    await writeSetting(ctx, 'settings.quote.format', view.format)
   } else if (key === 'brand') {
     view.brand = nextBrand(view.brand)
     await writeSetting(ctx, 'settings.quote.emojiBrand', view.brand)
@@ -273,14 +379,14 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|brand|gab)$/, async (ctx) =>
     view.gab = nextGab(view.gab)
     await writeSetting(ctx, 'settings.randomQuoteGab', view.gab)
   }
-  await renderFromView(ctx, view, true)
+  await renderCategory(ctx, CATEGORY_OF[key]!, view, true)
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
-// Flip a boolean setting.
+// Flip a boolean setting, staying in its category.
 quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|privacy|hidden|rate|archive)$/, async (ctx) => {
   const key = ctx.match?.[1]
-  const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
+  const view = await authorizedView(ctx)
   if (!view || !key) {
     await ctx.answerCallbackQuery().catch(() => {})
     return
@@ -307,11 +413,11 @@ quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|privacy|hidden|rat
     view.archive = !view.archive
     await writeSetting(ctx, 'settings.archive.storeText', view.archive)
   }
-  await renderFromView(ctx, view, true)
+  await renderCategory(ctx, CATEGORY_OF[key]!, view, true)
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
-// Open the background-color sub-panel.
+// Open the background-color picker (within Appearance).
 quoteSettingsMenu.callbackQuery('qs:color', async (ctx) => {
   if (await isAdmin(ctx)) {
     await ctx
@@ -325,21 +431,21 @@ quoteSettingsMenu.callbackQuery('qs:color', async (ctx) => {
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
-// Pick a background-color preset (by index) and return to the hub.
+// Pick a background-color preset (by index) and return to Appearance.
 quoteSettingsMenu.callbackQuery(/^qs:color:set:(\d+)$/, async (ctx) => {
   const preset = COLOR_PRESETS[Number(ctx.match?.[1])]
-  const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
+  const view = await authorizedView(ctx)
   if (!view || !preset) {
     await ctx.answerCallbackQuery().catch(() => {})
     return
   }
   view.color = preset.value
   await writeSetting(ctx, 'settings.quote.backgroundColor', preset.value)
-  await renderFromView(ctx, view, true)
+  await renderCategory(ctx, 'appearance', view, true)
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
-// Open the sticker-emoji sub-panel.
+// Open the sticker-emoji picker (within Appearance).
 quoteSettingsMenu.callbackQuery('qs:suffix', async (ctx) => {
   if (await isAdmin(ctx)) {
     await ctx
@@ -353,16 +459,16 @@ quoteSettingsMenu.callbackQuery('qs:suffix', async (ctx) => {
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
-// Pick a sticker-emoji preset and return to the hub.
+// Pick a sticker-emoji preset and return to Appearance.
 quoteSettingsMenu.callbackQuery(/^qs:suffix:set:(.+)$/, async (ctx) => {
   const emoji = ctx.match?.[1]
-  const view = (await isAdmin(ctx)) ? resolveView(ctx) : null
+  const view = await authorizedView(ctx)
   if (!view || !emoji) {
     await ctx.answerCallbackQuery().catch(() => {})
     return
   }
   view.suffix = emoji
   await writeSetting(ctx, 'settings.quote.emojiSuffix', emoji)
-  await renderFromView(ctx, view, true)
+  await renderCategory(ctx, 'appearance', view, true)
   await ctx.answerCallbackQuery().catch(() => {})
 })

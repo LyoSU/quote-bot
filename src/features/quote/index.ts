@@ -167,7 +167,15 @@ async function renderQuote(
   const emojiSuffix = pickSetting(group?.settings?.quote?.emojiSuffix, user?.settings?.quote?.emojiSuffix)
   const emojiBrandSetting = pickSetting(group?.settings?.quote?.emojiBrand, user?.settings?.quote?.emojiBrand)
 
-  const spec = resolveRenderSpec(flag)
+  // Default output format applies only when no explicit format flag was given.
+  const hasFormatFlag = flag.png || flag.img || flag.stories
+  const defaultFormat = pickSetting(group?.settings?.quote?.format, user?.settings?.quote?.format)
+  const specFlag =
+    hasFormatFlag || !defaultFormat
+      ? flag
+      : { ...flag, img: defaultFormat === 'image', png: defaultFormat === 'png' }
+
+  const spec = resolveRenderSpec(specFlag)
   const backgroundColor = resolveBackgroundColor(flag.color, bgSetting)
   const emojiBrand = resolveEmojiBrand(emojiBrandSetting)
   const emojis = resolveStickerEmojis(emojiSuffix)

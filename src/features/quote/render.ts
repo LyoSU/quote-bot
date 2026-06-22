@@ -26,12 +26,17 @@ export const DEFAULT_STICKER_EMOJI = '💜'
  */
 export type PartialQuoteMode = 'framed' | 'plain' | 'off'
 
+/** Default output format when no `i`/`p`/`s` flag is given. */
+export type QuoteFormatPref = 'sticker' | 'image' | 'png'
+
 /** Quote-level settings that survive in the DB (user or group `settings.quote`). */
 export interface QuoteSettings {
   backgroundColor?: string | null
   emojiSuffix?: string | null
   emojiBrand?: string | null
   partialMode?: PartialQuoteMode | null
+  /** Default output format; the `i`/`p`/`s` command flags still override. */
+  format?: QuoteFormatPref | null
   /** Default-on for the `m`/`r`/`c` flags (the command flag still overrides). */
   media?: boolean | null
   showReply?: boolean | null

@@ -23,6 +23,7 @@ const userSchema = new Schema(
         emojiSuffix: { type: String },
         emojiBrand: { type: String },
         partialMode: { type: String },
+        format: { type: String },
         media: { type: Boolean },
         showReply: { type: Boolean },
         crop: { type: Boolean },

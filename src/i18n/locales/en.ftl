@@ -339,7 +339,38 @@ menu-settings-privacy-info =
 qs-title =
     <b>⚙️ Quote settings</b>
 
-    Tap to change. Changes apply to every new quote here.
+    Pick a section. Changes apply to every new quote here.
+qs-on = On
+qs-off = Off
+qs-cat-appearance = 🎨 Appearance
+qs-cat-content = ✂️ What to quote
+qs-cat-privacy = 🔒 Privacy
+qs-cat-group = 👥 Group
+qs-cat-appearance-desc =
+    <b>🎨 Appearance</b>
+
+    • <b>Format</b> — sticker, an image, or a PNG file.
+    • <b>Color</b> — the quote background.
+    • <b>Emoji brand</b> — how emojis are drawn (Apple, Google…).
+    • <b>Sticker emoji</b> — the emoji attached to saved stickers.
+qs-cat-content-desc =
+    <b>✂️ What to quote</b>
+
+    • <b>Partial quote</b> — when you reply to a selected fragment: <i>Framed</i> shows it with the quote frame, <i>No frame</i> shows just the text, <i>Full message</i> ignores the selection.
+    • <b>Show reply</b> — include the message being replied to.
+    • <b>Media</b> — include photos/videos from the message.
+    • <b>Crop media</b> — crop tall media to fit.
+qs-cat-privacy-desc =
+    <b>🔒 Privacy</b>
+
+    • <b>Privacy</b> — hide names and avatars in quotes.
+    • <b>Sender search</b> — attribute forwarded messages to their original author.
+qs-cat-group-desc =
+    <b>👥 Group</b>
+
+    • <b>Ratings</b> — show 👍/👎 buttons under quotes.
+    • <b>Auto-quote</b> — occasionally resurface a top quote on a lively moment.
+    • <b>Text archive</b> — store quote text (needed for search & random).
 qs-row-partial = ✂️ Partial quote
 qs-partial-framed = Framed
 qs-partial-plain = No frame
@@ -350,6 +381,10 @@ qs-color-title =
 
     Pick a color, or set a custom one with <code>/qcolor #ff5733</code>.
 qs-row-brand = 😀 Emoji brand
+qs-row-format = 🖥 Format
+qs-format-sticker = Sticker
+qs-format-image = Image
+qs-format-png = PNG file
 qs-row-gab = 🔁 Auto-quote
 qs-gab-off = Off
 qs-gab-often = Often
@@ -368,6 +403,8 @@ qs-suffix-title =
 
     Pick one below, or set a custom emoji with <code>/qemoji 🔥</code>.
 qs-suffix-random = 🎲 Random
+qs-btn-reset = ↩️ Reset all
+qs-reset-done = Reset to defaults
 menu-features-title =
     <b>✨ What can I do?</b>
 
