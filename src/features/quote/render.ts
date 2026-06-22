@@ -86,6 +86,9 @@ export function resolveBackgroundColor(
   rng: () => number = Math.random,
 ): string {
   if (flagColor) return buildBackgroundColor(flagColor, rng)
+  // A stored `random` preset isn't a renderer-valid color — roll a fresh
+  // gradient each time, like the `/q random` flag does.
+  if (setting === 'random') return buildBackgroundColor({ kind: 'random' }, rng)
   if (setting) return setting
   return DEFAULT_BACKGROUND
 }

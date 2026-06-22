@@ -363,8 +363,8 @@ qs-cat-content-desc =
 qs-cat-privacy-desc =
     <b>🔒 Privacy</b>
 
-    • <b>Privacy</b> — hide names and avatars in quotes.
-    • <b>Sender search</b> — attribute forwarded messages to their original author.
+    • <b>Privacy</b> — saved quotes aren't linked to their author (they won't appear under your name in the app). The sticker itself is unchanged.
+    • <b>Sender search</b> — try to identify the original author of a forwarded message whose account is hidden.
 qs-cat-group-desc =
     <b>👥 Group</b>
 
@@ -402,7 +402,6 @@ qs-suffix-title =
     <b>💟 Sticker emoji</b>
 
     Pick one below, or set a custom emoji with <code>/qemoji 🔥</code>.
-qs-suffix-random = 🎲 Random
 qs-btn-reset = ↩️ Reset all
 qs-reset-done = Reset to defaults
 menu-features-title =

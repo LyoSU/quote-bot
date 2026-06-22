@@ -252,7 +252,6 @@ function suffixKeyboard(t: Translate): InlineKeyboard {
     kb.text(emoji, `qs:suffix:set:${emoji}`)
     if (i % 4 === 3) kb.row()
   })
-  kb.row().text(t('qs-suffix-random'), 'qs:suffix:set:random')
   kb.row().text(t('menu-btn-back'), 'qs:cat:appearance')
   return kb
 }

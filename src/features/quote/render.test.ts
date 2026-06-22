@@ -51,6 +51,10 @@ describe('resolveBackgroundColor', () => {
     expect(resolveBackgroundColor(undefined, null)).toBe(DEFAULT_BACKGROUND)
     expect(resolveBackgroundColor(undefined, undefined)).toBe(DEFAULT_BACKGROUND)
   })
+
+  it('rolls a fresh gradient for a stored "random" preset instead of passing it through', () => {
+    expect(resolveBackgroundColor(undefined, 'random', () => 0)).toBe('#000000/#000000')
+  })
 })
 
 describe('resolveStickerEmojis / resolveEmojiBrand', () => {
