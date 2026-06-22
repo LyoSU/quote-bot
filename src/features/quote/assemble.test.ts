@@ -95,6 +95,30 @@ describe('assembleQuoteMessages', () => {
     expect(out.messages[0]?.forward?.label).toBe('Forwarded from Orig')
   })
 
+  it('attributes a channel forward to the channel itself (no forwarder, no label) in groups', async () => {
+    // Forwarding a channel post into a group: there's no real "forwarder" —
+    // the channel is the author. Show it directly, like an auto-forward.
+    const m = msg({
+      from: { id: 50, first_name: 'Forwarder' },
+      forward_origin: { type: 'channel', chat: { id: -100500, name: 'My Channel' } },
+    })
+    const out = await assembleQuoteMessages([m], deps())
+    expect(out.messages[0]?.from?.id).toBe(-100500)
+    expect(out.messages[0]?.from?.name).toBe('My Channel')
+    expect(out.messages[0]?.forward).toBeUndefined()
+  })
+
+  it('attributes a legacy channel forward (forward_from_chat) to the channel', async () => {
+    const m = msg({
+      from: { id: 50, first_name: 'Forwarder' },
+      forward_from_chat: { id: -100777, title: 'Legacy Channel' },
+    })
+    const out = await assembleQuoteMessages([m], deps())
+    expect(out.messages[0]?.from?.id).toBe(-100777)
+    expect(out.messages[0]?.from?.name).toBe('Legacy Channel')
+    expect(out.messages[0]?.forward).toBeUndefined()
+  })
+
   it('does not tag an auto-forwarded channel post as a forward', async () => {
     // A channel post in its linked discussion group: auto-forward + channel origin.
     const m = msg({

@@ -119,6 +119,17 @@ function forwardOriginUserId(raw: RawMessage): number | undefined {
   return undefined
 }
 
+/**
+ * Whether a forward originated from a chat/channel rather than a user. Such a
+ * forward has no real "forwarder" — the channel IS the author — so we attribute
+ * the quote to it directly (no forwarder, no label), like an auto-forward.
+ */
+function isChannelForward(raw: RawMessage): boolean {
+  const origin = raw.forward_origin ?? raw.origin
+  if (origin?.type === 'channel' || origin?.type === 'chat') return true
+  return !origin && Boolean(raw.forward_from_chat)
+}
+
 /** Resolve the effective sender for a message (forward attribution + hidden enrichment). */
 async function resolveSender(raw: RawMessage, deps: AssembleDeps): Promise<Sender> {
   // A forwarded story is attributed to the story's chat, not the forwarder.
@@ -178,8 +189,13 @@ export async function assembleQuoteMessages(
     // message were posted here. Falls back to forwarder attribution otherwise.
     let attributeToOrigin = false
     if (forwarded) {
-      const originUserId = forwardOriginUserId(raw)
-      if (originUserId !== undefined) attributeToOrigin = await deps.isGroupMember(originUserId)
+      if (isChannelForward(raw)) {
+        // A channel/chat forward is always shown as authored by that channel.
+        attributeToOrigin = true
+      } else {
+        const originUserId = forwardOriginUserId(raw)
+        if (originUserId !== undefined) attributeToOrigin = await deps.isGroupMember(originUserId)
+      }
     }
 
     const groupForwarder = forwarded && !attributeToOrigin ? (raw.sender_chat ?? raw.from) : null
