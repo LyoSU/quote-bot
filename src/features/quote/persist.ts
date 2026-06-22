@@ -11,6 +11,24 @@ const log = logger.child({ module: 'quote-persist' })
 /** Hard cap on the archived payload — mirrors the legacy 1MB guard. */
 const PAYLOAD_BYTES_CAP = 1_000_000
 
+/**
+ * Telegram ids that count as group-membership evidence for a quote: the quoter
+ * plus the *actual senders* of the quoted messages. Deliberately ignores
+ * forward-label origins — `denormalize` folds those into a quote's `authors`,
+ * but a forwarded message's original author needn't belong to this group, and
+ * crediting them here would make later /q forwards mis-attribute the quote to
+ * them (no forwarder, no label). Synthetic/hidden ids (≤ 0) are dropped.
+ */
+export function membershipIds(messages: QuoteMessage[], quoterTgId?: number): number[] {
+  const ids = new Set<number>()
+  for (const m of messages) {
+    const id = m.from?.id
+    if (typeof id === 'number' && id > 0) ids.add(id)
+  }
+  if (typeof quoterTgId === 'number' && quoterTgId > 0) ids.add(quoterTgId)
+  return [...ids]
+}
+
 /** The renderer payload, stored verbatim so the webapp can re-render. */
 export interface QuotePayload {
   version: 1
@@ -90,8 +108,6 @@ export async function persistQuote(params: PersistQuoteParams): Promise<void> {
     if (params.user) doc.user = params.user._id
     if (params.localId != null) doc.local_id = params.localId
 
-    let authorTgIds: number[] = []
-
     if (params.storeText) {
       const bytes = Buffer.byteLength(JSON.stringify(params.payload), 'utf8')
       if (bytes <= PAYLOAD_BYTES_CAP) {
@@ -106,9 +122,6 @@ export async function persistQuote(params: PersistQuoteParams): Promise<void> {
         doc.source = params.callerChat
           ? { chat_id: params.callerChat.id, message_ids: denorm.source.message_ids, date: denorm.source.date }
           : denorm.source
-        authorTgIds = denorm.authors
-          .map((a) => a.telegram_id)
-          .filter((id): id is number => typeof id === 'number' && id > 0)
       } else {
         log.warn({ bytes }, 'payload exceeds cap, skipping archive fields')
       }
@@ -128,12 +141,12 @@ export async function persistQuote(params: PersistQuoteParams): Promise<void> {
 
     await Quote.create(doc)
 
-    // Membership signal: quoter + quoted authors.
+    // Membership signal: the quoter + the real senders of the quoted messages
+    // (see membershipIds — forward-label origins are intentionally excluded).
     if (params.group) {
-      const quoterTgId = params.user?.telegram_id
-      const ids = new Set<number>(authorTgIds)
-      if (typeof quoterTgId === 'number' && quoterTgId > 0) ids.add(quoterTgId)
-      for (const id of ids) trackMember(params.group._id, id)
+      for (const id of membershipIds(params.payload.messages, params.user?.telegram_id)) {
+        trackMember(params.group._id, id)
+      }
     }
   } catch (err) {
     log.error({ err }, 'post-send persist failed')
