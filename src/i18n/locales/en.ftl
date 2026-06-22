@@ -47,11 +47,6 @@ help =
     • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
     • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
-    🤖 <b>AI Modes</b>
-    • Smart Mode: Add <code>/q ai</code> to generate intelligent responses
-    • Change AI Style: Use <code>/qai [style]</code> (admin only)
-    • Available styles: sarcastic, philosopher, comedian, poet, motivator, conspiracy, critic, boomer, zoomer, academic, memer
-
     💡 <b>Cool Combinations</b>
 
     • White quote with replies: <code>/q white rp</code>
@@ -478,35 +473,6 @@ menu-features-group-title =
     <b>Group sticker pack:</b>
     <code>/qs 💜</code> — save to pack
     <code>/qd</code> — remove from pack
-onboarding-welcome-title =
-    <b>Welcome! 👋</b>
-
-    I turn chat messages into beautiful quote stickers.
-    Let me show you how it works!
-onboarding-welcome-btn-start = Let's Go! →
-onboarding-welcome-btn-skip = Skip Tutorial
-onboarding-step1-title =
-    <b>Step of 2</b> 📨
-
-    Forward me any message from a chat.
-    I'll turn it into a quote sticker!
-onboarding-step1-waiting =
-    Waiting for your message...
-    Just forward something from any chat!
-onboarding-step2-title =
-    <b>Amazing! 🎉</b>
-
-    You just created your first quote!
-
-    <b>In groups</b>, use <code>/q</code> as a reply to any message.
-
-    Ready to try more features?
-onboarding-step2-btn-menu = Open Menu
-onboarding-step2-btn-add_group = Add to Group
-onboarding-complete-title =
-    <b>You're all set! ✨</b>
-
-    Now you know the basics. Add me to a group or explore all features in the menu.
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Recreate with different style
 qarchive-on = ✅ Quote text archive <b>enabled</b>. New quotes will be stored with text and author.

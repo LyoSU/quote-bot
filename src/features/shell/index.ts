@@ -76,26 +76,40 @@ async function showLanguagePicker(ctx: BotContext, opts: { edit?: boolean; backC
 
 // ---- Help ----
 
-function helpKeyboard(ctx: BotContext, fromMenu: boolean): InlineKeyboard {
-  if (fromMenu) return new InlineKeyboard().text(ctx.t('menu-btn-back'), 'menu:main')
+function helpKeyboard(ctx: BotContext): InlineKeyboard {
   return new InlineKeyboard().url(ctx.t('btn-add_group'), `https://t.me/${ctx.me.username}?startgroup=add`)
 }
 
 async function showHelp(ctx: BotContext): Promise<void> {
+  // In groups, show the same interactive feature tabs as the private menu —
+  // a newbie who just discovered the bot gets the full cheat-sheet in place,
+  // no "open me in private" detour.
   if (ctx.group) {
-    await ctx.reply(ctx.t('help_group', { username: ctx.me.username }), {
+    await ctx.reply(ctx.t('menu-features-title'), {
       ...htmlReplyOptions(ctx),
-      reply_markup: new InlineKeyboard().url(ctx.t('btn-help'), `https://t.me/${ctx.me.username}?start=help`),
+      reply_markup: featuresKeyboard((k) => ctx.t(k)),
     })
     return
   }
-  await ctx.reply(ctx.t('help'), { ...htmlReplyOptions(ctx), reply_markup: helpKeyboard(ctx, false) })
+  await ctx.reply(ctx.t('help'), { ...htmlReplyOptions(ctx), reply_markup: helpKeyboard(ctx) })
 }
 
 // ---- Feature pages (menu) ----
 
 const FEATURE_PAGES = ['basics', 'colors', 'media', 'group'] as const
 type FeaturePage = (typeof FEATURE_PAGES)[number]
+
+/** The "what can I do?" tab overview — the four feature pages + back to the menu. */
+export function featuresKeyboard(t: (key: string) => string): InlineKeyboard {
+  return new InlineKeyboard()
+    .text(t('menu-features-btn-basics'), 'menu:f_basics')
+    .text(t('menu-features-btn-colors'), 'menu:f_colors')
+    .row()
+    .text(t('menu-features-btn-media'), 'menu:f_media')
+    .text(t('menu-features-btn-group'), 'menu:f_group')
+    .row()
+    .text(t('menu-btn-back'), 'menu:main')
+}
 
 async function editPanel(ctx: BotContext, key: string, keyboard: InlineKeyboard): Promise<void> {
   await ctx
@@ -116,10 +130,8 @@ shellFeature.command('start', async (ctx) => {
     if (payload === 'help') return showHelp(ctx)
     return showMainMenu(ctx, false)
   }
-  await ctx.reply(ctx.t('help_group', { username: ctx.me.username }), {
-    ...htmlReplyOptions(ctx),
-    reply_markup: new InlineKeyboard().url(ctx.t('btn-help'), `https://t.me/${ctx.me.username}?start=help`),
-  })
+  // Group /start (e.g. just after being added): show the feature tabs too.
+  await showHelp(ctx)
 })
 
 // /help
@@ -176,18 +188,7 @@ shellFeature.callbackQuery(/^menu:(.+)$/, async (ctx) => {
       await showMainMenu(ctx, true)
       break
     case 'features':
-      await editPanel(
-        ctx,
-        'menu-features-title',
-        new InlineKeyboard()
-          .text(ctx.t('menu-features-btn-basics'), 'menu:f_basics')
-          .text(ctx.t('menu-features-btn-colors'), 'menu:f_colors')
-          .row()
-          .text(ctx.t('menu-features-btn-media'), 'menu:f_media')
-          .text(ctx.t('menu-features-btn-group'), 'menu:f_group')
-          .row()
-          .text(ctx.t('menu-btn-back'), 'menu:main'),
-      )
+      await editPanel(ctx, 'menu-features-title', featuresKeyboard((k) => ctx.t(k)))
       break
     case 'help':
       await editPanel(ctx, 'help', back('menu:main'))
