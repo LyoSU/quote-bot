@@ -192,6 +192,11 @@ async function renderQuote(
     (pickSetting(group?.settings?.quote?.partialMode, user?.settings?.quote?.partialMode) as
       | PartialQuoteMode
       | undefined) ?? 'framed'
+  // Author role/title (admin custom title / signature) shows by default; either
+  // scope can hide it. Group setting wins in groups, the user's in private.
+  const showSenderTag = group
+    ? (group.settings?.quote?.senderTag ?? true)
+    : (user?.settings?.quote?.senderTag ?? true)
 
   // Ads: ru-locale, private chat only. Fired after collection so the ad message
   // can't be swept into the quote. Fully detached from the response.
@@ -212,6 +217,7 @@ async function renderQuote(
     unsupportedText: ctx.t('quote-unsupported_message'),
     groupPrivacy,
     quoteMode,
+    showSenderTag,
     enrichHidden: (name) => resolveHiddenSender(name),
     getUserEmojiStatus: (telegramId) => botApi.getUserEmojiStatus(telegramId),
     isUserPrivate: async (telegramId) => {

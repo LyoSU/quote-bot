@@ -25,6 +25,7 @@ const groupSchema = new Schema(
         media: { type: Boolean },
         showReply: { type: Boolean },
         crop: { type: Boolean },
+        senderTag: { type: Boolean },
       },
       rate: { type: Boolean, default: true },
       hidden: { type: Boolean, default: true },

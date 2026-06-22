@@ -91,6 +91,7 @@ export interface QuoteSettingsView {
   media: boolean
   showReply: boolean
   crop: boolean
+  senderTag: boolean
   privacy: boolean
   hidden: boolean
   rate: boolean
@@ -111,6 +112,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       media: s?.quote?.media ?? false,
       showReply: s?.quote?.showReply ?? false,
       crop: s?.quote?.crop ?? false,
+      senderTag: s?.quote?.senderTag ?? true,
       privacy: s?.privacy ?? false,
       hidden: s?.hidden ?? true,
       rate: s?.rate ?? true,
@@ -130,6 +132,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       media: s?.quote?.media ?? false,
       showReply: s?.quote?.showReply ?? false,
       crop: s?.quote?.crop ?? false,
+      senderTag: s?.quote?.senderTag ?? true,
       privacy: s?.privacy ?? false,
       hidden: s?.hidden ?? true,
       rate: false,
@@ -152,6 +155,7 @@ function defaultView(scope: 'group' | 'user'): QuoteSettingsView {
     media: false,
     showReply: false,
     crop: false,
+    senderTag: true,
     privacy: false,
     hidden: true,
     rate: scope === 'group',
@@ -169,6 +173,7 @@ const RESET_QUOTE: Record<string, unknown> = {
   'settings.quote.media': false,
   'settings.quote.showReply': false,
   'settings.quote.crop': false,
+  'settings.quote.senderTag': true,
   'settings.privacy': false,
   'settings.hidden': true,
 }
@@ -191,6 +196,7 @@ const CATEGORY_OF: Record<string, Category> = {
   reply: 'content',
   media: 'content',
   crop: 'content',
+  sendertag: 'content',
   privacy: 'privacy',
   hidden: 'privacy',
   rate: 'group',
@@ -230,6 +236,7 @@ export function buildCategoryKeyboard(cat: Category, view: QuoteSettingsView, t:
     kb.text(`${t('qs-row-reply')}: ${onOff(view.showReply)}`, 'qs:toggle:reply').row()
     kb.text(`${t('qs-row-media')}: ${onOff(view.media)}`, 'qs:toggle:media').row()
     kb.text(`${t('qs-row-crop')}: ${onOff(view.crop)}`, 'qs:toggle:crop').row()
+    kb.text(`${t('qs-row-sendertag')}: ${onOff(view.senderTag)}`, 'qs:toggle:sendertag').row()
   } else if (cat === 'privacy') {
     kb.text(`${t('qs-row-privacy')}: ${onOff(view.privacy)}`, 'qs:toggle:privacy').row()
     kb.text(`${t('qs-row-hidden')}: ${onOff(view.hidden)}`, 'qs:toggle:hidden').row()
@@ -383,7 +390,7 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|format|brand|gab)$/, async (
 })
 
 // Flip a boolean setting, staying in its category.
-quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|privacy|hidden|rate|archive)$/, async (ctx) => {
+quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|sendertag|privacy|hidden|rate|archive)$/, async (ctx) => {
   const key = ctx.match?.[1]
   const view = await authorizedView(ctx)
   if (!view || !key) {
@@ -399,6 +406,9 @@ quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|privacy|hidden|rat
   } else if (key === 'crop') {
     view.crop = !view.crop
     await writeSetting(ctx, 'settings.quote.crop', view.crop)
+  } else if (key === 'sendertag') {
+    view.senderTag = !view.senderTag
+    await writeSetting(ctx, 'settings.quote.senderTag', view.senderTag)
   } else if (key === 'privacy') {
     view.privacy = !view.privacy
     await writeSetting(ctx, 'settings.privacy', view.privacy)

@@ -22,6 +22,7 @@ const view = (over: Partial<QuoteSettingsView> = {}): QuoteSettingsView => ({
   media: false,
   showReply: false,
   crop: false,
+  senderTag: true,
   privacy: false,
   hidden: true,
   rate: true,
@@ -84,7 +85,9 @@ describe('buildCategoryKeyboard', () => {
 
   it('content groups the partial-mode + behaviour toggles', () => {
     const cb = callbacks(buildCategoryKeyboard('content', view(), t))
-    expect(cb).toEqual(expect.arrayContaining(['qs:cycle:partial', 'qs:toggle:reply', 'qs:toggle:media', 'qs:toggle:crop']))
+    expect(cb).toEqual(
+      expect.arrayContaining(['qs:cycle:partial', 'qs:toggle:reply', 'qs:toggle:media', 'qs:toggle:crop', 'qs:toggle:sendertag']),
+    )
   })
 
   it('group panel carries the group-only controls', () => {

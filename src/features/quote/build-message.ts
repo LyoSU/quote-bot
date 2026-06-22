@@ -87,6 +87,8 @@ export interface BuildQuoteMessageParams {
   unsupportedText: string
   /** How to treat a manual partial-quote selection. Defaults to `framed`. */
   quoteMode?: PartialQuoteMode
+  /** Render the author's role/title (admin custom title / signature). Defaults to true. */
+  showSenderTag?: boolean
 }
 
 function replyMediaKind(reply: ReplySource): QuoteReplyMedia | undefined {
@@ -177,7 +179,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   out.chatId = fromOut.id
 
   const senderTag = source.sender_tag ?? source.author_signature ?? from.author_signature
-  if (senderTag) out.senderTag = senderTag
+  if (senderTag && params.showSenderTag !== false) out.senderTag = senderTag
 
   if (source.via_bot?.username) out.viaBot = source.via_bot.username
 

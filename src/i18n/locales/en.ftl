@@ -360,6 +360,7 @@ qs-cat-content-desc =
     • <b>Show reply</b> — include the message being replied to.
     • <b>Media</b> — include photos/videos from the message.
     • <b>Crop media</b> — crop tall media to fit.
+    • <b>Author role</b> — show the sender's admin title / signature (the small label top-right).
 qs-cat-privacy-desc =
     <b>🔒 Privacy</b>
 
@@ -394,6 +395,7 @@ qs-row-suffix = 💟 Sticker emoji
 qs-row-media = 📎 Media
 qs-row-reply = 💬 Show reply
 qs-row-crop = 🖼 Crop media
+qs-row-sendertag = 🏷 Author role
 qs-row-privacy = 🔒 Privacy
 qs-row-hidden = 🕵 Sender search
 qs-row-rate = ⭐ Ratings

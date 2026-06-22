@@ -48,6 +48,8 @@ export interface AssembleDeps {
   getUserEmojiStatus: (telegramId: number) => Promise<string | undefined>
   /** Group-level privacy (forces anonymization for the whole quote). */
   groupPrivacy: boolean
+  /** Render the author's role/title (admin custom title / author signature) top-right. */
+  showSenderTag: boolean
   /**
    * Whether a user is a known member of the current group. Used to attribute a
    * forward to its original author (instead of the forwarder + label) when that
@@ -231,6 +233,7 @@ export async function assembleQuoteMessages(
         forceMedia: deps.forceMedia,
         unsupportedText: deps.unsupportedText,
         quoteMode: deps.quoteMode,
+        showSenderTag: deps.showSenderTag,
       }),
     )
 

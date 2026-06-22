@@ -27,6 +27,7 @@ const userSchema = new Schema(
         media: { type: Boolean },
         showReply: { type: Boolean },
         crop: { type: Boolean },
+        senderTag: { type: Boolean },
       },
       hidden: { type: Boolean, default: true },
       privacy: { type: Boolean, default: false },

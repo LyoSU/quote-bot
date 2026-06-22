@@ -11,6 +11,7 @@ function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
     showReply: false,
     unsupportedText: 'Unsupported',
     groupPrivacy: false,
+    showSenderTag: true,
     enrichHidden: vi.fn(async () => null),
     isUserPrivate: vi.fn(async () => false),
     getUserEmojiStatus: vi.fn(async () => undefined),
@@ -140,6 +141,14 @@ describe('assembleQuoteMessages', () => {
     expect(out.messages[0]?.from?.name).toBe('Story Channel')
     expect(out.messages[0]?.mediaType).toBe('story')
     expect(out.messages[0]?.storyId).toBe(3)
+  })
+
+  it("omits the author's role/title (senderTag) when showSenderTag is off", async () => {
+    const m = msg({ author_signature: 'Admin' })
+    const on = await assembleQuoteMessages([m], deps({ chatType: 'private' }))
+    expect(on.messages[0]?.senderTag).toBe('Admin')
+    const off = await assembleQuoteMessages([m], deps({ chatType: 'private', showSenderTag: false }))
+    expect(off.messages[0]?.senderTag).toBeUndefined()
   })
 
   it('omits the reply block unless showReply is set', async () => {
