@@ -121,8 +121,8 @@ describe('selectSourceMessages', () => {
 
   it('fetches a range via the server when count > 1 and healthy', async () => {
     const td = fetcher([
-      { message_id: 10, date: 0 },
-      { message_id: 11, date: 0 },
+      { message_id: 10, date: 0, text: 'a' },
+      { message_id: 11, date: 0, text: 'b' },
     ])
     const sel = await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply }),
@@ -132,8 +132,84 @@ describe('selectSourceMessages', () => {
       count: 2,
       fetcher: td,
     })
-    expect(td.getMessages).toHaveBeenCalledWith(-100, [10, 11])
+    // count=2 over-fetches a 2x window so gaps don't shrink the output.
+    expect(td.getMessages).toHaveBeenCalledWith(-100, [10, 11, 12, 13])
     expect(sel.messages).toHaveLength(2)
+  })
+
+  it('over-fetches so a range with gaps still returns `count` messages', async () => {
+    // count=3 → requests the 6-slot window [10..15]; 11 and 13 are service
+    // messages the server returns empty. Survivors [10,12,14,15] are sliced
+    // back to the requested 3 nearest the anchor.
+    const td = fetcher([
+      { message_id: 10, date: 0, text: 'a' },
+      { message_id: 12, date: 0, text: 'c' },
+      { message_id: 14, date: 0, text: 'e' },
+      { message_id: 15, date: 0, text: 'f' },
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 3,
+      fetcher: td,
+    })
+    expect(td.getMessages).toHaveBeenCalledWith(-100, [10, 11, 12, 13, 14, 15])
+    expect(sel.messages.map((m) => m.message_id)).toEqual([10, 12, 14])
+  })
+
+  it('drops content-less service messages (joins, pins, deleted gaps) from a range', async () => {
+    // The range [10, 11, 12] spans a service message at 11 (e.g. someone
+    // joined). The server returns it with no text/media; left in, the renderer
+    // would paint an "unsupported message" bubble between the real quotes.
+    const td = fetcher([
+      { message_id: 10, date: 0, text: 'first' },
+      { message_id: 11, date: 0 } as ApiMessage,
+      { message_id: 12, date: 0, text: 'third' },
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 3,
+      fetcher: td,
+    })
+    expect(sel.messages.map((m) => m.message_id)).toEqual([10, 12])
+  })
+
+  it('keeps a media-only message in a range (caption-less photo is real content)', async () => {
+    const td = fetcher([
+      { message_id: 10, date: 0, text: 'first' },
+      { message_id: 11, date: 0, photo: [{ file_id: 'p', file_unique_id: 'u', width: 1, height: 1 }] } as ApiMessage,
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 2,
+      fetcher: td,
+    })
+    expect(sel.messages.map((m) => m.message_id)).toEqual([10, 11])
+  })
+
+  it('falls back to the native message when a range is all service messages', async () => {
+    const td = fetcher([
+      { message_id: 10, date: 0 } as ApiMessage,
+      { message_id: 11, date: 0 } as ApiMessage,
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 2,
+      fetcher: td,
+    })
+    expect(sel.messages).toHaveLength(1)
+    expect(sel.messages[0]?.message_id).toBe(10)
   })
 
   it('falls back to the native message when the server is unavailable', async () => {
@@ -176,7 +252,7 @@ describe('selectSourceMessages', () => {
   })
 
   it('quotes backwards for a negative count', async () => {
-    const td = fetcher([{ message_id: 8, date: 0 }])
+    const td = fetcher([{ message_id: 8, date: 0, text: 'x' }])
     await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply }),
       chatId: -100,
@@ -185,14 +261,15 @@ describe('selectSourceMessages', () => {
       count: -3,
       fetcher: td,
     })
-    // start = 10 - (3 - 1) = 8 → [8, 9, 10]
-    expect(td.getMessages).toHaveBeenCalledWith(-100, [8, 9, 10])
+    // count=-3 over-fetches a 6-slot window ending at the anchor (10):
+    // start = 10 - (6 - 1) = 5 → [5, 6, 7, 8, 9, 10].
+    expect(td.getMessages).toHaveBeenCalledWith(-100, [5, 6, 7, 8, 9, 10])
   })
 
   it('attaches the selection to the replied message in a range fetch', async () => {
     const td = fetcher([
-      { message_id: 10, date: 0 },
-      { message_id: 11, date: 0 },
+      { message_id: 10, date: 0, text: 'a' },
+      { message_id: 11, date: 0, text: 'b' },
     ])
     const sel = await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply, quote: { text: 'part' } }),
@@ -210,9 +287,9 @@ describe('selectSourceMessages', () => {
     // Backwards from message 10: [8, 9, 10] — the replied message is LAST,
     // and the manual quote selection belongs to it, not to messages[0].
     const td = fetcher([
-      { message_id: 8, date: 0 },
-      { message_id: 9, date: 0 },
-      { message_id: 10, date: 0 },
+      { message_id: 8, date: 0, text: 'a' },
+      { message_id: 9, date: 0, text: 'b' },
+      { message_id: 10, date: 0, text: 'c' },
     ])
     const sel = await selectSourceMessages({
       trigger: trigger({ reply_to_message: reply, quote: { text: 'part' } }),

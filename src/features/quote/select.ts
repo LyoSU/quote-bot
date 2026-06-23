@@ -1,5 +1,6 @@
 import type { RawMessage } from './assemble'
 import type { ApiMessage } from '../../services/bot-api'
+import { hasAnyMedia } from './extract-media'
 
 /** The subset of the Bot API service the selector needs (kept small for testing). */
 export interface MessageFetcher {
@@ -33,6 +34,16 @@ export interface Selection {
 }
 
 const MAX_MESSAGES = 50
+
+/**
+ * True if a fetched message carries something worth quoting. Mirrors what
+ * buildQuoteMessage treats as content (text/caption or any media) — anything
+ * that returns false would otherwise render as the "unsupported message"
+ * placeholder, which is exactly what we want to filter out of a range.
+ */
+function hasContent(m: ApiMessage): boolean {
+  return Boolean(m.text || m.caption || hasAnyMedia(m))
+}
 
 function clampCount(raw: number | undefined): { count: number; backwards: boolean } {
   let count = raw ?? 1
@@ -98,11 +109,20 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
     return { messages: [firstMessage] }
   }
 
-  const startId = backwards ? firstMessage.message_id - (count - 1) : firstMessage.message_id
-  const ids = Array.from({ length: count }, (_, i) => startId + i)
+  // `count` is how many real messages the user wants OUT. Service messages
+  // (joins/leaves/pins) and deleted ids occupy slots in the range but carry no
+  // quotable content — left in, buildQuoteMessage renders them as an
+  // "unsupported message" bubble. So over-fetch a wider window (2×), drop the
+  // content-less ones, and keep the `count` nearest the anchor. The anchor is
+  // the replied message: the FIRST id for a forward range, the LAST for a
+  // backward one — so slice from the matching end.
+  const span = count * 2
+  const startId = backwards ? firstMessage.message_id - (span - 1) : firstMessage.message_id
+  const ids = Array.from({ length: span }, (_, i) => startId + i)
 
-  const fetched = await fetcher.getMessages(chatId, ids).catch(() => [] as ApiMessage[])
-  const messages: RawMessage[] = fetched.length > 0 ? fetched : [firstMessage]
+  const fetched = (await fetcher.getMessages(chatId, ids).catch(() => [] as ApiMessage[])).filter(hasContent)
+  const picked = backwards ? fetched.slice(-count) : fetched.slice(0, count)
+  const messages: RawMessage[] = picked.length > 0 ? picked : [firstMessage]
 
   // The selection belongs to the replied message — in a backwards range
   // that's the LAST of the fetched ids, not messages[0].

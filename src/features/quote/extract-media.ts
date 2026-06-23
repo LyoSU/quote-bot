@@ -82,7 +82,7 @@ export interface ExtractMediaOptions {
   crop: boolean
 }
 
-function hasAnyMedia(src: MediaSource): boolean {
+export function hasAnyMedia(src: MediaSource): boolean {
   return Boolean(
     src.photo ||
       src.sticker ||
