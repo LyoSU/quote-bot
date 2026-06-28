@@ -34,6 +34,8 @@ export interface Selection {
 }
 
 const MAX_MESSAGES = 50
+/** Per-call cap of the Bot API server's getMessages (LyoSU fork batches ≤50). */
+const MAX_FETCH_IDS = 50
 
 /**
  * True if a fetched message carries something worth quoting. Mirrors what
@@ -116,7 +118,9 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   // content-less ones, and keep the `count` nearest the anchor. The anchor is
   // the replied message: the FIRST id for a forward range, the LAST for a
   // backward one — so slice from the matching end.
-  const span = count * 2
+  // Over-fetch 2× to absorb gaps, but never exceed the server's per-call id cap
+  // (it rejects the whole request with "too many message identifiers" otherwise).
+  const span = Math.min(count * 2, MAX_FETCH_IDS)
   const startId = backwards ? firstMessage.message_id - (span - 1) : firstMessage.message_id
   const ids = Array.from({ length: span }, (_, i) => startId + i)
 

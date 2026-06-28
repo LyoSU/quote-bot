@@ -137,6 +137,22 @@ describe('selectSourceMessages', () => {
     expect(sel.messages).toHaveLength(2)
   })
 
+  it('caps the over-fetch window at the server id limit', async () => {
+    // count=50 would over-fetch 100 ids, but getMessages rejects batches >50
+    // ("too many message identifiers"). The window must clamp to 50 ids.
+    const td = fetcher([{ message_id: 10, date: 0, text: 'a' }])
+    await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 50,
+      fetcher: td,
+    })
+    const ids = (td.getMessages as ReturnType<typeof vi.fn>).mock.calls[0]?.[1] as number[]
+    expect(ids).toHaveLength(50)
+  })
+
   it('over-fetches so a range with gaps still returns `count` messages', async () => {
     // count=3 → requests the 6-slot window [10..15]; 11 and 13 are service
     // messages the server returns empty. Survivors [10,12,14,15] are sliced
