@@ -44,7 +44,7 @@ export interface MediaSource {
   video_note?: ThumbedFile
   document?: ThumbedFile
   audio?: ThumbedFile
-  voice?: { waveform?: number[]; duration?: number }
+  voice?: { file_id?: string; mime_type?: string; waveform?: number[]; duration?: number }
   paid_media?: { star_count?: number; paid_media?: PaidMediaItem[] }
   story?: { id?: number; chat?: { id: number; title?: string } }
   /** Telegram "tap to reveal" blur + caption-above-media UI hints. */
@@ -180,6 +180,7 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
       // name + size), not a thumbnail bubble — so a thumbnail-less file is no
       // longer "unsupported".
       out.document = {}
+      out.mediaType = 'document'
       if (d.file_name) out.document.file_name = d.file_name
       if (typeof d.file_size === 'number') out.document.file_size = d.file_size
     }
@@ -189,6 +190,7 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
     // duration), with the cover fetched from the thumbnail by file id.
     const a = src.audio
     out.audio = {}
+    out.mediaType = 'audio'
     if (a.title) out.audio.title = a.title
     if (a.performer) out.audio.performer = a.performer
     if (typeof a.duration === 'number') out.audio.duration = a.duration
@@ -216,6 +218,8 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
 
   if (src.voice) {
     out.voice = { waveform: src.voice.waveform ?? [], duration: src.voice.duration ?? 0 }
+    if (src.voice.file_id) out.voice.fileId = src.voice.file_id
+    if (src.voice.mime_type) out.voice.mimeType = src.voice.mime_type
   }
 
   // An empty media array is still truthy: it would both suppress the

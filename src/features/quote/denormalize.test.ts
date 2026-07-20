@@ -40,6 +40,17 @@ describe('denormalizeQuote', () => {
     expect(out.hasMedia).toBe(true)
   })
 
+  it('counts canonical audio, document, story and paid-preview payloads as media', () => {
+    for (const message of [
+      baseMsg({ audio: { title: 'Song' } }),
+      baseMsg({ document: { file_name: 'report.pdf' } }),
+      baseMsg({ mediaType: 'story' }),
+      baseMsg({ mediaType: 'paid_preview' }),
+    ]) {
+      expect(denormalizeQuote([message], {}).hasMedia).toBe(true)
+    }
+  })
+
   it('includes forward authors', () => {
     const out = denormalizeQuote(
       [baseMsg({ forward: { label: 'Forwarded from Bob', name: 'Bob', from: { id: 50, kind: 'user' } } })],

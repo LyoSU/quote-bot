@@ -50,7 +50,7 @@ export function denormalizeQuote(
 
   for (const m of messages) {
     if (m.voice) hasVoice = true
-    if (m.media) hasMedia = true
+    if (m.media || m.document || m.audio || m.mediaType === 'story' || m.mediaType === 'paid_preview') hasMedia = true
     if (m.replyMessage?.media) {
       if (m.replyMessage.media.kind === 'voice') hasVoice = true
       else hasMedia = true

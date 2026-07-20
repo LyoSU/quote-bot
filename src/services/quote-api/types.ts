@@ -129,6 +129,9 @@ export interface QuoteMessage {
 export interface QuoteVoice {
   waveform: number[]
   duration: number
+  /** Archive-only playback metadata consumed by quotly-webapp. */
+  fileId?: string
+  mimeType?: string
 }
 
 export interface QuoteDocument {

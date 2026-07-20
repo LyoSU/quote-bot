@@ -70,7 +70,7 @@ describe('extractMedia', () => {
     )
     expect(r.document).toEqual({ file_name: 'report.pdf', file_size: 2048 })
     expect(r.media).toBeUndefined() // the row is the bubble content; no media image
-    expect(r.mediaType).toBeUndefined()
+    expect(r.mediaType).toBe('document')
     expect(r.mediaFileId).toBe('pdf') // still kept for the webapp
   })
 
@@ -87,8 +87,13 @@ describe('extractMedia', () => {
     )
     expect(r.audio).toEqual({ title: 'Водограй', performer: 'Івасюк', duration: 215, thumb: { file_id: 'cover' } })
     expect(r.media).toBeUndefined()
-    expect(r.mediaType).toBeUndefined()
+    expect(r.mediaType).toBe('audio')
     expect(r.mediaFileId).toBe('aud')
+  })
+
+  it('preserves voice playback metadata for the webapp archive', () => {
+    const r = extractMedia({ voice: { file_id: 'voice', mime_type: 'audio/ogg', duration: 5, waveform: [1, 2] } }, opts)
+    expect(r.voice).toEqual({ fileId: 'voice', mimeType: 'audio/ogg', duration: 5, waveform: [1, 2] })
   })
 
   it('renders a thumbnail-less animation by handing the renderer the file id (decodable gif frame)', () => {
