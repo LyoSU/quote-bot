@@ -1,5 +1,5 @@
 import { Composer, InlineKeyboard } from 'grammy'
-import { Types } from 'mongoose'
+import { Types, type PipelineStage } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { Quote, type QuoteDoc } from '../../db/models'
 
@@ -44,10 +44,66 @@ export function applyVote(
 }
 
 /**
- * Toggles the caller's vote on a quote. Ported from the legacy handler but
- * written as a read + atomic `$set` (votes + recomputed score) instead of a
- * full-document `save()`, sidestepping Mongoose VersionErrors under concurrent
- * votes on the same quote.
+ * Builds an aggregation-pipeline update that toggles `userId`'s vote on
+ * `rateName` entirely server-side. The previous read-then-`$set` path lost one
+ * of two simultaneous votes — each writer re-`$set` the whole array from its
+ * own stale read, so the second write erased the first. Deriving the new arrays
+ * from the live `$rate.votes` inside the update makes concurrent votes on the
+ * same quote compose instead of clobber.
+ *
+ * Semantics are identical to {@link applyVote}: the caller is pulled from both
+ * buckets, then re-added to the tapped bucket only if they weren't already in
+ * it (tap same → retract, tap other → move). Vote elements are `$toString`-
+ * compared so it works whether ids were stored as ObjectIds (new) or raw
+ * strings (legacy), and the array is rebuilt as exactly the two 👍/👎 buckets
+ * in fixed order so missing/short legacy `rate.votes` are repaired in place
+ * (matching {@link ensureVotes}). `$ifNull` guards keep the path valid when
+ * `rate.votes` is absent.
+ */
+export function buildVoteUpdate(userId: Types.ObjectId | string, rateName: string): PipelineStage[] {
+  const userIdStr = userId.toString()
+  const votedUp = rateName === '👍'
+
+  // `$rate.votes.vote` projects the buckets to `[[…👍 ids…], […👎 ids…]]`.
+  const buckets = { $ifNull: ['$rate.votes.vote', []] }
+  const bucketAt = (i: number): Record<string, unknown> => ({ $ifNull: [{ $arrayElemAt: [buckets, i] }, []] })
+  const withoutUser = (arr: unknown): Record<string, unknown> => ({
+    $filter: { input: arr, as: 'v', cond: { $ne: [{ $toString: '$$v' }, userIdStr] } },
+  })
+  const hasUser = (arr: unknown): Record<string, unknown> => ({
+    $in: [userIdStr, { $map: { input: arr, as: 'v', in: { $toString: '$$v' } } }],
+  })
+
+  const up = bucketAt(0)
+  const down = bucketAt(1)
+  // Re-add the caller to the tapped bucket only when they weren't already in it.
+  const newUp = {
+    $concatArrays: [withoutUser(up), { $cond: [{ $and: [votedUp, { $not: [hasUser(up)] }] }, [userId], []] }],
+  }
+  const newDown = {
+    $concatArrays: [withoutUser(down), { $cond: [{ $and: [!votedUp, { $not: [hasUser(down)] }] }, [userId], []] }],
+  }
+
+  return [
+    {
+      $set: {
+        'rate.votes': [
+          { name: '👍', vote: newUp },
+          { name: '👎', vote: newDown },
+        ],
+        'rate.score': { $subtract: [{ $size: newUp }, { $size: newDown }] },
+      },
+    },
+  ] as PipelineStage[]
+}
+
+/**
+ * Toggles the caller's vote on a quote. Ported from the legacy handler but the
+ * write is a single atomic aggregation-pipeline update ({@link buildVoteUpdate})
+ * instead of a full-document `save()`/read-modify-`$set`, sidestepping Mongoose
+ * VersionErrors and the lost-update race under concurrent votes on one quote.
+ * The pre-read only decides the toast text + supplies fallback counts; the
+ * post-update doc is authoritative for the keyboard.
  */
 async function handleRate(ctx: BotContext, kind: 'rate' | 'irate'): Promise<void> {
   const userId = ctx.user?._id
@@ -77,18 +133,23 @@ async function handleRate(ctx: BotContext, kind: 'rate' | 'irate'): Promise<void
     return
   }
 
+  // The pre-read only drives the toast text (best-effort — the atomic write
+  // below is what actually decides the stored state) and supplies fallback
+  // counts if the write can't hand back a fresh doc.
   const votes = ensureVotes(quote)
   const outcome = applyVote(votes, userId, rateName)
   const resultText =
     outcome === 'back' ? ctx.t('rate-vote-back') : outcome === 'rated' ? ctx.t('rate-vote-rated', { rateName }) : ''
 
-  const score = votes[0]!.vote.length - votes[1]!.vote.length
-  await Quote.updateOne({ _id: quote._id }, { $set: { 'rate.votes': votes, 'rate.score': score } }).catch(() => {})
+  const updated = await Quote.findOneAndUpdate({ _id: quote._id }, buildVoteUpdate(userId, rateName), { new: true })
+    .lean<QuoteDoc>()
+    .catch(() => null)
+  const persisted = updated ? ensureVotes(updated) : votes
 
   await ctx.answerCallbackQuery(resultText ? { text: resultText } : undefined).catch(() => {})
 
-  const up = votes[0]!.vote.length
-  const down = votes[1]!.vote.length
+  const up = persisted[0]!.vote.length
+  const down = persisted[1]!.vote.length
 
   const kb = new InlineKeyboard()
   if (kind === 'irate') {
