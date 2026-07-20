@@ -24,6 +24,14 @@ function toStickerResult(quote: QuoteDoc): InlineQueryResult | null {
   }
 }
 
+/**
+ * Next page offset, or '' to end pagination. Based on the RAW document count
+ * (before the null-file_id filter): a full raw page may still hide more.
+ */
+export function nextOffset(offset: number, rawCount: number): string {
+  return rawCount < LIMIT ? '' : String(offset + LIMIT)
+}
+
 export const inlineFeature = new Composer<BotContext>()
 
 /**
@@ -45,7 +53,7 @@ inlineFeature.on('inline_query', async (ctx) => {
 
     const results = quotes.map(toStickerResult).filter((r): r is InlineQueryResult => r !== null)
     await ctx
-      .answerInlineQuery(results, { is_personal: false, cache_time: 300, next_offset: String(offset + LIMIT) })
+      .answerInlineQuery(results, { is_personal: false, cache_time: 300, next_offset: nextOffset(offset, quotes.length) })
       .catch(() => {})
     return
   }
@@ -65,6 +73,6 @@ inlineFeature.on('inline_query', async (ctx) => {
 
   const results = liked.map(toStickerResult).filter((r): r is InlineQueryResult => r !== null)
   await ctx
-    .answerInlineQuery(results, { is_personal: true, cache_time: 5, next_offset: String(offset + LIMIT) })
+    .answerInlineQuery(results, { is_personal: true, cache_time: 5, next_offset: nextOffset(offset, liked.length) })
     .catch(() => {})
 })
