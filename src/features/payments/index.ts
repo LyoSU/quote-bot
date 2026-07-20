@@ -43,6 +43,22 @@ paymentsFeature.on('pre_checkout_query', (ctx) => {
 
 paymentsFeature.on('message:successful_payment', async (ctx) => {
   await ctx.reply(ctx.t('donate-successful'), { parse_mode: 'HTML' }).catch(() => {})
+
+  // Surface the charge id to the owner so /refund is copy-pasteable; the
+  // charge id is otherwise never persisted. Fire-and-forget — a failed
+  // admin ping must not break the payer's flow.
+  if (config.ADMIN_ID && ctx.from) {
+    const payment = ctx.message.successful_payment
+    const userId = ctx.from.id
+    void ctx.api
+      .sendMessage(
+        config.ADMIN_ID,
+        `New payment from ${userId}: ${payment.total_amount} ${payment.currency}\n` +
+          `<code>/refund ${userId} ${payment.telegram_payment_charge_id}</code>`,
+        { parse_mode: 'HTML' },
+      )
+      .catch(() => {})
+  }
 })
 
 // /refund <userId> <telegram_payment_charge_id> — owner only.
