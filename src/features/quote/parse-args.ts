@@ -6,8 +6,11 @@ import { parseColor, type ColorSpec } from './color'
  * forgiving and self-explaining:
  *   - flags & scale are case-insensitive (`/q Reply S2`)
  *   - colors are recognized and normalized via {@link parseColor}
- *   - tokens we can't classify go into `unknown` so the handler can tell the
- *     user what wasn't understood, instead of silently rendering a black box.
+ *   - tokens we can't classify go into `unknown`. The inline `/q` handler
+ *     ignores them (silent tolerance, matching the legacy bot — a stray token
+ *     never blocks the quote). They exist for the group `@bot` alias in
+ *     mention.ts: any unknown token means the message is ordinary chatter that
+ *     merely names the bot, not a bare "@bot <flags>" summon, so no quote fires.
  *
  * Token grammar (priority order):
  *   r | reply, p | png, i | img, rate, h | hidden, m | media, c | crop,
