@@ -57,7 +57,7 @@ export function installSignalHandlers(runner: RunnerHandle): void {
         await runner.stop()
         logger.info('Polling stopped, in-flight updates drained')
       }
-      for (const resource of resources.reverse()) {
+      for (const resource of [...resources].reverse()) {
         try {
           await resource.close()
           logger.info({ resource: resource.name }, 'Resource closed')

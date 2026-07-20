@@ -44,10 +44,16 @@ export const networkErrorsTotal = new Counter({
  *     saturated (handlers stuck behind the per-group send throttler);
  *   - in_flight near zero + poll age growing → polling itself is dead.
  */
+let pollingGaugesRegistered = false
+
 export function registerPollingGauges(
   runner: { size(): number },
   poll: { ageSeconds(): number },
 ): void {
+  // prom-client throws on a duplicate metric name; make a second call a no-op.
+  if (pollingGaugesRegistered) return
+  pollingGaugesRegistered = true
+
   new Gauge({
     name: 'bot_runner_in_flight',
     help: 'Updates currently being processed by the runner sink',

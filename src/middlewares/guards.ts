@@ -31,6 +31,10 @@ export async function onlyAdmin(ctx: BotContext, next: NextFunction): Promise<vo
   if (!isGroupChat(ctx)) return next()
   if (!ctx.from) return
 
+  // Known limitation: an admin posting anonymously (as the group/channel) shows
+  // up as GroupAnonymousBot, whose getChatMember is not "administrator", so they
+  // are denied. Accepted deliberately — anonymous posts carry no real user to
+  // authorize, and treating any anonymous sender as admin would be spoofable.
   const member = await ctx.getChatMember(ctx.from.id).catch(() => null)
   if (member && ADMIN_STATUSES.has(member.status)) return next()
   await denyHtml(ctx, 'only_admin')

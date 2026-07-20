@@ -99,7 +99,8 @@ export class PollWatch {
 }
 
 /**
- * Polling freshness read by /health. 90s ≈ three 30s long-poll cycles — one
- * missed cycle is noise, three means the Bot API server is really gone.
+ * Polling freshness read by /health. 90s ≈ nine 10s long-poll cycles (see the
+ * shortened window in runner.ts) — a missed cycle or two is noise, this many
+ * means the Bot API server is really gone.
  */
 export const pollWatch = new PollWatch(90_000)
