@@ -29,6 +29,10 @@ import { requestRate } from './rate-meter'
  * handling is silent and unbounded, which hid local-server outages for up to
  * an hour. Transformers installed later run first, so the chain is
  * autoRetry → networkRetry → throttler → fetch.
+ *
+ * The throttler is bypassed for `getUpdates`: long polling shares the same
+ * Bottleneck reservoir as outgoing sends, so a burst of replies could otherwise
+ * queue-starve polling itself. Only outgoing traffic needs rate limiting.
  */
 export interface CreateBotOptions {
   /** Injectable for tests — exercises the real transformer chain offline. */
@@ -56,7 +60,13 @@ export function createBot(opts: CreateBotOptions = {}): Bot<BotContext> {
   // --- Outgoing resilience -------------------------------------------------
   bot.api.config.use(pollWatch.transformer())
   bot.api.config.use(pollGuard.transformer())
-  bot.api.config.use(apiThrottler())
+  // Throttle only outgoing calls — getUpdates skips the reservoir (see above).
+  const throttler = apiThrottler()
+  bot.api.config.use((prev, method, payload, signal) =>
+    method === 'getUpdates'
+      ? prev(method, payload, signal)
+      : throttler(prev, method, payload, signal),
+  )
   bot.api.config.use(networkRetry({ attempts: 5, maxDelayMs: 8_000 }))
   bot.api.config.use(autoRetry({ maxRetryAttempts: 3, maxDelaySeconds: 5, rethrowHttpErrors: true }))
 
