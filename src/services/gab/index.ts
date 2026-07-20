@@ -51,7 +51,11 @@ function scheduleLoad(chatId: number): void {
  * drop, which is exactly what makes the "author is present" trick cheap.
  */
 export function recordActivity(chatId: number, userId: number): void {
-  let map = activity.get(chatId)
+  // `touchTtl` refreshes the map's expiry on every message, so a group that
+  // never falls silent keeps its speaker map instead of having it evicted a
+  // fixed window after the first message (which briefly reset the ≥2-speakers
+  // gate mid-conversation).
+  let map = activity.get(chatId, true)
   if (!map) {
     map = new Map()
     activity.set(chatId, map)

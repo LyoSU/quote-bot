@@ -18,6 +18,23 @@ describe('gab activity tracking', () => {
     expect(activeSpeakers(-1001).sort()).toEqual([11, 12])
     expect(activeSpeakers(-9999)).toEqual([])
   })
+
+  it('keeps a continuously active group tracked past the map TTL', () => {
+    vi.useFakeTimers()
+    try {
+      const chat = -1004
+      recordActivity(chat, 21) // t=0: map created, base TTL ≈ 10 min
+      vi.advanceTimersByTime(7 * 60_000)
+      recordActivity(chat, 21) // t=7 min: refreshes the map's TTL
+      recordActivity(chat, 22)
+      vi.advanceTimersByTime(4 * 60_000) // t=11 min — past the ORIGINAL 10-min TTL
+      // Both spoke 4 min ago (inside the 5-min window); without the TTL refresh
+      // the whole map would have expired at t=10 min and this would be empty.
+      expect(activeSpeakers(chat).sort()).toEqual([21, 22])
+    } finally {
+      vi.useRealTimers()
+    }
+  })
 })
 
 describe('considerGab', () => {

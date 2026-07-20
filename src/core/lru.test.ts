@@ -42,4 +42,24 @@ describe('LruCache', () => {
     expect(c.get('a')).toBeUndefined()
     expect(c.size).toBe(0)
   })
+
+  it('touchTtl resets expiry so a continuously accessed key survives', () => {
+    vi.useFakeTimers()
+    const c = new LruCache<string, number>(10, 1000)
+    c.set('a', 1)
+    vi.advanceTimersByTime(800)
+    c.get('a', true) // refresh: expiry now 800+1000
+    vi.advanceTimersByTime(800) // 1600 since insert — a plain get would be gone
+    expect(c.get('a')).toBe(1)
+  })
+
+  it('plain get does NOT reset expiry', () => {
+    vi.useFakeTimers()
+    const c = new LruCache<string, number>(10, 1000)
+    c.set('a', 1)
+    vi.advanceTimersByTime(800)
+    c.get('a') // MRU bump only, no TTL refresh
+    vi.advanceTimersByTime(300) // 1100 since insert → expired
+    expect(c.get('a')).toBeUndefined()
+  })
 })

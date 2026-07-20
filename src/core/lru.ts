@@ -14,7 +14,12 @@ export class LruCache<K, V> {
     private readonly ttlMs: number,
   ) {}
 
-  get(key: K): V | undefined {
+  /**
+   * `touchTtl` also resets the entry's expiry, keeping a continuously accessed
+   * key alive (a plain get only bumps MRU position, so a long-lived entry would
+   * otherwise expire a fixed TTL after its FIRST insert).
+   */
+  get(key: K, touchTtl = false): V | undefined {
     const entry = this.map.get(key)
     if (!entry) return undefined
     if (entry.expiresAt <= Date.now()) {
@@ -23,6 +28,7 @@ export class LruCache<K, V> {
     }
     // Touch: move to most-recently-used position.
     this.map.delete(key)
+    if (touchTtl) entry.expiresAt = Date.now() + this.ttlMs
     this.map.set(key, entry)
     return entry.value
   }
