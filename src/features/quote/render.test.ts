@@ -38,6 +38,19 @@ describe('resolveRenderSpec', () => {
   it('honors an explicit scale flag over the computed default', () => {
     expect(resolveRenderSpec(parseQuoteArgs('s1.5')).scale).toBe(1.5)
   })
+
+  it('clamps scale to the renderer-accepted [1, 20] range', () => {
+    expect(resolveRenderSpec(parseQuoteArgs('s100')).scale).toBe(20)
+    expect(resolveRenderSpec(parseQuoteArgs('s0')).scale).toBe(1)
+    expect(resolveRenderSpec(parseQuoteArgs('s-5')).scale).toBe(1)
+  })
+
+  it('rounds dimensions to integers (the 1.2× width factor is fractional)', () => {
+    const spec = resolveRenderSpec(parseQuoteArgs('img'))
+    expect(Number.isInteger(spec.width)).toBe(true)
+    expect(Number.isInteger(spec.height)).toBe(true)
+    expect(spec.width).toBe(614) // round(512 * 1.2)
+  })
 })
 
 describe('resolveBackgroundColor', () => {

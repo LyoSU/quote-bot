@@ -43,20 +43,36 @@ export interface QuoteSettings {
   crop?: boolean | null
 }
 
+// Base sticker canvas: 512×768 at 2× (legacy proportions).
+const BASE_WIDTH = 512
+const BASE_HEIGHT = 512 * 1.5
+// Image/PNG/stories widen the canvas slightly...
+const WIDE_WIDTH_FACTOR = 1.2
+// ...and lift the height ceiling hard: multi-message image/stories output can
+// run very long, and the renderer ink-trims to the real content, so this is a
+// generous upper bound the layout grows into, not the final height.
+const TALL_HEIGHT_FACTOR = 15
+// The renderer clamps scale to [1,20] server-side (methods/generate.js:109);
+// mirror it here so `/q s100` behaves predictably instead of round-tripping a
+// value the server will silently reject/clamp.
+const SCALE_MIN = 1
+const SCALE_MAX = 20
+
 /**
  * Resolves the renderer dimensions/type from the parsed flags. Pure — ported
  * 1:1 from the legacy size math (512×768 @2×, inflated for image/png/stories),
  * but the delivery channel is derived from intent here instead of trusting the
- * response header downstream.
+ * response header downstream. Dimensions are rounded to integers and scale is
+ * clamped to the renderer's accepted range.
  */
 export function resolveRenderSpec(flag: ParsedQuoteArgs): RenderSpec {
-  let width = 512
-  let height = 512 * 1.5
+  let width = BASE_WIDTH
+  let height = BASE_HEIGHT
   let scale = 2
 
   if (flag.png || flag.img) {
-    width *= 1.2
-    height *= 15
+    width *= WIDE_WIDTH_FACTOR
+    height *= TALL_HEIGHT_FACTOR
     scale *= 1.5
   }
 
@@ -64,16 +80,24 @@ export function resolveRenderSpec(flag: ParsedQuoteArgs): RenderSpec {
   if (flag.img || flag.png) type = 'image'
 
   if (flag.stories) {
-    width *= 1.2
-    height *= 15
+    width *= WIDE_WIDTH_FACTOR
+    height *= TALL_HEIGHT_FACTOR
     scale = 3
     type = 'stories'
   }
 
   const delivery: QuoteDelivery = flag.png ? 'document' : type === 'quote' ? 'sticker' : 'photo'
   const format: QuoteFormat = delivery === 'sticker' ? 'webp' : 'png'
+  const rawScale = flag.scale ?? scale
 
-  return { type, format, width, height, scale: flag.scale ?? scale, delivery }
+  return {
+    type,
+    format,
+    width: Math.round(width),
+    height: Math.round(height),
+    scale: Math.min(SCALE_MAX, Math.max(SCALE_MIN, rawScale)),
+    delivery,
+  }
 }
 
 /**
