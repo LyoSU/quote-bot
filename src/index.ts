@@ -7,6 +7,7 @@ import { pollWatch } from './core/poll-watch'
 import { registerPollingGauges } from './core/metrics'
 import { startHealthServer } from './health/server'
 import { waitForDatabase, isDatabaseReady } from './db/connection'
+import { verifyDatabase } from './db/verify'
 import { contextMiddleware } from './middlewares/context'
 import { i18nMiddleware } from './i18n'
 import { features } from './features'
@@ -29,6 +30,9 @@ async function main(): Promise<void> {
 
   await waitForDatabase()
   logger.info('Database ready')
+  // Warn-only: indexes/capped collections are managed out-of-band (autoIndex
+  // off). Fire-and-forget so a slow admin call never delays polling.
+  void verifyDatabase()
 
   const bot = createBot()
   bot.use(contextMiddleware) // resolves ctx.user / ctx.group
