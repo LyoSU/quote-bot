@@ -12,6 +12,8 @@ const groupMemberSchema = new Schema(
     group: { type: Schema.Types.ObjectId, ref: 'Group', required: true },
     telegram_id: { type: Number, required: true },
     firstSeenAt: { type: Date, default: Date.now },
+    /** Last positive Bot API membership check performed by quotly-webapp. */
+    verifiedAt: Date,
   },
   { versionKey: false },
 )
