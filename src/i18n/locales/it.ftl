@@ -191,7 +191,7 @@ sticker-save-error-need_creator = <b>Quasi fatto!</b> { $creator } deve inviarmi
 sticker-save-error-telegram = <b>Oops!</b> Qualcosa è andato storto:\n<pre>{ $error }</pre>
 sticker-delete-suc = Rimosso dal tuo <a href="{ $link }">pacchetto di adesivi del gruppo</a> 🗑
 sticker-delete-empty_reply = Per favore rispondi a un adesivo che desideri eliminare 🗑
-sticker-delete-error-telegram = <b>Oops!</b> Impossibile rimuovere lo sticker:\n<pre>{ $error }</pre>
+sticker-delete-error-telegram = <b>Oops!</b> Impossibile rimuovere lo sticker:\n<pre>{ $reason }</pre>
 sticker-delete-error-not_found = L'adesivo non esiste più nel pacchetto 🤔
 sticker-delete-error-rights = Non ho il permesso di eliminare questo adesivo 🔒
 sticker-delete-error-generic =
@@ -268,6 +268,76 @@ menu-btn-help = 📚 Comandi
 menu-btn-language = 🌍 Lingua
 menu-btn-back = ← Indietro
 menu-btn-add_group = ➕ Aggiungi al Gruppo
+qs-title =
+    <b>⚙️ Impostazioni citazioni</b>
+
+    Scegli una sezione. Le modifiche si applicano a ogni nuova citazione qui.
+qs-on = Attivo
+qs-off = Disattivo
+qs-cat-appearance = 🎨 Aspetto
+qs-cat-content = ✂️ Cosa citare
+qs-cat-privacy = 🔒 Privacy
+qs-cat-group = 👥 Gruppo
+qs-cat-appearance-desc =
+    <b>🎨 Aspetto</b>
+
+    • <b>Formato</b> — sticker, immagine o file PNG.
+    • <b>Colore</b> — lo sfondo della citazione.
+    • <b>Stile emoji</b> — come vengono disegnate le emoji (Apple, Google…).
+    • <b>Emoji dello sticker</b> — l'emoji aggiunta agli sticker salvati.
+qs-cat-content-desc =
+    <b>✂️ Cosa citare</b>
+
+    • <b>Citazione parziale</b> — quando rispondi a un frammento selezionato: <i>Con cornice</i> lo mostra con la cornice della citazione, <i>Senza cornice</i> solo il testo, <i>Messaggio intero</i> ignora la selezione.
+    • <b>Mostra risposta</b> — includere il messaggio a cui si risponde.
+    • <b>Media</b> — includere foto/video dal messaggio.
+    • <b>Ritaglia media</b> — ritagliare i media alti per adattarli.
+    • <b>Ruolo autore</b> — mostrare il titolo di amministratore / la firma del mittente (la piccola etichetta in alto a destra).
+qs-cat-privacy-desc =
+    <b>🔒 Privacy</b>
+
+    • <b>Privacy</b> — le citazioni salvate non sono collegate al loro autore (non appariranno sotto il tuo nome nell'app). Lo sticker in sé non cambia.
+    • <b>Ricerca mittente</b> — provare a identificare l'autore originale di un messaggio inoltrato il cui account è nascosto.
+qs-cat-group-desc =
+    <b>👥 Gruppo</b>
+
+    • <b>Valutazioni</b> — mostrare i pulsanti 👍/👎 sotto le citazioni.
+    • <b>Citazione automatica</b> — ogni tanto riproporre una citazione di punta in un momento vivace.
+    • <b>Archivio testo</b> — salvare il testo delle citazioni (necessario per ricerca e casuali).
+qs-row-partial = ✂️ Citazione parziale
+qs-partial-framed = Con cornice
+qs-partial-plain = Senza cornice
+qs-partial-off = Messaggio intero
+qs-row-color = 🎨 Colore
+qs-color-title =
+    <b>🎨 Sfondo</b>
+
+    Scegli un colore o impostane uno personalizzato con <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 Stile emoji
+qs-row-format = 🖥 Formato
+qs-format-sticker = Sticker
+qs-format-image = Immagine
+qs-format-png = File PNG
+qs-row-gab = 🔁 Citazione automatica
+qs-gab-off = Disattivo
+qs-gab-often = Spesso
+qs-gab-sometimes = A volte
+qs-gab-rarely = Raramente
+qs-row-suffix = 💟 Emoji dello sticker
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Mostra risposta
+qs-row-crop = 🖼 Ritaglia media
+qs-row-sendertag = 🏷 Ruolo autore
+qs-row-privacy = 🔒 Privacy
+qs-row-hidden = 🕵 Ricerca mittente
+qs-row-rate = ⭐ Valutazioni
+qs-row-archive = 🗂 Archivio testo
+qs-suffix-title =
+    <b>💟 Emoji dello sticker</b>
+
+    Scegline una qui sotto o imposta un'emoji personalizzata con <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ Reimposta tutto
+qs-reset-done = Reimpostato ai valori predefiniti
 menu-features-title =
     <b>✨ Cosa posso fare?</b>
     Tocca una funzionalità per saperne di più:
@@ -330,43 +400,6 @@ menu-settings-title =
     <b>⚙️ Impostazioni</b>
     Gestisci le tue preferenze:
 menu-settings-btn-privacy = 🔒 Privacy
-menu-settings-btn-language = 🌍 Lingua
-menu-help-title =
-    <b>📚 Comandi</b>
-
-    <b>Base:</b>
-    • <code>/q</code> — crea citazione
-    • <code>/lang</code> — cambia lingua
-    • <code>/donate</code> — supporta lo sviluppo
-
-    <b>Per admin:</b>
-    • <code>/qcolor</code> — colore predefinito
-    • <code>/qrate</code> — abilita valutazione
-    • <code>/qb</code> — stile emoji
-onboarding-welcome-title =
-    <b>Ciao! 👋</b>
-
-    Trasformo i messaggi di chat ordinari in splendidi sticker di citazione.
-
-    ✨ <b>Lascia che ti mostri come funziona!</b>
-onboarding-welcome-btn-start = Iniziamo! →
-onboarding-welcome-btn-skip = Salta Tutorial
-onboarding-step1-title =
-    <b>Passo 1: Inoltra un messaggio</b>
-
-    Inoltrami qualsiasi messaggio di chat adesso.
-
-    💡 <i>Consiglio: Puoi inoltrare più messaggi contemporaneamente!</i>
-onboarding-step2-title =
-    <b>Ottimo! Ecco la tua citazione! ✨</b>
-
-    Nei gruppi, usa semplicemente <code>/q</code> per rispondere a qualsiasi messaggio.
-onboarding-step2-btn-complete = Capito! ✓
-onboarding-complete-title =
-    <b>Sei pronto! 🎉</b>
-
-    Ora conosci le basi. Esplora il menu per scoprire più funzionalità!
-
 aimode-title = 🤖 <b>Modalità IA</b>
 aimode-current = Modalità corrente: { $mode }
 aimode-available = <b>Modalità disponibili:</b>
@@ -406,11 +439,6 @@ app-info =
 menu-settings-btn-color = 🎨 Colore predefinito
 menu-settings-btn-emoji_style = 😊 Stile emoji
 menu-settings-btn-back = ← Indietro
-onboarding-step1-waiting =
-    In attesa del tuo messaggio...
-    Inoltrami qualcosa da una chat qualsiasi!
-onboarding-step2-btn-menu = Apri menu
-onboarding-step2-btn-add_group = Aggiungi al gruppo
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Ricrea con uno stile diverso
 qarchive-on = ✅ Archivio testo citazioni <b>attivato</b>. Le nuove citazioni verranno salvate con testo e autore.

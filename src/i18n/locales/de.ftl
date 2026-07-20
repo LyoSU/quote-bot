@@ -275,6 +275,76 @@ menu-settings-btn-color = 🎨 Farbe
 menu-settings-btn-emoji_style = 😊 Emoji-Stil
 menu-settings-btn-privacy = 🔒 Privatsphäre
 menu-settings-btn-back = ← Zurück
+qs-title =
+    <b>⚙️ Zitat-Einstellungen</b>
+
+    Wähle einen Bereich. Änderungen gelten für jedes neue Zitat hier.
+qs-on = An
+qs-off = Aus
+qs-cat-appearance = 🎨 Aussehen
+qs-cat-content = ✂️ Was zitieren
+qs-cat-privacy = 🔒 Privatsphäre
+qs-cat-group = 👥 Gruppe
+qs-cat-appearance-desc =
+    <b>🎨 Aussehen</b>
+
+    • <b>Format</b> — Sticker, Bild oder PNG-Datei.
+    • <b>Farbe</b> — der Zitat-Hintergrund.
+    • <b>Emoji-Stil</b> — wie Emojis dargestellt werden (Apple, Google…).
+    • <b>Sticker-Emoji</b> — das Emoji, das gespeicherten Stickern angehängt wird.
+qs-cat-content-desc =
+    <b>✂️ Was zitieren</b>
+
+    • <b>Teilzitat</b> — wenn du auf einen markierten Ausschnitt antwortest: <i>Mit Rahmen</i> zeigt ihn mit dem Zitatrahmen, <i>Ohne Rahmen</i> nur den Text, <i>Ganze Nachricht</i> ignoriert die Markierung.
+    • <b>Antwort zeigen</b> — die Nachricht einbeziehen, auf die geantwortet wird.
+    • <b>Medien</b> — Fotos/Videos aus der Nachricht einbeziehen.
+    • <b>Medien zuschneiden</b> — hohe Medien passend zuschneiden.
+    • <b>Autor-Rolle</b> — den Admin-Titel / die Signatur des Absenders anzeigen (das kleine Label oben rechts).
+qs-cat-privacy-desc =
+    <b>🔒 Privatsphäre</b>
+
+    • <b>Privatsphäre</b> — gespeicherte Zitate werden nicht mit ihrem Autor verknüpft (sie erscheinen nicht unter deinem Namen in der App). Der Sticker selbst bleibt unverändert.
+    • <b>Sendersuche</b> — versuchen, den ursprünglichen Autor einer weitergeleiteten Nachricht zu ermitteln, dessen Konto verborgen ist.
+qs-cat-group-desc =
+    <b>👥 Gruppe</b>
+
+    • <b>Bewertungen</b> — 👍/👎-Buttons unter Zitaten anzeigen.
+    • <b>Auto-Zitat</b> — gelegentlich ein Top-Zitat in einem lebhaften Moment wieder aufgreifen.
+    • <b>Textarchiv</b> — Zitattext speichern (nötig für Suche & Zufall).
+qs-row-partial = ✂️ Teilzitat
+qs-partial-framed = Mit Rahmen
+qs-partial-plain = Ohne Rahmen
+qs-partial-off = Ganze Nachricht
+qs-row-color = 🎨 Farbe
+qs-color-title =
+    <b>🎨 Hintergrund</b>
+
+    Wähle eine Farbe oder lege mit <code>/qcolor #ff5733</code> eine eigene fest.
+qs-row-brand = 😀 Emoji-Stil
+qs-row-format = 🖥 Format
+qs-format-sticker = Sticker
+qs-format-image = Bild
+qs-format-png = PNG-Datei
+qs-row-gab = 🔁 Auto-Zitat
+qs-gab-off = Aus
+qs-gab-often = Oft
+qs-gab-sometimes = Manchmal
+qs-gab-rarely = Selten
+qs-row-suffix = 💟 Sticker-Emoji
+qs-row-media = 📎 Medien
+qs-row-reply = 💬 Antwort zeigen
+qs-row-crop = 🖼 Medien zuschneiden
+qs-row-sendertag = 🏷 Autor-Rolle
+qs-row-privacy = 🔒 Privatsphäre
+qs-row-hidden = 🕵 Sendersuche
+qs-row-rate = ⭐ Bewertungen
+qs-row-archive = 🗂 Textarchiv
+qs-suffix-title =
+    <b>💟 Sticker-Emoji</b>
+
+    Wähle unten eines aus oder lege mit <code>/qemoji 🔥</code> ein eigenes fest.
+qs-btn-reset = ↩️ Alles zurücksetzen
+qs-reset-done = Auf Standard zurückgesetzt
 menu-features-title =
     <b>✨ Was kann ich?</b>
 
@@ -347,35 +417,6 @@ menu-features-group-title =
     <b>Sticker-Pack:</b>
     <code>/qs 💜</code> — zum Pack hinzufügen
     <code>/qd</code> — aus Pack entfernen
-onboarding-welcome-title =
-    <b>Hallo! 👋</b>
-
-    Ich verwandle Chat-Nachrichten in schöne Zitat-Sticker.
-    Lass mich zeigen, wie es funktioniert!
-onboarding-welcome-btn-start = Los geht's! →
-onboarding-welcome-btn-skip = Überspringen
-onboarding-step1-title =
-    <b>Schritt von 2</b> 📨
-
-    Leiten Sie mir eine Nachricht aus einem Chat weiter.
-    Ich mache daraus einen Zitat-Sticker!
-onboarding-step1-waiting =
-    Warte auf Ihre Nachricht...
-    Leiten Sie einfach etwas weiter!
-onboarding-step2-title =
-    <b>Super! 🎉</b>
-
-    Sie haben gerade Ihr erstes Zitat erstellt!
-
-    <b>In Gruppen</b> nutzen Sie <code>/q</code> als Antwort.
-
-    Bereit für mehr?
-onboarding-step2-btn-menu = Menü öffnen
-onboarding-step2-btn-add_group = Zur Gruppe
-onboarding-complete-title =
-    <b>Alles bereit! ✨</b>
-
-    Jetzt kennen Sie die Grundlagen. Fügen Sie mich einer Gruppe hinzu oder entdecken Sie alle Funktionen im Menü.
 sticker-save-error-too_large = Das Bild ist zu groß (max. 2048×2048). Versuche es mit einem kleineren 📐
 app-open_quote = ✨ Zitat öffnen
 app-open_group = 📚 Alle Zitate der Gruppe

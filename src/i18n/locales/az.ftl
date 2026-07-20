@@ -266,6 +266,76 @@ menu-btn-help = 📚 Əmrlər
 menu-btn-language = 🌍 Dil
 menu-btn-back = ← Geri
 menu-btn-add_group = ➕ Qrupa əlavə et
+qs-title =
+    <b>⚙️ Sitat parametrləri</b>
+
+    Bölmə seç. Dəyişikliklər buradakı hər yeni sitata tətbiq olunur.
+qs-on = Açıq
+qs-off = Bağlı
+qs-cat-appearance = 🎨 Görünüş
+qs-cat-content = ✂️ Nə sitat gətirilir
+qs-cat-privacy = 🔒 Gizlilik
+qs-cat-group = 👥 Qrup
+qs-cat-appearance-desc =
+    <b>🎨 Görünüş</b>
+
+    • <b>Format</b> — stiker, şəkil və ya PNG faylı.
+    • <b>Rəng</b> — sitatın fonu.
+    • <b>Emoji üslubu</b> — emojilərin necə çəkildiyi (Apple, Google…).
+    • <b>Stiker emojisi</b> — saxlanılan stikerlərə əlavə olunan emoji.
+qs-cat-content-desc =
+    <b>✂️ Nə sitat gətirilir</b>
+
+    • <b>Qismən sitat</b> — seçilmiş hissəyə cavab verəndə: <i>Çərçivəli</i> onu sitat çərçivəsi ilə göstərir, <i>Çərçivəsiz</i> yalnız mətni, <i>Bütün mesaj</i> seçimi nəzərə almır.
+    • <b>Cavabı göstər</b> — cavab verilən mesajı daxil et.
+    • <b>Media</b> — mesajdakı foto/videoları daxil et.
+    • <b>Medianı kəs</b> — hündür medianı uyğunlaşdırmaq üçün kəs.
+    • <b>Müəllif rolu</b> — göndərənin admin titulunu / imzasını göstər (sağ yuxarıdakı kiçik etiket).
+qs-cat-privacy-desc =
+    <b>🔒 Gizlilik</b>
+
+    • <b>Gizlilik</b> — saxlanılan sitatlar müəllifi ilə əlaqələndirilmir (tətbiqdə sənin adınla görünmür). Stikerin özü dəyişmir.
+    • <b>Göndərən axtarışı</b> — hesabı gizli olan yönləndirilmiş mesajın əsl müəllifini müəyyən etməyə çalış.
+qs-cat-group-desc =
+    <b>👥 Qrup</b>
+
+    • <b>Qiymətləndirmələr</b> — sitatların altında 👍/👎 düymələrini göstər.
+    • <b>Avto-sitat</b> — canlı bir anda arabir seçilmiş sitatı yenidən gündəmə gətir.
+    • <b>Mətn arxivi</b> — sitat mətnini saxla (axtarış və təsadüfi üçün lazımdır).
+qs-row-partial = ✂️ Qismən sitat
+qs-partial-framed = Çərçivəli
+qs-partial-plain = Çərçivəsiz
+qs-partial-off = Bütün mesaj
+qs-row-color = 🎨 Rəng
+qs-color-title =
+    <b>🎨 Fon</b>
+
+    Rəng seç və ya <code>/qcolor #ff5733</code> ilə öz rəngini təyin et.
+qs-row-brand = 😀 Emoji üslubu
+qs-row-format = 🖥 Format
+qs-format-sticker = Stiker
+qs-format-image = Şəkil
+qs-format-png = PNG faylı
+qs-row-gab = 🔁 Avto-sitat
+qs-gab-off = Bağlı
+qs-gab-often = Tez-tez
+qs-gab-sometimes = Bəzən
+qs-gab-rarely = Nadir
+qs-row-suffix = 💟 Stiker emojisi
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Cavabı göstər
+qs-row-crop = 🖼 Medianı kəs
+qs-row-sendertag = 🏷 Müəllif rolu
+qs-row-privacy = 🔒 Gizlilik
+qs-row-hidden = 🕵 Göndərən axtarışı
+qs-row-rate = ⭐ Qiymətləndirmələr
+qs-row-archive = 🗂 Mətn arxivi
+qs-suffix-title =
+    <b>💟 Stiker emojisi</b>
+
+    Aşağıdan birini seç və ya <code>/qemoji 🔥</code> ilə öz emojini təyin et.
+qs-btn-reset = ↩️ Hamısını sıfırla
+qs-reset-done = Standarta sıfırlandı
 menu-features-title =
     <b>✨ Nə edə bilərəm?</b>
     Daha çox öyrənmək üçün xüsusiyyətə toxunun:
@@ -328,42 +398,6 @@ menu-settings-title =
     <b>⚙️ Parametrlər</b>
     Seçimlərinizi idarə edin:
 menu-settings-btn-privacy = 🔒 Gizlilik
-menu-settings-btn-language = 🌍 Dil
-menu-help-title =
-    <b>📚 Əmrlər</b>
-
-    <b>Əsas:</b>
-    • <code>/q</code> — sitat yarat
-    • <code>/lang</code> — dili dəyiş
-    • <code>/donate</code> — inkişafa dəstək
-
-    <b>Adminlər üçün:</b>
-    • <code>/qcolor</code> — standart rəng
-    • <code>/qrate</code> — reytinqi aktivləşdir
-    • <code>/qb</code> — emoji üslubu
-onboarding-welcome-title =
-    <b>Salam! 👋</b>
-
-    Mən adi söhbət mesajlarını möhtəşəm sitat stikerlərinə çevirirəm.
-
-    ✨ <b>Necə işlədiyini göstərim!</b>
-onboarding-welcome-btn-start = Başlayaq! →
-onboarding-welcome-btn-skip = Dərsliyi keç
-onboarding-step1-title =
-    <b>Addım 1: Mesaj yönləndir</b>
-
-    İndi mənə istənilən söhbət mesajını yönləndirin.
-
-    💡 <i>Məsləhət: Bir neçə mesajı eyni anda yönləndirə bilərsiniz!</i>
-onboarding-step2-title =
-    <b>Əla! Budur sitatınız! ✨</b>
-
-    Qruplarda sadəcə <code>/q</code> istifadə edərək istənilən mesaja cavab verin.
-onboarding-step2-btn-complete = Anladım! ✓
-onboarding-complete-title =
-    <b>Hazırsınız! 🎉</b>
-
-    İndi əsasları bilirsiniz. Daha çox xüsusiyyət üçün menyunu kəşf edin!
 app-open_quote = ✨ Sitatı aç
 app-open_group = 📚 Qrupdakı bütün sitatlar
 app-open_root = 💫 Mənim qruplarım
@@ -403,11 +437,6 @@ aimode-modes-memer-description = Mem ifadələri və internet mədəniyyəti
 menu-settings-btn-color = 🎨 Standart rəng
 menu-settings-btn-emoji_style = 😊 Emoji üslubu
 menu-settings-btn-back = ← Geri
-onboarding-step1-waiting =
-    Mesajınızı gözləyirəm...
-    Sadəcə istənilən söhbətdən nəsə yönləndirin!
-onboarding-step2-btn-menu = Menyunu aç
-onboarding-step2-btn-add_group = Qrupa əlavə et
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Fərqli üslubda yenidən yarat
 qarchive-on = ✅ Sitat mətni arxivi <b>aktivləşdirildi</b>. Yeni sitatlar mətn və müəlliflə birlikdə saxlanılacaq.

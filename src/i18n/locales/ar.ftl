@@ -266,6 +266,76 @@ menu-btn-help = 📚 الأوامر
 menu-btn-language = 🌍 اللغة
 menu-btn-back = رجوع ←
 menu-btn-add_group = ➕ أضف إلى مجموعة
+qs-title =
+    <b>⚙️ إعدادات الاقتباس</b>
+
+    اختر قسمًا. تُطبَّق التغييرات على كل اقتباس جديد هنا.
+qs-on = تشغيل
+qs-off = إيقاف
+qs-cat-appearance = 🎨 المظهر
+qs-cat-content = ✂️ ماذا تقتبس
+qs-cat-privacy = 🔒 الخصوصية
+qs-cat-group = 👥 المجموعة
+qs-cat-appearance-desc =
+    <b>🎨 المظهر</b>
+
+    • <b>التنسيق</b> — ملصق أو صورة أو ملف PNG.
+    • <b>اللون</b> — خلفية الاقتباس.
+    • <b>نمط الإيموجي</b> — كيف تُرسم الرموز التعبيرية (Apple، Google…).
+    • <b>إيموجي الملصق</b> — الإيموجي المضاف إلى الملصقات المحفوظة.
+qs-cat-content-desc =
+    <b>✂️ ماذا تقتبس</b>
+
+    • <b>اقتباس جزئي</b> — عندما ترد على مقطع محدد: <i>بإطار</i> يعرضه بإطار الاقتباس، <i>بدون إطار</i> النص فقط، <i>الرسالة كاملة</i> يتجاهل التحديد.
+    • <b>إظهار الرد</b> — تضمين الرسالة التي يُرَد عليها.
+    • <b>الوسائط</b> — تضمين الصور/الفيديوهات من الرسالة.
+    • <b>قص الوسائط</b> — قص الوسائط الطويلة لتناسب.
+    • <b>دور المؤلف</b> — إظهار لقب المشرف / توقيع المرسل (العلامة الصغيرة أعلى اليمين).
+qs-cat-privacy-desc =
+    <b>🔒 الخصوصية</b>
+
+    • <b>الخصوصية</b> — الاقتباسات المحفوظة لا تُربَط بمؤلفها (لن تظهر باسمك في التطبيق). الملصق نفسه لا يتغير.
+    • <b>بحث المرسل</b> — محاولة تحديد المؤلف الأصلي لرسالة مُعاد توجيهها حسابه مخفي.
+qs-cat-group-desc =
+    <b>👥 المجموعة</b>
+
+    • <b>التقييمات</b> — إظهار أزرار 👍/👎 أسفل الاقتباسات.
+    • <b>اقتباس تلقائي</b> — إعادة عرض اقتباس مميز من حين لآخر في لحظة نشطة.
+    • <b>أرشيف النص</b> — حفظ نص الاقتباس (مطلوب للبحث والعشوائي).
+qs-row-partial = ✂️ اقتباس جزئي
+qs-partial-framed = بإطار
+qs-partial-plain = بدون إطار
+qs-partial-off = الرسالة كاملة
+qs-row-color = 🎨 اللون
+qs-color-title =
+    <b>🎨 الخلفية</b>
+
+    اختر لونًا أو عيّن لونًا مخصصًا بـ <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 نمط الإيموجي
+qs-row-format = 🖥 التنسيق
+qs-format-sticker = ملصق
+qs-format-image = صورة
+qs-format-png = ملف PNG
+qs-row-gab = 🔁 اقتباس تلقائي
+qs-gab-off = إيقاف
+qs-gab-often = كثيرًا
+qs-gab-sometimes = أحيانًا
+qs-gab-rarely = نادرًا
+qs-row-suffix = 💟 إيموجي الملصق
+qs-row-media = 📎 الوسائط
+qs-row-reply = 💬 إظهار الرد
+qs-row-crop = 🖼 قص الوسائط
+qs-row-sendertag = 🏷 دور المؤلف
+qs-row-privacy = 🔒 الخصوصية
+qs-row-hidden = 🕵 بحث المرسل
+qs-row-rate = ⭐ التقييمات
+qs-row-archive = 🗂 أرشيف النص
+qs-suffix-title =
+    <b>💟 إيموجي الملصق</b>
+
+    اختر واحدًا أدناه أو عيّن إيموجي مخصصًا بـ <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ إعادة تعيين الكل
+qs-reset-done = تمت الإعادة إلى الإعدادات الافتراضية
 menu-features-title =
     <b>✨ ماذا يمكنني أن أفعل؟</b>
     اضغط على أي ميزة لمعرفة المزيد:
@@ -328,42 +398,6 @@ menu-settings-title =
     <b>⚙️ الإعدادات</b>
     إدارة تفضيلاتك:
 menu-settings-btn-privacy = 🔒 الخصوصية
-menu-settings-btn-language = 🌍 اللغة
-menu-help-title =
-    <b>📚 الأوامر</b>
-
-    <b>الأساسية:</b>
-    • <code>/q</code> — إنشاء اقتباس
-    • <code>/lang</code> — تغيير اللغة
-    • <code>/donate</code> — دعم التطوير
-
-    <b>للمسؤولين:</b>
-    • <code>/qcolor</code> — اللون الافتراضي
-    • <code>/qrate</code> — تفعيل التقييم
-    • <code>/qb</code> — نمط الرموز التعبيرية
-onboarding-welcome-title =
-    <b>مرحبًا! 👋</b>
-
-    أنا أحوّل رسائل الدردشة العادية إلى ملصقات اقتباس مذهلة.
-
-    ✨ <b>دعني أريك كيف يعمل!</b>
-onboarding-welcome-btn-start = هيا نبدأ! →
-onboarding-welcome-btn-skip = تخطي التعليمات
-onboarding-step1-title =
-    <b>الخطوة 1: أعد توجيه رسالة</b>
-
-    أعد توجيه أي رسالة دردشة إليّ الآن.
-
-    💡 <i>نصيحة: يمكنك إعادة توجيه عدة رسائل في وقت واحد!</i>
-onboarding-step2-title =
-    <b>ممتاز! ها هو اقتباسك! ✨</b>
-
-    في المجموعات، ببساطة استخدم <code>/q</code> ردًا على أي رسالة.
-onboarding-step2-btn-complete = فهمت! ✓
-onboarding-complete-title =
-    <b>أنت جاهز! 🎉</b>
-
-    الآن أنت تعرف الأساسيات. استكشف القائمة لاكتشاف المزيد من الميزات!
 sticker-save-error-too_large = الصورة كبيرة جداً (الحد الأقصى 2048×2048). جرّب صورة أصغر 📐
 app-open_quote = ✨ فتح الاقتباس
 app-open_group = 📚 كل الاقتباسات في المجموعة
@@ -404,11 +438,6 @@ aimode-modes-memer-description = عبارات الميمات وثقافة الإ
 menu-settings-btn-color = 🎨 اللون الافتراضي
 menu-settings-btn-emoji_style = 😊 نمط الإيموجي
 menu-settings-btn-back = ← رجوع
-onboarding-step1-waiting =
-    في انتظار رسالتك...
-    فقط أعد توجيه أي شيء من أي محادثة!
-onboarding-step2-btn-menu = فتح القائمة
-onboarding-step2-btn-add_group = إضافة إلى مجموعة
 quick_action-remake = 🔄
 quick_action-tooltip-remake = إعادة الإنشاء بنمط مختلف
 qarchive-on = ✅ تم <b>تفعيل</b> أرشيف نص الاقتباسات. ستُحفظ الاقتباسات الجديدة مع النص والمؤلف.

@@ -266,6 +266,76 @@ menu-btn-help = 📚 命令
 menu-btn-language = 🌍 语言
 menu-btn-back = ← 返回
 menu-btn-add_group = ➕ 添加到群组
+qs-title =
+    <b>⚙️ 引用设置</b>
+
+    选择一个部分。更改将应用于此处的每条新引用。
+qs-on = 开
+qs-off = 关
+qs-cat-appearance = 🎨 外观
+qs-cat-content = ✂️ 引用内容
+qs-cat-privacy = 🔒 隐私
+qs-cat-group = 👥 群组
+qs-cat-appearance-desc =
+    <b>🎨 外观</b>
+
+    • <b>格式</b> — 贴纸、图片或 PNG 文件。
+    • <b>颜色</b> — 引用背景。
+    • <b>表情符号风格</b> — 表情符号的绘制方式（Apple、Google…）。
+    • <b>贴纸表情</b> — 添加到已保存贴纸的表情符号。
+qs-cat-content-desc =
+    <b>✂️ 引用内容</b>
+
+    • <b>部分引用</b> — 当你回复选中的片段时：<i>带边框</i> 以引用边框显示，<i>无边框</i> 仅显示文本，<i>整条消息</i> 忽略选择。
+    • <b>显示回复</b> — 包含被回复的消息。
+    • <b>媒体</b> — 包含消息中的图片/视频。
+    • <b>裁剪媒体</b> — 裁剪过高的媒体以适应。
+    • <b>作者身份</b> — 显示发送者的管理员头衔 / 签名（右上角的小标签）。
+qs-cat-privacy-desc =
+    <b>🔒 隐私</b>
+
+    • <b>隐私</b> — 保存的引用不会关联到其作者（不会在应用中以你的名字显示）。贴纸本身不变。
+    • <b>发送者搜索</b> — 尝试识别账户被隐藏的转发消息的原始作者。
+qs-cat-group-desc =
+    <b>👥 群组</b>
+
+    • <b>评分</b> — 在引用下方显示 👍/👎 按钮。
+    • <b>自动引用</b> — 在热闹时刻偶尔重新展示一条热门引用。
+    • <b>文本存档</b> — 存储引用文本（搜索和随机所需）。
+qs-row-partial = ✂️ 部分引用
+qs-partial-framed = 带边框
+qs-partial-plain = 无边框
+qs-partial-off = 整条消息
+qs-row-color = 🎨 颜色
+qs-color-title =
+    <b>🎨 背景</b>
+
+    选择一种颜色，或用 <code>/qcolor #ff5733</code> 设置自定义颜色。
+qs-row-brand = 😀 表情符号风格
+qs-row-format = 🖥 格式
+qs-format-sticker = 贴纸
+qs-format-image = 图片
+qs-format-png = PNG 文件
+qs-row-gab = 🔁 自动引用
+qs-gab-off = 关
+qs-gab-often = 经常
+qs-gab-sometimes = 有时
+qs-gab-rarely = 很少
+qs-row-suffix = 💟 贴纸表情
+qs-row-media = 📎 媒体
+qs-row-reply = 💬 显示回复
+qs-row-crop = 🖼 裁剪媒体
+qs-row-sendertag = 🏷 作者身份
+qs-row-privacy = 🔒 隐私
+qs-row-hidden = 🕵 发送者搜索
+qs-row-rate = ⭐ 评分
+qs-row-archive = 🗂 文本存档
+qs-suffix-title =
+    <b>💟 贴纸表情</b>
+
+    在下方选择一个，或用 <code>/qemoji 🔥</code> 设置自定义表情。
+qs-btn-reset = ↩️ 全部重置
+qs-reset-done = 已重置为默认值
 menu-features-title =
     <b>✨ 我能做什么？</b>
     点击功能了解更多：
@@ -328,42 +398,6 @@ menu-settings-title =
     <b>⚙️ 设置</b>
     管理您的偏好设置：
 menu-settings-btn-privacy = 🔒 隐私
-menu-settings-btn-language = 🌍 语言
-menu-help-title =
-    <b>📚 命令</b>
-
-    <b>基本：</b>
-    • <code>/q</code> — 创建引用
-    • <code>/lang</code> — 更改语言
-    • <code>/donate</code> — 支持开发
-
-    <b>管理员：</b>
-    • <code>/qcolor</code> — 默认颜色
-    • <code>/qrate</code> — 启用评分
-    • <code>/qb</code> — 表情符号样式
-onboarding-welcome-title =
-    <b>你好！👋</b>
-
-    我将普通聊天消息转换为精美的引用贴纸。
-
-    ✨ <b>让我展示它是如何工作的！</b>
-onboarding-welcome-btn-start = 开始吧！→
-onboarding-welcome-btn-skip = 跳过教程
-onboarding-step1-title =
-    <b>步骤1：转发消息</b>
-
-    现在转发任何聊天消息给我。
-
-    💡 <i>提示：您可以一次转发多条消息！</i>
-onboarding-step2-title =
-    <b>太棒了！这是您的引用！✨</b>
-
-    在群组中，只需使用 <code>/q</code> 回复任何消息。
-onboarding-step2-btn-complete = 明白了！✓
-onboarding-complete-title =
-    <b>准备就绪！🎉</b>
-
-    现在您了解了基础知识。探索菜单发现更多功能！
 app-open_quote = ✨ 打开引用
 app-open_group = 📚 群组中的所有引用
 app-open_root = 💫 我的群组
@@ -403,11 +437,6 @@ aimode-modes-memer-description = 梗图短语和网络文化
 menu-settings-btn-color = 🎨 默认颜色
 menu-settings-btn-emoji_style = 😊 表情符号风格
 menu-settings-btn-back = ← 返回
-onboarding-step1-waiting =
-    正在等待您的消息……
-    只需从任意聊天转发点什么过来！
-onboarding-step2-btn-menu = 打开菜单
-onboarding-step2-btn-add_group = 添加到群组
 quick_action-remake = 🔄
 quick_action-tooltip-remake = 用不同风格重新生成
 qarchive-on = ✅ 引用文本存档<b>已启用</b>。新引用将连同文本和作者一起存储。

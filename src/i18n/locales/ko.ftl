@@ -266,6 +266,76 @@ menu-btn-help = 📚 명령어
 menu-btn-language = 🌍 언어
 menu-btn-back = ← 뒤로
 menu-btn-add_group = ➕ 그룹에 추가
+qs-title =
+    <b>⚙️ 인용 설정</b>
+
+    섹션을 선택하세요. 변경 사항은 여기의 모든 새 인용에 적용됩니다.
+qs-on = 켜짐
+qs-off = 꺼짐
+qs-cat-appearance = 🎨 모양
+qs-cat-content = ✂️ 인용할 내용
+qs-cat-privacy = 🔒 개인정보
+qs-cat-group = 👥 그룹
+qs-cat-appearance-desc =
+    <b>🎨 모양</b>
+
+    • <b>형식</b> — 스티커, 이미지 또는 PNG 파일.
+    • <b>색상</b> — 인용 배경.
+    • <b>이모지 스타일</b> — 이모지가 그려지는 방식 (Apple, Google…).
+    • <b>스티커 이모지</b> — 저장된 스티커에 추가되는 이모지.
+qs-cat-content-desc =
+    <b>✂️ 인용할 내용</b>
+
+    • <b>부분 인용</b> — 선택한 일부에 답장할 때: <i>테두리 있음</i>은 인용 테두리와 함께 표시하고, <i>테두리 없음</i>은 텍스트만, <i>전체 메시지</i>는 선택을 무시합니다.
+    • <b>답장 표시</b> — 답장하는 메시지를 포함합니다.
+    • <b>미디어</b> — 메시지의 사진/동영상을 포함합니다.
+    • <b>미디어 자르기</b> — 세로로 긴 미디어를 맞게 자릅니다.
+    • <b>작성자 역할</b> — 보낸 사람의 관리자 직함 / 서명을 표시합니다 (오른쪽 위의 작은 라벨).
+qs-cat-privacy-desc =
+    <b>🔒 개인정보</b>
+
+    • <b>개인정보</b> — 저장된 인용은 작성자와 연결되지 않습니다 (앱에서 귀하의 이름으로 표시되지 않습니다). 스티커 자체는 변경되지 않습니다.
+    • <b>송신자 검색</b> — 계정이 숨겨진 전달 메시지의 원래 작성자를 식별하려고 시도합니다.
+qs-cat-group-desc =
+    <b>👥 그룹</b>
+
+    • <b>평가</b> — 인용 아래에 👍/👎 버튼을 표시합니다.
+    • <b>자동 인용</b> — 활발한 순간에 이따금 인기 인용을 다시 띄웁니다.
+    • <b>텍스트 보관</b> — 인용 텍스트를 저장합니다 (검색과 랜덤에 필요).
+qs-row-partial = ✂️ 부분 인용
+qs-partial-framed = 테두리 있음
+qs-partial-plain = 테두리 없음
+qs-partial-off = 전체 메시지
+qs-row-color = 🎨 색상
+qs-color-title =
+    <b>🎨 배경</b>
+
+    색상을 고르거나 <code>/qcolor #ff5733</code>로 사용자 지정 색상을 설정하세요.
+qs-row-brand = 😀 이모지 스타일
+qs-row-format = 🖥 형식
+qs-format-sticker = 스티커
+qs-format-image = 이미지
+qs-format-png = PNG 파일
+qs-row-gab = 🔁 자동 인용
+qs-gab-off = 꺼짐
+qs-gab-often = 자주
+qs-gab-sometimes = 가끔
+qs-gab-rarely = 드물게
+qs-row-suffix = 💟 스티커 이모지
+qs-row-media = 📎 미디어
+qs-row-reply = 💬 답장 표시
+qs-row-crop = 🖼 미디어 자르기
+qs-row-sendertag = 🏷 작성자 역할
+qs-row-privacy = 🔒 개인정보
+qs-row-hidden = 🕵 송신자 검색
+qs-row-rate = ⭐ 평가
+qs-row-archive = 🗂 텍스트 보관
+qs-suffix-title =
+    <b>💟 스티커 이모지</b>
+
+    아래에서 하나를 고르거나 <code>/qemoji 🔥</code>로 사용자 지정 이모지를 설정하세요.
+qs-btn-reset = ↩️ 모두 초기화
+qs-reset-done = 기본값으로 초기화됨
 menu-features-title =
     <b>✨ 무엇을 할 수 있나요?</b>
     기능을 탭하여 자세히 알아보세요:
@@ -328,43 +398,6 @@ menu-settings-title =
     <b>⚙️ 설정</b>
     환경 설정 관리:
 menu-settings-btn-privacy = 🔒 개인정보
-menu-settings-btn-language = 🌍 언어
-menu-help-title =
-    <b>📚 명령어</b>
-
-    <b>기본:</b>
-    • <code>/q</code> — 인용 생성
-    • <code>/lang</code> — 언어 변경
-    • <code>/donate</code> — 개발 지원
-
-    <b>관리자용:</b>
-    • <code>/qcolor</code> — 기본 색상
-    • <code>/qrate</code> — 평가 활성화
-    • <code>/qb</code> — 이모지 스타일
-onboarding-welcome-title =
-    <b>안녕하세요! 👋</b>
-
-    일반 채팅 메시지를 멋진 인용 스티커로 변환합니다.
-
-    ✨ <b>어떻게 작동하는지 보여드릴게요!</b>
-onboarding-welcome-btn-start = 시작하기! →
-onboarding-welcome-btn-skip = 튜토리얼 건너뛰기
-onboarding-step1-title =
-    <b>1단계: 메시지 전달</b>
-
-    지금 저에게 채팅 메시지를 전달해 주세요.
-
-    💡 <i>팁: 한 번에 여러 메시지를 전달할 수 있어요!</i>
-onboarding-step2-title =
-    <b>훌륭해요! 인용이 완성됐어요! ✨</b>
-
-    그룹에서는 <code>/q</code>를 사용하여 아무 메시지에 답장하면 됩니다.
-onboarding-step2-btn-complete = 이해했어요! ✓
-onboarding-complete-title =
-    <b>준비 완료! 🎉</b>
-
-    이제 기본을 알게 되었어요. 메뉴를 탐색하여 더 많은 기능을 발견하세요!
-
 aimode-title = 🤖 <b>AI 모드</b>
 aimode-current = 현재 모드: { $mode }
 aimode-available = <b>사용 가능한 모드:</b>
@@ -404,11 +437,6 @@ app-info =
 menu-settings-btn-color = 🎨 기본 색상
 menu-settings-btn-emoji_style = 😊 이모지 스타일
 menu-settings-btn-back = ← 뒤로
-onboarding-step1-waiting =
-    메시지를 기다리는 중...
-    아무 채팅에서든 무언가를 전달해 주세요!
-onboarding-step2-btn-menu = 메뉴 열기
-onboarding-step2-btn-add_group = 그룹에 추가
 quick_action-remake = 🔄
 quick_action-tooltip-remake = 다른 스타일로 다시 만들기
 qarchive-on = ✅ 인용구 텍스트 아카이브가 <b>활성화</b>되었습니다. 새 인용구는 텍스트 및 작성자와 함께 저장됩니다.

@@ -266,6 +266,76 @@ menu-btn-help = 📚 Komutlar
 menu-btn-language = 🌍 Dil
 menu-btn-back = ← Geri
 menu-btn-add_group = ➕ Gruba Ekle
+qs-title =
+    <b>⚙️ Alıntı ayarları</b>
+
+    Bir bölüm seç. Değişiklikler buradaki her yeni alıntıya uygulanır.
+qs-on = Açık
+qs-off = Kapalı
+qs-cat-appearance = 🎨 Görünüm
+qs-cat-content = ✂️ Ne alıntılanır
+qs-cat-privacy = 🔒 Gizlilik
+qs-cat-group = 👥 Grup
+qs-cat-appearance-desc =
+    <b>🎨 Görünüm</b>
+
+    • <b>Format</b> — çıkartma, görsel veya PNG dosyası.
+    • <b>Renk</b> — alıntı arka planı.
+    • <b>Emoji stili</b> — emojilerin nasıl çizildiği (Apple, Google…).
+    • <b>Çıkartma emojisi</b> — kaydedilen çıkartmalara eklenen emoji.
+qs-cat-content-desc =
+    <b>✂️ Ne alıntılanır</b>
+
+    • <b>Kısmi alıntı</b> — seçili bir parçaya yanıt verdiğinde: <i>Çerçeveli</i> onu alıntı çerçevesiyle gösterir, <i>Çerçevesiz</i> yalnızca metni, <i>Tüm mesaj</i> seçimi yok sayar.
+    • <b>Yanıtı göster</b> — yanıtlanan mesajı dahil et.
+    • <b>Medya</b> — mesajdaki fotoğrafları/videoları dahil et.
+    • <b>Medyayı kırp</b> — uzun medyayı sığacak şekilde kırp.
+    • <b>Yazar rolü</b> — gönderenin yönetici unvanını / imzasını göster (sağ üstteki küçük etiket).
+qs-cat-privacy-desc =
+    <b>🔒 Gizlilik</b>
+
+    • <b>Gizlilik</b> — kaydedilen alıntılar yazarına bağlanmaz (uygulamada senin adınla görünmez). Çıkartmanın kendisi değişmez.
+    • <b>Gönderen arama</b> — hesabı gizli olan iletilmiş bir mesajın asıl yazarını belirlemeye çalış.
+qs-cat-group-desc =
+    <b>👥 Grup</b>
+
+    • <b>Değerlendirmeler</b> — alıntıların altında 👍/👎 düğmelerini göster.
+    • <b>Otomatik alıntı</b> — hareketli bir anda ara sıra öne çıkan bir alıntıyı yeniden gündeme getir.
+    • <b>Metin arşivi</b> — alıntı metnini sakla (arama ve rastgele için gerekli).
+qs-row-partial = ✂️ Kısmi alıntı
+qs-partial-framed = Çerçeveli
+qs-partial-plain = Çerçevesiz
+qs-partial-off = Tüm mesaj
+qs-row-color = 🎨 Renk
+qs-color-title =
+    <b>🎨 Arka plan</b>
+
+    Bir renk seç veya <code>/qcolor #ff5733</code> ile özel bir renk ayarla.
+qs-row-brand = 😀 Emoji stili
+qs-row-format = 🖥 Format
+qs-format-sticker = Çıkartma
+qs-format-image = Görsel
+qs-format-png = PNG dosyası
+qs-row-gab = 🔁 Otomatik alıntı
+qs-gab-off = Kapalı
+qs-gab-often = Sık sık
+qs-gab-sometimes = Bazen
+qs-gab-rarely = Nadiren
+qs-row-suffix = 💟 Çıkartma emojisi
+qs-row-media = 📎 Medya
+qs-row-reply = 💬 Yanıtı göster
+qs-row-crop = 🖼 Medyayı kırp
+qs-row-sendertag = 🏷 Yazar rolü
+qs-row-privacy = 🔒 Gizlilik
+qs-row-hidden = 🕵 Gönderen arama
+qs-row-rate = ⭐ Değerlendirmeler
+qs-row-archive = 🗂 Metin arşivi
+qs-suffix-title =
+    <b>💟 Çıkartma emojisi</b>
+
+    Aşağıdan birini seç veya <code>/qemoji 🔥</code> ile özel bir emoji ayarla.
+qs-btn-reset = ↩️ Tümünü sıfırla
+qs-reset-done = Varsayılanlara sıfırlandı
 menu-features-title =
     <b>✨ Ne yapabilirim?</b>
     Daha fazla bilgi için bir özelliğe dokunun:
@@ -328,43 +398,6 @@ menu-settings-title =
     <b>⚙️ Ayarlar</b>
     Tercihlerinizi yönetin:
 menu-settings-btn-privacy = 🔒 Gizlilik
-menu-settings-btn-language = 🌍 Dil
-menu-help-title =
-    <b>📚 Komutlar</b>
-
-    <b>Temel:</b>
-    • <code>/q</code> — alıntı oluştur
-    • <code>/lang</code> — dili değiştir
-    • <code>/donate</code> — geliştirmeyi destekle
-
-    <b>Yöneticiler için:</b>
-    • <code>/qcolor</code> — varsayılan renk
-    • <code>/qrate</code> — derecelendirmeyi etkinleştir
-    • <code>/qb</code> — emoji stili
-onboarding-welcome-title =
-    <b>Merhaba! 👋</b>
-
-    Sıradan sohbet mesajlarını muhteşem alıntı çıkartmalarına dönüştürüyorum.
-
-    ✨ <b>Nasıl çalıştığını göstereyim!</b>
-onboarding-welcome-btn-start = Hadi Başlayalım! →
-onboarding-welcome-btn-skip = Öğreticiyi Atla
-onboarding-step1-title =
-    <b>Adım 1: Bir mesaj yönlendir</b>
-
-    Şimdi bana herhangi bir sohbet mesajı yönlendirin.
-
-    💡 <i>İpucu: Birden fazla mesajı aynı anda yönlendirebilirsiniz!</i>
-onboarding-step2-title =
-    <b>Harika! İşte alıntınız! ✨</b>
-
-    Gruplarda sadece <code>/q</code> kullanarak herhangi bir mesaja yanıt verin.
-onboarding-step2-btn-complete = Anladım! ✓
-onboarding-complete-title =
-    <b>Hazırsınız! 🎉</b>
-
-    Artık temelleri biliyorsunuz. Daha fazla özellik keşfetmek için menüyü inceleyin!
-
 sticker-save-error-too_large = Görsel çok büyük (en fazla 2048×2048). Daha küçüğünü deneyin 📐
 app-open_quote = ✨ Alıntıyı aç
 app-open_group = 📚 Gruptaki tüm alıntılar
@@ -405,11 +438,6 @@ aimode-modes-memer-description = Mizah cümleleri ve internet kültürü
 menu-settings-btn-color = 🎨 Varsayılan renk
 menu-settings-btn-emoji_style = 😊 Emoji stili
 menu-settings-btn-back = ← Geri
-onboarding-step1-waiting =
-    Mesajınız bekleniyor...
-    Herhangi bir sohbetten bir şey iletmeniz yeterli!
-onboarding-step2-btn-menu = Menüyü aç
-onboarding-step2-btn-add_group = Gruba ekle
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Farklı bir stille yeniden oluştur
 qarchive-on = ✅ Alıntı metni arşivi <b>etkin</b>. Yeni alıntılar metin ve yazarıyla birlikte saklanacak.

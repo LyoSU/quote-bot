@@ -266,6 +266,76 @@ menu-btn-help = 📚 コマンド
 menu-btn-language = 🌍 言語
 menu-btn-back = ← 戻る
 menu-btn-add_group = ➕ グループに追加
+qs-title =
+    <b>⚙️ 引用設定</b>
+
+    セクションを選んでください。変更はここでの新しい引用すべてに適用されます。
+qs-on = オン
+qs-off = オフ
+qs-cat-appearance = 🎨 外観
+qs-cat-content = ✂️ 引用する内容
+qs-cat-privacy = 🔒 プライバシー
+qs-cat-group = 👥 グループ
+qs-cat-appearance-desc =
+    <b>🎨 外観</b>
+
+    • <b>形式</b> — ステッカー、画像、または PNG ファイル。
+    • <b>色</b> — 引用の背景。
+    • <b>絵文字スタイル</b> — 絵文字の描き方（Apple、Google…）。
+    • <b>ステッカーの絵文字</b> — 保存したステッカーに付ける絵文字。
+qs-cat-content-desc =
+    <b>✂️ 引用する内容</b>
+
+    • <b>部分引用</b> — 選択した部分に返信したとき：<i>枠あり</i> は引用の枠付きで表示、<i>枠なし</i> はテキストのみ、<i>メッセージ全体</i> は選択を無視します。
+    • <b>返信を表示</b> — 返信先のメッセージを含める。
+    • <b>メディア</b> — メッセージの写真/動画を含める。
+    • <b>メディアを切り抜き</b> — 縦長のメディアを収まるように切り抜く。
+    • <b>投稿者の役職</b> — 送信者の管理者の肩書き / 署名を表示（右上の小さなラベル）。
+qs-cat-privacy-desc =
+    <b>🔒 プライバシー</b>
+
+    • <b>プライバシー</b> — 保存した引用は作成者に紐付けられません（アプリであなたの名前の下に表示されません）。ステッカー自体は変わりません。
+    • <b>送信者検索</b> — アカウントが非表示の転送メッセージについて、元の作成者を特定しようとします。
+qs-cat-group-desc =
+    <b>👥 グループ</b>
+
+    • <b>評価</b> — 引用の下に 👍/👎 ボタンを表示。
+    • <b>自動引用</b> — 盛り上がった瞬間に人気の引用をときどき再登場させる。
+    • <b>テキストアーカイブ</b> — 引用テキストを保存（検索とランダムに必要）。
+qs-row-partial = ✂️ 部分引用
+qs-partial-framed = 枠あり
+qs-partial-plain = 枠なし
+qs-partial-off = メッセージ全体
+qs-row-color = 🎨 色
+qs-color-title =
+    <b>🎨 背景</b>
+
+    色を選ぶか、<code>/qcolor #ff5733</code> でカスタム色を設定してください。
+qs-row-brand = 😀 絵文字スタイル
+qs-row-format = 🖥 形式
+qs-format-sticker = ステッカー
+qs-format-image = 画像
+qs-format-png = PNG ファイル
+qs-row-gab = 🔁 自動引用
+qs-gab-off = オフ
+qs-gab-often = 頻繁
+qs-gab-sometimes = ときどき
+qs-gab-rarely = まれに
+qs-row-suffix = 💟 ステッカーの絵文字
+qs-row-media = 📎 メディア
+qs-row-reply = 💬 返信を表示
+qs-row-crop = 🖼 メディアを切り抜き
+qs-row-sendertag = 🏷 投稿者の役職
+qs-row-privacy = 🔒 プライバシー
+qs-row-hidden = 🕵 送信者検索
+qs-row-rate = ⭐ 評価
+qs-row-archive = 🗂 テキストアーカイブ
+qs-suffix-title =
+    <b>💟 ステッカーの絵文字</b>
+
+    下から選ぶか、<code>/qemoji 🔥</code> でカスタム絵文字を設定してください。
+qs-btn-reset = ↩️ すべてリセット
+qs-reset-done = デフォルトにリセットしました
 menu-features-title =
     <b>✨ 何ができますか？</b>
     機能をタップして詳細を確認:
@@ -328,43 +398,6 @@ menu-settings-title =
     <b>⚙️ 設定</b>
     設定を管理:
 menu-settings-btn-privacy = 🔒 プライバシー
-menu-settings-btn-language = 🌍 言語
-menu-help-title =
-    <b>📚 コマンド</b>
-
-    <b>基本:</b>
-    • <code>/q</code> — 引用を作成
-    • <code>/lang</code> — 言語を変更
-    • <code>/donate</code> — 開発をサポート
-
-    <b>管理者向け:</b>
-    • <code>/qcolor</code> — デフォルト色
-    • <code>/qrate</code> — 評価を有効化
-    • <code>/qb</code> — 絵文字スタイル
-onboarding-welcome-title =
-    <b>こんにちは！👋</b>
-
-    普通のチャットメッセージを美しい引用ステッカーに変換します。
-
-    ✨ <b>どのように動作するか見せましょう！</b>
-onboarding-welcome-btn-start = 始めましょう！→
-onboarding-welcome-btn-skip = チュートリアルをスキップ
-onboarding-step1-title =
-    <b>ステップ1: メッセージを転送</b>
-
-    今すぐチャットメッセージを私に転送してください。
-
-    💡 <i>ヒント: 一度に複数のメッセージを転送できます！</i>
-onboarding-step2-title =
-    <b>素晴らしい！これがあなたの引用です！✨</b>
-
-    グループでは、<code>/q</code>を使って任意のメッセージに返信するだけです。
-onboarding-step2-btn-complete = わかりました！✓
-onboarding-complete-title =
-    <b>準備完了！🎉</b>
-
-    基本を理解しました。メニューを探索してさらに多くの機能を発見しましょう！
-
 aimode-title = 🤖 <b>AIモード</b>
 aimode-current = 現在のモード: { $mode }
 aimode-available = <b>利用可能なモード:</b>
@@ -404,11 +437,6 @@ app-info =
 menu-settings-btn-color = 🎨 デフォルトの色
 menu-settings-btn-emoji_style = 😊 絵文字スタイル
 menu-settings-btn-back = ← 戻る
-onboarding-step1-waiting =
-    メッセージを待っています...
-    どのチャットからでも何か転送してください！
-onboarding-step2-btn-menu = メニューを開く
-onboarding-step2-btn-add_group = グループに追加
 quick_action-remake = 🔄
 quick_action-tooltip-remake = 別のスタイルで作り直す
 qarchive-on = ✅ 引用テキストのアーカイブが<b>有効</b>になりました。新しい引用はテキストと作成者とともに保存されます。

@@ -266,6 +266,76 @@ menu-btn-help = 📚 Commando's
 menu-btn-language = 🌍 Taal
 menu-btn-back = ← Terug
 menu-btn-add_group = ➕ Toevoegen aan Groep
+qs-title =
+    <b>⚙️ Citaatinstellingen</b>
+
+    Kies een sectie. Wijzigingen gelden voor elk nieuw citaat hier.
+qs-on = Aan
+qs-off = Uit
+qs-cat-appearance = 🎨 Weergave
+qs-cat-content = ✂️ Wat citeren
+qs-cat-privacy = 🔒 Privacy
+qs-cat-group = 👥 Groep
+qs-cat-appearance-desc =
+    <b>🎨 Weergave</b>
+
+    • <b>Formaat</b> — sticker, afbeelding of PNG-bestand.
+    • <b>Kleur</b> — de achtergrond van het citaat.
+    • <b>Emoji-stijl</b> — hoe emoji's worden getekend (Apple, Google…).
+    • <b>Sticker-emoji</b> — de emoji die aan opgeslagen stickers wordt toegevoegd.
+qs-cat-content-desc =
+    <b>✂️ Wat citeren</b>
+
+    • <b>Gedeeltelijk citaat</b> — wanneer je op een geselecteerd fragment antwoordt: <i>Met kader</i> toont het met het citaatkader, <i>Zonder kader</i> alleen de tekst, <i>Volledig bericht</i> negeert de selectie.
+    • <b>Antwoord tonen</b> — het bericht waarop wordt geantwoord meenemen.
+    • <b>Media</b> — foto's/video's uit het bericht meenemen.
+    • <b>Media bijsnijden</b> — hoge media passend bijsnijden.
+    • <b>Auteursrol</b> — de beheerderstitel / handtekening van de afzender tonen (het kleine label rechtsboven).
+qs-cat-privacy-desc =
+    <b>🔒 Privacy</b>
+
+    • <b>Privacy</b> — opgeslagen citaten worden niet aan hun auteur gekoppeld (ze verschijnen niet onder jouw naam in de app). De sticker zelf blijft ongewijzigd.
+    • <b>Afzender zoeken</b> — proberen de oorspronkelijke auteur van een doorgestuurd bericht te achterhalen wiens account verborgen is.
+qs-cat-group-desc =
+    <b>👥 Groep</b>
+
+    • <b>Beoordelingen</b> — 👍/👎-knoppen onder citaten tonen.
+    • <b>Auto-citaat</b> — af en toe een topcitaat terugbrengen op een levendig moment.
+    • <b>Tekstarchief</b> — de citaattekst opslaan (nodig voor zoeken en willekeurig).
+qs-row-partial = ✂️ Gedeeltelijk citaat
+qs-partial-framed = Met kader
+qs-partial-plain = Zonder kader
+qs-partial-off = Volledig bericht
+qs-row-color = 🎨 Kleur
+qs-color-title =
+    <b>🎨 Achtergrond</b>
+
+    Kies een kleur of stel een eigen kleur in met <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 Emoji-stijl
+qs-row-format = 🖥 Formaat
+qs-format-sticker = Sticker
+qs-format-image = Afbeelding
+qs-format-png = PNG-bestand
+qs-row-gab = 🔁 Auto-citaat
+qs-gab-off = Uit
+qs-gab-often = Vaak
+qs-gab-sometimes = Soms
+qs-gab-rarely = Zelden
+qs-row-suffix = 💟 Sticker-emoji
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Antwoord tonen
+qs-row-crop = 🖼 Media bijsnijden
+qs-row-sendertag = 🏷 Auteursrol
+qs-row-privacy = 🔒 Privacy
+qs-row-hidden = 🕵 Afzender zoeken
+qs-row-rate = ⭐ Beoordelingen
+qs-row-archive = 🗂 Tekstarchief
+qs-suffix-title =
+    <b>💟 Sticker-emoji</b>
+
+    Kies er hieronder een of stel een eigen emoji in met <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ Alles resetten
+qs-reset-done = Teruggezet naar standaard
 menu-features-title =
     <b>✨ Wat kan ik doen?</b>
     Tik op een functie om meer te leren:
@@ -328,43 +398,6 @@ menu-settings-title =
     <b>⚙️ Instellingen</b>
     Beheer je voorkeuren:
 menu-settings-btn-privacy = 🔒 Privacy
-menu-settings-btn-language = 🌍 Taal
-menu-help-title =
-    <b>📚 Commando's</b>
-
-    <b>Basis:</b>
-    • <code>/q</code> — citaat maken
-    • <code>/lang</code> — taal wijzigen
-    • <code>/donate</code> — ontwikkeling steunen
-
-    <b>Voor beheerders:</b>
-    • <code>/qcolor</code> — standaardkleur
-    • <code>/qrate</code> — beoordeling inschakelen
-    • <code>/qb</code> — emoji stijl
-onboarding-welcome-title =
-    <b>Hallo! 👋</b>
-
-    Ik verander gewone chatberichten in prachtige citaatstickers.
-
-    ✨ <b>Laat me je laten zien hoe het werkt!</b>
-onboarding-welcome-btn-start = Laten we beginnen! →
-onboarding-welcome-btn-skip = Tutorial overslaan
-onboarding-step1-title =
-    <b>Stap 1: Stuur een bericht door</b>
-
-    Stuur nu een chatbericht naar mij door.
-
-    💡 <i>Tip: Je kunt meerdere berichten tegelijk doorsturen!</i>
-onboarding-step2-title =
-    <b>Geweldig! Hier is je citaat! ✨</b>
-
-    In groepen gebruik je gewoon <code>/q</code> om op een bericht te reageren.
-onboarding-step2-btn-complete = Begrepen! ✓
-onboarding-complete-title =
-    <b>Je bent klaar! 🎉</b>
-
-    Nu ken je de basis. Verken het menu om meer functies te ontdekken!
-
 aimode-title = 🤖 <b>IA-modi</b>
 aimode-current = Huidige modus: { $mode }
 aimode-available = <b>Beschikbare modi:</b>
@@ -404,11 +437,6 @@ app-info =
 menu-settings-btn-color = 🎨 Standaardkleur
 menu-settings-btn-emoji_style = 😊 Emoji-stijl
 menu-settings-btn-back = ← Terug
-onboarding-step1-waiting =
-    Wachten op je bericht...
-    Stuur me gewoon iets door uit een willekeurige chat!
-onboarding-step2-btn-menu = Menu openen
-onboarding-step2-btn-add_group = Toevoegen aan groep
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Opnieuw maken met een andere stijl
 qarchive-on = ✅ Citaattekst-archief <b>ingeschakeld</b>. Nieuwe citaten worden opgeslagen met tekst en auteur.

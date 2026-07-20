@@ -266,6 +266,76 @@ menu-btn-help = 📚 Komendy
 menu-btn-language = 🌍 Język
 menu-btn-back = ← Wstecz
 menu-btn-add_group = ➕ Dodaj do Grupy
+qs-title =
+    <b>⚙️ Ustawienia cytatów</b>
+
+    Wybierz sekcję. Zmiany dotyczą każdego nowego cytatu tutaj.
+qs-on = Wł.
+qs-off = Wył.
+qs-cat-appearance = 🎨 Wygląd
+qs-cat-content = ✂️ Co cytować
+qs-cat-privacy = 🔒 Prywatność
+qs-cat-group = 👥 Grupa
+qs-cat-appearance-desc =
+    <b>🎨 Wygląd</b>
+
+    • <b>Format</b> — naklejka, obraz lub plik PNG.
+    • <b>Kolor</b> — tło cytatu.
+    • <b>Styl emoji</b> — jak rysowane są emoji (Apple, Google…).
+    • <b>Emoji naklejki</b> — emoji dodawane do zapisanych naklejek.
+qs-cat-content-desc =
+    <b>✂️ Co cytować</b>
+
+    • <b>Cytat częściowy</b> — gdy odpowiadasz na zaznaczony fragment: <i>W ramce</i> pokazuje go z ramką cytatu, <i>Bez ramki</i> tylko tekst, <i>Cała wiadomość</i> ignoruje zaznaczenie.
+    • <b>Pokaż odpowiedź</b> — dołączyć wiadomość, na którą odpowiadasz.
+    • <b>Media</b> — dołączyć zdjęcia/filmy z wiadomości.
+    • <b>Przytnij media</b> — przyciąć wysokie media, by pasowały.
+    • <b>Rola autora</b> — pokazać tytuł administratora / podpis nadawcy (mała etykieta w prawym górnym rogu).
+qs-cat-privacy-desc =
+    <b>🔒 Prywatność</b>
+
+    • <b>Prywatność</b> — zapisane cytaty nie są powiązane z ich autorem (nie pojawią się pod Twoim imieniem w aplikacji). Sama naklejka pozostaje bez zmian.
+    • <b>Wyszukiwanie nadawcy</b> — próba ustalenia pierwotnego autora przesłanej wiadomości, którego konto jest ukryte.
+qs-cat-group-desc =
+    <b>👥 Grupa</b>
+
+    • <b>Oceny</b> — pokazać przyciski 👍/👎 pod cytatami.
+    • <b>Auto-cytat</b> — od czasu do czasu przywołać najlepszy cytat w ożywionym momencie.
+    • <b>Archiwum tekstu</b> — przechowywać tekst cytatów (potrzebne do wyszukiwania i losowych).
+qs-row-partial = ✂️ Cytat częściowy
+qs-partial-framed = W ramce
+qs-partial-plain = Bez ramki
+qs-partial-off = Cała wiadomość
+qs-row-color = 🎨 Kolor
+qs-color-title =
+    <b>🎨 Tło</b>
+
+    Wybierz kolor lub ustaw własny za pomocą <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 Styl emoji
+qs-row-format = 🖥 Format
+qs-format-sticker = Naklejka
+qs-format-image = Obraz
+qs-format-png = Plik PNG
+qs-row-gab = 🔁 Auto-cytat
+qs-gab-off = Wył.
+qs-gab-often = Często
+qs-gab-sometimes = Czasami
+qs-gab-rarely = Rzadko
+qs-row-suffix = 💟 Emoji naklejki
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Pokaż odpowiedź
+qs-row-crop = 🖼 Przytnij media
+qs-row-sendertag = 🏷 Rola autora
+qs-row-privacy = 🔒 Prywatność
+qs-row-hidden = 🕵 Wyszukiwanie nadawcy
+qs-row-rate = ⭐ Oceny
+qs-row-archive = 🗂 Archiwum tekstu
+qs-suffix-title =
+    <b>💟 Emoji naklejki</b>
+
+    Wybierz jedno poniżej lub ustaw własne emoji za pomocą <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ Zresetuj wszystko
+qs-reset-done = Przywrócono ustawienia domyślne
 menu-features-title =
     <b>✨ Co mogę zrobić?</b>
     Dotknij funkcji, aby dowiedzieć się więcej:
@@ -328,43 +398,6 @@ menu-settings-title =
     <b>⚙️ Ustawienia</b>
     Zarządzaj swoimi preferencjami:
 menu-settings-btn-privacy = 🔒 Prywatność
-menu-settings-btn-language = 🌍 Język
-menu-help-title =
-    <b>📚 Komendy</b>
-
-    <b>Podstawowe:</b>
-    • <code>/q</code> — utwórz cytat
-    • <code>/lang</code> — zmień język
-    • <code>/donate</code> — wspieraj rozwój
-
-    <b>Dla adminów:</b>
-    • <code>/qcolor</code> — domyślny kolor
-    • <code>/qrate</code> — włącz oceny
-    • <code>/qb</code> — styl emoji
-onboarding-welcome-title =
-    <b>Cześć! 👋</b>
-
-    Zamieniam zwykłe wiadomości czatu w oszałamiające naklejki z cytatami.
-
-    ✨ <b>Pozwól mi pokazać, jak to działa!</b>
-onboarding-welcome-btn-start = Zaczynamy! →
-onboarding-welcome-btn-skip = Pomiń samouczek
-onboarding-step1-title =
-    <b>Krok 1: Przekaż wiadomość</b>
-
-    Przekaż mi teraz dowolną wiadomość z czatu.
-
-    💡 <i>Wskazówka: Możesz przekazać wiele wiadomości naraz!</i>
-onboarding-step2-title =
-    <b>Świetnie! Oto twój cytat! ✨</b>
-
-    W grupach po prostu użyj <code>/q</code>, aby odpowiedzieć na dowolną wiadomość.
-onboarding-step2-btn-complete = Rozumiem! ✓
-onboarding-complete-title =
-    <b>Gotowe! 🎉</b>
-
-    Teraz znasz podstawy. Eksploruj menu, aby odkryć więcej funkcji!
-
 aimode-title = 🤖 <b>Tryby SI</b>
 aimode-current = Bieżący tryb: { $mode }
 aimode-available = <b>Dostępne tryby:</b>
@@ -404,11 +437,6 @@ app-info =
 menu-settings-btn-color = 🎨 Domyślny kolor
 menu-settings-btn-emoji_style = 😊 Styl emoji
 menu-settings-btn-back = ← Wstecz
-onboarding-step1-waiting =
-    Czekam na twoją wiadomość...
-    Po prostu prześlij mi coś z dowolnego czatu!
-onboarding-step2-btn-menu = Otwórz menu
-onboarding-step2-btn-add_group = Dodaj do grupy
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Utwórz ponownie w innym stylu
 qarchive-on = ✅ Archiwum tekstu cytatów <b>włączone</b>. Nowe cytaty będą zapisywane z tekstem i autorem.

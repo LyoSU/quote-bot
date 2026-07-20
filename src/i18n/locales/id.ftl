@@ -266,6 +266,76 @@ menu-btn-help = 📚 Perintah
 menu-btn-language = 🌍 Bahasa
 menu-btn-back = ← Kembali
 menu-btn-add_group = ➕ Tambahkan ke Grup
+qs-title =
+    <b>⚙️ Pengaturan kutipan</b>
+
+    Pilih bagian. Perubahan berlaku untuk setiap kutipan baru di sini.
+qs-on = Aktif
+qs-off = Nonaktif
+qs-cat-appearance = 🎨 Tampilan
+qs-cat-content = ✂️ Apa yang dikutip
+qs-cat-privacy = 🔒 Privasi
+qs-cat-group = 👥 Grup
+qs-cat-appearance-desc =
+    <b>🎨 Tampilan</b>
+
+    • <b>Format</b> — stiker, gambar, atau berkas PNG.
+    • <b>Warna</b> — latar belakang kutipan.
+    • <b>Gaya emoji</b> — bagaimana emoji digambar (Apple, Google…).
+    • <b>Emoji stiker</b> — emoji yang ditambahkan ke stiker tersimpan.
+qs-cat-content-desc =
+    <b>✂️ Apa yang dikutip</b>
+
+    • <b>Kutipan sebagian</b> — saat kamu membalas potongan terpilih: <i>Berbingkai</i> menampilkannya dengan bingkai kutipan, <i>Tanpa bingkai</i> hanya teksnya, <i>Seluruh pesan</i> mengabaikan pilihan.
+    • <b>Tampilkan balasan</b> — sertakan pesan yang dibalas.
+    • <b>Media</b> — sertakan foto/video dari pesan.
+    • <b>Pangkas media</b> — pangkas media tinggi agar pas.
+    • <b>Peran penulis</b> — tampilkan gelar admin / tanda tangan pengirim (label kecil di kanan atas).
+qs-cat-privacy-desc =
+    <b>🔒 Privasi</b>
+
+    • <b>Privasi</b> — kutipan tersimpan tidak terkait dengan penulisnya (tidak muncul dengan namamu di aplikasi). Stikernya sendiri tidak berubah.
+    • <b>Pencarian pengirim</b> — coba kenali penulis asli dari pesan yang diteruskan yang akunnya tersembunyi.
+qs-cat-group-desc =
+    <b>👥 Grup</b>
+
+    • <b>Penilaian</b> — tampilkan tombol 👍/👎 di bawah kutipan.
+    • <b>Kutipan otomatis</b> — sesekali memunculkan kembali kutipan teratas di momen yang ramai.
+    • <b>Arsip teks</b> — simpan teks kutipan (diperlukan untuk pencarian dan acak).
+qs-row-partial = ✂️ Kutipan sebagian
+qs-partial-framed = Berbingkai
+qs-partial-plain = Tanpa bingkai
+qs-partial-off = Seluruh pesan
+qs-row-color = 🎨 Warna
+qs-color-title =
+    <b>🎨 Latar belakang</b>
+
+    Pilih warna atau atur warna khusus dengan <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 Gaya emoji
+qs-row-format = 🖥 Format
+qs-format-sticker = Stiker
+qs-format-image = Gambar
+qs-format-png = Berkas PNG
+qs-row-gab = 🔁 Kutipan otomatis
+qs-gab-off = Nonaktif
+qs-gab-often = Sering
+qs-gab-sometimes = Kadang
+qs-gab-rarely = Jarang
+qs-row-suffix = 💟 Emoji stiker
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Tampilkan balasan
+qs-row-crop = 🖼 Pangkas media
+qs-row-sendertag = 🏷 Peran penulis
+qs-row-privacy = 🔒 Privasi
+qs-row-hidden = 🕵 Pencarian pengirim
+qs-row-rate = ⭐ Penilaian
+qs-row-archive = 🗂 Arsip teks
+qs-suffix-title =
+    <b>💟 Emoji stiker</b>
+
+    Pilih satu di bawah atau atur emoji khusus dengan <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ Atur ulang semua
+qs-reset-done = Disetel ulang ke default
 menu-features-title =
     <b>✨ Apa yang bisa saya lakukan?</b>
     Ketuk fitur untuk mempelajari lebih lanjut:
@@ -328,43 +398,6 @@ menu-settings-title =
     <b>⚙️ Pengaturan</b>
     Kelola preferensi Anda:
 menu-settings-btn-privacy = 🔒 Privasi
-menu-settings-btn-language = 🌍 Bahasa
-menu-help-title =
-    <b>📚 Perintah</b>
-
-    <b>Dasar:</b>
-    • <code>/q</code> — buat kutipan
-    • <code>/lang</code> — ubah bahasa
-    • <code>/donate</code> — dukung pengembangan
-
-    <b>Untuk admin:</b>
-    • <code>/qcolor</code> — warna default
-    • <code>/qrate</code> — aktifkan rating
-    • <code>/qb</code> — gaya emoji
-onboarding-welcome-title =
-    <b>Hai! 👋</b>
-
-    Saya mengubah pesan obrolan biasa menjadi stiker kutipan yang menakjubkan.
-
-    ✨ <b>Biar saya tunjukkan cara kerjanya!</b>
-onboarding-welcome-btn-start = Ayo Mulai! →
-onboarding-welcome-btn-skip = Lewati Tutorial
-onboarding-step1-title =
-    <b>Langkah 1: Teruskan pesan</b>
-
-    Teruskan pesan obrolan apa pun kepada saya sekarang.
-
-    💡 <i>Tips: Anda bisa meneruskan beberapa pesan sekaligus!</i>
-onboarding-step2-title =
-    <b>Hebat! Ini kutipan Anda! ✨</b>
-
-    Di grup, cukup gunakan <code>/q</code> untuk membalas pesan apa pun.
-onboarding-step2-btn-complete = Mengerti! ✓
-onboarding-complete-title =
-    <b>Anda siap! 🎉</b>
-
-    Sekarang Anda tahu dasarnya. Jelajahi menu untuk menemukan lebih banyak fitur!
-
 aimode-title = 🤖 <b>Mode AI</b>
 aimode-current = Mode saat ini: { $mode }
 aimode-available = <b>Mode yang tersedia:</b>
@@ -404,11 +437,6 @@ app-info =
 menu-settings-btn-color = 🎨 Warna Default
 menu-settings-btn-emoji_style = 😊 Gaya Emoji
 menu-settings-btn-back = ← Kembali
-onboarding-step1-waiting =
-    Menunggu pesan Anda...
-    Cukup teruskan sesuatu dari obrolan mana pun!
-onboarding-step2-btn-menu = Buka Menu
-onboarding-step2-btn-add_group = Tambahkan ke Grup
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Buat ulang dengan gaya berbeda
 qarchive-on = ✅ Arsip teks kutipan <b>aktif</b>. Kutipan baru akan disimpan beserta teks dan penulisnya.

@@ -275,6 +275,76 @@ menu-settings-btn-color = 🎨 Color
 menu-settings-btn-emoji_style = 😊 Estilo emoji
 menu-settings-btn-privacy = 🔒 Privacidad
 menu-settings-btn-back = ← Volver
+qs-title =
+    <b>⚙️ Ajustes de citas</b>
+
+    Elige una sección. Los cambios se aplican a cada nueva cita aquí.
+qs-on = Activado
+qs-off = Desactivado
+qs-cat-appearance = 🎨 Apariencia
+qs-cat-content = ✂️ Qué citar
+qs-cat-privacy = 🔒 Privacidad
+qs-cat-group = 👥 Grupo
+qs-cat-appearance-desc =
+    <b>🎨 Apariencia</b>
+
+    • <b>Formato</b> — sticker, imagen o archivo PNG.
+    • <b>Color</b> — el fondo de la cita.
+    • <b>Estilo emoji</b> — cómo se dibujan los emojis (Apple, Google…).
+    • <b>Emoji del sticker</b> — el emoji que se añade a los stickers guardados.
+qs-cat-content-desc =
+    <b>✂️ Qué citar</b>
+
+    • <b>Cita parcial</b> — cuando respondes a un fragmento seleccionado: <i>Con marco</i> lo muestra con el marco de la cita, <i>Sin marco</i> solo el texto, <i>Mensaje completo</i> ignora la selección.
+    • <b>Mostrar respuesta</b> — incluir el mensaje al que se responde.
+    • <b>Media</b> — incluir fotos/vídeos del mensaje.
+    • <b>Recortar media</b> — recortar la media alta para que encaje.
+    • <b>Rol del autor</b> — mostrar el cargo de administrador / la firma del remitente (la pequeña etiqueta arriba a la derecha).
+qs-cat-privacy-desc =
+    <b>🔒 Privacidad</b>
+
+    • <b>Privacidad</b> — las citas guardadas no se vinculan a su autor (no aparecerán con tu nombre en la app). El sticker en sí no cambia.
+    • <b>Búsqueda de remitente</b> — intentar identificar al autor original de un mensaje reenviado cuya cuenta está oculta.
+qs-cat-group-desc =
+    <b>👥 Grupo</b>
+
+    • <b>Valoraciones</b> — mostrar botones 👍/👎 bajo las citas.
+    • <b>Cita automática</b> — de vez en cuando recuperar una cita destacada en un momento animado.
+    • <b>Archivo de texto</b> — guardar el texto de la cita (necesario para búsqueda y aleatorias).
+qs-row-partial = ✂️ Cita parcial
+qs-partial-framed = Con marco
+qs-partial-plain = Sin marco
+qs-partial-off = Mensaje completo
+qs-row-color = 🎨 Color
+qs-color-title =
+    <b>🎨 Fondo</b>
+
+    Elige un color o define uno propio con <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 Estilo emoji
+qs-row-format = 🖥 Formato
+qs-format-sticker = Sticker
+qs-format-image = Imagen
+qs-format-png = Archivo PNG
+qs-row-gab = 🔁 Cita automática
+qs-gab-off = Desactivado
+qs-gab-often = A menudo
+qs-gab-sometimes = A veces
+qs-gab-rarely = Rara vez
+qs-row-suffix = 💟 Emoji del sticker
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Mostrar respuesta
+qs-row-crop = 🖼 Recortar media
+qs-row-sendertag = 🏷 Rol del autor
+qs-row-privacy = 🔒 Privacidad
+qs-row-hidden = 🕵 Búsqueda de remitente
+qs-row-rate = ⭐ Valoraciones
+qs-row-archive = 🗂 Archivo de texto
+qs-suffix-title =
+    <b>💟 Emoji del sticker</b>
+
+    Elige uno abajo o define un emoji propio con <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ Restablecer todo
+qs-reset-done = Restablecido a los valores predeterminados
 menu-features-title =
     <b>✨ ¿Qué puedo hacer?</b>
 
@@ -347,35 +417,6 @@ menu-features-group-title =
     <b>Pack de stickers:</b>
     <code>/qs 💜</code> — guardar en pack
     <code>/qd</code> — eliminar del pack
-onboarding-welcome-title =
-    <b>¡Hola! 👋</b>
-
-    Transformo mensajes de chat en hermosos stickers de citas.
-    ¡Déjame mostrarte cómo funciona!
-onboarding-welcome-btn-start = ¡Vamos! →
-onboarding-welcome-btn-skip = Saltar
-onboarding-step1-title =
-    <b>Paso de 2</b> 📨
-
-    Reenvíame cualquier mensaje de un chat.
-    ¡Lo convertiré en un sticker de cita!
-onboarding-step1-waiting =
-    Esperando tu mensaje...
-    ¡Solo reenvía algo de cualquier chat!
-onboarding-step2-title =
-    <b>¡Genial! 🎉</b>
-
-    ¡Acabas de crear tu primera cita!
-
-    <b>En grupos</b>, usa <code>/q</code> como respuesta a un mensaje.
-
-    ¿Listo para más?
-onboarding-step2-btn-menu = Abrir menú
-onboarding-step2-btn-add_group = Añadir al grupo
-onboarding-complete-title =
-    <b>¡Todo listo! ✨</b>
-
-    Ya conoces lo básico. Añádeme a un grupo o explora todas las funciones en el menú.
 sticker-save-error-too_large = La imagen es demasiado grande (máx. 2048×2048). Prueba con una más pequeña 📐
 app-open_quote = ✨ Abrir cita
 app-open_group = 📚 Todas las citas del grupo

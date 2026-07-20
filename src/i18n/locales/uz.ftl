@@ -266,6 +266,76 @@ menu-btn-help = 📚 Buyruqlar
 menu-btn-language = 🌍 Til
 menu-btn-back = ← Orqaga
 menu-btn-add_group = ➕ Guruhga qo'shish
+qs-title =
+    <b>⚙️ Sitata sozlamalari</b>
+
+    Bo'lim tanlang. O'zgarishlar bu yerdagi har bir yangi sitataga qo'llanadi.
+qs-on = Yoniq
+qs-off = O'chiq
+qs-cat-appearance = 🎨 Ko'rinish
+qs-cat-content = ✂️ Nima olinadi
+qs-cat-privacy = 🔒 Maxfiylik
+qs-cat-group = 👥 Guruh
+qs-cat-appearance-desc =
+    <b>🎨 Ko'rinish</b>
+
+    • <b>Format</b> — stiker, rasm yoki PNG fayl.
+    • <b>Rang</b> — sitataning foni.
+    • <b>Emoji uslubi</b> — emojilar qanday chiziladi (Apple, Google…).
+    • <b>Stiker emojisi</b> — saqlangan stikerlarga qo'shiladigan emoji.
+qs-cat-content-desc =
+    <b>✂️ Nima olinadi</b>
+
+    • <b>Qisman sitata</b> — tanlangan parchaga javob berganingda: <i>Ramkali</i> uni sitata ramkasi bilan ko'rsatadi, <i>Ramkasiz</i> faqat matnni, <i>To'liq xabar</i> tanlovni e'tiborsiz qoldiradi.
+    • <b>Javobni ko'rsatish</b> — javob berilayotgan xabarni qo'shish.
+    • <b>Media</b> — xabardan foto/videolarni qo'shish.
+    • <b>Mediani kesish</b> — baland mediani moslashtirish uchun kesish.
+    • <b>Muallif roli</b> — yuboruvchining admin unvoni / imzosini ko'rsatish (yuqori o'ngdagi kichik yorliq).
+qs-cat-privacy-desc =
+    <b>🔒 Maxfiylik</b>
+
+    • <b>Maxfiylik</b> — saqlangan sitatalar muallifiga bog'lanmaydi (ilovada sizning ismingiz ostida ko'rinmaydi). Stikerning o'zi o'zgarmaydi.
+    • <b>Yuboruvchi qidiruvi</b> — akkaunti yashirin bo'lgan yo'naltirilgan xabarning asl muallifini aniqlashga urinish.
+qs-cat-group-desc =
+    <b>👥 Guruh</b>
+
+    • <b>Reytinglar</b> — sitatalar ostida 👍/👎 tugmalarini ko'rsatish.
+    • <b>Avto-sitata</b> — jonli lahzada vaqti-vaqti bilan eng yaxshi sitatani qayta ko'tarish.
+    • <b>Matn arxivi</b> — sitata matnini saqlash (qidiruv va tasodifiy uchun kerak).
+qs-row-partial = ✂️ Qisman sitata
+qs-partial-framed = Ramkali
+qs-partial-plain = Ramkasiz
+qs-partial-off = To'liq xabar
+qs-row-color = 🎨 Rang
+qs-color-title =
+    <b>🎨 Fon</b>
+
+    Rang tanlang yoki <code>/qcolor #ff5733</code> bilan o'zingiznikini belgilang.
+qs-row-brand = 😀 Emoji uslubi
+qs-row-format = 🖥 Format
+qs-format-sticker = Stiker
+qs-format-image = Rasm
+qs-format-png = PNG fayl
+qs-row-gab = 🔁 Avto-sitata
+qs-gab-off = O'chiq
+qs-gab-often = Tez-tez
+qs-gab-sometimes = Ba'zan
+qs-gab-rarely = Kamdan-kam
+qs-row-suffix = 💟 Stiker emojisi
+qs-row-media = 📎 Media
+qs-row-reply = 💬 Javobni ko'rsatish
+qs-row-crop = 🖼 Mediani kesish
+qs-row-sendertag = 🏷 Muallif roli
+qs-row-privacy = 🔒 Maxfiylik
+qs-row-hidden = 🕵 Yuboruvchi qidiruvi
+qs-row-rate = ⭐ Reytinglar
+qs-row-archive = 🗂 Matn arxivi
+qs-suffix-title =
+    <b>💟 Stiker emojisi</b>
+
+    Quyidan birini tanlang yoki <code>/qemoji 🔥</code> bilan o'z emojingizni belgilang.
+qs-btn-reset = ↩️ Hammasini tiklash
+qs-reset-done = Standartga qaytarildi
 menu-features-title =
     <b>✨ Nima qila olaman?</b>
     Ko'proq ma'lumot uchun xususiyatga bosing:
@@ -328,42 +398,6 @@ menu-settings-title =
     <b>⚙️ Sozlamalar</b>
     Sozlamalaringizni boshqaring:
 menu-settings-btn-privacy = 🔒 Maxfiylik
-menu-settings-btn-language = 🌍 Til
-menu-help-title =
-    <b>📚 Buyruqlar</b>
-
-    <b>Asosiy:</b>
-    • <code>/q</code> — sitata yaratish
-    • <code>/lang</code> — tilni o'zgartirish
-    • <code>/donate</code> — rivojlanishni qo'llab-quvvatlash
-
-    <b>Adminlar uchun:</b>
-    • <code>/qcolor</code> — standart rang
-    • <code>/qrate</code> — reytingni yoqish
-    • <code>/qb</code> — emoji uslubi
-onboarding-welcome-title =
-    <b>Salom! 👋</b>
-
-    Oddiy chat xabarlarini ajoyib sitata stikerlariga aylantiraman.
-
-    ✨ <b>Qanday ishlashini ko'rsatay!</b>
-onboarding-welcome-btn-start = Boshlaylik! →
-onboarding-welcome-btn-skip = O'rgatishni o'tkazib yuborish
-onboarding-step1-title =
-    <b>1-qadam: Xabar yuboring</b>
-
-    Menga hozir biron-bir chat xabarini yuboring.
-
-    💡 <i>Maslahat: Bir vaqtning o'zida bir nechta xabar yuborishingiz mumkin!</i>
-onboarding-step2-title =
-    <b>Ajoyib! Mana sitatangiz! ✨</b>
-
-    Guruhlarda shunchaki <code>/q</code> ishlatib har qanday xabarga javob bering.
-onboarding-step2-btn-complete = Tushunarli! ✓
-onboarding-complete-title =
-    <b>Tayyorsiz! 🎉</b>
-
-    Endi asoslarni bilasiz. Ko'proq xususiyatlarni topish uchun menyuni o'rganing!
 app-open_quote = ✨ Iqtibosni ochish
 app-open_group = 📚 Guruhdagi barcha iqtiboslar
 app-open_root = 💫 Mening guruhlarim
@@ -403,11 +437,6 @@ aimode-modes-memer-description = Mem iboralari va internet madaniyati
 menu-settings-btn-color = 🎨 Standart rang
 menu-settings-btn-emoji_style = 😊 Emoji uslubi
 menu-settings-btn-back = ← Orqaga
-onboarding-step1-waiting =
-    Xabaringizni kutyapman...
-    Shunchaki istalgan suhbatdan biror narsani yo'naltiring!
-onboarding-step2-btn-menu = Menyuni ochish
-onboarding-step2-btn-add_group = Guruhga qo'shish
 quick_action-remake = 🔄
 quick_action-tooltip-remake = Boshqa uslubda qayta yaratish
 qarchive-on = ✅ Iqtibos matni arxivi <b>yoqildi</b>. Yangi iqtiboslar matn va muallif bilan saqlanadi.

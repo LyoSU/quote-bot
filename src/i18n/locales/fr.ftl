@@ -275,6 +275,76 @@ menu-settings-btn-color = 🎨 Couleur
 menu-settings-btn-emoji_style = 😊 Style emoji
 menu-settings-btn-privacy = 🔒 Confidentialité
 menu-settings-btn-back = ← Retour
+qs-title =
+    <b>⚙️ Réglages des citations</b>
+
+    Choisis une section. Les changements s'appliquent à chaque nouvelle citation ici.
+qs-on = Activé
+qs-off = Désactivé
+qs-cat-appearance = 🎨 Apparence
+qs-cat-content = ✂️ Quoi citer
+qs-cat-privacy = 🔒 Confidentialité
+qs-cat-group = 👥 Groupe
+qs-cat-appearance-desc =
+    <b>🎨 Apparence</b>
+
+    • <b>Format</b> — sticker, image ou fichier PNG.
+    • <b>Couleur</b> — le fond de la citation.
+    • <b>Style emoji</b> — comment les emojis sont dessinés (Apple, Google…).
+    • <b>Emoji du sticker</b> — l'emoji ajouté aux stickers enregistrés.
+qs-cat-content-desc =
+    <b>✂️ Quoi citer</b>
+
+    • <b>Citation partielle</b> — quand tu réponds à un fragment sélectionné : <i>Avec cadre</i> l'affiche avec le cadre de citation, <i>Sans cadre</i> seulement le texte, <i>Message entier</i> ignore la sélection.
+    • <b>Afficher la réponse</b> — inclure le message auquel on répond.
+    • <b>Médias</b> — inclure les photos/vidéos du message.
+    • <b>Rogner les médias</b> — rogner les médias hauts pour les ajuster.
+    • <b>Rôle de l'auteur</b> — afficher le titre d'administrateur / la signature de l'expéditeur (la petite étiquette en haut à droite).
+qs-cat-privacy-desc =
+    <b>🔒 Confidentialité</b>
+
+    • <b>Confidentialité</b> — les citations enregistrées ne sont pas liées à leur auteur (elles n'apparaîtront pas sous ton nom dans l'app). Le sticker lui-même ne change pas.
+    • <b>Recherche d'expéditeur</b> — essayer d'identifier l'auteur original d'un message transféré dont le compte est caché.
+qs-cat-group-desc =
+    <b>👥 Groupe</b>
+
+    • <b>Notes</b> — afficher les boutons 👍/👎 sous les citations.
+    • <b>Citation auto</b> — faire ressurgir de temps en temps une citation phare lors d'un moment animé.
+    • <b>Archive de texte</b> — enregistrer le texte des citations (nécessaire pour la recherche et l'aléatoire).
+qs-row-partial = ✂️ Citation partielle
+qs-partial-framed = Avec cadre
+qs-partial-plain = Sans cadre
+qs-partial-off = Message entier
+qs-row-color = 🎨 Couleur
+qs-color-title =
+    <b>🎨 Fond</b>
+
+    Choisis une couleur ou définis-en une personnalisée avec <code>/qcolor #ff5733</code>.
+qs-row-brand = 😀 Style emoji
+qs-row-format = 🖥 Format
+qs-format-sticker = Sticker
+qs-format-image = Image
+qs-format-png = Fichier PNG
+qs-row-gab = 🔁 Citation auto
+qs-gab-off = Désactivé
+qs-gab-often = Souvent
+qs-gab-sometimes = Parfois
+qs-gab-rarely = Rarement
+qs-row-suffix = 💟 Emoji du sticker
+qs-row-media = 📎 Médias
+qs-row-reply = 💬 Afficher la réponse
+qs-row-crop = 🖼 Rogner les médias
+qs-row-sendertag = 🏷 Rôle de l'auteur
+qs-row-privacy = 🔒 Confidentialité
+qs-row-hidden = 🕵 Recherche d'expéditeur
+qs-row-rate = ⭐ Notes
+qs-row-archive = 🗂 Archive de texte
+qs-suffix-title =
+    <b>💟 Emoji du sticker</b>
+
+    Choisis-en un ci-dessous ou définis un emoji personnalisé avec <code>/qemoji 🔥</code>.
+qs-btn-reset = ↩️ Tout réinitialiser
+qs-reset-done = Réinitialisé aux valeurs par défaut
 menu-features-title =
     <b>✨ Que puis-je faire?</b>
 
@@ -347,35 +417,6 @@ menu-features-group-title =
     <b>Pack d'autocollants:</b>
     <code>/qs 💜</code> — sauvegarder dans le pack
     <code>/qd</code> — supprimer du pack
-onboarding-welcome-title =
-    <b>Bonjour! 👋</b>
-
-    Je transforme les messages en beaux autocollants de citations.
-    Laissez-moi vous montrer comment ça marche!
-onboarding-welcome-btn-start = C'est parti! →
-onboarding-welcome-btn-skip = Passer
-onboarding-step1-title =
-    <b>Étape sur 2</b> 📨
-
-    Transférez-moi n'importe quel message d'un chat.
-    Je le transformerai en autocollant de citation!
-onboarding-step1-waiting =
-    J'attends votre message...
-    Transférez simplement quelque chose!
-onboarding-step2-title =
-    <b>Génial! 🎉</b>
-
-    Vous venez de créer votre première citation!
-
-    <b>Dans les groupes</b>, utilisez <code>/q</code> en réponse.
-
-    Prêt pour plus?
-onboarding-step2-btn-menu = Ouvrir le menu
-onboarding-step2-btn-add_group = Ajouter au groupe
-onboarding-complete-title =
-    <b>Tout est prêt! ✨</b>
-
-    Vous connaissez maintenant les bases. Ajoutez-moi à un groupe ou explorez toutes les fonctionnalités dans le menu.
 sticker-save-error-too_large = L'image est trop grande (max. 2048×2048). Essaie-en une plus petite 📐
 app-open_quote = ✨ Ouvrir la citation
 app-open_group = 📚 Toutes les citations du groupe
