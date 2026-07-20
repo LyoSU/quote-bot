@@ -247,10 +247,15 @@ async function renderQuote(
     return
   }
 
+  // Only sticker delivery persists a quote and carries interactive buttons;
+  // image/png/document output is a one-off render with no stored id. Gating the
+  // whole rate/deep-link path on this stops non-sticker quotes from getting
+  // dead 👍/👎 buttons and a deep link to a local id that's never persisted.
+  const isStickerDelivery = spec.delivery === 'sticker'
+
   // ---- Render + (in parallel) allocate the per-group local id ----
-  const localIdPromise: Promise<number | null> = group
-    ? incrementQuoteCounter(group._id).catch(() => null)
-    : Promise.resolve(null)
+  const localIdPromise: Promise<number | null> =
+    group && isStickerDelivery ? incrementQuoteCounter(group._id).catch(() => null) : Promise.resolve(null)
 
   let image: Buffer
   let renderedType: string
@@ -276,11 +281,11 @@ async function renderQuote(
 
   // ---- Build the reply markup ----
   const presetId = isGuest ? new Types.ObjectId() : undefined
-  const rateEnabled = Boolean(group && ((group.settings?.rate ?? true) || flag.rate))
+  const rateEnabled = Boolean(group && isStickerDelivery && ((group.settings?.rate ?? true) || flag.rate))
 
   // Guest mode ends up with no buttons: no group → no rating and no deep link.
   const deepLinkUrl =
-    group && localId != null && ctx.me?.username
+    group && isStickerDelivery && localId != null && ctx.me?.username
       ? deepLink.forQuote(ctx.me.username, group._id.toString(), localId)
       : null
   const replyMarkup = buildQuoteReplyMarkup({
@@ -380,7 +385,10 @@ export const quoteFeature = new Composer<BotContext>()
 quoteFeature.command('q', handleQuote)
 quoteFeature.on('guest_message', handleQuote)
 quoteFeature.on('business_message:text', async (ctx, next) => {
-  if (ctx.businessMessage?.text?.startsWith('/q')) return handleQuote(ctx)
+  // Word-boundary match, consistent with extractArgString's `/^\/q(\s|$)/i`:
+  // a bare `startsWith('/q')` also swallowed /qrand, /qtop, /qcolor, … and
+  // rendered a default quote for them. Allow `/q@botname` too.
+  if (/^\/q(@\w+)?(\s|$)/i.test(ctx.businessMessage?.text ?? '')) return handleQuote(ctx)
   return next()
 })
 
@@ -414,4 +422,4 @@ quoteFeature.on('message', async (ctx, next) => {
   return handleQuote(ctx)
 })
 
-export { handleQuote }
+export { handleQuote, renderQuote }
