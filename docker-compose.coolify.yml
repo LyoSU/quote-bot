@@ -16,7 +16,7 @@ services:
       - QUOTE_API_URI=http://quote-api:4888
       - QUOTE_API_URI_HTML=http://quote-api:4889
     ports:
-      - "3000:3000"   # METRICS_PORT
+      - "3010:3000"   # METRICS_PORT (host 3010 — 3000 taken by fastCRW on hetzner-auction)
     networks:
       - quote-shared
 
