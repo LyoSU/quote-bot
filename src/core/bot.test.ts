@@ -13,11 +13,15 @@ vi.mock('./shutdown', async (importOriginal) => ({
  * Integration tests for the OUTGOING TRANSFORMER CHAIN — the wiring in
  * createBot that every unit test trusts blindly:
  *
- *   autoRetry(rethrowHttpErrors) → networkRetry → throttler → pollGuard → pollWatch → fetch
+ *   autoRetry(rethrowHttpErrors) → networkRetry → pollGuard → pollWatch → fetch
  *
  * A reorder, or dropping `rethrowHttpErrors: true`, silently restores the
  * unbounded-silent-retry behavior these tests exist to forbid.
  */
+function json(body: unknown): Response {
+  return new Response(JSON.stringify(body), { headers: { 'content-type': 'application/json' } })
+}
+
 describe('createBot transformer chain', () => {
   afterEach(() => {
     vi.useRealTimers()
@@ -38,6 +42,27 @@ describe('createBot transformer chain', () => {
     expect(await outcome).toBeInstanceOf(HttpError)
     // initial call + 5 capped retries; one more means auto-retry looped on it.
     expect(fetchMock).toHaveBeenCalledTimes(6)
+  })
+
+  it('rides out a group 429 with a retry_after above 5s (no throttler — Telegram paces us)', async () => {
+    vi.useFakeTimers()
+    const retryAfter = {
+      ok: false,
+      error_code: 429,
+      description: 'Too Many Requests: retry after 20',
+      parameters: { retry_after: 20 },
+    }
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json(retryAfter))
+      .mockResolvedValueOnce(json({ ok: true, result: true }))
+    const bot = createBot({ fetchFn: fetchMock as unknown as typeof fetch })
+
+    const outcome = bot.api.raw.sendChatAction({ chat_id: -1, action: 'typing' })
+    await vi.advanceTimersByTimeAsync(21_000)
+
+    expect(await outcome).toBe(true)
+    expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
   it('escalates a persistent "Logged out" poll to a fatal shutdown', async () => {

@@ -45,8 +45,8 @@ export function installSignalHandlers(runner: RunnerHandle): void {
     logger.info({ signal }, 'Graceful shutdown started')
 
     // Hard deadline. PM2 force-kills only after a signal it sent itself; a
-    // self-initiated shutdown stuck on draining (e.g. a handler waiting in
-    // the send-throttler queue) would otherwise become an unwatched zombie.
+    // self-initiated shutdown stuck on draining (e.g. a handler riding out
+    // network retries) would otherwise become an unwatched zombie.
     setTimeout(() => {
       logger.error('Graceful shutdown timed out — forcing exit')
       process.exit(exitCode)

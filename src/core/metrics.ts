@@ -41,7 +41,7 @@ export const networkErrorsTotal = new Counter({
  * Polling-health gauges, sampled on each /metrics scrape. Together they
  * separate the two ways the bot can "stop collecting updates":
  *   - in_flight pinned at the concurrency cap + poll age growing → the sink is
- *     saturated (handlers stuck behind the per-group send throttler);
+ *     saturated (handlers stuck on something slow — sends, DB, renderer);
  *   - in_flight near zero + poll age growing → polling itself is dead.
  */
 let pollingGaugesRegistered = false

@@ -104,3 +104,40 @@ export class PollWatch {
  * means the Bot API server is really gone.
  */
 export const pollWatch = new PollWatch(90_000)
+
+/** The slice of RunnerHandle the watchdog needs — narrow for tests. */
+export interface RunnerProbe {
+  isRunning: () => boolean
+  size: () => number
+}
+
+/** Stall evidence for the log line, or null while everything is healthy. */
+export function stallInfo(
+  runner: RunnerProbe,
+  watch: PollWatch,
+  nowMs: number = Date.now(),
+): { ageSeconds: number; inFlight: number } | null {
+  if (!runner.isRunning() || watch.isFresh(nowMs)) return null
+  return { ageSeconds: watch.ageSeconds(nowMs), inFlight: runner.size() }
+}
+
+/**
+ * Timer-based stall alarm — the trace the transformer above cannot leave.
+ * PollWatch only observes getUpdates calls that HAPPEN; when the sink is
+ * saturated the runner stops polling altogether, so the observer goes silent
+ * exactly when the bot freezes. This check runs off its own clock: while the
+ * runner claims to be running but no poll has succeeded within the freshness
+ * window, it logs an error (with in-flight count) once per interval.
+ */
+export function startStallWatchdog(
+  runner: RunnerProbe,
+  watch: PollWatch = pollWatch,
+  intervalMs = 30_000,
+): NodeJS.Timeout {
+  const timer = setInterval(() => {
+    const stall = stallInfo(runner, watch)
+    if (stall) log.error(stall, 'update pipeline stalled — no successful getUpdates within the freshness window')
+  }, intervalMs)
+  timer.unref()
+  return timer
+}

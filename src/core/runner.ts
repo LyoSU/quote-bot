@@ -3,6 +3,9 @@ import type { Bot } from 'grammy'
 import type { Update } from 'grammy/types'
 import type { BotContext } from './types'
 import { config } from '../config/env'
+import { logger } from './logger'
+
+const log = logger.child({ module: 'runner' })
 
 /**
  * Update types we ask Telegram for. `chat_member` and the business/payment
@@ -25,6 +28,36 @@ const ALLOWED_UPDATES: ReadonlyArray<Exclude<keyof Update, 'update_id'>> = [
   'edited_business_message',
   'deleted_business_messages',
 ]
+
+/**
+ * Ceiling for one update's middleware chain. The worst legitimate path — a 30s
+ * quote render plus a send riding out a full networkRetry cycle (~2 min during
+ * a Bot API outage) — stays under it; anything longer is stuck, not slow. The
+ * timeout does NOT cancel the update: the runner merely stops counting it
+ * against `concurrency` (so one wedged chat can't freeze polling for everyone)
+ * and hands it to the handler below for logging.
+ */
+export const SINK_TIMEOUT_MS = 120_000
+
+/**
+ * Called by the runner sink when an update exceeds {@link SINK_TIMEOUT_MS}.
+ *
+ * The `.catch` is load-bearing: after a timeout the runner rethrows the task's
+ * eventual failure on this promise instead of routing it to the bot's error
+ * boundary (see toDrift in @grammyjs/runner queue.js). Left unhandled, that
+ * rejection becomes an unhandledRejection — which shutdown.ts escalates to a
+ * fatal process exit.
+ */
+export function onSinkTimeout(update: Update, task: Promise<unknown>): void {
+  const chatId =
+    update.message?.chat.id ??
+    update.edited_message?.chat.id ??
+    update.callback_query?.message?.chat.id
+  log.warn({ updateId: update.update_id, chatId }, 'update exceeded sink timeout — slot freed, work continues')
+  task.catch((err: unknown) =>
+    log.warn({ updateId: update.update_id, chatId, err }, 'timed-out update eventually failed'),
+  )
+}
 
 /**
  * Starts long polling with concurrent processing. Per-chat ordering is enforced
@@ -50,6 +83,7 @@ export function startRunner(bot: Bot<BotContext>): RunnerHandle {
     },
     sink: {
       concurrency: config.BOT_CONCURRENCY,
+      timeout: { milliseconds: SINK_TIMEOUT_MS, handler: onSinkTimeout },
     },
   })
 }

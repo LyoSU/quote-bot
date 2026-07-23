@@ -25,7 +25,7 @@ Update flow: `fastPath` (drops ~95% group noise before any DB) → `sequentializ
 ### Layers (never import "upward")
 
 - `src/config/env.ts` — zod-validated, frozen config; fail-fast on bad env.
-- `src/core/` — `bot` (throttler + auto-retry + fast-path + sequentialize + error boundary), `runner` (long polling, allowed_updates), `logger` (pino), `metrics` (prom-client), `shutdown`, `lru`, `types` (`BotContext`).
+- `src/core/` — `bot` (auto-retry + network-retry + fast-path + sequentialize + error boundary; deliberately NO send throttler — see the comment in `bot.ts`), `runner` (long polling, allowed_updates, per-update sink timeout), `poll-watch` (polling freshness + stall watchdog), `logger` (pino), `metrics` (prom-client), `shutdown`, `lru`, `types` (`BotContext`).
 - `src/db/` — Mongoose models (schema kept **1:1 with production**), `repositories/` (atomic `updateOne`/`findOneAndUpdate`, never full-doc `.save()`), `member-tracker`, dedicated `connection`.
 - `src/services/` — `bot-api` (thin HTTP client for the self-hosted Bot API server's custom methods `getMessages`/`getUserInfo`; degrades gracefully against the Telegram cloud), `quote-api` (HTTP client for the renderer), `sticker`, `stats`, `gab`, `gramads`.
 - `src/middlewares/` — `fast-path`, `context`, `guards` (`onlyGroup`/`onlyAdmin`).
@@ -53,5 +53,5 @@ Occasionally resurfaces a top quote on a lively group moment, biased to a quote 
 
 - Strict TypeScript, no `any`. Boundary casts on Telegram data (`as RawMessage`) are acceptable; casts hiding real mismatches are not.
 - Atomic DB writes only (no full-doc `.save()` → avoids VersionError).
-- Don't reintroduce dropped pieces: Redis, cluster/worker sharding, the in-house ad system, AI features, HTML render mode, Stripe/Freekassa. Ads = gramads only (ru-locale + private chat). Payments = Telegram Stars (XTR) only.
+- Don't reintroduce dropped pieces: Redis, cluster/worker sharding, the in-house ad system, AI features, HTML render mode, Stripe/Freekassa, the Bottleneck send throttler (`@grammyjs/transformer-throttler` — its unbounded silent queues froze the bot; 429s are auto-retry's job). Ads = gramads only (ru-locale + private chat). Payments = Telegram Stars (XTR) only.
 - New work: handlers in `src/features/`, services in `src/services/`, models in `src/db/models/`. Keep modules small and testable.

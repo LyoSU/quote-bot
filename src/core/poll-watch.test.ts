@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { DRY_LOG_INTERVAL_MS, PollWatch } from './poll-watch'
+import { DRY_LOG_INTERVAL_MS, PollWatch, stallInfo, type RunnerProbe } from './poll-watch'
 
 const log = vi.hoisted(() => ({
   warn: vi.fn(),
@@ -142,6 +142,31 @@ describe('PollWatch', () => {
       watch.observe(1, T0 + 60_000)
 
       expect(log.info).not.toHaveBeenCalled()
+    })
+  })
+})
+
+describe('stallInfo (watchdog predicate)', () => {
+  const runner = (running: boolean, size = 0): RunnerProbe => ({
+    isRunning: () => running,
+    size: () => size,
+  })
+
+  it('is null while polling is fresh', () => {
+    const watch = new PollWatch(90_000, T0)
+    expect(stallInfo(runner(true), watch, T0 + 60_000)).toBeNull()
+  })
+
+  it('is null when the runner is not running (normal shutdown, not a stall)', () => {
+    const watch = new PollWatch(90_000, T0)
+    expect(stallInfo(runner(false), watch, T0 + 300_000)).toBeNull()
+  })
+
+  it('reports poll age and in-flight count once polling goes stale', () => {
+    const watch = new PollWatch(90_000, T0)
+    expect(stallInfo(runner(true, 500), watch, T0 + 200_000)).toEqual({
+      ageSeconds: 200,
+      inFlight: 500,
     })
   })
 })
