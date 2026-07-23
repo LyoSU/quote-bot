@@ -1,0 +1,494 @@
+# Auto-generated from locales/tr.yaml — do not edit by hand.
+# Regenerate: node scripts/convert-locales-to-ftl.cjs tr
+
+language_name = 🇹🇷 Türkçe
+description-short =
+    Herhangi bir mesajı güzel bir alıntı çıkartmasına dönüştürün! ✨
+    /q ile yanıtlayın ya da mesajı bana yönlendirin
+description-long =
+    Çarpıcı alıntı çıkartmaları oluşturun ve favori sohbet anlarınızı koruyun! ✨
+
+    Sadece herhangi bir mesaja /q ile yanıt verin veya bana yönlendirin. Kaydetmek için mükemmel:
+    🌟 En iyi sohbet anları ve anıları
+    💭 İlham verici düşünceler ve konuşmalar
+    🎨 Özel stillerle yaratıcı mesajlar
+    ✍️ Güzel formatta önemli notlar
+
+    Hemen başlayın - sadece bir mesaj yönlendirin veya /q kullanın!
+start =
+    <b>Merhaba! 👋 Ben QuotLyBot</b>
+
+    Sıradan sohbet mesajlarını muhteşem alıntı çıkartmalarına dönüştürüyorum. Basit, yaratıcı ve kullanımı eğlenceli!
+
+    ✨ <b>İlk alıntınızı oluşturmaya hazır mısınız?</b>
+    <b>Özel sohbetlerde:</b> Bana herhangi bir mesajı iletin (hatta birkaçını birden seçebilirsiniz!)
+    <b>Gruplarda:</b> Beni grubunuza ekleyin ve herhangi bir mesaja <code>/q</code> ile yanıt verin
+
+    Renkleri, stilleri ve daha fazlasını değiştirmek mi istiyorsunuz? Tüm yaratıcı olasılıkları keşfetmeye hazır olduğunuzda /help yazın! 🎨
+help =
+    <b>✨ QuotLyBot: Hızlı & Kolay Alıntılar! ✨</b>
+
+    Telegram'da mesajları şık alıntılara dönüştürün. İşte nasıl yapılacağı:
+
+    📱 <b>Temel Alıntılama</b>
+
+    • Yanıtla & Alıntıla: Bir mesaja yanıt verin ve onu alıntılamak için <code>/q</code> yazın.
+    • Birden Fazla Alıntı: Birkaç mesajdan ilkinin yanıtına <code>/q [sayı]</code> (örneğin, <code>/q 3</code>) yazarak birden fazlasını alıntılayın.
+    • İlet & Alıntıla: Direkt alıntılamak için bir mesajı bota iletin.
+
+    🎨 <b>Alıntınızı Özelleştirin</b>
+
+    • Renkler:
+        • Temel: <code>/q red</code> (ya da blue, green, vb.)
+        • Özel: <code>/q #[hex renk kodu]</code> (örneğin, <code>/q #cbafff</code>)
+        • Rastgele: <code>/q random</code>
+    • Medya: Alıntılanan mesajdan görüntüleri/videoları <code>/q m</code> ya da <code>/q media</code> ile ekleyin
+        • Medya Kırpma: Medyayı kırpmak için <code>/q c</code> ya da <code>/q crop</code> kullanın.
+    • Yanıtları Sakla: <code>/q r</code> ya da <code>/q reply</code> ile yanıtlanan mesajı gösterin
+    • Görüntü Formatı: Görüntü alıntıları için (sticker yerine) <code>/q i</code> ya da <code>/q img</code> veya <code>/q p</code> veya <code>/q png</code> kullanın.
+
+    💡 <b>Harika Kombinasyonlar</b>
+
+    • Yanıtlarla beyaz alıntı: <code>/q white rp</code>
+    • Yüksek kaliteli kırmızı görüntü: <code>/q i red s3.2</code>
+    • Medya ve yanıtlarla alıntı: <code>/q r #cbafff m</code>
+
+    ⚙️ <b>Daha Fazla Seçenek</b>
+
+    • Alıntıları Değerlendir: <code>/q rate</code> (grupta etkinse)
+    • Rastgele Alıntı: <code>/qrand</code> (grupta etkinse)
+    • En İyi Alıntılar: <code>/qtop</code> (grupta etkinse)
+    • Dili Değiştir: <code>/lang</code>
+
+    🎯 <b>Grup Yönetici Ayarları</b> (sadece grup yöneticileri için)
+
+    • Varsayılan Renk: <code>/qcolor [renk]</code>
+    • Derecelendirmeyi Etkinleştir: <code>/qrate</code>
+    • Sticker Paketi Kaydet: <code>/qs [emoji]</code>
+    • Sticker Kaldır: <code>/qd</code> (stickera yanıt verin)
+    • Rastgele Alıntı Frekansı: <code>/qgab [sayı]</code>
+    • Emoji Sonek Değiştir: <code>/qemoji</code> (sticker emoji sonekini değiştirir)
+    • Emoji Stili:
+        • Klasik: <code>/qb apple</code>, <code>/qb google</code>
+        • Alternatif: <code>/qb twitter</code>, <code>/qb joypixels</code>
+        • Retro: <code>/qb blob</code>
+
+    📱 <b>Yardıma mı ihtiyacınız var?</b>
+
+    • Blog: <a href="https://t.me/LyBlog">@LyBlog</a>
+    • GitHub: <a href="https://github.com/LyoSU/quote-bot">github.com/LyoSU/quote-bot</a>
+    • Destek: <code>/donate</code>
+help_group =
+    <b>Merhaba! 👋</b>
+    Bu grupta güzel alıntılar oluşturacağım - herhangi bir mesajın yanıtına <code>/q</code> kullanın!
+
+    Tüm özelliklerimi özelde öğrenin: <a href="t.me/{ $username }?start=help">Yardım Alın</a> ✨
+btn-add_group = Gruba Ekle
+btn-help = Dökümanlar
+quote-unsupported_message = Bu mesaj türü alıntı için desteklenmiyor
+quote-api_error =
+    <b>Oops! Bir şeyler ters gitti 😅</b>
+    <pre>{ $error }</pre>
+    Lütfen bir dakika sonra tekrar deneyin!
+quote-empty_forward = Lütfen alıntılamak istediğiniz mesaja yanıt verin veya onu iletin ✨
+quote-set_background_color = <b>Mükemmel!</b> Alıntı arka planı değiştirildi: <code>{ $backgroundColor }</code> 🎨
+quote-set_emoji_brand = <b>Tamam!</b> Emoji stili değiştirildi: <code>{ $emojiBrand }</code> ✨
+quote-errors-api_down =
+    😕 Üzgünüz, alıntı hizmetimiz geçici olarak kullanılamıyor. Lütfen birkaç dakika sonra tekrar deneyin.
+
+    Sorun devam ederse, güncellemeler için @LyBlog'a göz atın.
+quote-errors-rate_limit = ⏳ Çok fazla istek! Yeni bir alıntı oluşturmadan önce lütfen { $seconds } saniye bekleyin.
+quote-errors-file_too_large = 📸 Medya dosyası çok büyük (maksimum 5MB). Daha küçük bir resim veya video kullanmayı deneyin.
+quote-errors-invalid_format =
+    ❌ Desteklenmeyen dosya formatı. Desteklediğim:
+    • Görseller (JPG, PNG, WEBP)
+    • Videolar (MP4)
+    • Çıkartmalar
+    • Metin mesajları
+quote-errors-telegram_error =
+    ⚠️ Telegram hatası: { $error }
+
+    Bu genellikle şu durumlarda olur:
+    • Dosya çok büyük
+    • Çıkartma paketi dolu
+    • Botun yetkileri yetersiz
+quote-errors-generic_error =
+    😅 Hata! Bir şeyler yanlış gitti:
+    <code>{ $error }</code>
+
+    Lütfen tekrar deneyin veya sorun devam ederse bunu @Ly_oBot'a bildirin.
+quote-errors-no_rights_send_documents =
+    🚫 <b>İzin Hatası</b>
+    Bu sohbette belge gönderme iznim yok.
+
+    <b>Bunu düzeltmek için:</b>
+    • Grup yöneticisi: Bana "Belge gönderme" izni ver
+    • Özel sohbet: Botu engellemediğinizden emin olun
+quote-errors-no_rights_send_stickers =
+    🚫 <b>İzin Hatası</b>
+    Bu sohbette çıkartma gönderme iznim yok.
+
+    <b>Bunu düzeltmek için:</b>
+    • Grup yöneticisi: Bana "Çıkartma gönderme" izni ver
+    • Resim formatı için <code>/q img</code> kullanmayı deneyin
+quote-errors-no_rights_send_photos =
+    🚫 <b>İzin Hatası</b>
+    Bu sohbette fotoğraf gönderme iznim yok.
+
+    <b>Bunu düzeltmek için:</b>
+    • Grup yöneticisi: Bana "Fotoğraf gönderme" izni ver
+    • Çıkartma formatı için <code>/q</code> kullanmayı deneyin
+quote-errors-chat_write_forbidden =
+    🚫 <b>Sohbet Kısıtlandı</b>
+    Bu sohbette mesaj gönderemem.
+
+    <b>Olası nedenler:</b>
+    • Botu engellediniz
+    • Grupta botlar kısıtlandı
+    • Gruptan çıkarıldım
+quote-errors-sticker_set_invalid =
+    🔄 <b>Çıkartma Paketi Sorunu</b>
+    Çıkartma paketinde bir sorun var. Yeni bir alıntı oluşturuluyor...
+quote-errors-sticker_set_full =
+    📦 <b>Çıkartma Paketi Dolu</b>
+    Çıkartma paketi sınırına ulaştı. Alıntınız normal bir çıkartma olarak gönderilecektir.
+quote-errors-bot_blocked =
+    🚫 <b>Bot Engellendi</b>
+    Bu botu engellediniz. Alıntıları almak için engelini kaldırın.
+quote-errors-user_deactivated =
+    👤 <b>Hesap Sorunu</b>
+    Hedef kullanıcı hesabı devre dışı bırakıldı veya silindi.
+quote-errors-message_too_long =
+    📝 <b>Mesaj Çok Uzun</b>
+    Alıntılanan mesaj çok uzun. Daha az mesaj veya daha kısa metin alıntılamayı deneyin.
+quote-errors-network_error =
+    🌐 <b>Ağ Hatası</b>
+    Bağlantı problemi oluştu. Lütfen bir an sonra tekrar deneyin.
+quote-errors-timeout_error =
+    ⏱️ <b>Zaman Aşımı Hatası</b>
+    İstek çok uzun sürdü. Lütfen daha basit bir alıntıyla tekrar deneyin.
+quote-image_to_quote-processing = 🔍 Görüntü analiz ediliyor ve metin çıkarılıyor...
+quote-image_to_quote-success =
+    ✅ { $count } mesajdan alıntı oluşturuldu!
+
+    💡 <b>İpucu:</b> Alıntı oluşturmak için <code>/qi</code> veya <code>/quote_image</code> başlığı ile ekran görüntüsü gönderin
+quote-image_to_quote-errors-no_image = ❌ Lütfen bir resim dosyası gönderin (JPG, PNG, WebP)
+quote-image_to_quote-errors-file_too_large = ❌ Resim çok büyük. Maksimum boyut: 20MB
+quote-image_to_quote-errors-unsupported_format = ❌ Desteklenmeyen resim formatı. Desteklenenler: JPG, PNG, WebP
+quote-image_to_quote-errors-no_text_found = ❌ Resimde okunabilir sohbet mesajı bulunamadı. Bunun net bir sohbet ekran görüntüsü olduğundan emin olun.
+quote-image_to_quote-errors-parse_error = ❌ Tanıma hatası. Resim net bir sohbet metni içermiyor olabilir.
+quote-image_to_quote-errors-api_error = ❌ Metin tanıma hatası. Lütfen tekrar deneyin.
+quote-image_to_quote-errors-rate_limit = ⏳ Çok fazla istek var! Lütfen { $seconds } saniye bekleyin ve tekrar deneyin.
+sticker-save-suc = Başarıyla <a href="{ $link }">grup çıkartma paketinize</a> eklendi ✨
+sticker-save-error-animated = Üzgünüm, henüz animasyonlu çıkartmaları kaydedemiyorum 😅
+sticker-save-error-need_creator = <b>Az kaldı!</b> { $creator } çıkartmaları kaydetmek için önce bana bir mesaj göndermeli
+sticker-save-error-telegram = <b>Oops!</b> Bir şeyler ters gitti:\n<pre>{ $error }</pre>
+sticker-delete-suc = <a href="{ $link }">Grup çıkartma paketinizden</a> kaldırıldı 🗑
+sticker-delete-empty_reply = Lütfen silmek istediğiniz bir çıkartmaya yanıt verin 🗑
+sticker-delete-error-telegram =
+    <b>Çıkartma kaldırılamadı 😕</b>
+    { $reason }
+sticker-delete-error-not_found = Çıkartma artık pakette yok 🤔
+sticker-delete-error-rights = Bu çıkartmayı silme iznim yok 🔒
+sticker-delete-error-generic =
+    Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin ⚠️
+
+    <code>{ $error }</code>
+sticker-delete_random-suc = Rastgele koleksiyondan kaldırıldı 🗑
+sticker-delete_random-error =
+    <b>Alıntı kaldırılamadı 😕</b>
+    { $error }
+sticker-delete_random-not_found = Bu alıntı veritabanında değil 🤔
+sticker-empty_forward = Lütfen kaydetmek istediğiniz çıkartma, fotoğraf veya görüntüye yanıt verin ✨
+sticker-fstik = Bunu kişisel çıkartma paketinize kaydetmek için @fStikBot'a iletin 🎨
+rate-vote-rated = Sen { $rateName } bu.
+rate-vote-back = Oyunuz kaldırıldı
+rate-settings-enable = Alıntı değerlendirme etkin
+rate-settings-disable = Alıntı değerlendirme devre dışı bırakıldı
+random-empty = Bu grupta henüz yüksek puanlı alıntılar yok! Bazı mesajları değerlendirmeye başlayın
+random-gab = Rastgele alıntı sıklığı { $gab } olarak ayarlandı ✨
+hidden-settings-enable = Gönderen arama etkinleştirildi 🔍
+hidden-settings-disable = Gönderen arama devre dışı bırakıldı 🔄
+privacy-settings-enable = Gizlilik modu etkinleştirildi 🔒 Bilgileriniz alıntılarda gizlenecek
+privacy-settings-disable = Gizlilik modu devre dışı bırakıldı 🔓
+top-info = <b>✨ En Çok Alıntılanan Mesajlar</b>
+top-open = En İyi Alıntıları Gör
+donate-info =
+    <b>QuotLyBot'un Gelişimini Destekleyin! ☕</b>
+
+    Desteğiniz bize şunları sağlar:
+    • Sunucuların 24/7 çalışmasını
+    • Yeni özellikler ve stiller eklemeyi
+    • Alıntı kalitesini iyileştirmeyi
+    • Botu daha hızlı hale getirmeyi
+
+    <b>💳 Kolay Ödeme Seçenekleri</b>
+    • <a href="https://send.monobank.ua/jar/2fpLioJzU8">Kart ile Ödeme</a> (Visa/Mastercard)
+    • Apple Pay / Google Pay
+
+    <b>🔒 Kripto Para (Teknoloji meraklıları için)</b>
+    • BTC: <code>17QaN4wPZFaH4qtsgDdTaYwiW9s9PUcHj7</code>
+    • ETH/BUSD: <code>0x34007b75775F8DAe005A407141617aA2fBa2740c</code>
+
+    Her katkı, QuotLyBot'u herkes için daha iyi hale getirmeye yardımcı olur! 💜
+donate-title = { $botUsername } Bağış Yap
+donate-description = Büyüyü sürdürebilmek için yardım edin ✨
+donate-successful =
+    <b>Desteğiniz için teşekkür ederiz! 💜</b>
+    QuotLyBot'u daha da iyi hale getiriyorsunuz!
+donate-pay = 💜 Telegram Üzerinden Ödeyin
+donate-other = Diğer Yöntemler
+emoji-info =
+    <b>Alıntı Emojinizi Seçin!</b>
+
+    • Özel emoji ayarla: <code>/qemoji</code>💜
+    • Rastgele emoji kullan: <code>/qemoji random</code>
+    • Emoji temizle: <code>/qemoji clear</code>
+
+    Emojiniz tüm yeni alıntılara eklenecektir ✨
+emoji-done = Emoji stili güncellendi! ✨
+only_admin =
+    <b>⚠️ Admin Erişimi Gerekli</b>
+    Bu komut yalnızca grup yöneticileri tarafından kullanılabilir.
+only_group =
+    <b>⚠️ Grup Komutu</b>
+    Bu özellik yalnızca grup sohbetlerinde çalışır.
+rate_limit =
+    <i>Kısa bir mola veriyorum...</i> Bu komutu tekrar kullanabilmen için { $seconds } saniye ⏳
+
+    <i>Uzman ipucu: Beklerken, son alıntını </i><code>/q color</code> <i>veya</i> <code>/q media</code> <i>ile özelleştirmeyi dene</i>
+menu-title =
+    <b>🎨 QuotLyBot</b>
+    Mesajları muhteşem alıntı çıkartmalarına dönüştürün!
+menu-btn-features = ✨ Özellikler
+menu-btn-settings = ⚙️ Ayarlar
+menu-btn-help = 📚 Komutlar
+menu-btn-language = 🌍 Dil
+menu-btn-back = ← Geri
+menu-btn-add_group = ➕ Gruba Ekle
+qs-title =
+    <b>⚙️ Alıntı ayarları</b>
+
+    Bir bölüm seç. Değişiklikler buradaki her yeni alıntıya uygulanır.
+qs-on = Açık
+qs-off = Kapalı
+qs-cat-appearance = 🎨 Görünüm
+qs-cat-content = ✂️ Ne alıntılanır
+qs-cat-privacy = 🔒 Gizlilik
+qs-cat-group = 👥 Grup
+qs-cat-appearance-desc =
+    <b>🎨 Görünüm</b>
+
+    • <b>Format</b> — çıkartma, görsel veya PNG dosyası.
+    • <b>Renk</b> — alıntı arka planı.
+    • <b>Emoji stili</b> — emojilerin nasıl çizildiği (Apple, Google…).
+    • <b>Çıkartma emojisi</b> — kaydedilen çıkartmalara eklenen emoji.
+qs-cat-content-desc =
+    <b>✂️ Ne alıntılanır</b>
+
+    • <b>Kısmi alıntı</b> — seçili bir parçaya yanıt verdiğinde: <i>Çerçeveli</i> onu alıntı çerçevesiyle gösterir, <i>Çerçevesiz</i> yalnızca metni, <i>Tüm mesaj</i> seçimi yok sayar.
+    • <b>Yanıtı göster</b> — yanıtlanan mesajı dahil et.
+    • <b>Medya</b> — mesajdaki fotoğrafları/videoları dahil et.
+    • <b>Medyayı kırp</b> — uzun medyayı sığacak şekilde kırp.
+    • <b>Yazar rolü</b> — gönderenin yönetici unvanını / imzasını göster (sağ üstteki küçük etiket).
+qs-cat-privacy-desc =
+    <b>🔒 Gizlilik</b>
+
+    • <b>Gizlilik</b> — kaydedilen alıntılar yazarına bağlanmaz (uygulamada senin adınla görünmez). Çıkartmanın kendisi değişmez.
+    • <b>Gönderen arama</b> — hesabı gizli olan iletilmiş bir mesajın asıl yazarını belirlemeye çalış.
+qs-cat-group-desc =
+    <b>👥 Grup</b>
+
+    • <b>Değerlendirmeler</b> — alıntıların altında 👍/👎 düğmelerini göster.
+    • <b>Otomatik alıntı</b> — hareketli bir anda ara sıra öne çıkan bir alıntıyı yeniden gündeme getir.
+    • <b>Metin arşivi</b> — alıntı metnini sakla (arama ve rastgele için gerekli).
+qs-row-partial = ✂️ Kısmi alıntı
+qs-partial-framed = Çerçeveli
+qs-partial-plain = Çerçevesiz
+qs-partial-off = Tüm mesaj
+qs-row-color = 🎨 Renk
+qs-color-title =
+    <b>🎨 Arka plan</b>
+
+    Bir renk seç veya <code>/qcolor #ff5733</code> ile özel bir renk ayarla.
+qs-row-brand = 😀 Emoji stili
+qs-row-format = 🖥 Format
+qs-format-sticker = Çıkartma
+qs-format-image = Görsel
+qs-format-png = PNG dosyası
+qs-row-gab = 🔁 Otomatik alıntı
+qs-gab-off = Kapalı
+qs-gab-often = Sık sık
+qs-gab-sometimes = Bazen
+qs-gab-rarely = Nadiren
+qs-row-suffix = 💟 Çıkartma emojisi
+qs-row-media = 📎 Medya
+qs-row-reply = 💬 Yanıtı göster
+qs-row-crop = 🖼 Medyayı kırp
+qs-row-sendertag = 🏷 Yazar rolü
+qs-row-privacy = 🔒 Gizlilik
+qs-row-hidden = 🕵 Gönderen arama
+qs-row-rate = ⭐ Değerlendirmeler
+qs-row-archive = 🗂 Metin arşivi
+qs-suffix-title =
+    <b>💟 Çıkartma emojisi</b>
+
+    Aşağıdan birini seç veya <code>/qemoji 🔥</code> ile özel bir emoji ayarla.
+qs-btn-reset = ↩️ Tümünü sıfırla
+qs-reset-done = Varsayılanlara sıfırlandı
+menu-features-title =
+    <b>✨ Ne yapabilirim?</b>
+    Daha fazla bilgi için bir özelliğe dokunun:
+menu-features-btn-basics = 📱 Temel
+menu-features-btn-colors = 🎨 Renkler & Stiller
+menu-features-btn-media = 🖼 Medya
+menu-features-btn-group = 👥 Grup Özellikleri
+menu-features-basics-title =
+    <b>📱 Temel Alıntılama</b>
+
+    <b>Gruplarda:</b>
+    Herhangi bir mesaja <code>/q</code> ile yanıt verin
+
+    <b>Özelde:</b>
+    Mesajları bana yönlendirin
+
+    <b>Birden fazla mesaj:</b>
+    <code>/q 3</code> — yanıtlanan mesaj + aşağıda 2
+    <code>/q -3</code> — yanıtlanan mesaj + yukarıda 2
+menu-features-colors-title =
+    <b>🎨 Renkler & Stiller</b>
+
+    <b>Temel renkler:</b>
+    <code>/q red</code>, <code>/q blue</code>, <code>/q green</code>
+
+    <b>Özel renk:</b>
+    <code>/q #ff69b4</code>
+
+    <b>Rastgele renk:</b>
+    <code>/q random</code>
+
+    <b>Gradyan:</b>
+    <code>/q red//blue</code>
+menu-features-media-title =
+    <b>🖼 Medya Seçenekleri</b>
+
+    <b>Medya ekle:</b>
+    <code>/q m</code> veya <code>/q media</code>
+
+    <b>Medyayı kırp:</b>
+    <code>/q c</code> veya <code>/q crop</code>
+
+    <b>Yanıtları göster:</b>
+    <code>/q r</code> veya <code>/q reply</code>
+
+    <b>Görüntü olarak:</b>
+    <code>/q img</code> veya <code>/q png</code>
+menu-features-group-title =
+    <b>👥 Grup Özellikleri</b>
+
+    <b>Yöneticiler için:</b>
+    • <code>/qcolor blue</code> — varsayılan renk
+    • <code>/qrate</code> — derecelendirmeyi etkinleştir
+    • <code>/qs</code> — çıkartma paketine kaydet
+
+    <b>Herkes için:</b>
+    • <code>/qtop</code> — en iyi alıntılar
+    • <code>/qrand</code> — rastgele alıntı
+menu-settings-title =
+    <b>⚙️ Ayarlar</b>
+    Tercihlerinizi yönetin:
+menu-settings-btn-privacy = 🔒 Gizlilik
+sticker-save-error-too_large = Görsel çok büyük (en fazla 2048×2048). Daha küçüğünü deneyin 📐
+app-open_quote = ✨ Alıntıyı aç
+app-open_group = 📚 Gruptaki tüm alıntılar
+app-open_root = 💫 Gruplarım
+app-info =
+    <b>Hepsi uygulamada da var 💬</b>
+
+    Alıntıları karıştırın, arşivi kurcalayın, zirvenin peşine düşün — tek dokunuş uzağınızda. Butona dokunun ↓
+aimode-title = 🤖 <b>Yapay Zekâ Modları</b>
+aimode-current = Geçerli mod: { $mode }
+aimode-available = <b>Kullanılabilir modlar:</b>
+aimode-unknown = ❌ Bilinmeyen mod: <code>{ $mode }</code>
+aimode-available_list = Kullanılabilir: { $modes }
+aimode-success = ✅ Yapay zekâ modu şuna değiştirildi: { $mode }
+aimode-error = ❌ Ayarlar kaydedilirken hata oluştu
+aimode-modes-sarcastic-name = 😏 Alaycı
+aimode-modes-sarcastic-description = Kara mizahlı, alaycı ve zekice yorumlar
+aimode-modes-philosopher-name = 🧠 Filozof
+aimode-modes-philosopher-description = Derin düşünceler ve felsefi yansımalar
+aimode-modes-comedian-name = 😂 Komedyen
+aimode-modes-comedian-description = Komik şakalar ve esprili yorumlar
+aimode-modes-poet-name = 📝 Şair
+aimode-modes-poet-description = Şiirsel dizeler ve güzel metaforlar
+aimode-modes-motivator-name = 💪 Motivatör
+aimode-modes-motivator-description = Motive edici ve ilham verici mesajlar
+aimode-modes-conspiracy-name = 🕵️ Komplo Teorisyeni
+aimode-modes-conspiracy-description = Komplo teorileri ve şüpheli yorumlar
+aimode-modes-critic-name = 🎭 Eleştirmen
+aimode-modes-critic-description = Her şey için eleştirel değerlendirmeler ve puanlar
+aimode-modes-boomer-name = 👴 Boomer
+aimode-modes-boomer-description = Eski kuşaktan eski usul yorumlar
+aimode-modes-zoomer-name = 😎 Zoomer
+aimode-modes-zoomer-description = Gençlik argosu ve trend ifadeler
+aimode-modes-academic-name = 🎓 Akademisyen
+aimode-modes-academic-description = Bilimsel gerçekler ve akademik yorumlar
+aimode-modes-memer-name = 🐸 Mizahçı
+aimode-modes-memer-description = Mizah cümleleri ve internet kültürü
+menu-settings-btn-color = 🎨 Varsayılan renk
+menu-settings-btn-emoji_style = 😊 Emoji stili
+menu-settings-btn-back = ← Geri
+quick_action-remake = 🔄
+quick_action-tooltip-remake = Farklı bir stille yeniden oluştur
+qarchive-on = ✅ Alıntı metni arşivi <b>etkin</b>. Yeni alıntılar metin ve yazarıyla birlikte saklanacak.
+qarchive-off = ⏸ Alıntı metni arşivi <b>devre dışı</b>. Yeni alıntılar yalnızca sticker ve puanı saklayacak.
+qarchive-status_on =
+    Geçerli durum: <b>etkin</b>.
+
+    <code>/qarchive off</code> — devre dışı bırak
+qarchive-status_off =
+    Geçerli durum: <b>devre dışı</b>.
+
+    <code>/qarchive on</code> — etkinleştir
+qarchive-usage =
+    Bu grup için alıntı metni arşivini aç/kapat.
+
+    <code>/qarchive on</code> veya <code>/qarchive off</code>
+qforget-usage = Alıntı numarasını belirtin: <code>/qforget 142</code>
+qforget-not_found = #{ $local } numaralı alıntı bu grupta bulunamadı.
+qforget-not_author = Bir alıntıyı yalnızca yazarı unutturabilir.
+qforget-forgotten = ✅ #{ $local } numaralı alıntı unutuldu. Sticker ve oylar kalır, ancak metin ve yazar arşivden kaldırılır.
+qforget-already_forgotten = #{ $local } numaralı alıntı zaten unutulmuştu.
+qforget-not_yet_archived = #{ $local } numaralı alıntının metni yok (arşivden önce oluşturulmuş).
+guest-hint =
+    <b>Quotly — misafir modu 💬</b>
+
+    Sohbete üye olmadan <i>herhangi</i> bir mesajdan alıntı sticker'ı oluşturabilirim.
+
+    <b>Nasıl kullanılır:</b>
+    1. Alıntılamak istediğiniz mesajı yanıtlayın
+    2. Yanıtınızda <code>@{ $username }</code> yazın
+    3. Tamam — alıntı sticker'ını doğrudan sohbete bırakırım
+
+    <b>İsteğe bağlı argümanlar (tıpkı /q gibi):</b>
+    • <code>@{ $username } r</code> — yanıtladığım mesajı dahil et
+    • <code>@{ $username } red</code> — arka plan rengini ayarla
+    • <code>@{ $username } rate</code> — 👍 / 👎 butonları ekle
+    • <code>@{ $username } p</code> — PNG olarak oluştur
+
+    Tüm deneyim için beni PM'de açın.
+guest-hint_short = Quotly misafir modunda nasıl çalışır
+guest-need_reply =
+    <b>Az kaldı! 🪄</b>
+
+    Bir alıntı oluşturmak için alıntılayacağım bir mesaja ihtiyacım var — birini yanıtlayın ve <code>@{ $username }</code> ifadesinden bahsedin.
+
+    Örnek: bir mesajda "Yanıtla"ya dokunun → <code>@{ $username }</code> yazın → gönderin.
+guest-need_reply_short = Bir mesajı yanıtlayın ve botu etiketleyin
+guest-empty_query =
+    <b>Quotly burada 💜</b>
+
+    Bu sohbetteki herhangi bir mesajı yanıtlayın ve onu alıntı sticker'ına dönüştürmek için <code>@{ $username }</code> ifadesinden bahsedin.
+
+    Tüm özellikler için beni PM'de açmak üzere aşağıya dokunun.
+guest-open_in_pm = Quotly'de aç →

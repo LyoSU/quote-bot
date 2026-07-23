@@ -1,0 +1,10 @@
+# Coolify build for the grammY bot. Same as ./Dockerfile but forces devDeps so
+# tsc is present: Coolify injects NODE_ENV=production as a build arg, which makes
+# `npm install` skip devDependencies (typescript) and breaks `npm run build`.
+FROM node:22-bookworm
+WORKDIR /app
+COPY package*.json ./
+RUN NODE_ENV=development npm install
+COPY . .
+RUN npm run build
+CMD ["node", "dist/index.js"]

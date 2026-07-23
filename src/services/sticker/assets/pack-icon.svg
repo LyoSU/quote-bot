@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="60" y1="84" x2="452" y2="452" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- white die-cut outline: silhouette stroked + filled white -->
+  <g filter="url(#sh)">
+    <g fill="#fff" stroke="#fff" stroke-width="26" stroke-linejoin="round">
+      <rect x="60" y="84" width="392" height="288" rx="80"/>
+      <path d="M150 340 Q142 420 108 452 Q196 432 234 360 Z"/>
+    </g>
+  </g>
+
+  <!-- colored body -->
+  <g fill="url(#g)">
+    <rect x="60" y="84" width="392" height="288" rx="80"/>
+    <path d="M150 340 Q142 420 108 452 Q196 432 234 360 Z"/>
+  </g>
+
+  <!-- quote marks: ball + quarter-ring tail, mirrored to canonical “ -->
+  <g fill="#fff">
+    <g transform="translate(202,262) scale(-1.18,1.18)">
+      <circle cx="0" cy="0" r="34"/>
+      <path d="M -34 0 A 70 70 0 0 1 36 -70 L 36 -38 A 38 38 0 0 0 -2 0 Z"/>
+    </g>
+    <g transform="translate(322,262) scale(-1.18,1.18)">
+      <circle cx="0" cy="0" r="34"/>
+      <path d="M -34 0 A 70 70 0 0 1 36 -70 L 36 -38 A 38 38 0 0 0 -2 0 Z"/>
+    </g>
+  </g>
+</svg>

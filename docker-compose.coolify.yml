@@ -1,35 +1,29 @@
-# Coolify deployment compose for quote-bot (hetzner-auction).
-# IMPORTANT: the repo's default CMD is the stats collector (updates-collector.js);
-# the user-facing grammY bot is dist/index.js — run that here (matches the old
-# PM2 "quote-bot" process). Long-polling, no inbound webhook. Reaches quote-api
-# via the host's published port. TDLib logs in as a bot from BOT_TOKEN. Durable
-# data is in external MongoDB; Redis is used for caching/the bot's internal needs.
+# Coolify deployment compose for quote-bot (hetzner-auction) — grammy-rewrite.
+# Builds the grammY bot (dist/index.js), the user-facing @QuotLyBot. Long-polling,
+# no inbound webhook. Reaches quote-api over the shared `quote-shared` docker
+# network by DNS name (host-gateway is blocked by ufw on hz). Uses external
+# MongoDB + self-hosted Bot API (BOT_API_ROOT); no Redis/TDLib (those belong to
+# the separate collector subsystem, not deployed here).
 services:
   quote-bot:
-    build: .
-    command: node dist/index.js
+    build:
+      context: .
+      dockerfile: Dockerfile.coolify
     restart: unless-stopped
     env_file:
       - .env
     environment:
-      - QUOTE_API_URI=http://host.docker.internal:4888
-      - QUOTE_API_URI_HTML=http://host.docker.internal:4889
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    volumes:
-      - quote-bot-tdlib:/app/helpers/tdlib/data
-    depends_on:
-      - redis
+      - QUOTE_API_URI=http://quote-api:4888
+      - QUOTE_API_URI_HTML=http://quote-api:4889
     ports:
-      - "3000:3000"   # METRICS_PORT
-  redis:
-    image: redis:7-alpine
-    restart: unless-stopped
-    command: redis-server --appendonly yes
-    volumes:
-      - quote-bot-redis:/data
-volumes:
-  quote-bot-tdlib:
-  quote-bot-redis:
+      - "3010:3000"   # METRICS_PORT (host 3010 — 3000 taken by fastCRW on hetzner-auction)
+    networks:
+      - quote-shared
+
+# Shared bridge with quote-api (see that app's compose). Provides both
+# service-name DNS to quote-api and egress (Mongo, Bot API). Pre-created on the
+# host; external so both Coolify compose projects can attach.
+networks:
+  quote-shared:
+    name: quote-shared
+    external: true
