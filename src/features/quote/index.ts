@@ -13,6 +13,7 @@ import { bareMentionArgs } from './mention'
 import { isOwnMessage } from './own-message'
 import { parseQuoteArgs } from './parse-args'
 import { pmBatcher } from './pm-batch'
+import { checkQuoteRate } from './rate-limit'
 import { persistQuote, type QuotePayload } from './persist'
 import {
   resolveBackgroundColor,
@@ -66,6 +67,13 @@ async function handleQuote(ctx: BotContext): Promise<void> {
       })
     | undefined
   if (!trigger || trigger.message_id === undefined) return
+
+  // Flood gate — before parsing, message fetching or any DB work.
+  const rate = checkQuoteRate(ctx.from?.id, ctx.chat?.id ?? trigger.chat?.id ?? 0)
+  if (!rate.ok) {
+    if (rate.notify) await replyHtml(ctx, ctx.t('quote-errors-rate_limit', { seconds: rate.retryAfterSeconds }))
+    return
+  }
 
   const replyToId = trigger.message_id
   const rawText = trigger.text ?? trigger.caption ?? ''

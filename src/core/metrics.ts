@@ -37,6 +37,13 @@ export const networkErrorsTotal = new Counter({
   registers: [registry],
 })
 
+/** Quote commands rejected by the in-process token-bucket flood limiter. */
+export const quoteRateLimitedTotal = new Counter({
+  name: 'bot_quote_rate_limited_total',
+  help: 'Quote commands rejected by the rate limiter',
+  registers: [registry],
+})
+
 /**
  * Context-cache effectiveness: user/group lookups served from memory vs the
  * database. A healthy hit rate is ~90%+; a drop means the access pattern

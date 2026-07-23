@@ -5,6 +5,7 @@ import { Group, Quote } from '../../db/models'
 import { deepLink } from '../../helpers/deep-link'
 import { onlyGroup } from '../../middlewares/guards'
 import { activeSpeakers, rememberFired } from '../../services/gab'
+import { checkQuoteRate } from './rate-limit'
 import { buildRatingKeyboard } from './reply-markup'
 
 interface SampledQuote {
@@ -85,8 +86,17 @@ async function sendRandomQuote(
 }
 
 export function registerRandom(composer: Composer<BotContext>): void {
-  // /qrand — explicit pull of a random highly-rated quote.
-  composer.hears(/^\/qrand\b/i, onlyGroup, (ctx) => sendRandomQuote(ctx).then(() => undefined))
+  // /qrand — explicit pull of a random highly-rated quote. Shares the /q
+  // flood budget: the $sample and the send cost the same either way.
+  composer.hears(/^\/qrand\b/i, onlyGroup, async (ctx) => {
+    const rate = checkQuoteRate(ctx.from?.id, ctx.chat?.id ?? 0)
+    if (!rate.ok) {
+      if (rate.notify)
+        await ctx.reply(ctx.t('quote-errors-rate_limit', { seconds: rate.retryAfterSeconds })).catch(() => {})
+      return
+    }
+    await sendRandomQuote(ctx)
+  })
 
   // Auto-gab: fires only when the fast-path flagged a lively moment. The trick —
   // we bias the pick to a quote authored by someone currently in the chat, so
