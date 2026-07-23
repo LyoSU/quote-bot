@@ -26,7 +26,7 @@ Update flow: `fastPath` (drops ~95% group noise before any DB) → `sequentializ
 
 - `src/config/env.ts` — zod-validated, frozen config; fail-fast on bad env.
 - `src/core/` — `bot` (auto-retry + network-retry + fast-path + sequentialize + error boundary; deliberately NO send throttler — see the comment in `bot.ts`), `runner` (long polling, allowed_updates, per-update sink timeout), `poll-watch` (polling freshness + stall watchdog), `logger` (pino), `metrics` (prom-client), `shutdown`, `lru`, `types` (`BotContext`).
-- `src/db/` — Mongoose models (schema kept **1:1 with production**), `repositories/` (atomic `updateOne`/`findOneAndUpdate`, never full-doc `.save()`), `member-tracker`, dedicated `connection`.
+- `src/db/` — Mongoose models (schema kept **1:1 with production**), `repositories/` (atomic `updateOne`/`findOneAndUpdate`, never full-doc `.save()`; user/group lookups are LRU-cached with delete-on-write — route ALL User/Group writes through the repositories), `member-tracker`, dedicated `connection`.
 - `src/services/` — `bot-api` (thin HTTP client for the self-hosted Bot API server's custom methods `getMessages`/`getUserInfo`; degrades gracefully against the Telegram cloud), `quote-api` (HTTP client for the renderer), `sticker`, `stats`, `gab`, `gramads`.
 - `src/middlewares/` — `fast-path`, `context`, `guards` (`onlyGroup`/`onlyAdmin`).
 - `src/features/` — `quote` (the core pipeline + `/q_<id>`, rate, random, top), `settings`, `shell` (start/help/menu/app/lang), `payments` (Telegram Stars), `inline`, `fstik`, `ping`. Aggregated in `src/features/index.ts` (order matters: specific handlers before the quote private-chat catch-all).

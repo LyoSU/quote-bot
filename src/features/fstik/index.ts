@@ -101,7 +101,7 @@ fstikFeature.hears(/^\/qs(?:@\S+)?(?:\s+(.+))?/i, onlyGroup, onlyAdmin, async (c
       packName = `g${randomUUID().replace(/-/g, '').slice(0, 8)}_${Math.abs(ctx.group.group_id)}_by_${botUsername}`
       const title = `${(ctx.group.title ?? 'Group').slice(0, 40)} pack by @${botUsername}`
       await ctx.api.createNewStickerSet(owner, packName, title, [sticker])
-      await setGroupStickerSet(ctx.group._id, packName)
+      await setGroupStickerSet(ctx.group, packName)
     }
   } catch (err) {
     if (err instanceof GrammyError) {
@@ -111,7 +111,7 @@ fstikFeature.hears(/^\/qs(?:@\S+)?(?:\s+(.+))?/i, onlyGroup, onlyAdmin, async (c
       }
       // A stale/full pack: forget it so the next /qs starts a fresh one.
       if (d.includes('stickerset_invalid') || d.includes('too_much') || d.includes('too many')) {
-        await setGroupStickerSet(ctx.group._id, null)
+        await setGroupStickerSet(ctx.group, null)
       }
     }
     return replyHtml(ctx, ctx.t('sticker-save-error-telegram', { error: err instanceof Error ? err.message : String(err) }))

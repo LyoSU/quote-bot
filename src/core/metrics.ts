@@ -38,6 +38,18 @@ export const networkErrorsTotal = new Counter({
 })
 
 /**
+ * Context-cache effectiveness: user/group lookups served from memory vs the
+ * database. A healthy hit rate is ~90%+; a drop means the access pattern
+ * stopped matching the cache sizing (see the repositories).
+ */
+export const contextCacheTotal = new Counter({
+  name: 'bot_context_cache_total',
+  help: 'Context (user/group) cache lookups by entity and outcome',
+  labelNames: ['entity', 'outcome'] as const,
+  registers: [registry],
+})
+
+/**
  * Polling-health gauges, sampled on each /metrics scrape. Together they
  * separate the two ways the bot can "stop collecting updates":
  *   - in_flight pinned at the concurrency cap + poll age growing → the sink is

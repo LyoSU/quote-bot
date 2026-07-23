@@ -27,8 +27,8 @@ function replyHtml(ctx: BotContext, text: string): Promise<unknown> {
 /** Writes a `settings.quote.*` value to the group (preferred) or user doc. */
 async function setQuoteSetting(ctx: BotContext, key: string, value: string): Promise<void> {
   const path = `settings.quote.${key}`
-  if (ctx.group) await updateGroupSettings(ctx.group._id, { [path]: value })
-  else if (ctx.user) await updateUserSettings(ctx.user._id, { [path]: value })
+  if (ctx.group) await updateGroupSettings(ctx.group, { [path]: value })
+  else if (ctx.user) await updateUserSettings(ctx.user, { [path]: value })
 }
 
 /**
@@ -40,12 +40,12 @@ async function toggleSetting(ctx: BotContext, field: 'hidden' | 'privacy', dflt:
   const path = `settings.${field}`
   if (ctx.group) {
     const next = !(ctx.group.settings?.[field] ?? dflt)
-    await updateGroupSettings(ctx.group._id, { [path]: next })
+    await updateGroupSettings(ctx.group, { [path]: next })
     return next
   }
   if (ctx.user) {
     const next = !(ctx.user.settings?.[field] ?? dflt)
-    await updateUserSettings(ctx.user._id, { [path]: next })
+    await updateUserSettings(ctx.user, { [path]: next })
     return next
   }
   return null
@@ -102,14 +102,14 @@ settingsFeature.command('privacy', onlyAdmin, async (ctx) => {
 settingsFeature.hears(/^\/qrate\b/i, onlyGroup, onlyAdmin, async (ctx) => {
   if (!ctx.group) return
   const next = !(ctx.group.settings?.rate ?? true)
-  await updateGroupSettings(ctx.group._id, { 'settings.rate': next })
+  await updateGroupSettings(ctx.group, { 'settings.rate': next })
   await replyHtml(ctx, ctx.t(next ? 'rate-settings-enable' : 'rate-settings-disable'))
 })
 
 // /qgab <n> — random-quote frequency (group only).
 settingsFeature.hears(/^\/qgab(?:@\S+)?\s+(\d+)/i, onlyGroup, onlyAdmin, async (ctx) => {
   const gab = parseInt(ctx.match?.[1] ?? '0', 10)
-  if (ctx.group) await updateGroupSettings(ctx.group._id, { 'settings.randomQuoteGab': gab })
+  if (ctx.group) await updateGroupSettings(ctx.group, { 'settings.randomQuoteGab': gab })
   await replyHtml(ctx, ctx.t('random-gab', { gab }))
 })
 
@@ -121,7 +121,7 @@ settingsFeature.command('qarchive', onlyGroup, onlyAdmin, async (ctx) => {
 
   if (arg === 'on' || arg === 'off') {
     const next = arg === 'on'
-    await updateGroupSettings(ctx.group._id, { 'settings.archive.storeText': next })
+    await updateGroupSettings(ctx.group, { 'settings.archive.storeText': next })
     await replyHtml(ctx, ctx.t(next ? 'qarchive-on' : 'qarchive-off'))
     return
   }

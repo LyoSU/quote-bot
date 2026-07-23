@@ -326,8 +326,8 @@ async function authorizedView(ctx: BotContext): Promise<QuoteSettingsView | null
 
 /** Persists one settings path to the group (preferred) or user doc. */
 async function writeSetting(ctx: BotContext, path: string, value: unknown): Promise<void> {
-  if (ctx.group) await updateGroupSettings(ctx.group._id, { [path]: value })
-  else if (ctx.user) await updateUserSettings(ctx.user._id, { [path]: value })
+  if (ctx.group) await updateGroupSettings(ctx.group, { [path]: value })
+  else if (ctx.user) await updateUserSettings(ctx.user, { [path]: value })
 }
 
 export const quoteSettingsMenu = new Composer<BotContext>()
@@ -358,8 +358,8 @@ quoteSettingsMenu.callbackQuery('qs:reset', async (ctx) => {
     await ctx.answerCallbackQuery().catch(() => {})
     return
   }
-  if (ctx.group) await updateGroupSettings(ctx.group._id, RESET_GROUP)
-  else if (ctx.user) await updateUserSettings(ctx.user._id, RESET_QUOTE)
+  if (ctx.group) await updateGroupSettings(ctx.group, RESET_GROUP)
+  else if (ctx.user) await updateUserSettings(ctx.user, RESET_QUOTE)
   await renderMain(ctx, defaultView(ctx.group ? 'group' : 'user'), true)
   await ctx.answerCallbackQuery({ text: ctx.t('qs-reset-done') }).catch(() => {})
 })

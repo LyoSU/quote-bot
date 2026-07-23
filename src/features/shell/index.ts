@@ -168,9 +168,9 @@ shellFeature.callbackQuery(/^set_language:(.+)$/, async (ctx) => {
       await ctx.answerCallbackQuery().catch(() => {})
       return
     }
-    if (ctx.group) await updateGroupSettings(ctx.group._id, { 'settings.locale': code })
+    if (ctx.group) await updateGroupSettings(ctx.group, { 'settings.locale': code })
   } else if (ctx.user) {
-    await updateUserSettings(ctx.user._id, { 'settings.locale': code })
+    await updateUserSettings(ctx.user, { 'settings.locale': code })
   }
 
   ctx.i18n.useLocale(code)
