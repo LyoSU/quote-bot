@@ -70,6 +70,13 @@ export const EnvSchema = z.object({
   HEALTH_PORT: z.coerce.number().int().positive().default(3000),
 
   /**
+   * Interface for the health endpoint. Unset = all interfaces (0.0.0.0) —
+   * mind that on a host-networked box this exposes /metrics publicly; set
+   * 127.0.0.1 (or an internal interface) unless an external prober needs it.
+   */
+  HEALTH_HOST: z.string().optional(),
+
+  /**
    * Max updates the runner processes concurrently across all chats.
    * Per-chat ordering is still guaranteed by sequentialize().
    */

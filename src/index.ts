@@ -53,7 +53,15 @@ async function main(): Promise<void> {
   const health = startHealthServer({
     // pollWatch catches the case the runner can't see: the Bot API server is
     // down and getUpdates has been failing — "running" but processing nothing.
-    ready: () => runner.isRunning() && isDatabaseReady() && pollWatch.isFresh(),
+    check: () => {
+      const running = runner.isRunning()
+      const db = isDatabaseReady()
+      const pollFresh = pollWatch.isFresh()
+      return {
+        ok: running && db && pollFresh,
+        detail: { runner: running, db, pollFresh, pollAgeSeconds: pollWatch.ageSeconds() },
+      }
+    },
   })
   onShutdown(
     'health-server',
