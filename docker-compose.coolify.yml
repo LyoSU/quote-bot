@@ -6,6 +6,9 @@
 # the separate collector subsystem, not deployed here).
 services:
   quote-bot:
+    # Resource caps from 7-day peaks in Coroot (memory = peak x1.5), 2026-09-24:
+    # hetzner-auction had none, so one leak or CPU hog hit every bot on the host.
+    mem_limit: 2g  # peak 1.1 GB
     build:
       context: .
       dockerfile: Dockerfile.coolify
