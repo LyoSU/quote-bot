@@ -106,7 +106,8 @@ describe('buildQuoteMessage', () => {
 
   it('adds a forward label and sender tag', () => {
     const m = buildQuoteMessage({
-      source: { text: 'x', sender_tag: 'Admin' },
+      source: { text: 'x' },
+      authorTag: 'Admin',
       from: alice,
       isFirstInStreak: true,
       showReply: true,
@@ -117,6 +118,20 @@ describe('buildQuoteMessage', () => {
     })
     expect(m.forward).toEqual({ label: 'Forwarded from Bob' })
     expect(m.senderTag).toBe('Admin')
+  })
+
+  it('never falls back to source tags or the displayed sender signature', () => {
+    const params = {
+      source: { text: 'x', sender_tag: 'Forwarder role', author_signature: 'Forwarder signature' },
+      from: { ...alice, author_signature: 'Displayed sender signature' },
+      isFirstInStreak: true,
+      showReply: false,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    }
+    expect(buildQuoteMessage(params).senderTag).toBeUndefined()
+    expect(buildQuoteMessage({ ...params, authorTag: 'Author role' }).senderTag).toBe('Author role')
   })
 
   it('marks an explicit quote selection', () => {

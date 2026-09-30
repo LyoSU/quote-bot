@@ -12,6 +12,7 @@ function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
     unsupportedText: 'Unsupported',
     groupPrivacy: false,
     showSenderTag: true,
+    getAuthorTag: vi.fn(async () => undefined),
     enrichHidden: vi.fn(async () => null),
     isUserPrivate: vi.fn(async () => false),
     getUserEmojiStatus: vi.fn(async () => undefined),
@@ -94,6 +95,90 @@ describe('assembleQuoteMessages', () => {
     const out = await assembleQuoteMessages([m], deps({ isGroupMember: vi.fn(async () => false) }))
     expect(out.messages[0]?.from?.name).toBe('Forwarder')
     expect(out.messages[0]?.forward?.label).toBe('Forwarded from Orig')
+  })
+
+  it.each(['user', 'legacy'] as const)("uses only the original author's group role for a %s forward", async (kind) => {
+    const author = { id: 7, first_name: 'Daniella' }
+    const getAuthorTag = vi.fn(async (id: number) => id === 7 ? 'Жирчик' : 'Граф')
+    const m = msg({
+      from: { id: 50, first_name: 'Serhii', author_signature: 'Граф' },
+      sender_tag: 'Граф',
+      author_signature: 'Граф',
+      ...(kind === 'user' ? { forward_origin: { type: 'user', sender_user: author } } : { forward_from: author }),
+    })
+    const out = await assembleQuoteMessages([m], deps({ isGroupMember: vi.fn(async () => true), getAuthorTag }))
+    expect(out.messages[0]?.from?.name).toBe('Daniella')
+    expect(out.messages[0]?.senderTag).toBe('Жирчик')
+    expect(getAuthorTag).toHaveBeenCalledExactlyOnceWith(7)
+  })
+
+  it.each(['missing', 'failed'] as const)('omits a forwarded author role when lookup is %s', async (lookup) => {
+    const getAuthorTag = vi.fn(async () => {
+      if (lookup === 'failed') throw new Error('Unavailable')
+      return undefined
+    })
+    const out = await assembleQuoteMessages([msg({
+      sender_tag: 'Forwarder role',
+      author_signature: 'Forwarder signature',
+      forward_origin: { type: 'user', sender_user: { id: 7, first_name: 'Original' } },
+    })], deps({ isGroupMember: vi.fn(async () => true), getAuthorTag }))
+    expect(out.messages[0]?.senderTag).toBeUndefined()
+    expect(getAuthorTag).toHaveBeenCalledExactlyOnceWith(7)
+  })
+
+  it.each(['private', 'supergroup'])('never takes a hidden forward role from its forwarder in %s', async (chatType) => {
+    const getAuthorTag = vi.fn(async () => 'Wrong')
+    const out = await assembleQuoteMessages([msg({
+      sender_tag: 'Граф',
+      author_signature: 'Граф',
+      forward_origin: { type: 'hidden_user', sender_user_name: 'Daniella' },
+    })], deps({ chatType, getAuthorTag }))
+    expect(out.messages[0]?.senderTag).toBeUndefined()
+    expect(getAuthorTag).not.toHaveBeenCalled()
+  })
+
+  it('omits roles when displaying a forwarder header', async () => {
+    const getAuthorTag = vi.fn(async () => 'Original role')
+    const out = await assembleQuoteMessages([msg({
+      sender_tag: 'Forwarder role',
+      forward_origin: { type: 'user', sender_user: { id: 7, first_name: 'Original' } },
+    })], deps({ getAuthorTag }))
+    expect(out.messages[0]?.forward).toBeDefined()
+    expect(out.messages[0]?.senderTag).toBeUndefined()
+    expect(getAuthorTag).not.toHaveBeenCalled()
+  })
+
+  it('does not look up group roles for user forwards in private chats', async () => {
+    const getAuthorTag = vi.fn(async () => 'Wrong')
+    const out = await assembleQuoteMessages([msg({
+      sender_tag: 'Forwarder role',
+      forward_origin: { type: 'user', sender_user: { id: 7, first_name: 'Original' } },
+    })], deps({ chatType: 'private', getAuthorTag }))
+    expect(out.messages[0]?.senderTag).toBeUndefined()
+    expect(getAuthorTag).not.toHaveBeenCalled()
+  })
+
+  it.each(['chat', 'channel'] as const)('uses only the original signature for a %s forward', async (type) => {
+    const chat = { id: -100500, title: 'Channel' }
+    const getAuthorTag = vi.fn(async () => 'Wrong')
+    for (const signature of ['Editor', undefined]) {
+      const out = await assembleQuoteMessages([msg({
+        sender_tag: 'Forwarder role',
+        author_signature: 'Forwarder signature',
+        forward_origin: { type, chat, sender_chat: chat, author_signature: signature },
+      })], deps({ getAuthorTag }))
+      expect(out.messages[0]?.senderTag).toBe(signature)
+    }
+    expect(getAuthorTag).not.toHaveBeenCalled()
+  })
+
+  it('skips author role lookups when role display is disabled', async () => {
+    const getAuthorTag = vi.fn(async () => 'Original role')
+    const out = await assembleQuoteMessages([msg({
+      forward_origin: { type: 'user', sender_user: { id: 7 } },
+    })], deps({ showSenderTag: false, isGroupMember: vi.fn(async () => true), getAuthorTag }))
+    expect(out.messages[0]?.senderTag).toBeUndefined()
+    expect(getAuthorTag).not.toHaveBeenCalled()
   })
 
   it('attributes a channel forward to the channel itself (no forwarder, no label) in groups', async () => {

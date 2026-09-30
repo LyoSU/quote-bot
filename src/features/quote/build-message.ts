@@ -89,6 +89,8 @@ export interface BuildQuoteMessageParams {
   quoteMode?: PartialQuoteMode
   /** Render the author's role/title (admin custom title / signature). Defaults to true. */
   showSenderTag?: boolean
+  /** Verified tag/title of the quoted author, resolved upstream. No sender fallback. */
+  authorTag?: string
 }
 
 function replyMediaKind(reply: ReplySource): QuoteReplyMedia | undefined {
@@ -178,8 +180,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   out.from = fromOut
   out.chatId = fromOut.id
 
-  const senderTag = source.sender_tag ?? source.author_signature ?? from.author_signature
-  if (senderTag && params.showSenderTag !== false) out.senderTag = senderTag
+  if (params.authorTag && params.showSenderTag !== false) out.senderTag = params.authorTag
 
   if (source.via_bot?.username) out.viaBot = source.via_bot.username
 

@@ -16,6 +16,7 @@ import { renderQuote } from './index'
 import { parseQuoteArgs } from './parse-args'
 import { generateQuote } from '../../services/quote-api/client'
 import { incrementQuoteCounter } from '../../db/repositories/group-repository'
+import { assembleQuoteMessages } from './assemble'
 
 /** Minimal valid PNG header (signature + IHDR) with the given dimensions. */
 function png(width: number, height: number): Buffer {
@@ -81,5 +82,40 @@ describe('renderQuote reply markup', () => {
     expect(replyWithPhoto.mock.calls[0]![1].reply_markup).toBeUndefined()
     // No dangling local_id: the per-group counter isn't bumped for non-sticker output.
     expect(incrementQuoteCounter).not.toHaveBeenCalled()
+  })
+})
+
+describe('renderQuote original author role lookup', () => {
+  it.each([
+    { status: 'creator', custom_title: 'Owner', expected: 'Owner' },
+    { status: 'administrator', custom_title: 'Admin', expected: 'Admin' },
+    { status: 'member', tag: 'Member role', expected: 'Member role' },
+    { status: 'restricted', is_member: true, tag: 'Restricted role', expected: 'Restricted role' },
+    { status: 'restricted', is_member: false, tag: 'Old role', expected: undefined },
+    { status: 'left', expected: undefined },
+    { status: 'kicked', expected: undefined },
+    { status: 'administrator', expected: undefined },
+  ])('reads author role for $status and caches it within the quote', async ({ expected, ...member }) => {
+    const { ctx } = groupCtx()
+    const getChatMember = vi.fn(async () => member)
+    ctx.api.getChatMember = getChatMember as never
+    vi.mocked(generateQuote).mockResolvedValue({ image: Buffer.from('webp'), quoteType: 'quote' } as never)
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+    const deps = vi.mocked(assembleQuoteMessages).mock.calls.at(-1)![1]
+    expect(await deps.getAuthorTag(2)).toBe(expected)
+    expect(await deps.getAuthorTag(2)).toBe(expected)
+    expect(getChatMember).toHaveBeenCalledExactlyOnceWith(-100, 2)
+  })
+
+  it('returns no role when Telegram cannot resolve the author', async () => {
+    const { ctx } = groupCtx()
+    const getChatMember = vi.fn(async () => { throw new Error('Not found') })
+    ctx.api.getChatMember = getChatMember as never
+    vi.mocked(generateQuote).mockResolvedValue({ image: Buffer.from('webp'), quoteType: 'quote' } as never)
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+    const deps = vi.mocked(assembleQuoteMessages).mock.calls.at(-1)![1]
+    expect(await deps.getAuthorTag(2)).toBeUndefined()
+    expect(await deps.getAuthorTag(2)).toBeUndefined()
+    expect(getChatMember).toHaveBeenCalledTimes(1)
   })
 })
