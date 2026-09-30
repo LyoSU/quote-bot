@@ -68,6 +68,7 @@ help =
     • Valutazione: <code>/q rate</code>
     • Citazioni casuali: <code>/qrand</code>
     • Citazioni top: <code>/qtop</code>
+    • Cerca citazioni: <code>/qfind</code>
     • Lingua: <code>/lang</code>
 
     <b>🎯 Impostazioni del Gruppo</b>
@@ -215,6 +216,10 @@ privacy-settings-enable = Modalità privacy attivata 🔒 Le tue informazioni sa
 privacy-settings-disable = Modalità privacy disattivata 🔓
 top-info = <b>✨ Top Citazioni</b>
 top-open = Visualizza le Top Citazioni
+find-info =
+    <b>🔍 Cerca citazioni</b>
+    Tocca il pulsante e scrivi una parola della citazione o il nome dell'autore.
+find-open = Cerca citazioni
 donate-info =
     <b>Supporta lo sviluppo di QuotLyBot! ☕</b>
 
@@ -395,6 +400,7 @@ menu-features-group-title =
 
     <b>Per tutti:</b>
     • <code>/qtop</code> — migliori citazioni
+    • <code>/qfind</code> — ricerca per testo o autore
     • <code>/qrand</code> — citazione casuale
 menu-settings-title =
     <b>⚙️ Impostazioni</b>

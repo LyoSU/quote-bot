@@ -32,8 +32,9 @@ describe('/qfind', () => {
     const { ctx, groupId, reply } = context('supergroup')
     await composer.middleware()(ctx, async () => {})
     expect(reply).toHaveBeenCalledExactlyOnceWith(i18n.t('en', 'find-info'), {
+      parse_mode: 'HTML',
       reply_markup: expect.objectContaining({ inline_keyboard: [[{
-        text: 'Click To Search', switch_inline_query_current_chat: `find:${groupId} `,
+        text: 'Search Quotes', switch_inline_query_current_chat: `find:${groupId} `,
       }]] }),
       reply_parameters: { message_id: 10, allow_sending_without_reply: true },
     })
@@ -48,7 +49,10 @@ describe('/qfind', () => {
     expect(reply.mock.calls[0]![1]).not.toHaveProperty('reply_markup')
   })
 
-  it('falls back to the English search label for other locales', () => {
-    expect(i18n.t('ru', 'find-open')).toBe('Click To Search')
+  it('is translated in every locale', () => {
+    const en = i18n.t('en', 'find-open')
+    for (const locale of i18n.locales.filter((l) => l !== 'en')) {
+      expect(i18n.t(locale, 'find-open'), locale).not.toBe(en)
+    }
   })
 })

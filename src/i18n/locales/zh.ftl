@@ -58,6 +58,7 @@ help =
     • 评分引言：<code>/q rate</code>（如果在群组中启用）
     • 随机引言：<code>/qrand</code>（如果在群组中启用）
     • 顶级引言：<code>/qtop</code>（如果在群组中启用）
+    • 搜索引言：<code>/qfind</code>
     • 更改语言：<code>/lang</code>
 
     🎯 <b>群组管理员设置</b>（仅限群组管理员）
@@ -213,6 +214,10 @@ privacy-settings-enable = 隐私模式已激活 🔒 您的信息将在引文中
 privacy-settings-disable = 隐私模式已关闭 🔓
 top-info = <b>✨ 顶级引用消息</b>
 top-open = 查看顶级引文
+find-info =
+    <b>🔍 搜索引用</b>
+    点击按钮，输入引用中的词语或作者名称。
+find-open = 搜索引用
 donate-info =
     <b>支持 QuotLyBot 的发展！☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>所有人：</b>
     • <code>/qtop</code> — 热门引用
+    • <code>/qfind</code> — 按文本或作者搜索
     • <code>/qrand</code> — 随机引用
 menu-settings-title =
     <b>⚙️ 设置</b>

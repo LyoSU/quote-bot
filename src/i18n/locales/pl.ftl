@@ -58,6 +58,7 @@ help =
     • Oceń Cytaty: <code>/q rate</code> (jeśli włączone w grupie)
     • Losowy Cytat: <code>/qrand</code> (jeśli włączone w grupie)
     • Najlepsze Cytaty: <code>/qtop</code> (jeśli włączone w grupie)
+    • Szukaj Cytatów: <code>/qfind</code>
     • Zmień Język: <code>/lang</code>
 
     🎯 <b>Ustawienia Administratora Grupy</b> (tylko dla administratorów grup)
@@ -213,6 +214,10 @@ privacy-settings-enable = Tryb prywatności aktywowany 🔒 Twoje informacje bę
 privacy-settings-disable = Tryb prywatności dezaktywowany 🔓
 top-info = <b>✨ Najczęściej cytowane wiadomości</b>
 top-open = Zobacz najlepsze cytaty
+find-info =
+    <b>🔍 Wyszukiwanie cytatów</b>
+    Naciśnij przycisk i wpisz słowo z cytatu lub imię autora.
+find-open = Szukaj cytatów
 donate-info =
     <b>Wspieraj rozwój QuotLyBot! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>Dla wszystkich:</b>
     • <code>/qtop</code> — najlepsze cytaty
+    • <code>/qfind</code> — wyszukiwanie po tekście lub autorze
     • <code>/qrand</code> — losowy cytat
 menu-settings-title =
     <b>⚙️ Ustawienia</b>

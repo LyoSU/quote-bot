@@ -58,6 +58,7 @@ help =
     • 인용 평가: <code>/q rate</code> (그룹에서 활성화된 경우)
     • 무작위 인용: <code>/qrand</code> (그룹에서 활성화된 경우)
     • 최고 인용: <code>/qtop</code> (그룹에서 활성화된 경우)
+    • 인용 검색: <code>/qfind</code>
     • 언어 변경: <code>/lang</code>
 
     🎯 <b>그룹 관리자 설정</b> (그룹 관리자 전용)
@@ -213,6 +214,10 @@ privacy-settings-enable = 프라이버시 모드가 활성화되었습니다 �
 privacy-settings-disable = 프라이버시 모드가 비활성화되었습니다 🔓
 top-info = <b>✨ 가장 많이 인용된 메시지</b>
 top-open = 상위 인용 보기
+find-info =
+    <b>🔍 인용 검색</b>
+    버튼을 누르고 인용문 속 단어나 작성자 이름을 입력하세요.
+find-open = 인용 검색하기
 donate-info =
     <b>QuotLyBot 개발을 지원하세요! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>모든 사용자:</b>
     • <code>/qtop</code> — 최고 인용
+    • <code>/qfind</code> — 텍스트 또는 작성자로 검색
     • <code>/qrand</code> — 랜덤 인용
 menu-settings-title =
     <b>⚙️ 설정</b>

@@ -58,6 +58,7 @@ help =
     • 引用を評価: <code>/q rate</code>（グループで有効の場合）
     • ランダム引用: <code>/qrand</code>（グループで有効の場合）
     • トップ引用: <code>/qtop</code>（グループで有効の場合）
+    • 引用検索: <code>/qfind</code>
     • 言語変更: <code>/lang</code>
 
     🎯 <b>グループ管理者設定</b>（グループ管理者のみ）
@@ -213,6 +214,10 @@ privacy-settings-enable = プライバシーモードが有効になりました
 privacy-settings-disable = プライバシーモードは無効になっています 🔓
 top-info = <b>✨ トップ引用メッセージ</b>
 top-open = トップ引用を見る
+find-info =
+    <b>🔍 引用を検索</b>
+    ボタンをタップして、引用内の言葉または投稿者名を入力してください。
+find-open = 引用を検索
 donate-info =
     <b>QuotLyBotの開発をサポートしよう！☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>全員向け:</b>
     • <code>/qtop</code> — トップ引用
+    • <code>/qfind</code> — テキストまたは投稿者で検索
     • <code>/qrand</code> — ランダム引用
 menu-settings-title =
     <b>⚙️ 設定</b>

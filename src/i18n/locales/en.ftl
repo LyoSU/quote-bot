@@ -58,7 +58,7 @@ help =
     • Rate Quotes: <code>/q rate</code> (if enabled in group)
     • Random Quote: <code>/qrand</code> (if enabled in group)
     • Top Quotes: <code>/qtop</code> (if enabled in group)
-    • Search Quotes: <code>/qfind</code> — search this group's saved stickers by text or author
+    • Search Quotes: <code>/qfind</code>
     • Change Language: <code>/lang</code>
 
     🎯 <b>Group Admin Settings</b> (for group admins only)
@@ -208,9 +208,10 @@ privacy-settings-enable = Privacy mode activated 🔒 Your info will be hidden i
 privacy-settings-disable = Privacy mode deactivated 🔓
 top-info = <b>✨ Top Quoted Messages</b>
 top-open = View Top Quotes
-
-find-info = <b>🔍 Search group quotes</b>
-find-open = Click To Search
+find-info =
+    <b>🔍 Search Quotes</b>
+    Tap the button and type a word from the quote or the author's name.
+find-open = Search Quotes
 app-open_quote = ✨ Open quote
 app-open_group = 📚 All quotes in group
 app-open_root = 💫 My groups
@@ -444,6 +445,7 @@ menu-features-group-title =
 
     <b>Top quotes:</b>
     <code>/qtop</code> — best rated quotes
+    <code>/qfind</code> — search by text or author
 
     <b>Random quote:</b>
     <code>/qrand</code> — random from top

@@ -58,6 +58,7 @@ help =
     • Sitatları qiymətləndir: <code>/q rate</code> (qrupda aktiv edilibsə)
     • Təsadüfi Sitat: <code>/qrand</code> (qrupda aktiv edilibsə)
     • Ən Yaxşı Sitatlar: <code>/qtop</code> (qrupda aktiv edilibsə)
+    • Sitat Axtar: <code>/qfind</code>
     • Dili dəyişmək: <code>/lang</code>
 
     🎯 <b>Qrup Admin Parametrləri</b> (yalnız qrup adminləri üçün)
@@ -213,6 +214,10 @@ privacy-settings-enable = Məxfilik rejimi aktivdir 🔒 Sizin məlumatlarınız
 privacy-settings-disable = Məxfilik rejimi deaktivdir 🔓
 top-info = <b>✨ Ən Çox Sitatlaşan Mesajlar</b>
 top-open = Ən Yaxşı Sitatları Görüntülə
+find-info =
+    <b>🔍 Sitat Axtarışı</b>
+    Düyməyə toxunun və sitatdan bir söz və ya müəllifin adını yazın.
+find-open = Sitat Axtar
 donate-info =
     <b>QuotLyBot'un İnkişafına Dəstək olun! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>Hamı üçün:</b>
     • <code>/qtop</code> — ən yaxşı sitatlar
+    • <code>/qfind</code> — mətn və ya müəllifə görə axtarış
     • <code>/qrand</code> — təsadüfi sitat
 menu-settings-title =
     <b>⚙️ Parametrlər</b>

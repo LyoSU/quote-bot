@@ -58,6 +58,7 @@ help =
     • Quotes Beoordelen: <code>/q rate</code> (indien ingeschakeld in groep)
     • Willekeurige Quote: <code>/qrand</code> (indien ingeschakeld in groep)
     • Top Quotes: <code>/qtop</code> (indien ingeschakeld in groep)
+    • Citaten Zoeken: <code>/qfind</code>
     • Taal Wijzigen: <code>/lang</code>
 
     🎯 <b>Groepsbeheer Instellingen</b> (alleen voor groepsbeheerders)
@@ -213,6 +214,10 @@ privacy-settings-enable = Privacy modus geactiveerd 🔒 Uw informatie wordt ver
 privacy-settings-disable = Privacy modus is uitgeschakeld 🔓
 top-info = <b>✨ Top Geciteerde Berichten</b>
 top-open = Bekijk Top Citaten
+find-info =
+    <b>🔍 Citaten zoeken</b>
+    Tik op de knop en typ een woord uit het citaat of de naam van de auteur.
+find-open = Citaten zoeken
 donate-info =
     <b>Steun de Ontwikkeling van QuotLyBot! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>Voor iedereen:</b>
     • <code>/qtop</code> — topcitaten
+    • <code>/qfind</code> — zoeken op tekst of auteur
     • <code>/qrand</code> — willekeurig citaat
 menu-settings-title =
     <b>⚙️ Instellingen</b>

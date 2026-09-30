@@ -9,6 +9,7 @@ export function registerFind(composer: Composer<BotContext>): void {
     const keyboard = new InlineKeyboard().switchInlineCurrent(ctx.t('find-open'), `find:${ctx.group._id} `)
     const messageId = ctx.message?.message_id
     await ctx.reply(ctx.t('find-info'), {
+      parse_mode: 'HTML',
       reply_markup: keyboard,
       ...(messageId ? { reply_parameters: { message_id: messageId, allow_sending_without_reply: true } } : {}),
     })

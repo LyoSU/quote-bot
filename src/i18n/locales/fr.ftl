@@ -58,6 +58,7 @@ help =
     • Évaluer les Citations: <code>/q rate</code> (si activé dans le groupe)
     • Citation Aléatoire: <code>/qrand</code> (si activé dans le groupe)
     • Meilleures Citations: <code>/qtop</code> (si activé dans le groupe)
+    • Rechercher des Citations: <code>/qfind</code>
     • Changer de Langue: <code>/lang</code>
 
     🎯 <b>Paramètres Admin de Groupe</b> (pour les administrateurs de groupe seulement)
@@ -213,6 +214,10 @@ privacy-settings-enable = Mode confidentialité activé 🔒 Vos informations se
 privacy-settings-disable = Mode confidentialité désactivé 🔓
 top-info = <b>✨ Messages les Plus Cités</b>
 top-open = Voir les Meilleures Citations
+find-info =
+    <b>🔍 Rechercher des citations</b>
+    Appuyez sur le bouton et saisissez un mot de la citation ou le nom de l'auteur.
+find-open = Rechercher des citations
 donate-info =
     <b>Soutenez le Développement de QuotLyBot ! ☕</b>
 
@@ -410,6 +415,7 @@ menu-features-group-title =
 
     <b>Top citations:</b>
     <code>/qtop</code> — meilleures citations
+    <code>/qfind</code> — recherche par texte ou auteur
 
     <b>Citation aléatoire:</b>
     <code>/qrand</code> — aléatoire du top

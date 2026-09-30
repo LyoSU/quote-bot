@@ -58,6 +58,7 @@ help =
     • Nilai Kutipan: <code>/q rate</code> (jika diaktifkan dalam grup)
     • Kutipan Acak: <code>/qrand</code> (jika diaktifkan dalam grup)
     • Kutipan Teratas: <code>/qtop</code> (jika diaktifkan dalam grup)
+    • Cari Kutipan: <code>/qfind</code>
     • Ubah Bahasa: <code>/lang</code>
 
     🎯 <b>Pengaturan Admin Grup</b> (hanya untuk admin grup)
@@ -213,6 +214,10 @@ privacy-settings-enable = Mode privasi diaktifkan 🔒 Info Anda akan disembunyi
 privacy-settings-disable = Mode privasi dinonaktifkan 🔓
 top-info = <b>✨ Pesan Kutipan Teratas</b>
 top-open = Lihat Kutipan Teratas
+find-info =
+    <b>🔍 Cari Kutipan</b>
+    Ketuk tombol lalu ketik kata dari kutipan atau nama penulisnya.
+find-open = Cari Kutipan
 donate-info =
     <b>Dukung Pengembangan QuotLyBot! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>Untuk semua:</b>
     • <code>/qtop</code> — kutipan teratas
+    • <code>/qfind</code> — cari berdasarkan teks atau penulis
     • <code>/qrand</code> — kutipan acak
 menu-settings-title =
     <b>⚙️ Pengaturan</b>

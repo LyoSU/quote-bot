@@ -58,6 +58,7 @@ help =
     • Alıntıları Değerlendir: <code>/q rate</code> (grupta etkinse)
     • Rastgele Alıntı: <code>/qrand</code> (grupta etkinse)
     • En İyi Alıntılar: <code>/qtop</code> (grupta etkinse)
+    • Alıntı Ara: <code>/qfind</code>
     • Dili Değiştir: <code>/lang</code>
 
     🎯 <b>Grup Yönetici Ayarları</b> (sadece grup yöneticileri için)
@@ -213,6 +214,10 @@ privacy-settings-enable = Gizlilik modu etkinleştirildi 🔒 Bilgileriniz alın
 privacy-settings-disable = Gizlilik modu devre dışı bırakıldı 🔓
 top-info = <b>✨ En Çok Alıntılanan Mesajlar</b>
 top-open = En İyi Alıntıları Gör
+find-info =
+    <b>🔍 Alıntı Arama</b>
+    Düğmeye dokunun ve alıntıdan bir kelime ya da yazarın adını yazın.
+find-open = Alıntı Ara
 donate-info =
     <b>QuotLyBot'un Gelişimini Destekleyin! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>Herkes için:</b>
     • <code>/qtop</code> — en iyi alıntılar
+    • <code>/qfind</code> — metne veya yazara göre arama
     • <code>/qrand</code> — rastgele alıntı
 menu-settings-title =
     <b>⚙️ Ayarlar</b>

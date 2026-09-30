@@ -58,6 +58,7 @@ help =
     • Iqtiboslarni Baholash: <code>/q rate</code> (guruhda yoqilgan bo'lsa)
     • Tasodifiy Iqtibos: <code>/qrand</code> (guruhda yoqilgan bo'lsa)
     • Eng yuqori Iqtiboslar: <code>/qtop</code> (guruhda yoqilgan bo'lsa)
+    • Sitata Qidirish: <code>/qfind</code>
     • Tilni o'zgartirish: <code>/lang</code>
 
     🎯 <b>Guruh Admin Sozlamalari</b> (faqat guruh adminlari uchun)
@@ -213,6 +214,10 @@ privacy-settings-enable = Maxfiylik rejimi yoqildi 🔒 Sitatada sizning ma'lumo
 privacy-settings-disable = Maxfiylik rejimi o'chirilgan 🔓
 top-info = <b>✨ Eng Ko'p Sitatasi Keltirilgan Xabarlar</b>
 top-open = Eng Yuqori Sitatalarni Ko'rish
+find-info =
+    <b>🔍 Sitata Qidirish</b>
+    Tugmani bosing va sitatadagi so'zni yoki muallif ismini yozing.
+find-open = Sitatalarni Qidirish
 donate-info =
     <b>QuotLyBot rivojlanishini qo'llab-quvvatlang! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>Hamma uchun:</b>
     • <code>/qtop</code> — eng yaxshi sitatalar
+    • <code>/qfind</code> — matn yoki muallif bo'yicha qidirish
     • <code>/qrand</code> — tasodifiy sitata
 menu-settings-title =
     <b>⚙️ Sozlamalar</b>

@@ -58,6 +58,7 @@ help =
     • تقييم الاقتباسات: <code>/q rate</code> (إذا تم تفعيله في المجموعة)
     • اقتباس عشوائي: <code>/qrand</code> (إذا تم تفعيله في المجموعة)
     • الاقتباسات الأعلى: <code>/qtop</code> (إذا تم تفعيله في المجموعة)
+    • البحث في الاقتباسات: <code>/qfind</code>
     • تغيير اللغة: <code>/lang</code>
 
     🎯 <b>إعدادات مسؤول المجموعة</b> (للمسؤولين فقط)
@@ -213,6 +214,10 @@ privacy-settings-enable = تم تفعيل وضع الخصوصية 🔒 سيتم 
 privacy-settings-disable = تم إلغاء تفعيل وضع الخصوصية 🔓
 top-info = <b>✨ أكثر الرسائل اقتباسًا</b>
 top-open = عرض أفضل الاقتباسات
+find-info =
+    <b>🔍 البحث في الاقتباسات</b>
+    اضغط على الزر واكتب كلمة من الاقتباس أو اسم كاتبه.
+find-open = ابحث في الاقتباسات
 donate-info =
     <b>ادعم تطوير QuotLyBot! ☕</b>
 
@@ -393,6 +398,7 @@ menu-features-group-title =
 
     <b>للجميع:</b>
     • <code>/qtop</code> — أفضل الاقتباسات
+    • <code>/qfind</code> — بحث حسب النص أو الكاتب
     • <code>/qrand</code> — اقتباس عشوائي
 menu-settings-title =
     <b>⚙️ الإعدادات</b>
