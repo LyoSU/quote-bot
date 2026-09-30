@@ -3,8 +3,11 @@ import type { InlineQueryResult } from 'grammy/types'
 import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { Quote, type QuoteDoc } from '../../db/models'
+import { inlineWordFilter, parseInlineSearch } from './search'
 
 const LIMIT = 50
+const QUERY_BUDGET_MS = 1_500
+const RESULT_FIELDS = { file_id: 1, rate: 1 } as const
 
 function ratingKeyboard(quote: QuoteDoc): InlineKeyboard {
   const up = quote.rate?.votes?.[0]?.vote?.length ?? 0
@@ -36,24 +39,33 @@ export const inlineFeature = new Composer<BotContext>()
 
 /**
  * Inline mode: `@bot top:<groupId>` lists a group's top quotes; an empty query
- * lists the quotes the caller has up-voted. Paginated via the numeric offset.
+ * lists the quotes the caller has up-voted. `find:<groupId>` lists all group
+ * stickers. Words filter each list by archived text or author, keeping the
+ * score ordering. Paginated via the numeric offset.
  */
 inlineFeature.on('inline_query', async (ctx) => {
-  const query = ctx.inlineQuery.query
-  const offset = parseInt(ctx.inlineQuery.offset, 10) || 0
+  const query = parseInlineSearch(ctx.inlineQuery.query)
+  const parsedOffset = Number(ctx.inlineQuery.offset)
+  const offset = Number.isSafeInteger(parsedOffset) && parsedOffset >= 0 ? parsedOffset : 0
+  const wordFilter = inlineWordFilter(query.text)
 
-  const topMatch = query.match(/^top:(.+)$/)
-  if (topMatch && Types.ObjectId.isValid(topMatch[1]!)) {
-    const quotes = await Quote.find({ group: new Types.ObjectId(topMatch[1]!), 'rate.score': { $gt: 0 } })
+  if (query.groupId) {
+    const quotes = await Quote.find({
+      group: new Types.ObjectId(query.groupId),
+      ...(query.scope === 'top' ? { 'rate.score': { $gt: 0 } } : { file_id: { $type: 'string', $ne: '' } }),
+      ...wordFilter,
+    })
+      .select(RESULT_FIELDS)
       .sort({ 'rate.score': -1 })
       .skip(offset)
       .limit(LIMIT)
+      .maxTimeMS(QUERY_BUDGET_MS)
       .lean<QuoteDoc[]>()
       .catch(() => [])
 
     const results = quotes.map(toStickerResult).filter((r): r is InlineQueryResult => r !== null)
     await ctx
-      .answerInlineQuery(results, { is_personal: false, cache_time: 300, next_offset: nextOffset(offset, quotes.length) })
+      .answerInlineQuery(results, { is_personal: false, cache_time: query.scope === 'top' && !query.text ? 300 : 5, next_offset: nextOffset(offset, quotes.length) })
       .catch(() => {})
     return
   }
@@ -64,10 +76,18 @@ inlineFeature.on('inline_query', async (ctx) => {
     return
   }
 
-  const liked = await Quote.find({ 'rate.votes.0.vote': ctx.user._id })
+  const liked = await Quote.find({
+    // The broad vote predicate uses the existing { rate.votes.vote, rate.score }
+    // index; the numeric-path predicate restricts the result to up-votes.
+    'rate.votes.vote': ctx.user._id,
+    'rate.votes.0.vote': ctx.user._id,
+    ...wordFilter,
+  })
+    .select(RESULT_FIELDS)
     .sort({ 'rate.score': -1 })
     .skip(offset)
     .limit(LIMIT)
+    .maxTimeMS(QUERY_BUDGET_MS)
     .lean<QuoteDoc[]>()
     .catch(() => [])
 
