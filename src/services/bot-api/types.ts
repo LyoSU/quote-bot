@@ -88,6 +88,8 @@ export interface ApiMessage {
   forward_from_chat?: ApiChat
   forward_sender_name?: string
   forward_origin?: ApiForwardOrigin
+  /** Tag/custom title of this message's sender in a supergroup (not the forward origin). */
+  sender_tag?: string
   author_signature?: string
   via_bot?: { username?: string }
 

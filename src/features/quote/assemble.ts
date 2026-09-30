@@ -50,6 +50,8 @@ export interface AssembleDeps {
   groupPrivacy: boolean
   /** Render the author's role/title (admin custom title / author signature) top-right. */
   showSenderTag: boolean
+  /** Best-effort tag/custom title of the original author in the current group. */
+  getAuthorTag: (telegramId: number) => Promise<string | undefined>
   /**
    * Whether a user is a known member of the current group. Used to attribute a
    * forward to its original author (instead of the forwarder + label) when that
@@ -156,6 +158,23 @@ async function resolveSender(raw: RawMessage, deps: AssembleDeps): Promise<Sende
   return from ?? {}
 }
 
+/** Resolve author roles without using a forwarded message's outer sender role fields. */
+async function resolveAuthorTag(raw: RawMessage, deps: AssembleDeps): Promise<string | undefined> {
+  if (!deps.showSenderTag || raw.story?.chat) return undefined
+
+  const origin = raw.forward_origin ?? raw.origin
+  if (origin?.type === 'chat' || origin?.type === 'channel') return origin.author_signature
+
+  if (origin || raw.forward_from || raw.forward_from_chat || raw.forward_sender_name) {
+    const authorId = forwardOriginUserId(raw)
+    if (authorId === undefined || deps.chatType === 'private') return undefined
+    return deps.getAuthorTag(authorId).catch(() => undefined)
+  }
+
+  // With no forward, the message's sender is its author.
+  return raw.sender_tag ?? raw.author_signature
+}
+
 /**
  * Turns the selected source messages into the renderer's QuoteMessage[]:
  * resolves senders, detects same-sender streaks (name shown once, avatar
@@ -234,6 +253,9 @@ export async function assembleQuoteMessages(
         unsupportedText: deps.unsupportedText,
         quoteMode: deps.quoteMode,
         showSenderTag: deps.showSenderTag,
+        // A forwarder header must not display either the forwarder's role or
+        // the original author's role under the forwarder's name.
+        authorTag: groupForwarder ? undefined : await resolveAuthorTag(raw, deps),
       }),
     )
 

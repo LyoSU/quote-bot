@@ -216,6 +216,7 @@ async function renderQuote(
   // ---- Assemble into renderer messages ----
   const privacyCache = new Map<number, boolean>()
   const memberCache = new Map<number, boolean>()
+  const authorTagCache = new Map<number, Promise<string | undefined>>()
   const deps: AssembleDeps = {
     chatType,
     hidden,
@@ -226,6 +227,18 @@ async function renderQuote(
     groupPrivacy,
     quoteMode,
     showSenderTag,
+    getAuthorTag: (telegramId) => {
+      if (isPrivate || isGuest) return Promise.resolve(undefined)
+      const cached = authorTagCache.get(telegramId)
+      if (cached) return cached
+      const tag = ctx.api.getChatMember(chatId, telegramId).then((member) => {
+        if (member.status === 'creator' || member.status === 'administrator') return member.custom_title
+        if (member.status === 'member' || (member.status === 'restricted' && member.is_member)) return member.tag
+        return undefined
+      }).catch(() => undefined)
+      authorTagCache.set(telegramId, tag)
+      return tag
+    },
     enrichHidden: (name) => resolveHiddenSender(name),
     getUserEmojiStatus: (telegramId) => botApi.getUserEmojiStatus(telegramId),
     isUserPrivate: async (telegramId) => {
