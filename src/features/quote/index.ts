@@ -30,6 +30,7 @@ import { registerGetQuote } from './get'
 import { registerRate } from './rate'
 import { registerRandom } from './random'
 import { registerTop } from './top'
+import { registerFind } from './find'
 
 /** First setting that's actually set wins (group overrides user). */
 function pickSetting(...values: (string | null | undefined)[]): string | undefined {
@@ -434,6 +435,7 @@ registerGetQuote(quoteFeature)
 registerRate(quoteFeature)
 registerRandom(quoteFeature)
 registerTop(quoteFeature)
+registerFind(quoteFeature)
 
 // Any private-chat message (forward / paste) becomes a one-shot quote, but only
 // after the command/get handlers above had their chance.

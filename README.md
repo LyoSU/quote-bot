@@ -75,7 +75,36 @@ See `.env.example` for the full list.
 - `/q_<id>` — recall a saved quote
 - `/qrand` — random top quote
 - `/qtop` — top-rated quotes
+- `/qfind` — search this group's saved quote stickers
 - `/help` — help
+
+### Inline sticker search
+
+- `@quotlybot` — browse stickers you have up-voted.
+- `@quotlybot words` — filter your liked stickers by archived text or author name/username.
+- `/qtop` opens `@quotlybot top:<groupId>`; append words to filter that group's top stickers.
+- `/qfind` sends a single **Click To Search** button that opens `@quotlybot find:<groupId>`; type words to search all saved stickers in that group, including unrated ones.
+
+All three lists keep their rating-score ordering. Ordinary inline queries have
+no group id; `/qtop` and `/qfind` carry it explicitly in the query prefix.
+
+Matching is case-insensitive and accepts partial words. Every query word must
+appear somewhere in the sticker's text, reply text, or archived author fields.
+Quotes without archived matching data and forgotten quotes do not appear in
+word searches; an empty query still browses the existing sticker list.
+
+Search uses the existing group/vote indexes to restrict candidates, projects
+only sticker/rating fields, and caps Mongo query execution at 1.5 seconds. No
+new index or backfill is required. Regex matching scans the selected list, so
+very large liked/group lists need latency checks on production data before
+extending this to a global search.
+
+Optional real-Mongo validation (use an isolated test server; the suite creates
+and drops its own temporary database):
+
+```bash
+INLINE_SEARCH_TEST_MONGO_URI=mongodb://127.0.0.1:27017 npm test -- src/features/inline/search.integration.test.ts
+```
 
 ### Quote flags
 
