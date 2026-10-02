@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 プライバシー
 qs-row-hidden = 🕵 送信者検索
 qs-row-rate = ⭐ 評価
 qs-row-archive = 🗂 テキストアーカイブ
+qs-row-appbutton = 📱 アプリボタン
 qs-suffix-title =
     <b>💟 ステッカーの絵文字</b>
 

@@ -29,6 +29,7 @@ const view = (over: Partial<QuoteSettingsView> = {}): QuoteSettingsView => ({
   hidden: true,
   rate: true,
   archive: true,
+  appButton: true,
   ...over,
 })
 
@@ -99,7 +100,7 @@ describe('buildCategoryKeyboard', () => {
 
   it('group panel carries the group-only controls', () => {
     const cb = callbacks(buildCategoryKeyboard('group', view({ scope: 'group' }), t))
-    expect(cb).toEqual(expect.arrayContaining(['qs:toggle:rate', 'qs:cycle:gab', 'qs:toggle:archive']))
+    expect(cb).toEqual(expect.arrayContaining(['qs:toggle:rate', 'qs:cycle:gab', 'qs:toggle:archive', 'qs:toggle:appbutton']))
   })
 })
 

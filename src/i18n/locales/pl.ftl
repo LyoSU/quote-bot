@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 Prywatność
 qs-row-hidden = 🕵 Wyszukiwanie nadawcy
 qs-row-rate = ⭐ Oceny
 qs-row-archive = 🗂 Archiwum tekstu
+qs-row-appbutton = 📱 Przycisk aplikacji
 qs-suffix-title =
     <b>💟 Emoji naklejki</b>
 

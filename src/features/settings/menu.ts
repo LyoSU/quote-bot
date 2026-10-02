@@ -100,6 +100,7 @@ export interface QuoteSettingsView {
   hidden: boolean
   rate: boolean
   archive: boolean
+  appButton: boolean
 }
 
 function resolveView(ctx: BotContext): QuoteSettingsView | null {
@@ -122,6 +123,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       hidden: s?.hidden ?? true,
       rate: s?.rate ?? true,
       archive: s?.archive?.storeText ?? true,
+      appButton: s?.appButton ?? true,
     }
   }
   if (ctx.user) {
@@ -143,6 +145,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       hidden: s?.hidden ?? true,
       rate: false,
       archive: false,
+      appButton: false,
     }
   }
   return null
@@ -167,6 +170,7 @@ function defaultView(scope: 'group' | 'user'): QuoteSettingsView {
     hidden: true,
     rate: scope === 'group',
     archive: scope === 'group',
+    appButton: scope === 'group',
   }
 }
 
@@ -190,6 +194,7 @@ const RESET_GROUP: Record<string, unknown> = {
   'settings.rate': true,
   'settings.randomQuoteGab': 800,
   'settings.archive.storeText': true,
+  'settings.appButton': true,
 }
 
 // ---- Categories ----
@@ -211,6 +216,7 @@ const CATEGORY_OF: Record<string, Category> = {
   rate: 'group',
   gab: 'group',
   archive: 'group',
+  appbutton: 'group',
 }
 
 // ---- Keyboards (pure given a view + translator) ----
@@ -256,6 +262,7 @@ export function buildCategoryKeyboard(cat: Category, view: QuoteSettingsView, t:
     kb.text(`${t('qs-row-rate')}: ${onOff(view.rate)}`, 'qs:toggle:rate').row()
     kb.text(`${t('qs-row-gab')}: ${gabLabel}`, 'qs:cycle:gab').row()
     kb.text(`${t('qs-row-archive')}: ${onOff(view.archive)}`, 'qs:toggle:archive').row()
+    kb.text(`${t('qs-row-appbutton')}: ${onOff(view.appButton)}`, 'qs:toggle:appbutton').row()
   }
 
   kb.text(t('menu-btn-back'), 'qs:open')
@@ -403,7 +410,7 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|format|style|brand|gab)$/, a
 })
 
 // Flip a boolean setting, staying in its category.
-quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|sendertag|privacy|hidden|rate|archive)$/, async (ctx) => {
+quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|sendertag|privacy|hidden|rate|archive|appbutton)$/, async (ctx) => {
   const key = ctx.match?.[1]
   const view = await authorizedView(ctx)
   if (!view || !key) {
@@ -434,6 +441,9 @@ quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|sendertag|privacy|
   } else if (key === 'archive' && view.scope === 'group') {
     view.archive = !view.archive
     await writeSetting(ctx, 'settings.archive.storeText', view.archive)
+  } else if (key === 'appbutton' && view.scope === 'group') {
+    view.appButton = !view.appButton
+    await writeSetting(ctx, 'settings.appButton', view.appButton)
   }
   await renderCategory(ctx, CATEGORY_OF[key]!, view, true)
   await ctx.answerCallbackQuery().catch(() => {})

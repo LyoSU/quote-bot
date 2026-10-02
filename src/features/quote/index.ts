@@ -331,8 +331,9 @@ async function renderQuote(
   const rateEnabled = Boolean(group && isStickerDelivery && ((group.settings?.rate ?? true) || flag.rate))
 
   // Guest mode ends up with no buttons: no group → no rating and no deep link.
+  // Groups can hide the "open in app" button (settings → group).
   const deepLinkUrl =
-    group && isStickerDelivery && localId != null && ctx.me?.username
+    group && (group.settings?.appButton ?? true) && isStickerDelivery && localId != null && ctx.me?.username
       ? deepLink.forQuote(ctx.me.username, group._id.toString(), localId)
       : null
   const replyMarkup = buildQuoteReplyMarkup({

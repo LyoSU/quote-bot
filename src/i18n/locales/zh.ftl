@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 隐私
 qs-row-hidden = 🕵 发送者搜索
 qs-row-rate = ⭐ 评分
 qs-row-archive = 🗂 文本存档
+qs-row-appbutton = 📱 应用按钮
 qs-suffix-title =
     <b>💟 贴纸表情</b>
 

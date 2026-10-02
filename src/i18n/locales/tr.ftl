@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 Gizlilik
 qs-row-hidden = 🕵 Gönderen arama
 qs-row-rate = ⭐ Değerlendirmeler
 qs-row-archive = 🗂 Metin arşivi
+qs-row-appbutton = 📱 Uygulama düğmesi
 qs-suffix-title =
     <b>💟 Çıkartma emojisi</b>
 

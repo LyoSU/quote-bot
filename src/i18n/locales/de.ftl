@@ -349,6 +349,7 @@ qs-row-privacy = 🔒 Privatsphäre
 qs-row-hidden = 🕵 Sendersuche
 qs-row-rate = ⭐ Bewertungen
 qs-row-archive = 🗂 Textarchiv
+qs-row-appbutton = 📱 App-Button
 qs-suffix-title =
     <b>💟 Sticker-Emoji</b>
 

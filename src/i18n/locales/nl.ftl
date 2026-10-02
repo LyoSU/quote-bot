@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 Privacy
 qs-row-hidden = 🕵 Afzender zoeken
 qs-row-rate = ⭐ Beoordelingen
 qs-row-archive = 🗂 Tekstarchief
+qs-row-appbutton = 📱 App-knop
 qs-suffix-title =
     <b>💟 Sticker-emoji</b>
 

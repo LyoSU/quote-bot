@@ -46,7 +46,7 @@ async function sampleQuote(
 
 function ratingKeyboard(ctx: BotContext, quote: SampledQuote): InlineKeyboard {
   const deepLinkRow =
-    quote.local_id != null && ctx.group && ctx.me?.username
+    quote.local_id != null && ctx.group && ctx.me?.username && (ctx.group.settings?.appButton ?? true)
       ? {
           url: deepLink.forQuote(ctx.me.username, ctx.group._id.toString(), quote.local_id),
           label: ctx.t('app-open_quote'),

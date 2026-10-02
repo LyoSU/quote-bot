@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 개인정보
 qs-row-hidden = 🕵 송신자 검색
 qs-row-rate = ⭐ 평가
 qs-row-archive = 🗂 텍스트 보관
+qs-row-appbutton = 📱 앱 버튼
 qs-suffix-title =
     <b>💟 스티커 이모지</b>
 

@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 الخصوصية
 qs-row-hidden = 🕵 بحث المرسل
 qs-row-rate = ⭐ التقييمات
 qs-row-archive = 🗂 أرشيف النص
+qs-row-appbutton = 📱 زر التطبيق
 qs-suffix-title =
     <b>💟 إيموجي الملصق</b>
 

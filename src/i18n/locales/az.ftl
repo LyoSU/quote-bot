@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 Gizlilik
 qs-row-hidden = 🕵 Göndərən axtarışı
 qs-row-rate = ⭐ Qiymətləndirmələr
 qs-row-archive = 🗂 Mətn arxivi
+qs-row-appbutton = 📱 Tətbiq düyməsi
 qs-suffix-title =
     <b>💟 Stiker emojisi</b>
 

@@ -343,6 +343,7 @@ qs-row-privacy = 🔒 Приватность
 qs-row-hidden = 🕵 Поиск отправителя
 qs-row-rate = ⭐ Оценки
 qs-row-archive = 🗂 Архив текста
+qs-row-appbutton = 📱 Кнопка приложения
 qs-suffix-title =
     <b>💟 Эмодзи стикера</b>
 

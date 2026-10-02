@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 Maxfiylik
 qs-row-hidden = 🕵 Yuboruvchi qidiruvi
 qs-row-rate = ⭐ Reytinglar
 qs-row-archive = 🗂 Matn arxivi
+qs-row-appbutton = 📱 Ilova tugmasi
 qs-suffix-title =
     <b>💟 Stiker emojisi</b>
 

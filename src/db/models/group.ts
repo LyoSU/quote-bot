@@ -29,6 +29,8 @@ const groupSchema = new Schema(
         senderTag: { type: Boolean },
       },
       rate: { type: Boolean, default: true },
+      /** "Open in app" (webapp deep-link) button under quotes. */
+      appButton: { type: Boolean, default: true },
       hidden: { type: Boolean, default: true },
       privacy: { type: Boolean, default: false },
       randomQuoteGab: { type: Number, default: 800 },

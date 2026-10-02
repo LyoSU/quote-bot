@@ -340,6 +340,7 @@ qs-row-privacy = 🔒 Privasi
 qs-row-hidden = 🕵 Pencarian pengirim
 qs-row-rate = ⭐ Penilaian
 qs-row-archive = 🗂 Arsip teks
+qs-row-appbutton = 📱 Tombol aplikasi
 qs-suffix-title =
     <b>💟 Emoji stiker</b>
 

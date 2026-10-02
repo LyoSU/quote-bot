@@ -15,7 +15,7 @@ export function registerGetQuote(composer: Composer<BotContext>): void {
     if (!quote?.file_id) return
 
     const deepLinkRow =
-      quote.local_id != null && quote.group && ctx.me?.username
+      quote.local_id != null && quote.group && ctx.me?.username && (ctx.group?.settings?.appButton ?? true)
         ? {
             url: deepLink.forQuote(ctx.me.username, quote.group.toString(), quote.local_id),
             label: ctx.t('app-open_quote'),
