@@ -4,6 +4,7 @@ import {
   buildCategoryKeyboard,
   nextBrand,
   nextStyle,
+  nextBackdrop,
   nextFormat,
   nextGab,
   nextPartialMode,
@@ -19,6 +20,7 @@ const view = (over: Partial<QuoteSettingsView> = {}): QuoteSettingsView => ({
   color: COLOR_PRESETS[0]!.value,
   brand: 'apple',
   style: 'glass',
+  backdrop: 'doodle',
   suffix: '💜',
   gab: 800,
   media: false,
@@ -39,6 +41,12 @@ function callbacks(kb: ReturnType<typeof buildMainMenu>): string[] {
 }
 
 describe('cyclers', () => {
+  it('cycles the image backdrop doodle → mesh → aurora → doodle', () => {
+    expect(nextBackdrop('doodle')).toBe('mesh')
+    expect(nextBackdrop('mesh')).toBe('aurora')
+    expect(nextBackdrop('aurora')).toBe('doodle')
+  })
+
   it('cycles the bubble style glass → classic → glass', () => {
     expect(nextStyle('glass')).toBe('classic')
     expect(nextStyle('classic')).toBe('glass')
@@ -87,7 +95,7 @@ describe('buildCategoryKeyboard', () => {
 
   it('appearance opens the color/suffix pickers and cycles format/brand', () => {
     const cb = callbacks(buildCategoryKeyboard('appearance', view(), t))
-    expect(cb).toEqual(expect.arrayContaining(['qs:cycle:format', 'qs:cycle:style', 'qs:color', 'qs:cycle:brand', 'qs:suffix']))
+    expect(cb).toEqual(expect.arrayContaining(['qs:cycle:format', 'qs:cycle:style', 'qs:cycle:backdrop', 'qs:color', 'qs:cycle:brand', 'qs:suffix']))
     expect(cb).toContain('qs:open') // back to the menu
   })
 

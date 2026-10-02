@@ -30,6 +30,10 @@ export type PartialQuoteMode = 'framed' | 'plain' | 'off'
 export const QUOTE_STYLES = ['glass', 'classic'] as const
 export type QuoteStylePref = (typeof QUOTE_STYLES)[number]
 
+/** Image/stories wallpapers the renderer knows; unknown values fall back to doodle. */
+export const QUOTE_BACKDROPS = ['doodle', 'mesh', 'aurora'] as const
+export type QuoteBackdropPref = (typeof QUOTE_BACKDROPS)[number]
+
 /** Default output format when no `i`/`p`/`s` flag is given. */
 export type QuoteFormatPref = 'sticker' | 'image' | 'png'
 
@@ -40,6 +44,8 @@ export interface QuoteSettings {
   emojiBrand?: string | null
   /** Bubble style preset in the renderer ('glass' default, 'classic'). */
   style?: QuoteStylePref | null
+  /** Wallpaper behind image/stories quotes ('doodle' default, 'mesh', 'aurora'). */
+  backdrop?: QuoteBackdropPref | null
   partialMode?: PartialQuoteMode | null
   /** Default output format; the `i`/`p`/`s` command flags still override. */
   format?: QuoteFormatPref | null

@@ -26,6 +26,7 @@ const payloadSchema = new Schema(
     backgroundColor: String,
     emojiBrand: String,
     style: String,
+    backdrop: String,
     scale: Number,
     width: Number,
     height: Number,

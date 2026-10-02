@@ -36,6 +36,7 @@ export interface QuotePayload {
   backgroundColor: string
   emojiBrand: string
   style?: string
+  backdrop?: string
   scale: number
   width: number
   height: number

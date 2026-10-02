@@ -172,6 +172,8 @@ export interface QuoteGenerationRequest {
   emojiBrand?: string
   /** Bubble style preset ('glass' | 'classic'); older renderers ignore it. */
   style?: string
+  /** Image/stories wallpaper ('doodle' | 'mesh' | 'aurora'); older renderers ignore it. */
+  backdrop?: string
   messages: QuoteMessage[]
 }
 

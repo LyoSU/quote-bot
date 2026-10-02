@@ -194,6 +194,7 @@ async function renderQuote(
   const emojiSuffix = pickSetting(group?.settings?.quote?.emojiSuffix, user?.settings?.quote?.emojiSuffix)
   const emojiBrandSetting = pickSetting(group?.settings?.quote?.emojiBrand, user?.settings?.quote?.emojiBrand)
   const style = pickSetting(group?.settings?.quote?.style, user?.settings?.quote?.style) ?? undefined
+  const backdrop = pickSetting(group?.settings?.quote?.backdrop, user?.settings?.quote?.backdrop) ?? undefined
 
   // Default output format applies only when no explicit format flag was given.
   const hasFormatFlag = flag.png || flag.img || flag.stories
@@ -315,6 +316,7 @@ async function renderQuote(
       scale: spec.scale,
       emojiBrand,
       style,
+      backdrop,
       messages: assembled.messages,
     })
     image = result.image
@@ -368,6 +370,7 @@ async function renderQuote(
       backgroundColor,
       emojiBrand,
       style,
+      backdrop,
       scale: spec.scale,
       width: spec.width,
       height: spec.height,

@@ -21,6 +21,7 @@ const groupSchema = new Schema(
         emojiSuffix: { type: String },
         emojiBrand: { type: String },
         style: { type: String },
+        backdrop: { type: String },
         partialMode: { type: String },
         format: { type: String },
         media: { type: Boolean },
