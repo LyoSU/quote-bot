@@ -12,7 +12,7 @@ describe('featuresKeyboard', () => {
       'menu:f_colors',
       'menu:f_media',
       'menu:f_group',
-      'menu:main',
+      'menu:guide',
     ])
   })
 })

@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>Qisman sitata</b> — tanlangan parchaga javob berganingda: <i>Ramkali</i> uni sitata ramkasi bilan ko'rsatadi, <i>Ramkasiz</i> faqat matnni, <i>To'liq xabar</i> tanlovni e'tiborsiz qoldiradi.
     • <b>Javobni ko'rsatish</b> — javob berilayotgan xabarni qo'shish.
-    • <b>Media</b> — xabardan foto/videolarni qo'shish.
-    • <b>Mediani kesish</b> — baland mediani moslashtirish uchun kesish.
+    • <b>Media</b> — qisman iqtibosda ham foto/videoni saqlash (oddiy iqtibos mediani doim qo'shadi).
+    • <b>Mediani kesish</b> — izohsiz fotolarni aqlli kesish: kadrning eng qiziq qismi qoladi.
     • <b>Muallif roli</b> — yuboruvchining admin unvoni / imzosini ko'rsatish (yuqori o'ngdagi kichik yorliq).
 qs-cat-privacy-desc =
     <b>🔒 Maxfiylik</b>
@@ -448,6 +448,13 @@ menu-settings-btn-privacy = 🔒 Maxfiylik
 app-open_quote = ✨ Iqtibosni ochish
 app-open_group = 📚 Guruhdagi barcha iqtiboslar
 app-open_root = 💫 Mening guruhlarim
+app-open_top_week = 🏆 Haftaning №1 iqtibosi
+app-open_game = 🎲 Muallifni top
+app-open_top = 🏆 Butun shuhrat zali
+app-open_archive = 🔎 Butun arxiv
+app-open_settings = 🎨 Oldindan ko'rish bilan sozlash
+app-inline_open = 📚 Arxivni ochish
+app-menu_button = Iqtiboslar
 app-info =
     <b>Bularning hammasi ilovada ham bor 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
     To'liq imkoniyatlar uchun meni shaxsiy xabarda ochish uchun quyiga bosing.
 guest-open_in_pm = Quotly-da ochish →
 sticker-save-error-too_large = Rasm juda katta (maksimum 2048×2048). Kichikrog'ini sinab ko'ring 📐
+
+# Start screen (redesign)
+start-new =
+    <b>Salom! 👋</b> Men kulgili xabarlarni chiroyli iqtibos stikerlariga aylantiraman.
+
+    💬 Guruhda: xabarga <code>/q</code> deb javob bering
+    📩 Bu yerda: menga istalgan xabarni yuboring
+start-back =
+    <b>Qaytganingiz bilan! 👋</b>
+start-back-week = “{ $title }” guruhida bu hafta { $count } ta yangi iqtibos
+start-back-generic = Yangi iqtibosga tayyormisiz? 💬
+start-group_ready = Tayyor! Iqtibos yaratish uchun istalgan xabarga <code>/q</code> deb javob bering 💬
+start-guide_title =
+    <b>❓ Yordam</b>
+
+    Nimani bilmoqchisiz?
+start-btn-style = 🎨 Mening uslubim
+start-btn-how = ❓ Bu qanday ishlaydi
+start-btn-help = ❓ Yordam
+start-btn-open = ✨ Iqtiboslarni ochish
+start-btn-add_more = ➕ Yana bir guruhga qo‘shish
+start-btn-group_style = 🎨 Guruh uslubini sozlash

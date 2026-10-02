@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>부분 인용</b> — 선택한 일부에 답장할 때: <i>테두리 있음</i>은 인용 테두리와 함께 표시하고, <i>테두리 없음</i>은 텍스트만, <i>전체 메시지</i>는 선택을 무시합니다.
     • <b>답장 표시</b> — 답장하는 메시지를 포함합니다.
-    • <b>미디어</b> — 메시지의 사진/동영상을 포함합니다.
-    • <b>미디어 자르기</b> — 세로로 긴 미디어를 맞게 자릅니다.
+    • <b>미디어</b> — 부분 인용에서도 사진/동영상을 유지합니다(일반 인용은 항상 미디어를 포함).
+    • <b>미디어 자르기</b> — 캡션 없는 사진을 스마트하게 잘라 가장 흥미로운 부분을 남깁니다.
     • <b>작성자 역할</b> — 보낸 사람의 관리자 직함 / 서명을 표시합니다 (오른쪽 위의 작은 라벨).
 qs-cat-privacy-desc =
     <b>🔒 개인정보</b>
@@ -477,6 +477,13 @@ aimode-modes-memer-description = 밈 문구와 인터넷 문화
 app-open_quote = ✨ 인용구 열기
 app-open_group = 📚 그룹의 모든 인용구
 app-open_root = 💫 내 그룹
+app-open_top_week = 🏆 이번 주 1위
+app-open_game = 🎲 작성자 맞히기
+app-open_top = 🏆 명예의 전당 전체
+app-open_archive = 🔎 전체 아카이브
+app-open_settings = 🎨 미리보기로 설정
+app-inline_open = 📚 아카이브 열기
+app-menu_button = 인용구
 app-info =
     <b>모든 것은 앱에도 있습니다 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
     모든 기능을 사용하려면 아래를 탭하여 PM에서 열어주세요.
 guest-open_in_pm = Quotly에서 열기 →
 sticker-save-error-too_large = 이미지가 너무 큽니다(최대 2048×2048). 더 작은 것을 시도해 보세요 📐
+
+# Start screen (redesign)
+start-new =
+    <b>안녕하세요! 👋</b> 웃긴 메시지를 멋진 인용 스티커로 만들어 드려요.
+
+    💬 그룹에서: 메시지에 <code>/q</code>로 답장하세요
+    📩 여기서: 아무 메시지나 저에게 전달하세요
+start-back =
+    <b>다시 오신 걸 환영해요! 👋</b>
+start-back-week = 「{ $title }」에 이번 주 { $count }개의 새 인용구가 올라왔어요
+start-back-generic = 다음 인용구를 만들어 볼까요? 💬
+start-group_ready = 준비 완료! 아무 메시지에 <code>/q</code>로 답장하면 인용구가 만들어져요 💬
+start-guide_title =
+    <b>❓ 도움말</b>
+
+    무엇이 궁금하세요?
+start-btn-style = 🎨 내 스타일
+start-btn-how = ❓ 사용 방법
+start-btn-help = ❓ 도움말
+start-btn-open = ✨ 인용구 열기
+start-btn-add_more = ➕ 다른 그룹에 추가
+start-btn-group_style = 🎨 그룹 스타일 설정

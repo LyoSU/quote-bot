@@ -8,6 +8,7 @@ import {
   nextFormat,
   nextGab,
   nextPartialMode,
+  resolveView,
   COLOR_PRESETS,
   GAB_PRESETS,
   type QuoteSettingsView,
@@ -118,5 +119,40 @@ describe('COLOR_PRESETS', () => {
     const swatches = COLOR_PRESETS.map((p) => p.swatch)
     expect(new Set(values).size).toBe(values.length)
     expect(new Set(swatches).size).toBe(swatches.length)
+  })
+})
+
+describe('settings preview link', () => {
+  const url = 'https://t.me/bot/app?startapp=settings_x'
+  const t = (k: string) => k
+  const firstRow = (kb: ReturnType<typeof buildMainMenu>) => kb.inline_keyboard[0]!
+
+  it('is the first row in the group scope when the app button is on', () => {
+    expect(firstRow(buildMainMenu(view(), t, url))).toEqual([{ text: 'app-open_settings', url }])
+  })
+
+  it('is hidden in a group that disabled the app button', () => {
+    expect(JSON.stringify(buildMainMenu(view({ appButton: false }), t, url).inline_keyboard)).not.toContain(url)
+  })
+
+  it('shows in the personal scope', () => {
+    expect(firstRow(buildMainMenu(view({ scope: 'user', appButton: false }), t, url))).toEqual([{ text: 'app-open_settings', url }])
+  })
+
+  it('is absent without a url', () => {
+    expect(firstRow(buildMainMenu(view(), t))[0]).toMatchObject({ callback_data: 'qs:cat:appearance' })
+  })
+})
+
+describe('auto-quote (gab) in the group view', () => {
+  // Mirrors services/gab: a group without the field never auto-quotes.
+  const ctxWith = (settings: Record<string, unknown>) => ({ group: { settings } }) as unknown as Parameters<typeof resolveView>[0]
+
+  it('shows a missing value as off', () => {
+    expect(resolveView(ctxWith({}))?.gab).toBe(0)
+  })
+
+  it('keeps an explicit value', () => {
+    expect(resolveView(ctxWith({ randomQuoteGab: 200 }))?.gab).toBe(200)
   })
 })

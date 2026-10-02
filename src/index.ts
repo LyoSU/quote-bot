@@ -1,6 +1,7 @@
 import { config } from './config/env'
 import { logger } from './core/logger'
 import { createBot } from './core/bot'
+import { setupMenuButton } from './core/menu-button'
 import { startRunner } from './core/runner'
 import { installSignalHandlers, onShutdown } from './core/shutdown'
 import { pollWatch, startStallWatchdog } from './core/poll-watch'
@@ -44,6 +45,8 @@ async function main(): Promise<void> {
     { username: bot.botInfo.username, id: bot.botInfo.id, apiRoot: config.BOT_API_ROOT },
     'Bot authorized',
   )
+
+  void setupMenuButton(bot.api)
 
   statsService.start()
   const runner = startRunner(bot)

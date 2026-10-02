@@ -10,7 +10,9 @@ export function registerTop(composer: Composer<BotContext>): void {
     const groupObjectId = ctx.group._id.toString()
 
     const kb = new InlineKeyboard().switchInlineCurrent(ctx.t('top-open'), `top:${groupObjectId}`)
-    if (ctx.me?.username) kb.row().url(ctx.t('app-open_group'), deepLink.forGroup(ctx.me.username, groupObjectId))
+    if (ctx.me?.username && (ctx.group.settings?.appButton ?? true)) {
+      kb.row().url(ctx.t('app-open_top'), deepLink.forTop(ctx.me.username, groupObjectId))
+    }
 
     const messageId = ctx.message?.message_id
     await ctx.reply(ctx.t('top-info'), {

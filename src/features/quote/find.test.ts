@@ -26,18 +26,29 @@ function context(chatType: 'supergroup' | 'private') {
 }
 
 describe('/qfind', () => {
-  it('sends exactly one button that opens group search in the current chat', async () => {
+  it('sends the search button plus a secondary archive link', async () => {
     const composer = new Composer<BotContext>()
     registerFind(composer)
     const { ctx, groupId, reply } = context('supergroup')
     await composer.middleware()(ctx, async () => {})
     expect(reply).toHaveBeenCalledExactlyOnceWith(i18n.t('en', 'find-info'), {
       parse_mode: 'HTML',
-      reply_markup: expect.objectContaining({ inline_keyboard: [[{
-        text: 'Search Quotes', switch_inline_query_current_chat: `find:${groupId} `,
-      }]] }),
+      reply_markup: expect.objectContaining({ inline_keyboard: [
+        [{ text: 'Search Quotes', switch_inline_query_current_chat: `find:${groupId} ` }],
+        [{ text: '🔎 Full archive', url: `https://t.me/testbot/app?startapp=g_${groupId}` }],
+      ] }),
       reply_parameters: { message_id: 10, allow_sending_without_reply: true },
     })
+  })
+
+  it('omits the archive link when the group disabled the app button', async () => {
+    const composer = new Composer<BotContext>()
+    registerFind(composer)
+    const { ctx, groupId, reply } = context('supergroup')
+    ctx.group = { _id: groupId, settings: { appButton: false } } as unknown as NonNullable<BotContext['group']>
+    await composer.middleware()(ctx, async () => {})
+    const kb = reply.mock.calls[0]![1]!.reply_markup as { inline_keyboard: unknown[][] }
+    expect(kb.inline_keyboard).toHaveLength(1)
   })
 
   it('uses the existing group-only guard in private chats', async () => {

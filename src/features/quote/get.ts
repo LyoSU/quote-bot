@@ -2,7 +2,7 @@ import { Composer } from 'grammy'
 import { Types } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { Quote, type QuoteDoc } from '../../db/models'
-import { deepLink } from '../../helpers/deep-link'
+import { resolveQuoteLink } from './app-link'
 import { buildRatingKeyboard } from './reply-markup'
 
 /** `/q_<id>` — resends a stored quote by its Mongo id with fresh rating buttons. */
@@ -14,13 +14,7 @@ export function registerGetQuote(composer: Composer<BotContext>): void {
     const quote = await Quote.findById(raw).lean<QuoteDoc>().catch(() => null)
     if (!quote?.file_id) return
 
-    const deepLinkRow =
-      quote.local_id != null && quote.group && ctx.me?.username && (ctx.group?.settings?.appButton ?? true)
-        ? {
-            url: deepLink.forQuote(ctx.me.username, quote.group.toString(), quote.local_id),
-            label: ctx.t('app-open_quote'),
-          }
-        : undefined
+    const deepLinkRow = await resolveQuoteLink(ctx, quote)
     const kb = buildRatingKeyboard(quote, deepLinkRow)
 
     // Stored quotes are always stickers (persist runs only for the sticker

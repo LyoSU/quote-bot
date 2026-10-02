@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>Kısmi alıntı</b> — seçili bir parçaya yanıt verdiğinde: <i>Çerçeveli</i> onu alıntı çerçevesiyle gösterir, <i>Çerçevesiz</i> yalnızca metni, <i>Tüm mesaj</i> seçimi yok sayar.
     • <b>Yanıtı göster</b> — yanıtlanan mesajı dahil et.
-    • <b>Medya</b> — mesajdaki fotoğrafları/videoları dahil et.
-    • <b>Medyayı kırp</b> — uzun medyayı sığacak şekilde kırp.
+    • <b>Medya</b> — kısmi alıntıda bile fotoğraf/videoyu koru (normal alıntı medyayı her zaman içerir).
+    • <b>Medyayı kırp</b> — açıklamasız fotoğrafları akıllı kırp: karenin en ilginç kısmı kalır.
     • <b>Yazar rolü</b> — gönderenin yönetici unvanını / imzasını göster (sağ üstteki küçük etiket).
 qs-cat-privacy-desc =
     <b>🔒 Gizlilik</b>
@@ -449,6 +449,13 @@ sticker-save-error-too_large = Görsel çok büyük (en fazla 2048×2048). Daha 
 app-open_quote = ✨ Alıntıyı aç
 app-open_group = 📚 Gruptaki tüm alıntılar
 app-open_root = 💫 Gruplarım
+app-open_top_week = 🏆 Haftanın 1 numarası
+app-open_game = 🎲 Yazarı tahmin et
+app-open_top = 🏆 Tüm şöhret listesi
+app-open_archive = 🔎 Tüm arşiv
+app-open_settings = 🎨 Önizlemeyle özelleştir
+app-inline_open = 📚 Arşivi aç
+app-menu_button = Alıntılar
 app-info =
     <b>Hepsi uygulamada da var 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
 
     Tüm özellikler için beni PM'de açmak üzere aşağıya dokunun.
 guest-open_in_pm = Quotly'de aç →
+
+# Start screen (redesign)
+start-new =
+    <b>Merhaba! 👋</b> Komik mesajları şık alıntı çıkartmalarına dönüştürüyorum.
+
+    💬 Grupta: bir mesaja <code>/q</code> ile yanıt ver
+    📩 Burada: bana herhangi bir mesajı ilet
+start-back =
+    <b>Tekrar hoş geldin! 👋</b>
+start-back-week = “{ $title }” grubunda bu hafta { $count } yeni alıntı var
+start-back-generic = Yeni bir alıntıya hazır mısın? 💬
+start-group_ready = Hazır! Alıntı yapmak için herhangi bir mesaja <code>/q</code> ile yanıt ver 💬
+start-guide_title =
+    <b>❓ Yardım</b>
+
+    Ne öğrenmek istersin?
+start-btn-style = 🎨 Stilim
+start-btn-how = ❓ Nasıl çalışır
+start-btn-help = ❓ Yardım
+start-btn-open = ✨ Alıntıları aç
+start-btn-add_more = ➕ Başka bir gruba ekle
+start-btn-group_style = 🎨 Grup stilini ayarla

@@ -350,8 +350,8 @@ qs-cat-content-desc =
 
     • <b>Citation partielle</b> — quand tu réponds à un fragment sélectionné : <i>Avec cadre</i> l'affiche avec le cadre de citation, <i>Sans cadre</i> seulement le texte, <i>Message entier</i> ignore la sélection.
     • <b>Afficher la réponse</b> — inclure le message auquel on répond.
-    • <b>Médias</b> — inclure les photos/vidéos du message.
-    • <b>Rogner les médias</b> — rogner les médias hauts pour les ajuster.
+    • <b>Médias</b> — garder photos/vidéos même dans une citation partielle (une citation normale inclut toujours le média).
+    • <b>Rogner les médias</b> — recadrage intelligent des photos sans légende : la partie la plus intéressante est conservée.
     • <b>Rôle de l'auteur</b> — afficher le titre d'administrateur / la signature de l'expéditeur (la petite étiquette en haut à droite).
 qs-cat-privacy-desc =
     <b>🔒 Confidentialité</b>
@@ -483,6 +483,13 @@ sticker-save-error-too_large = L'image est trop grande (max. 2048×2048). Essaie
 app-open_quote = ✨ Ouvrir la citation
 app-open_group = 📚 Toutes les citations du groupe
 app-open_root = 💫 Mes groupes
+app-open_top_week = 🏆 N° 1 de la semaine
+app-open_game = 🎲 Devine l'auteur
+app-open_top = 🏆 Tout le temple de la renommée
+app-open_archive = 🔎 Toutes les archives
+app-open_settings = 🎨 Personnaliser avec aperçu
+app-inline_open = 📚 Ouvrir les archives
+app-menu_button = Citations
 app-info =
     <b>Tout vit aussi dans l'app 💬</b>
 
@@ -570,3 +577,28 @@ guest-empty_query =
 
     Appuie ci-dessous pour m'ouvrir en message privé et accéder à toutes les fonctionnalités.
 guest-open_in_pm = Ouvrir dans Quotly →
+
+# Start screen (redesign)
+start-new =
+    <b>Salut ! 👋</b> Je transforme les messages drôles en jolis stickers de citation.
+
+    💬 Dans un groupe : réponds avec <code>/q</code> à un message
+    📩 Ici : transfère-moi n’importe quel message
+start-back =
+    <b>Content de te revoir ! 👋</b>
+start-back-week = Dans « { $title } » : { $count ->
+        [one] { $count } nouvelle citation
+        *[other] { $count } nouvelles citations
+    } cette semaine
+start-back-generic = Prêt pour une nouvelle citation ? 💬
+start-group_ready = C’est prêt ! Réponds avec <code>/q</code> à un message pour en faire une citation 💬
+start-guide_title =
+    <b>❓ Aide</b>
+
+    Qu’est-ce qui t’intéresse ?
+start-btn-style = 🎨 Mon style
+start-btn-how = ❓ Comment ça marche
+start-btn-help = ❓ Aide
+start-btn-open = ✨ Ouvrir les citations
+start-btn-add_more = ➕ Ajouter à un autre groupe
+start-btn-group_style = 🎨 Régler le style du groupe

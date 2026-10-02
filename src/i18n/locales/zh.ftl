@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>部分引用</b> — 当你回复选中的片段时：<i>带边框</i> 以引用边框显示，<i>无边框</i> 仅显示文本，<i>整条消息</i> 忽略选择。
     • <b>显示回复</b> — 包含被回复的消息。
-    • <b>媒体</b> — 包含消息中的图片/视频。
-    • <b>裁剪媒体</b> — 裁剪过高的媒体以适应。
+    • <b>媒体</b> — 即使是部分引用也保留图片/视频（普通引用总会包含媒体）。
+    • <b>裁剪媒体</b> — 智能裁剪无说明文字的图片，保留画面中最有看点的部分。
     • <b>作者身份</b> — 显示发送者的管理员头衔 / 签名（右上角的小标签）。
 qs-cat-privacy-desc =
     <b>🔒 隐私</b>
@@ -448,6 +448,13 @@ menu-settings-btn-privacy = 🔒 隐私
 app-open_quote = ✨ 打开引用
 app-open_group = 📚 群组中的所有引用
 app-open_root = 💫 我的群组
+app-open_top_week = 🏆 本周第一
+app-open_game = 🎲 猜猜是谁说的
+app-open_top = 🏆 完整名人堂
+app-open_archive = 🔎 完整归档
+app-open_settings = 🎨 预览并自定义
+app-inline_open = 📚 打开归档
+app-menu_button = 语录
 app-info =
     <b>这一切也都在应用中 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
     点击下方在私聊中打开我，获取完整功能。
 guest-open_in_pm = 在 Quotly 中打开 →
 sticker-save-error-too_large = 图片太大了（最大 2048×2048）。请尝试小一点的 📐
+
+# Start screen (redesign)
+start-new =
+    <b>你好！👋</b> 我能把有趣的消息变成好看的引用贴纸。
+
+    💬 在群里：用 <code>/q</code> 回复一条消息
+    📩 在这里：把任意消息转发给我
+start-back =
+    <b>欢迎回来！👋</b>
+start-back-week = 「{ $title }」本周有 { $count } 条新引用
+start-back-generic = 来做下一条引用吧 💬
+start-group_ready = 搞定！用 <code>/q</code> 回复任意消息即可生成引用 💬
+start-guide_title =
+    <b>❓ 帮助</b>
+
+    想了解什么？
+start-btn-style = 🎨 我的风格
+start-btn-how = ❓ 使用方法
+start-btn-help = ❓ 帮助
+start-btn-open = ✨ 打开引用
+start-btn-add_more = ➕ 添加到另一个群
+start-btn-group_style = 🎨 设置群组风格

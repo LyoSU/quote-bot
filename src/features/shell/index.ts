@@ -1,9 +1,11 @@
-import { Composer, InlineKeyboard } from 'grammy'
+import { Composer, InlineKeyboard, InputFile } from 'grammy'
 import type { BotContext } from '../../core/types'
 import { i18n } from '../../i18n'
 import { deepLink } from '../../helpers/deep-link'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
+import { demoStickers } from './demo-sticker'
+import { groupStartKeyboard, guideKeyboard, loadStartState, newUserKeyboard, returningKeyboard, type StartState } from './start'
 
 const ADMIN_STATUSES = new Set(['creator', 'administrator'])
 
@@ -20,35 +22,63 @@ function htmlReplyOptions(ctx: BotContext): {
   }
 }
 
-// ---- Main menu ----
+// ---- Main screen (/start) ----
 
-function mainMenuKeyboard(ctx: BotContext): InlineKeyboard {
+const escapeHtml = (s: string): string => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+/** Text + keyboard of the private start screen; one cheap state lookup decides new vs returning. */
+async function buildMainScreen(ctx: BotContext): Promise<{ text: string; keyboard: InlineKeyboard }> {
   const username = ctx.me.username
-  return new InlineKeyboard()
-    .url(ctx.t('app-open_root'), deepLink.forRoot(username))
-    .row()
-    .text(ctx.t('menu-btn-features'), 'menu:features')
-    .text(ctx.t('menu-btn-settings'), 'qs:open')
-    .row()
-    .text(ctx.t('menu-btn-help'), 'menu:help')
-    .text(ctx.t('menu-btn-language'), 'menu:language')
-    .row()
-    .url(ctx.t('menu-btn-add_group'), `https://t.me/${username}?startgroup=add`)
+  const t = (k: string): string => ctx.t(k)
+  const state: StartState = ctx.from
+    ? await loadStartState(ctx.from.id).catch((): StartState => ({ kind: 'new' }))
+    : { kind: 'new' }
+
+  if (state.kind === 'new') return { text: ctx.t('start-new'), keyboard: newUserKeyboard(t, username) }
+
+  const line = state.best
+    ? ctx.t('start-back-week', { title: escapeHtml(state.best.title), count: state.best.count })
+    : ctx.t('start-back-generic')
+  return {
+    text: `${ctx.t('start-back')}\n\n${line}`,
+    keyboard: returningKeyboard(t, username, state.best),
+  }
 }
 
+/**
+ * Private /start. Demo sticker ordering: if the sticker is already cached we
+ * send it first (instant, by file_id), then the text. If not, the text goes out
+ * immediately and the sticker is rendered + sent in the background afterwards
+ * (Telegram cannot insert above an existing message) and cached for next time —
+ * the user never waits on the renderer.
+ */
 async function showMainMenu(ctx: BotContext, edit: boolean): Promise<void> {
-  const keyboard = mainMenuKeyboard(ctx)
+  const locale = await ctx.i18n.getLocale()
+  const sendSticker = (media: string | Buffer): Promise<string | undefined> =>
+    ctx
+      .replyWithSticker(typeof media === 'string' ? media : new InputFile(media, 'demo.webp'))
+      .then((m) => m.sticker?.file_id)
+
+  const cached = !edit && demoStickers.get(locale) !== undefined
+  if (cached) await demoStickers.deliver(locale, sendSticker)
+
+  const { text, keyboard } = await buildMainScreen(ctx)
   if (edit && ctx.callbackQuery) {
     await ctx
-      .editMessageText(ctx.t('menu-title'), {
-        parse_mode: 'HTML',
-        link_preview_options: { is_disabled: true },
-        reply_markup: keyboard,
-      })
+      .editMessageText(text, { parse_mode: 'HTML', link_preview_options: { is_disabled: true }, reply_markup: keyboard })
       .catch(() => {})
     return
   }
-  await ctx.reply(ctx.t('menu-title'), { ...htmlReplyOptions(ctx), reply_markup: keyboard })
+  await ctx.reply(text, { ...htmlReplyOptions(ctx), reply_markup: keyboard })
+  if (!edit && !cached) void demoStickers.deliver(locale, sendSticker)
+}
+
+/** Group /start (just after the bot was added): one line + an optional style button. */
+async function showGroupStart(ctx: BotContext): Promise<void> {
+  const keyboard = ctx.group
+    ? groupStartKeyboard((k) => ctx.t(k), ctx.me.username, ctx.group._id.toString(), ctx.group.settings?.appButton)
+    : undefined
+  await ctx.reply(ctx.t('start-group_ready'), { ...htmlReplyOptions(ctx), ...(keyboard ? { reply_markup: keyboard } : {}) })
 }
 
 // ---- Language picker ----
@@ -87,7 +117,7 @@ async function showHelp(ctx: BotContext): Promise<void> {
   if (ctx.group) {
     await ctx.reply(ctx.t('menu-features-title'), {
       ...htmlReplyOptions(ctx),
-      reply_markup: featuresKeyboard((k) => ctx.t(k)),
+      reply_markup: featuresKeyboard((k) => ctx.t(k), 'menu:main'),
     })
     return
   }
@@ -100,7 +130,7 @@ const FEATURE_PAGES = ['basics', 'colors', 'media', 'group'] as const
 type FeaturePage = (typeof FEATURE_PAGES)[number]
 
 /** The "what can I do?" tab overview — the four feature pages + back to the menu. */
-export function featuresKeyboard(t: (key: string) => string): InlineKeyboard {
+export function featuresKeyboard(t: (key: string) => string, backTarget = 'menu:guide'): InlineKeyboard {
   return new InlineKeyboard()
     .text(t('menu-features-btn-basics'), 'menu:f_basics')
     .text(t('menu-features-btn-colors'), 'menu:f_colors')
@@ -108,7 +138,7 @@ export function featuresKeyboard(t: (key: string) => string): InlineKeyboard {
     .text(t('menu-features-btn-media'), 'menu:f_media')
     .text(t('menu-features-btn-group'), 'menu:f_group')
     .row()
-    .text(t('menu-btn-back'), 'menu:main')
+    .text(t('menu-btn-back'), backTarget)
 }
 
 async function editPanel(ctx: BotContext, key: string, keyboard: InlineKeyboard): Promise<void> {
@@ -130,8 +160,8 @@ shellFeature.command('start', async (ctx) => {
     if (payload === 'help') return showHelp(ctx)
     return showMainMenu(ctx, false)
   }
-  // Group /start (e.g. just after being added): show the feature tabs too.
-  await showHelp(ctx)
+  // Group /start (e.g. just after being added): a short "ready" note.
+  await showGroupStart(ctx)
 })
 
 // /help
@@ -187,14 +217,17 @@ shellFeature.callbackQuery(/^menu:(.+)$/, async (ctx) => {
     case 'main':
       await showMainMenu(ctx, true)
       break
+    case 'guide':
+      await editPanel(ctx, 'start-guide_title', guideKeyboard((k) => ctx.t(k)))
+      break
     case 'features':
       await editPanel(ctx, 'menu-features-title', featuresKeyboard((k) => ctx.t(k)))
       break
     case 'help':
-      await editPanel(ctx, 'help', back('menu:main'))
+      await editPanel(ctx, 'help', back('menu:guide'))
       break
     case 'language':
-      await showLanguagePicker(ctx, { edit: true, backCallback: 'menu:main' })
+      await showLanguagePicker(ctx, { edit: true, backCallback: 'menu:guide' })
       break
     default: {
       const page = action.replace(/^f_/, '')

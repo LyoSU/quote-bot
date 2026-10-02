@@ -5,14 +5,15 @@ import { Group, Quote } from '../../db/models'
 import { deepLink } from '../../helpers/deep-link'
 import { onlyGroup } from '../../middlewares/guards'
 import { activeSpeakers, rememberFired } from '../../services/gab'
+import { resolveQuoteLink } from './app-link'
 import { checkQuoteRate } from './rate-limit'
 import { buildRatingKeyboard } from './reply-markup'
 
-interface SampledQuote {
+export interface SampledQuote {
   _id: Types.ObjectId
   file_id?: string
   local_id?: number
-  rate?: { votes?: { vote?: unknown[] }[] }
+  rate?: { score?: number; votes?: { vote?: unknown[] }[] }
 }
 
 /** Chance of biasing toward a "throwback" (quote authored by someone present). */
@@ -44,15 +45,30 @@ async function sampleQuote(
   return any
 }
 
-function ratingKeyboard(ctx: BotContext, quote: SampledQuote): InlineKeyboard {
-  const deepLinkRow =
-    quote.local_id != null && ctx.group && ctx.me?.username && (ctx.group.settings?.appButton ?? true)
-      ? {
-          url: deepLink.forQuote(ctx.me.username, ctx.group._id.toString(), quote.local_id),
-          label: ctx.t('app-open_quote'),
-        }
-      : undefined
-  return buildRatingKeyboard(quote, deepLinkRow)
+/** Roughly 1 in 5 explicit /qrand picks swaps the quote link for the author game. */
+export const GAME_OFFER_CHANCE = 0.2
+
+export function shouldOfferGame(rng: () => number = Math.random): boolean {
+  return rng() < GAME_OFFER_CHANCE
+}
+
+/**
+ * Rating keyboard for a random pick. The app button follows `settings.appButton`
+ * (quote link, or — when `offerGame` wins the dice roll — the author game).
+ */
+export async function buildRandomKeyboard(
+  ctx: BotContext,
+  quote: SampledQuote,
+  opts: { offerGame?: boolean; rng?: () => number } = {},
+): Promise<InlineKeyboard> {
+  if (opts.offerGame && ctx.group && ctx.me?.username && (ctx.group.settings?.appButton ?? true) && shouldOfferGame(opts.rng)) {
+    return buildRatingKeyboard(quote, {
+      url: deepLink.forGame(ctx.me.username, ctx.group._id.toString()),
+      label: ctx.t('app-open_game'),
+    })
+  }
+  const link = await resolveQuoteLink(ctx, { ...quote, group: ctx.group?._id })
+  return buildRatingKeyboard(quote, link)
 }
 
 /**
@@ -62,7 +78,7 @@ function ratingKeyboard(ctx: BotContext, quote: SampledQuote): InlineKeyboard {
  */
 async function sendRandomQuote(
   ctx: BotContext,
-  opts: { preferAuthors?: number[]; silentIfEmpty?: boolean } = {},
+  opts: { preferAuthors?: number[]; silentIfEmpty?: boolean; offerGame?: boolean; rng?: () => number } = {},
 ): Promise<boolean> {
   if (!ctx.group) return false
 
@@ -79,9 +95,8 @@ async function sendRandomQuote(
     return false
   }
 
-  await ctx
-    .replyWithSticker(quote.file_id, { reply_markup: ratingKeyboard(ctx, quote), ...replyParams })
-    .catch(() => {})
+  const reply_markup = await buildRandomKeyboard(ctx, quote, { offerGame: opts.offerGame, rng: opts.rng })
+  await ctx.replyWithSticker(quote.file_id, { reply_markup, ...replyParams }).catch(() => {})
   return true
 }
 
@@ -95,7 +110,7 @@ export function registerRandom(composer: Composer<BotContext>): void {
         await ctx.reply(ctx.t('quote-errors-rate_limit', { seconds: rate.retryAfterSeconds })).catch(() => {})
       return
     }
-    await sendRandomQuote(ctx)
+    await sendRandomQuote(ctx, { offerGame: true })
   })
 
   // Auto-gab: fires only when the fast-path flagged a lively moment. The trick —

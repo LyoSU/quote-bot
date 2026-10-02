@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>Kutipan sebagian</b> — saat kamu membalas potongan terpilih: <i>Berbingkai</i> menampilkannya dengan bingkai kutipan, <i>Tanpa bingkai</i> hanya teksnya, <i>Seluruh pesan</i> mengabaikan pilihan.
     • <b>Tampilkan balasan</b> — sertakan pesan yang dibalas.
-    • <b>Media</b> — sertakan foto/video dari pesan.
-    • <b>Pangkas media</b> — pangkas media tinggi agar pas.
+    • <b>Media</b> — tetap sertakan foto/video bahkan pada kutipan sebagian (kutipan biasa selalu menyertakan media).
+    • <b>Pangkas media</b> — potong cerdas foto tanpa keterangan, menyisakan bagian paling menarik.
     • <b>Peran penulis</b> — tampilkan gelar admin / tanda tangan pengirim (label kecil di kanan atas).
 qs-cat-privacy-desc =
     <b>🔒 Privasi</b>
@@ -477,6 +477,13 @@ aimode-modes-memer-description = Frasa meme dan budaya internet
 app-open_quote = ✨ Buka kutipan
 app-open_group = 📚 Semua kutipan di grup
 app-open_root = 💫 Grup saya
+app-open_top_week = 🏆 No. 1 minggu ini
+app-open_game = 🎲 Tebak penulisnya
+app-open_top = 🏆 Seluruh hall of fame
+app-open_archive = 🔎 Seluruh arsip
+app-open_settings = 🎨 Atur dengan pratinjau
+app-inline_open = 📚 Buka arsip
+app-menu_button = Kutipan
 app-info =
     <b>Semuanya juga ada di aplikasi 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
     Ketuk di bawah untuk membuka saya di PM demi set fitur lengkap.
 guest-open_in_pm = Buka di Quotly →
 sticker-save-error-too_large = Gambar terlalu besar (maks 2048×2048). Coba yang lebih kecil 📐
+
+# Start screen (redesign)
+start-new =
+    <b>Halo! 👋</b> Aku mengubah pesan lucu jadi stiker kutipan yang keren.
+
+    💬 Di grup: balas pesan dengan <code>/q</code>
+    📩 Di sini: teruskan pesan apa saja ke aku
+start-back =
+    <b>Selamat datang kembali! 👋</b>
+start-back-week = Di “{ $title }” ada { $count } kutipan baru minggu ini
+start-back-generic = Siap bikin kutipan berikutnya? 💬
+start-group_ready = Siap! Balas pesan apa saja dengan <code>/q</code> untuk membuat kutipan 💬
+start-guide_title =
+    <b>❓ Bantuan</b>
+
+    Ada yang ingin kamu tahu?
+start-btn-style = 🎨 Gayaku
+start-btn-how = ❓ Cara kerjanya
+start-btn-help = ❓ Bantuan
+start-btn-open = ✨ Buka kutipan
+start-btn-add_more = ➕ Tambah ke grup lain
+start-btn-group_style = 🎨 Atur gaya grup

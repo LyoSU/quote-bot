@@ -266,10 +266,17 @@ find-open = Search Quotes
 app-open_quote = ✨ Open quote
 app-open_group = 📚 All quotes in group
 app-open_root = 💫 My groups
+app-open_top_week = 🏆 #1 of the week
+app-open_game = 🎲 Guess the author
+app-open_top = 🏆 Full Hall of Fame
+app-open_archive = 🔎 Full archive
+app-open_settings = 🎨 Customize the look
+app-inline_open = 📚 Open archive
+app-menu_button = Quotes
 app-info =
     <b>It all lives in the app too 💬</b>
 
-    Flip through quotes, dig into the archive, chase the tops — one tap away. Hit the button ↓
+    Browse quotes, search the archive, check the rankings — all in one place. Tap the button below ↓
 donate-info =
     <b>Support QuotLyBot's Development! ☕</b>
 
@@ -381,11 +388,11 @@ qs-cat-appearance-desc =
 qs-cat-content-desc =
     <b>✂️ What to quote</b>
 
-    • <b>Partial quote</b> — when you reply to a selected fragment: <i>Framed</i> shows it with the quote frame, <i>No frame</i> shows just the text, <i>Full message</i> ignores the selection.
-    • <b>Show reply</b> — include the message being replied to.
-    • <b>Media</b> — include photos/videos from the message.
-    • <b>Crop media</b> — crop tall media to fit.
-    • <b>Author role</b> — show the sender's admin title / signature (the small label top-right).
+    • <b>Partial quote</b> — when you reply to a selected part of a message: <i>Framed</i> shows it with the quote frame, <i>No frame</i> shows just the text, <i>Full message</i> takes everything, ignoring the selection.
+    • <b>What came before</b> — show the message that was replied to above the quote.
+    • <b>Media</b> — keep photos and videos even in a partial quote (a regular quote always has them).
+    • <b>Smart crop</b> — photos without a caption are cropped to a narrow strip around the most interesting part. Wide shots lose most of their width.
+    • <b>Author role</b> — show “admin”, “owner” or a custom title (the small label top-right).
 qs-cat-privacy-desc =
     <b>🔒 Privacy</b>
 
@@ -425,8 +432,8 @@ qs-gab-sometimes = Sometimes
 qs-gab-rarely = Rarely
 qs-row-suffix = 💟 Sticker emoji
 qs-row-media = 📎 Media
-qs-row-reply = 💬 Show reply
-qs-row-crop = 🖼 Crop media
+qs-row-reply = 💬 What came before
+qs-row-crop = 🖼 Smart crop
 qs-row-sendertag = 🏷 Author role
 qs-row-privacy = 🔒 Privacy
 qs-row-hidden = 🕵 Sender search
@@ -484,8 +491,8 @@ menu-features-media-title =
     <b>Include media:</b>
     <code>/q m</code> — adds images/videos
 
-    <b>Crop media:</b>
-    <code>/q c</code> — crops to fit
+    <b>Smart crop:</b>
+    <code>/q c</code> — crops the photo to a narrow strip around the most interesting part
 
     <b>Show replies:</b>
     <code>/q r</code> — includes replied message
@@ -566,3 +573,28 @@ guest-empty_query =
 
     Tap below to open me in PM for the full feature set.
 guest-open_in_pm = Open in Quotly →
+
+# Start screen (redesign)
+start-new =
+    <b>Hi! 👋</b> I turn funny messages into stylish quote stickers.
+
+    💬 In a group: reply to a message with <code>/q</code>
+    📩 Here: forward me any message
+start-back =
+    <b>Welcome back! 👋</b>
+start-back-week = In “{ $title }”: { $count ->
+        [one] { $count } new quote
+        *[other] { $count } new quotes
+    } this week
+start-back-generic = Ready for your next great quote? 💬
+start-group_ready = All set! Reply to any message with <code>/q</code> to make a quote 💬
+start-guide_title =
+    <b>❓ Help</b>
+
+    What would you like to know?
+start-btn-style = 🎨 My style
+start-btn-how = ❓ How it works
+start-btn-help = ❓ Help
+start-btn-open = ✨ Open the app
+start-btn-add_more = ➕ Add to another group
+start-btn-group_style = 🎨 Group style

@@ -3,6 +3,7 @@ import type { BotContext } from '../../core/types'
 import { onlyAdmin } from '../../middlewares/guards'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { updateUserSettings } from '../../db/repositories/user-repository'
+import { deepLink } from '../../helpers/deep-link'
 import { DEFAULT_BACKGROUND } from '../quote/color'
 import { DEFAULT_STICKER_EMOJI, QUOTE_BACKDROPS, QUOTE_STYLES, type PartialQuoteMode, type QuoteBackdropPref, type QuoteFormatPref, type QuoteStylePref } from '../quote/render'
 
@@ -107,7 +108,7 @@ export interface QuoteSettingsView {
   appButton: boolean
 }
 
-function resolveView(ctx: BotContext): QuoteSettingsView | null {
+export function resolveView(ctx: BotContext): QuoteSettingsView | null {
   if (ctx.group) {
     const s = ctx.group.settings
     return {
@@ -119,7 +120,9 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       style: (s?.quote?.style as QuoteStylePref | undefined) ?? 'glass',
       backdrop: (s?.quote?.backdrop as QuoteBackdropPref | undefined) ?? 'doodle',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
-      gab: s?.randomQuoteGab ?? 800,
+      // Missing = off: the gab service reads `randomQuoteGab ?? 0`, so legacy groups
+      // without the field never auto-quote — show that instead of the schema default.
+      gab: s?.randomQuoteGab ?? 0,
       media: s?.quote?.media ?? false,
       showReply: s?.quote?.showReply ?? false,
       crop: s?.quote?.crop ?? false,
@@ -233,9 +236,14 @@ const CATEGORY_OF: Record<string, Category> = {
 type Translate = (key: string) => string
 
 /** Top-level menu: one button per category + reset, with explanations on each panel. */
-export function buildMainMenu(view: QuoteSettingsView, t: Translate): InlineKeyboard {
+export function buildMainMenu(view: QuoteSettingsView, t: Translate, settingsUrl?: string | null): InlineKeyboard {
   const kb = new InlineKeyboard()
-    .text(t('qs-cat-appearance'), 'qs:cat:appearance')
+  // First row: live-preview settings in the Mini App — the primary way to set
+  // things up; the in-chat categories below stay as the quick/legacy path.
+  // Groups can hide every app link via `appButton`; the personal (private)
+  // scope has no such switch.
+  if (settingsUrl && (view.scope === 'user' || view.appButton)) kb.url(t('app-open_settings'), settingsUrl).row()
+  kb.text(t('qs-cat-appearance'), 'qs:cat:appearance')
     .text(t('qs-cat-content'), 'qs:cat:content')
     .row()
     .text(t('qs-cat-privacy'), 'qs:cat:privacy')
@@ -327,7 +335,9 @@ async function show(ctx: BotContext, bodyKey: string, reply_markup: InlineKeyboa
 }
 
 async function renderMain(ctx: BotContext, view: QuoteSettingsView, edit: boolean): Promise<void> {
-  await show(ctx, 'qs-title', buildMainMenu(view, (k) => ctx.t(k)), edit)
+  const username = ctx.me?.username
+  const settingsUrl = username ? deepLink.forSettings(username, view.scope === 'group' ? ctx.group?._id.toString() : undefined) : null
+  await show(ctx, 'qs-title', buildMainMenu(view, (k) => ctx.t(k), settingsUrl), edit)
 }
 
 async function renderCategory(ctx: BotContext, cat: Category, view: QuoteSettingsView, edit: boolean): Promise<void> {

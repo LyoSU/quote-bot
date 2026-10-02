@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>部分引用</b> — 選択した部分に返信したとき：<i>枠あり</i> は引用の枠付きで表示、<i>枠なし</i> はテキストのみ、<i>メッセージ全体</i> は選択を無視します。
     • <b>返信を表示</b> — 返信先のメッセージを含める。
-    • <b>メディア</b> — メッセージの写真/動画を含める。
-    • <b>メディアを切り抜き</b> — 縦長のメディアを収まるように切り抜く。
+    • <b>メディア</b> — 部分引用でも写真/動画を残す（通常の引用では常にメディアが含まれます）。
+    • <b>メディアを切り抜き</b> — キャプションのない写真をスマートにトリミングし、最も見どころのある部分を残す。
     • <b>投稿者の役職</b> — 送信者の管理者の肩書き / 署名を表示（右上の小さなラベル）。
 qs-cat-privacy-desc =
     <b>🔒 プライバシー</b>
@@ -477,6 +477,13 @@ aimode-modes-memer-description = ミームのフレーズとインターネッ�
 app-open_quote = ✨ 引用を開く
 app-open_group = 📚 グループ内のすべての引用
 app-open_root = 💫 マイグループ
+app-open_top_week = 🏆 今週の1位
+app-open_game = 🎲 作者当てゲーム
+app-open_top = 🏆 殿堂入りをすべて見る
+app-open_archive = 🔎 アーカイブ全体
+app-open_settings = 🎨 プレビューしながら設定
+app-inline_open = 📚 アーカイブを開く
+app-menu_button = 名言
 app-info =
     <b>すべてはアプリの中にもあります 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
     フル機能を使うには下をタップしてPMで開いてください。
 guest-open_in_pm = Quotlyで開く →
 sticker-save-error-too_large = 画像が大きすぎます（最大 2048×2048）。もっと小さいものを試してください 📐
+
+# Start screen (redesign)
+start-new =
+    <b>こんにちは！👋</b> おもしろいメッセージを、おしゃれな引用ステッカーにします。
+
+    💬 グループでは：メッセージに <code>/q</code> で返信
+    📩 ここでは：好きなメッセージを転送してください
+start-back =
+    <b>おかえりなさい！👋</b>
+start-back-week = 「{ $title }」で今週 { $count } 件の新しい引用
+start-back-generic = 次の引用を作りましょう 💬
+start-group_ready = 準備完了！メッセージに <code>/q</code> で返信すると引用が作れます 💬
+start-guide_title =
+    <b>❓ ヘルプ</b>
+
+    何を知りたいですか？
+start-btn-style = 🎨 マイスタイル
+start-btn-how = ❓ 使い方
+start-btn-help = ❓ ヘルプ
+start-btn-open = ✨ 引用を開く
+start-btn-add_more = ➕ 別のグループに追加
+start-btn-group_style = 🎨 グループのスタイルを設定

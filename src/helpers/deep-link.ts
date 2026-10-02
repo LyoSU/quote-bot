@@ -28,4 +28,27 @@ export function forQuote(botUsername: string, groupObjectId?: string, localId?: 
   return build(botUsername, `q_${localId}_g_${groupObjectId}`)
 }
 
-export const deepLink = { forRoot, forGroup, forQuote }
+/** Telegram caps `startapp` at 64 chars of [A-Za-z0-9_-]; anything else is dropped. */
+const SAFE_PARAM = /^[A-Za-z0-9_-]{1,64}$/
+
+function withId(botUsername: string, prefix: string, groupObjectId?: string): string {
+  const param = groupObjectId ? `${prefix}_${groupObjectId}` : prefix
+  return SAFE_PARAM.test(param) ? build(botUsername, param) : build(botUsername)
+}
+
+/** Group hall of fame (top quotes). */
+export function forTop(botUsername: string, groupObjectId: string): string {
+  return withId(botUsername, 'top', groupObjectId)
+}
+
+/** "Guess the author" game for a group. */
+export function forGame(botUsername: string, groupObjectId: string): string {
+  return withId(botUsername, 'game', groupObjectId)
+}
+
+/** Settings preview: a group's, or the personal ones when no group is given. */
+export function forSettings(botUsername: string, groupObjectId?: string): string {
+  return withId(botUsername, 'settings', groupObjectId)
+}
+
+export const deepLink = { forRoot, forGroup, forQuote, forTop, forGame, forSettings }

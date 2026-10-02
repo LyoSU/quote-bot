@@ -344,8 +344,8 @@ qs-cat-content-desc =
 
     • <b>Gedeeltelijk citaat</b> — wanneer je op een geselecteerd fragment antwoordt: <i>Met kader</i> toont het met het citaatkader, <i>Zonder kader</i> alleen de tekst, <i>Volledig bericht</i> negeert de selectie.
     • <b>Antwoord tonen</b> — het bericht waarop wordt geantwoord meenemen.
-    • <b>Media</b> — foto's/video's uit het bericht meenemen.
-    • <b>Media bijsnijden</b> — hoge media passend bijsnijden.
+    • <b>Media</b> — foto's/video's behouden, ook in een gedeeltelijk citaat (een gewoon citaat bevat altijd media).
+    • <b>Media bijsnijden</b> — foto's zonder bijschrift slim bijsnijden — het interessantste deel blijft.
     • <b>Auteursrol</b> — de beheerderstitel / handtekening van de afzender tonen (het kleine label rechtsboven).
 qs-cat-privacy-desc =
     <b>🔒 Privacy</b>
@@ -495,6 +495,13 @@ aimode-modes-memer-description = Memezinnen en internetcultuur
 app-open_quote = ✨ Citaat openen
 app-open_group = 📚 Alle citaten in de groep
 app-open_root = 💫 Mijn groepen
+app-open_top_week = 🏆 Nr. 1 van de week
+app-open_game = 🎲 Raad de auteur
+app-open_top = 🏆 De hele eregalerij
+app-open_archive = 🔎 Het hele archief
+app-open_settings = 🎨 Aanpassen met voorbeeld
+app-inline_open = 📚 Archief openen
+app-menu_button = Citaten
 app-info =
     <b>Het leeft allemaal ook in de app 💬</b>
 
@@ -558,3 +565,28 @@ guest-empty_query =
 guest-open_in_pm = Openen in Quotly →
 
 sticker-save-error-too_large = De afbeelding is te groot (max 2048×2048). Probeer een kleinere 📐
+
+# Start screen (redesign)
+start-new =
+    <b>Hoi! 👋</b> Ik maak van grappige berichten mooie quote-stickers.
+
+    💬 In een groep: reageer met <code>/q</code> op een bericht
+    📩 Hier: stuur me een bericht door
+start-back =
+    <b>Welkom terug! 👋</b>
+start-back-week = In ‘{ $title }’: { $count ->
+        [one] { $count } nieuwe quote
+        *[other] { $count } nieuwe quotes
+    } deze week
+start-back-generic = Klaar voor je volgende quote? 💬
+start-group_ready = Klaar! Reageer met <code>/q</code> op een bericht om een quote te maken 💬
+start-guide_title =
+    <b>❓ Help</b>
+
+    Wat wil je weten?
+start-btn-style = 🎨 Mijn stijl
+start-btn-how = ❓ Hoe het werkt
+start-btn-help = ❓ Help
+start-btn-open = ✨ Quotes openen
+start-btn-add_more = ➕ Aan nog een groep toevoegen
+start-btn-group_style = 🎨 Groepsstijl instellen

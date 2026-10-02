@@ -346,8 +346,8 @@ qs-cat-content-desc =
 
     • <b>Citação parcial</b> — quando você responde a um trecho selecionado: <i>Com moldura</i> mostra-o com a moldura da citação, <i>Sem moldura</i> apenas o texto, <i>Mensagem inteira</i> ignora a seleção.
     • <b>Mostrar resposta</b> — incluir a mensagem a que se responde.
-    • <b>Mídia</b> — incluir fotos/vídeos da mensagem.
-    • <b>Recortar mídia</b> — recortar mídia alta para caber.
+    • <b>Mídia</b> — manter fotos/vídeos mesmo numa citação parcial (uma citação normal sempre inclui a mídia).
+    • <b>Recortar mídia</b> — recorte inteligente de fotos sem legenda: fica a parte mais interessante do quadro.
     • <b>Papel do autor</b> — mostrar o cargo de administrador / a assinatura do remetente (a pequena etiqueta no canto superior direito).
 qs-cat-privacy-desc =
     <b>🔒 Privacidade</b>
@@ -469,6 +469,13 @@ sticker-save-error-too_large = A imagem é grande demais (máx. 2048×2048). Ten
 app-open_quote = ✨ Abrir citação
 app-open_group = 📚 Todas as citações do grupo
 app-open_root = 💫 Meus grupos
+app-open_top_week = 🏆 N.º 1 da semana
+app-open_game = 🎲 Adivinhe o autor
+app-open_top = 🏆 Todo o hall da fama
+app-open_archive = 🔎 Todo o arquivo
+app-open_settings = 🎨 Personalizar com pré-visualização
+app-inline_open = 📚 Abrir arquivo
+app-menu_button = Citações
 app-info =
     <b>Tudo isso também vive no app 💬</b>
 
@@ -559,3 +566,28 @@ guest-empty_query =
 
     Toque abaixo para me abrir no PM e ter todos os recursos.
 guest-open_in_pm = Abrir no Quotly →
+
+# Start screen (redesign)
+start-new =
+    <b>Olá! 👋</b> Transformo mensagens engraçadas em stickers de citação estilosos.
+
+    💬 No grupo: responda com <code>/q</code> a uma mensagem
+    📩 Aqui: encaminhe qualquer mensagem para mim
+start-back =
+    <b>Bem-vindo de volta! 👋</b>
+start-back-week = Em “{ $title }”: { $count ->
+        [one] { $count } nova citação
+        *[other] { $count } novas citações
+    } esta semana
+start-back-generic = Pronto para a próxima citação? 💬
+start-group_ready = Pronto! Responda com <code>/q</code> a qualquer mensagem para criar uma citação 💬
+start-guide_title =
+    <b>❓ Ajuda</b>
+
+    O que você quer saber?
+start-btn-style = 🎨 Meu estilo
+start-btn-how = ❓ Como funciona
+start-btn-help = ❓ Ajuda
+start-btn-open = ✨ Abrir citações
+start-btn-add_more = ➕ Adicionar a outro grupo
+start-btn-group_style = 🎨 Ajustar o estilo do grupo

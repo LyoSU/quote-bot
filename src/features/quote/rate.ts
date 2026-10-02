@@ -2,6 +2,7 @@ import { Composer, InlineKeyboard } from 'grammy'
 import { Types, type PipelineStage } from 'mongoose'
 import type { BotContext } from '../../core/types'
 import { Quote, type QuoteDoc } from '../../db/models'
+import { resolveQuoteLink } from './app-link'
 
 // Vote entries are usually ObjectIds, but legacy data also holds raw string
 // ids — compare/store defensively rather than assuming ObjectId methods exist.
@@ -159,11 +160,17 @@ async function handleRate(ctx: BotContext, kind: 'rate' | 'irate'): Promise<void
     )
   } else {
     kb.text(`👍 ${up || ''}`.trim(), 'rate:👍').text(`👎 ${down || ''}`.trim(), 'rate:👎')
-    // Preserve a trailing url button (e.g. "Open in app") if present.
-    const rows = ctx.callbackQuery?.message?.reply_markup?.inline_keyboard ?? []
-    const lastRow = rows[rows.length - 1]
-    const urlButton = lastRow?.find((b): b is { text: string; url: string } => 'url' in b)
-    if (urlButton) kb.row().url(urlButton.text, urlButton.url)
+    // The app link shares the vote row; a vote can crown the quote #1 of the
+    // week, so the label is recomputed from the post-update score.
+    const link = await resolveQuoteLink(ctx, updated ?? quote).catch(() => undefined)
+    if (link) {
+      kb.url(link.label, link.url)
+    } else if (!ctx.group) {
+      // No group context to re-resolve from: keep whatever url button was there.
+      const rows = ctx.callbackQuery?.message?.reply_markup?.inline_keyboard ?? []
+      const urlButton = rows.flat().find((b): b is { text: string; url: string } => 'url' in b)
+      if (urlButton) kb.url(urlButton.text, urlButton.url)
+    }
   }
 
   await ctx.editMessageReplyMarkup({ reply_markup: kb }).catch(() => {})

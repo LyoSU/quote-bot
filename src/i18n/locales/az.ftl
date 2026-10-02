@@ -326,8 +326,8 @@ qs-cat-content-desc =
 
     • <b>Qismən sitat</b> — seçilmiş hissəyə cavab verəndə: <i>Çərçivəli</i> onu sitat çərçivəsi ilə göstərir, <i>Çərçivəsiz</i> yalnız mətni, <i>Bütün mesaj</i> seçimi nəzərə almır.
     • <b>Cavabı göstər</b> — cavab verilən mesajı daxil et.
-    • <b>Media</b> — mesajdakı foto/videoları daxil et.
-    • <b>Medianı kəs</b> — hündür medianı uyğunlaşdırmaq üçün kəs.
+    • <b>Media</b> — hissəvi sitatda belə foto/videonu saxla (adi sitat medianı həmişə daxil edir).
+    • <b>Medianı kəs</b> — başlıqsız fotoları ağıllı kəs: kadrın ən maraqlı hissəsi qalır.
     • <b>Müəllif rolu</b> — göndərənin admin titulunu / imzasını göstər (sağ yuxarıdakı kiçik etiket).
 qs-cat-privacy-desc =
     <b>🔒 Gizlilik</b>
@@ -448,6 +448,13 @@ menu-settings-btn-privacy = 🔒 Gizlilik
 app-open_quote = ✨ Sitatı aç
 app-open_group = 📚 Qrupdakı bütün sitatlar
 app-open_root = 💫 Mənim qruplarım
+app-open_top_week = 🏆 Həftənin №1-i
+app-open_game = 🎲 Müəllifi tap
+app-open_top = 🏆 Bütün şöhrət zalı
+app-open_archive = 🔎 Bütün arxiv
+app-open_settings = 🎨 Önbaxışla fərdiləşdir
+app-inline_open = 📚 Arxivi aç
+app-menu_button = Sitatlar
 app-info =
     <b>Bunların hamısı tətbiqdə də var 💬</b>
 
@@ -539,3 +546,25 @@ guest-empty_query =
     Tam funksiya dəsti üçün məni şəxsi mesajda açmaq üçün aşağıya toxunun.
 guest-open_in_pm = Quotly-də aç →
 sticker-save-error-too_large = Şəkil çox böyükdür (maksimum 2048×2048). Daha kiçiyini sınayın 📐
+
+# Start screen (redesign)
+start-new =
+    <b>Salam! 👋</b> Mən gülməli mesajları şık sitat stikerlərinə çevirirəm.
+
+    💬 Qrupda: mesaja <code>/q</code> ilə cavab ver
+    📩 Burada: mənə istənilən mesajı yönləndir
+start-back =
+    <b>Xoş gördük! 👋</b>
+start-back-week = “{ $title }” qrupunda bu həftə { $count } yeni sitat var
+start-back-generic = Yeni sitata hazırsan? 💬
+start-group_ready = Hazırdır! Sitat yaratmaq üçün istənilən mesaja <code>/q</code> ilə cavab ver 💬
+start-guide_title =
+    <b>❓ Kömək</b>
+
+    Nə öyrənmək istəyirsən?
+start-btn-style = 🎨 Mənim stilim
+start-btn-how = ❓ Necə işləyir
+start-btn-help = ❓ Kömək
+start-btn-open = ✨ Sitatları aç
+start-btn-add_more = ➕ Başqa qrupa əlavə et
+start-btn-group_style = 🎨 Qrup stilini tənzimlə

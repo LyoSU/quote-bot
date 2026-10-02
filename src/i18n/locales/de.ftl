@@ -350,8 +350,8 @@ qs-cat-content-desc =
 
     • <b>Teilzitat</b> — wenn du auf einen markierten Ausschnitt antwortest: <i>Mit Rahmen</i> zeigt ihn mit dem Zitatrahmen, <i>Ohne Rahmen</i> nur den Text, <i>Ganze Nachricht</i> ignoriert die Markierung.
     • <b>Antwort zeigen</b> — die Nachricht einbeziehen, auf die geantwortet wird.
-    • <b>Medien</b> — Fotos/Videos aus der Nachricht einbeziehen.
-    • <b>Medien zuschneiden</b> — hohe Medien passend zuschneiden.
+    • <b>Medien</b> — Fotos/Videos auch in einem Teilzitat behalten (ein normales Zitat enthält Medien immer).
+    • <b>Medien zuschneiden</b> — Fotos ohne Bildunterschrift smart zuschneiden – der interessanteste Bildausschnitt bleibt.
     • <b>Autor-Rolle</b> — den Admin-Titel / die Signatur des Absenders anzeigen (das kleine Label oben rechts).
 qs-cat-privacy-desc =
     <b>🔒 Privatsphäre</b>
@@ -483,6 +483,13 @@ sticker-save-error-too_large = Das Bild ist zu groß (max. 2048×2048). Versuche
 app-open_quote = ✨ Zitat öffnen
 app-open_group = 📚 Alle Zitate der Gruppe
 app-open_root = 💫 Meine Gruppen
+app-open_top_week = 🏆 Nr. 1 der Woche
+app-open_game = 🎲 Errate den Autor
+app-open_top = 🏆 Ganze Ruhmeshalle
+app-open_archive = 🔎 Ganzes Archiv
+app-open_settings = 🎨 Mit Vorschau anpassen
+app-inline_open = 📚 Archiv öffnen
+app-menu_button = Zitate
 app-info =
     <b>Alles lebt auch in der App 💬</b>
 
@@ -570,3 +577,28 @@ guest-empty_query =
 
     Tippe unten, um mich im PN-Chat für den vollen Funktionsumfang zu öffnen.
 guest-open_in_pm = In Quotly öffnen →
+
+# Start screen (redesign)
+start-new =
+    <b>Hallo! 👋</b> Ich mache aus lustigen Nachrichten schicke Zitat-Sticker.
+
+    💬 In der Gruppe: Antworte mit <code>/q</code> auf eine Nachricht
+    📩 Hier: Leite mir einfach eine Nachricht weiter
+start-back =
+    <b>Willkommen zurück! 👋</b>
+start-back-week = In „{ $title }“: { $count ->
+        [one] { $count } neues Zitat
+        *[other] { $count } neue Zitate
+    } diese Woche
+start-back-generic = Bereit für das nächste Zitat? 💬
+start-group_ready = Fertig! Antworte mit <code>/q</code> auf eine Nachricht, um ein Zitat zu erstellen 💬
+start-guide_title =
+    <b>❓ Hilfe</b>
+
+    Was möchtest du wissen?
+start-btn-style = 🎨 Mein Stil
+start-btn-how = ❓ So funktioniert’s
+start-btn-help = ❓ Hilfe
+start-btn-open = ✨ Zitate öffnen
+start-btn-add_more = ➕ Zu weiterer Gruppe hinzufügen
+start-btn-group_style = 🎨 Gruppenstil einstellen

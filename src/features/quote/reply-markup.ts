@@ -15,20 +15,20 @@ export function buildQuoteReplyMarkup(
   opts: QuoteReplyMarkupOptions = {},
 ): { reply_markup?: InlineKeyboard } {
   const keyboard = new InlineKeyboard()
-  let hasRows = false
+  let hasButtons = false
 
+  // 👍 👎 and the app link share one row (the link sits alone when rating is off).
   if (opts.rateEnabled) {
     keyboard.text('👍', 'rate:👍').text('👎', 'rate:👎')
-    hasRows = true
+    hasButtons = true
   }
 
   if (opts.deepLinkUrl && opts.openInAppLabel) {
-    if (hasRows) keyboard.row()
     keyboard.url(opts.openInAppLabel, opts.deepLinkUrl)
-    hasRows = true
+    hasButtons = true
   }
 
-  return hasRows ? { reply_markup: keyboard } : {}
+  return hasButtons ? { reply_markup: keyboard } : {}
 }
 
 /** A previously stored quote, as needed to rebuild its rating keyboard. */
@@ -38,12 +38,12 @@ export interface RatedQuote {
 
 /**
  * Builds the `👍 N / 👎 M` rating keyboard for a resent stored quote (`/q_<id>`,
- * `/qrand`, auto-gab), with an optional "open in app" row.
+ * `/qrand`, auto-gab), with the optional "open in app" button in the same row.
  */
 export function buildRatingKeyboard(quote: RatedQuote, deepLinkRow?: { url: string; label: string }): InlineKeyboard {
   const up = quote.rate?.votes?.[0]?.vote?.length ?? 0
   const down = quote.rate?.votes?.[1]?.vote?.length ?? 0
   const keyboard = new InlineKeyboard().text(`👍 ${up || ''}`.trim(), 'rate:👍').text(`👎 ${down || ''}`.trim(), 'rate:👎')
-  if (deepLinkRow) keyboard.row().url(deepLinkRow.label, deepLinkRow.url)
+  if (deepLinkRow) keyboard.url(deepLinkRow.label, deepLinkRow.url)
   return keyboard
 }

@@ -346,8 +346,8 @@ qs-cat-content-desc =
 
     • <b>Citazione parziale</b> — quando rispondi a un frammento selezionato: <i>Con cornice</i> lo mostra con la cornice della citazione, <i>Senza cornice</i> solo il testo, <i>Messaggio intero</i> ignora la selezione.
     • <b>Mostra risposta</b> — includere il messaggio a cui si risponde.
-    • <b>Media</b> — includere foto/video dal messaggio.
-    • <b>Ritaglia media</b> — ritagliare i media alti per adattarli.
+    • <b>Media</b> — mantenere foto/video anche in una citazione parziale (una citazione normale include sempre i media).
+    • <b>Ritaglia media</b> — ritaglio intelligente delle foto senza didascalia: resta la parte più interessante.
     • <b>Ruolo autore</b> — mostrare il titolo di amministratore / la firma del mittente (la piccola etichetta in alto a destra).
 qs-cat-privacy-desc =
     <b>🔒 Privacy</b>
@@ -497,6 +497,13 @@ aimode-modes-memer-description = Frasi da meme e cultura di internet
 app-open_quote = ✨ Apri citazione
 app-open_group = 📚 Tutte le citazioni del gruppo
 app-open_root = 💫 I miei gruppi
+app-open_top_week = 🏆 N°1 della settimana
+app-open_game = 🎲 Indovina l'autore
+app-open_top = 🏆 Tutta la hall of fame
+app-open_archive = 🔎 Tutto l'archivio
+app-open_settings = 🎨 Personalizza con anteprima
+app-inline_open = 📚 Apri l'archivio
+app-menu_button = Citazioni
 app-info =
     <b>Tutto vive anche nell'app 💬</b>
 
@@ -560,3 +567,28 @@ guest-empty_query =
 guest-open_in_pm = Apri in Quotly →
 
 sticker-save-error-too_large = L'immagine è troppo grande (max 2048×2048). Provane una più piccola 📐
+
+# Start screen (redesign)
+start-new =
+    <b>Ciao! 👋</b> Trasformo i messaggi divertenti in bellissimi sticker-citazione.
+
+    💬 Nel gruppo: rispondi con <code>/q</code> a un messaggio
+    📩 Qui: inoltrami un messaggio qualsiasi
+start-back =
+    <b>Bentornato! 👋</b>
+start-back-week = In «{ $title }»: { $count ->
+        [one] { $count } nuova citazione
+        *[other] { $count } nuove citazioni
+    } questa settimana
+start-back-generic = Pronto per la prossima citazione? 💬
+start-group_ready = Fatto! Rispondi con <code>/q</code> a un messaggio per creare una citazione 💬
+start-guide_title =
+    <b>❓ Aiuto</b>
+
+    Cosa ti interessa?
+start-btn-style = 🎨 Il mio stile
+start-btn-how = ❓ Come funziona
+start-btn-help = ❓ Aiuto
+start-btn-open = ✨ Apri le citazioni
+start-btn-add_more = ➕ Aggiungi a un altro gruppo
+start-btn-group_style = 🎨 Imposta lo stile del gruppo

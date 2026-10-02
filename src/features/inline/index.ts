@@ -1,6 +1,7 @@
 import { Composer, InlineKeyboard } from 'grammy'
-import type { InlineQueryResult } from 'grammy/types'
+import type { InlineQueryResult, InlineQueryResultsButton } from 'grammy/types'
 import { Types } from 'mongoose'
+import { config } from '../../config/env'
 import type { BotContext } from '../../core/types'
 import { Quote, type QuoteDoc } from '../../db/models'
 import { inlineWordFilter, parseInlineSearch } from './search'
@@ -35,6 +36,16 @@ export function nextOffset(offset: number, rawCount: number): string {
   return rawCount < LIMIT ? '' : String(offset + LIMIT)
 }
 
+/**
+ * "Open archive" button pinned above inline results. `web_app` needs a direct
+ * https URL (not the t.me link), so it only exists when MINI_APP_URL is set.
+ */
+export function appResultsButton(ctx: BotContext): { button?: InlineQueryResultsButton } {
+  const url = config.MINI_APP_URL
+  if (!url || !url.startsWith('https://')) return {}
+  return { button: { text: ctx.t('app-inline_open'), web_app: { url } } }
+}
+
 export const inlineFeature = new Composer<BotContext>()
 
 /**
@@ -65,14 +76,14 @@ inlineFeature.on('inline_query', async (ctx) => {
 
     const results = quotes.map(toStickerResult).filter((r): r is InlineQueryResult => r !== null)
     await ctx
-      .answerInlineQuery(results, { is_personal: false, cache_time: query.scope === 'top' && !query.text ? 300 : 5, next_offset: nextOffset(offset, quotes.length) })
+      .answerInlineQuery(results, { is_personal: false, cache_time: query.scope === 'top' && !query.text ? 300 : 5, next_offset: nextOffset(offset, quotes.length), ...appResultsButton(ctx) })
       .catch(() => {})
     return
   }
 
   // Default: the caller's up-voted quotes.
   if (!ctx.user) {
-    await ctx.answerInlineQuery([], { cache_time: 5 }).catch(() => {})
+    await ctx.answerInlineQuery([], { cache_time: 5, ...appResultsButton(ctx) }).catch(() => {})
     return
   }
 
@@ -93,6 +104,6 @@ inlineFeature.on('inline_query', async (ctx) => {
 
   const results = liked.map(toStickerResult).filter((r): r is InlineQueryResult => r !== null)
   await ctx
-    .answerInlineQuery(results, { is_personal: true, cache_time: 5, next_offset: nextOffset(offset, liked.length) })
+    .answerInlineQuery(results, { is_personal: true, cache_time: 5, next_offset: nextOffset(offset, liked.length), ...appResultsButton(ctx) })
     .catch(() => {})
 })
