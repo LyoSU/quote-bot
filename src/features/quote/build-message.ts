@@ -159,6 +159,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   // behaves the same), unless the user explicitly asked for it with `m`.
   if (!selection || forceMedia) {
     Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
+    if (source.album?.length) out.album = source.album
   }
 
   const name = composeName(from)
@@ -200,7 +201,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
 
   if (forward) out.forward = forward
 
-  if (!out.text && !out.media && !out.voice && !out.document && !out.audio) {
+  if (!out.text && !out.media && !out.album && !out.voice && !out.document && !out.audio) {
     out.text = unsupportedText
     out.entities = [{ type: 'italic', offset: 0, length: unsupportedText.length }]
   }

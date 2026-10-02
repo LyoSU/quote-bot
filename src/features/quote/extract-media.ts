@@ -1,5 +1,6 @@
 import type { PhotoSize } from 'grammy/types'
 import type {
+  QuoteAlbumItem,
   QuoteAudio,
   QuoteDocument,
   QuoteMediaFile,
@@ -19,6 +20,8 @@ interface ThumbedFile {
   /** Audio tags. */
   title?: string
   performer?: string
+  width?: number
+  height?: number
   thumbnail?: PhotoSize
 }
 
@@ -31,6 +34,10 @@ interface PaidMediaItem {
 
 /** Structural view of a message's media — both native and server-fetched messages satisfy it. */
 export interface MediaSource {
+  /** Shared by the messages of one album. */
+  media_group_id?: string
+  /** Merged album tiles (see album.ts) — set instead of photo/video. */
+  album?: QuoteAlbumItem[]
   photo?: PhotoSize[]
   sticker?: {
     file_id: string

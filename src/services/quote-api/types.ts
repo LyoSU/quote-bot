@@ -51,6 +51,17 @@ export interface QuoteMediaFile {
   waveform?: number[]
 }
 
+/** One tile of an album (several photos/videos sent together) — the renderer lays them out as a mosaic. */
+export interface QuoteAlbumItem {
+  file_id?: string
+  url?: string
+  width?: number
+  height?: number
+  type: 'photo' | 'video' | 'animation'
+  /** Video length (s) — the tile's duration badge. */
+  duration?: number
+}
+
 /** Main-message media: an array of file variants (photo sizes, a sticker, a thumbnail…). */
 export type QuoteMessageMedia = QuoteMediaFile[]
 
@@ -98,6 +109,8 @@ export interface QuoteMessage {
   text?: string
   entities?: MessageEntity[]
   media?: QuoteMessageMedia
+  /** Media group (2–10 items): replaces `media`; caption stays in `text`. */
+  album?: QuoteAlbumItem[]
   mediaType?: QuoteMediaType
   mediaCrop?: boolean
   /** Video/animation duration (s) — the renderer's play-badge label. */

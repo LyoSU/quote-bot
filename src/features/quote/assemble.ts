@@ -1,4 +1,5 @@
 import type { QuoteForward, QuoteMessage } from '../../services/quote-api/types'
+import { mergeAlbums } from './album'
 import { buildQuoteMessage, type QuoteSource, type ReplySource } from './build-message'
 import type { PartialQuoteMode } from './render'
 import {
@@ -209,7 +210,8 @@ export async function assembleQuoteMessages(
 
   const messages: QuoteMessage[] = []
 
-  for (const raw of sources) {
+  // Album members collapse into one message (also covers PM batches).
+  for (const raw of mergeAlbums(sources)) {
     if (raw.message_id === undefined) continue
 
     let from = await resolveSender(raw, deps)

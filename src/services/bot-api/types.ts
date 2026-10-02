@@ -93,6 +93,8 @@ export interface ApiMessage {
   author_signature?: string
   via_bot?: { username?: string }
 
+  /** Shared by the messages of one album. */
+  media_group_id?: string
   photo?: PhotoSize[]
   sticker?: ApiSticker
   voice?: ApiVoice

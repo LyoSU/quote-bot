@@ -1,5 +1,6 @@
 import type { RawMessage } from './assemble'
 import type { ApiMessage } from '../../services/bot-api'
+import { expandAlbums } from './album'
 import { hasAnyMedia } from './extract-media'
 
 /** The subset of the Bot API service the selector needs (kept small for testing). */
@@ -108,6 +109,10 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
       }
     }
     if (selection) firstMessage = { ...firstMessage, selection }
+    // An album is one quote: bring in its other items (needs the server).
+    if (!isGuest && fetcher.isHealthy() && firstMessage.media_group_id) {
+      return { messages: await expandAlbums([firstMessage], chatId, fetcher) }
+    }
     return { messages: [firstMessage] }
   }
 
@@ -126,7 +131,11 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
 
   const fetched = (await fetcher.getMessages(chatId, ids).catch(() => [] as ApiMessage[])).filter(hasContent)
   const picked = backwards ? fetched.slice(-count) : fetched.slice(0, count)
-  const messages: RawMessage[] = picked.length > 0 ? picked : [firstMessage]
+  const messages: RawMessage[] = await expandAlbums(
+    picked.length > 0 ? picked : [firstMessage],
+    chatId,
+    fetcher,
+  )
 
   // The selection belongs to the replied message — in a backwards range
   // that's the LAST of the fetched ids, not messages[0].
