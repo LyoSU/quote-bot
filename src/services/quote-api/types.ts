@@ -121,6 +121,8 @@ export interface QuoteMessage {
   /** Audio file → renderer draws a Telegram-style audio row. */
   audio?: QuoteAudio
   senderTag?: string
+  /** Who carries the tag: owner/admin render as purple/green pills, member as plain text. */
+  senderTagRole?: QuoteSenderTagRole
   /** Inline-bot attribution — renderer shows a grey "via @bot" next to the name. */
   viaBot?: string
   replyMessage?: QuoteReplyMessage
@@ -155,6 +157,8 @@ export interface QuoteGenerationRequest {
   height?: number
   scale?: number
   emojiBrand?: string
+  /** Bubble style preset ('glass' | 'classic'); older renderers ignore it. */
+  style?: string
   messages: QuoteMessage[]
 }
 
@@ -166,3 +170,5 @@ export interface QuoteGenerationResult {
   width?: number
   height?: number
 }
+
+export type QuoteSenderTagRole = 'owner' | 'admin' | 'member'

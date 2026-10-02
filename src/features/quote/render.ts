@@ -26,6 +26,10 @@ export const DEFAULT_STICKER_EMOJI = '💜'
  */
 export type PartialQuoteMode = 'framed' | 'plain' | 'off'
 
+/** Bubble style presets the renderer knows; unknown values fall back to glass. */
+export const QUOTE_STYLES = ['glass', 'classic'] as const
+export type QuoteStylePref = (typeof QUOTE_STYLES)[number]
+
 /** Default output format when no `i`/`p`/`s` flag is given. */
 export type QuoteFormatPref = 'sticker' | 'image' | 'png'
 
@@ -34,6 +38,8 @@ export interface QuoteSettings {
   backgroundColor?: string | null
   emojiSuffix?: string | null
   emojiBrand?: string | null
+  /** Bubble style preset in the renderer ('glass' default, 'classic'). */
+  style?: QuoteStylePref | null
   partialMode?: PartialQuoteMode | null
   /** Default output format; the `i`/`p`/`s` command flags still override. */
   format?: QuoteFormatPref | null

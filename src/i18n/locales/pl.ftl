@@ -86,6 +86,8 @@ help_group =
     Poznaj wszystkie moje funkcje prywatnie: <a href="t.me/{ $username }?start=help">Uzyskaj pomoc</a> ✨
 btn-add_group = Dodaj do Grupy
 btn-help = Pomoc
+quote-tag-owner = właściciel
+quote-tag-admin = admin
 quote-unsupported_message = Ten typ wiadomości nie jest obsługiwany do cytowania
 quote-api_error =
     <b>Ups! Coś poszło nie tak 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Tło</b>
 
     Wybierz kolor lub ustaw własny za pomocą <code>/qcolor #ff5733</code>.
+qs-row-style = 🎨 Styl dymka
+qs-style-glass = Szkło
+qs-style-classic = Klasyczny
 qs-row-brand = 😀 Styl emoji
 qs-row-format = 🖥 Format
 qs-format-sticker = Naklejka

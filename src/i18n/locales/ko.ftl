@@ -86,6 +86,8 @@ help_group =
     개인적으로 모든 기능을 알아보세요: <a href="t.me/{ $username }?start=help">도움 받기</a> ✨
 btn-add_group = 그룹에 추가
 btn-help = 도움말
+quote-tag-owner = 소유자
+quote-tag-admin = 관리자
 quote-unsupported_message = 인용은 이 메시지 유형을 지원하지 않습니다
 quote-api_error =
     <b>이런! 문제가 발생했습니다 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 배경</b>
 
     색상을 고르거나 <code>/qcolor #ff5733</code>로 사용자 지정 색상을 설정하세요.
+qs-row-style = 🎨 말풍선 스타일
+qs-style-glass = 유리
+qs-style-classic = 클래식
 qs-row-brand = 😀 이모지 스타일
 qs-row-format = 🖥 형식
 qs-format-sticker = 스티커

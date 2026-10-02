@@ -86,6 +86,8 @@ help_group =
     Barcha xususiyatlarimni shaxsiyda bilib oling: <a href="t.me/{ $username }?start=help">Yordam Olish</a> ✨
 btn-add_group = Guruhga qo'shish
 btn-help = Ma'lumotnoma
+quote-tag-owner = egasi
+quote-tag-admin = admin
 quote-unsupported_message = Ushbu xabar turi iqtibos uchun qo'llab-quvvatlanmaydi
 quote-api_error =
     <b>Oops! Nimadir xato ketdi 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Fon</b>
 
     Rang tanlang yoki <code>/qcolor #ff5733</code> bilan o'zingiznikini belgilang.
+qs-row-style = 🎨 Pufak uslubi
+qs-style-glass = Shisha
+qs-style-classic = Klassik
 qs-row-brand = 😀 Emoji uslubi
 qs-row-format = 🖥 Format
 qs-format-sticker = Stiker

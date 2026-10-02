@@ -4,7 +4,7 @@ import { onlyAdmin } from '../../middlewares/guards'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { DEFAULT_BACKGROUND } from '../quote/color'
-import { DEFAULT_STICKER_EMOJI, type PartialQuoteMode, type QuoteFormatPref } from '../quote/render'
+import { DEFAULT_STICKER_EMOJI, QUOTE_STYLES, type PartialQuoteMode, type QuoteFormatPref, type QuoteStylePref } from '../quote/render'
 
 const ADMIN_STATUSES = new Set(['creator', 'administrator'])
 
@@ -59,6 +59,9 @@ export function nextPartialMode(mode: PartialQuoteMode): PartialQuoteMode {
 export function nextFormat(format: QuoteFormatPref): QuoteFormatPref {
   return nextIn(FORMATS, format)
 }
+export function nextStyle(style: QuoteStylePref): QuoteStylePref {
+  return nextIn(QUOTE_STYLES, style)
+}
 export function nextBrand(brand: string): string {
   return nextIn(EMOJI_BRANDS, brand)
 }
@@ -86,6 +89,7 @@ export interface QuoteSettingsView {
   format: QuoteFormatPref
   color: string
   brand: string
+  style: QuoteStylePref
   suffix: string
   gab: number
   media: boolean
@@ -107,6 +111,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       format: (s?.quote?.format as QuoteFormatPref | undefined) ?? 'sticker',
       color: s?.quote?.backgroundColor ?? DEFAULT_BACKGROUND,
       brand: s?.quote?.emojiBrand ?? 'apple',
+      style: (s?.quote?.style as QuoteStylePref | undefined) ?? 'glass',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
       gab: s?.randomQuoteGab ?? 800,
       media: s?.quote?.media ?? false,
@@ -127,6 +132,7 @@ function resolveView(ctx: BotContext): QuoteSettingsView | null {
       format: (s?.quote?.format as QuoteFormatPref | undefined) ?? 'sticker',
       color: s?.quote?.backgroundColor ?? DEFAULT_BACKGROUND,
       brand: s?.quote?.emojiBrand ?? 'apple',
+      style: (s?.quote?.style as QuoteStylePref | undefined) ?? 'glass',
       suffix: s?.quote?.emojiSuffix ?? DEFAULT_STICKER_EMOJI,
       gab: 0,
       media: s?.quote?.media ?? false,
@@ -150,6 +156,7 @@ function defaultView(scope: 'group' | 'user'): QuoteSettingsView {
     format: 'sticker',
     color: DEFAULT_BACKGROUND,
     brand: 'apple',
+    style: 'glass',
     suffix: DEFAULT_STICKER_EMOJI,
     gab: scope === 'group' ? 800 : 0,
     media: false,
@@ -167,6 +174,7 @@ function defaultView(scope: 'group' | 'user'): QuoteSettingsView {
 const RESET_QUOTE: Record<string, unknown> = {
   'settings.quote.backgroundColor': DEFAULT_BACKGROUND,
   'settings.quote.emojiBrand': 'apple',
+  'settings.quote.style': 'glass',
   'settings.quote.emojiSuffix': DEFAULT_STICKER_EMOJI,
   'settings.quote.partialMode': 'framed',
   'settings.quote.format': 'sticker',
@@ -192,6 +200,7 @@ export type Category = 'appearance' | 'content' | 'privacy' | 'group'
 const CATEGORY_OF: Record<string, Category> = {
   format: 'appearance',
   brand: 'appearance',
+  style: 'appearance',
   partial: 'content',
   reply: 'content',
   media: 'content',
@@ -228,6 +237,7 @@ export function buildCategoryKeyboard(cat: Category, view: QuoteSettingsView, t:
 
   if (cat === 'appearance') {
     kb.text(`${t('qs-row-format')}: ${t(`qs-format-${view.format}`)}`, 'qs:cycle:format').row()
+    kb.text(`${t('qs-row-style')}: ${t(`qs-style-${view.style}`)}`, 'qs:cycle:style').row()
     kb.text(`${t('qs-row-color')}: ${colorSwatch(view.color)}`, 'qs:color').row()
     kb.text(`${t('qs-row-brand')}: ${capitalize(view.brand)}`, 'qs:cycle:brand').row()
     kb.text(`${t('qs-row-suffix')}: ${view.suffix}`, 'qs:suffix').row()
@@ -365,7 +375,7 @@ quoteSettingsMenu.callbackQuery('qs:reset', async (ctx) => {
 })
 
 // Cycle a multi-value setting to its next preset, staying in its category.
-quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|format|brand|gab)$/, async (ctx) => {
+quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|format|style|brand|gab)$/, async (ctx) => {
   const key = ctx.match?.[1]
   const view = await authorizedView(ctx)
   if (!view || !key) {
@@ -378,6 +388,9 @@ quoteSettingsMenu.callbackQuery(/^qs:cycle:(partial|format|brand|gab)$/, async (
   } else if (key === 'format') {
     view.format = nextFormat(view.format)
     await writeSetting(ctx, 'settings.quote.format', view.format)
+  } else if (key === 'style') {
+    view.style = nextStyle(view.style)
+    await writeSetting(ctx, 'settings.quote.style', view.style)
   } else if (key === 'brand') {
     view.brand = nextBrand(view.brand)
     await writeSetting(ctx, 'settings.quote.emojiBrand', view.brand)

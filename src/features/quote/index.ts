@@ -28,6 +28,24 @@ import { sendQuote } from './send'
 import type { Sender } from './sender'
 import { registerGetQuote } from './get'
 import { registerRate } from './rate'
+
+// Owner/admin roles per group, from one getChatAdministrators call — far
+// cheaper than getChatMember per quoted author. Short TTL: roles change rarely.
+const ROLE_TTL_MS = 5 * 60 * 1000
+const adminRolesCache = new Map<number, { at: number; roles: Promise<Map<number, 'owner' | 'admin'>> }>()
+
+function chatAdminRoles(ctx: BotContext, chatId: number): Promise<Map<number, 'owner' | 'admin'>> {
+  const hit = adminRolesCache.get(chatId)
+  if (hit && Date.now() - hit.at < ROLE_TTL_MS) return hit.roles
+  const roles = ctx.api.getChatAdministrators(chatId).then((admins) => {
+    const map = new Map<number, 'owner' | 'admin'>()
+    for (const a of admins) map.set(a.user.id, a.status === 'creator' ? 'owner' : 'admin')
+    return map
+  }).catch(() => new Map<number, 'owner' | 'admin'>())
+  adminRolesCache.set(chatId, { at: Date.now(), roles })
+  if (adminRolesCache.size > 5000) adminRolesCache.delete(adminRolesCache.keys().next().value!)
+  return roles
+}
 import { registerRandom } from './random'
 import { registerTop } from './top'
 import { registerFind } from './find'
@@ -175,6 +193,7 @@ async function renderQuote(
   const bgSetting = pickSetting(group?.settings?.quote?.backgroundColor, user?.settings?.quote?.backgroundColor)
   const emojiSuffix = pickSetting(group?.settings?.quote?.emojiSuffix, user?.settings?.quote?.emojiSuffix)
   const emojiBrandSetting = pickSetting(group?.settings?.quote?.emojiBrand, user?.settings?.quote?.emojiBrand)
+  const style = pickSetting(group?.settings?.quote?.style, user?.settings?.quote?.style) ?? undefined
 
   // Default output format applies only when no explicit format flag was given.
   const hasFormatFlag = flag.png || flag.img || flag.stories
@@ -240,6 +259,11 @@ async function renderQuote(
       authorTagCache.set(telegramId, tag)
       return tag
     },
+    getAuthorRole: (telegramId) => {
+      if (isPrivate || isGuest) return Promise.resolve(undefined)
+      return chatAdminRoles(ctx, chatId).then((roles) => roles.get(telegramId))
+    },
+    roleLabels: { owner: ctx.t('quote-tag-owner'), admin: ctx.t('quote-tag-admin') },
     enrichHidden: (name) => resolveHiddenSender(name),
     getUserEmojiStatus: (telegramId) => botApi.getUserEmojiStatus(telegramId),
     isUserPrivate: async (telegramId) => {
@@ -290,6 +314,7 @@ async function renderQuote(
       height: spec.height,
       scale: spec.scale,
       emojiBrand,
+      style,
       messages: assembled.messages,
     })
     image = result.image
@@ -341,6 +366,7 @@ async function renderQuote(
       messages: assembled.messages,
       backgroundColor,
       emojiBrand,
+      style,
       scale: spec.scale,
       width: spec.width,
       height: spec.height,

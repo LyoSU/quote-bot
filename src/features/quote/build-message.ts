@@ -5,6 +5,7 @@ import type {
   QuoteMessageFrom,
   QuoteReplyMedia,
   QuoteReplyMessage,
+  QuoteSenderTagRole,
 } from '../../services/quote-api/types'
 import { extractMedia, type MediaSource } from './extract-media'
 import type { PartialQuoteMode } from './render'
@@ -91,6 +92,8 @@ export interface BuildQuoteMessageParams {
   showSenderTag?: boolean
   /** Verified tag/title of the quoted author, resolved upstream. No sender fallback. */
   authorTag?: string
+  /** Role behind authorTag — styles the tag (owner/admin pill, member plain). */
+  authorTagRole?: QuoteSenderTagRole
 }
 
 function replyMediaKind(reply: ReplySource): QuoteReplyMedia | undefined {
@@ -180,7 +183,10 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   out.from = fromOut
   out.chatId = fromOut.id
 
-  if (params.authorTag && params.showSenderTag !== false) out.senderTag = params.authorTag
+  if (params.authorTag && params.showSenderTag !== false) {
+    out.senderTag = params.authorTag
+    if (params.authorTagRole) out.senderTagRole = params.authorTagRole
+  }
 
   if (source.via_bot?.username) out.viaBot = source.via_bot.username
 

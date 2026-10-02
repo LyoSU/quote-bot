@@ -86,6 +86,8 @@ help_group =
     Bütün xüsusiyyətlərimi xüsusi öyrənin: <a href="t.me/{ $username }?start=help">Yardım Alın</a> ✨
 btn-add_group = Qrupa əlavə etmək
 btn-help = Kömək
+quote-tag-owner = sahib
+quote-tag-admin = admin
 quote-unsupported_message = Bu mesaj növü sitat üçün dəstəklənmir
 quote-api_error =
     <b>Oops! Bir şey səhv getdi 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Fon</b>
 
     Rəng seç və ya <code>/qcolor #ff5733</code> ilə öz rəngini təyin et.
+qs-row-style = 🎨 Balon üslubu
+qs-style-glass = Şüşə
+qs-style-classic = Klassik
 qs-row-brand = 😀 Emoji üslubu
 qs-row-format = 🖥 Format
 qs-format-sticker = Stiker

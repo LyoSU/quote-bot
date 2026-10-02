@@ -86,6 +86,8 @@ help_group =
     Pelajari semua fitur saya secara pribadi: <a href="t.me/{ $username }?start=help">Dapatkan Bantuan</a> ✨
 btn-add_group = Tambahkan ke Grup
 btn-help = Bantuan
+quote-tag-owner = pemilik
+quote-tag-admin = admin
 quote-unsupported_message = Jenis pesan ini tidak didukung untuk kutipan
 quote-api_error =
     <b>Ups! Ada yang salah 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Latar belakang</b>
 
     Pilih warna atau atur warna khusus dengan <code>/qcolor #ff5733</code>.
+qs-row-style = 🎨 Gaya gelembung
+qs-style-glass = Kaca
+qs-style-classic = Klasik
 qs-row-brand = 😀 Gaya emoji
 qs-row-format = 🖥 Format
 qs-format-sticker = Stiker

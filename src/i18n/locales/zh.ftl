@@ -86,6 +86,8 @@ help_group =
     了解我在私人中的所有功能：<a href="t.me/{ $username }?start=help">获取帮助</a>✨
 btn-add_group = 添加到群组
 btn-help = 帮助
+quote-tag-owner = 群主
+quote-tag-admin = 管理员
 quote-unsupported_message = 此消息类型不支持引用
 quote-api_error =
     <b>糟糕！出错了 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 背景</b>
 
     选择一种颜色，或用 <code>/qcolor #ff5733</code> 设置自定义颜色。
+qs-row-style = 🎨 气泡样式
+qs-style-glass = 玻璃
+qs-style-classic = 经典
 qs-row-brand = 😀 表情符号风格
 qs-row-format = 🖥 格式
 qs-format-sticker = 贴纸

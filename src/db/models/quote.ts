@@ -25,6 +25,7 @@ const payloadSchema = new Schema(
     messages: [Schema.Types.Mixed],
     backgroundColor: String,
     emojiBrand: String,
+    style: String,
     scale: Number,
     width: Number,
     height: Number,

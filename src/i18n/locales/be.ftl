@@ -86,6 +86,8 @@ help_group =
     Даведайцеся пра ўсе мае асаблівасці ў прыватным: <a href="t.me/{ $username }?start=help">Атрымаць Дапамогу</a> ✨
 btn-add_group = Дадаць у суполку
 btn-help = Даведка
+quote-tag-owner = уладальнік
+quote-tag-admin = адмін
 quote-unsupported_message = Гэта тып паведамлення не падтрымліваецца для цытавання
 quote-api_error =
     <b>Ой! Нешта пайшло не так 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Фон</b>
 
     Абяры колер або задай свой камандай <code>/qcolor #ff5733</code>.
+qs-row-style = 🎨 Стыль бабла
+qs-style-glass = Шкло
+qs-style-classic = Класіка
 qs-row-brand = 😀 Стыль эмодзі
 qs-row-format = 🖥 Фармат
 qs-format-sticker = Стыкер

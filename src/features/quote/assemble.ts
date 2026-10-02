@@ -52,6 +52,10 @@ export interface AssembleDeps {
   showSenderTag: boolean
   /** Best-effort tag/custom title of the original author in the current group. */
   getAuthorTag: (telegramId: number) => Promise<string | undefined>
+  /** Owner/admin status of a user in the current group (undefined = regular member or unknown). */
+  getAuthorRole?: (telegramId: number) => Promise<'owner' | 'admin' | undefined>
+  /** Localized default labels for owners/admins without a custom title, like Telegram's. */
+  roleLabels?: { owner: string; admin: string }
   /**
    * Whether a user is a known member of the current group. Used to attribute a
    * forward to its original author (instead of the forwarder + label) when that
@@ -175,6 +179,20 @@ async function resolveAuthorTag(raw: RawMessage, deps: AssembleDeps): Promise<st
   return raw.sender_tag ?? raw.author_signature
 }
 
+/** The quoted author's group role, mirroring resolveAuthorTag's author choice. */
+async function resolveAuthorRole(raw: RawMessage, deps: AssembleDeps): Promise<'owner' | 'admin' | undefined> {
+  if (!deps.showSenderTag || !deps.getAuthorRole || raw.story?.chat || deps.chatType === 'private') return undefined
+
+  const origin = raw.forward_origin ?? raw.origin
+  // Channel/chat posts carry an author signature, which has no role.
+  if (origin?.type === 'chat' || origin?.type === 'channel') return undefined
+
+  const forwarded = origin || raw.forward_from || raw.forward_from_chat || raw.forward_sender_name
+  const authorId = forwarded ? forwardOriginUserId(raw) : raw.from?.id
+  if (authorId === undefined) return undefined
+  return deps.getAuthorRole(authorId).catch(() => undefined)
+}
+
 /**
  * Turns the selected source messages into the renderer's QuoteMessage[]:
  * resolves senders, detects same-sender streaks (name shown once, avatar
@@ -239,6 +257,13 @@ export async function assembleQuoteMessages(
         }
       : from
 
+    // A forwarder header must not display either the forwarder's role or the
+    // original author's role under the forwarder's name.
+    const authorTag = groupForwarder ? undefined : await resolveAuthorTag(raw, deps)
+    const authorRole = groupForwarder ? undefined : await resolveAuthorRole(raw, deps)
+    // Owners/admins without a custom title still get Telegram's default label.
+    const tagText = authorTag ?? (authorRole ? deps.roleLabels?.[authorRole] : undefined)
+
     messages.push(
       buildQuoteMessage({
         source: raw,
@@ -253,9 +278,8 @@ export async function assembleQuoteMessages(
         unsupportedText: deps.unsupportedText,
         quoteMode: deps.quoteMode,
         showSenderTag: deps.showSenderTag,
-        // A forwarder header must not display either the forwarder's role or
-        // the original author's role under the forwarder's name.
-        authorTag: groupForwarder ? undefined : await resolveAuthorTag(raw, deps),
+        authorTag: tagText,
+        authorTagRole: tagText ? (authorRole ?? 'member') : undefined,
       }),
     )
 

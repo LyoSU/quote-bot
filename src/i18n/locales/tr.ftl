@@ -86,6 +86,8 @@ help_group =
     Tüm özelliklerimi özelde öğrenin: <a href="t.me/{ $username }?start=help">Yardım Alın</a> ✨
 btn-add_group = Gruba Ekle
 btn-help = Dökümanlar
+quote-tag-owner = sahip
+quote-tag-admin = yönetici
 quote-unsupported_message = Bu mesaj türü alıntı için desteklenmiyor
 quote-api_error =
     <b>Oops! Bir şeyler ters gitti 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Arka plan</b>
 
     Bir renk seç veya <code>/qcolor #ff5733</code> ile özel bir renk ayarla.
+qs-row-style = 🎨 Balon stili
+qs-style-glass = Cam
+qs-style-classic = Klasik
 qs-row-brand = 😀 Emoji stili
 qs-row-format = 🖥 Format
 qs-format-sticker = Çıkartma

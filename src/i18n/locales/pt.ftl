@@ -92,6 +92,8 @@ help_group =
     Descubra todos os meus recursos em particular: <a href="t.me/{ $username }?start=help">Obter Ajuda</a> ✨
 btn-add_group = Adicionar ao grupo
 btn-help = Ajuda
+quote-tag-owner = dono
+quote-tag-admin = admin
 quote-unsupported_message = Este tipo de mensagem não é suportado para citação
 quote-api_error =
     <b>Ops! Algo deu errado 😅</b>
@@ -318,6 +320,9 @@ qs-color-title =
     <b>🎨 Fundo</b>
 
     Escolha uma cor ou defina uma personalizada com <code>/qcolor #ff5733</code>.
+qs-row-style = 🎨 Estilo do balão
+qs-style-glass = Vidro
+qs-style-classic = Clássico
 qs-row-brand = 😀 Estilo de emoji
 qs-row-format = 🖥 Formato
 qs-format-sticker = Adesivo

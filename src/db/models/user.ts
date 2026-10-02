@@ -22,6 +22,7 @@ const userSchema = new Schema(
         backgroundColor: { type: String },
         emojiSuffix: { type: String },
         emojiBrand: { type: String },
+        style: { type: String },
         partialMode: { type: String },
         format: { type: String },
         media: { type: Boolean },

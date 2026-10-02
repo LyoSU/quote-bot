@@ -86,6 +86,8 @@ help_group =
     プライベートで全機能を学びましょう: <a href="t.me/{ $username }?start=help">ヘルプを取得</a> ✨
 btn-add_group = グループに追加
 btn-help = ヘルプ
+quote-tag-owner = オーナー
+quote-tag-admin = 管理者
 quote-unsupported_message = このメッセージタイプは引用に対応していません
 quote-api_error =
     <b>おっと！何かがうまくいかなかったようです 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 背景</b>
 
     色を選ぶか、<code>/qcolor #ff5733</code> でカスタム色を設定してください。
+qs-row-style = 🎨 吹き出しスタイル
+qs-style-glass = ガラス
+qs-style-classic = クラシック
 qs-row-brand = 😀 絵文字スタイル
 qs-row-format = 🖥 形式
 qs-format-sticker = ステッカー

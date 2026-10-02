@@ -236,6 +236,33 @@ describe('assembleQuoteMessages', () => {
     expect(off.messages[0]?.senderTag).toBeUndefined()
   })
 
+  it('tags owners/admins with their role: custom title, else the default label', async () => {
+    const getAuthorRole = vi.fn(async (id: number) => (id === 1 ? 'owner' : id === 2 ? 'admin' : undefined) as 'owner' | 'admin' | undefined)
+    const roleLabels = { owner: 'власник', admin: 'адмін' }
+    const out = await assembleQuoteMessages(
+      [
+        msg({ message_id: 1, sender_tag: 'Бос' }),
+        msg({ message_id: 2, from: { id: 2, first_name: 'B' } }),
+        msg({ message_id: 3, from: { id: 3, first_name: 'C' }, sender_tag: 'moral patient' }),
+        msg({ message_id: 4, from: { id: 4, first_name: 'D' } }),
+      ],
+      deps({ getAuthorRole, roleLabels }),
+    )
+    expect(out.messages.map((m) => [m.senderTag, m.senderTagRole])).toEqual([
+      ['Бос', 'owner'],
+      ['адмін', 'admin'],
+      ['moral patient', 'member'],
+      [undefined, undefined],
+    ])
+  })
+
+  it('never resolves roles in private chats', async () => {
+    const getAuthorRole = vi.fn(async () => 'admin' as const)
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getAuthorRole, roleLabels: { owner: 'o', admin: 'a' } }))
+    expect(getAuthorRole).not.toHaveBeenCalled()
+    expect(out.messages[0]?.senderTag).toBeUndefined()
+  })
+
   it('omits the reply block unless showReply is set', async () => {
     const m = msg({ reply_to_message: { text: 'orig', from: { id: 9, first_name: 'B' } } })
     const off = await assembleQuoteMessages([m], deps({ chatType: 'private', showReply: false }))

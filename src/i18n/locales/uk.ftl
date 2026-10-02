@@ -79,6 +79,8 @@ help_group =
     Дізнайтеся всі мої можливості в приваті: <a href="t.me/{ $username }?start=help">Отримати допомогу</a> ✨
 btn-add_group = Додати до групи
 btn-help = Довідка
+quote-tag-owner = власник
+quote-tag-admin = адмін
 quote-unsupported_message = Цей тип повідомлень не підтримується для цитування
 quote-api_error =
     <b>Ой! Щось пішло не так 😅</b>
@@ -325,6 +327,9 @@ qs-color-title =
     <b>🎨 Фон</b>
 
     Обери колір або задай свій командою <code>/qcolor #ff5733</code>.
+qs-row-style = 🎨 Стиль бабла
+qs-style-glass = Скло
+qs-style-classic = Класика
 qs-row-brand = 😀 Бренд емодзі
 qs-row-format = 🖥 Формат
 qs-format-sticker = Стікер

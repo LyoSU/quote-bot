@@ -86,6 +86,8 @@ help_group =
     Leer al mijn functies in privé: <a href="t.me/{ $username }?start=help">Krijg Hulp</a> ✨
 btn-add_group = Voeg toe aan groep
 btn-help = Hulp
+quote-tag-owner = eigenaar
+quote-tag-admin = beheerder
 quote-unsupported_message = Dit berichttype wordt niet ondersteund voor quoten
 quote-api_error =
     <b>Oeps! Er ging iets mis 😅</b>
@@ -316,6 +318,9 @@ qs-color-title =
     <b>🎨 Achtergrond</b>
 
     Kies een kleur of stel een eigen kleur in met <code>/qcolor #ff5733</code>.
+qs-row-style = 🎨 Ballonstijl
+qs-style-glass = Glas
+qs-style-classic = Klassiek
 qs-row-brand = 😀 Emoji-stijl
 qs-row-format = 🖥 Formaat
 qs-format-sticker = Sticker
