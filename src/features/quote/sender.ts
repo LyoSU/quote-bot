@@ -15,6 +15,9 @@ export interface Sender {
   author_signature?: string
   emoji_status?: string
   photo?: QuoteFromPhoto
+  /** Profile accent color / background emoji (resolved via getChat; never on messages). */
+  accentColorId?: number
+  backgroundEmojiId?: string
 }
 
 /** A chat-like object (native Chat or TdChat). */

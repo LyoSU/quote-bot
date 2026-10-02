@@ -27,6 +27,7 @@ import { buildQuoteReplyMarkup } from './reply-markup'
 import { selectSourceMessages } from './select'
 import { sendQuote } from './send'
 import { labelsFromTranslator } from './labels'
+import { resolveSenderColors } from './sender-colors'
 import { resolveSenderPhoto } from './sender-photo'
 import type { Sender } from './sender'
 import { registerGetQuote } from './get'
@@ -250,6 +251,7 @@ async function renderQuote(
     unsupportedText: ctx.t('quote-unsupported_message'),
     labels: labelsFromTranslator((key, args) => ctx.t(key, args)),
     getSenderPhoto: (telegramId) => resolveSenderPhoto(ctx.api, telegramId),
+    getSenderColors: (telegramId) => resolveSenderColors(ctx.api, telegramId),
     groupPrivacy,
     quoteMode,
     showSenderTag,

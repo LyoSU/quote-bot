@@ -1,4 +1,4 @@
-import type { QuoteForward, QuoteFromPhoto, QuoteMessage } from '../../services/quote-api/types'
+import type { QuoteForward, QuoteFromPhoto, QuoteMessage, QuoteSenderColors } from '../../services/quote-api/types'
 import { mergeAlbums } from './album'
 import { buildQuoteMessage, type QuoteSource, type ReplySource } from './build-message'
 import { DEFAULT_LABELS, type QuoteLabels } from './labels'
@@ -48,6 +48,12 @@ export interface AssembleDeps {
    * never invoked for synthetic ids.
    */
   getSenderPhoto?: (telegramId: number) => Promise<QuoteFromPhoto | undefined>
+  /**
+   * Profile accent color / background emoji of a user or chat — the Bot API
+   * never includes them on messages (getChat does). Best-effort, cached by the
+   * caller; never invoked for synthetic ids.
+   */
+  getSenderColors?: (telegramId: number) => Promise<QuoteSenderColors | undefined>
   /** Resolve a hidden-user forward by display name (DB lookup). */
   enrichHidden: (name: string) => Promise<Sender | null>
   /** Whether a quoted user enabled privacy mode. */
@@ -229,6 +235,21 @@ export async function assembleQuoteMessages(
   if (deps.getSenderPhoto) {
     for (const raw of merged) for (const id of photoCandidateIds(raw)) void deps.getSenderPhoto(id).catch(() => undefined)
   }
+  // Same for profile colors: the author, forward origins and the reply's sender.
+  if (deps.getSenderColors) {
+    for (const raw of merged) {
+      for (const id of photoCandidateIds(raw)) void deps.getSenderColors(id).catch(() => undefined)
+      if (deps.showReply && raw.reply_to_message) {
+        for (const id of photoCandidateIds(raw.reply_to_message as RawMessage)) void deps.getSenderColors(id).catch(() => undefined)
+      }
+    }
+  }
+  const withColors = async (s: Sender): Promise<Sender> => {
+    if (!deps.getSenderColors || s.accentColorId !== undefined) return s
+    if (typeof s.id !== 'number' || s.id === 0 || isSyntheticId(s.id)) return s
+    const colors = await deps.getSenderColors(s.id).catch(() => undefined)
+    return colors ? { ...s, ...colors } : s
+  }
   const withPhoto = async (s: Sender): Promise<Sender> => {
     if (!deps.getSenderPhoto || s.photo?.big_file_id || s.photo?.url) return s
     if (typeof s.id !== 'number' || s.id === 0 || isSyntheticId(s.id)) return s
@@ -284,7 +305,7 @@ export async function assembleQuoteMessages(
           photo: groupForwarder.photo,
         }
       : from
-    const displayFrom = await withPhoto(displayFromBase)
+    const displayFrom = await withColors(await withPhoto(displayFromBase))
 
     // A forwarder header must not display either the forwarder's role or the
     // original author's role under the forwarder's name.
@@ -298,7 +319,9 @@ export async function assembleQuoteMessages(
         source: raw,
         from: displayFrom,
         replyFrom:
-          deps.showReply && raw.reply_to_message ? await resolveReplyFrom(raw.reply_to_message, deps) : null,
+          deps.showReply && raw.reply_to_message
+            ? await resolveReplyFromWithColors(raw.reply_to_message, deps, withColors)
+            : null,
         isFirstInStreak,
         showReply: deps.showReply,
         forward,
@@ -343,6 +366,15 @@ function photoCandidateIds(raw: RawMessage): number[] {
 }
 
 /** The reply block carries its own forward attribution. */
+async function resolveReplyFromWithColors(
+  reply: ReplySource,
+  deps: AssembleDeps,
+  withColors: (s: Sender) => Promise<Sender>,
+): Promise<Sender | null> {
+  const from = await resolveReplyFrom(reply, deps)
+  return from ? withColors(from) : null
+}
+
 async function resolveReplyFrom(reply: ReplySource, deps: AssembleDeps): Promise<Sender | null> {
   const origin = reply.forward_origin ?? reply.origin
   let from = resolveMessageOrigin(origin)

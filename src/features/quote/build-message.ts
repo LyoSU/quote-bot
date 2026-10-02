@@ -144,6 +144,8 @@ export function buildReplyMessage(
   const out: QuoteReplyMessage = {}
   if (name !== undefined) out.name = name
   if (from) out.chatId = from.id ?? syntheticId(name ?? '')
+  if (from?.accentColorId !== undefined) out.accentColorId = from.accentColorId
+  if (from?.backgroundEmojiId) out.backgroundEmojiId = from.backgroundEmojiId
   // A reply-with-quote shows the quoted fragment, like Telegram's own header.
   // Its entities replace the reply's: those offsets index into the full text.
   const ownText = quote?.text || reply.text || reply.caption || undefined
@@ -213,6 +215,8 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
     fromOut.name = false
   }
   if (isSyntheticId(fromOut.id)) fromOut.synthetic = true
+  if (from.accentColorId !== undefined) fromOut.accentColorId = from.accentColorId
+  if (from.backgroundEmojiId) fromOut.backgroundEmojiId = from.backgroundEmojiId
   out.from = fromOut
   out.chatId = fromOut.id
 

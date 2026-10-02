@@ -27,7 +27,15 @@ export interface QuoteFromPhoto {
   url?: string
 }
 
-export interface QuoteMessageFrom {
+/** Telegram profile colors of a sender (Bot API `accent_color_id` / `background_custom_emoji_id`). */
+export interface QuoteSenderColors {
+  /** 0–6 single color, 7–13 two-color, 14–20 three-color. */
+  accentColorId?: number
+  /** custom_emoji_id of the profile background emoji (reply-chip pattern). */
+  backgroundEmojiId?: string
+}
+
+export interface QuoteMessageFrom extends QuoteSenderColors {
   id: number
   /** Display name. `false` suppresses the name (streak continuation). */
   name?: string | false
@@ -83,7 +91,7 @@ export interface QuoteReplyMedia {
   duration?: number
 }
 
-export interface QuoteReplyMessage {
+export interface QuoteReplyMessage extends QuoteSenderColors {
   name?: string
   chatId?: number
   text?: string

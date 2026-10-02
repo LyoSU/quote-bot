@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { assembleQuoteMessages, type AssembleDeps, type RawMessage } from './assemble'
 import { DEFAULT_LABELS } from './labels'
-import type { Sender } from './sender'
+import { isSyntheticId, type Sender } from './sender'
 
 function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
   return {
@@ -410,5 +410,52 @@ describe('assembleQuoteMessages: B3 reply to a text-less message', () => {
     const m = msg({ reply_to_message: { voice: { duration: 4 }, from: { id: 9, first_name: 'B' } } })
     const out = await assembleQuoteMessages([m], deps({ chatType: 'private', showReply: true, labels }))
     expect(out.messages[0]?.replyMessage?.text).toBe('Голосове повідомлення')
+  })
+})
+
+describe('assembleQuoteMessages: profile accent colors', () => {
+  it('attaches accent id + background emoji to the sender', async () => {
+    const getSenderColors = vi.fn(async () => ({ accentColorId: 8, backgroundEmojiId: 'E1' }))
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getSenderColors }))
+    expect(out.messages[0]?.from).toMatchObject({ accentColorId: 8, backgroundEmojiId: 'E1' })
+    expect(getSenderColors).toHaveBeenCalledWith(1)
+  })
+
+  it('attaches the reply sender colors to replyMessage', async () => {
+    const getSenderColors = vi.fn(async (id: number) => (id === 9 ? { accentColorId: 15 } : { accentColorId: 2 }))
+    const m = msg({ reply_to_message: { text: 'orig', from: { id: 9, first_name: 'B' } } })
+    const out = await assembleQuoteMessages([m], deps({ chatType: 'private', showReply: true, getSenderColors }))
+    expect(out.messages[0]?.replyMessage).toMatchObject({ chatId: 9, accentColorId: 15 })
+    expect(out.messages[0]?.from?.accentColorId).toBe(2)
+  })
+
+  it('starts every lookup (author and reply sender) before awaiting any', async () => {
+    const started: number[] = []
+    const getSenderColors = vi.fn((id: number) => {
+      started.push(id)
+      return new Promise<undefined>(() => {})
+    })
+    const m = msg({ reply_to_message: { text: 'orig', from: { id: 9, first_name: 'B' } } })
+    void assembleQuoteMessages([m], deps({ chatType: 'private', showReply: true, getSenderColors }))
+    await Promise.resolve()
+    expect(started).toEqual(expect.arrayContaining([1, 9]))
+  })
+
+  it('works without colors when the lookup fails or is not wired', async () => {
+    const getSenderColors = vi.fn(async () => {
+      throw new Error('boom')
+    })
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getSenderColors }))
+    expect(out.messages[0]?.from?.accentColorId).toBeUndefined()
+    const out2 = await assembleQuoteMessages([msg()], deps({ chatType: 'private' }))
+    expect(out2.messages[0]?.from?.accentColorId).toBeUndefined()
+  })
+
+  it('never looks up synthetic senders', async () => {
+    const getSenderColors = vi.fn(async () => ({ accentColorId: 1 }))
+    const m = msg({ from: undefined, forward_sender_name: 'Ghost' })
+    const out = await assembleQuoteMessages([m], deps({ getSenderColors }))
+    expect(out.messages).toHaveLength(1)
+    for (const [id] of getSenderColors.mock.calls as unknown as [number][]) expect(isSyntheticId(id)).toBe(false)
   })
 })
