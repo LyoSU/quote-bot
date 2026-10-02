@@ -203,7 +203,10 @@ async function renderQuote(
 
   // Default output format applies only when no explicit format flag was given.
   const hasFormatFlag = flag.png || flag.img || flag.stories
-  const defaultFormat = pickSetting(group?.settings?.quote?.format, user?.settings?.quote?.format)
+  // In a group only the group's own choice counts: falling back to the caller's
+  // personal format made one member's quotes photos while the group menu said
+  // "sticker".
+  const defaultFormat = group ? group.settings?.quote?.format : user?.settings?.quote?.format
   const specFlag =
     hasFormatFlag || !defaultFormat
       ? flag

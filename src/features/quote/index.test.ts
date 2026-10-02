@@ -85,6 +85,31 @@ describe('renderQuote reply markup', () => {
   })
 })
 
+describe('renderQuote default format', () => {
+  it("ignores the caller's personal format in a group that has none set", async () => {
+    const { ctx, replyWithSticker, replyWithPhoto } = groupCtx()
+    ctx.user = { settings: { quote: { format: 'image' } } } as never
+    vi.mocked(generateQuote).mockResolvedValue({ image: Buffer.from('webp'), quoteType: 'quote' } as never)
+
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+
+    expect(vi.mocked(generateQuote).mock.calls.at(-1)![0].type).toBe('quote')
+    expect(replyWithSticker).toHaveBeenCalledTimes(1)
+    expect(replyWithPhoto).not.toHaveBeenCalled()
+  })
+
+  it("applies the group's own format", async () => {
+    const { ctx, replyWithPhoto } = groupCtx()
+    ctx.group!.settings!.quote = { format: 'image' } as never
+    vi.mocked(generateQuote).mockResolvedValue({ image: png(614, 900), quoteType: 'image' } as never)
+
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+
+    expect(vi.mocked(generateQuote).mock.calls.at(-1)![0].type).toBe('image')
+    expect(replyWithPhoto).toHaveBeenCalledTimes(1)
+  })
+})
+
 describe('renderQuote original author role lookup', () => {
   it.each([
     { status: 'creator', custom_title: 'Owner', expected: 'Owner' },
