@@ -107,8 +107,43 @@ quote-kind-poll = Enquete
 quote-kind-location = Localização
 quote-kind-contact = Contato
 quote-kind-story = Story
+quote-rich-thinking = Pensando…
 quote-forward-from = Encaminhado de { $name }
 quote-forward-message = Mensagem encaminhada
+quote-gift = Presente
+quote-gift-upgrade = Melhoria de presente
+quote-gift-unique = Presente colecionável
+quote-checklist = Lista de tarefas
+quote-stars = { $count ->
+        [one] { $count } estrela
+       *[other] { $count } estrelas
+    }
+quote-giveaway = Sorteio
+quote-giveaway-winners = Vencedores do sorteio
+quote-giveaway-completed = Sorteio encerrado
+quote-giveaway-created = Sorteio agendado
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] { $months } mês
+       *[other] { $months } meses
+    }
+quote-giveaway-winner-count = { $count ->
+        [one] { $count } vencedor
+       *[other] { $count } vencedores
+    }
+quote-giveaway-date = Resultados em { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done } de { $total } concluídas
+quote-checklist-done = { $count ->
+        [one] { $count } tarefa marcada como concluída
+       *[other] { $count } tarefas marcadas como concluídas
+    }
+quote-checklist-undone = { $count ->
+        [one] { $count } tarefa marcada como não concluída
+       *[other] { $count } tarefas marcadas como não concluídas
+    }
+quote-checklist-added = { $count ->
+        [one] { $count } tarefa adicionada
+       *[other] { $count } tarefas adicionadas
+    }
 quote-api_error =
     <b>Ops! Algo deu errado 😅</b>
     <pre>{ $error }</pre>

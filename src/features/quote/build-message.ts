@@ -11,12 +11,14 @@ import { extractMedia, type MediaSource } from './extract-media'
 import type { PartialQuoteMode } from './render'
 import { DEFAULT_LABELS, hasSpecialContent, specialText, type QuoteLabels, type SpecialSource } from './labels'
 import { composeName, isSyntheticId, syntheticId, type ChatLike, type OriginLike, type Sender } from './sender'
+import { applyRich, richPreviewText, type RichSource } from './rich'
+import { applySpecialTypes } from './special-types'
 
 /**
  * The replied-to message. Media is a preview only (webapp); the renderer
  * ignores it. The sender/forward fields let us attribute the reply block.
  */
-export interface ReplySource extends SpecialSource {
+export interface ReplySource extends SpecialSource, RichSource {
   message_id?: number
   date?: number
   text?: string
@@ -49,7 +51,7 @@ export interface ReplySource extends SpecialSource {
 }
 
 /** Structural view of the source message buildQuoteMessage consumes. */
-export interface QuoteSource extends MediaSource, SpecialSource {
+export interface QuoteSource extends MediaSource, SpecialSource, RichSource {
   message_id?: number
   text?: string
   caption?: string
@@ -148,7 +150,7 @@ export function buildReplyMessage(
   if (from?.backgroundEmojiId) out.backgroundEmojiId = from.backgroundEmojiId
   // A reply-with-quote shows the quoted fragment, like Telegram's own header.
   // Its entities replace the reply's: those offsets index into the full text.
-  const ownText = quote?.text || reply.text || reply.caption || undefined
+  const ownText = quote?.text || reply.text || reply.caption || richPreviewText(reply, labels) || undefined
   // A reply to a text-less message (photo, sticker, voice, …) shows a localized
   // kind label — the renderer drops reply blocks with no text.
   out.text = ownText ?? replyLabel(reply, labels)
@@ -229,6 +231,8 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
 
   if (text) out.text = text
   if (entities) out.entities = entities
+  // Rich Message (Bot API 10.1+): blocks + flattened fallback text + its media.
+  if (!selection) applyRich(out, source, { labels, crop })
 
   out.replyMessage =
     showReply && source.reply_to_message
@@ -236,6 +240,9 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
       : {}
 
   if (forward) out.forward = forward
+
+  // Checklist / gift / giveaway / story cards, forum topic header (special-types.ts).
+  applySpecialTypes(out, source, { labels, showReply, selection: Boolean(selection) })
 
   // Poll / dice / location / contact: no text or media of their own — quote
   // them as a short text line instead of "unsupported".

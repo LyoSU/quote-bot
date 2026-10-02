@@ -101,8 +101,55 @@ quote-kind-poll = استطلاع
 quote-kind-location = الموقع
 quote-kind-contact = جهة اتصال
 quote-kind-story = قصة
+quote-rich-thinking = جارٍ التفكير…
 quote-forward-from = محولة من { $name }
 quote-forward-message = رسالة محولة
+quote-gift = هدية
+quote-gift-upgrade = ترقية الهدية
+quote-gift-unique = هدية قابلة للجمع
+quote-checklist = قائمة مهام
+quote-stars = { $count ->
+        [one] نجمة واحدة
+        [two] نجمتان
+        [few] { $count } نجوم
+       *[other] { $count } نجمة
+    }
+quote-giveaway = سحب على جوائز
+quote-giveaway-winners = الفائزون في السحب
+quote-giveaway-completed = انتهى السحب
+quote-giveaway-created = تمت جدولة السحب
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] شهر واحد
+        [two] شهران
+        [few] { $months } أشهر
+       *[other] { $months } شهرًا
+    }
+quote-giveaway-winner-count = { $count ->
+        [one] فائز واحد
+        [two] فائزان
+        [few] { $count } فائزين
+       *[other] { $count } فائزًا
+    }
+quote-giveaway-date = النتائج في { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = اكتمل { $done } من { $total }
+quote-checklist-done = تم تحديد { $count ->
+        [one] مهمة واحدة
+        [two] مهمتين
+        [few] { $count } مهام
+       *[other] { $count } مهمة
+    } كمكتملة
+quote-checklist-undone = تم تحديد { $count ->
+        [one] مهمة واحدة
+        [two] مهمتين
+        [few] { $count } مهام
+       *[other] { $count } مهمة
+    } كغير مكتملة
+quote-checklist-added = تمت إضافة { $count ->
+        [one] مهمة واحدة
+        [two] مهمتين
+        [few] { $count } مهام
+       *[other] { $count } مهمة
+    }
 quote-api_error =
     <b>عفوًا! حدث خطأ ما 😅</b>
     <pre>{ $error }</pre>

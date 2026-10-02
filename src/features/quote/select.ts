@@ -3,6 +3,9 @@ import type { ApiMessage } from '../../services/bot-api'
 import { expandAlbums } from './album'
 import { hasAnyMedia } from './extract-media'
 import { hasSpecialContent } from './labels'
+import { hasRichContent } from './rich'
+import { hasSpecialTypeContent } from './special-types'
+import { isTopicRoot } from './topics'
 
 /** The subset of the Bot API service the selector needs (kept small for testing). */
 export interface MessageFetcher {
@@ -46,7 +49,7 @@ const MAX_FETCH_IDS = 50
  * placeholder, which is exactly what we want to filter out of a range.
  */
 function hasContent(m: ApiMessage): boolean {
-  return Boolean(m.text || m.caption || hasAnyMedia(m) || hasSpecialContent(m))
+  return Boolean(m.text || m.caption || hasAnyMedia(m) || hasSpecialContent(m) || hasRichContent(m) || hasSpecialTypeContent(m))
 }
 
 function clampCount(raw: number | undefined): { count: number; backwards: boolean } {
@@ -72,7 +75,9 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
   const { trigger, chatId, isPrivate, isGuest, fetcher } = params
   const { count, backwards } = clampCount(params.count)
 
-  const reply = trigger.reply_to_message
+  // In a forum topic every non-reply message "replies" to the topic's
+  // creation service message — that's the topic root, not a quoted message.
+  const reply = isTopicRoot(trigger.reply_to_message) ? undefined : trigger.reply_to_message
   // The trigger's `quote` is always a fragment of the message it REPLIES to —
   // with no reply linkage it can't describe anything we're about to quote.
   const selection = reply ? trigger.quote : undefined

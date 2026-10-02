@@ -27,6 +27,7 @@ import { buildQuoteReplyMarkup } from './reply-markup'
 import { selectSourceMessages } from './select'
 import { sendQuote } from './send'
 import { labelsFromTranslator } from './labels'
+import { dedupeTopics } from './topics'
 import { resolveSenderColors } from './sender-colors'
 import { resolveSenderPhoto } from './sender-photo'
 import type { Sender } from './sender'
@@ -296,6 +297,7 @@ async function renderQuote(
   }
 
   const assembled = await assembleQuoteMessages(sources, deps)
+  dedupeTopics(assembled.messages) // one forum-topic header per run of the same topic
   if (assembled.messages.length === 0) {
     await replyHtml(ctx, ctx.t('quote-empty_forward'), replyToId)
     return

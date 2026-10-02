@@ -2,6 +2,7 @@ import type { NextFunction } from 'grammy'
 import type { BotContext } from '../core/types'
 import { updatesTotal } from '../core/metrics'
 import { considerGab, recordActivity } from '../services/gab'
+import { recordTopic } from '../features/quote/topics'
 
 /**
  * The single most important performance decision in the bot.
@@ -102,6 +103,8 @@ export async function fastPath(ctx: BotContext, next: NextFunction): Promise<voi
   if (msg && inGroup && ctx.chat && ctx.from && !ctx.from.is_bot) {
     recordActivity(ctx.chat.id, ctx.from.id)
   }
+  // Forum topic names for the quote header (O(1), memory-only; noise included).
+  if (msg) recordTopic(msg)
 
   if (isRelevantUpdate(ctx)) {
     updatesTotal.inc({ relevant: 'true' })

@@ -101,8 +101,55 @@ quote-kind-poll = Ankieta
 quote-kind-location = Lokalizacja
 quote-kind-contact = Kontakt
 quote-kind-story = Relacja
+quote-rich-thinking = Myśli…
 quote-forward-from = Przekazano od { $name }
 quote-forward-message = Przekazana wiadomość
+quote-gift = Prezent
+quote-gift-upgrade = Ulepszenie prezentu
+quote-gift-unique = Prezent kolekcjonerski
+quote-checklist = Lista zadań
+quote-stars = { $count ->
+        [one] { $count } gwiazdka
+        [few] { $count } gwiazdki
+        [many] { $count } gwiazdek
+       *[other] { $count } gwiazdek
+    }
+quote-giveaway = Losowanie
+quote-giveaway-winners = Zwycięzcy losowania
+quote-giveaway-completed = Losowanie zakończone
+quote-giveaway-created = Losowanie zaplanowane
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] { $months } miesiąc
+        [few] { $months } miesiące
+        [many] { $months } miesięcy
+       *[other] { $months } miesięcy
+    }
+quote-giveaway-winner-count = { $count ->
+        [one] { $count } zwycięzca
+        [few] { $count } zwycięzców
+        [many] { $count } zwycięzców
+       *[other] { $count } zwycięzców
+    }
+quote-giveaway-date = Wyniki { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = Ukończono { $done } z { $total }
+quote-checklist-done = Oznaczono jako wykonane: { $count ->
+        [one] { $count } zadanie
+        [few] { $count } zadania
+        [many] { $count } zadań
+       *[other] { $count } zadań
+    }
+quote-checklist-undone = Oznaczono jako niewykonane: { $count ->
+        [one] { $count } zadanie
+        [few] { $count } zadania
+        [many] { $count } zadań
+       *[other] { $count } zadań
+    }
+quote-checklist-added = Dodano: { $count ->
+        [one] { $count } zadanie
+        [few] { $count } zadania
+        [many] { $count } zadań
+       *[other] { $count } zadań
+    }
 quote-api_error =
     <b>Ups! Coś poszło nie tak 😅</b>
     <pre>{ $error }</pre>

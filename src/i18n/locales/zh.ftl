@@ -101,8 +101,25 @@ quote-kind-poll = 投票
 quote-kind-location = 位置
 quote-kind-contact = 联系人
 quote-kind-story = 动态
+quote-rich-thinking = 思考中…
 quote-forward-from = 转发自 { $name }
 quote-forward-message = 转发的消息
+quote-gift = 礼物
+quote-gift-upgrade = 礼物升级
+quote-gift-unique = 收藏礼物
+quote-checklist = 清单
+quote-stars = { $count } 颗星
+quote-giveaway = 抽奖
+quote-giveaway-winners = 抽奖获奖者
+quote-giveaway-completed = 抽奖已结束
+quote-giveaway-created = 已安排抽奖
+quote-giveaway-premium = { $count }× Telegram Premium · { $months } 个月
+quote-giveaway-winner-count = { $count } 名获奖者
+quote-giveaway-date = 开奖时间：{ DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = 已完成 { $done }/{ $total }
+quote-checklist-done = 已将 { $count } 项任务标记为完成
+quote-checklist-undone = 已将 { $count } 项任务标记为未完成
+quote-checklist-added = 已添加 { $count } 项任务
 quote-api_error =
     <b>糟糕！出错了 😅</b>
     <pre>{ $error }</pre>

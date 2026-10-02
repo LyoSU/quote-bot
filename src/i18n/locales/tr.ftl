@@ -101,8 +101,25 @@ quote-kind-poll = Anket
 quote-kind-location = Konum
 quote-kind-contact = Kişi
 quote-kind-story = Hikaye
+quote-rich-thinking = Düşünüyor…
 quote-forward-from = { $name } kişisinden iletildi
 quote-forward-message = İletilen mesaj
+quote-gift = Hediye
+quote-gift-upgrade = Hediye yükseltmesi
+quote-gift-unique = Koleksiyon hediyesi
+quote-checklist = Yapılacaklar listesi
+quote-stars = { $count } yıldız
+quote-giveaway = Çekiliş
+quote-giveaway-winners = Çekiliş kazananları
+quote-giveaway-completed = Çekiliş tamamlandı
+quote-giveaway-created = Çekiliş planlandı
+quote-giveaway-premium = { $count }× Telegram Premium · { $months } ay
+quote-giveaway-winner-count = { $count } kazanan
+quote-giveaway-date = Sonuçlar: { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done }/{ $total } tamamlandı
+quote-checklist-done = { $count } görev tamamlandı olarak işaretlendi
+quote-checklist-undone = { $count } görev tamamlanmadı olarak işaretlendi
+quote-checklist-added = { $count } görev eklendi
 quote-api_error =
     <b>Oops! Bir şeyler ters gitti 😅</b>
     <pre>{ $error }</pre>

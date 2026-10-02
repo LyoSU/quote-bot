@@ -101,8 +101,25 @@ quote-kind-poll = 투표
 quote-kind-location = 위치
 quote-kind-contact = 연락처
 quote-kind-story = 스토리
+quote-rich-thinking = 생각 중…
 quote-forward-from = { $name }님이 전달함
 quote-forward-message = 전달된 메시지
+quote-gift = 선물
+quote-gift-upgrade = 선물 업그레이드
+quote-gift-unique = 수집용 선물
+quote-checklist = 체크리스트
+quote-stars = 별 { $count }개
+quote-giveaway = 경품 이벤트
+quote-giveaway-winners = 경품 이벤트 당첨자
+quote-giveaway-completed = 경품 이벤트 종료
+quote-giveaway-created = 경품 이벤트 예약됨
+quote-giveaway-premium = { $count }× Telegram Premium · { $months }개월
+quote-giveaway-winner-count = 당첨자 { $count }명
+quote-giveaway-date = 결과 발표: { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $total }개 중 { $done }개 완료
+quote-checklist-done = 작업 { $count }개를 완료로 표시함
+quote-checklist-undone = 작업 { $count }개를 미완료로 표시함
+quote-checklist-added = 작업 { $count }개 추가함
 quote-api_error =
     <b>이런! 문제가 발생했습니다 😅</b>
     <pre>{ $error }</pre>

@@ -101,8 +101,25 @@ quote-kind-poll = Sorğu
 quote-kind-location = Yerləşmə
 quote-kind-contact = Kontakt
 quote-kind-story = Hekayə
+quote-rich-thinking = Düşünür…
 quote-forward-from = { $name } tərəfindən yönləndirilib
 quote-forward-message = Yönləndirilmiş mesaj
+quote-gift = Hədiyyə
+quote-gift-upgrade = Hədiyyənin təkmilləşdirilməsi
+quote-gift-unique = Kolleksiya hədiyyəsi
+quote-checklist = Tapşırıq siyahısı
+quote-stars = { $count } ulduz
+quote-giveaway = Çəkiliş
+quote-giveaway-winners = Çəkilişin qalibləri
+quote-giveaway-completed = Çəkiliş başa çatdı
+quote-giveaway-created = Çəkiliş planlaşdırıldı
+quote-giveaway-premium = { $count }× Telegram Premium · { $months } ay
+quote-giveaway-winner-count = { $count } qalib
+quote-giveaway-date = Nəticələr: { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done }/{ $total } tamamlandı
+quote-checklist-done = { $count } tapşırıq tamamlanmış kimi qeyd edildi
+quote-checklist-undone = { $count } tapşırıq tamamlanmamış kimi qeyd edildi
+quote-checklist-added = { $count } tapşırıq əlavə edildi
 quote-api_error =
     <b>Oops! Bir şey səhv getdi 😅</b>
     <pre>{ $error }</pre>

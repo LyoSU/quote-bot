@@ -101,8 +101,49 @@ quote-kind-poll = Апытанне
 quote-kind-location = Геапазіцыя
 quote-kind-contact = Кантакт
 quote-kind-story = Гісторыя
+quote-rich-thinking = Думае…
 quote-forward-from = Перасланае ад { $name }
 quote-forward-message = Перасланае паведамленне
+quote-gift = Падарунак
+quote-gift-upgrade = Паляпшэнне падарунка
+quote-gift-unique = Калекцыйны падарунак
+quote-checklist = Спіс задач
+quote-stars = { $count ->
+        [one] { $count } зорка
+        [few] { $count } зоркі
+       *[other] { $count } зорак
+    }
+quote-giveaway = Розыгрыш
+quote-giveaway-winners = Пераможцы розыгрышу
+quote-giveaway-completed = Розыгрыш завершаны
+quote-giveaway-created = Розыгрыш запланаваны
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] { $months } месяц
+        [few] { $months } месяцы
+       *[other] { $months } месяцаў
+    }
+quote-giveaway-winner-count = { $count ->
+        [one] { $count } пераможца
+        [few] { $count } пераможцы
+       *[other] { $count } пераможцаў
+    }
+quote-giveaway-date = Вынікі { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = Выканана { $done } з { $total }
+quote-checklist-done = Адзначана выкананымі: { $count ->
+        [one] { $count } задача
+        [few] { $count } задачы
+       *[other] { $count } задач
+    }
+quote-checklist-undone = Адзначана невыкананымі: { $count ->
+        [one] { $count } задача
+        [few] { $count } задачы
+       *[other] { $count } задач
+    }
+quote-checklist-added = Дададзена: { $count ->
+        [one] { $count } задача
+        [few] { $count } задачы
+       *[other] { $count } задач
+    }
 quote-api_error =
     <b>Ой! Нешта пайшло не так 😅</b>
     <pre>{ $error }</pre>

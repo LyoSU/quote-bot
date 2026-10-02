@@ -101,8 +101,25 @@ quote-kind-poll = Polling
 quote-kind-location = Lokasi
 quote-kind-contact = Kontak
 quote-kind-story = Cerita
+quote-rich-thinking = Berpikir…
 quote-forward-from = Diteruskan dari { $name }
 quote-forward-message = Pesan yang diteruskan
+quote-gift = Hadiah
+quote-gift-upgrade = Peningkatan hadiah
+quote-gift-unique = Hadiah koleksi
+quote-checklist = Daftar tugas
+quote-stars = { $count } Bintang
+quote-giveaway = Giveaway
+quote-giveaway-winners = Pemenang giveaway
+quote-giveaway-completed = Giveaway selesai
+quote-giveaway-created = Giveaway dijadwalkan
+quote-giveaway-premium = { $count }× Telegram Premium · { $months } bulan
+quote-giveaway-winner-count = { $count } pemenang
+quote-giveaway-date = Hasil pada { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done } dari { $total } selesai
+quote-checklist-done = { $count } tugas ditandai selesai
+quote-checklist-undone = { $count } tugas ditandai belum selesai
+quote-checklist-added = { $count } tugas ditambahkan
 quote-api_error =
     <b>Ups! Ada yang salah 😅</b>
     <pre>{ $error }</pre>

@@ -94,8 +94,43 @@ quote-kind-poll = Poll
 quote-kind-location = Location
 quote-kind-contact = Contact
 quote-kind-story = Story
+quote-rich-thinking = Thinking…
 quote-forward-from = Forwarded from { $name }
 quote-forward-message = Forwarded message
+quote-gift = Gift
+quote-gift-upgrade = Gift upgrade
+quote-gift-unique = Collectible gift
+quote-checklist = Checklist
+quote-stars = { $count ->
+        [one] { $count } Star
+       *[other] { $count } Stars
+    }
+quote-giveaway = Giveaway
+quote-giveaway-winners = Giveaway winners
+quote-giveaway-completed = Giveaway completed
+quote-giveaway-created = Giveaway scheduled
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] { $months } month
+       *[other] { $months } months
+    }
+quote-giveaway-winner-count = { $count ->
+        [one] { $count } winner
+       *[other] { $count } winners
+    }
+quote-giveaway-date = Results on { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done } of { $total } completed
+quote-checklist-done = Marked { $count ->
+        [one] { $count } task
+       *[other] { $count } tasks
+    } as done
+quote-checklist-undone = Marked { $count ->
+        [one] { $count } task
+       *[other] { $count } tasks
+    } as not done
+quote-checklist-added = Added { $count ->
+        [one] { $count } task
+       *[other] { $count } tasks
+    }
 quote-api_error =
     <b>Oops! Something went wrong 😅</b>
     <pre>{ $error }</pre>

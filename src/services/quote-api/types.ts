@@ -1,4 +1,5 @@
 import type { MessageEntity } from 'grammy/types'
+import type { QuoteSpecialFields } from './special-types'
 
 /** Output kind requested from the renderer. */
 export type QuoteType = 'quote' | 'image' | 'stories'
@@ -84,6 +85,8 @@ export type QuoteReplyMediaKind =
   | 'voice'
   | 'audio'
   | 'document'
+  /** Reply to a story: the renderer draws a story ring instead of a thumbnail. */
+  | 'story'
 
 export interface QuoteReplyMedia {
   kind: QuoteReplyMediaKind
@@ -106,8 +109,11 @@ export interface QuoteForward {
   from?: { id?: number; username?: string; kind?: 'user' | 'chat' | 'hidden' }
 }
 
-/** A single message in the quote, in the shape the renderer (quote-api) reads. */
-export interface QuoteMessage {
+/**
+ * A single message in the quote, in the shape the renderer (quote-api) reads.
+ * Card payloads (checklist/gift/giveaway/story) + forum topic: special-types.ts.
+ */
+export interface QuoteMessage extends QuoteSpecialFields {
   message_id?: number
   /** Original Telegram timestamp (unix s). Ignored by the renderer; used for archiving. */
   date?: number
@@ -149,6 +155,8 @@ export interface QuoteMessage {
   /** Inline-bot attribution — renderer shows a grey "via @bot" next to the name. */
   viaBot?: string
   replyMessage?: QuoteReplyMessage
+  /** Rich Message (Bot API 10.1+) blocks; `text`/`entities` carry a flattened fallback. */
+  rich?: import('./rich-types').QuoteRich
 }
 
 export interface QuoteVoice {

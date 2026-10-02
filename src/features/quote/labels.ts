@@ -1,4 +1,5 @@
 import type { MessageEntity } from 'grammy/types'
+import { specialLabelsFromTranslator, type SpecialLabels } from './special-types'
 
 /** Kinds of text-less content that get a human label (reply blocks, locations, …). */
 export const LABEL_KINDS = [
@@ -24,6 +25,10 @@ export interface QuoteLabels {
   forwardedFrom: (name: string) => string
   /** "Forwarded message" (original author unknown) */
   forwardedMessage: string
+  /** Collapsed "thinking" block of a rich message (`quote-rich-thinking`). */
+  richThinking?: string
+  /** Checklist / gift / giveaway strings (special-types.ts); English when omitted. */
+  special?: SpecialLabels
 }
 
 /** English defaults — used when a caller doesn't inject localized labels. */
@@ -44,6 +49,7 @@ export const DEFAULT_LABELS: QuoteLabels = {
   },
   forwardedFrom: (name) => `Forwarded from ${name}`,
   forwardedMessage: 'Forwarded message',
+  richThinking: 'Thinking…',
 }
 
 /** Builds the label set from a translate function (Fluent keys `quote-kind-*`, `quote-forward-*`). */
@@ -54,6 +60,9 @@ export function labelsFromTranslator(t: (key: string, args?: Record<string, stri
     kinds,
     forwardedFrom: (name) => t('quote-forward-from', { name }),
     forwardedMessage: t('quote-forward-message'),
+    richThinking: t('quote-rich-thinking'),
+    // ctx.t takes numbers too (Fluent plurals/NUMBER/DATETIME need them unstringified).
+    special: specialLabelsFromTranslator(t as Parameters<typeof specialLabelsFromTranslator>[0]),
   }
 }
 

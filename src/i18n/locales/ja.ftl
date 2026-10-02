@@ -101,8 +101,25 @@ quote-kind-poll = 投票
 quote-kind-location = 位置情報
 quote-kind-contact = 連絡先
 quote-kind-story = ストーリー
+quote-rich-thinking = 考え中…
 quote-forward-from = { $name } から転送
 quote-forward-message = 転送されたメッセージ
+quote-gift = ギフト
+quote-gift-upgrade = ギフトのアップグレード
+quote-gift-unique = コレクタブルギフト
+quote-checklist = チェックリスト
+quote-stars = { $count } スター
+quote-giveaway = プレゼント企画
+quote-giveaway-winners = プレゼント企画の当選者
+quote-giveaway-completed = プレゼント企画終了
+quote-giveaway-created = プレゼント企画を予約しました
+quote-giveaway-premium = { $count }× Telegram Premium · { $months }か月
+quote-giveaway-winner-count = 当選者 { $count } 名
+quote-giveaway-date = 結果発表: { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done }/{ $total } 完了
+quote-checklist-done = { $count } 件のタスクを完了にしました
+quote-checklist-undone = { $count } 件のタスクを未完了にしました
+quote-checklist-added = { $count } 件のタスクを追加しました
 quote-api_error =
     <b>おっと！何かがうまくいかなかったようです 😅</b>
     <pre>{ $error }</pre>

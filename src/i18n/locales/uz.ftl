@@ -101,8 +101,25 @@ quote-kind-poll = So'rovnoma
 quote-kind-location = Joylashuv
 quote-kind-contact = Kontakt
 quote-kind-story = Hikoya
+quote-rich-thinking = O‘ylamoqda…
 quote-forward-from = { $name } dan yo'naltirilgan
 quote-forward-message = Yo'naltirilgan xabar
+quote-gift = Sovg'a
+quote-gift-upgrade = Sovg'ani yaxshilash
+quote-gift-unique = Kolleksiya sovg'asi
+quote-checklist = Vazifalar ro'yxati
+quote-stars = { $count } yulduz
+quote-giveaway = Konkurs
+quote-giveaway-winners = Konkurs g'oliblari
+quote-giveaway-completed = Konkurs yakunlandi
+quote-giveaway-created = Konkurs rejalashtirildi
+quote-giveaway-premium = { $count }× Telegram Premium · { $months } oy
+quote-giveaway-winner-count = { $count } g'olib
+quote-giveaway-date = Natijalar: { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done }/{ $total } bajarildi
+quote-checklist-done = { $count } ta vazifa bajarilgan deb belgilandi
+quote-checklist-undone = { $count } ta vazifa bajarilmagan deb belgilandi
+quote-checklist-added = { $count } ta vazifa qo'shildi
 quote-api_error =
     <b>Oops! Nimadir xato ketdi 😅</b>
     <pre>{ $error }</pre>

@@ -101,8 +101,43 @@ quote-kind-poll = Peiling
 quote-kind-location = Locatie
 quote-kind-contact = Contact
 quote-kind-story = Verhaal
+quote-rich-thinking = Denkt na…
 quote-forward-from = Doorgestuurd van { $name }
 quote-forward-message = Doorgestuurd bericht
+quote-gift = Cadeau
+quote-gift-upgrade = Cadeau-upgrade
+quote-gift-unique = Verzamelcadeau
+quote-checklist = Checklist
+quote-stars = { $count ->
+        [one] { $count } ster
+       *[other] { $count } sterren
+    }
+quote-giveaway = Giveaway
+quote-giveaway-winners = Winnaars van de giveaway
+quote-giveaway-completed = Giveaway afgelopen
+quote-giveaway-created = Giveaway gepland
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] { $months } maand
+       *[other] { $months } maanden
+    }
+quote-giveaway-winner-count = { $count ->
+        [one] { $count } winnaar
+       *[other] { $count } winnaars
+    }
+quote-giveaway-date = Uitslag op { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done } van { $total } voltooid
+quote-checklist-done = { $count ->
+        [one] { $count } taak
+       *[other] { $count } taken
+    } als voltooid gemarkeerd
+quote-checklist-undone = { $count ->
+        [one] { $count } taak
+       *[other] { $count } taken
+    } als niet voltooid gemarkeerd
+quote-checklist-added = { $count ->
+        [one] { $count } taak
+       *[other] { $count } taken
+    } toegevoegd
 quote-api_error =
     <b>Oeps! Er ging iets mis 😅</b>
     <pre>{ $error }</pre>

@@ -101,8 +101,40 @@ quote-kind-poll = Umfrage
 quote-kind-location = Standort
 quote-kind-contact = Kontakt
 quote-kind-story = Story
+quote-rich-thinking = Denkt nach…
 quote-forward-from = Weitergeleitet von { $name }
 quote-forward-message = Weitergeleitete Nachricht
+quote-gift = Geschenk
+quote-gift-upgrade = Geschenk-Upgrade
+quote-gift-unique = Sammlerstück
+quote-checklist = Checkliste
+quote-stars = { $count ->
+        [one] { $count } Stern
+       *[other] { $count } Sterne
+    }
+quote-giveaway = Gewinnspiel
+quote-giveaway-winners = Gewinner des Gewinnspiels
+quote-giveaway-completed = Gewinnspiel beendet
+quote-giveaway-created = Gewinnspiel geplant
+quote-giveaway-premium = { $count }× Telegram Premium · { $months ->
+        [one] { $months } Monat
+       *[other] { $months } Monate
+    }
+quote-giveaway-winner-count = { $count } Gewinner
+quote-giveaway-date = Ergebnisse am { DATETIME($date, day: "numeric", month: "short", year: "numeric") }
+quote-checklist-progress = { $done } von { $total } erledigt
+quote-checklist-done = { $count ->
+        [one] { $count } Aufgabe
+       *[other] { $count } Aufgaben
+    } als erledigt markiert
+quote-checklist-undone = { $count ->
+        [one] { $count } Aufgabe
+       *[other] { $count } Aufgaben
+    } als nicht erledigt markiert
+quote-checklist-added = { $count ->
+        [one] { $count } Aufgabe
+       *[other] { $count } Aufgaben
+    } hinzugefügt
 quote-api_error =
     <b>Ups! Etwas ist schiefgelaufen 😅</b>
     <pre>{ $error }</pre>
