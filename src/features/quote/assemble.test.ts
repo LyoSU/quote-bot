@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { assembleQuoteMessages, type AssembleDeps, type RawMessage } from './assemble'
+import { DEFAULT_LABELS } from './labels'
 import type { Sender } from './sender'
 
 function deps(over: Partial<AssembleDeps> = {}): AssembleDeps {
@@ -284,5 +285,130 @@ describe('assembleQuoteMessages', () => {
   it('skips sources without a message_id', async () => {
     const out = await assembleQuoteMessages([{ text: 'x' } as RawMessage], deps())
     expect(out.messages).toHaveLength(0)
+  })
+})
+
+describe('assembleQuoteMessages: B12 localized forward label', () => {
+  const labels = {
+    ...DEFAULT_LABELS,
+    forwardedFrom: (n: string) => `Переслано від ${n}`,
+    forwardedMessage: 'Переслане повідомлення',
+  }
+
+  it('uses the injected labels', async () => {
+    const m = msg({ forward_origin: { type: 'hidden_user', sender_user_name: 'Ghost' } })
+    const out = await assembleQuoteMessages([m], deps({ labels }))
+    expect(out.messages[0]?.forward?.label).toBe('Переслано від Ghost')
+  })
+
+  it('uses the nameless label when the origin is unknown', async () => {
+    const m = msg({ forward_origin: { type: 'hidden_user' } })
+    const out = await assembleQuoteMessages([m], deps({ labels }))
+    expect(out.messages[0]?.forward?.label).toBe('Переслане повідомлення')
+  })
+})
+
+describe('assembleQuoteMessages: B2 sender photos', () => {
+  it('attaches the resolved profile photo to the sender', async () => {
+    const getSenderPhoto = vi.fn(async () => ({ big_file_id: 'BIG' }))
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getSenderPhoto }))
+    expect(out.messages[0]?.from?.photo).toEqual({ big_file_id: 'BIG' })
+    expect(getSenderPhoto).toHaveBeenCalledWith(1)
+  })
+
+  it('resolves several senders in parallel (all lookups start before any finishes)', async () => {
+    const started: number[] = []
+    const release: (() => void)[] = []
+    const inflight = new Map<number, Promise<{ big_file_id: string }>>() // like the real resolver: one lookup per id
+    const getSenderPhoto = vi.fn((id: number) => {
+      if (!inflight.has(id)) {
+        inflight.set(
+          id,
+          new Promise<{ big_file_id: string }>((resolve) => {
+            started.push(id)
+            release.push(() => resolve({ big_file_id: `p${id}` }))
+          }),
+        )
+      }
+      return inflight.get(id)!
+    })
+    const run = assembleQuoteMessages(
+      [msg({ message_id: 1, from: { id: 1, first_name: 'A' } }), msg({ message_id: 2, from: { id: 2, first_name: 'B' } })],
+      deps({ chatType: 'private', getSenderPhoto }),
+    )
+    await new Promise((r) => setTimeout(r, 0))
+    expect(started).toEqual([1, 2]) // second lookup was not queued behind the first
+    release.forEach((r) => r())
+    const out = await run
+    expect(out.messages.map((m) => m.from?.photo?.big_file_id)).toEqual(['p1', 'p2'])
+  })
+
+  it('keeps a photo the message already carries', async () => {
+    const getSenderPhoto = vi.fn(async () => ({ big_file_id: 'OTHER' }))
+    const m = msg({ from: { id: 1, first_name: 'A', photo: { big_file_id: 'OWN' } } })
+    const out = await assembleQuoteMessages([m], deps({ chatType: 'private', getSenderPhoto }))
+    expect(out.messages[0]?.from?.photo).toEqual({ big_file_id: 'OWN' })
+  })
+
+  it('degrades to no photo when the lookup fails', async () => {
+    const getSenderPhoto = vi.fn(async () => {
+      throw new Error('boom')
+    })
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private', getSenderPhoto }))
+    expect(out.messages[0]?.from?.photo).toBeUndefined()
+  })
+
+  it('resolves a channel author by its negative id', async () => {
+    const getSenderPhoto = vi.fn(async () => ({ big_file_id: 'CH' }))
+    const m = msg({ from: undefined, sender_chat: { id: -1001234567890, title: 'News' } })
+    const out = await assembleQuoteMessages([m], deps({ getSenderPhoto }))
+    expect(getSenderPhoto).toHaveBeenCalledWith(-1001234567890)
+    expect(out.messages[0]?.from?.photo).toEqual({ big_file_id: 'CH' })
+  })
+})
+
+describe('assembleQuoteMessages: B14 synthetic ids', () => {
+  const hidden = () => msg({ from: { id: 50, first_name: 'Fwd' }, forward_origin: { type: 'hidden_user', sender_user_name: 'Ghost' }, forward_sender_name: 'Ghost' })
+
+  it('flags a hidden sender as synthetic and never looks it up', async () => {
+    const getSenderPhoto = vi.fn(async () => ({ big_file_id: 'X' }))
+    const getUserEmojiStatus = vi.fn(async () => 'emoji')
+    const isUserPrivate = vi.fn(async () => false)
+    const out = await assembleQuoteMessages(
+      [hidden()],
+      deps({ chatType: 'private', getSenderPhoto, getUserEmojiStatus, isUserPrivate }),
+    )
+    const from = out.messages[0]?.from
+    expect(from?.synthetic).toBe(true)
+    expect(from?.id).toBeLessThan(-2_000_000_000_000)
+    expect(from?.photo).toBeUndefined()
+    expect(getUserEmojiStatus).not.toHaveBeenCalledWith(from?.id)
+    expect(isUserPrivate).not.toHaveBeenCalledWith(from?.id)
+    expect(getSenderPhoto).not.toHaveBeenCalledWith(from?.id)
+  })
+
+  it('does not flag real senders', async () => {
+    const out = await assembleQuoteMessages([msg()], deps({ chatType: 'private' }))
+    expect(out.messages[0]?.from?.synthetic).toBeUndefined()
+  })
+})
+
+describe('assembleQuoteMessages: B3 reply to a text-less message', () => {
+  const labels = {
+    ...DEFAULT_LABELS,
+    kinds: { ...DEFAULT_LABELS.kinds, photo: 'Фото', voice: 'Голосове повідомлення' },
+  }
+
+  it('sends the localized kind label as the reply text', async () => {
+    const m = msg({ reply_to_message: { photo: [{ file_id: 'p' }], from: { id: 9, first_name: 'B' } } })
+    const out = await assembleQuoteMessages([m], deps({ chatType: 'private', showReply: true, labels }))
+    expect(out.messages[0]?.replyMessage?.text).toBe('Фото')
+    expect(out.messages[0]?.replyMessage?.media).toEqual({ kind: 'photo', fileId: 'p' })
+  })
+
+  it('labels a voice reply', async () => {
+    const m = msg({ reply_to_message: { voice: { duration: 4 }, from: { id: 9, first_name: 'B' } } })
+    const out = await assembleQuoteMessages([m], deps({ chatType: 'private', showReply: true, labels }))
+    expect(out.messages[0]?.replyMessage?.text).toBe('Голосове повідомлення')
   })
 })

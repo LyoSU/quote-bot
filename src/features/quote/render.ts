@@ -139,3 +139,15 @@ export function resolveStickerEmojis(suffix: string | null | undefined): string[
 export function resolveEmojiBrand(setting: string | null | undefined): string {
   return setting || 'apple'
 }
+
+/**
+ * The channel a rendered image is actually delivered through. A sticker request
+ * can come back as a plain PNG (the renderer switches to `png` for quotes taller
+ * than a sticker allows) — that is not a valid sticker, so it goes out as a
+ * photo (send.ts downgrades it to a document when it exceeds Telegram's photo
+ * limits). Guest answers always stay stickers: they can only carry one.
+ */
+export function resolveDelivery(requested: QuoteDelivery, requestedType: QuoteType, renderedType: string, isGuest = false): QuoteDelivery {
+  if (requested === 'sticker' && !isGuest && renderedType !== requestedType) return 'photo'
+  return requested
+}

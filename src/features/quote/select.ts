@@ -2,6 +2,7 @@ import type { RawMessage } from './assemble'
 import type { ApiMessage } from '../../services/bot-api'
 import { expandAlbums } from './album'
 import { hasAnyMedia } from './extract-media'
+import { hasSpecialContent } from './labels'
 
 /** The subset of the Bot API service the selector needs (kept small for testing). */
 export interface MessageFetcher {
@@ -45,7 +46,7 @@ const MAX_FETCH_IDS = 50
  * placeholder, which is exactly what we want to filter out of a range.
  */
 function hasContent(m: ApiMessage): boolean {
-  return Boolean(m.text || m.caption || hasAnyMedia(m))
+  return Boolean(m.text || m.caption || hasAnyMedia(m) || hasSpecialContent(m))
 }
 
 function clampCount(raw: number | undefined): { count: number; backwards: boolean } {

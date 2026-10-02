@@ -89,6 +89,20 @@ btn-help = مساعدة
 quote-tag-owner = المالك
 quote-tag-admin = مشرف
 quote-unsupported_message = نوع الرسالة هذه غير مدعوم للاقتباس
+quote-kind-photo = صورة
+quote-kind-sticker = ملصق
+quote-kind-voice = رسالة صوتية
+quote-kind-video = فيديو
+quote-kind-gif = GIF
+quote-kind-video_note = رسالة فيديو
+quote-kind-document = مستند
+quote-kind-audio = ملف صوتي
+quote-kind-poll = استطلاع
+quote-kind-location = الموقع
+quote-kind-contact = جهة اتصال
+quote-kind-story = قصة
+quote-forward-from = محولة من { $name }
+quote-forward-message = رسالة محولة
 quote-api_error =
     <b>عفوًا! حدث خطأ ما 😅</b>
     <pre>{ $error }</pre>

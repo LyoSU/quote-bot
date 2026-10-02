@@ -89,6 +89,20 @@ btn-help = 帮助
 quote-tag-owner = 群主
 quote-tag-admin = 管理员
 quote-unsupported_message = 此消息类型不支持引用
+quote-kind-photo = 图片
+quote-kind-sticker = 贴纸
+quote-kind-voice = 语音消息
+quote-kind-video = 视频
+quote-kind-gif = GIF
+quote-kind-video_note = 视频消息
+quote-kind-document = 文件
+quote-kind-audio = 音频
+quote-kind-poll = 投票
+quote-kind-location = 位置
+quote-kind-contact = 联系人
+quote-kind-story = 动态
+quote-forward-from = 转发自 { $name }
+quote-forward-message = 转发的消息
 quote-api_error =
     <b>糟糕！出错了 😅</b>
     <pre>{ $error }</pre>

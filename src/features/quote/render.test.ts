@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   resolveBackgroundColor,
+  resolveDelivery,
   resolveEmojiBrand,
   resolveRenderSpec,
   resolveStickerEmojis,
@@ -80,5 +81,24 @@ describe('resolveStickerEmojis / resolveEmojiBrand', () => {
   it('defaults the emoji brand to apple', () => {
     expect(resolveEmojiBrand('google')).toBe('google')
     expect(resolveEmojiBrand(undefined)).toBe('apple')
+  })
+})
+
+describe('resolveDelivery (B5)', () => {
+  it('keeps a sticker a sticker when the renderer produced one', () => {
+    expect(resolveDelivery('sticker', 'quote', 'quote')).toBe('sticker')
+  })
+
+  it('downgrades a sticker request to a photo when the renderer fell back to png (quote > 2048px)', () => {
+    expect(resolveDelivery('sticker', 'quote', 'png')).toBe('photo')
+  })
+
+  it('leaves photo/document delivery untouched', () => {
+    expect(resolveDelivery('photo', 'image', 'image')).toBe('photo')
+    expect(resolveDelivery('document', 'image', 'image')).toBe('document')
+  })
+
+  it('never reroutes guest answers (they can only carry a sticker)', () => {
+    expect(resolveDelivery('sticker', 'quote', 'png', true)).toBe('sticker')
   })
 })

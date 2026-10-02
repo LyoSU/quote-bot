@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { hashCode, stubFromName, senderFromChat, resolveMessageOrigin } from './sender'
+import { hashCode, syntheticId, isSyntheticId, stubFromName, senderFromChat, resolveMessageOrigin } from './sender'
 
 describe('hashCode', () => {
   it('is deterministic and stable', () => {
@@ -9,9 +9,31 @@ describe('hashCode', () => {
   })
 })
 
+describe('syntheticId', () => {
+  it('is negative, deterministic and outside every real id range', () => {
+    const id = syntheticId('Ghost')
+    expect(id).toBe(syntheticId('Ghost'))
+    expect(id).toBeLessThan(-2_000_000_000_000) // below channel ids (-100… + id)
+    expect(isSyntheticId(id)).toBe(true)
+    expect(syntheticId('')).toBe(-2_100_000_000_000)
+  })
+
+  it('keeps the legacy color index (abs(id) % 7)', () => {
+    for (const name of ['Alice', 'Bob', 'Ghost', 'Анонім', 'x']) {
+      expect(Math.abs(syntheticId(name)) % 7).toBe(Math.abs(hashCode(name)) % 7)
+    }
+  })
+
+  it('does not flag real ids', () => {
+    for (const id of [1, 66478514, -4_000_000_000, -1_001_234_567_890, -1_997_852_516_352, undefined]) {
+      expect(isSyntheticId(id)).toBe(false)
+    }
+  })
+})
+
 describe('stubFromName', () => {
   it('builds a synthetic sender from a name', () => {
-    expect(stubFromName('Ghost')).toEqual({ id: hashCode('Ghost'), name: 'Ghost' })
+    expect(stubFromName('Ghost')).toEqual({ id: syntheticId('Ghost'), name: 'Ghost' })
   })
 })
 
@@ -39,7 +61,7 @@ describe('resolveMessageOrigin', () => {
 
   it('synthesizes a stable id for hidden users', () => {
     expect(resolveMessageOrigin({ type: 'hidden_user', sender_user_name: 'Anon' })).toEqual({
-      id: hashCode('Anon'),
+      id: syntheticId('Anon'),
       name: 'Anon',
     })
   })

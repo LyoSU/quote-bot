@@ -143,3 +143,54 @@ describe('extractMedia', () => {
     expect(r.voice).toEqual({ waveform: [1, 2, 3], duration: 5 })
   })
 })
+
+describe('extractMedia: B1 voice without waveform', () => {
+  it('omits the waveform field when the Bot API sent none (renderer draws a synthetic one)', () => {
+    const r = extractMedia({ voice: { file_id: 'v', duration: 9 } }, opts)
+    expect(r.voice).toEqual({ fileId: 'v', duration: 9 })
+    expect(r.voice).not.toHaveProperty('waveform')
+  })
+
+  it('omits an empty waveform too', () => {
+    const r = extractMedia({ voice: { duration: 3, waveform: [] } }, opts)
+    expect(r.voice).toEqual({ duration: 3 })
+  })
+})
+
+describe('extractMedia: B10 big files', () => {
+  const MB = 1024 * 1024
+  const thumb = { file_id: 't', file_unique_id: 'tu', width: 1, height: 1 }
+
+  it('uses the thumbnail of an image document over 19 MB instead of downloading it', () => {
+    const r = extractMedia({ document: { file_id: 'big', file_name: 'scan.png', file_size: 25 * MB, thumbnail: thumb } }, opts)
+    expect(r.mediaType).toBe('photo')
+    expect(r.media).toEqual([thumb])
+  })
+
+  it('degrades a thumbnail-less image document over 19 MB to a document row', () => {
+    const r = extractMedia({ document: { file_id: 'big', file_name: 'scan.png', file_size: 25 * MB } }, opts)
+    expect(r.media).toBeUndefined()
+    expect(r.mediaType).toBe('document')
+    expect(r.document).toEqual({ file_name: 'scan.png', file_size: 25 * MB })
+  })
+
+  it('still renders a normal-sized image document from its file id', () => {
+    const r = extractMedia({ document: { file_id: 'ok', file_name: 'a.png', file_size: 3 * MB, thumbnail: thumb } }, opts)
+    expect(r.media).toEqual([{ file_id: 'ok' }])
+  })
+
+  it('does not hand a >19 MB thumbnail-less GIF to the renderer', () => {
+    const r = extractMedia({ animation: { file_id: 'a', file_size: 30 * MB } }, opts)
+    expect(r.media).toBeUndefined()
+  })
+
+  it('falls back to the file id for a thumbnail-less video / video note like animation does', () => {
+    expect(extractMedia({ video: { file_id: 'v', file_size: 2 * MB } }, opts).media).toEqual([{ file_id: 'v' }])
+    expect(extractMedia({ video_note: { file_id: 'n' } }, opts).media).toEqual([{ file_id: 'n' }])
+    expect(extractMedia({ video: { file_id: 'v', file_size: 40 * MB } }, opts).media).toBeUndefined()
+  })
+
+  it('prefers the thumbnail of a video when present', () => {
+    expect(extractMedia({ video: { file_id: 'v', thumbnail: thumb } }, opts).media).toEqual([thumb])
+  })
+})

@@ -82,6 +82,20 @@ btn-help = Справка
 quote-tag-owner = владелец
 quote-tag-admin = админ
 quote-unsupported_message = Этот тип сообщения не поддерживается для цитирования
+quote-kind-photo = Фото
+quote-kind-sticker = Стикер
+quote-kind-voice = Голосовое сообщение
+quote-kind-video = Видео
+quote-kind-gif = GIF
+quote-kind-video_note = Видеосообщение
+quote-kind-document = Документ
+quote-kind-audio = Аудио
+quote-kind-poll = Опрос
+quote-kind-location = Геопозиция
+quote-kind-contact = Контакт
+quote-kind-story = История
+quote-forward-from = Переслано от { $name }
+quote-forward-message = Пересланное сообщение
 quote-api_error =
     <b>Упс! Что-то пошло не так 😅</b>
     <pre>{ $error }</pre>

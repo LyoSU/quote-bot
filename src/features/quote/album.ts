@@ -90,6 +90,8 @@ export function mergeAlbums(sources: RawMessage[]): RawMessage[] {
     delete merged.video
     delete merged.animation
     if (selection) merged.selection = selection
+    // The spoiler veil covers the whole album if any member carries it.
+    if (sorted.some((p) => p.has_media_spoiler)) merged.has_media_spoiler = true
     out.push(merged)
   }
   return out

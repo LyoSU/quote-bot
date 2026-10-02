@@ -36,9 +36,9 @@ export interface OriginLike {
 }
 
 /**
- * Deterministic 32-bit string hash. Used to synthesize a stable pseudo-id for
- * senders we can't identify (hidden-user forwards), so the renderer still
- * assigns them a consistent avatar color. Ported 1:1 from the legacy bot.
+ * Deterministic 32-bit string hash — the seed of {@link syntheticId}, which
+ * gives senders we can't identify (hidden-user forwards) a stable pseudo-id so
+ * the renderer assigns them a consistent avatar color.
  */
 export function hashCode(s: string): number {
   let h = 0
@@ -46,6 +46,25 @@ export function hashCode(s: string): number {
     h = ((h << 5) - h + s.charCodeAt(i)) | 0
   }
   return h
+}
+
+/**
+ * Synthetic ids live far below every real Telegram id (users are positive,
+ * supergroups/channels bottom out around -2.0e12), so a made-up id for a hidden
+ * sender can never collide with — or trigger lookups on — a real account.
+ * The base is a multiple of 7, so `abs(id) % 7` (the renderer's color index)
+ * equals the legacy `abs(hashCode(name)) % 7` and hidden senders keep their colors.
+ */
+const SYNTHETIC_BASE = 2_100_000_000_000
+
+/** Stable pseudo-id for a sender we can only identify by display name. */
+export function syntheticId(name: string): number {
+  return -(SYNTHETIC_BASE + Math.abs(hashCode(name)))
+}
+
+/** True for ids produced by {@link syntheticId} — never look these up on Telegram. */
+export function isSyntheticId(id: number | undefined | null): boolean {
+  return typeof id === 'number' && id <= -SYNTHETIC_BASE
 }
 
 /**
@@ -62,7 +81,7 @@ export function composeName(sender: Sender): string | undefined {
 
 /** Synthetic sender from a display name only. */
 export function stubFromName(name: string): Sender {
-  return { id: hashCode(name), name }
+  return { id: syntheticId(name), name }
 }
 
 /** Sender derived from a chat (channel / group / sender_chat). */
@@ -87,7 +106,7 @@ export function resolveMessageOrigin(origin: OriginLike | undefined | null): Sen
     return origin.sender_user
   }
   if (origin.type === 'hidden_user') {
-    return { id: hashCode(origin.sender_user_name ?? ''), name: origin.sender_user_name }
+    return { id: syntheticId(origin.sender_user_name ?? ''), name: origin.sender_user_name }
   }
   if (origin.type === 'chat' && origin.sender_chat) {
     return { ...origin.sender_chat, ...(origin.author_signature ? { author_signature: origin.author_signature } : {}) }

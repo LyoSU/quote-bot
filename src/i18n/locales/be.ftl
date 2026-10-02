@@ -89,6 +89,20 @@ btn-help = Даведка
 quote-tag-owner = уладальнік
 quote-tag-admin = адмін
 quote-unsupported_message = Гэта тып паведамлення не падтрымліваецца для цытавання
+quote-kind-photo = Фота
+quote-kind-sticker = Стыкер
+quote-kind-voice = Галасавое паведамленне
+quote-kind-video = Відэа
+quote-kind-gif = GIF
+quote-kind-video_note = Відэапаведамленне
+quote-kind-document = Дакумент
+quote-kind-audio = Аўдыё
+quote-kind-poll = Апытанне
+quote-kind-location = Геапазіцыя
+quote-kind-contact = Кантакт
+quote-kind-story = Гісторыя
+quote-forward-from = Перасланае ад { $name }
+quote-forward-message = Перасланае паведамленне
 quote-api_error =
     <b>Ой! Нешта пайшло не так 😅</b>
     <pre>{ $error }</pre>

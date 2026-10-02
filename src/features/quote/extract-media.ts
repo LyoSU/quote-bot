@@ -104,9 +104,22 @@ export function hasAnyMedia(src: MediaSource): boolean {
   )
 }
 
-function thumbList(file: ThumbedFile | undefined): QuoteMediaFile[] {
-  return file?.thumbnail ? [file.thumbnail] : []
+/**
+ * A video/round video is drawn from its thumbnail; without one the renderer can
+ * still pull a frame from the file itself — unless it's too big to download.
+ */
+function thumbOrFile(file: ThumbedFile): QuoteMediaFile[] {
+  if (file.thumbnail) return [file.thumbnail]
+  return file.file_id && !isTooBig(file) ? [{ file_id: file.file_id }] : []
 }
+
+/**
+ * Files above this are skipped as render sources (cloud Bot API getFile cap is
+ * 20 MB; a bit of headroom): the thumbnail is used instead, or nothing.
+ */
+export const MAX_FETCH_BYTES = 19 * 1024 * 1024
+
+const isTooBig = (f: ThumbedFile): boolean => (f.file_size ?? 0) > MAX_FETCH_BYTES
 
 const IMAGE_EXT_RE = /\.(gif|png|jpe?g|webp|bmp|tiff?|heic|heif|avif)$/i
 
@@ -159,22 +172,34 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
     // thumbnail; when Telegram omits it, hand over the file id so the renderer
     // can still try to decode a frame (a real .gif decodes via sharp). Without
     // this the bubble had no media at all and degraded to "unsupported".
-    out.media = a.thumbnail ? [a.thumbnail] : a.file_id ? [{ file_id: a.file_id }] : []
+    out.media = a.thumbnail ? [a.thumbnail] : a.file_id && !isTooBig(a) ? [{ file_id: a.file_id }] : []
     out.mediaType = 'animation'
     if (typeof a.duration === 'number') out.mediaDuration = a.duration
     fileMeta(out, a)
   } else if (src.video) {
-    out.media = thumbList(src.video)
+    out.media = thumbOrFile(src.video)
     out.mediaType = 'video'
     if (typeof src.video.duration === 'number') out.mediaDuration = src.video.duration
     fileMeta(out, src.video)
   } else if (src.video_note) {
-    out.media = thumbList(src.video_note)
+    out.media = thumbOrFile(src.video_note)
     out.mediaType = 'video_note'
     fileMeta(out, src.video_note)
   } else if (src.document) {
     const d = src.document
-    if (isImageDocument(d) && d.file_id) {
+    if (isImageDocument(d) && d.file_id && isTooBig(d)) {
+      // Too big to download as an image: its thumbnail stands in; without one it
+      // is just a file — fall through to the document row below.
+      if (d.thumbnail) {
+        out.media = [d.thumbnail]
+        out.mediaType = 'photo'
+      } else {
+        out.document = {}
+        out.mediaType = 'document'
+        if (d.file_name) out.document.file_name = d.file_name
+        out.document.file_size = d.file_size
+      }
+    } else if (isImageDocument(d) && d.file_id) {
       // A .gif/.png/.webp sent as a file is just an image — render it as a photo
       // straight from the document's own file id. (Its thumbnail is a tiny static
       // preview and is often absent, which is why the old `[thumbnail]`-only path
@@ -224,7 +249,10 @@ export function extractMedia(src: MediaSource, opts: ExtractMediaOptions): Extra
   }
 
   if (src.voice) {
-    out.voice = { waveform: src.voice.waveform ?? [], duration: src.voice.duration ?? 0 }
+    // The official Bot API's Voice has no waveform — omit the field instead of
+    // sending []: the renderer then draws a synthetic one.
+    out.voice = { duration: src.voice.duration ?? 0 }
+    if (src.voice.waveform?.length) out.voice.waveform = src.voice.waveform
     if (src.voice.file_id) out.voice.fileId = src.voice.file_id
     if (src.voice.mime_type) out.voice.mimeType = src.voice.mime_type
   }

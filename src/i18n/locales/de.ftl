@@ -89,6 +89,20 @@ btn-help = Hilfe
 quote-tag-owner = Inhaber
 quote-tag-admin = Admin
 quote-unsupported_message = Dieser Nachrichtentyp wird nicht für Zitate unterstützt
+quote-kind-photo = Foto
+quote-kind-sticker = Sticker
+quote-kind-voice = Sprachnachricht
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Videonachricht
+quote-kind-document = Dokument
+quote-kind-audio = Audio
+quote-kind-poll = Umfrage
+quote-kind-location = Standort
+quote-kind-contact = Kontakt
+quote-kind-story = Story
+quote-forward-from = Weitergeleitet von { $name }
+quote-forward-message = Weitergeleitete Nachricht
 quote-api_error =
     <b>Ups! Etwas ist schiefgelaufen 😅</b>
     <pre>{ $error }</pre>

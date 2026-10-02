@@ -89,6 +89,20 @@ btn-help = Bantuan
 quote-tag-owner = pemilik
 quote-tag-admin = admin
 quote-unsupported_message = Jenis pesan ini tidak didukung untuk kutipan
+quote-kind-photo = Foto
+quote-kind-sticker = Stiker
+quote-kind-voice = Pesan suara
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Pesan video
+quote-kind-document = Dokumen
+quote-kind-audio = Audio
+quote-kind-poll = Polling
+quote-kind-location = Lokasi
+quote-kind-contact = Kontak
+quote-kind-story = Cerita
+quote-forward-from = Diteruskan dari { $name }
+quote-forward-message = Pesan yang diteruskan
 quote-api_error =
     <b>Ups! Ada yang salah 😅</b>
     <pre>{ $error }</pre>

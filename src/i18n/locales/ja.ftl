@@ -89,6 +89,20 @@ btn-help = ヘルプ
 quote-tag-owner = オーナー
 quote-tag-admin = 管理者
 quote-unsupported_message = このメッセージタイプは引用に対応していません
+quote-kind-photo = 写真
+quote-kind-sticker = ステッカー
+quote-kind-voice = 音声メッセージ
+quote-kind-video = 動画
+quote-kind-gif = GIF
+quote-kind-video_note = ビデオメッセージ
+quote-kind-document = ドキュメント
+quote-kind-audio = 音声
+quote-kind-poll = 投票
+quote-kind-location = 位置情報
+quote-kind-contact = 連絡先
+quote-kind-story = ストーリー
+quote-forward-from = { $name } から転送
+quote-forward-message = 転送されたメッセージ
 quote-api_error =
     <b>おっと！何かがうまくいかなかったようです 😅</b>
     <pre>{ $error }</pre>

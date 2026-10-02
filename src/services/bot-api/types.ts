@@ -104,6 +104,12 @@ export interface ApiMessage {
   audio?: ApiMediaFile
   video_note?: ApiMediaFile
 
+  poll?: { question: string; options?: { text: string }[] }
+  dice?: { emoji: string; value?: number }
+  location?: { latitude: number; longitude: number }
+  venue?: { title?: string; address?: string }
+  contact?: { first_name?: string; last_name?: string; phone_number?: string }
+
   /** "Tap to reveal" media spoiler flag. */
   has_media_spoiler?: boolean
 }

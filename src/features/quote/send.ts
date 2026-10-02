@@ -36,12 +36,16 @@ function replyOptions(params: SendQuoteParams): {
   }
 }
 
+const MAX_PHOTO_BYTES = 10 * 1024 * 1024
+
 /**
  * Telegram rejects photos with width+height > 10000 or an aspect ratio > 20
  * (PHOTO_INVALID_DIMENSIONS) — long quotes rendered as images hit both.
  * Reads the dimensions straight from the PNG IHDR header.
  */
 function fitsPhotoLimits(image: Buffer): boolean {
+  // Telegram also caps photo uploads at 10 MB.
+  if (image.length > MAX_PHOTO_BYTES) return false
   const isPng = image.length >= 24 && image.readUInt32BE(0) === 0x89504e47
   if (!isPng) return true
   const width = image.readUInt32BE(16)

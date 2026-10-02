@@ -37,6 +37,8 @@ export interface QuoteMessageFrom {
   photo?: QuoteFromPhoto
   emoji_status?: string
   author_signature?: string
+  /** Made-up id (hidden sender): the renderer must never look it up on Telegram. */
+  synthetic?: boolean
 }
 
 export interface QuoteMediaFile {
@@ -142,7 +144,8 @@ export interface QuoteMessage {
 }
 
 export interface QuoteVoice {
-  waveform: number[]
+  /** Absent for official Bot API voices (no waveform) — the renderer draws a synthetic one. */
+  waveform?: number[]
   duration: number
   /** Archive-only playback metadata consumed by quotly-webapp. */
   fileId?: string

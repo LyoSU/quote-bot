@@ -82,6 +82,20 @@ btn-help = Help
 quote-tag-owner = owner
 quote-tag-admin = admin
 quote-unsupported_message = This message type is not supported for quoting
+quote-kind-photo = Photo
+quote-kind-sticker = Sticker
+quote-kind-voice = Voice message
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Video message
+quote-kind-document = Document
+quote-kind-audio = Audio
+quote-kind-poll = Poll
+quote-kind-location = Location
+quote-kind-contact = Contact
+quote-kind-story = Story
+quote-forward-from = Forwarded from { $name }
+quote-forward-message = Forwarded message
 quote-api_error =
     <b>Oops! Something went wrong 😅</b>
     <pre>{ $error }</pre>

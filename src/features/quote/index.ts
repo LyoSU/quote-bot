@@ -17,6 +17,7 @@ import { checkQuoteRate } from './rate-limit'
 import { persistQuote, type QuotePayload } from './persist'
 import {
   resolveBackgroundColor,
+  resolveDelivery,
   resolveEmojiBrand,
   resolveRenderSpec,
   resolveStickerEmojis,
@@ -25,6 +26,8 @@ import {
 import { buildQuoteReplyMarkup } from './reply-markup'
 import { selectSourceMessages } from './select'
 import { sendQuote } from './send'
+import { labelsFromTranslator } from './labels'
+import { resolveSenderPhoto } from './sender-photo'
 import type { Sender } from './sender'
 import { registerGetQuote } from './get'
 import { registerRate } from './rate'
@@ -245,6 +248,8 @@ async function renderQuote(
     forceMedia: flag.media || defaultMedia,
     showReply: flag.reply || defaultReply,
     unsupportedText: ctx.t('quote-unsupported_message'),
+    labels: labelsFromTranslator((key, args) => ctx.t(key, args)),
+    getSenderPhoto: (telegramId) => resolveSenderPhoto(ctx.api, telegramId),
     groupPrivacy,
     quoteMode,
     showSenderTag,
@@ -294,15 +299,11 @@ async function renderQuote(
     return
   }
 
-  // Only sticker delivery persists a quote and carries interactive buttons;
-  // image/png/document output is a one-off render with no stored id. Gating the
-  // whole rate/deep-link path on this stops non-sticker quotes from getting
-  // dead 👍/👎 buttons and a deep link to a local id that's never persisted.
-  const isStickerDelivery = spec.delivery === 'sticker'
-
   // ---- Render + (in parallel) allocate the per-group local id ----
+  // Allocated optimistically for a sticker request; if the renderer falls back
+  // to a plain PNG (see resolveDelivery) the id is simply left unused.
   const localIdPromise: Promise<number | null> =
-    group && isStickerDelivery ? incrementQuoteCounter(group._id).catch(() => null) : Promise.resolve(null)
+    group && spec.delivery === 'sticker' ? incrementQuoteCounter(group._id).catch(() => null) : Promise.resolve(null)
 
   let image: Buffer
   let renderedType: string
@@ -328,6 +329,17 @@ async function renderQuote(
 
   const localId = await localIdPromise
 
+  // A quote taller than a sticker allows comes back as a PNG: deliver it as a
+  // photo/document, never as a sticker.
+  const delivery = resolveDelivery(spec.delivery, spec.type, renderedType, isGuest)
+  if (delivery !== spec.delivery) ctx.logger.debug({ renderedType }, 'quote rendered as png, not a sticker')
+
+  // Only sticker delivery persists a quote and carries interactive buttons;
+  // image/png/document output is a one-off render with no stored id. Gating the
+  // whole rate/deep-link path on this stops non-sticker quotes from getting
+  // dead 👍/👎 buttons and a deep link to a local id that's never persisted.
+  const isStickerDelivery = delivery === 'sticker'
+
   // ---- Build the reply markup ----
   const presetId = isGuest ? new Types.ObjectId() : undefined
   const rateEnabled = Boolean(group && isStickerDelivery && ((group.settings?.rate ?? true) || flag.rate))
@@ -350,7 +362,7 @@ async function renderQuote(
     sendResult = await sendQuote({
       ctx,
       image,
-      delivery: spec.delivery,
+      delivery,
       emojis,
       replyToMessageId: isGuest ? undefined : replyToId,
       replyMarkup,

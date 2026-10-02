@@ -89,6 +89,20 @@ btn-help = 도움말
 quote-tag-owner = 소유자
 quote-tag-admin = 관리자
 quote-unsupported_message = 인용은 이 메시지 유형을 지원하지 않습니다
+quote-kind-photo = 사진
+quote-kind-sticker = 스티커
+quote-kind-voice = 음성 메시지
+quote-kind-video = 동영상
+quote-kind-gif = GIF
+quote-kind-video_note = 영상 메시지
+quote-kind-document = 문서
+quote-kind-audio = 오디오
+quote-kind-poll = 투표
+quote-kind-location = 위치
+quote-kind-contact = 연락처
+quote-kind-story = 스토리
+quote-forward-from = { $name }님이 전달함
+quote-forward-message = 전달된 메시지
 quote-api_error =
     <b>이런! 문제가 발생했습니다 😅</b>
     <pre>{ $error }</pre>

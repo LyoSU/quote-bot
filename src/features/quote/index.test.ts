@@ -119,3 +119,31 @@ describe('renderQuote original author role lookup', () => {
     expect(getChatMember).toHaveBeenCalledTimes(1)
   })
 })
+
+describe('renderQuote tall-quote fallback (B5)', () => {
+  beforeEach(() => {
+    vi.mocked(incrementQuoteCounter).mockClear()
+  })
+
+  it('sends a >2048px quote (png fallback) as a photo, not a sticker, without buttons or persistence', async () => {
+    const { ctx, replyWithSticker, replyWithPhoto } = groupCtx()
+    vi.mocked(generateQuote).mockResolvedValue({ image: png(1024, 4200), quoteType: 'png' } as never)
+
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+
+    expect(replyWithSticker).not.toHaveBeenCalled()
+    expect(replyWithPhoto).toHaveBeenCalledTimes(1)
+    expect(replyWithPhoto.mock.calls[0]![1].reply_markup).toBeUndefined()
+  })
+
+  it('sends it as a document when the png also exceeds photo dimension limits', async () => {
+    const { ctx, replyWithSticker, replyWithPhoto } = groupCtx()
+    vi.mocked(generateQuote).mockResolvedValue({ image: png(1024, 30_000), quoteType: 'png' } as never)
+
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+
+    expect(replyWithSticker).not.toHaveBeenCalled()
+    expect(replyWithPhoto).not.toHaveBeenCalled()
+    expect(ctx.replyWithDocument).toHaveBeenCalledTimes(1)
+  })
+})

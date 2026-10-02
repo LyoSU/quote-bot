@@ -89,6 +89,20 @@ btn-help = Kömək
 quote-tag-owner = sahib
 quote-tag-admin = admin
 quote-unsupported_message = Bu mesaj növü sitat üçün dəstəklənmir
+quote-kind-photo = Foto
+quote-kind-sticker = Stiker
+quote-kind-voice = Səsli mesaj
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Video mesaj
+quote-kind-document = Sənəd
+quote-kind-audio = Audio
+quote-kind-poll = Sorğu
+quote-kind-location = Yerləşmə
+quote-kind-contact = Kontakt
+quote-kind-story = Hekayə
+quote-forward-from = { $name } tərəfindən yönləndirilib
+quote-forward-message = Yönləndirilmiş mesaj
 quote-api_error =
     <b>Oops! Bir şey səhv getdi 😅</b>
     <pre>{ $error }</pre>

@@ -197,3 +197,15 @@ describe('sendQuote (guest mode)', () => {
     expect(answerGuestQuery).toHaveBeenCalledWith(expect.objectContaining({ type: 'article', id: 'pm' }))
   })
 })
+
+describe('sendQuote (photo size limit)', () => {
+  it('falls back to a document when the png exceeds Telegram\'s 10 MB photo cap', async () => {
+    const { ctx, replyWithPhoto, replyWithDocument } = chatCtx()
+    const big = Buffer.concat([png(1000, 3000), Buffer.alloc(11 * 1024 * 1024)])
+
+    await sendQuote({ ...params(ctx), image: big, delivery: 'photo' })
+
+    expect(replyWithPhoto).not.toHaveBeenCalled()
+    expect(replyWithDocument).toHaveBeenCalledTimes(1)
+  })
+})

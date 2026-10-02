@@ -1,9 +1,11 @@
-import type { QuoteForward, QuoteMessage } from '../../services/quote-api/types'
+import type { QuoteForward, QuoteFromPhoto, QuoteMessage } from '../../services/quote-api/types'
 import { mergeAlbums } from './album'
 import { buildQuoteMessage, type QuoteSource, type ReplySource } from './build-message'
+import { DEFAULT_LABELS, type QuoteLabels } from './labels'
 import type { PartialQuoteMode } from './render'
 import {
   resolveMessageOrigin,
+  isSyntheticId,
   senderFromChat,
   stubFromName,
   type ChatLike,
@@ -38,6 +40,14 @@ export interface AssembleDeps {
   /** Render the replied-to message block (the `reply` flag). */
   showReply: boolean
   unsupportedText: string
+  /** Localized labels (forward header, reply-to-media kinds, …). English when omitted. */
+  labels?: QuoteLabels
+  /**
+   * Profile photo of a user (positive id) or chat/channel (negative id) — the
+   * Bot API never includes it on messages. Best-effort, cached by the caller;
+   * never invoked for synthetic ids.
+   */
+  getSenderPhoto?: (telegramId: number) => Promise<QuoteFromPhoto | undefined>
   /** Resolve a hidden-user forward by display name (DB lookup). */
   enrichHidden: (name: string) => Promise<Sender | null>
   /** Whether a quoted user enabled privacy mode. */
@@ -82,7 +92,7 @@ function isForwarded(raw: RawMessage): boolean {
 }
 
 /** Builds the "Forwarded from X" info (groups only). */
-function buildForward(raw: RawMessage): QuoteForward | undefined {
+function buildForward(raw: RawMessage, labels: QuoteLabels): QuoteForward | undefined {
   let name = ''
   let from: QuoteForward['from']
 
@@ -117,7 +127,7 @@ function buildForward(raw: RawMessage): QuoteForward | undefined {
     }
   }
 
-  return { label: name ? `Forwarded from ${name}` : 'Forwarded message', name: name || undefined, from }
+  return { label: name ? labels.forwardedFrom(name) : labels.forwardedMessage, name: name || undefined, from }
 }
 
 /** Telegram id of a forward's original author, only when it is an identifiable user. */
@@ -205,13 +215,29 @@ export async function assembleQuoteMessages(
   deps: AssembleDeps,
 ): Promise<AssembledQuote> {
   const isPrivateChat = deps.chatType === 'private'
+  const labels = deps.labels ?? DEFAULT_LABELS
   let privacy = deps.groupPrivacy
   let lastSenderId: number | null = null
 
   const messages: QuoteMessage[] = []
 
+  const merged = mergeAlbums(sources)
+
+  // Profile photos: kick every lookup off up-front so they run in parallel with
+  // each other and with the per-message awaits below (the resolver caches, so
+  // the later `await` in the loop just joins the in-flight promise).
+  if (deps.getSenderPhoto) {
+    for (const raw of merged) for (const id of photoCandidateIds(raw)) void deps.getSenderPhoto(id).catch(() => undefined)
+  }
+  const withPhoto = async (s: Sender): Promise<Sender> => {
+    if (!deps.getSenderPhoto || s.photo?.big_file_id || s.photo?.url) return s
+    if (typeof s.id !== 'number' || s.id === 0 || isSyntheticId(s.id)) return s
+    const photo = await deps.getSenderPhoto(s.id).catch(() => undefined)
+    return photo ? { ...s, photo } : s
+  }
+
   // Album members collapse into one message (also covers PM batches).
-  for (const raw of mergeAlbums(sources)) {
+  for (const raw of merged) {
     if (raw.message_id === undefined) continue
 
     let from = await resolveSender(raw, deps)
@@ -244,12 +270,12 @@ export async function assembleQuoteMessages(
     const isFirstInStreak = lastSenderId === null || effectiveSenderId !== lastSenderId
 
     // Quote-level privacy: any quoted user (or the group) can request it.
-    if (!privacy && from.id) {
+    if (!privacy && from.id && !isSyntheticId(from.id)) {
       if (await deps.isUserPrivate(from.id)) privacy = true
     }
 
-    const forward = forwarded && !attributeToOrigin ? buildForward(raw) : undefined
-    const displayFrom: Sender = groupForwarder
+    const forward = forwarded && !attributeToOrigin ? buildForward(raw, labels) : undefined
+    const displayFromBase: Sender = groupForwarder
       ? {
           id: groupForwarder.id,
           first_name: 'first_name' in groupForwarder ? groupForwarder.first_name : groupForwarder.title,
@@ -258,6 +284,7 @@ export async function assembleQuoteMessages(
           photo: groupForwarder.photo,
         }
       : from
+    const displayFrom = await withPhoto(displayFromBase)
 
     // A forwarder header must not display either the forwarder's role or the
     // original author's role under the forwarder's name.
@@ -278,6 +305,7 @@ export async function assembleQuoteMessages(
         crop: deps.crop,
         forceMedia: deps.forceMedia,
         unsupportedText: deps.unsupportedText,
+        labels,
         quoteMode: deps.quoteMode,
         showSenderTag: deps.showSenderTag,
         authorTag: tagText,
@@ -294,6 +322,24 @@ export async function assembleQuoteMessages(
   }
 
   return { messages, privacy }
+}
+
+/** Ids whose profile photo the quote may need: the author and, for a forward shown under the forwarder, the forwarder. */
+function photoCandidateIds(raw: RawMessage): number[] {
+  const ids = new Set<number>()
+  const add = (id: number | undefined): void => {
+    if (typeof id === 'number' && id !== 0 && !isSyntheticId(id)) ids.add(id)
+  }
+  add(raw.from?.id)
+  add(raw.sender_chat?.id)
+  add(raw.story?.chat?.id)
+  const origin = raw.forward_origin ?? raw.origin
+  add(origin?.sender_user?.id)
+  add(origin?.sender_chat?.id)
+  add(origin?.chat?.id)
+  add(raw.forward_from?.id)
+  add(raw.forward_from_chat?.id)
+  return [...ids]
 }
 
 /** The reply block carries its own forward attribution. */

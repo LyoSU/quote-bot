@@ -89,6 +89,20 @@ btn-help = Hulp
 quote-tag-owner = eigenaar
 quote-tag-admin = beheerder
 quote-unsupported_message = Dit berichttype wordt niet ondersteund voor quoten
+quote-kind-photo = Foto
+quote-kind-sticker = Sticker
+quote-kind-voice = Spraakbericht
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Videobericht
+quote-kind-document = Document
+quote-kind-audio = Audio
+quote-kind-poll = Peiling
+quote-kind-location = Locatie
+quote-kind-contact = Contact
+quote-kind-story = Verhaal
+quote-forward-from = Doorgestuurd van { $name }
+quote-forward-message = Doorgestuurd bericht
 quote-api_error =
     <b>Oeps! Er ging iets mis 😅</b>
     <pre>{ $error }</pre>

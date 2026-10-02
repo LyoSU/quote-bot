@@ -89,6 +89,20 @@ btn-help = Ma'lumotnoma
 quote-tag-owner = egasi
 quote-tag-admin = admin
 quote-unsupported_message = Ushbu xabar turi iqtibos uchun qo'llab-quvvatlanmaydi
+quote-kind-photo = Rasm
+quote-kind-sticker = Stiker
+quote-kind-voice = Ovozli xabar
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Video xabar
+quote-kind-document = Hujjat
+quote-kind-audio = Audio
+quote-kind-poll = So'rovnoma
+quote-kind-location = Joylashuv
+quote-kind-contact = Kontakt
+quote-kind-story = Hikoya
+quote-forward-from = { $name } dan yo'naltirilgan
+quote-forward-message = Yo'naltirilgan xabar
 quote-api_error =
     <b>Oops! Nimadir xato ketdi 😅</b>
     <pre>{ $error }</pre>

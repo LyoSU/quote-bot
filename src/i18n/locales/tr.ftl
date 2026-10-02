@@ -89,6 +89,20 @@ btn-help = Dökümanlar
 quote-tag-owner = sahip
 quote-tag-admin = yönetici
 quote-unsupported_message = Bu mesaj türü alıntı için desteklenmiyor
+quote-kind-photo = Fotoğraf
+quote-kind-sticker = Çıkartma
+quote-kind-voice = Sesli mesaj
+quote-kind-video = Video
+quote-kind-gif = GIF
+quote-kind-video_note = Video mesaj
+quote-kind-document = Belge
+quote-kind-audio = Ses
+quote-kind-poll = Anket
+quote-kind-location = Konum
+quote-kind-contact = Kişi
+quote-kind-story = Hikaye
+quote-forward-from = { $name } kişisinden iletildi
+quote-forward-message = İletilen mesaj
 quote-api_error =
     <b>Oops! Bir şeyler ters gitti 😅</b>
     <pre>{ $error }</pre>
