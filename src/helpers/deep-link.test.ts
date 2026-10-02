@@ -16,9 +16,9 @@ describe('deep links', () => {
     expect(deepLink.forSettings('bot')).toBe('https://t.me/bot/app?startapp=settings')
   })
 
-  it('uses MINI_APP_URL when configured', () => {
+  it('ignores MINI_APP_URL (url buttons must open the Mini App, not a browser)', () => {
     cfg.MINI_APP_URL = 'https://app.example.com'
-    expect(deepLink.forTop('bot', gid)).toBe(`https://app.example.com?startapp=top_${gid}`)
+    expect(deepLink.forTop('bot', gid)).toBe(`https://t.me/bot/app?startapp=top_${gid}`)
     cfg.MINI_APP_URL = undefined
   })
 

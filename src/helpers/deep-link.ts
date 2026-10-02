@@ -5,8 +5,10 @@ import { config } from '../config/env'
  *   https://t.me/<bot_username>/<short_name>?startapp=<payload>
  * The payload arrives in the webapp as `start_param`.
  */
+// Always the t.me link: url buttons with a raw https MINI_APP_URL would open in a
+// plain browser (no initData, no start_param). MINI_APP_URL is only for web_app
+// buttons (menu button, inline results button).
 function baseUrl(botUsername: string): string {
-  if (config.MINI_APP_URL) return config.MINI_APP_URL
   return `https://t.me/${botUsername}/${config.MINI_APP_SHORT_NAME}`
 }
 
