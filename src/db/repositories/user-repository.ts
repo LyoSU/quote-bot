@@ -11,10 +11,12 @@ const log = logger.child({ module: 'user-repo' })
  * Hot-lookup cache — contextMiddleware resolves the sender on every relevant
  * update, and the same users message far more often than their rows change.
  *
- * Freshness is owned by delete-on-write in the helpers below: every User write
- * in the codebase flows through this module, so nothing can bypass the cache.
- * The fixed TTL (no touch-on-read) is only a backstop — even a continuously
- * active user re-reads once a minute. Capacity comes from hot-set math: at
+ * Freshness is owned by delete-on-write in the helpers below for every User
+ * write in this codebase. The Mini App writes `settings` directly, bypassing
+ * this module — paths that depend on settings re-read them first (see
+ * middlewares/fresh-settings). The fixed TTL (no touch-on-read) is the
+ * backstop for everything else — even a continuously active user re-reads
+ * once a minute. Capacity comes from hot-set math: at
  * ~50 relevant updates/s a 60s window holds ~3k distinct senders.
  */
 const userCache = new LruCache<number, UserDoc>(10_000, 60_000)
@@ -124,7 +126,8 @@ export async function syncUserProfile(user: UserDoc, from: TelegramUser): Promis
 export async function updateUserSettings(
   user: Pick<UserDoc, '_id' | 'telegram_id'>,
   $set: UpdateQuery<UserDoc>['$set'],
+  $unset?: Record<string, 1>,
 ): Promise<void> {
-  await User.updateOne({ _id: user._id }, { $set })
+  await User.updateOne({ _id: user._id }, $unset ? { $set, $unset } : { $set })
   userCache.delete(user.telegram_id)
 }

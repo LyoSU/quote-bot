@@ -3,6 +3,7 @@ import type { BotContext } from '../../core/types'
 import { onlyAdmin, onlyGroup } from '../../middlewares/guards'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
+import { freshSettings } from '../../middlewares/fresh-settings'
 import { Quote } from '../../db/models'
 import { buildBackgroundColor, DEFAULT_BACKGROUND, parseColor } from '../quote/color'
 
@@ -85,21 +86,21 @@ settingsFeature.command('qemoji', onlyAdmin, async (ctx) => {
 })
 
 // /hidden — toggle sender search (forward attribution).
-settingsFeature.hears(/^\/hidden\b/i, onlyAdmin, async (ctx) => {
+settingsFeature.hears(/^\/hidden\b/i, onlyAdmin, freshSettings, async (ctx) => {
   const next = await toggleSetting(ctx, 'hidden', true)
   if (next === null) return
   await replyHtml(ctx, ctx.t(next ? 'hidden-settings-enable' : 'hidden-settings-disable'))
 })
 
 // /privacy — toggle privacy mode.
-settingsFeature.command('privacy', onlyAdmin, async (ctx) => {
+settingsFeature.command('privacy', onlyAdmin, freshSettings, async (ctx) => {
   const next = await toggleSetting(ctx, 'privacy', false)
   if (next === null) return
   await replyHtml(ctx, ctx.t(next ? 'privacy-settings-enable' : 'privacy-settings-disable'))
 })
 
 // /qrate — toggle group rating buttons (group only).
-settingsFeature.hears(/^\/qrate\b/i, onlyGroup, onlyAdmin, async (ctx) => {
+settingsFeature.hears(/^\/qrate\b/i, onlyGroup, onlyAdmin, freshSettings, async (ctx) => {
   if (!ctx.group) return
   const next = !(ctx.group.settings?.rate ?? true)
   await updateGroupSettings(ctx.group, { 'settings.rate': next })
@@ -114,7 +115,7 @@ settingsFeature.hears(/^\/qgab(?:@\S+)?\s+(\d+)/i, onlyGroup, onlyAdmin, async (
 })
 
 // /qarchive [on|off] — toggle text archiving (group only).
-settingsFeature.command('qarchive', onlyGroup, onlyAdmin, async (ctx) => {
+settingsFeature.command('qarchive', onlyGroup, onlyAdmin, freshSettings, async (ctx) => {
   if (!ctx.group) return
   const arg = ctx.match.trim().toLowerCase()
   const current = ctx.group.settings?.archive?.storeText ?? true

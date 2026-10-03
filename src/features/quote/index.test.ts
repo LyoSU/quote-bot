@@ -11,12 +11,14 @@ vi.mock('./assemble', () => ({
 vi.mock('./persist', () => ({ persistQuote: vi.fn() }))
 vi.mock('../../db/repositories/group-repository', () => ({ incrementQuoteCounter: vi.fn(async () => 5) }))
 vi.mock('../../services/quote-api/client', () => ({ generateQuote: vi.fn() }))
+vi.mock('../../middlewares/fresh-settings', () => ({ refreshSettings: vi.fn() }))
 
 import { renderQuote } from './index'
 import { parseQuoteArgs } from './parse-args'
 import { generateQuote } from '../../services/quote-api/client'
 import { incrementQuoteCounter } from '../../db/repositories/group-repository'
 import { assembleQuoteMessages } from './assemble'
+import { refreshSettings } from '../../middlewares/fresh-settings'
 
 /** Minimal valid PNG header (signature + IHDR) with the given dimensions. */
 function png(width: number, height: number): Buffer {
@@ -170,5 +172,33 @@ describe('renderQuote tall-quote fallback (B5)', () => {
     expect(replyWithSticker).not.toHaveBeenCalled()
     expect(replyWithPhoto).not.toHaveBeenCalled()
     expect(ctx.replyWithDocument).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('renderQuote settings resolution', () => {
+  beforeEach(() => {
+    vi.mocked(generateQuote).mockResolvedValue({ image: Buffer.from('webp'), quoteType: 'quote' } as never)
+  })
+
+  it('re-reads settings before rendering', async () => {
+    const { ctx } = groupCtx()
+    vi.mocked(refreshSettings).mockClear()
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+    expect(refreshSettings).toHaveBeenCalledWith(ctx)
+  })
+
+  it("falls back to the caller's content flags when the group set none", async () => {
+    const { ctx } = groupCtx()
+    ctx.user = { settings: { quote: { media: true } } } as never
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+    expect(vi.mocked(assembleQuoteMessages).mock.calls.at(-1)![1].forceMedia).toBe(true)
+  })
+
+  it("lets a group's explicit off beat the caller's on", async () => {
+    const { ctx } = groupCtx()
+    ctx.group!.settings!.quote = { media: false } as never
+    ctx.user = { settings: { quote: { media: true } } } as never
+    await renderQuote(ctx, sources, parseQuoteArgs(''), { isGuest: false, replyToId: 1 })
+    expect(vi.mocked(assembleQuoteMessages).mock.calls.at(-1)![1].forceMedia).toBe(false)
   })
 })

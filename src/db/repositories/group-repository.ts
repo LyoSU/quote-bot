@@ -81,8 +81,9 @@ async function syncGroupProfile(group: GroupDoc, chat: GroupChat): Promise<void>
 export async function updateGroupSettings(
   group: Pick<GroupDoc, '_id' | 'group_id'>,
   $set: UpdateQuery<GroupDoc>['$set'],
+  $unset?: Record<string, 1>,
 ): Promise<void> {
-  await Group.updateOne({ _id: group._id }, { $set })
+  await Group.updateOne({ _id: group._id }, $unset ? { $set, $unset } : { $set })
   groupCache.delete(group.group_id)
 }
 

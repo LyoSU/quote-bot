@@ -54,11 +54,17 @@ function chatAdminRoles(ctx: BotContext, chatId: number): Promise<Map<number, 'o
 import { registerRandom } from './random'
 import { registerTop } from './top'
 import { registerFind } from './find'
+import { refreshSettings } from '../../middlewares/fresh-settings'
 
 /** First setting that's actually set wins (group overrides user). */
 function pickSetting(...values: (string | null | undefined)[]): string | undefined {
   for (const v of values) if (v) return v
   return undefined
+}
+
+function pickFlag(...values: (boolean | null | undefined)[]): boolean {
+  for (const v of values) if (typeof v === 'boolean') return v
+  return false
 }
 
 /** Resolves the `/q` argument string from a command, mention, or forward. */
@@ -188,6 +194,9 @@ async function renderQuote(
 ): Promise<void> {
   const { isGuest, replyToId } = opts
   const trigger = opts.trigger
+  // A change made in the Mini App must show up on the very next quote, not
+  // after the context cache expires.
+  await refreshSettings(ctx)
   const group = ctx.group
   const user = ctx.user
   const chatType = isGuest ? 'private' : (ctx.chat?.type ?? 'private')
@@ -222,9 +231,11 @@ async function renderQuote(
 
   // Per-quote flags (m/r/c) can be turned on by default via settings; the
   // explicit flag still takes precedence (there's no negative flag to turn off).
-  const defaultMedia = Boolean(group?.settings?.quote?.media) || Boolean(user?.settings?.quote?.media)
-  const defaultReply = Boolean(group?.settings?.quote?.showReply) || Boolean(user?.settings?.quote?.showReply)
-  const defaultCrop = Boolean(group?.settings?.quote?.crop) || Boolean(user?.settings?.quote?.crop)
+  // Same rule as every other look setting: the group's value when it set one,
+  // otherwise the caller's own.
+  const defaultMedia = pickFlag(group?.settings?.quote?.media, user?.settings?.quote?.media)
+  const defaultReply = pickFlag(group?.settings?.quote?.showReply, user?.settings?.quote?.showReply)
+  const defaultCrop = pickFlag(group?.settings?.quote?.crop, user?.settings?.quote?.crop)
   const quoteMode =
     (pickSetting(group?.settings?.quote?.partialMode, user?.settings?.quote?.partialMode) as
       | PartialQuoteMode

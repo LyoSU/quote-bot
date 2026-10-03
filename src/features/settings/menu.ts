@@ -3,6 +3,7 @@ import type { BotContext } from '../../core/types'
 import { onlyAdmin } from '../../middlewares/guards'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { updateUserSettings } from '../../db/repositories/user-repository'
+import { freshSettings, refreshSettings } from '../../middlewares/fresh-settings'
 import { deepLink } from '../../helpers/deep-link'
 import { DEFAULT_BACKGROUND } from '../quote/color'
 import { DEFAULT_STICKER_EMOJI, QUOTE_BACKDROPS, QUOTE_STYLES, type PartialQuoteMode, type QuoteBackdropPref, type QuoteFormatPref, type QuoteStylePref } from '../quote/render'
@@ -184,24 +185,19 @@ function defaultView(scope: 'group' | 'user'): QuoteSettingsView {
   }
 }
 
-/** Settings paths written by "reset", restoring schema defaults. */
-const RESET_QUOTE: Record<string, unknown> = {
-  'settings.quote.backgroundColor': DEFAULT_BACKGROUND,
-  'settings.quote.emojiBrand': 'apple',
-  'settings.quote.style': 'glass',
-  'settings.quote.backdrop': 'doodle',
-  'settings.quote.emojiSuffix': DEFAULT_STICKER_EMOJI,
-  'settings.quote.partialMode': 'framed',
-  'settings.quote.format': 'sticker',
-  'settings.quote.media': false,
-  'settings.quote.showReply': false,
-  'settings.quote.crop': false,
-  'settings.quote.senderTag': true,
+/**
+ * "Reset" clears the quote look instead of writing the defaults into it: an
+ * unset field renders as the default and, in a group, lets each member's own
+ * look through — exactly the state a fresh group starts in. Writing explicit
+ * defaults pinned every field and silently overrode members' personal styles.
+ */
+const RESET_QUOTE_UNSET: Record<string, 1> = { 'settings.quote': 1 }
+const RESET_USER: Record<string, unknown> = {
   'settings.privacy': false,
   'settings.hidden': true,
 }
 const RESET_GROUP: Record<string, unknown> = {
-  ...RESET_QUOTE,
+  ...RESET_USER,
   'settings.rate': true,
   'settings.randomQuoteGab': 800,
   'settings.archive.storeText': true,
@@ -357,8 +353,10 @@ async function isAdmin(ctx: BotContext): Promise<boolean> {
 
 /** Resolves the view only for an authorized admin; answers the callback otherwise. */
 async function authorizedView(ctx: BotContext): Promise<QuoteSettingsView | null> {
-  if (await isAdmin(ctx)) return resolveView(ctx)
-  return null
+  if (!(await isAdmin(ctx))) return null
+  // Toggles compute "next" from this view — it must reflect Mini App edits.
+  await refreshSettings(ctx)
+  return resolveView(ctx)
 }
 
 /** Persists one settings path to the group (preferred) or user doc. */
@@ -370,7 +368,7 @@ async function writeSetting(ctx: BotContext, path: string, value: unknown): Prom
 export const quoteSettingsMenu = new Composer<BotContext>()
 
 // /qsettings — open the interactive quote-settings menu.
-quoteSettingsMenu.command('qsettings', onlyAdmin, async (ctx) => {
+quoteSettingsMenu.command('qsettings', onlyAdmin, freshSettings, async (ctx) => {
   const view = resolveView(ctx)
   if (view) await renderMain(ctx, view, false)
 })
@@ -395,8 +393,8 @@ quoteSettingsMenu.callbackQuery('qs:reset', async (ctx) => {
     await ctx.answerCallbackQuery().catch(() => {})
     return
   }
-  if (ctx.group) await updateGroupSettings(ctx.group, RESET_GROUP)
-  else if (ctx.user) await updateUserSettings(ctx.user, RESET_QUOTE)
+  if (ctx.group) await updateGroupSettings(ctx.group, RESET_GROUP, RESET_QUOTE_UNSET)
+  else if (ctx.user) await updateUserSettings(ctx.user, RESET_USER, RESET_QUOTE_UNSET)
   await renderMain(ctx, defaultView(ctx.group ? 'group' : 'user'), true)
   await ctx.answerCallbackQuery({ text: ctx.t('qs-reset-done') }).catch(() => {})
 })
