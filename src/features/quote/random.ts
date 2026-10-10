@@ -20,7 +20,7 @@ export interface SampledQuote {
 const THROWBACK_CHANCE = 0.5
 
 /** Samples one highly-rated quote, optionally biased to a present author. */
-async function sampleQuote(
+export async function sampleQuote(
   groupId: Types.ObjectId,
   preferAuthors: number[],
   rng: () => number = Math.random,
@@ -38,11 +38,38 @@ async function sampleQuote(
     ])) as SampledQuote[]
     if (byPresent) return byPresent
   }
-  const [any] = (await Quote.aggregate([
-    { $match: { group: groupId, 'rate.score': { $gt: 0 } } },
-    { $sample: { size: 1 } },
-  ])) as SampledQuote[]
-  return any
+  return pickUniform({ group: groupId, 'rate.score': { $gt: 0 } }, rng)
+}
+
+/**
+ * One rated quote of a group, each with the same 1/n chance, reading one document.
+ *
+ * `$match` + `$sample` looked like one indexed read, but a `$sample` that is not the
+ * first stage random-sorts every matched document: a group with 7.7k rated quotes
+ * pulled all 7.7k off disk for each pick (7.5 s on prod, ~24 picks a minute across
+ * groups — the top disk reader of the shared Mongo, 10.10). Here both steps walk the
+ * { group, rate.score } index: the count is a COUNT_SCAN and the skip runs below the
+ * FETCH, so the one document read is the one returned. The index order is total
+ * (ties fall back to the record id), so every k names exactly one quote.
+ *
+ * A quote unrated or forgotten between the count and the pick can leave k past the
+ * end; the pool is counted again rather than settling for a neighbour.
+ */
+async function pickUniform(
+  filter: { group: Types.ObjectId; 'rate.score': { $gt: number } },
+  rng: () => number,
+): Promise<SampledQuote | undefined> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const n = await Quote.countDocuments(filter)
+    if (n === 0) return undefined
+    const [quote] = await Quote.find(filter)
+      .sort({ 'rate.score': -1 })
+      .skip(Math.floor(rng() * n))
+      .limit(1)
+      .lean<SampledQuote[]>()
+    if (quote) return quote
+  }
+  return undefined
 }
 
 /** Roughly 1 in 5 explicit /qrand picks swaps the quote link for the author game. */

@@ -39,7 +39,7 @@ Update flow: `fastPath` (drops ~95% group noise before any DB) → `sequentializ
 
 ### Auto-gab (`src/services/gab` + `features/quote/random.ts`)
 
-Occasionally resurfaces a top quote on a lively group moment, biased to a quote **authored by someone currently speaking** ("throwback"). The hot-path check is O(1) (in-memory activity LRU + probability + 60s cooldown + ≥2 active speakers); the real work (one indexed `$sample`) runs at most once per cooldown per group. Speaker activity is recorded on the fast-path noise branch — no per-message DB.
+Occasionally resurfaces a top quote on a lively group moment, biased to a quote **authored by someone currently speaking** ("throwback"). The hot-path check is O(1) (in-memory activity LRU + probability + 60s cooldown + ≥2 active speakers); the real work (an index-only count plus a one-document indexed pick — never `$match`+`$sample`, which fetches every matched quote) runs at most once per cooldown per group. Speaker activity is recorded on the fast-path noise branch — no per-message DB.
 
 ## Commands the bot exposes (syntax kept 1:1 with the legacy bot)
 
