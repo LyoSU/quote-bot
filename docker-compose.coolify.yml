@@ -9,6 +9,9 @@ services:
     # Resource caps from 7-day peaks in Coroot (memory = peak x1.5), 2026-09-24:
     # hetzner-auction had none, so one leak or CPU hog hit every bot on the host.
     mem_limit: 2g  # peak 1.1 GB
+    # Interactive: cgroup v2 weight 157 (4096), above the default 100 and the
+    # converter (79) and batch work (10) on hetzner-auction. 2026-10-14.
+    cpu_shares: 4096
     build:
       context: .
       dockerfile: Dockerfile.coolify
