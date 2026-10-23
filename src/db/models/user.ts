@@ -30,6 +30,7 @@ const userSchema = new Schema(
         showReply: { type: Boolean },
         crop: { type: Boolean },
         senderTag: { type: Boolean },
+        showTopic: { type: Boolean },
       },
       hidden: { type: Boolean, default: true },
       privacy: { type: Boolean, default: false },

@@ -13,7 +13,7 @@ import { parseColor, type ColorSpec } from './color'
  *     merely names the bot, not a bare "@bot <flags>" summon, so no quote fires.
  *
  * Token grammar (priority order):
- *   r | reply, p | png, i | img, rate, h | hidden, m | media, c | crop,
+ *   r | reply, p | png, i | img, rate, h | hidden, m | media, t | text, c | crop,
  *   s | stories                          → boolean flags
  *   s<number>  (s2, s1.5, s-1)           → scale
  *   <integer>  (3, -3)                   → count (negative = quote backwards)
@@ -28,6 +28,7 @@ export interface ParsedQuoteArgs {
   rate: boolean
   hidden: boolean
   media: boolean
+  text: boolean
   crop: boolean
   stories: boolean
   count?: number
@@ -43,6 +44,7 @@ const ALIASES = {
   rate: ['rate'],
   hidden: ['h', 'hidden'],
   media: ['m', 'media'],
+  text: ['t', 'text'],
   crop: ['c', 'crop'],
   stories: ['s', 'stories'],
 } as const
@@ -61,6 +63,7 @@ export function parseQuoteArgs(argString: string): ParsedQuoteArgs {
     rate: false,
     hidden: false,
     media: false,
+    text: false,
     crop: false,
     stories: false,
     unknown: [],

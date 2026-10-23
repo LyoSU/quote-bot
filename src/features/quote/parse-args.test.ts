@@ -10,6 +10,7 @@ describe('parseQuoteArgs', () => {
       rate: false,
       hidden: false,
       media: false,
+      text: false,
       crop: false,
       stories: false,
       unknown: [],

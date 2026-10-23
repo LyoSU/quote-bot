@@ -245,6 +245,10 @@ async function renderQuote(
   const showSenderTag = group
     ? (group.settings?.quote?.senderTag ?? true)
     : (user?.settings?.quote?.senderTag ?? true)
+  // Forum topic name header is opt-in (Mini App setting), off by default.
+  const showTopic = group
+    ? (group.settings?.quote?.showTopic ?? false)
+    : (user?.settings?.quote?.showTopic ?? false)
 
   // Ads: ru-locale, private chat only. Fired after collection so the ad message
   // can't be swept into the quote. Fully detached from the response.
@@ -262,6 +266,7 @@ async function renderQuote(
     hidden,
     crop: flag.crop || defaultCrop,
     forceMedia: flag.media || defaultMedia,
+    textOnly: flag.text,
     showReply: flag.reply || defaultReply,
     unsupportedText: ctx.t('quote-unsupported_message'),
     labels: labelsFromTranslator((key, args) => ctx.t(key, args)),
@@ -270,6 +275,7 @@ async function renderQuote(
     groupPrivacy,
     quoteMode,
     showSenderTag,
+    showTopic,
     getAuthorTag: (telegramId) => {
       if (isPrivate || isGuest) return Promise.resolve(undefined)
       const cached = authorTagCache.get(telegramId)

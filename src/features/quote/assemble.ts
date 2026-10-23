@@ -37,6 +37,8 @@ export interface AssembleDeps {
   crop: boolean
   /** The `m | media` flag: keep media even for a partial quote. */
   forceMedia: boolean
+  /** The `t | text` flag: text only — drop the media of a captioned message. */
+  textOnly?: boolean
   /** Render the replied-to message block (the `reply` flag). */
   showReply: boolean
   unsupportedText: string
@@ -67,6 +69,8 @@ export interface AssembleDeps {
   groupPrivacy: boolean
   /** Render the author's role/title (admin custom title / author signature) top-right. */
   showSenderTag: boolean
+  /** Show the forum topic name header (opt-in, off by default). */
+  showTopic?: boolean
   /** Best-effort tag/custom title of the original author in the current group. */
   getAuthorTag: (telegramId: number) => Promise<string | undefined>
   /** Owner/admin status of a user in the current group (undefined = regular member or unknown). */
@@ -327,10 +331,12 @@ export async function assembleQuoteMessages(
         forward,
         crop: deps.crop,
         forceMedia: deps.forceMedia,
+        textOnly: deps.textOnly,
         unsupportedText: deps.unsupportedText,
         labels,
         quoteMode: deps.quoteMode,
         showSenderTag: deps.showSenderTag,
+        showTopic: deps.showTopic,
         authorTag: tagText,
         authorTagRole: tagText ? (authorRole ?? 'member') : undefined,
       }),

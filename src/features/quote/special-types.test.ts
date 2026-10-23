@@ -25,6 +25,7 @@ const build = (source: object, showReply = true) =>
     crop: false,
     forceMedia: false,
     unsupportedText: 'Unsupported',
+    showTopic: true,
   })
 
 const sticker = (id: string, animated = true) => ({
@@ -294,6 +295,13 @@ describe('forum topics', () => {
     const out = build({ message_id: 42, chat, text: 'yes', message_thread_id: 40, is_topic_message: true, reply_to_message: { message_id: 41, text: 'hi' } })
     expect(out.replyMessage?.text).toBe('hi')
     expect(out.topic).toEqual({ name: 'Design', iconColor: '#ffd67e', iconEmojiId: 'e1' })
+  })
+
+  it('topic header is off unless showTopic is enabled', () => {
+    const src = { message_id: 41, chat, text: 'hi', message_thread_id: 40, is_topic_message: true, reply_to_message: root } as Source
+    const off = buildQuoteMessage({ source: src, from: alice, isFirstInStreak: true, showReply: false, crop: false, forceMedia: false, unsupportedText: 'Unsupported' })
+    expect(off.topic).toBeUndefined()
+    expect(off.replyMessage).toEqual({})
   })
 
   it('no topic outside forum topics or when unknown', () => {

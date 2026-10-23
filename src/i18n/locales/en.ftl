@@ -44,6 +44,7 @@ help =
         • Random: <code>/q random</code>
     • Media: Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
         • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
+        • Text only: Use <code>/q t</code> or <code>/q text</code> to drop the picture and quote just the text.
     • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
     • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 

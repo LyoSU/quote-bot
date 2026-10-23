@@ -88,6 +88,8 @@ export interface BuildQuoteMessageParams {
   crop: boolean
   /** The `m | media` flag: keep media even for a partial quote. */
   forceMedia: boolean
+  /** The `t | text` flag: drop the media when there's text to show. */
+  textOnly?: boolean
   /** Localized fallback text for unsupported content. */
   unsupportedText: string
   /** Localized labels (reply to a text-less message, location, …). English when omitted. */
@@ -96,6 +98,8 @@ export interface BuildQuoteMessageParams {
   quoteMode?: PartialQuoteMode
   /** Render the author's role/title (admin custom title / signature). Defaults to true. */
   showSenderTag?: boolean
+  /** Show the forum topic name header. Defaults to false. */
+  showTopic?: boolean
   /** Verified tag/title of the quoted author, resolved upstream. No sender fallback. */
   authorTag?: string
   /** Role behind authorTag — styles the tag (owner/admin pill, member plain). */
@@ -165,7 +169,7 @@ export function buildReplyMessage(
  * resolved senders. Pure — all DB/server resolution happens upstream.
  */
 export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage {
-  const { source, from, replyFrom, isFirstInStreak, showReply, forward, crop, forceMedia, unsupportedText } = params
+  const { source, from, replyFrom, isFirstInStreak, showReply, forward, crop, forceMedia, textOnly, unsupportedText } = params
   const labels = params.labels ?? DEFAULT_LABELS
   const quoteMode = params.quoteMode ?? 'framed'
 
@@ -192,7 +196,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
 
   // A partial quote is about the selected text — drop the media (Telegram
   // behaves the same), unless the user explicitly asked for it with `m`.
-  if (!selection || forceMedia) {
+  if ((!selection || forceMedia) && !(textOnly && text)) {
     Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
     if (source.album?.length) out.album = source.album
   }
@@ -242,7 +246,7 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
   if (forward) out.forward = forward
 
   // Checklist / gift / giveaway / story cards, forum topic header (special-types.ts).
-  applySpecialTypes(out, source, { labels, showReply, selection: Boolean(selection) })
+  applySpecialTypes(out, source, { labels, showReply, selection: Boolean(selection), showTopic: params.showTopic })
 
   // Poll / dice / location / contact: no text or media of their own — quote
   // them as a short text line instead of "unsupported".

@@ -28,6 +28,7 @@ const groupSchema = new Schema(
         showReply: { type: Boolean },
         crop: { type: Boolean },
         senderTag: { type: Boolean },
+        showTopic: { type: Boolean },
       },
       rate: { type: Boolean, default: true },
       /** "Open in app" (webapp deep-link) button under quotes. */

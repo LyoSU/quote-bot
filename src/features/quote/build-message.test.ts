@@ -21,6 +21,36 @@ describe('buildQuoteMessage', () => {
     expect(m.avatar).toBe(true)
   })
 
+  it('textOnly drops the media of a captioned message but keeps the text', () => {
+    const base = {
+      source: { caption: 'look', photo: [{ file_id: 'p1', file_unique_id: 'u1', width: 1, height: 1 }] },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: false,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    }
+    expect(buildQuoteMessage(base).media).toBeDefined()
+    const m = buildQuoteMessage({ ...base, textOnly: true })
+    expect(m.media).toBeUndefined()
+    expect(m.text).toBe('look')
+  })
+
+  it('textOnly keeps the media when there is no text', () => {
+    const m = buildQuoteMessage({
+      source: { photo: [{ file_id: 'p1', file_unique_id: 'u1', width: 1, height: 1 }] },
+      from: alice,
+      isFirstInStreak: true,
+      showReply: false,
+      crop: false,
+      forceMedia: false,
+      textOnly: true,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.media).toBeDefined()
+  })
+
   it('carries the source message_id through (denormalize reads it)', () => {
     const m = buildQuoteMessage({
       source: { message_id: 42, text: 'hi' },

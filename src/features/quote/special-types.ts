@@ -435,6 +435,8 @@ export interface ApplySpecialOptions {
   showReply: boolean
   /** A manual partial-quote selection is the message body — keep it. */
   selection?: boolean
+  /** Show the forum topic header. Off unless the chat/user opted in (Mini App). */
+  showTopic?: boolean
 }
 
 /**
@@ -449,7 +451,7 @@ export function applySpecialTypes(out: QuoteMessage, source: object, opts: Apply
   const sl = specialLabelsOf(labels)
 
   // ---- Forum topic: header + the root is not a reply ----
-  const topic = resolveTopic(src)
+  const topic = opts.showTopic ? resolveTopic(src) : undefined
   if (topic) out.topic = topic
   if (isTopicRoot(src.reply_to_message)) out.replyMessage = {}
 
