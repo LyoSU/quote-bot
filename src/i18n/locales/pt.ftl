@@ -346,7 +346,7 @@ qs-cat-content-desc =
 
     • <b>Citação parcial</b> — quando você responde a um trecho selecionado: <i>Com moldura</i> mostra-o com a moldura da citação, <i>Sem moldura</i> apenas o texto, <i>Mensagem inteira</i> ignora a seleção.
     • <b>Mostrar resposta</b> — incluir a mensagem a que se responde.
-    • <b>Mídia</b> — manter fotos/vídeos mesmo numa citação parcial (uma citação normal sempre inclui a mídia).
+    • <b>Mídia</b> — incluir fotos/vídeos nas citações. Desativado por padrão: uma citação com texto é só texto (uma mensagem sem texto mantém a imagem).
     • <b>Recortar mídia</b> — recorte inteligente de fotos sem legenda: fica a parte mais interessante do quadro.
     • <b>Papel do autor</b> — mostrar o cargo de administrador / a assinatura do remetente (a pequena etiqueta no canto superior direito).
 qs-cat-privacy-desc =
@@ -387,7 +387,7 @@ qs-gab-often = Frequentemente
 qs-gab-sometimes = Às vezes
 qs-gab-rarely = Raramente
 qs-row-suffix = 💟 Emoji do adesivo
-qs-row-media = 📎 Mídia em citação parcial
+qs-row-media = 📎 Mídia
 qs-row-reply = 💬 Mostrar resposta
 qs-row-crop = 🖼 Recortar mídia
 qs-row-sendertag = 🏷 Papel do autor

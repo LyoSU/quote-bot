@@ -356,7 +356,7 @@ qs-cat-content-desc =
 
     • <b>Cytat częściowy</b> — gdy odpowiadasz na zaznaczony fragment: <i>W ramce</i> pokazuje go z ramką cytatu, <i>Bez ramki</i> tylko tekst, <i>Cała wiadomość</i> ignoruje zaznaczenie.
     • <b>Pokaż odpowiedź</b> — dołączyć wiadomość, na którą odpowiadasz.
-    • <b>Media</b> — zachowaj zdjęcia/filmy nawet w częściowym cytacie (zwykły cytat zawsze zawiera media).
+    • <b>Media</b> — dodawaj zdjęcia/filmy do cytatów. Domyślnie wyłączone: cytat z tekstem to sam tekst (wiadomość bez tekstu zachowuje obraz).
     • <b>Przytnij media</b> — inteligentne kadrowanie zdjęć bez podpisu — zostaje najciekawsza część kadru.
     • <b>Rola autora</b> — pokazać tytuł administratora / podpis nadawcy (mała etykieta w prawym górnym rogu).
 qs-cat-privacy-desc =
@@ -397,7 +397,7 @@ qs-gab-often = Często
 qs-gab-sometimes = Czasami
 qs-gab-rarely = Rzadko
 qs-row-suffix = 💟 Emoji naklejki
-qs-row-media = 📎 Media w cytacie częściowym
+qs-row-media = 📎 Media
 qs-row-reply = 💬 Pokaż odpowiedź
 qs-row-crop = 🖼 Przytnij media
 qs-row-sendertag = 🏷 Rola autora

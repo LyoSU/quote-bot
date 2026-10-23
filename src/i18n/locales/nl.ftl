@@ -344,7 +344,7 @@ qs-cat-content-desc =
 
     • <b>Gedeeltelijk citaat</b> — wanneer je op een geselecteerd fragment antwoordt: <i>Met kader</i> toont het met het citaatkader, <i>Zonder kader</i> alleen de tekst, <i>Volledig bericht</i> negeert de selectie.
     • <b>Antwoord tonen</b> — het bericht waarop wordt geantwoord meenemen.
-    • <b>Media</b> — foto's/video's behouden, ook in een gedeeltelijk citaat (een gewoon citaat bevat altijd media).
+    • <b>Media</b> — foto's/video's in citaten opnemen. Standaard uit: een citaat met tekst is alleen tekst (een bericht zonder tekst behoudt zijn afbeelding).
     • <b>Media bijsnijden</b> — foto's zonder bijschrift slim bijsnijden — het interessantste deel blijft.
     • <b>Auteursrol</b> — de beheerderstitel / handtekening van de afzender tonen (het kleine label rechtsboven).
 qs-cat-privacy-desc =
@@ -385,7 +385,7 @@ qs-gab-often = Vaak
 qs-gab-sometimes = Soms
 qs-gab-rarely = Zelden
 qs-row-suffix = 💟 Sticker-emoji
-qs-row-media = 📎 Media in deelcitaat
+qs-row-media = 📎 Media
 qs-row-reply = 💬 Antwoord tonen
 qs-row-crop = 🖼 Media bijsnijden
 qs-row-sendertag = 🏷 Auteursrol

@@ -194,9 +194,10 @@ export function buildQuoteMessage(params: BuildQuoteMessageParams): QuoteMessage
     if (quoteMode === 'framed') out.isQuote = true
   }
 
-  // A partial quote is about the selected text — drop the media (Telegram
-  // behaves the same), unless the user explicitly asked for it with `m`.
-  if ((!selection || forceMedia) && !(textOnly && text)) {
+  // A quote with text is text-only by default; media comes along when asked
+  // for (`m` flag or the media setting) and `t` always drops it. A message
+  // with no text keeps its media — it's the whole point of the quote.
+  if (!text || (forceMedia && !textOnly)) {
     Object.assign(out, extractMedia(source, { hasText: Boolean(text), crop }))
     if (source.album?.length) out.album = source.album
   }

@@ -326,7 +326,7 @@ qs-cat-content-desc =
 
     • <b>Kısmi alıntı</b> — seçili bir parçaya yanıt verdiğinde: <i>Çerçeveli</i> onu alıntı çerçevesiyle gösterir, <i>Çerçevesiz</i> yalnızca metni, <i>Tüm mesaj</i> seçimi yok sayar.
     • <b>Yanıtı göster</b> — yanıtlanan mesajı dahil et.
-    • <b>Medya</b> — kısmi alıntıda bile fotoğraf/videoyu koru (normal alıntı medyayı her zaman içerir).
+    • <b>Medya</b> — alıntılara fotoğraf/video ekle. Varsayılan olarak kapalı: metinli alıntı yalnızca metindir (metni olmayan mesaj görselini korur).
     • <b>Medyayı kırp</b> — açıklamasız fotoğrafları akıllı kırp: karenin en ilginç kısmı kalır.
     • <b>Yazar rolü</b> — gönderenin yönetici unvanını / imzasını göster (sağ üstteki küçük etiket).
 qs-cat-privacy-desc =
@@ -367,7 +367,7 @@ qs-gab-often = Sık sık
 qs-gab-sometimes = Bazen
 qs-gab-rarely = Nadiren
 qs-row-suffix = 💟 Çıkartma emojisi
-qs-row-media = 📎 Kısmi alıntıda medya
+qs-row-media = 📎 Medya
 qs-row-reply = 💬 Yanıtı göster
 qs-row-crop = 🖼 Medyayı kırp
 qs-row-sendertag = 🏷 Yazar rolü

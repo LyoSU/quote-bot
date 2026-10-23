@@ -116,7 +116,7 @@ describe('buildQuoteMessage with an album', () => {
       isFirstInStreak: true,
       showReply: false,
       crop: false,
-      forceMedia: false,
+      forceMedia: true,
       unsupportedText: 'unsupported',
     })
     expect(out.text).toBe('cap')

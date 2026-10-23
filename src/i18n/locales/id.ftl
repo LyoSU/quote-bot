@@ -326,7 +326,7 @@ qs-cat-content-desc =
 
     • <b>Kutipan sebagian</b> — saat kamu membalas potongan terpilih: <i>Berbingkai</i> menampilkannya dengan bingkai kutipan, <i>Tanpa bingkai</i> hanya teksnya, <i>Seluruh pesan</i> mengabaikan pilihan.
     • <b>Tampilkan balasan</b> — sertakan pesan yang dibalas.
-    • <b>Media</b> — tetap sertakan foto/video bahkan pada kutipan sebagian (kutipan biasa selalu menyertakan media).
+    • <b>Media</b> — sertakan foto/video dalam kutipan. Nonaktif secara bawaan: kutipan yang punya teks hanya berisi teks (pesan tanpa teks tetap membawa gambarnya).
     • <b>Pangkas media</b> — potong cerdas foto tanpa keterangan, menyisakan bagian paling menarik.
     • <b>Peran penulis</b> — tampilkan gelar admin / tanda tangan pengirim (label kecil di kanan atas).
 qs-cat-privacy-desc =
@@ -367,7 +367,7 @@ qs-gab-often = Sering
 qs-gab-sometimes = Kadang
 qs-gab-rarely = Jarang
 qs-row-suffix = 💟 Emoji stiker
-qs-row-media = 📎 Media di kutipan sebagian
+qs-row-media = 📎 Media
 qs-row-reply = 💬 Tampilkan balasan
 qs-row-crop = 🖼 Pangkas media
 qs-row-sendertag = 🏷 Peran penulis

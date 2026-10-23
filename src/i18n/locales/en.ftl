@@ -42,9 +42,9 @@ help =
         • Basic: <code>/q red</code> (or blue, green, etc.)
         • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
         • Random: <code>/q random</code>
-    • Media in a partial quote: keep images/videos when quoting part of a message with <code>/q m</code> or <code>/q media</code> (a whole message always keeps its picture)
+    • Media: quotes with text are text-only by default; add the picture with <code>/q m</code> or <code>/q media</code>
         • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
-        • Text only: Use <code>/q t</code> or <code>/q text</code> to drop the picture and quote just the text.
+        • Text only: Use <code>/q t</code> or <code>/q text</code> to drop the picture even if media is on in settings.
     • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
     • Image Format: Use <code>/q i</code> or <code>/q img</code> or <code>/q p</code> or <code>/q png</code> for image quotes (instead of stickers).
 
@@ -391,7 +391,7 @@ qs-cat-content-desc =
 
     • <b>Partial quote</b> — when you reply to a selected part of a message: <i>Framed</i> shows it with the quote frame, <i>No frame</i> shows just the text, <i>Full message</i> takes everything, ignoring the selection.
     • <b>What came before</b> — show the message that was replied to above the quote.
-    • <b>Media</b> — keep photos and videos even in a partial quote (a regular quote always has them).
+    • <b>Media</b> — add photos and videos to quotes. Off by default: a quote with text is text only (a message with no text keeps its picture). <code>/q m</code> adds them once, <code>/q t</code> drops them.
     • <b>Smart crop</b> — photos without a caption are cropped to a narrow strip around the most interesting part. Wide shots lose most of their width.
     • <b>Author role</b> — show “admin”, “owner” or a custom title (the small label top-right).
 qs-cat-privacy-desc =
@@ -432,7 +432,7 @@ qs-gab-often = Often
 qs-gab-sometimes = Sometimes
 qs-gab-rarely = Rarely
 qs-row-suffix = 💟 Sticker emoji
-qs-row-media = 📎 Media in partial quote
+qs-row-media = 📎 Media
 qs-row-reply = 💬 What came before
 qs-row-crop = 🖼 Smart crop
 qs-row-sendertag = 🏷 Author role
@@ -489,11 +489,11 @@ menu-features-colors-title =
 menu-features-media-title =
     <b>🖼 Media in Quotes</b>
 
-    <b>Media in a partial quote:</b>
-    <code>/q m</code> — keeps images/videos when you quote part of a message
+    <b>Include media:</b>
+    <code>/q m</code> — adds images/videos (quotes with text are text-only by default)
 
     <b>Text only:</b>
-    <code>/q t</code> — drops the picture, quotes just the text
+    <code>/q t</code> — drops the picture even if media is on in settings
 
     <b>Smart crop:</b>
     <code>/q c</code> — crops the photo to a narrow strip around the most interesting part

@@ -350,7 +350,7 @@ qs-cat-content-desc =
 
     • <b>Teilzitat</b> — wenn du auf einen markierten Ausschnitt antwortest: <i>Mit Rahmen</i> zeigt ihn mit dem Zitatrahmen, <i>Ohne Rahmen</i> nur den Text, <i>Ganze Nachricht</i> ignoriert die Markierung.
     • <b>Antwort zeigen</b> — die Nachricht einbeziehen, auf die geantwortet wird.
-    • <b>Medien</b> — Fotos/Videos auch in einem Teilzitat behalten (ein normales Zitat enthält Medien immer).
+    • <b>Medien</b> — Fotos/Videos in Zitate aufnehmen. Standardmäßig aus: ein Zitat mit Text ist reiner Text (eine Nachricht ohne Text behält ihr Bild).
     • <b>Medien zuschneiden</b> — Fotos ohne Bildunterschrift smart zuschneiden – der interessanteste Bildausschnitt bleibt.
     • <b>Autor-Rolle</b> — den Admin-Titel / die Signatur des Absenders anzeigen (das kleine Label oben rechts).
 qs-cat-privacy-desc =
@@ -391,7 +391,7 @@ qs-gab-often = Oft
 qs-gab-sometimes = Manchmal
 qs-gab-rarely = Selten
 qs-row-suffix = 💟 Sticker-Emoji
-qs-row-media = 📎 Medien im Teilzitat
+qs-row-media = 📎 Medien
 qs-row-reply = 💬 Antwort zeigen
 qs-row-crop = 🖼 Medien zuschneiden
 qs-row-sendertag = 🏷 Autor-Rolle

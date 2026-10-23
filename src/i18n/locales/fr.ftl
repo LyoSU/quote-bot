@@ -350,7 +350,7 @@ qs-cat-content-desc =
 
     • <b>Citation partielle</b> — quand tu réponds à un fragment sélectionné : <i>Avec cadre</i> l'affiche avec le cadre de citation, <i>Sans cadre</i> seulement le texte, <i>Message entier</i> ignore la sélection.
     • <b>Afficher la réponse</b> — inclure le message auquel on répond.
-    • <b>Médias</b> — garder photos/vidéos même dans une citation partielle (une citation normale inclut toujours le média).
+    • <b>Médias</b> — ajouter photos/vidéos aux citations. Désactivé par défaut : une citation avec du texte reste du texte seul (un message sans texte garde son image).
     • <b>Rogner les médias</b> — recadrage intelligent des photos sans légende : la partie la plus intéressante est conservée.
     • <b>Rôle de l'auteur</b> — afficher le titre d'administrateur / la signature de l'expéditeur (la petite étiquette en haut à droite).
 qs-cat-privacy-desc =
@@ -391,7 +391,7 @@ qs-gab-often = Souvent
 qs-gab-sometimes = Parfois
 qs-gab-rarely = Rarement
 qs-row-suffix = 💟 Emoji du sticker
-qs-row-media = 📎 Médias dans une citation partielle
+qs-row-media = 📎 Médias
 qs-row-reply = 💬 Afficher la réponse
 qs-row-crop = 🖼 Rogner les médias
 qs-row-sendertag = 🏷 Rôle de l'auteur

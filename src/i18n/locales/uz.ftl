@@ -326,7 +326,7 @@ qs-cat-content-desc =
 
     • <b>Qisman sitata</b> — tanlangan parchaga javob berganingda: <i>Ramkali</i> uni sitata ramkasi bilan ko'rsatadi, <i>Ramkasiz</i> faqat matnni, <i>To'liq xabar</i> tanlovni e'tiborsiz qoldiradi.
     • <b>Javobni ko'rsatish</b> — javob berilayotgan xabarni qo'shish.
-    • <b>Media</b> — qisman iqtibosda ham foto/videoni saqlash (oddiy iqtibos mediani doim qo'shadi).
+    • <b>Media</b> — iqtiboslarga foto/video qo'shish. Odatda o'chirilgan: matnli iqtibos faqat matn bo'ladi (matnsiz xabar rasmini saqlaydi).
     • <b>Mediani kesish</b> — izohsiz fotolarni aqlli kesish: kadrning eng qiziq qismi qoladi.
     • <b>Muallif roli</b> — yuboruvchining admin unvoni / imzosini ko'rsatish (yuqori o'ngdagi kichik yorliq).
 qs-cat-privacy-desc =
@@ -367,7 +367,7 @@ qs-gab-often = Tez-tez
 qs-gab-sometimes = Ba'zan
 qs-gab-rarely = Kamdan-kam
 qs-row-suffix = 💟 Stiker emojisi
-qs-row-media = 📎 Qisman iqtibosda media
+qs-row-media = 📎 Media
 qs-row-reply = 💬 Javobni ko'rsatish
 qs-row-crop = 🖼 Mediani kesish
 qs-row-sendertag = 🏷 Muallif roli

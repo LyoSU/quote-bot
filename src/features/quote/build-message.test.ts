@@ -21,7 +21,7 @@ describe('buildQuoteMessage', () => {
     expect(m.avatar).toBe(true)
   })
 
-  it('textOnly drops the media of a captioned message but keeps the text', () => {
+  it('a captioned message is text-only by default; forceMedia brings the media, textOnly drops it again', () => {
     const base = {
       source: { caption: 'look', photo: [{ file_id: 'p1', file_unique_id: 'u1', width: 1, height: 1 }] },
       from: alice,
@@ -31,10 +31,11 @@ describe('buildQuoteMessage', () => {
       forceMedia: false,
       unsupportedText: 'Unsupported',
     }
-    expect(buildQuoteMessage(base).media).toBeDefined()
-    const m = buildQuoteMessage({ ...base, textOnly: true })
-    expect(m.media).toBeUndefined()
-    expect(m.text).toBe('look')
+    const plain = buildQuoteMessage(base)
+    expect(plain.media).toBeUndefined()
+    expect(plain.text).toBe('look')
+    expect(buildQuoteMessage({ ...base, forceMedia: true }).media).toBeDefined()
+    expect(buildQuoteMessage({ ...base, forceMedia: true, textOnly: true }).media).toBeUndefined()
   })
 
   it('textOnly keeps the media when there is no text', () => {
@@ -85,7 +86,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: true,
       crop: false,
-      forceMedia: false,
+      forceMedia: true,
       unsupportedText: 'Unsupported',
     })
     expect(m.text).toBe('cap')
@@ -260,7 +261,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: true,
       crop: false,
-      forceMedia: false,
+      forceMedia: true,
       unsupportedText: 'Unsupported',
       quoteMode: 'off',
     })
@@ -301,7 +302,7 @@ describe('buildQuoteMessage', () => {
       isFirstInStreak: true,
       showReply: false,
       crop: false,
-      forceMedia: false,
+      forceMedia: true,
       unsupportedText: 'Unsupported',
     })
     expect(m.text).toBe('cap')

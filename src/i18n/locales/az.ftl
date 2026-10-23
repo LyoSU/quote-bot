@@ -326,7 +326,7 @@ qs-cat-content-desc =
 
     • <b>Qismən sitat</b> — seçilmiş hissəyə cavab verəndə: <i>Çərçivəli</i> onu sitat çərçivəsi ilə göstərir, <i>Çərçivəsiz</i> yalnız mətni, <i>Bütün mesaj</i> seçimi nəzərə almır.
     • <b>Cavabı göstər</b> — cavab verilən mesajı daxil et.
-    • <b>Media</b> — hissəvi sitatda belə foto/videonu saxla (adi sitat medianı həmişə daxil edir).
+    • <b>Media</b> — foto/videonu sitatlara əlavə et. Susmaya görə söndürülüb: mətni olan sitat yalnız mətn olur (mətni olmayan mesaj şəklini saxlayır).
     • <b>Medianı kəs</b> — başlıqsız fotoları ağıllı kəs: kadrın ən maraqlı hissəsi qalır.
     • <b>Müəllif rolu</b> — göndərənin admin titulunu / imzasını göstər (sağ yuxarıdakı kiçik etiket).
 qs-cat-privacy-desc =
@@ -367,7 +367,7 @@ qs-gab-often = Tez-tez
 qs-gab-sometimes = Bəzən
 qs-gab-rarely = Nadir
 qs-row-suffix = 💟 Stiker emojisi
-qs-row-media = 📎 Qismən sitatda media
+qs-row-media = 📎 Media
 qs-row-reply = 💬 Cavabı göstər
 qs-row-crop = 🖼 Medianı kəs
 qs-row-sendertag = 🏷 Müəllif rolu

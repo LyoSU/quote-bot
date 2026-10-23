@@ -346,7 +346,7 @@ qs-cat-content-desc =
 
     • <b>Citazione parziale</b> — quando rispondi a un frammento selezionato: <i>Con cornice</i> lo mostra con la cornice della citazione, <i>Senza cornice</i> solo il testo, <i>Messaggio intero</i> ignora la selezione.
     • <b>Mostra risposta</b> — includere il messaggio a cui si risponde.
-    • <b>Media</b> — mantenere foto/video anche in una citazione parziale (una citazione normale include sempre i media).
+    • <b>Media</b> — aggiungere foto/video alle citazioni. Disattivato di default: una citazione con testo è solo testo (un messaggio senza testo mantiene la sua immagine).
     • <b>Ritaglia media</b> — ritaglio intelligente delle foto senza didascalia: resta la parte più interessante.
     • <b>Ruolo autore</b> — mostrare il titolo di amministratore / la firma del mittente (la piccola etichetta in alto a destra).
 qs-cat-privacy-desc =
@@ -387,7 +387,7 @@ qs-gab-often = Spesso
 qs-gab-sometimes = A volte
 qs-gab-rarely = Raramente
 qs-row-suffix = 💟 Emoji dello sticker
-qs-row-media = 📎 Media nella citazione parziale
+qs-row-media = 📎 Media
 qs-row-reply = 💬 Mostra risposta
 qs-row-crop = 🖼 Ritaglia media
 qs-row-sendertag = 🏷 Ruolo autore
