@@ -25,6 +25,7 @@ describe('resolveRenderSpec', () => {
 
   it('renders png as a png document', () => {
     const spec = resolveRenderSpec(parseQuoteArgs('png'))
+    expect(spec.type).toBe('png')
     expect(spec.delivery).toBe('document')
     expect(spec.format).toBe('png')
   })

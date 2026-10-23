@@ -2,7 +2,7 @@ import type { MessageEntity } from 'grammy/types'
 import type { QuoteSpecialFields } from './special-types'
 
 /** Output kind requested from the renderer. */
-export type QuoteType = 'quote' | 'image' | 'stories'
+export type QuoteType = 'quote' | 'image' | 'stories' | 'png'
 /** Encoding of the rendered image. */
 export type QuoteFormat = 'webp' | 'png'
 

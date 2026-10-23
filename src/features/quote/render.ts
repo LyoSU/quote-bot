@@ -89,7 +89,9 @@ export function resolveRenderSpec(flag: ParsedQuoteArgs): RenderSpec {
   }
 
   let type: QuoteType = 'quote'
-  if (flag.img || flag.png) type = 'image'
+  if (flag.img) type = 'image'
+  // `png` is the transparent one: the renderer skips the backdrop for it.
+  if (flag.png) type = 'png'
 
   if (flag.stories) {
     width *= WIDE_WIDTH_FACTOR
