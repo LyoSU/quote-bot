@@ -42,7 +42,7 @@ help =
         • Basic: <code>/q red</code> (or blue, green, etc.)
         • Custom: <code>/q #[hex color code]</code> (e.g., <code>/q #cbafff</code>)
         • Random: <code>/q random</code>
-    • Media: Include images/videos from the quoted message with <code>/q m</code> or <code>/q media</code>
+    • Media in a partial quote: keep images/videos when quoting part of a message with <code>/q m</code> or <code>/q media</code> (a whole message always keeps its picture)
         • Crop Media: Use <code>/q c</code> or <code>/q crop</code> to crop the media.
         • Text only: Use <code>/q t</code> or <code>/q text</code> to drop the picture and quote just the text.
     • Keep Replies: Show the message being replied to with <code>/q r</code> or <code>/q reply</code>
@@ -432,7 +432,7 @@ qs-gab-often = Often
 qs-gab-sometimes = Sometimes
 qs-gab-rarely = Rarely
 qs-row-suffix = 💟 Sticker emoji
-qs-row-media = 📎 Media
+qs-row-media = 📎 Media in partial quote
 qs-row-reply = 💬 What came before
 qs-row-crop = 🖼 Smart crop
 qs-row-sendertag = 🏷 Author role
@@ -489,8 +489,11 @@ menu-features-colors-title =
 menu-features-media-title =
     <b>🖼 Media in Quotes</b>
 
-    <b>Include media:</b>
-    <code>/q m</code> — adds images/videos
+    <b>Media in a partial quote:</b>
+    <code>/q m</code> — keeps images/videos when you quote part of a message
+
+    <b>Text only:</b>
+    <code>/q t</code> — drops the picture, quotes just the text
 
     <b>Smart crop:</b>
     <code>/q c</code> — crops the photo to a narrow strip around the most interesting part
