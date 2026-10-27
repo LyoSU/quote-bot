@@ -140,7 +140,6 @@ quote-checklist-added = { $count ->
     } toegevoegd
 quote-api_error =
     <b>Oeps! Er ging iets mis 😅</b>
-    <pre>{ $error }</pre>
     Probeer het over een moment opnieuw!
 quote-empty_forward = Reageer of stuur het bericht dat je wilt citeren ✨
 quote-set_background_color = <b>Perfect!</b> Citaat achtergrond veranderd naar: <code>{ $backgroundColor }</code> 🎨
@@ -158,15 +157,14 @@ quote-errors-invalid_format =
     • Stickers
     • Tekstberichten
 quote-errors-telegram_error =
-    ⚠️ Telegramfout: { $error }
+    ⚠️ Telegramfout
 
     Dit gebeurt meestal wanneer:
     • Het bestand te groot is
     • Het stickerpakket vol is
     • De bot geen toestemmingen heeft
 quote-errors-generic_error =
-    😅 Oeps! Er is iets misgegaan:
-    <code>{ $error }</code>
+    😅 Oeps! Er is iets misgegaan
 
     Probeer het opnieuw of meld dit bij @Ly_oBot als het probleem aanhoudt.
 quote-errors-no_rights_send_documents =
@@ -234,7 +232,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Te veel verzoeken! Wacht alstublief
 sticker-save-suc = Succesvol toegevoegd aan je <a href="{ $link }">groepssticker pakket</a> ✨
 sticker-save-error-animated = Sorry, ik kan nog geen geanimeerde stickers opslaan 😅
 sticker-save-error-need_creator = <b>Bijna daar!</b> { $creator } moet mij eerst een bericht sturen om stickers op te slaan
-sticker-save-error-telegram = <b>Oeps!</b> Er ging iets mis:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oeps!</b> Er ging iets mis
 sticker-delete-suc = Verwijderd uit je <a href="{ $link }">groepssticker pakket</a> 🗑
 sticker-delete-empty_reply = Antwoord op een sticker die je wilt verwijderen 🗑
 sticker-delete-error-telegram =
@@ -244,12 +242,9 @@ sticker-delete-error-not_found = De sticker bestaat niet meer in het pakket 🤔
 sticker-delete-error-rights = Ik heb geen toestemming om deze sticker te verwijderen 🔒
 sticker-delete-error-generic =
     Er is iets misgegaan. Probeer het later opnieuw ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Verwijderd uit willekeurige verzameling 🗑
 sticker-delete_random-error =
     <b>Kon het citaat niet verwijderen 😕</b>
-    { $error }
 sticker-delete_random-not_found = Dit citaat staat niet in de database 🤔
 sticker-empty_forward = Reageer op een sticker, foto of afbeelding die je wilt opslaan ✨
 sticker-fstik = Om dit op te slaan naar je persoonlijke stickerpakket, stuur door naar @fStikBot 🎨

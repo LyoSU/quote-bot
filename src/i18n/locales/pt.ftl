@@ -146,7 +146,6 @@ quote-checklist-added = { $count ->
     }
 quote-api_error =
     <b>Ops! Algo deu errado 😅</b>
-    <pre>{ $error }</pre>
     Tente novamente em um momento!
 quote-empty_forward = Responda ou encaminhe a mensagem que você gostaria de citar ✨
 quote-set_background_color = <b>Perfeito!</b> Cor de fundo da citação mudada para: <code>{ $backgroundColor }</code> 🎨
@@ -164,15 +163,14 @@ quote-errors-invalid_format =
     • Figurinhas
     • Mensagens de texto
 quote-errors-telegram_error =
-    ⚠️ Erro do Telegram: { $error }
+    ⚠️ Erro do Telegram
 
     Isso geralmente acontece quando:
     • O arquivo é muito grande
     • O pacote de figurinhas está cheio
     • O bot não tem permissões
 quote-errors-generic_error =
-    😅 Opa! Algo deu errado:
-    <code>{ $error }</code>
+    😅 Opa! Algo deu errado
 
     Por favor, tente novamente ou reporte isso para @Ly_oBot se persistir.
 quote-errors-no_rights_send_documents =
@@ -240,7 +238,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Muitos pedidos! Por favor, espere {
 sticker-save-suc = Adicionado com sucesso ao seu <a href="{ $link }">pacote de adesivos do grupo</a> ✨
 sticker-save-error-animated = Desculpe, ainda não posso salvar adesivos animados 😅
 sticker-save-error-need_creator = <b>Quase lá!</b> { $creator } precisa me enviar uma mensagem primeiro para salvar adesivos
-sticker-save-error-telegram = <b>Ops!</b> Algo deu errado:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Ops!</b> Algo deu errado
 sticker-delete-suc = Removido do seu <a href="{ $link }">pacote de adesivos do grupo</a> 🗑
 sticker-delete-empty_reply = Por favor, responda a um adesivo que deseja excluir 🗑
 sticker-delete-error-telegram = <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>{ $reason }</pre>
@@ -248,10 +246,8 @@ sticker-delete-error-not_found = A figurinha não existe mais no pacote 🤔
 sticker-delete-error-rights = Não tenho permissão para deletar esta figurinha 🔒
 sticker-delete-error-generic =
     Algo deu errado. Por favor, tente novamente mais tarde ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Removido da coleção aleatória 🗑
-sticker-delete_random-error = <b>Ops!</b> Não foi possível remover o adesivo:\n<pre>{ $error }</pre>
+sticker-delete_random-error = <b>Ops!</b> Não foi possível remover o adesivo
 sticker-delete_random-not_found = Esta citação não está no banco de dados 🤔
 sticker-empty_forward = Por favor, responda a um adesivo, foto ou imagem que você gostaria de salvar ✨
 sticker-fstik = Para salvar isso no seu pacote pessoal de adesivos, encaminhe para @fStikBot 🎨

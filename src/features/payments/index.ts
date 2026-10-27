@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { Composer, InlineKeyboard } from 'grammy'
 import type { BotContext } from '../../core/types'
 import { config } from '../../config/env'
+import { redactSecrets } from '../../core/redact'
 
 /** Donation tiers, in Telegram Stars (XTR). */
 const STAR_AMOUNTS = [50, 250, 500, 1000, 1500, 2500] as const
@@ -71,6 +72,6 @@ paymentsFeature.hears(/^\/refund(?:@\S+)?\s+(\d+)\s+(\S+)/, async (ctx) => {
     await ctx.api.refundStarPayment(userId, chargeId)
     await ctx.reply(`Refund success: ${userId} ${chargeId}`)
   } catch (err) {
-    await ctx.reply(`Refund error: ${err instanceof Error ? err.message : String(err)}`)
+    await ctx.reply(`Refund error: ${redactSecrets(err instanceof Error ? err.message : String(err))}`)
   }
 })

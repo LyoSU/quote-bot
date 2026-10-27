@@ -139,7 +139,6 @@ quote-checklist-added = Добавлено: { $count ->
     }
 quote-api_error =
     <b>Упс! Что-то пошло не так 😅</b>
-    <pre>{ $error }</pre>
     Пожалуйста, попробуйте еще раз через мгновение!
 quote-empty_forward = Пожалуйста, ответьте или перешлите сообщение, которое хотите процитировать ✨
 quote-set_background_color = <b>Идеально!</b> Фон цитаты изменен на: <code>{ $backgroundColor }</code> 🎨
@@ -157,15 +156,14 @@ quote-errors-invalid_format =
     • Стикеры
     • Текстовые сообщения
 quote-errors-telegram_error =
-    ⚠️ Ошибка Telegram: { $error }
+    ⚠️ Ошибка Telegram
 
     Обычно это происходит, когда:
     • Файл слишком большой
     • Пакет стикеров полон
     • Боту не хватает разрешений
 quote-errors-generic_error =
-    😅 Упс! Что-то пошло не так:
-    <code>{ $error }</code>
+    😅 Упс! Что-то пошло не так
 
     Пожалуйста, попробуйте снова или сообщите об этом в @Ly_oBot, если проблема сохраняется.
 quote-errors-no_rights_send_documents =
@@ -234,7 +232,7 @@ sticker-save-suc = Успешно добавлено в ваш <a href="{ $link 
 sticker-save-error-animated = Извините, я пока не могу сохранять анимированные стикеры 😅
 sticker-save-error-too_large = Изображение слишком большое (макс 2048×2048). Попробуй поменьше 📐
 sticker-save-error-need_creator = <b>Почти готово!</b> { $creator } должен сначала отправить мне сообщение, чтобы сохранить стикеры
-sticker-save-error-telegram = <b>Упс!</b> Что-то пошло не так:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Упс!</b> Что-то пошло не так
 sticker-delete-suc = Удалено из вашего <a href="{ $link }">стикерпака группы</a> 🗑
 sticker-delete-empty_reply = Пожалуйста, ответьте на стикер, который хотите удалить 🗑
 sticker-delete-error-telegram =
@@ -244,12 +242,9 @@ sticker-delete-error-not_found = Стикер больше не существу
 sticker-delete-error-rights = У меня нет разрешения на удаление этого стикера 🔒
 sticker-delete-error-generic =
     Что-то пошло не так. Пожалуйста, попробуйте позже ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Удалено из случайной коллекции 🗑
 sticker-delete_random-error =
     <b>Не удалось удалить цитату 😕</b>
-    { $error }
 sticker-delete_random-not_found = Этой цитаты нет в базе данных 🤔
 sticker-empty_forward = Пожалуйста, ответьте на стикер, фото или изображение, которое хотите сохранить ✨
 sticker-fstik = Для сохранения в ваш личный стикерпак, перешлите @fStikBot 🎨

@@ -122,7 +122,6 @@ quote-checklist-undone = 작업 { $count }개를 미완료로 표시함
 quote-checklist-added = 작업 { $count }개 추가함
 quote-api_error =
     <b>이런! 문제가 발생했습니다 😅</b>
-    <pre>{ $error }</pre>
     잠시 후 다시 시도해 주세요!
 quote-empty_forward = 인용하고 싶은 메시지에 답장하거나 포워드하세요 ✨
 quote-set_background_color = <b>완벽합니다!</b> 인용 배경이 변경되었습니다: <code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • 스티커
     • 텍스트 메시지
 quote-errors-telegram_error =
-    ⚠️ 텔레그램 오류: { $error }
+    ⚠️ 텔레그램 오류
 
     이런 일이 발생하는 경우:
     • 파일이 너무 큼
     • 스티커 팩이 가득 참
     • 봇에 권한이 없음
 quote-errors-generic_error =
-    😅 이런! 문제가 발생했습니다:
-    <code>{ $error }</code>
+    😅 이런! 문제가 발생했습니다
 
     다시 시도하거나 문제가 지속되면 @Ly_oBot에 보고하세요．
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ 너무 많은 요청! { $seconds }�
 sticker-save-suc = <a href="{ $link }">그룹 스티커 팩</a>에 성공적으로 추가되었습니다 ✨
 sticker-save-error-animated = 죄송합니다, 아직 애니메이션 스티커를 저장할 수 없습니다 😅
 sticker-save-error-need_creator = <b>거의 완료!</b> 스티커를 저장하려면 먼저 { $creator }가 저에게 메시지를 보내야 합니다.
-sticker-save-error-telegram = <b>이런!</b> 문제가 발생했습니다:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>이런!</b> 문제가 발생했습니다
 sticker-delete-suc = <a href="{ $link }">그룹 스티커 팩</a>에서 제거되었습니다 🗑
 sticker-delete-empty_reply = 삭제하려는 스티커에 답장해 주세요 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = 패키지에 스티커가 더 이상 존재하�
 sticker-delete-error-rights = 이 스티커를 삭제할 권한이 없습니다 🔒
 sticker-delete-error-generic =
     문제가 발생했습니다. 나중에 다시 시도해주세요 ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = 랜덤 컬렉션에서 제거되었습니다 🗑
 sticker-delete_random-error =
     <b>인용을 제거할 수 없습니다 😕</b>
-    { $error }
 sticker-delete_random-not_found = 이 인용은 데이터베이스에 없습니다 🤔
 sticker-empty_forward = 저장하고 싶은 스티커, 사진 또는 이미지를 답장하세요 ✨
 sticker-fstik = 개인 스티커 팩에 저장하려면 @fStikBot으로 포워드하세요 🎨

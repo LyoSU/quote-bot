@@ -72,7 +72,7 @@ export async function handleQuoteError(
     if (d.includes('request entity too large') || d.includes('file too big')) return reply('quote-errors-file_too_large')
     if (d.includes('message is too long')) return reply('quote-errors-message_too_long')
     if (d.includes('timeout') || d.includes('timed out')) return reply('quote-errors-timeout_error')
-    return reply('quote-errors-telegram_error', { error: err.description })
+    return reply('quote-errors-telegram_error')
   }
 
   if (err instanceof QuoteApiError) {
@@ -80,7 +80,7 @@ export async function handleQuoteError(
     if (err.status === 429) return reply('quote-errors-rate_limit', { seconds: 30 })
     if (m.includes('file too large')) return reply('quote-errors-file_too_large')
     if (m.includes('unsupported format')) return reply('quote-errors-invalid_format')
-    return reply('quote-api_error', { error: err.message })
+    return reply('quote-api_error')
   }
 
   if (err instanceof QuoteApiUnavailableError) return reply('quote-errors-api_down')

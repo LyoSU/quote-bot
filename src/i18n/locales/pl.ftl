@@ -152,7 +152,6 @@ quote-checklist-added = Dodano: { $count ->
     }
 quote-api_error =
     <b>Ups! Coś poszło nie tak 😅</b>
-    <pre>{ $error }</pre>
     Spróbuj ponownie za chwilę!
 quote-empty_forward = Odpowiedz lub przekaż wiadomość, którą chcesz zacytować ✨
 quote-set_background_color = <b>Perfekcyjnie!</b> Tło cytatu zmienione na: <code>{ $backgroundColor }</code> 🎨
@@ -170,15 +169,14 @@ quote-errors-invalid_format =
     • Naklejki
     • Wiadomości tekstowe
 quote-errors-telegram_error =
-    ⚠️ Błąd Telegram: { $error }
+    ⚠️ Błąd Telegram
 
     Zwykle dzieje się to, gdy:
     • Plik jest zbyt duży
     • Pakiet naklejek jest pełny
     • Bot nie ma uprawnień
 quote-errors-generic_error =
-    😅 Ups! Coś poszło nie tak:
-    <code>{ $error }</code>
+    😅 Ups! Coś poszło nie tak
 
     Proszę spróbować ponownie lub zgłosić to do @Ly_oBot, jeśli problem się utrzymuje.
 quote-errors-no_rights_send_documents =
@@ -246,7 +244,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Zbyt wiele żądań! Poczekaj { $se
 sticker-save-suc = Pomyślnie dodano do Twojego <a href="{ $link }">pakietu naklejek grupy</a> ✨
 sticker-save-error-animated = Przepraszam, nie mogę zapisać animowanych naklejek jeszcze 😅
 sticker-save-error-need_creator = <b>Prawie gotowe!</b> { $creator } musi najpierw wysłać mi wiadomość, aby zapisać naklejki
-sticker-save-error-telegram = <b>Ups!</b> Coś poszło nie tak:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Ups!</b> Coś poszło nie tak
 sticker-delete-suc = Usunięto z Twojego <a href="{ $link }">pakietu naklejek grupy</a> 🗑
 sticker-delete-empty_reply = Proszę odpowiedzieć na naklejkę, którą chcesz usunąć 🗑
 sticker-delete-error-telegram =
@@ -256,12 +254,9 @@ sticker-delete-error-not_found = Naklejka nie znajduje się już w pakiecie 🤔
 sticker-delete-error-rights = Nie mam uprawnień do usunięcia tej naklejki 🔒
 sticker-delete-error-generic =
     Coś poszło nie tak. Proszę spróbować ponownie później ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Usunięto z losowej kolekcji 🗑
 sticker-delete_random-error =
     <b>Nie udało się usunąć cytatu 😕</b>
-    { $error }
 sticker-delete_random-not_found = Tego cytatu nie ma w bazie danych 🤔
 sticker-empty_forward = Odpowiedz na naklejkę, zdjęcie lub obraz, który chcesz zapisać ✨
 sticker-fstik = Aby zapisać to do swojego osobistego pakietu naklejek, przekaż do @fStikBot 🎨

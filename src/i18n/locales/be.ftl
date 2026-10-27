@@ -146,7 +146,6 @@ quote-checklist-added = Дададзена: { $count ->
     }
 quote-api_error =
     <b>Ой! Нешта пайшло не так 😅</b>
-    <pre>{ $error }</pre>
     Калі ласка, паспрабуйце яшчэ раз пазней!
 quote-empty_forward = Калі ласка, адкажыце або перашліце паведамленне, якое вы хацелі б працытаваць ✨
 quote-set_background_color = <b>Ідэальна!</b> Фон цытаты змяніўся на: <code>{ $backgroundColor }</code> 🎨
@@ -164,15 +163,14 @@ quote-errors-invalid_format =
     • Стыкеры
     • Паведамленні з тэкстам
 quote-errors-telegram_error =
-    ⚠️ Памылка Telegram: { $error }
+    ⚠️ Памылка Telegram
 
     Гэта звычайна адбываецца, калі:
     • Файл занадта вялікі
     • Пакет стыкераў запоўнены
     • Боту не хапае правоў
 quote-errors-generic_error =
-    😅 Ой! Штосьці пайшло не так:
-    <code>{ $error }</code>
+    😅 Ой! Штосьці пайшло не так
 
     Калі ласка, паспрабуйце яшчэ раз або паведаміце пра гэта @Ly_oBot, калі гэта захоўваецца.
 quote-errors-no_rights_send_documents =
@@ -240,7 +238,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Занадта шмат запыт�
 sticker-save-suc = Стыкер паспяхова дададзены ў ваш <a href="{ $link }">стыкерпак суполкі</a> ✨
 sticker-save-error-animated = На жаль, я пакуль не магу захаваць анімаваныя стыкеры 😅
 sticker-save-error-need_creator = <b>Амаль гатова!</b> { $creator } павінен спачатку мне адправіць паведамленне, каб захаваць стыкеры
-sticker-save-error-telegram = <b>Ой!</b> Нешта пайшло не так:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Ой!</b> Нешта пайшло не так
 sticker-delete-suc = Выдалена з вашага <a href="{ $link }">стыкерпака суполкі</a> 🗑
 sticker-delete-empty_reply = Калі ласка, адкажыце на стыкер, які хочаце выдаліць 🗑
 sticker-delete-error-telegram =
@@ -250,12 +248,9 @@ sticker-delete-error-not_found = Стыкера больш няма ў паке�
 sticker-delete-error-rights = У мяне няма правоў, каб выдаліць гэты стыкер 🔒
 sticker-delete-error-generic =
     Нешта пайшло не так. Калі ласка, паспрабуйце зноў пазней ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Выдалена з выпадковай калекцыі 🗑
 sticker-delete_random-error =
     <b>Не ўдалося выдаліць цытату 😕</b>
-    { $error }
 sticker-delete_random-not_found = Гэтая цытата адсутнічае ў базе дадзеных 🤔
 sticker-empty_forward = Калі ласка, адкажыце на стыкер, фота або выяву, якую вы хочаце захаваць ✨
 sticker-fstik = Для захавання гэтага ў асабісты стыкерпак, перашліце на @fStikBot 🎨

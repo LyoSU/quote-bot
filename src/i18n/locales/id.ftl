@@ -122,7 +122,6 @@ quote-checklist-undone = { $count } tugas ditandai belum selesai
 quote-checklist-added = { $count } tugas ditambahkan
 quote-api_error =
     <b>Ups! Ada yang salah 😅</b>
-    <pre>{ $error }</pre>
     Silakan coba lagi sebentar lagi!
 quote-empty_forward = Silakan balas atau teruskan pesan yang ingin Anda kutip ✨
 quote-set_background_color = <b>Sempurna!</b> Latar belakang kutipan diubah menjadi: <code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • Stiker
     • Pesan teks
 quote-errors-telegram_error =
-    ⚠️ Kesalahan Telegram: { $error }
+    ⚠️ Kesalahan Telegram
 
     Ini biasanya terjadi ketika:
     • File terlalu besar
     • Paket stiker penuh
     • Bot tidak memiliki izin
 quote-errors-generic_error =
-    😅 Ups! Terjadi kesalahan:
-    <code>{ $error }</code>
+    😅 Ups! Terjadi kesalahan
 
     Silakan coba lagi atau laporkan ke @Ly_oBot jika masalah berlanjut.
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Terlalu banyak permintaan! Silakan 
 sticker-save-suc = Stiker telah berhasil ditambahkan ke <a href="{ $link }">paket stiker grup</a> ✨
 sticker-save-error-animated = Maaf, saya belum bisa menyimpan stiker animasi 😅
 sticker-save-error-need_creator = <b>Hampir selesai!</b> { $creator } harus mengirimkan pesan kepada saya terlebih dahulu untuk menyimpan stiker
-sticker-save-error-telegram = <b>Ups!</b> Ada yang salah:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Ups!</b> Ada yang salah
 sticker-delete-suc = Dihapus dari <a href="{ $link }">paket stiker grup</a> Anda 🗑
 sticker-delete-empty_reply = Silakan balas stiker yang ingin Anda hapus 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = Stiker tidak ada lagi di dalam paket 🤔
 sticker-delete-error-rights = Saya tidak memiliki izin untuk menghapus stiker ini 🔒
 sticker-delete-error-generic =
     Ada yang salah. Silakan coba lagi nanti ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Dihapus dari koleksi acak 🗑
 sticker-delete_random-error =
     <b>Gagal menghapus kutipan 😕</b>
-    { $error }
 sticker-delete_random-not_found = Kutipan ini tidak ada dalam database 🤔
 sticker-empty_forward = Silakan balas pada stiker, foto, atau gambar yang ingin Anda simpan ✨
 sticker-fstik = Untuk menyimpan di paket stiker pribadi Anda, teruskan ke @fStikBot 🎨

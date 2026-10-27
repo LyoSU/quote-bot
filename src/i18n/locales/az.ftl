@@ -122,7 +122,6 @@ quote-checklist-undone = { $count } tapşırıq tamamlanmamış kimi qeyd edildi
 quote-checklist-added = { $count } tapşırıq əlavə edildi
 quote-api_error =
     <b>Oops! Bir şey səhv getdi 😅</b>
-    <pre>{ $error }</pre>
     Bir az sonra yenidən cəhd edin!
 quote-empty_forward = Zəhmət olmasa, sitat vermək istədiyiniz mesaja cavab verin və ya onu yönləndirin ✨
 quote-set_background_color = <b>Əla!</b> Sitatın fonu dəyişdirildi: <code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • Stikerlər
     • Mətn mesajları
 quote-errors-telegram_error =
-    ⚠️ Telegram xətası: { $error }
+    ⚠️ Telegram xətası
 
     Bu ümumiyyətlə bu hallarda baş verir:
     • Fayl çox böyükdür
     • Stiker dəsti doludur
     • Botun icazələri yoxdur
 quote-errors-generic_error =
-    😅 Üzr istəyirik! Bir nasazlıq baş verdi:
-    <code>{ $error }</code>
+    😅 Üzr istəyirik! Bir nasazlıq baş verdi
 
     Yenidən cəhd edin və ya bu problemin davam etməsi halında bunu @Ly_oBot-a məlumat verin.
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Çoxlu sorğular! Yenidən cəhd et
 sticker-save-suc = Uğurla <a href="{ $link }">qrupun stikerpaka</a> əlavə olundu ✨
 sticker-save-error-animated = Bağışlayın, animasiyalı stikeri hələ saxlaya bilmirəm 😅
 sticker-save-error-need_creator = <b>Demək olar ki, hazırdır!</b> { $creator } əvvəlcə mənə mesaj göndərməlidir ki, stikerləri saxlaya bilim
-sticker-save-error-telegram = <b>Oops!</b> Bir şey səhv getdi:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oops!</b> Bir şey səhv getdi
 sticker-delete-suc = <a href="{ $link }">Qrupun stikerpaka</a>dan çıxarıldı 🗑
 sticker-delete-empty_reply = Zəhmət olmasa silmək istədiyiniz stikerə cavab verin 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = Stiker artıq paketdə yoxdur 🤔
 sticker-delete-error-rights = Bu stikeri silmək üçün mənim icazəm yoxdur 🔒
 sticker-delete-error-generic =
     Nəsə səhv oldu. Zəhmət olmasa, yenidən cəhd edin ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Təsadüfi kolleksiyadan çıxarıldı 🗑
 sticker-delete_random-error =
     <b>Sitatı silmək alınmadı 😕</b>
-    { $error }
 sticker-delete_random-not_found = Bu sitat bazada yoxdur 🤔
 sticker-empty_forward = Zəhmət olmasa, saxlamaq istədiyiniz stikeri, fotonu və ya şəkli cavablayın ✨
 sticker-fstik = Bunu şəxsi stikerpakınıza saxlamaq üçün @fStikBot-a yönləndirin 🎨

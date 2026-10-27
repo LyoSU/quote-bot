@@ -146,7 +146,6 @@ quote-checklist-added = { $count ->
     }
 quote-api_error =
     <b>Oops! Qualcosa è andato storto 😅</b>
-    <pre>{ $error }</pre>
     Riprova tra un momento!
 quote-empty_forward = Per favore, rispondi o inoltra il messaggio che desideri citare ✨
 quote-set_background_color = <b>Perfetto!</b> Sfondo della citazione cambiato in: <code>{ $backgroundColor }</code> 🎨
@@ -164,15 +163,14 @@ quote-errors-invalid_format =
     • Adesivi
     • Messaggi di testo
 quote-errors-telegram_error =
-    ⚠️ Errore di Telegram: { $error }
+    ⚠️ Errore di Telegram
 
     Questo di solito accade quando:
     • Il file è troppo grande
     • Il pacchetto di adesivi è pieno
     • Il bot non ha permessi
 quote-errors-generic_error =
-    😅 Ops! Qualcosa è andato storto:
-    <code>{ $error }</code>
+    😅 Ops! Qualcosa è andato storto
 
     Per favore riprova o segnala questo a @Ly_oBot se persiste.
 quote-errors-no_rights_send_documents =
@@ -240,7 +238,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Troppe richieste! Attendi { $second
 sticker-save-suc = Lo sticker è stato aggiunto con successo al tuo <a href="{ $link }">pacchetto di adesivi del gruppo</a> ✨
 sticker-save-error-animated = Mi dispiace, non posso ancora salvare sticker animati 😅
 sticker-save-error-need_creator = <b>Quasi fatto!</b> { $creator } deve inviarmi un messaggio prima di salvare gli sticker
-sticker-save-error-telegram = <b>Oops!</b> Qualcosa è andato storto:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oops!</b> Qualcosa è andato storto
 sticker-delete-suc = Rimosso dal tuo <a href="{ $link }">pacchetto di adesivi del gruppo</a> 🗑
 sticker-delete-empty_reply = Per favore rispondi a un adesivo che desideri eliminare 🗑
 sticker-delete-error-telegram = <b>Oops!</b> Impossibile rimuovere lo sticker:\n<pre>{ $reason }</pre>
@@ -248,10 +246,8 @@ sticker-delete-error-not_found = L'adesivo non esiste più nel pacchetto 🤔
 sticker-delete-error-rights = Non ho il permesso di eliminare questo adesivo 🔒
 sticker-delete-error-generic =
     Qualcosa è andato storto. Per favore riprova più tardi ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Rimosso dalla collezione casuale 🗑
-sticker-delete_random-error = <b>Oops!</b> Impossibile rimuovere lo sticker:\n<pre>{ $error }</pre>
+sticker-delete_random-error = <b>Oops!</b> Impossibile rimuovere lo sticker
 sticker-delete_random-not_found = Questa citazione non è nel database 🤔
 sticker-empty_forward = Per favore, rispondi a uno sticker, foto o immagine che vuoi salvare ✨
 sticker-fstik = Per salvare questo nel tuo pacchetto personale di sticker, inoltra a @fStikBot 🎨

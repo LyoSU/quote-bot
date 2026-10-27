@@ -122,7 +122,6 @@ quote-checklist-undone = 已将 { $count } 项任务标记为未完成
 quote-checklist-added = 已添加 { $count } 项任务
 quote-api_error =
     <b>糟糕！出错了 😅</b>
-    <pre>{ $error }</pre>
     请稍等片刻再试！
 quote-empty_forward = 请回复或转发您想引用的消息✨
 quote-set_background_color = <b>太好了！</b> 引文背景已更改为：<code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • 贴纸
     • 文本消息
 quote-errors-telegram_error =
-    ⚠️ Telegram错误：{ $error }
+    ⚠️ Telegram错误
 
     这通常发生在：
     • 文件太大
     • 贴纸包已满
     • 机器人权限不足
 quote-errors-generic_error =
-    😅 哎呀！出了点问题：
-    <code>{ $error }</code>
+    😅 哎呀！出了点问题
 
     请再试一次，或者如果问题持续存在，请向 @Ly_oBot 报告。
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ 请求次数过多！请等待 { $s
 sticker-save-suc = 成功添加到您的<a href="{ $link }">群组贴纸包</a>✨
 sticker-save-error-animated = 抱歉，我暂时无法保存动画贴纸 😅
 sticker-save-error-need_creator = <b>快到了！</b> { $creator }需要先发送给我一条消息才能保存贴纸
-sticker-save-error-telegram = <b>糟糕！</b> 出现错误：\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>糟糕！</b> 出现错误
 sticker-delete-suc = 已从您的<a href="{ $link }">群组贴纸包</a>中移除 🗑
 sticker-delete-empty_reply = 请回复您想删除的贴纸 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = 贴纸在包中不存在 🤔
 sticker-delete-error-rights = 我没有删除此贴纸的权限 🔒
 sticker-delete-error-generic =
     发生了错误。请稍后再试 ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = 已从随机集合中移除 🗑
 sticker-delete_random-error =
     <b>无法移除引用 😕</b>
-    { $error }
 sticker-delete_random-not_found = 此引用不在数据库中 🤔
 sticker-empty_forward = 请回复您想保存的贴纸、照片或图片✨
 sticker-fstik = 为了将此保存到您的个人贴纸包，请转发到 @fStikBot 🎨

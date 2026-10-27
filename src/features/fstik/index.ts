@@ -83,7 +83,8 @@ fstikFeature.hears(/^\/qs(?:@\S+)?(?:\s+(.+))?/i, onlyGroup, onlyAdmin, async (c
     webp = await toStickerWebp(await downloadTelegramFile(ctx.api, source.fileId))
   } catch (err) {
     if (err instanceof StickerTooLargeError) return replyHtml(ctx, ctx.t('sticker-save-error-too_large'))
-    return replyHtml(ctx, ctx.t('sticker-save-error-telegram', { error: err instanceof Error ? err.message : String(err) }))
+    ctx.logger.warn({ err }, 'sticker download/convert failed')
+    return replyHtml(ctx, ctx.t('sticker-save-error-telegram'))
   }
 
   const emojiList = buildEmojiList(ctx.match?.[1]?.trim(), source.emoji)
@@ -113,8 +114,14 @@ fstikFeature.hears(/^\/qs(?:@\S+)?(?:\s+(.+))?/i, onlyGroup, onlyAdmin, async (c
       if (d.includes('stickerset_invalid') || d.includes('too_much') || d.includes('too many')) {
         await setGroupStickerSet(ctx.group, null)
       }
+      if (d.includes('stickerset_invalid')) return replyHtml(ctx, ctx.t('quote-errors-sticker_set_invalid'))
+      if (d.includes('too_much') || d.includes('too many') || d.includes('sticker set full')) {
+        return replyHtml(ctx, ctx.t('quote-errors-sticker_set_full'))
+      }
+      if (d.includes('not enough rights')) return replyHtml(ctx, ctx.t('quote-errors-no_rights_send_stickers'))
     }
-    return replyHtml(ctx, ctx.t('sticker-save-error-telegram', { error: err instanceof Error ? err.message : String(err) }))
+    ctx.logger.warn({ err }, 'saving sticker to the group pack failed')
+    return replyHtml(ctx, ctx.t('sticker-save-error-telegram'))
   }
 
   return replyHtml(ctx, ctx.t('sticker-save-suc', { link: `${STICKER_LINK}${packName}` }))
@@ -132,12 +139,13 @@ fstikFeature.command('qd', onlyGroup, onlyAdmin, async (ctx) => {
       await ctx.api.deleteStickerFromSet(reply.sticker.file_id)
       return replyHtml(ctx, ctx.t('sticker-delete-suc', { link: `${STICKER_LINK}${packName}` }))
     } catch (err) {
+      ctx.logger.warn({ err }, 'deleting sticker from the group pack failed')
       const msg = (err instanceof Error ? err.message : String(err)).toLowerCase()
       const reason = msg.includes('not found')
         ? ctx.t('sticker-delete-error-not_found')
         : msg.includes('rights') || msg.includes('administrator')
           ? ctx.t('sticker-delete-error-rights')
-          : ctx.t('sticker-delete-error-generic', { error: msg })
+          : ctx.t('sticker-delete-error-generic')
       return replyHtml(ctx, ctx.t('sticker-delete-error-telegram', { reason }))
     }
   }

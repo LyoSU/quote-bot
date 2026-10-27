@@ -137,7 +137,6 @@ quote-checklist-added = { $count ->
     } hinzugefügt
 quote-api_error =
     <b>Ups! Etwas ist schiefgelaufen 😅</b>
-    <pre>{ $error }</pre>
     Bitte versuchen Sie es in einem Moment noch einmal!
 quote-empty_forward = Bitte antworten Sie auf oder leiten Sie die Nachricht weiter, die Sie zitieren möchten ✨
 quote-set_background_color = <b>Perfekt!</b> Zitat-Hintergrund geändert zu: <code>{ $backgroundColor }</code> 🎨
@@ -155,15 +154,14 @@ quote-errors-invalid_format =
     • Sticker
     • Textnachrichten
 quote-errors-telegram_error =
-    ⚠️ Telegram-Fehler: { $error }
+    ⚠️ Telegram-Fehler
 
     Dies passiert normalerweise, wenn:
     • Die Datei zu groß ist
     • Das Sticker-Paket voll ist
     • Dem Bot fehlen Berechtigungen
 quote-errors-generic_error =
-    😅 Ups! Es ist ein Fehler aufgetreten:
-    <code>{ $error }</code>
+    😅 Ups! Es ist ein Fehler aufgetreten
 
     Bitte versuchen Sie es erneut oder melden Sie das an @Ly_oBot, wenn es weiterhin besteht.
 quote-errors-no_rights_send_documents =
@@ -231,7 +229,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Zu viele Anfragen! Bitte warten Sie
 sticker-save-suc = Erfolgreich zu Ihrem <a href="{ $link }">Gruppen-Stickerpack</a> hinzugefügt ✨
 sticker-save-error-animated = Entschuldigung, animierte Sticker kann ich noch nicht speichern 😅
 sticker-save-error-need_creator = <b>Fast fertig!</b> { $creator } muss mir zuerst eine Nachricht senden, um Sticker zu speichern
-sticker-save-error-telegram = <b>Ups!</b> Etwas ist schiefgelaufen:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Ups!</b> Etwas ist schiefgelaufen
 sticker-delete-suc = Von Ihrem <a href="{ $link }">Gruppen-Stickerpack</a> entfernt 🗑
 sticker-delete-empty_reply = Bitte antworten Sie auf einen Sticker, den Sie löschen möchten 🗑
 sticker-delete-error-telegram =
@@ -241,12 +239,9 @@ sticker-delete-error-not_found = Der Sticker existiert nicht mehr im Paket 🤔
 sticker-delete-error-rights = Ich habe keine Berechtigung, diesen Sticker zu löschen 🔒
 sticker-delete-error-generic =
     Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Von der zufälligen Sammlung entfernt 🗑
 sticker-delete_random-error =
     <b>Konnte das Zitat nicht entfernen 😕</b>
-    { $error }
 sticker-delete_random-not_found = Dieses Zitat befindet sich nicht in der Datenbank 🤔
 sticker-empty_forward = Bitte antworten Sie auf einen Sticker, ein Foto oder ein Bild, das Sie speichern möchten ✨
 sticker-fstik = Um dies in Ihrem persönlichen Stickerpack zu speichern, leite zu @fStikBot weiter 🎨

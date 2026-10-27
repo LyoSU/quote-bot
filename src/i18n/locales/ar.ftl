@@ -152,7 +152,6 @@ quote-checklist-added = تمت إضافة { $count ->
     }
 quote-api_error =
     <b>عفوًا! حدث خطأ ما 😅</b>
-    <pre>{ $error }</pre>
     يرجى المحاولة مرة أخرى بعد قليل!
 quote-empty_forward = يرجى الرد على الرسالة التي تريد اقتباسها أو إعادة توجيهها ✨
 quote-set_background_color = <b>رائع!</b> تم تغيير خلفية الاقتباس إلى: <code>{ $backgroundColor }</code> 🎨
@@ -170,15 +169,14 @@ quote-errors-invalid_format =
     • الملصقات
     • الرسائل النصية
 quote-errors-telegram_error =
-    ⚠️ خطأ في تيليجرام: { $error }
+    ⚠️ خطأ في تيليجرام
 
     عادة ما يحدث هذا عندما:
     • يكون الملف كبيرًا جدًا
     • يكون مجموعة الملصقات ممتلئة
     • يفتقر البوت إلى الأذونات
 quote-errors-generic_error =
-    😅 عفوًا! حدث خطأ ما:
-    <code>{ $error }</code>
+    😅 عفوًا! حدث خطأ ما
 
     يرجى المحاولة مرة أخرى أو الإبلاغ عن هذا إلى @Ly_oBot إذا استمر المشكلة.
 quote-errors-no_rights_send_documents =
@@ -246,7 +244,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ طلبات كثيرة جداً! ي�
 sticker-save-suc = تمت الإضافة بنجاح إلى <a href="{ $link }">حزمة ملصقات المجموعة</a> ✨
 sticker-save-error-animated = عذرًا، لا أستطيع حفظ الملصقات المتحركة بعد 😅
 sticker-save-error-need_creator = <b>قريبًا!</b> { $creator } يجب أن يرسل لي رسالة أولاً لحفظ الملصقات
-sticker-save-error-telegram = <b>عفوًا!</b> حدث خطأ:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>عفوًا!</b> حدث خطأ
 sticker-delete-suc = تم الإزالة من <a href="{ $link }">حزمة ملصقات المجموعة</a> 🗑
 sticker-delete-empty_reply = يرجى الرد على ملصق تريد حذفه 🗑
 sticker-delete-error-telegram =
@@ -256,12 +254,9 @@ sticker-delete-error-not_found = الملصق لم يعد موجودًا في ا
 sticker-delete-error-rights = ليس لدي الإذن لحذف هذا الملصق 🔒
 sticker-delete-error-generic =
     حدث خطأ ما. الرجاء المحاولة مرة أخرى لاحقًا ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = تم الإزالة من مجموعة عشوائية 🗑
 sticker-delete_random-error =
     <b>لم أتمكن من إزالة الاقتباس 😕</b>
-    { $error }
 sticker-delete_random-not_found = هذا الاقتباس غير موجود في قاعدة البيانات 🤔
 sticker-empty_forward = يرجى الرد على الملصق، الصورة أو الصورة التي تريد حفظها ✨
 sticker-fstik = لحفظ هذا في حزمة الملصقات الشخصية الخاصة بك، أعد توجيهها إلى @fStikBot 🎨

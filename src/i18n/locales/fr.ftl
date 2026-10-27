@@ -137,7 +137,6 @@ quote-checklist-added = { $count ->
     }
 quote-api_error =
     <b>Oups ! Quelque chose s'est mal passé 😅</b>
-    <pre>{ $error }</pre>
     Veuillez réessayer dans un instant !
 quote-empty_forward = Veuillez répondre ou transférer le message que vous souhaitez citer ✨
 quote-set_background_color = <b>Parfait !</b> Le fond de la citation a été changé en : <code>{ $backgroundColor }</code> 🎨
@@ -155,15 +154,14 @@ quote-errors-invalid_format =
     • Autocollants
     • Messages texte
 quote-errors-telegram_error =
-    ⚠️ Erreur Telegram : { $error }
+    ⚠️ Erreur Telegram
 
     Cela se produit généralement lorsque :
     • Le fichier est trop volumineux
     • Le pack d'autocollants est plein
     • Le bot n'a pas les permissions
 quote-errors-generic_error =
-    😅 Oups ! Quelque chose a mal tourné :
-    <code>{ $error }</code>
+    😅 Oups ! Quelque chose a mal tourné
 
     Veuillez réessayer ou signaler cela à @Ly_oBot si cela persiste.
 quote-errors-no_rights_send_documents =
@@ -231,7 +229,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Trop de demandes ! Veuillez attendr
 sticker-save-suc = Ajouté avec succès à votre <a href="{ $link }">pack d'autocollants du groupe</a> ✨
 sticker-save-error-animated = Désolé, je ne peux pas encore enregistrer des autocollants animés 😅
 sticker-save-error-need_creator = <b>Presque terminé !</b> { $creator } doit m'envoyer un message d'abord pour enregistrer les autocollants
-sticker-save-error-telegram = <b>Oups !</b> Quelque chose s'est mal passé:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oups !</b> Quelque chose s'est mal passé
 sticker-delete-suc = Supprimé de votre <a href="{ $link }">pack d'autocollants du groupe</a> 🗑
 sticker-delete-empty_reply = Veuillez répondre à un autocollant que vous souhaitez supprimer 🗑
 sticker-delete-error-telegram =
@@ -241,12 +239,9 @@ sticker-delete-error-not_found = L'autocollant n'existe plus dans le pack 🤔
 sticker-delete-error-rights = Je n'ai pas l'autorisation de supprimer cet autocollant 🔒
 sticker-delete-error-generic =
     Quelque chose s'est mal passé. Veuillez réessayer plus tard ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Supprimé de la collection aléatoire 🗑
 sticker-delete_random-error =
     <b>Impossible de supprimer la citation 😕</b>
-    { $error }
 sticker-delete_random-not_found = Cette citation n'est pas dans la base de données 🤔
 sticker-empty_forward = Veuillez répondre à un autocollant, une photo ou une image que vous souhaitez enregistrer ✨
 sticker-fstik = Pour l'enregistrer dans votre pack d'autocollants personnel, transférez à @fStikBot 🎨

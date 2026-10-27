@@ -140,7 +140,6 @@ quote-checklist-added = { $count ->
     }
 quote-api_error =
     <b>¡Vaya! Algo salió mal 😅</b>
-    <pre>{ $error }</pre>
     ¡Por favor intenta de nuevo en un momento!
 quote-empty_forward = Por favor, responde o reenvía el mensaje que te gustaría citar ✨
 quote-set_background_color = <b>¡Perfecto!</b> Fondo de cita cambiado a: <code>{ $backgroundColor }</code> 🎨
@@ -158,15 +157,14 @@ quote-errors-invalid_format =
     • Stickers
     • Mensajes de texto
 quote-errors-telegram_error =
-    ⚠️ Error de Telegram: { $error }
+    ⚠️ Error de Telegram
 
     Esto generalmente sucede cuando:
     • El archivo es demasiado grande
     • El paquete de stickers está lleno
     • El bot carece de permisos
 quote-errors-generic_error =
-    😅 ¡Ups! Algo salió mal:
-    <code>{ $error }</code>
+    😅 ¡Ups! Algo salió mal
 
     Por favor, inténtalo de nuevo o informa a @Ly_oBot si persiste.
 quote-errors-no_rights_send_documents =
@@ -234,7 +232,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ ¡Demasiadas solicitudes! Por favor
 sticker-save-suc = El sticker se ha guardado con éxito en el <a href="{ $link }">pack de stickers del grupo</a> ✨
 sticker-save-error-animated = Lo siento, no puedo guardar stickers animados todavía 😅
 sticker-save-error-need_creator = <b>¡Casi!</b> { $creator } necesita enviarme un mensaje primero para guardar stickers
-sticker-save-error-telegram = <b>¡Vaya!</b> Algo salió mal:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>¡Vaya!</b> Algo salió mal
 sticker-delete-suc = Eliminado de tu <a href="{ $link }">pack de stickers del grupo</a> 🗑
 sticker-delete-empty_reply = Por favor, responde a un sticker que quieras eliminar 🗑
 sticker-delete-error-telegram =
@@ -244,12 +242,9 @@ sticker-delete-error-not_found = El sticker ya no existe en el paquete 🤔
 sticker-delete-error-rights = No tengo permiso para eliminar este sticker 🔒
 sticker-delete-error-generic =
     Algo salió mal. Por favor, inténtalo de nuevo más tarde ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Eliminado de la colección aleatoria 🗑
 sticker-delete_random-error =
     <b>No se pudo eliminar la cita 😕</b>
-    { $error }
 sticker-delete_random-not_found = Esta cita no está en la base de datos 🤔
 sticker-empty_forward = Por favor responde a un sticker, foto o imagen que te gustaría guardar ✨
 sticker-fstik = Para guardar esto en tu pack de stickers personal, reenvíalo a @fStikBot 🎨

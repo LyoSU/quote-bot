@@ -122,7 +122,6 @@ quote-checklist-undone = { $count } 件のタスクを未完了にしました
 quote-checklist-added = { $count } 件のタスクを追加しました
 quote-api_error =
     <b>おっと！何かがうまくいかなかったようです 😅</b>
-    <pre>{ $error }</pre>
     もう一度試してみてください！
 quote-empty_forward = 引用したいメッセージに返信するか、転送してください ✨
 quote-set_background_color = <b>完璧です!</b> 引用背景が変更されました: <code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • ステッカー
     • テキストメッセージ
 quote-errors-telegram_error =
-    ⚠️ Telegramエラー: { $error }
+    ⚠️ Telegramエラー
 
     通常このエラーは以下の理由で発生します:
     • ファイルが大きすぎる
     • ステッカーパックが満杯
     • ボットに権限がない
 quote-errors-generic_error =
-    😅 おっと！何か問題が発生しました:
-    <code>{ $error }</code>
+    😅 おっと！何か問題が発生しました
 
     再試行するか、問題が解決しない場合は @Ly_oBot に報告してください。
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ 多くのリクエストがあり�
 sticker-save-suc = 正常に<a href="{ $link }">グループステッカーパック</a>に追加されました ✨
 sticker-save-error-animated = 申し訳ないですが、アニメーションステッカーはまだ保存できません 😅
 sticker-save-error-need_creator = <b>もう少し!</b> まず最初に{ $creator }が私にメッセージを送る必要があります
-sticker-save-error-telegram = <b>おっと！</b> 何かがうまくいかなかったようです:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>おっと！</b> 何かがうまくいかなかったようです
 sticker-delete-suc = <a href="{ $link }">グループステッカーパック</a>から削除されました 🗑
 sticker-delete-empty_reply = 削除したいステッカーに返信してください 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = ステッカーはもうパックに存在し�
 sticker-delete-error-rights = このステッカーを削除する権限がありません 🔒
 sticker-delete-error-generic =
     何かがうまくいきませんでした。後でもう一度お試しください ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = ランダムなコレクションから削除されました 🗑
 sticker-delete_random-error =
     <b>引用を削除できませんでした 😕</b>
-    { $error }
 sticker-delete_random-not_found = この引用はデータベースに存在しません 🤔
 sticker-empty_forward = 保存したいステッカー、写真、画像に返信してください ✨
 sticker-fstik = 個人用ステッカーパックに保存するには、@fStikBot に転送してください 🎨

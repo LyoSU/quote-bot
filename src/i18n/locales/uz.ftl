@@ -122,7 +122,6 @@ quote-checklist-undone = { $count } ta vazifa bajarilmagan deb belgilandi
 quote-checklist-added = { $count } ta vazifa qo'shildi
 quote-api_error =
     <b>Oops! Nimadir xato ketdi 😅</b>
-    <pre>{ $error }</pre>
     Iltimos, ozgina vaqt o'tgach yana urinib ko'ring!
 quote-empty_forward = Iltimos, sitata qilish uchun fikringizni yoki xabarni yuboring ✨
 quote-set_background_color = <b>Mukammal!</b> Sitataning fon rangi almashtirildi: <code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • Stikerlar
     • Matnli xabarlar
 quote-errors-telegram_error =
-    ⚠️ Telegram xatosi: { $error }
+    ⚠️ Telegram xatosi
 
     Bu odatda quyidagi holatlarda sodir bo'ladi:
     • Fayl juda katta
     • Stiker to'plami to'la
     • Botda ruxsatlar yo'q
 quote-errors-generic_error =
-    😅 Voy! Nimadir xato ketdi:
-    <code>{ $error }</code>
+    😅 Voy! Nimadir xato ketdi
 
     Iltimos, qayta urining yoki muammo davom etsa, @Ly_oBot ga xabar bering.
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Juda ko'p so'rovlar! Iltimos, yana 
 sticker-save-suc = Stiker muvaffaqiyatli ravishda <a href="{ $link }">stikerlar to'plami guruhiga qo'shildi</a> ✨
 sticker-save-error-animated = Kechirasiz, hozirda animatsiyali stikerlarni saqlay olmayman 😅
 sticker-save-error-need_creator = <b>Yaqinlashmoqdamiz!</b> Stikerlarni saqlash uchun { $creator } menga birinchi xabar yozishi kerak
-sticker-save-error-telegram = <b>Oops!</b> Nimadir xato ketdi:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oops!</b> Nimadir xato ketdi
 sticker-delete-suc = <a href="{ $link }">Guruh stikerlari to'plamidan</a> olib tashlandi 🗑
 sticker-delete-empty_reply = Iltimos, o'chirmoqchi bo'lgan stikerga javob bering 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = Stiker to'plamda endi mavjud emas 🤔
 sticker-delete-error-rights = Ushbu stikerni o'chirishga ruxsatim yo'q 🔒
 sticker-delete-error-generic =
     Bir narsa noto'g'ri ketdi. Keyinroq yana urinib ko'ring ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Tasodifiy to'plamdan olib tashlandi 🗑
 sticker-delete_random-error =
     <b>Iqtibosni olib tashlab bo'lmadi 😕</b>
-    { $error }
 sticker-delete_random-not_found = Ushbu iqtibos ma'lumotlar bazasida mavjud emas 🤔
 sticker-empty_forward = Iltimos, saqlamoqchi bo'lgan stiker, foto yoki rasmga javob bering ✨
 sticker-fstik = Buni shaxsiy stikerlar to'plamingizga saqlab qo'yish uchun, @fStikBot ga forward qiling 🎨

@@ -122,7 +122,6 @@ quote-checklist-undone = { $count } görev tamamlanmadı olarak işaretlendi
 quote-checklist-added = { $count } görev eklendi
 quote-api_error =
     <b>Oops! Bir şeyler ters gitti 😅</b>
-    <pre>{ $error }</pre>
     Lütfen bir dakika sonra tekrar deneyin!
 quote-empty_forward = Lütfen alıntılamak istediğiniz mesaja yanıt verin veya onu iletin ✨
 quote-set_background_color = <b>Mükemmel!</b> Alıntı arka planı değiştirildi: <code>{ $backgroundColor }</code> 🎨
@@ -140,15 +139,14 @@ quote-errors-invalid_format =
     • Çıkartmalar
     • Metin mesajları
 quote-errors-telegram_error =
-    ⚠️ Telegram hatası: { $error }
+    ⚠️ Telegram hatası
 
     Bu genellikle şu durumlarda olur:
     • Dosya çok büyük
     • Çıkartma paketi dolu
     • Botun yetkileri yetersiz
 quote-errors-generic_error =
-    😅 Hata! Bir şeyler yanlış gitti:
-    <code>{ $error }</code>
+    😅 Hata! Bir şeyler yanlış gitti
 
     Lütfen tekrar deneyin veya sorun devam ederse bunu @Ly_oBot'a bildirin.
 quote-errors-no_rights_send_documents =
@@ -216,7 +214,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Çok fazla istek var! Lütfen { $se
 sticker-save-suc = Başarıyla <a href="{ $link }">grup çıkartma paketinize</a> eklendi ✨
 sticker-save-error-animated = Üzgünüm, henüz animasyonlu çıkartmaları kaydedemiyorum 😅
 sticker-save-error-need_creator = <b>Az kaldı!</b> { $creator } çıkartmaları kaydetmek için önce bana bir mesaj göndermeli
-sticker-save-error-telegram = <b>Oops!</b> Bir şeyler ters gitti:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oops!</b> Bir şeyler ters gitti
 sticker-delete-suc = <a href="{ $link }">Grup çıkartma paketinizden</a> kaldırıldı 🗑
 sticker-delete-empty_reply = Lütfen silmek istediğiniz bir çıkartmaya yanıt verin 🗑
 sticker-delete-error-telegram =
@@ -226,12 +224,9 @@ sticker-delete-error-not_found = Çıkartma artık pakette yok 🤔
 sticker-delete-error-rights = Bu çıkartmayı silme iznim yok 🔒
 sticker-delete-error-generic =
     Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Rastgele koleksiyondan kaldırıldı 🗑
 sticker-delete_random-error =
     <b>Alıntı kaldırılamadı 😕</b>
-    { $error }
 sticker-delete_random-not_found = Bu alıntı veritabanında değil 🤔
 sticker-empty_forward = Lütfen kaydetmek istediğiniz çıkartma, fotoğraf veya görüntüye yanıt verin ✨
 sticker-fstik = Bunu kişisel çıkartma paketinize kaydetmek için @fStikBot'a iletin 🎨

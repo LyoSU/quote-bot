@@ -134,7 +134,6 @@ quote-checklist-added = Added { $count ->
     }
 quote-api_error =
     <b>Oops! Something went wrong 😅</b>
-    <pre>{ $error }</pre>
     Please try again in a moment!
 quote-empty_forward = Please reply to or forward the message you'd like to quote ✨
 quote-set_background_color = <b>Perfect!</b> Quote background changed to: <code>{ $backgroundColor }</code> 🎨
@@ -152,15 +151,14 @@ quote-errors-invalid_format =
     • Stickers
     • Text messages
 quote-errors-telegram_error =
-    ⚠️ Telegram error: { $error }
+    ⚠️ Telegram error
 
     This usually happens when:
     • The file is too large
     • The sticker pack is full
     • The bot lacks permissions
 quote-errors-generic_error =
-    😅 Oops! Something went wrong:
-    <code>{ $error }</code>
+    😅 Oops! Something went wrong
 
     Please try again or report this to @Ly_oBot if it persists.
 quote-errors-no_rights_send_documents =
@@ -229,7 +227,7 @@ sticker-save-suc = Successfully added to your <a href="{ $link }">group sticker 
 sticker-save-error-animated = Sorry, I can't save animated stickers yet 😅
 sticker-save-error-too_large = The image is too big (max 2048×2048). Try a smaller one 📐
 sticker-save-error-need_creator = <b>Almost there!</b> { $creator } needs to send me a message first to save stickers
-sticker-save-error-telegram = <b>Oops!</b> Something went wrong:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Oops!</b> Something went wrong
 sticker-delete-suc = Removed from your <a href="{ $link }">group sticker pack</a> 🗑
 sticker-delete-empty_reply = Please reply to a sticker you'd like to delete 🗑
 sticker-delete-error-telegram =
@@ -239,12 +237,9 @@ sticker-delete-error-not_found = The sticker no longer exists in the pack 🤔
 sticker-delete-error-rights = I don't have permission to delete this sticker 🔒
 sticker-delete-error-generic =
     Something went wrong. Please try again later ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Removed from random collection 🗑
 sticker-delete_random-error =
     <b>Couldn't remove the quote 😕</b>
-    { $error }
 sticker-delete_random-not_found = This quote is not in the database 🤔
 sticker-empty_forward = Please reply to a sticker, photo, or image you'd like to save ✨
 sticker-fstik = To save this to your personal sticker pack, forward to @fStikBot 🎨

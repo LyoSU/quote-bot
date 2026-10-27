@@ -1,5 +1,6 @@
 import { pino, type Logger } from 'pino'
 import { config, isProduction } from '../config/env'
+import { redactDeep, redactSecrets } from './redact'
 
 /**
  * Application logger.
@@ -16,6 +17,13 @@ import { config, isProduction } from '../config/env'
 export const logger: Logger = pino({
   level: config.LOG_LEVEL,
   base: undefined,
+  // Last line of defence: a bot token embedded in an error/URL never reaches the log.
+  hooks: {
+    logMethod(args, method) {
+      const clean = args.map((a) => (typeof a === 'string' ? redactSecrets(a) : redactDeep(a)))
+      return method.apply(this, clean as Parameters<typeof method>)
+    },
+  },
   ...(isProduction
     ? {}
     : {

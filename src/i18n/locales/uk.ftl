@@ -140,7 +140,6 @@ quote-checklist-added = Додано { $count ->
     }
 quote-api_error =
     <b>Ой! Щось пішло не так 😅</b>
-    <pre>{ $error }</pre>
     Спробуйте ще раз трохи пізніше!
 quote-empty_forward = Будь ласка, відповідайте або пересилайте повідомлення, яке ви хочете процитувати ✨
 quote-set_background_color = <b>Чудово!</b> Фон цитати змінено на: <code>{ $backgroundColor }</code> 🎨
@@ -158,15 +157,14 @@ quote-errors-invalid_format =
     • Стікери
     • Текстові повідомлення
 quote-errors-telegram_error =
-    ⚠️ Помилка Telegram: { $error }
+    ⚠️ Помилка Telegram
 
     Це зазвичай трапляється, коли:
     • Файл занадто великий
     • Пакет наліпок переповнений
     • Боту не вистачає прав
 quote-errors-generic_error =
-    😅 Упс! Щось пішло не так:
-    <code>{ $error }</code>
+    😅 Упс! Щось пішло не так
 
     Будь ласка, спробуйте ще раз або повідомте про це @Ly_oBot, якщо проблема не зникає.
 quote-errors-no_rights_send_documents =
@@ -234,7 +232,7 @@ quote-image_to_quote-errors-rate_limit = ⏳ Занадто багато зап�
 sticker-save-suc = Успішно додано у <a href="{ $link }">пак наліпок вашої групи</a> ✨
 sticker-save-error-animated = Вибачте, я поки що не можу зберігати анімовані стікери 😅
 sticker-save-error-need_creator = <b>Майже готово!</b> { $creator } спочатку повинен надіслати мені повідомлення, щоб зберегти наліпки
-sticker-save-error-telegram = <b>Ой!</b> Щось пішло не так:\n<pre>{ $error }</pre>
+sticker-save-error-telegram = <b>Ой!</b> Щось пішло не так
 sticker-delete-suc = Видалено з вашого <a href="{ $link }">паку наліпок групи</a> 🗑
 sticker-delete-empty_reply = Будь ласка, відповідайте на наліпку, яку хочете видалити 🗑
 sticker-delete-error-telegram =
@@ -244,12 +242,9 @@ sticker-delete-error-not_found = Наліпка більше не існує в 
 sticker-delete-error-rights = У мене немає дозволу на видалення цієї наліпки 🔒
 sticker-delete-error-generic =
     Щось пішло не так. Будь ласка, спробуйте пізніше ⚠️
-
-    <code>{ $error }</code>
 sticker-delete_random-suc = Видалено з випадкової колекції 🗑
 sticker-delete_random-error =
     <b>Не вдалося видалити цитату 😕</b>
-    { $error }
 sticker-delete_random-not_found = Цієї цитати немає в базі даних 🤔
 sticker-empty_forward = Будь ласка, відповідайте на наліпку, фото або зображення, яке ви хочете зберегти ✨
 sticker-fstik = Щоб зберегти у свій особистий стікерпак, перешліть до @fStikBot 🎨
