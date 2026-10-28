@@ -26,7 +26,9 @@ export function redactDeep(value: unknown, depth = 0, seen = new WeakSet<object>
     if (value.cause !== undefined) Object.defineProperty(out, 'cause', { value: redactDeep(value.cause, depth + 1, seen), enumerable: false })
     return out
   }
-  if (Buffer.isBuffer(value) || ArrayBuffer.isView(value)) return value
+  // Class instances (Date, Map, Mongoose docs…) would lose their shape as plain copies
+  const proto = Object.getPrototypeOf(value)
+  if (proto !== Object.prototype && proto !== null) return value
   const out: Record<string, unknown> = {}
   for (const [k, v] of Object.entries(value)) out[k] = redactDeep(v, depth + 1, seen)
   return out
