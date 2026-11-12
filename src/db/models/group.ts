@@ -43,6 +43,7 @@ const groupSchema = new Schema(
     },
     stickerSet: {
       name: String,
+      owner: Number, // Telegram user id the pack was created for; absent on older packs
       create: { type: Boolean, default: false },
     },
     topSet: {

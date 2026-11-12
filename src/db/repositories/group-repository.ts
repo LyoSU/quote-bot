@@ -91,8 +91,14 @@ export async function updateGroupSettings(
 export async function setGroupStickerSet(
   group: Pick<GroupDoc, '_id' | 'group_id'>,
   name: string | null,
+  owner?: number,
 ): Promise<void> {
-  if (name) await Group.updateOne({ _id: group._id }, { $set: { 'stickerSet.name': name, 'stickerSet.create': true } })
+  if (name) {
+    await Group.updateOne(
+      { _id: group._id },
+      { $set: { 'stickerSet.name': name, 'stickerSet.create': true, ...(owner ? { 'stickerSet.owner': owner } : {}) } },
+    )
+  }
   else await Group.updateOne({ _id: group._id }, { $unset: { stickerSet: 1 } })
   groupCache.delete(group.group_id)
 }

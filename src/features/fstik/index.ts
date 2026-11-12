@@ -62,6 +62,15 @@ async function resolvePackOwner(ctx: BotContext): Promise<number | undefined> {
   }
 }
 
+/** The pack owner's account no longer exists (e.g. the group creator deleted it). */
+function isOwnerGone(err: unknown): boolean {
+  if (!(err instanceof GrammyError)) return false
+  const d = err.description.toLowerCase()
+  return ['have no access to the user', 'user not found', 'user is deactivated', 'user_id_invalid'].some((s) =>
+    d.includes(s),
+  )
+}
+
 // In private chats /qs just points at @fStikBot (no group pack to save into).
 fstikFeature.hears(/^\/qs\b/i, async (ctx, next) => {
   if (ctx.chat?.type !== 'private') return next()
@@ -87,23 +96,35 @@ fstikFeature.hears(/^\/qs(?:@\S+)?(?:\s+(.+))?/i, onlyGroup, onlyAdmin, async (c
     return replyHtml(ctx, ctx.t('sticker-save-error-telegram'))
   }
 
+  const group = ctx.group
+  const callerId = ctx.from?.id
+  if (!callerId) return
   const emojiList = buildEmojiList(ctx.match?.[1]?.trim(), source.emoji)
-  const owner = await resolvePackOwner(ctx)
-  if (!owner) return
+  const owner = group.stickerSet?.owner ?? (await resolvePackOwner(ctx)) ?? callerId
 
-  const sticker: InputSticker = { sticker: new InputFile(webp, 'sticker.webp'), format: 'static', emoji_list: emojiList }
-  let packName = ctx.group.stickerSet?.name ?? undefined
-
-  try {
-    if (packName) {
-      await ctx.api.addStickerToSet(owner, packName.toLowerCase(), sticker)
-    } else {
-      const botUsername = ctx.me.username
-      packName = `g${randomUUID().replace(/-/g, '').slice(0, 8)}_${Math.abs(ctx.group.group_id)}_by_${botUsername}`
-      const title = `${(ctx.group.title ?? 'Group').slice(0, 40)} pack by @${botUsername}`
-      await ctx.api.createNewStickerSet(owner, packName, title, [sticker])
-      await setGroupStickerSet(ctx.group, packName)
+  /** Adds to the pack `name`, or starts a fresh one for `ownerId` when there is none. */
+  const save = async (ownerId: number, name: string | undefined): Promise<string> => {
+    const sticker: InputSticker = { sticker: new InputFile(webp, 'sticker.webp'), format: 'static', emoji_list: emojiList }
+    if (name) {
+      await ctx.api.addStickerToSet(ownerId, name.toLowerCase(), sticker)
+      return name
     }
+    const botUsername = ctx.me.username
+    const fresh = `g${randomUUID().replace(/-/g, '').slice(0, 8)}_${Math.abs(group.group_id)}_by_${botUsername}`
+    const title = `${(group.title ?? 'Group').slice(0, 40)} pack by @${botUsername}`
+    await ctx.api.createNewStickerSet(ownerId, fresh, title, [sticker])
+    await setGroupStickerSet(group, fresh, ownerId)
+    return fresh
+  }
+
+  let packName: string
+  try {
+    packName = await save(owner, group.stickerSet?.name ?? undefined).catch((err: unknown) => {
+      // Nobody can add to a deleted account's pack any more — start a fresh
+      // one owned by the admin who ran the command.
+      if (!isOwnerGone(err) || owner === callerId) throw err
+      return save(callerId, undefined)
+    })
   } catch (err) {
     if (err instanceof GrammyError) {
       const d = err.description.toLowerCase()
@@ -112,7 +133,7 @@ fstikFeature.hears(/^\/qs(?:@\S+)?(?:\s+(.+))?/i, onlyGroup, onlyAdmin, async (c
       }
       // A stale/full pack: forget it so the next /qs starts a fresh one.
       if (d.includes('stickerset_invalid') || d.includes('too_much') || d.includes('too many')) {
-        await setGroupStickerSet(ctx.group, null)
+        await setGroupStickerSet(group, null)
       }
       if (d.includes('stickerset_invalid')) return replyHtml(ctx, ctx.t('quote-errors-sticker_set_invalid'))
       if (d.includes('too_much') || d.includes('too many') || d.includes('sticker set full')) {
