@@ -1,66 +1,74 @@
 import type { InlineKeyboard } from 'grammy'
+import type { EphemeralMessageParameters, InputRichMessage, ReplyParameters } from 'grammy/types'
 import type { BotContext } from '../core/types'
-import { LruCache } from '../core/lru'
 
 type Panel = { parse_mode?: 'HTML'; link_preview_options?: { is_disabled: true }; reply_markup?: InlineKeyboard }
+type Extra = { ephemeral_message_parameters?: EphemeralMessageParameters; reply_parameters?: ReplyParameters }
 
 /**
- * Groups where an unprompted ephemeral send was refused (the bot isn't an admin
- * there) — skip the doomed attempt for a while instead of paying a failed call
- * on every command. Ephemeral commands don't need this: they open a reply window.
+ * Answers an ephemeral command (Bot API 10.2+) so that only its sender sees the
+ * reply — admin panels and confirmations don't clutter the chat and nobody else
+ * can tap them. Only an incoming ephemeral command is answered this way: it
+ * proves the sender's app can display such messages, and it opens a 15-second
+ * reply window that needs no admin rights. A command typed the plain way (an
+ * older app) gets a regular reply — an unprompted ephemeral message to it could
+ * simply never be shown. Returns false when nothing was sent ephemerally.
  */
-const noEphemeral = new LruCache<number, true>(10_000, 10 * 60_000)
+async function sendEphemeral(ctx: BotContext, send: (extra: Extra) => Promise<unknown>): Promise<boolean> {
+  const ephemeralId = ctx.message?.ephemeral_message_id
+  if (!ctx.from || !ephemeralId) return false
+  return send({
+    ephemeral_message_parameters: { receiver_user_id: ctx.from.id },
+    reply_parameters: { ephemeral_message_id: ephemeralId },
+  }).then(
+    () => true,
+    () => false, // window missed (backlog) or the server predates 10.2 — the caller replies publicly
+  )
+}
 
-/**
- * Sends a message in a group only to the user who asked for it (Bot API 10.2+
- * ephemeral message), so admin panels and confirmations don't clutter the chat
- * and nobody else can tap them. An ephemeral command is answered in its
- * 15-second reply window; a plain one needs the bot to be a chat admin.
- * Returns false when the message could not go out ephemerally.
- */
-export async function replyEphemeral(ctx: BotContext, text: string, other: Panel): Promise<boolean> {
-  const msg = ctx.message
-  if (!ctx.from || !msg || (msg.chat.type !== 'group' && msg.chat.type !== 'supergroup')) return false
-  const ephemeralId = msg.ephemeral_message_id
-  if (!ephemeralId && noEphemeral.get(msg.chat.id)) return false
-  return ctx
-    .reply(text, {
-      ...other,
-      ephemeral_message_parameters: { receiver_user_id: ctx.from.id },
-      ...(ephemeralId ? { reply_parameters: { ephemeral_message_id: ephemeralId } } : {}),
-    })
-    .then(
-      () => true,
-      () => {
-        if (!ephemeralId) noEphemeral.set(msg.chat.id, true)
-        return false
-      },
-    )
+/** A regular reply to the command (an ephemeral command has no message_id to reply to). */
+function replyTo(ctx: BotContext): Extra {
+  const messageId = ctx.message?.message_id
+  return messageId ? { reply_parameters: { message_id: messageId, allow_sending_without_reply: true } } : {}
+}
+
+export function replyEphemeral(ctx: BotContext, text: string, other: Panel): Promise<boolean> {
+  return sendEphemeral(ctx, (extra) => ctx.reply(text, { ...other, ...extra }))
 }
 
 /**
- * Replies to the caller only where possible (see replyEphemeral), else as a
+ * Replies to the caller only where possible (see sendEphemeral), else as a
  * regular reply. Commands declared `is_ephemeral` must answer through this:
  * a public reply would expose what the user typed invisibly.
  */
 export async function replyPrivately(ctx: BotContext, text: string, other: Panel): Promise<void> {
   if (await replyEphemeral(ctx, text, other)) return
-  const messageId = ctx.message?.message_id
-  await ctx
-    .reply(text, {
-      ...other,
-      ...(messageId ? { reply_parameters: { message_id: messageId, allow_sending_without_reply: true } } : {}),
-    })
-    .catch(() => {})
+  await ctx.reply(text, { ...other, ...replyTo(ctx) }).catch(() => {})
+}
+
+/**
+ * A rich message (Bot API 10.1+, buttons 10.3+) as the ephemeral answer to an
+ * ephemeral command. Never sent otherwise: an app old enough to send the
+ * command the plain way may show a rich message as "unsupported". Returns
+ * false when it wasn't sent, so the caller falls back to a classic message.
+ */
+export function replyRichEphemeral(ctx: BotContext, rich: InputRichMessage): Promise<boolean> {
+  return sendEphemeral(ctx, (extra) => ctx.replyWithRichMessage(rich, extra))
 }
 
 /** Edits the callback's message in place — ephemeral messages have their own edit method. */
-export async function editPanelText(ctx: BotContext, text: string, other: Panel): Promise<void> {
+export async function editPanelText(ctx: BotContext, content: string | InputRichMessage, other: Panel = {}): Promise<void> {
   const msg = ctx.callbackQuery?.message
   const ephemeralId = msg && 'ephemeral_message_id' in msg ? msg.ephemeral_message_id : undefined
   const edit =
     ephemeralId && msg && ctx.from
-      ? ctx.api.editEphemeralMessageText(msg.chat.id, ctx.from.id, ephemeralId, text, other)
-      : ctx.editMessageText(text, other)
+      ? ctx.api.editEphemeralMessageText(msg.chat.id, ctx.from.id, ephemeralId, content, other)
+      : ctx.editMessageText(content, other)
   await edit.catch(() => {})
+}
+
+/** True when the pressed button lives in a rich message (it must be edited as one). */
+export function fromRichMessage(ctx: BotContext): boolean {
+  const msg = ctx.callbackQuery?.message
+  return Boolean(msg && 'rich_message' in msg && msg.rich_message)
 }

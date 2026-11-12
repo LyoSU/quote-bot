@@ -37,7 +37,7 @@ describe('/qfind', () => {
         [{ text: 'Search Quotes', switch_inline_query_current_chat: `find:${groupId} ` }],
         [{ text: '🔎 Full archive', url: `https://t.me/testbot/app?startapp=g_${groupId}` }],
       ] }),
-      ephemeral_message_parameters: { receiver_user_id: 7 }, // only the caller sees it
+      reply_parameters: { message_id: 10, allow_sending_without_reply: true },
     })
   })
 
