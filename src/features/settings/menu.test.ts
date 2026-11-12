@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   buildMainMenu,
+  buildRichMenu,
+  panelBody,
   buildCategoryKeyboard,
   nextBrand,
   nextStyle,
@@ -159,5 +161,50 @@ describe('auto-quote (gab) in the group view', () => {
 
   it('keeps an explicit value', () => {
     expect(resolveView(ctxWith({ randomQuoteGab: 200 }))?.gab).toBe(200)
+  })
+})
+
+describe('buildRichMenu', () => {
+  const t = (k: string): string => (k === 'qs-title' ? '<b>⚙️ Settings</b>\n\nPick a section.' : k)
+  const sections = (html: string): string[] => html.match(/<details[^>]*>/g) ?? []
+
+  it('folds every category; the group one only for groups', () => {
+    expect(sections(buildRichMenu(view(), t))).toEqual(Array(4).fill('<details>'))
+    expect(sections(buildRichMenu(view({ scope: 'user' }), t))).toHaveLength(3)
+    expect(buildRichMenu(view(), t)).toContain('<h3>⚙️ Settings</h3><p>Pick a section.</p>')
+  })
+
+  it('keeps the edited section open and carries the same callbacks as the classic menu', () => {
+    const html = buildRichMenu(view(), t, { open: 'content' })
+    expect(html).toContain('<details open><summary>qs-cat-content</summary>')
+    expect(html).toContain('data="qs:toggle:media"')
+    expect(html).not.toContain('data="qs:open"') // no back rows inside sections
+  })
+
+  it('highlights toggles that are on and the destructive reset', () => {
+    const html = buildRichMenu(view({ privacy: true, hidden: false }), t)
+    expect(html).toContain('style="success" data="qs:toggle:privacy"')
+    expect(html).toContain('<tg-button type="callback_data" data="qs:toggle:hidden"')
+    expect(html).toContain('style="danger" data="qs:reset"')
+  })
+
+  it('opens the color grid in place of the color row, without empty rows', () => {
+    const html = buildRichMenu(view(), t, { picker: 'color' })
+    expect(html).toContain('<details open><summary>qs-cat-appearance</summary>')
+    expect(html).toContain('data="qs:color:set:14"')
+    expect(html).not.toContain('data="qs:color"')
+    expect(html).not.toContain('<tg-button-row></tg-button-row>')
+  })
+
+  it('lists languages in place and escapes button text', () => {
+    expect(buildRichMenu(view(), t, { picker: 'lang' })).toContain('data="set_language:uk"')
+    const html = buildRichMenu(view({ brand: 'a<b>&' }), t, { open: 'appearance' })
+    expect(html).toContain('A&lt;b&gt;&amp;')
+  })
+})
+
+describe('panelBody', () => {
+  it('drops the title and turns bullets into a list', () => {
+    expect(panelBody('<b>Title</b>\n\nIntro\n• <b>One</b> — a\n• Two')).toBe('<p>Intro</p><ul><li><b>One</b> — a</li><li>Two</li></ul>')
   })
 })

@@ -2,7 +2,7 @@ import { Composer, InlineKeyboard, InputFile } from 'grammy'
 import type { BotContext } from '../../core/types'
 import { i18n } from '../../i18n'
 import { deepLink } from '../../helpers/deep-link'
-import { editPanelText, replyPrivately } from '../../helpers/ephemeral'
+import { editPanelText, fromRichMessage, replyPrivately } from '../../helpers/ephemeral'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { showSettingsMenu } from '../settings/menu'
@@ -200,8 +200,9 @@ shellFeature.callbackQuery(/^set_language:(.+)$/, async (ctx) => {
   ctx.i18n.useLocale(code)
   await ctx.answerCallbackQuery(i18n.t(code, 'language_name')).catch(() => {})
   // The private start screen is per-user (it links the user's busiest group) —
-  // in a group, land back on that group's settings instead.
-  if (inGroup) await showSettingsMenu(ctx)
+  // in a group, or when picked inside the rich settings menu, land back on the
+  // settings instead.
+  if (inGroup || fromRichMessage(ctx)) await showSettingsMenu(ctx)
   else await showMainMenu(ctx, true)
 })
 

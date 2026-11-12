@@ -5,7 +5,8 @@ import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { freshSettings, refreshSettings } from '../../middlewares/fresh-settings'
 import { deepLink } from '../../helpers/deep-link'
-import { editPanelText, replyEphemeral } from '../../helpers/ephemeral'
+import { editPanelText, fromRichMessage, replyEphemeral, replyRichEphemeral } from '../../helpers/ephemeral'
+import { i18n } from '../../i18n'
 import { DEFAULT_BACKGROUND } from '../quote/color'
 import { DEFAULT_STICKER_EMOJI, QUOTE_BACKDROPS, QUOTE_STYLES, type PartialQuoteMode, type QuoteBackdropPref, type QuoteFormatPref, type QuoteStylePref } from '../quote/render'
 
@@ -308,6 +309,111 @@ function colorKeyboard(t: Translate): InlineKeyboard {
   return kb
 }
 
+// ---- Rich menu (Bot API 10.1+) ----
+
+/**
+ * The whole menu as one rich message: each category is a collapsible section
+ * with its explanation and its buttons inline, so there is no screen-hopping —
+ * the section being edited stays open, the rest stay folded. Pickers (color,
+ * sticker emoji, language) open in place. Built from the same keyboards as the
+ * classic menu. Shown only in answer to an ephemeral /qsettings (see
+ * replyRichEphemeral); the classic menu serves private chats and older apps.
+ */
+export interface RichMenuState {
+  open?: Category
+  picker?: 'color' | 'suffix' | 'lang'
+}
+
+const esc = (s: string): string => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+type RichButton = { text: string; data?: string; url?: string; style?: 'primary' | 'success' | 'danger' }
+
+function richRow(buttons: RichButton[]): string {
+  const html = buttons.map((b) => {
+    const style = b.style ? ` style="${b.style}"` : ''
+    return b.url
+      ? `<tg-button type="url"${style} url="${esc(b.url)}">${esc(b.text)}</tg-button>`
+      : `<tg-button type="callback_data"${style} data="${esc(b.data ?? '')}">${esc(b.text)}</tg-button>`
+  })
+  return `<tg-button-row>${html.join('')}</tg-button-row>`
+}
+
+/** Which `qs:toggle:*` buttons are currently on — shown in the "success" style. */
+const TOGGLE_ON: Record<string, (v: QuoteSettingsView) => boolean> = {
+  media: (v) => v.media,
+  reply: (v) => v.showReply,
+  crop: (v) => v.crop,
+  sendertag: (v) => v.senderTag,
+  privacy: (v) => v.privacy,
+  hidden: (v) => v.hidden,
+  rate: (v) => v.rate,
+  archive: (v) => v.archive,
+  appbutton: (v) => v.appButton,
+}
+
+/** Classic keyboard rows → rich button rows (minus the trailing back row). */
+function rowsOf(kb: InlineKeyboard, view: QuoteSettingsView): RichButton[][] {
+  return kb.inline_keyboard.slice(0, -1).map((row) =>
+    row.flatMap((b) => {
+      if (!('callback_data' in b)) return []
+      const toggle = b.callback_data.match(/^qs:toggle:(\w+)$/)?.[1]
+      const on = toggle ? TOGGLE_ON[toggle]?.(view) : false
+      return [{ text: b.text, data: b.callback_data, ...(on ? { style: 'success' as const } : {}) }]
+    }),
+  ).filter((row) => row.length > 0)
+}
+
+/**
+ * A panel text ("<b>Title</b>" line + "• item" lines) as rich HTML, without
+ * its title — the section summary already carries it.
+ */
+export function panelBody(panel: string): string {
+  const lines = panel.split('\n').slice(1).map((l) => l.trim()).filter(Boolean)
+  const items = lines.filter((l) => l.startsWith('•')).map((l) => `<li>${l.replace(/^•\s*/, '')}</li>`)
+  const paras = lines.filter((l) => !l.startsWith('•')).map((l) => `<p>${l}</p>`)
+  return paras.join('') + (items.length ? `<ul>${items.join('')}</ul>` : '')
+}
+
+function languageRows(): RichButton[][] {
+  const rows: RichButton[][] = []
+  i18n.locales.forEach((code, i) => {
+    if (i % 3 === 0) rows.push([])
+    rows.at(-1)!.push({ text: i18n.t(code, 'language_name'), data: `set_language:${code}` })
+  })
+  return rows
+}
+
+export function buildRichMenu(view: QuoteSettingsView, t: Translate, state: RichMenuState = {}, settingsUrl?: string | null): string {
+  const [titleLine = '', ...intro] = t('qs-title').split('\n')
+  const parts = [`<h3>${titleLine.replace(/<\/?b>/g, '').trim()}</h3>`, ...intro.map((l) => l.trim()).filter(Boolean).map((l) => `<p>${l}</p>`)]
+  if (settingsUrl && (view.scope === 'user' || view.appButton)) {
+    parts.push(richRow([{ text: t('app-open_settings'), url: settingsUrl, style: 'primary' }]))
+  }
+
+  const cats: Category[] = view.scope === 'group' ? ['appearance', 'content', 'privacy', 'group'] : ['appearance', 'content', 'privacy']
+  for (const cat of cats) {
+    let rows = rowsOf(buildCategoryKeyboard(cat, view, t), view)
+    if (cat === 'appearance' && (state.picker === 'color' || state.picker === 'suffix')) {
+      const target = state.picker === 'color' ? 'qs:color' : 'qs:suffix'
+      const grid = rowsOf(state.picker === 'color' ? colorKeyboard(t) : suffixKeyboard(t), view)
+      rows = rows.flatMap((row) => (row.some((b) => b.data === target) ? grid : [row]))
+    }
+    const open = state.open === cat || (cat === 'appearance' && (state.picker === 'color' || state.picker === 'suffix'))
+    parts.push(
+      `<details${open ? ' open' : ''}><summary>${t(`qs-cat-${cat}`)}</summary>${panelBody(t(`qs-cat-${cat}-desc`))}${rows.map(richRow).join('')}</details>`,
+    )
+  }
+
+  if (state.picker === 'lang') parts.push(...languageRows().map(richRow))
+  parts.push(
+    richRow([
+      { text: t('qs-btn-reset'), data: 'qs:reset', style: 'danger' },
+      { text: t('menu-btn-language'), data: 'qs:lang' },
+    ]),
+  )
+  return parts.join('')
+}
+
 // ---- Rendering ----
 
 function htmlOpts(ctx: BotContext): {
@@ -334,15 +440,27 @@ async function show(ctx: BotContext, bodyKey: string, reply_markup: InlineKeyboa
   await ctx.reply(ctx.t(bodyKey), { ...htmlOpts(ctx), reply_markup })
 }
 
-async function renderMain(ctx: BotContext, view: QuoteSettingsView, edit: boolean): Promise<void> {
+function settingsUrlFor(ctx: BotContext, view: QuoteSettingsView): string | null {
   const username = ctx.me?.username
-  const settingsUrl = username ? deepLink.forSettings(username, view.scope === 'group' ? ctx.group?._id.toString() : undefined) : null
+  return username ? deepLink.forSettings(username, view.scope === 'group' ? ctx.group?._id.toString() : undefined) : null
+}
+
+/** Re-renders a rich menu in place with the given section/picker open. */
+function editRich(ctx: BotContext, view: QuoteSettingsView, state: RichMenuState): Promise<void> {
+  return editPanelText(ctx, { html: buildRichMenu(view, (k) => ctx.t(k), state, settingsUrlFor(ctx, view)) })
+}
+
+async function renderMain(ctx: BotContext, view: QuoteSettingsView, edit: boolean): Promise<void> {
+  const settingsUrl = settingsUrlFor(ctx, view)
+  if (edit && fromRichMessage(ctx)) return editRich(ctx, view, {})
+  if (!edit && (await replyRichEphemeral(ctx, { html: buildRichMenu(view, (k) => ctx.t(k), {}, settingsUrl) }))) return
   await show(ctx, 'qs-title', buildMainMenu(view, (k) => ctx.t(k), settingsUrl), edit)
 }
 
 async function renderCategory(ctx: BotContext, cat: Category, view: QuoteSettingsView, edit: boolean): Promise<void> {
   // No group panel in private chats — fall back to the menu.
   if (cat === 'group' && view.scope !== 'group') return renderMain(ctx, view, edit)
+  if (edit && fromRichMessage(ctx)) return editRich(ctx, view, { open: cat })
   await show(ctx, `qs-cat-${cat}-desc`, buildCategoryKeyboard(cat, view, (k) => ctx.t(k)), edit)
 }
 
@@ -482,13 +600,23 @@ quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|sendertag|privacy|
 
 // Open the background-color picker (within Appearance).
 quoteSettingsMenu.callbackQuery('qs:color', async (ctx) => {
-  if (await isAdmin(ctx)) {
+  if (fromRichMessage(ctx)) {
+    const view = await authorizedView(ctx)
+    if (view) await editRich(ctx, view, { picker: 'color' })
+  } else if (await isAdmin(ctx)) {
     await editPanelText(ctx, ctx.t('qs-color-title'), {
       parse_mode: 'HTML',
       link_preview_options: { is_disabled: true },
       reply_markup: colorKeyboard((k) => ctx.t(k)),
     })
   }
+  await ctx.answerCallbackQuery().catch(() => {})
+})
+
+// Language picker, in place (rich menu only — the classic menu opens the shell's picker).
+quoteSettingsMenu.callbackQuery('qs:lang', async (ctx) => {
+  const view = await authorizedView(ctx)
+  if (view) await editRich(ctx, view, { picker: 'lang' })
   await ctx.answerCallbackQuery().catch(() => {})
 })
 
@@ -508,7 +636,10 @@ quoteSettingsMenu.callbackQuery(/^qs:color:set:(\d+)$/, async (ctx) => {
 
 // Open the sticker-emoji picker (within Appearance).
 quoteSettingsMenu.callbackQuery('qs:suffix', async (ctx) => {
-  if (await isAdmin(ctx)) {
+  if (fromRichMessage(ctx)) {
+    const view = await authorizedView(ctx)
+    if (view) await editRich(ctx, view, { picker: 'suffix' })
+  } else if (await isAdmin(ctx)) {
     await editPanelText(ctx, ctx.t('qs-suffix-title'), {
       parse_mode: 'HTML',
       link_preview_options: { is_disabled: true },
