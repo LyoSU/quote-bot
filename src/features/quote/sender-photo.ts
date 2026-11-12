@@ -3,7 +3,9 @@ import { LruCache } from '../../core/lru'
 import type { QuoteFromPhoto } from '../../services/quote-api/types'
 import { isSyntheticId } from './sender'
 
-const PHOTO_TTL_MS = 30 * 60 * 1000
+// How long a changed profile picture can go unnoticed. One cheap lookup per
+// sender per window; 30 min left quotes on the old avatar for too long (#215).
+const PHOTO_TTL_MS = 5 * 60 * 1000
 const PHOTO_CACHE_MAX = 5_000
 const LOOKUP_TIMEOUT_MS = 3_000
 
@@ -38,17 +40,18 @@ async function lookup(api: PhotoApi, id: number): Promise<QuoteFromPhoto | undef
     if (!sizes?.length) return undefined
     let best = sizes[0]!
     for (const s of sizes) if (s.width * s.height >= best.width * best.height) best = s
-    return { big_file_id: best.file_id }
+    return { big_file_id: best.file_id, big_file_unique_id: best.file_unique_id }
   }
   const chat = await api.getChat(id)
-  const big = 'photo' in chat ? chat.photo?.big_file_id : undefined
-  return big ? { big_file_id: big } : undefined
+  const photo = 'photo' in chat ? chat.photo : undefined
+  // The unique id is the renderer's cache key: a new picture misses its cache at once.
+  return photo?.big_file_id ? { big_file_id: photo.big_file_id, big_file_unique_id: photo.big_file_unique_id } : undefined
 }
 
 /**
  * Resolves a user's (positive id) or chat/channel's (negative id) profile photo
  * file id for the renderer — Telegram never ships it on messages. Cached for
- * 30 min (bounded), shares in-flight lookups, times out after 3 s and never
+ * 5 min (bounded), shares in-flight lookups, times out after 3 s and never
  * throws: no photo just means the renderer draws the initials avatar (or tries
  * its own lookup). Synthetic ids are skipped.
  */
@@ -69,7 +72,7 @@ export function resolveSenderPhoto(
   })
   const entry: PhotoEntry = { photo }
   photoCache.set(id, entry)
-  // A timeout/error must not pin "no photo" for 30 minutes — drop it so the next quote retries.
+  // A timeout/error must not pin "no photo" for the whole TTL — drop it so the next quote retries.
   void photo.then(() => {
     if (failed) photoCache.delete(id)
   })

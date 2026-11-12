@@ -7,7 +7,7 @@ const size = (id: string, w: number, h: number) => ({ file_id: id, file_unique_i
 function api(over: Record<string, unknown> = {}) {
   return {
     getUserProfilePhotos: vi.fn(async () => ({ total_count: 1, photos: [[size('s', 160, 160), size('l', 640, 640), size('m', 320, 320)]] })),
-    getChat: vi.fn(async () => ({ id: -100, photo: { big_file_id: 'chbig' } })),
+    getChat: vi.fn(async () => ({ id: -100, photo: { big_file_id: 'chbig', big_file_unique_id: 'chuniq' } })),
     ...over,
   } as never
 }
@@ -17,13 +17,13 @@ beforeEach(() => clearSenderPhotoCache())
 describe('resolveSenderPhoto (B2)', () => {
   it('uses the largest size of the current profile photo for a user', async () => {
     const a = api()
-    await expect(resolveSenderPhoto(a, 5)).resolves.toEqual({ big_file_id: 'l' })
+    await expect(resolveSenderPhoto(a, 5)).resolves.toEqual({ big_file_id: 'l', big_file_unique_id: 'l' })
     expect((a as never as { getUserProfilePhotos: ReturnType<typeof vi.fn> }).getUserProfilePhotos).toHaveBeenCalledWith(5, { limit: 1 })
   })
 
   it('uses getChat().photo.big_file_id for a channel / chat', async () => {
     const a = api()
-    await expect(resolveSenderPhoto(a, -1001234567890)).resolves.toEqual({ big_file_id: 'chbig' })
+    await expect(resolveSenderPhoto(a, -1001234567890)).resolves.toEqual({ big_file_id: 'chbig', big_file_unique_id: 'chuniq' })
   })
 
   it('returns undefined for a user without a photo', async () => {
@@ -56,7 +56,7 @@ describe('resolveSenderPhoto (B2)', () => {
     const a = api({ getUserProfilePhotos })
     await expect(resolveSenderPhoto(a, 7)).resolves.toBeUndefined()
     await Promise.resolve()
-    await expect(resolveSenderPhoto(a, 7)).resolves.toEqual({ big_file_id: 'ok' })
+    await expect(resolveSenderPhoto(a, 7)).resolves.toEqual({ big_file_id: 'ok', big_file_unique_id: 'ok' })
   })
 
   it('times out instead of stalling the quote', async () => {
