@@ -245,7 +245,10 @@ export function buildMainMenu(view: QuoteSettingsView, t: Translate, settingsUrl
     .text(t('qs-cat-privacy'), 'qs:cat:privacy')
   if (view.scope === 'group') kb.text(t('qs-cat-group'), 'qs:cat:group')
   kb.row().text(t('qs-btn-reset'), 'qs:reset').row()
-  kb.text(t('menu-btn-language'), 'menu:language').text(t('menu-btn-back'), 'menu:main')
+  kb.text(t('menu-btn-language'), 'menu:language')
+  // In a group this menu is the root: the private start screen behind "back"
+  // belongs to the user, not the chat, and would surface another group.
+  if (view.scope === 'user') kb.text(t('menu-btn-back'), 'menu:main')
   return kb
 }
 
@@ -363,6 +366,12 @@ async function authorizedView(ctx: BotContext): Promise<QuoteSettingsView | null
 async function writeSetting(ctx: BotContext, path: string, value: unknown): Promise<void> {
   if (ctx.group) await updateGroupSettings(ctx.group, { [path]: value })
   else if (ctx.user) await updateUserSettings(ctx.user, { [path]: value })
+}
+
+/** Re-renders the settings root in place (e.g. after a language change in a group). */
+export async function showSettingsMenu(ctx: BotContext): Promise<void> {
+  const view = resolveView(ctx)
+  if (view) await renderMain(ctx, view, true)
 }
 
 export const quoteSettingsMenu = new Composer<BotContext>()

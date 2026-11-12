@@ -4,6 +4,7 @@ import { i18n } from '../../i18n'
 import { deepLink } from '../../helpers/deep-link'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
+import { showSettingsMenu } from '../settings/menu'
 import { demoStickers } from './demo-sticker'
 import { groupStartKeyboard, guideKeyboard, loadStartState, newUserKeyboard, returningKeyboard, type StartState } from './start'
 
@@ -117,7 +118,7 @@ async function showHelp(ctx: BotContext): Promise<void> {
   if (ctx.group) {
     await ctx.reply(ctx.t('menu-features-title'), {
       ...htmlReplyOptions(ctx),
-      reply_markup: featuresKeyboard((k) => ctx.t(k), 'menu:main'),
+      reply_markup: featuresKeyboard((k) => ctx.t(k), null),
     })
     return
   }
@@ -129,16 +130,16 @@ async function showHelp(ctx: BotContext): Promise<void> {
 const FEATURE_PAGES = ['basics', 'colors', 'media', 'group'] as const
 type FeaturePage = (typeof FEATURE_PAGES)[number]
 
-/** The "what can I do?" tab overview — the four feature pages + back to the menu. */
-export function featuresKeyboard(t: (key: string) => string, backTarget = 'menu:guide'): InlineKeyboard {
-  return new InlineKeyboard()
+/** The "what can I do?" tab overview — the four feature pages + back (null = it is the root). */
+export function featuresKeyboard(t: (key: string) => string, backTarget: string | null = 'menu:guide'): InlineKeyboard {
+  const kb = new InlineKeyboard()
     .text(t('menu-features-btn-basics'), 'menu:f_basics')
     .text(t('menu-features-btn-colors'), 'menu:f_colors')
     .row()
     .text(t('menu-features-btn-media'), 'menu:f_media')
     .text(t('menu-features-btn-group'), 'menu:f_group')
-    .row()
-    .text(t('menu-btn-back'), backTarget)
+  if (backTarget) kb.row().text(t('menu-btn-back'), backTarget)
+  return kb
 }
 
 async function editPanel(ctx: BotContext, key: string, keyboard: InlineKeyboard): Promise<void> {
@@ -205,13 +206,24 @@ shellFeature.callbackQuery(/^set_language:(.+)$/, async (ctx) => {
 
   ctx.i18n.useLocale(code)
   await ctx.answerCallbackQuery(i18n.t(code, 'language_name')).catch(() => {})
-  await showMainMenu(ctx, true)
+  // The private start screen is per-user (it links the user's busiest group) —
+  // in a group, land back on that group's settings instead.
+  if (inGroup) await showSettingsMenu(ctx)
+  else await showMainMenu(ctx, true)
 })
 
 // menu:<action>
 shellFeature.callbackQuery(/^menu:(.+)$/, async (ctx) => {
   const action = ctx.match?.[1] ?? ''
   const back = (target: string): InlineKeyboard => new InlineKeyboard().text(ctx.t('menu-btn-back'), target)
+  // Groups have no private start/guide screen: their roots are /qsettings and /help.
+  const inGroup = ctx.chat?.type === 'group' || ctx.chat?.type === 'supergroup'
+
+  // Stale buttons on messages sent before this fix: never render a user's screen into a group.
+  if (inGroup && (action === 'main' || action === 'guide')) {
+    await ctx.answerCallbackQuery().catch(() => {})
+    return
+  }
 
   switch (action) {
     case 'main':
@@ -221,13 +233,13 @@ shellFeature.callbackQuery(/^menu:(.+)$/, async (ctx) => {
       await editPanel(ctx, 'start-guide_title', guideKeyboard((k) => ctx.t(k)))
       break
     case 'features':
-      await editPanel(ctx, 'menu-features-title', featuresKeyboard((k) => ctx.t(k)))
+      await editPanel(ctx, 'menu-features-title', featuresKeyboard((k) => ctx.t(k), inGroup ? null : 'menu:guide'))
       break
     case 'help':
       await editPanel(ctx, 'help', back('menu:guide'))
       break
     case 'language':
-      await showLanguagePicker(ctx, { edit: true, backCallback: 'menu:guide' })
+      await showLanguagePicker(ctx, { edit: true, backCallback: inGroup ? 'qs:open' : 'menu:guide' })
       break
     default: {
       const page = action.replace(/^f_/, '')

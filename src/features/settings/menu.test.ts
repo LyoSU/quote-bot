@@ -85,6 +85,11 @@ describe('buildMainMenu', () => {
     expect(callbacks(buildMainMenu(view({ scope: 'user' }), t))).not.toContain('qs:cat:group')
   })
 
+  it('offers back to the start screen only in private — in a group the menu is the root', () => {
+    expect(callbacks(buildMainMenu(view({ scope: 'user' }), t))).toContain('menu:main')
+    expect(callbacks(buildMainMenu(view({ scope: 'group' }), t))).not.toContain('menu:main')
+  })
+
   it('always offers the core categories and reset', () => {
     const cb = callbacks(buildMainMenu(view({ scope: 'user' }), t))
     expect(cb).toEqual(expect.arrayContaining(['qs:cat:appearance', 'qs:cat:content', 'qs:cat:privacy', 'qs:reset']))

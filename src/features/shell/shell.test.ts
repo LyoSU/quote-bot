@@ -15,4 +15,9 @@ describe('featuresKeyboard', () => {
       'menu:guide',
     ])
   })
+
+  it('has no back button when it is the root (group /help)', () => {
+    expect(callbacks(featuresKeyboard(t, null))).not.toContain('menu:guide')
+    expect(featuresKeyboard(t, null).inline_keyboard).toHaveLength(2)
+  })
 })
