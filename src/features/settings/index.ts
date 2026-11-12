@@ -5,6 +5,7 @@ import { updateUserSettings } from '../../db/repositories/user-repository'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { freshSettings } from '../../middlewares/fresh-settings'
 import { Quote } from '../../db/models'
+import { replyPrivately } from '../../helpers/ephemeral'
 import { buildBackgroundColor, DEFAULT_BACKGROUND, parseColor } from '../quote/color'
 
 const EMOJI_BRANDS = new Set(['apple', 'google', 'twitter', 'joypixels', 'blob'])
@@ -15,14 +16,9 @@ function extractEmojis(input: string): string | null {
   return matches?.join('') ?? null
 }
 
-function replyHtml(ctx: BotContext, text: string): Promise<unknown> {
-  const messageId = ctx.message?.message_id
-  return ctx
-    .reply(text, {
-      parse_mode: 'HTML',
-      ...(messageId ? { reply_parameters: { message_id: messageId, allow_sending_without_reply: true } } : {}),
-    })
-    .catch(() => undefined)
+/** Settings confirmations concern the admin who ran the command — not the whole chat. */
+function replyHtml(ctx: BotContext, text: string): Promise<void> {
+  return replyPrivately(ctx, text, { parse_mode: 'HTML' })
 }
 
 /** Writes a `settings.quote.*` value to the group (preferred) or user doc. */

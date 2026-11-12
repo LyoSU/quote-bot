@@ -563,3 +563,16 @@ start-btn-help = ❓ Bantuan
 start-btn-open = ✨ Buka kutipan
 start-btn-add_more = ➕ Tambah ke grup lain
 start-btn-group_style = 🎨 Atur gaya grup
+
+## Command menu (setMyCommands)
+cmd-q = Kutip pesan yang kamu balas
+cmd-qrand = Kutipan acak dari obrolan ini
+cmd-qtop = Kutipan teratas obrolan ini
+cmd-qfind = Cari kutipan tersimpan
+cmd-qforget = Hapus teks kutipanmu (#nomor)
+cmd-qsettings = Pengaturan kutipan
+cmd-lang = Bahasa
+cmd-start = Mulai bot
+cmd-app = Buka aplikasi
+cmd-help = Cara kerjanya
+cmd-donate = Dukung bot

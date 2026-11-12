@@ -605,3 +605,16 @@ start-btn-help = ❓ Допомога
 start-btn-open = ✨ Відкрити застосунок
 start-btn-add_more = ➕ Додати в іншу групу
 start-btn-group_style = 🎨 Стиль групи
+
+## Command menu (setMyCommands)
+cmd-q = Цитата з повідомлення, на яке відповідаєш
+cmd-qrand = Випадкова цитата чату
+cmd-qtop = Топ цитат чату
+cmd-qfind = Пошук збережених цитат
+cmd-qforget = Стерти текст своєї цитати (#номер)
+cmd-qsettings = Налаштування цитат
+cmd-lang = Мова
+cmd-start = Запустити бота
+cmd-app = Відкрити застосунок
+cmd-help = Як це працює
+cmd-donate = Підтримати бота

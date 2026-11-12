@@ -599,3 +599,16 @@ start-btn-help = ❓ مساعدة
 start-btn-open = ✨ فتح الاقتباسات
 start-btn-add_more = ➕ أضفني إلى مجموعة أخرى
 start-btn-group_style = 🎨 اضبط أسلوب المجموعة
+
+## Command menu (setMyCommands)
+cmd-q = اقتبس الرسالة التي ترد عليها
+cmd-qrand = اقتباس عشوائي من الدردشة
+cmd-qtop = أفضل اقتباسات الدردشة
+cmd-qfind = ابحث في الاقتباسات المحفوظة
+cmd-qforget = امسح نص اقتباسك (#الرقم)
+cmd-qsettings = إعدادات الاقتباس
+cmd-lang = اللغة
+cmd-start = تشغيل البوت
+cmd-app = فتح التطبيق
+cmd-help = كيف يعمل
+cmd-donate = ادعم البوت

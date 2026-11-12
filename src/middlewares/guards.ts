@@ -1,5 +1,6 @@
 import type { NextFunction } from 'grammy'
 import type { BotContext } from '../core/types'
+import { replyPrivately } from '../helpers/ephemeral'
 
 const ADMIN_STATUSES = new Set(['creator', 'administrator'])
 
@@ -7,14 +8,9 @@ function isGroupChat(ctx: BotContext): boolean {
   return ctx.chat?.type === 'group' || ctx.chat?.type === 'supergroup'
 }
 
-async function denyHtml(ctx: BotContext, key: string): Promise<void> {
-  const messageId = ctx.message?.message_id
-  await ctx
-    .reply(ctx.t(key), {
-      parse_mode: 'HTML',
-      ...(messageId ? { reply_parameters: { message_id: messageId, allow_sending_without_reply: true } } : {}),
-    })
-    .catch(() => {})
+/** Refusals go to the caller alone — nobody else needs to read them. */
+function denyHtml(ctx: BotContext, key: string): Promise<void> {
+  return replyPrivately(ctx, ctx.t(key), { parse_mode: 'HTML' })
 }
 
 /** Passes only in group/supergroup chats; otherwise replies with `only_group`. */

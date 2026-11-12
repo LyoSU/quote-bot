@@ -563,3 +563,16 @@ start-btn-help = ❓ 帮助
 start-btn-open = ✨ 打开引用
 start-btn-add_more = ➕ 添加到另一个群
 start-btn-group_style = 🎨 设置群组风格
+
+## Command menu (setMyCommands)
+cmd-q = 引用你回复的消息
+cmd-qrand = 本群随机语录
+cmd-qtop = 本群热门语录
+cmd-qfind = 搜索已保存的语录
+cmd-qforget = 清除你语录的文字 (#编号)
+cmd-qsettings = 语录设置
+cmd-lang = 语言
+cmd-start = 启动机器人
+cmd-app = 打开应用
+cmd-help = 使用说明
+cmd-donate = 支持机器人

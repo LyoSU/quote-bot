@@ -563,3 +563,16 @@ start-btn-help = ❓ Kömək
 start-btn-open = ✨ Sitatları aç
 start-btn-add_more = ➕ Başqa qrupa əlavə et
 start-btn-group_style = 🎨 Qrup stilini tənzimlə
+
+## Command menu (setMyCommands)
+cmd-q = Cavab verdiyin mesajdan sitat
+cmd-qrand = Söhbətdən təsadüfi sitat
+cmd-qtop = Söhbətin ən yaxşı sitatları
+cmd-qfind = Saxlanmış sitatlarda axtar
+cmd-qforget = Sitatının mətnini sil (#nömrə)
+cmd-qsettings = Sitat ayarları
+cmd-lang = Dil
+cmd-start = Botu başlat
+cmd-app = Tətbiqi aç
+cmd-help = Necə işləyir
+cmd-donate = Botu dəstəklə

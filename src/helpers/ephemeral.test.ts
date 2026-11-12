@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { BotContext } from '../core/types'
-import { editPanelText, replyEphemeral } from './ephemeral'
+import { editPanelText, replyEphemeral, replyPrivately } from './ephemeral'
 
 const group = { id: -100, type: 'supergroup' as const }
 const from = { id: 42 }
@@ -55,5 +55,19 @@ describe('editPanelText', () => {
     const ctx = ctxWith({ callbackQuery: { message: { chat: group, message_id: 3 } } })
     await editPanelText(ctx, 'x', {})
     expect(ctx.editMessageText).toHaveBeenCalledWith('x', {})
+  })
+})
+
+describe('replyPrivately', () => {
+  it('falls back to a regular reply and stops retrying ephemerally in that chat', async () => {
+    const chat = { id: -777, type: 'supergroup' as const }
+    const reply = vi.fn().mockRejectedValueOnce(new Error('400')).mockResolvedValue({})
+    const ctx = ctxWith({ message: { chat, message_id: 5 }, reply })
+    await replyPrivately(ctx, 'hi', {})
+    expect(reply).toHaveBeenLastCalledWith('hi', { reply_parameters: { message_id: 5, allow_sending_without_reply: true } })
+
+    reply.mockClear()
+    await replyPrivately(ctx, 'again', {})
+    expect(reply).toHaveBeenCalledTimes(1) // cached: no doomed ephemeral attempt
   })
 })

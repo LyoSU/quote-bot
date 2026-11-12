@@ -597,3 +597,16 @@ start-btn-help = ❓ Hilfe
 start-btn-open = ✨ Zitate öffnen
 start-btn-add_more = ➕ Zu weiterer Gruppe hinzufügen
 start-btn-group_style = 🎨 Gruppenstil einstellen
+
+## Command menu (setMyCommands)
+cmd-q = Zitat aus der beantworteten Nachricht
+cmd-qrand = Zufälliges Zitat aus diesem Chat
+cmd-qtop = Top-Zitate dieses Chats
+cmd-qfind = Gespeicherte Zitate durchsuchen
+cmd-qforget = Text deines Zitats löschen (#Nummer)
+cmd-qsettings = Zitat-Einstellungen
+cmd-lang = Sprache
+cmd-start = Bot starten
+cmd-app = App öffnen
+cmd-help = So funktioniert's
+cmd-donate = Bot unterstützen

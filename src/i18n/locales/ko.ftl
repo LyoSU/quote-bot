@@ -563,3 +563,16 @@ start-btn-help = ❓ 도움말
 start-btn-open = ✨ 인용구 열기
 start-btn-add_more = ➕ 다른 그룹에 추가
 start-btn-group_style = 🎨 그룹 스타일 설정
+
+## Command menu (setMyCommands)
+cmd-q = 답장한 메시지 인용
+cmd-qrand = 이 채팅의 무작위 인용
+cmd-qtop = 이 채팅의 인기 인용
+cmd-qfind = 저장된 인용 검색
+cmd-qforget = 내 인용 텍스트 지우기 (#번호)
+cmd-qsettings = 인용 설정
+cmd-lang = 언어
+cmd-start = 봇 시작
+cmd-app = 앱 열기
+cmd-help = 사용 방법
+cmd-donate = 봇 후원하기

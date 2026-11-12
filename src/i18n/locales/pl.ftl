@@ -599,3 +599,16 @@ start-btn-help = ❓ Pomoc
 start-btn-open = ✨ Otwórz cytaty
 start-btn-add_more = ➕ Dodaj do kolejnej grupy
 start-btn-group_style = 🎨 Ustaw styl grupy
+
+## Command menu (setMyCommands)
+cmd-q = Cytat z wiadomości, na którą odpowiadasz
+cmd-qrand = Losowy cytat z czatu
+cmd-qtop = Najlepsze cytaty czatu
+cmd-qfind = Szukaj zapisanych cytatów
+cmd-qforget = Usuń tekst swojego cytatu (#numer)
+cmd-qsettings = Ustawienia cytatów
+cmd-lang = Język
+cmd-start = Uruchom bota
+cmd-app = Otwórz aplikację
+cmd-help = Jak to działa
+cmd-donate = Wesprzyj bota

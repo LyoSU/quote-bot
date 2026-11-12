@@ -563,3 +563,16 @@ start-btn-help = ❓ Yordam
 start-btn-open = ✨ Iqtiboslarni ochish
 start-btn-add_more = ➕ Yana bir guruhga qo‘shish
 start-btn-group_style = 🎨 Guruh uslubini sozlash
+
+## Command menu (setMyCommands)
+cmd-q = Javob berilgan xabardan iqtibos
+cmd-qrand = Chatdan tasodifiy iqtibos
+cmd-qtop = Chatning eng yaxshi iqtiboslari
+cmd-qfind = Saqlangan iqtiboslarni qidirish
+cmd-qforget = Iqtibosingiz matnini oʻchirish (#raqam)
+cmd-qsettings = Iqtibos sozlamalari
+cmd-lang = Til
+cmd-start = Botni ishga tushirish
+cmd-app = Ilovani ochish
+cmd-help = Qanday ishlaydi
+cmd-donate = Botni qoʻllab-quvvatlash

@@ -587,3 +587,16 @@ start-btn-help = ❓ Ajuda
 start-btn-open = ✨ Abrir citações
 start-btn-add_more = ➕ Adicionar a outro grupo
 start-btn-group_style = 🎨 Ajustar o estilo do grupo
+
+## Command menu (setMyCommands)
+cmd-q = Cite a mensagem que você responde
+cmd-qrand = Citação aleatória do chat
+cmd-qtop = Melhores citações do chat
+cmd-qfind = Buscar citações salvas
+cmd-qforget = Apague o texto da sua citação (#número)
+cmd-qsettings = Configurações de citações
+cmd-lang = Idioma
+cmd-start = Iniciar o bot
+cmd-app = Abrir o app
+cmd-help = Como funciona
+cmd-donate = Apoiar o bot

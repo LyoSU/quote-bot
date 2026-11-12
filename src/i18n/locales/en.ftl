@@ -597,3 +597,16 @@ start-btn-help = ❓ Help
 start-btn-open = ✨ Open the app
 start-btn-add_more = ➕ Add to another group
 start-btn-group_style = 🎨 Group style
+
+## Command menu (setMyCommands)
+cmd-q = Quote the message you reply to
+cmd-qrand = Random quote from this chat
+cmd-qtop = Top quotes of this chat
+cmd-qfind = Search saved quotes
+cmd-qforget = Erase the text of your quote (#number)
+cmd-qsettings = Quote settings
+cmd-lang = Language
+cmd-start = Start the bot
+cmd-app = Open the app
+cmd-help = How it works
+cmd-donate = Support the bot

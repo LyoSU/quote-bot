@@ -600,3 +600,16 @@ start-btn-help = ❓ Ayuda
 start-btn-open = ✨ Abrir citas
 start-btn-add_more = ➕ Añadir a otro grupo
 start-btn-group_style = 🎨 Ajustar el estilo del grupo
+
+## Command menu (setMyCommands)
+cmd-q = Cita el mensaje al que respondes
+cmd-qrand = Cita aleatoria de este chat
+cmd-qtop = Mejores citas del chat
+cmd-qfind = Buscar citas guardadas
+cmd-qforget = Borra el texto de tu cita (#número)
+cmd-qsettings = Ajustes de citas
+cmd-lang = Idioma
+cmd-start = Iniciar el bot
+cmd-app = Abrir la app
+cmd-help = Cómo funciona
+cmd-donate = Apoyar el bot

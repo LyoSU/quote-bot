@@ -563,3 +563,16 @@ start-btn-help = ❓ Yardım
 start-btn-open = ✨ Alıntıları aç
 start-btn-add_more = ➕ Başka bir gruba ekle
 start-btn-group_style = 🎨 Grup stilini ayarla
+
+## Command menu (setMyCommands)
+cmd-q = Yanıtladığın mesajdan alıntı
+cmd-qrand = Sohbetten rastgele alıntı
+cmd-qtop = Sohbetin en iyi alıntıları
+cmd-qfind = Kayıtlı alıntılarda ara
+cmd-qforget = Alıntının metnini sil (#numara)
+cmd-qsettings = Alıntı ayarları
+cmd-lang = Dil
+cmd-start = Botu başlat
+cmd-app = Uygulamayı aç
+cmd-help = Nasıl çalışır
+cmd-donate = Botu destekle

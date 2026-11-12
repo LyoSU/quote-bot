@@ -563,3 +563,16 @@ start-btn-help = ❓ ヘルプ
 start-btn-open = ✨ 引用を開く
 start-btn-add_more = ➕ 別のグループに追加
 start-btn-group_style = 🎨 グループのスタイルを設定
+
+## Command menu (setMyCommands)
+cmd-q = 返信したメッセージを引用
+cmd-qrand = このチャットのランダム引用
+cmd-qtop = このチャットの人気引用
+cmd-qfind = 保存した引用を検索
+cmd-qforget = 自分の引用の本文を消去 (#番号)
+cmd-qsettings = 引用の設定
+cmd-lang = 言語
+cmd-start = ボットを開始
+cmd-app = アプリを開く
+cmd-help = 使い方
+cmd-donate = ボットを支援

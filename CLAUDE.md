@@ -43,7 +43,7 @@ Occasionally resurfaces a top quote on a lively group moment, biased to a quote 
 
 ## Commands the bot exposes (syntax kept 1:1 with the legacy bot)
 
-`/q [flags]` (r/reply, p/png, i/img, rate, h/hidden, m/media, t/text, c/crop, s/stories, `s<n>` scale, `<int>` count, color), `/q_<id>`, rate/irate buttons, `/qrand`, `/qtop`, `/qcolor`, `/qb`, `/qemoji`, `/hidden`, `/privacy`, `/qrate`, `/qgab`, `/qarchive`, `/qforget`, `/start`, `/help`, `/app`, `/lang`, `/donate`, `/refund` (owner-only), `/qs`. Guest mode via `guest_message`.
+`/q [flags]` (r/reply, p/png, i/img, rate, h/hidden, m/media, t/text, c/crop, s/stories, `s<n>` scale, `<int>` count, color), `/q_<id>`, rate/irate buttons, `/qrand`, `/qtop`, `/qcolor`, `/qb`, `/qemoji`, `/hidden`, `/privacy`, `/qrate`, `/qgab`, `/qarchive`, `/qforget`, `/start`, `/help`, `/app`, `/lang`, `/donate`, `/refund` (owner-only), `/qs`. Guest mode via `guest_message`. The published command menu (per audience, localized `cmd-*`, `is_ephemeral` flags) lives in `src/core/commands.ts` and is set on startup — an ephemeral command's handler must answer via `replyPrivately`.
 
 ## Configuration (env, validated in `src/config/env.ts`)
 

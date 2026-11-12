@@ -592,3 +592,16 @@ start-btn-help = ❓ Дапамога
 start-btn-open = ✨ Адкрыць цытаты
 start-btn-add_more = ➕ Дадаць у яшчэ адну групу
 start-btn-group_style = 🎨 Наладзіць стыль групы
+
+## Command menu (setMyCommands)
+cmd-q = Цытата з паведамлення, на якое адказваеш
+cmd-qrand = Выпадковая цытата чата
+cmd-qtop = Топ цытат чата
+cmd-qfind = Пошук захаваных цытат
+cmd-qforget = Сцерці тэкст сваёй цытаты (#нумар)
+cmd-qsettings = Налады цытат
+cmd-lang = Мова
+cmd-start = Запусціць бота
+cmd-app = Адкрыць праграму
+cmd-help = Як гэта працуе
+cmd-donate = Падтрымаць бота
