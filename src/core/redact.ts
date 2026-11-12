@@ -19,7 +19,11 @@ export function redactDeep(value: unknown, depth = 0, seen = new WeakSet<object>
   if (Array.isArray(value)) return value.map((v) => redactDeep(v, depth + 1, seen))
   if (value instanceof Error) {
     // Keep the prototype so the logger's error serializer still recognises it.
-    const out: Error = Object.create(Object.getPrototypeOf(value))
+    // Except a DOMException (fetch abort/timeout): its prototype getters throw on
+    // anything but a real instance, which crashed the serializer mid-log.
+    const dom = value instanceof DOMException
+    const out: Error = Object.create(dom ? Error.prototype : Object.getPrototypeOf(value))
+    if (dom) Object.defineProperty(out, 'name', { value: value.name, enumerable: true })
     Object.defineProperty(out, 'message', { value: redactSecrets(value.message), enumerable: false })
     if (value.stack) Object.defineProperty(out, 'stack', { value: redactSecrets(value.stack), enumerable: false })
     for (const [k, v] of Object.entries(value)) Object.defineProperty(out, k, { value: redactDeep(v, depth + 1, seen), enumerable: true })
