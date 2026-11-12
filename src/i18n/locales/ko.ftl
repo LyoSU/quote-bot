@@ -303,6 +303,7 @@ qs-title =
     <b>⚙️ 인용 설정</b>
 
     섹션을 선택하세요. 변경 사항은 여기의 모든 새 인용에 적용됩니다.
+qs-help = ℹ️ 설정 설명
 qs-on = 켜짐
 qs-off = 꺼짐
 qs-cat-appearance = 🎨 모양

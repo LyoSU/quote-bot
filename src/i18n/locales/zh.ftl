@@ -303,6 +303,7 @@ qs-title =
     <b>⚙️ 引用设置</b>
 
     选择一个部分。更改将应用于此处的每条新引用。
+qs-help = ℹ️ 这些是什么
 qs-on = 开
 qs-off = 关
 qs-cat-appearance = 🎨 外观

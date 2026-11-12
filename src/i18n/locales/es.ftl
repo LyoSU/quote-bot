@@ -330,6 +330,7 @@ qs-title =
     <b>⚙️ Ajustes de citas</b>
 
     Elige una sección. Los cambios se aplican a cada nueva cita aquí.
+qs-help = ℹ️ Qué significa
 qs-on = Activado
 qs-off = Desactivado
 qs-cat-appearance = 🎨 Apariencia

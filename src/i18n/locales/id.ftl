@@ -303,6 +303,7 @@ qs-title =
     <b>⚙️ Pengaturan kutipan</b>
 
     Pilih bagian. Perubahan berlaku untuk setiap kutipan baru di sini.
+qs-help = ℹ️ Apa fungsinya
 qs-on = Aktif
 qs-off = Nonaktif
 qs-cat-appearance = 🎨 Tampilan

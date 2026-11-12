@@ -303,6 +303,7 @@ qs-title =
     <b>⚙️ Sitat parametrləri</b>
 
     Bölmə seç. Dəyişikliklər buradakı hər yeni sitata tətbiq olunur.
+qs-help = ℹ️ Bunlar nə edir
 qs-on = Açıq
 qs-off = Bağlı
 qs-cat-appearance = 🎨 Görünüş

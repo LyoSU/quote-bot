@@ -168,9 +168,9 @@ describe('buildRichMenu', () => {
   const t = (k: string): string => (k === 'qs-title' ? '<b>⚙️ Settings</b>\n\nPick a section.' : k)
   const sections = (html: string): string[] => html.match(/<details[^>]*>/g) ?? []
 
-  it('folds every category; the group one only for groups', () => {
-    expect(sections(buildRichMenu(view(), t))).toEqual(Array(4).fill('<details>'))
-    expect(sections(buildRichMenu(view({ scope: 'user' }), t))).toHaveLength(3)
+  it('folds every category (each with its folded help); the group one only for groups', () => {
+    expect(sections(buildRichMenu(view(), t))).toEqual(Array(8).fill('<details>'))
+    expect(sections(buildRichMenu(view({ scope: 'user' }), t))).toHaveLength(6)
     expect(buildRichMenu(view(), t)).toContain('<h3>⚙️ Settings</h3><p>Pick a section.</p>')
   })
 
@@ -179,6 +179,8 @@ describe('buildRichMenu', () => {
     expect(html).toContain('<details open><summary>qs-cat-content</summary>')
     expect(html).toContain('data="qs:toggle:media"')
     expect(html).not.toContain('data="qs:open"') // no back rows inside sections
+    // buttons come first; the explanation is folded below them
+    expect(html).toMatch(/<summary>qs-cat-content<\/summary><tg-button-row>.*<details><summary>qs-help<\/summary>/)
   })
 
   it('highlights toggles that are on and the destructive reset', () => {

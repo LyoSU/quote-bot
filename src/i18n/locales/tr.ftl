@@ -303,6 +303,7 @@ qs-title =
     <b>⚙️ Alıntı ayarları</b>
 
     Bir bölüm seç. Değişiklikler buradaki her yeni alıntıya uygulanır.
+qs-help = ℹ️ Bunlar ne işe yarar
 qs-on = Açık
 qs-off = Kapalı
 qs-cat-appearance = 🎨 Görünüm

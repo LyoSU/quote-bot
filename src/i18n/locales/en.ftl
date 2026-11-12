@@ -368,6 +368,7 @@ qs-title =
     <b>⚙️ Quote settings</b>
 
     Pick a section. Changes apply to every new quote here.
+qs-help = ℹ️ What these do
 qs-on = On
 qs-off = Off
 qs-cat-appearance = 🎨 Appearance

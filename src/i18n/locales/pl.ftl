@@ -333,6 +333,7 @@ qs-title =
     <b>⚙️ Ustawienia cytatów</b>
 
     Wybierz sekcję. Zmiany dotyczą każdego nowego cytatu tutaj.
+qs-help = ℹ️ Co to znaczy
 qs-on = Wł.
 qs-off = Wył.
 qs-cat-appearance = 🎨 Wygląd

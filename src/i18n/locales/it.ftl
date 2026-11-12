@@ -324,6 +324,7 @@ qs-title =
     <b>⚙️ Impostazioni citazioni</b>
 
     Scegli una sezione. Le modifiche si applicano a ogni nuova citazione qui.
+qs-help = ℹ️ Cosa significa
 qs-on = Attivo
 qs-off = Disattivo
 qs-cat-appearance = 🎨 Aspetto

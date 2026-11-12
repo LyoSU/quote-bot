@@ -303,6 +303,7 @@ qs-title =
     <b>⚙️ Sitata sozlamalari</b>
 
     Bo'lim tanlang. O'zgarishlar bu yerdagi har bir yangi sitataga qo'llanadi.
+qs-help = ℹ️ Bu nima qiladi
 qs-on = Yoniq
 qs-off = O'chiq
 qs-cat-appearance = 🎨 Ko'rinish

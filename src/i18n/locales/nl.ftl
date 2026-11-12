@@ -321,6 +321,7 @@ qs-title =
     <b>⚙️ Citaatinstellingen</b>
 
     Kies een sectie. Wijzigingen gelden voor elk nieuw citaat hier.
+qs-help = ℹ️ Wat dit doet
 qs-on = Aan
 qs-off = Uit
 qs-cat-appearance = 🎨 Weergave

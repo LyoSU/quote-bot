@@ -313,7 +313,7 @@ function colorKeyboard(t: Translate): InlineKeyboard {
 
 /**
  * The whole menu as one rich message: each category is a collapsible section
- * with its explanation and its buttons inline, so there is no screen-hopping —
+ * holding its buttons (explanations fold away below them), so there is no screen-hopping —
  * the section being edited stays open, the rest stay folded. Pickers (color,
  * sticker emoji, language) open in place. Built from the same keyboards as the
  * classic menu. Shown only in answer to an ephemeral /qsettings (see
@@ -399,9 +399,10 @@ export function buildRichMenu(view: QuoteSettingsView, t: Translate, state: Rich
       rows = rows.flatMap((row) => (row.some((b) => b.data === target) ? grid : [row]))
     }
     const open = state.open === cat || (cat === 'appearance' && (state.picker === 'color' || state.picker === 'suffix'))
-    parts.push(
-      `<details${open ? ' open' : ''}><summary>${t(`qs-cat-${cat}`)}</summary>${panelBody(t(`qs-cat-${cat}-desc`))}${rows.map(richRow).join('')}</details>`,
-    )
+    // Controls first; the explanations wait folded underneath, so an open
+    // section is a short list of buttons rather than a wall of text.
+    const help = `<details><summary>${t('qs-help')}</summary>${panelBody(t(`qs-cat-${cat}-desc`))}</details>`
+    parts.push(`<details${open ? ' open' : ''}><summary>${t(`qs-cat-${cat}`)}</summary>${rows.map(richRow).join('')}${help}</details>`)
   }
 
   if (state.picker === 'lang') parts.push(...languageRows().map(richRow))
