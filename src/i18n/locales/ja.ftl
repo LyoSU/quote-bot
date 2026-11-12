@@ -120,6 +120,40 @@ quote-checklist-progress = { $done }/{ $total } 完了
 quote-checklist-done = { $count } 件のタスクを完了にしました
 quote-checklist-undone = { $count } 件のタスクを未完了にしました
 quote-checklist-added = { $count } 件のタスクを追加しました
+quote-service-joined = グループに参加しました
+quote-service-added = { $names } を追加しました
+quote-service-left = グループを退出しました
+quote-service-removed = { $name } を削除しました
+quote-service-title = グループ名を「{ $title }」に変更しました
+quote-service-photo = グループの写真を変更しました
+quote-service-photo-removed = グループの写真を削除しました
+quote-service-group-created = グループを作成しました
+quote-service-channel-created = チャンネルを作成しました
+quote-service-pinned = メッセージをピン留めしました
+quote-service-pinned-text = 「{ $text }」をピン留めしました
+quote-service-video-scheduled = ビデオチャットを { DATETIME($date, day: "numeric", month: "short") } に予約しました
+quote-service-video-scheduled-soon = ビデオチャットを予約しました
+quote-service-video-started = ビデオチャットを開始しました
+quote-service-video-ended = ビデオチャットが終了しました
+quote-service-video-invited = { $names } をビデオチャットに招待しました
+quote-service-video-invited-some = 参加者をビデオチャットに招待しました
+quote-service-auto-delete = メッセージの自動削除を { $duration } に設定しました
+quote-service-auto-delete-off = 自動削除を無効にしました
+quote-service-boost = { $count ->
+        [1] グループをブーストしました
+       *[other] グループを { $count } 回ブーストしました
+    }
+quote-service-background = チャットの背景を変更しました
+quote-service-topic-renamed = トピック名を「{ $name }」に変更しました
+quote-service-topic-icon = トピックのアイコンを変更しました
+quote-service-topic-closed = トピックを閉じました
+quote-service-topic-reopened = トピックを再開しました
+quote-service-general-hidden = 「General」トピックを非表示にしました
+quote-service-general-unhidden = 「General」トピックを再表示しました
+quote-duration-days = { $count }日
+quote-duration-hours = { $count }時間
+quote-duration-minutes = { $count }分
+quote-duration-seconds = { $count }秒
 quote-api_error =
     <b>おっと！何かがうまくいかなかったようです 😅</b>
     もう一度試してみてください！

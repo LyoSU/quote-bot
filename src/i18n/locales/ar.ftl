@@ -150,6 +150,43 @@ quote-checklist-added = تمت إضافة { $count ->
         [few] { $count } مهام
        *[other] { $count } مهمة
     }
+quote-service-joined = انضمام إلى المجموعة
+quote-service-added = إضافة { $names }
+quote-service-left = مغادرة المجموعة
+quote-service-removed = إزالة { $name }
+quote-service-title = تغيير اسم المجموعة إلى «{ $title }»
+quote-service-photo = تغيير صورة المجموعة
+quote-service-photo-removed = حذف صورة المجموعة
+quote-service-group-created = إنشاء المجموعة
+quote-service-channel-created = إنشاء القناة
+quote-service-pinned = تثبيت رسالة
+quote-service-pinned-text = تثبيت «{ $text }»
+quote-service-video-scheduled = جدولة محادثة فيديو في { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = جدولة محادثة فيديو
+quote-service-video-started = بدء محادثة فيديو
+quote-service-video-ended = انتهت محادثة الفيديو
+quote-service-video-invited = دعوة { $names } إلى محادثة الفيديو
+quote-service-video-invited-some = دعوة مشاركين إلى محادثة الفيديو
+quote-service-auto-delete = ضبط الحذف التلقائي للرسائل بعد { $duration }
+quote-service-auto-delete-off = تعطيل الحذف التلقائي
+quote-service-boost = { $count ->
+        [one] تعزيز المجموعة
+        [two] تعزيز المجموعة مرتين
+        [few] تعزيز المجموعة { $count } مرات
+        [many] تعزيز المجموعة { $count } مرة
+       *[other] تعزيز المجموعة { $count } مرة
+    }
+quote-service-background = تغيير خلفية المحادثة
+quote-service-topic-renamed = تغيير اسم الموضوع إلى «{ $name }»
+quote-service-topic-icon = تغيير أيقونة الموضوع
+quote-service-topic-closed = إغلاق الموضوع
+quote-service-topic-reopened = إعادة فتح الموضوع
+quote-service-general-hidden = إخفاء الموضوع العام
+quote-service-general-unhidden = إظهار الموضوع العام
+quote-duration-days = { $count } يوم
+quote-duration-hours = { $count } س
+quote-duration-minutes = { $count } د
+quote-duration-seconds = { $count } ث
 quote-api_error =
     <b>عفوًا! حدث خطأ ما 😅</b>
     يرجى المحاولة مرة أخرى بعد قليل!

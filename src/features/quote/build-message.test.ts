@@ -107,6 +107,24 @@ describe('buildQuoteMessage', () => {
     expect(m.entities).toEqual([{ type: 'italic', offset: 0, length: 'Unsupported'.length }])
   })
 
+  it('quotes a group service notification as a short line (not unsupported)', () => {
+    const m = buildQuoteMessage({
+      source: {
+        message_id: 5,
+        from: { id: 1, first_name: 'Alice' },
+        video_chat_participants_invited: { users: [{ id: 2, first_name: 'Bob' }, { id: 3, first_name: 'Eve' }] },
+      } as Parameters<typeof buildQuoteMessage>[0]['source'],
+      from: alice,
+      isFirstInStreak: true,
+      showReply: true,
+      crop: false,
+      forceMedia: false,
+      unsupportedText: 'Unsupported',
+    })
+    expect(m.text).toBe('📹 Invited Bob, Eve to the video chat')
+    expect(m.entities).toBeUndefined()
+  })
+
   it('keeps a text-less document as a document row (not unsupported)', () => {
     const m = buildQuoteMessage({
       source: { document: { file_id: 'pdf', mime_type: 'application/pdf', file_name: 'report.pdf', file_size: 2048 } },

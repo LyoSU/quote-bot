@@ -120,6 +120,40 @@ quote-checklist-progress = 已完成 { $done }/{ $total }
 quote-checklist-done = 已将 { $count } 项任务标记为完成
 quote-checklist-undone = 已将 { $count } 项任务标记为未完成
 quote-checklist-added = 已添加 { $count } 项任务
+quote-service-joined = 加入了群组
+quote-service-added = 添加了 { $names }
+quote-service-left = 退出了群组
+quote-service-removed = 移除了 { $name }
+quote-service-title = 将群组名称更改为「{ $title }」
+quote-service-photo = 更换了群组头像
+quote-service-photo-removed = 移除了群组头像
+quote-service-group-created = 创建了群组
+quote-service-channel-created = 创建了频道
+quote-service-pinned = 置顶了一条消息
+quote-service-pinned-text = 置顶了「{ $text }」
+quote-service-video-scheduled = 预定了 { DATETIME($date, day: "numeric", month: "short") } 的视频聊天
+quote-service-video-scheduled-soon = 预定了视频聊天
+quote-service-video-started = 发起了视频聊天
+quote-service-video-ended = 视频聊天已结束
+quote-service-video-invited = 邀请 { $names } 加入视频聊天
+quote-service-video-invited-some = 邀请了成员加入视频聊天
+quote-service-auto-delete = 将消息自动删除时间设为 { $duration }
+quote-service-auto-delete-off = 关闭了自动删除
+quote-service-boost = { $count ->
+        [1] 助力了群组
+       *[other] 为群组助力了 { $count } 次
+    }
+quote-service-background = 更换了聊天背景
+quote-service-topic-renamed = 将话题重命名为「{ $name }」
+quote-service-topic-icon = 更换了话题图标
+quote-service-topic-closed = 关闭了话题
+quote-service-topic-reopened = 重新开启了话题
+quote-service-general-hidden = 隐藏了「General」话题
+quote-service-general-unhidden = 重新显示了「General」话题
+quote-duration-days = { $count }天
+quote-duration-hours = { $count }小时
+quote-duration-minutes = { $count }分钟
+quote-duration-seconds = { $count }秒
 quote-api_error =
     <b>糟糕！出错了 😅</b>
     请稍等片刻再试！

@@ -120,6 +120,40 @@ quote-checklist-progress = { $done } dari { $total } selesai
 quote-checklist-done = { $count } tugas ditandai selesai
 quote-checklist-undone = { $count } tugas ditandai belum selesai
 quote-checklist-added = { $count } tugas ditambahkan
+quote-service-joined = Bergabung ke grup
+quote-service-added = Menambahkan { $names }
+quote-service-left = Keluar dari grup
+quote-service-removed = Mengeluarkan { $name }
+quote-service-title = Mengubah nama grup menjadi “{ $title }”
+quote-service-photo = Mengubah foto grup
+quote-service-photo-removed = Menghapus foto grup
+quote-service-group-created = Membuat grup
+quote-service-channel-created = Membuat channel
+quote-service-pinned = Menyematkan pesan
+quote-service-pinned-text = Menyematkan “{ $text }”
+quote-service-video-scheduled = Menjadwalkan obrolan video pada { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Menjadwalkan obrolan video
+quote-service-video-started = Memulai obrolan video
+quote-service-video-ended = Obrolan video berakhir
+quote-service-video-invited = Mengundang { $names } ke obrolan video
+quote-service-video-invited-some = Mengundang peserta ke obrolan video
+quote-service-auto-delete = Mengatur hapus otomatis pesan setelah { $duration }
+quote-service-auto-delete-off = Menonaktifkan hapus otomatis
+quote-service-boost = { $count ->
+        [1] Mem-boost grup
+       *[other] Mem-boost grup { $count } kali
+    }
+quote-service-background = Mengubah latar belakang obrolan
+quote-service-topic-renamed = Mengubah nama topik menjadi “{ $name }”
+quote-service-topic-icon = Mengubah ikon topik
+quote-service-topic-closed = Menutup topik
+quote-service-topic-reopened = Membuka kembali topik
+quote-service-general-hidden = Menyembunyikan topik Umum
+quote-service-general-unhidden = Menampilkan kembali topik Umum
+quote-duration-days = { $count } hr
+quote-duration-hours = { $count } j
+quote-duration-minutes = { $count } mnt
+quote-duration-seconds = { $count } dtk
 quote-api_error =
     <b>Ups! Ada yang salah 😅</b>
     Silakan coba lagi sebentar lagi!

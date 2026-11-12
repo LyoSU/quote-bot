@@ -120,6 +120,40 @@ quote-checklist-progress = { $done }/{ $total } tamamlandı
 quote-checklist-done = { $count } görev tamamlandı olarak işaretlendi
 quote-checklist-undone = { $count } görev tamamlanmadı olarak işaretlendi
 quote-checklist-added = { $count } görev eklendi
+quote-service-joined = Gruba katıldı
+quote-service-added = Ekledi: { $names }
+quote-service-left = Gruptan ayrıldı
+quote-service-removed = Çıkardı: { $name }
+quote-service-title = Grup adını “{ $title }” olarak değiştirdi
+quote-service-photo = Grup fotoğrafını değiştirdi
+quote-service-photo-removed = Grup fotoğrafını kaldırdı
+quote-service-group-created = Grubu oluşturdu
+quote-service-channel-created = Kanalı oluşturdu
+quote-service-pinned = Bir mesajı sabitledi
+quote-service-pinned-text = Sabitledi: “{ $text }”
+quote-service-video-scheduled = { DATETIME($date, day: "numeric", month: "short") } için görüntülü sohbet planladı
+quote-service-video-scheduled-soon = Görüntülü sohbet planladı
+quote-service-video-started = Görüntülü sohbet başlattı
+quote-service-video-ended = Görüntülü sohbet sona erdi
+quote-service-video-invited = Görüntülü sohbete davet etti: { $names }
+quote-service-video-invited-some = Katılımcıları görüntülü sohbete davet etti
+quote-service-auto-delete = Mesajların otomatik silinme süresini { $duration } olarak ayarladı
+quote-service-auto-delete-off = Otomatik silmeyi kapattı
+quote-service-boost = { $count ->
+        [one] Grubu takviyeledi
+       *[other] Grubu { $count } kez takviyeledi
+    }
+quote-service-background = Sohbet arka planını değiştirdi
+quote-service-topic-renamed = Konu adını “{ $name }” olarak değiştirdi
+quote-service-topic-icon = Konu simgesini değiştirdi
+quote-service-topic-closed = Konuyu kapattı
+quote-service-topic-reopened = Konuyu yeniden açtı
+quote-service-general-hidden = Genel konusunu gizledi
+quote-service-general-unhidden = Genel konusunu yeniden gösterdi
+quote-duration-days = { $count } g
+quote-duration-hours = { $count } sa
+quote-duration-minutes = { $count } dk
+quote-duration-seconds = { $count } sn
 quote-api_error =
     <b>Oops! Bir şeyler ters gitti 😅</b>
     Lütfen bir dakika sonra tekrar deneyin!

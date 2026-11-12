@@ -150,6 +150,42 @@ quote-checklist-added = Dodano: { $count ->
         [many] { $count } zadań
        *[other] { $count } zadań
     }
+quote-service-joined = Dołącza do grupy
+quote-service-added = Dodano do grupy: { $names }
+quote-service-left = Opuszcza grupę
+quote-service-removed = Usunięto z grupy: { $name }
+quote-service-title = Zmieniono nazwę grupy na „{ $title }”
+quote-service-photo = Zmieniono zdjęcie grupy
+quote-service-photo-removed = Usunięto zdjęcie grupy
+quote-service-group-created = Utworzono grupę
+quote-service-channel-created = Utworzono kanał
+quote-service-pinned = Przypięto wiadomość
+quote-service-pinned-text = Przypięto: „{ $text }”
+quote-service-video-scheduled = Zaplanowano czat wideo na { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Zaplanowano czat wideo
+quote-service-video-started = Rozpoczęto czat wideo
+quote-service-video-ended = Czat wideo zakończony
+quote-service-video-invited = Zaproszono do czatu wideo: { $names }
+quote-service-video-invited-some = Zaproszono uczestników do czatu wideo
+quote-service-auto-delete = Ustawiono automatyczne usuwanie wiadomości po { $duration }
+quote-service-auto-delete-off = Wyłączono automatyczne usuwanie
+quote-service-boost = { $count ->
+        [one] Wzmocniono grupę
+        [few] Wzmocniono grupę { $count } razy
+        [many] Wzmocniono grupę { $count } razy
+       *[other] Wzmocniono grupę { $count } raza
+    }
+quote-service-background = Zmieniono tło czatu
+quote-service-topic-renamed = Zmieniono nazwę tematu na „{ $name }”
+quote-service-topic-icon = Zmieniono ikonę tematu
+quote-service-topic-closed = Zamknięto temat
+quote-service-topic-reopened = Ponownie otwarto temat
+quote-service-general-hidden = Ukryto temat Ogólny
+quote-service-general-unhidden = Ponownie pokazano temat Ogólny
+quote-duration-days = { $count } d
+quote-duration-hours = { $count } godz.
+quote-duration-minutes = { $count } min
+quote-duration-seconds = { $count } s
 quote-api_error =
     <b>Ups! Coś poszło nie tak 😅</b>
     Spróbuj ponownie za chwilę!

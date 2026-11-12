@@ -144,6 +144,40 @@ quote-checklist-added = { $count ->
         [one] { $count } tarefa adicionada
        *[other] { $count } tarefas adicionadas
     }
+quote-service-joined = Entrou no grupo
+quote-service-added = Adicionou { $names }
+quote-service-left = Saiu do grupo
+quote-service-removed = Removeu { $name }
+quote-service-title = Alterou o nome do grupo para “{ $title }”
+quote-service-photo = Alterou a foto do grupo
+quote-service-photo-removed = Removeu a foto do grupo
+quote-service-group-created = Criou o grupo
+quote-service-channel-created = Criou o canal
+quote-service-pinned = Fixou uma mensagem
+quote-service-pinned-text = Fixou “{ $text }”
+quote-service-video-scheduled = Agendou um chat de vídeo para { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Agendou um chat de vídeo
+quote-service-video-started = Iniciou um chat de vídeo
+quote-service-video-ended = Chat de vídeo encerrado
+quote-service-video-invited = Convidou { $names } para o chat de vídeo
+quote-service-video-invited-some = Convidou participantes para o chat de vídeo
+quote-service-auto-delete = Definiu a autoexclusão de mensagens após { $duration }
+quote-service-auto-delete-off = Desativou a autoexclusão
+quote-service-boost = { $count ->
+        [one] Impulsionou o grupo
+       *[other] Impulsionou o grupo { $count } vezes
+    }
+quote-service-background = Alterou o fundo do chat
+quote-service-topic-renamed = Renomeou o tópico para “{ $name }”
+quote-service-topic-icon = Alterou o ícone do tópico
+quote-service-topic-closed = Fechou o tópico
+quote-service-topic-reopened = Reabriu o tópico
+quote-service-general-hidden = Ocultou o tópico Geral
+quote-service-general-unhidden = Voltou a exibir o tópico Geral
+quote-duration-days = { $count } d
+quote-duration-hours = { $count } h
+quote-duration-minutes = { $count } min
+quote-duration-seconds = { $count } s
 quote-api_error =
     <b>Ops! Algo deu errado 😅</b>
     Tente novamente em um momento!

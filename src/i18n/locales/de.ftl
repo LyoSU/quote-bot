@@ -135,6 +135,40 @@ quote-checklist-added = { $count ->
         [one] { $count } Aufgabe
        *[other] { $count } Aufgaben
     } hinzugefügt
+quote-service-joined = Ist der Gruppe beigetreten
+quote-service-added = Hat { $names } hinzugefügt
+quote-service-left = Hat die Gruppe verlassen
+quote-service-removed = Hat { $name } entfernt
+quote-service-title = Hat den Gruppennamen zu „{ $title }“ geändert
+quote-service-photo = Hat das Gruppenbild geändert
+quote-service-photo-removed = Hat das Gruppenbild entfernt
+quote-service-group-created = Hat die Gruppe erstellt
+quote-service-channel-created = Hat den Kanal erstellt
+quote-service-pinned = Hat eine Nachricht angeheftet
+quote-service-pinned-text = Hat „{ $text }“ angeheftet
+quote-service-video-scheduled = Hat einen Videochat für den { DATETIME($date, day: "numeric", month: "short") } geplant
+quote-service-video-scheduled-soon = Hat einen Videochat geplant
+quote-service-video-started = Hat einen Videochat gestartet
+quote-service-video-ended = Videochat beendet
+quote-service-video-invited = Hat { $names } zum Videochat eingeladen
+quote-service-video-invited-some = Hat Teilnehmer zum Videochat eingeladen
+quote-service-auto-delete = Automatisches Löschen von Nachrichten nach { $duration } aktiviert
+quote-service-auto-delete-off = Automatisches Löschen deaktiviert
+quote-service-boost = { $count ->
+        [one] Hat die Gruppe geboostet
+       *[other] Hat die Gruppe { $count }-mal geboostet
+    }
+quote-service-background = Hat den Chat-Hintergrund geändert
+quote-service-topic-renamed = Hat das Thema in „{ $name }“ umbenannt
+quote-service-topic-icon = Hat das Symbol des Themas geändert
+quote-service-topic-closed = Hat das Thema geschlossen
+quote-service-topic-reopened = Hat das Thema wieder geöffnet
+quote-service-general-hidden = Hat das Thema „Allgemein“ ausgeblendet
+quote-service-general-unhidden = Hat das Thema „Allgemein“ wieder eingeblendet
+quote-duration-days = { $count } T
+quote-duration-hours = { $count } Std.
+quote-duration-minutes = { $count } Min.
+quote-duration-seconds = { $count } Sek.
 quote-api_error =
     <b>Ups! Etwas ist schiefgelaufen 😅</b>
     Bitte versuchen Sie es in einem Moment noch einmal!

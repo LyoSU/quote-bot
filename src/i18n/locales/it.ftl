@@ -144,6 +144,40 @@ quote-checklist-added = { $count ->
         [one] Aggiunta { $count } attività
        *[other] Aggiunte { $count } attività
     }
+quote-service-joined = Ora fa parte del gruppo
+quote-service-added = Ha aggiunto { $names }
+quote-service-left = Ha lasciato il gruppo
+quote-service-removed = Ha rimosso { $name }
+quote-service-title = Ha cambiato il nome del gruppo in «{ $title }»
+quote-service-photo = Ha cambiato la foto del gruppo
+quote-service-photo-removed = Ha rimosso la foto del gruppo
+quote-service-group-created = Ha creato il gruppo
+quote-service-channel-created = Ha creato il canale
+quote-service-pinned = Ha fissato un messaggio
+quote-service-pinned-text = Ha fissato «{ $text }»
+quote-service-video-scheduled = Ha programmato una videochat per il { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Ha programmato una videochat
+quote-service-video-started = Ha avviato una videochat
+quote-service-video-ended = Videochat terminata
+quote-service-video-invited = Ha invitato { $names } alla videochat
+quote-service-video-invited-some = Ha invitato dei partecipanti alla videochat
+quote-service-auto-delete = Ha impostato l'eliminazione automatica dei messaggi dopo { $duration }
+quote-service-auto-delete-off = Ha disattivato l'eliminazione automatica
+quote-service-boost = { $count ->
+        [one] Ha potenziato il gruppo
+       *[other] Ha potenziato il gruppo { $count } volte
+    }
+quote-service-background = Ha cambiato lo sfondo della chat
+quote-service-topic-renamed = Ha rinominato l'argomento in «{ $name }»
+quote-service-topic-icon = Ha cambiato l'icona dell'argomento
+quote-service-topic-closed = Ha chiuso l'argomento
+quote-service-topic-reopened = Ha riaperto l'argomento
+quote-service-general-hidden = Ha nascosto l'argomento Generale
+quote-service-general-unhidden = Ha mostrato di nuovo l'argomento Generale
+quote-duration-days = { $count } g
+quote-duration-hours = { $count } h
+quote-duration-minutes = { $count } min
+quote-duration-seconds = { $count } s
 quote-api_error =
     <b>Oops! Qualcosa è andato storto 😅</b>
     Riprova tra un momento!

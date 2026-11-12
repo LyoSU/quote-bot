@@ -132,6 +132,40 @@ quote-checklist-added = Added { $count ->
         [one] { $count } task
        *[other] { $count } tasks
     }
+quote-service-joined = Joined the group
+quote-service-added = Added { $names }
+quote-service-left = Left the group
+quote-service-removed = Removed { $name }
+quote-service-title = Changed the group name to «{ $title }»
+quote-service-photo = Changed the group photo
+quote-service-photo-removed = Removed the group photo
+quote-service-group-created = Created the group
+quote-service-channel-created = Created the channel
+quote-service-pinned = Pinned a message
+quote-service-pinned-text = Pinned «{ $text }»
+quote-service-video-scheduled = Scheduled a video chat for { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Scheduled a video chat
+quote-service-video-started = Started a video chat
+quote-service-video-ended = Video chat ended
+quote-service-video-invited = Invited { $names } to the video chat
+quote-service-video-invited-some = Invited participants to the video chat
+quote-service-auto-delete = Set messages to auto-delete after { $duration }
+quote-service-auto-delete-off = Disabled auto-delete
+quote-service-boost = { $count ->
+        [one] Boosted the group
+       *[other] Boosted the group { $count } times
+    }
+quote-service-background = Changed the chat background
+quote-service-topic-renamed = Renamed the topic to «{ $name }»
+quote-service-topic-icon = Changed the topic icon
+quote-service-topic-closed = Closed the topic
+quote-service-topic-reopened = Reopened the topic
+quote-service-general-hidden = Hid the General topic
+quote-service-general-unhidden = Unhid the General topic
+quote-duration-days = { $count } d
+quote-duration-hours = { $count } h
+quote-duration-minutes = { $count } min
+quote-duration-seconds = { $count } s
 quote-api_error =
     <b>Oops! Something went wrong 😅</b>
     Please try again in a moment!

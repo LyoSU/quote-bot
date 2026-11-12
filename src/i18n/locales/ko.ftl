@@ -120,6 +120,40 @@ quote-checklist-progress = { $total }개 중 { $done }개 완료
 quote-checklist-done = 작업 { $count }개를 완료로 표시함
 quote-checklist-undone = 작업 { $count }개를 미완료로 표시함
 quote-checklist-added = 작업 { $count }개 추가함
+quote-service-joined = 그룹에 참여했습니다
+quote-service-added = 추가했습니다: { $names }
+quote-service-left = 그룹을 나갔습니다
+quote-service-removed = 내보냈습니다: { $name }
+quote-service-title = 그룹 이름을 변경했습니다: 「{ $title }」
+quote-service-photo = 그룹 사진을 변경했습니다
+quote-service-photo-removed = 그룹 사진을 삭제했습니다
+quote-service-group-created = 그룹을 만들었습니다
+quote-service-channel-created = 채널을 만들었습니다
+quote-service-pinned = 메시지를 고정했습니다
+quote-service-pinned-text = 고정했습니다: 「{ $text }」
+quote-service-video-scheduled = { DATETIME($date, day: "numeric", month: "short") }에 영상 채팅을 예약했습니다
+quote-service-video-scheduled-soon = 영상 채팅을 예약했습니다
+quote-service-video-started = 영상 채팅을 시작했습니다
+quote-service-video-ended = 영상 채팅이 종료되었습니다
+quote-service-video-invited = 영상 채팅에 초대했습니다: { $names }
+quote-service-video-invited-some = 참가자를 영상 채팅에 초대했습니다
+quote-service-auto-delete = 메시지 자동 삭제 설정: { $duration }
+quote-service-auto-delete-off = 자동 삭제를 껐습니다
+quote-service-boost = { $count ->
+        [1] 그룹을 부스트했습니다
+       *[other] 그룹을 { $count }회 부스트했습니다
+    }
+quote-service-background = 채팅 배경을 변경했습니다
+quote-service-topic-renamed = 주제 이름을 변경했습니다: 「{ $name }」
+quote-service-topic-icon = 주제 아이콘을 변경했습니다
+quote-service-topic-closed = 주제를 닫았습니다
+quote-service-topic-reopened = 주제를 다시 열었습니다
+quote-service-general-hidden = 일반 주제를 숨겼습니다
+quote-service-general-unhidden = 일반 주제를 다시 표시했습니다
+quote-duration-days = { $count }일
+quote-duration-hours = { $count }시간
+quote-duration-minutes = { $count }분
+quote-duration-seconds = { $count }초
 quote-api_error =
     <b>이런! 문제가 발생했습니다 😅</b>
     잠시 후 다시 시도해 주세요!

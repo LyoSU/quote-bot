@@ -7,6 +7,14 @@ import type {
   QuoteGiveaway,
 } from '../../services/quote-api/special-types'
 import type { QuoteLabels } from './labels'
+import {
+  DEFAULT_SERVICE_LABELS,
+  isServiceMessage,
+  serviceLabelsFromTranslator,
+  serviceMessageLine,
+  type ServiceLabels,
+  type ServiceMessageSource,
+} from './service-messages'
 import { isTopicRoot, resolveTopic, rgbToHex, type TopicMessageLike } from './topics'
 
 /*
@@ -14,7 +22,9 @@ import { isTopicRoot, resolveTopic, rgbToHex, type TopicMessageLike } from './to
  * text/media of their own. Each converts into a renderer card payload
  * (quote-api cards.js) plus a plain-text fallback in `text/entities` for
  * renderers that predate the cards. Also hosts the forum-topic hook (topic
- * header + "the topic root is not a reply").
+ * header + "the topic root is not a reply"). Group service notifications
+ * (joins, video chats, pins, …) are described in service-messages.ts and
+ * surface here as the same kind of short service line.
  *
  * The Bot API shapes below are structural (grammY's types may lag Bot API 10.x).
  */
@@ -101,7 +111,7 @@ interface GiveawayCompletedLike {
 }
 
 /** Every field this module reads off a message (native or server-fetched). */
-export interface SpecialTypesSource extends TopicMessageLike {
+export interface SpecialTypesSource extends TopicMessageLike, ServiceMessageSource {
   text?: string
   caption?: string
   checklist?: ChecklistLike
@@ -142,6 +152,8 @@ export interface SpecialLabels {
   tasksDone: (count: number) => string
   tasksNotDone: (count: number) => string
   tasksAdded: (count: number) => string
+  /** Group service notifications (service-messages.ts). */
+  service: ServiceLabels
 }
 
 const plural = (n: number, one: string, many: string): string => `${n.toLocaleString('en-US')} ${n === 1 ? one : many}`
@@ -164,6 +176,7 @@ export const DEFAULT_SPECIAL_LABELS: SpecialLabels = {
   tasksDone: (n) => `Marked ${plural(n, 'task', 'tasks')} as done`,
   tasksNotDone: (n) => `Marked ${plural(n, 'task', 'tasks')} as not done`,
   tasksAdded: (n) => `Added ${plural(n, 'task', 'tasks')}`,
+  service: DEFAULT_SERVICE_LABELS,
 }
 
 type Translate = (key: string, args?: Record<string, string | number>) => string
@@ -188,6 +201,7 @@ export function specialLabelsFromTranslator(t: Translate): SpecialLabels {
     tasksDone: (count) => t('quote-checklist-done', { count }),
     tasksNotDone: (count) => t('quote-checklist-undone', { count }),
     tasksAdded: (count) => t('quote-checklist-added', { count }),
+    service: serviceLabelsFromTranslator(t),
   }
 }
 
@@ -374,7 +388,7 @@ function giftFallback(gift: QuoteGift, sl: SpecialLabels): { text: string; entit
   return b.done()
 }
 
-/** One short service line for checklist_tasks_done / _added and giveaway_created. */
+/** One short service line: checklist_tasks_done / _added, giveaway_created, group service notifications. */
 function serviceLine(src: SpecialTypesSource, sl: SpecialLabels): string | undefined {
   if (src.checklist_tasks_done) {
     const d = src.checklist_tasks_done
@@ -391,7 +405,7 @@ function serviceLine(src: SpecialTypesSource, sl: SpecialLabels): string | undef
     const stars = src.giveaway_created.prize_star_count
     return `🎁 ${sl.giveawayCreated}${stars ? ` · ⭐ ${sl.stars(stars)}` : ''}`
   }
-  return undefined
+  return serviceMessageLine(src, sl.service)
 }
 
 // ---- Public API -----------------------------------------------------------------
@@ -411,7 +425,8 @@ export function hasSpecialTypeContent(m: object): boolean {
       s.checklist_tasks_done?.marked_as_done_task_ids?.length ||
       s.checklist_tasks_done?.marked_as_not_done_task_ids?.length ||
       s.checklist_tasks_added?.tasks?.length ||
-      s.story,
+      s.story ||
+      isServiceMessage(s),
   )
 }
 
@@ -507,7 +522,7 @@ export function applySpecialTypes(out: QuoteMessage, source: object, opts: Apply
     return
   }
 
-  // Short service lines (checklist progress, scheduled giveaway).
+  // Short service lines (checklist progress, scheduled giveaway, group service notifications).
   if (!out.text) {
     const line = serviceLine(src, sl)
     if (line) setFallback({ text: line })

@@ -175,10 +175,10 @@ describe('selectSourceMessages', () => {
     expect(sel.messages.map((m) => m.message_id)).toEqual([10, 12, 14])
   })
 
-  it('drops content-less service messages (joins, pins, deleted gaps) from a range', async () => {
-    // The range [10, 11, 12] spans a service message at 11 (e.g. someone
-    // joined). The server returns it with no text/media; left in, the renderer
-    // would paint an "unsupported message" bubble between the real quotes.
+  it('drops content-less service messages (unsupported kinds, deleted gaps) from a range', async () => {
+    // The range [10, 11, 12] spans a service message at 11 of a kind we
+    // can't describe. The server returns it with no text/media; left in, the
+    // renderer would paint an "unsupported message" bubble between the quotes.
     const td = fetcher([
       { message_id: 10, date: 0, text: 'first' },
       { message_id: 11, date: 0 } as ApiMessage,
@@ -193,6 +193,27 @@ describe('selectSourceMessages', () => {
       fetcher: td,
     })
     expect(sel.messages.map((m) => m.message_id)).toEqual([10, 12])
+  })
+
+  it('keeps supported service notifications in a range (they quote as a service line)', async () => {
+    // 11 = someone joined, 12 = a video chat ended; 13 is an unsupported
+    // service message (no known field) and is still dropped.
+    const td = fetcher([
+      { message_id: 10, date: 0, text: 'first' },
+      { message_id: 11, date: 0, from: { id: 5, first_name: 'E' }, new_chat_members: [{ id: 5, first_name: 'E' }] } as ApiMessage,
+      { message_id: 12, date: 0, video_chat_ended: { duration: 90 } } as ApiMessage,
+      { message_id: 13, date: 0 } as ApiMessage,
+      { message_id: 14, date: 0, text: 'last' },
+    ])
+    const sel = await selectSourceMessages({
+      trigger: trigger({ reply_to_message: reply }),
+      chatId: -100,
+      isPrivate: false,
+      isGuest: false,
+      count: 4,
+      fetcher: td,
+    })
+    expect(sel.messages.map((m) => m.message_id)).toEqual([10, 11, 12, 14])
   })
 
   it('keeps a media-only message in a range (caption-less photo is real content)', async () => {

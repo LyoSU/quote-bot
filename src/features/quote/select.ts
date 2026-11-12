@@ -44,7 +44,8 @@ const MAX_FETCH_IDS = 50
 
 /**
  * True if a fetched message carries something worth quoting. Mirrors what
- * buildQuoteMessage treats as content (text/caption or any media) — anything
+ * buildQuoteMessage treats as content (text/caption, any media, special types
+ * incl. supported service notifications) — anything
  * that returns false would otherwise render as the "unsupported message"
  * placeholder, which is exactly what we want to filter out of a range.
  */
@@ -122,10 +123,11 @@ export async function selectSourceMessages(params: SelectParams): Promise<Select
     return { messages: [firstMessage] }
   }
 
-  // `count` is how many real messages the user wants OUT. Service messages
-  // (joins/leaves/pins) and deleted ids occupy slots in the range but carry no
-  // quotable content — left in, buildQuoteMessage renders them as an
-  // "unsupported message" bubble. So over-fetch a wider window (2×), drop the
+  // `count` is how many real messages the user wants OUT. Unsupported service
+  // messages and deleted ids occupy slots in the range but carry no quotable
+  // content — left in, buildQuoteMessage renders them as an "unsupported
+  // message" bubble. (Joins/leaves/pins/video chats… DO count: they quote as
+  // a short service line — service-messages.ts.) So over-fetch a wider window (2×), drop the
   // content-less ones, and keep the `count` nearest the anchor. The anchor is
   // the replied message: the FIRST id for a forward range, the LAST for a
   // backward one — so slice from the matching end.

@@ -120,6 +120,40 @@ quote-checklist-progress = { $done }/{ $total } bajarildi
 quote-checklist-done = { $count } ta vazifa bajarilgan deb belgilandi
 quote-checklist-undone = { $count } ta vazifa bajarilmagan deb belgilandi
 quote-checklist-added = { $count } ta vazifa qo'shildi
+quote-service-joined = Guruhga qo'shildi
+quote-service-added = Qo'shdi: { $names }
+quote-service-left = Guruhni tark etdi
+quote-service-removed = Guruhdan chiqardi: { $name }
+quote-service-title = Guruh nomini «{ $title }» ga o'zgartirdi
+quote-service-photo = Guruh rasmini o'zgartirdi
+quote-service-photo-removed = Guruh rasmini o'chirdi
+quote-service-group-created = Guruhni yaratdi
+quote-service-channel-created = Kanalni yaratdi
+quote-service-pinned = Xabarni qadab qo'ydi
+quote-service-pinned-text = Qadab qo'ydi: «{ $text }»
+quote-service-video-scheduled = { DATETIME($date, day: "numeric", month: "short") } kuniga video chat rejalashtirdi
+quote-service-video-scheduled-soon = Video chat rejalashtirdi
+quote-service-video-started = Video chatni boshladi
+quote-service-video-ended = Video chat tugadi
+quote-service-video-invited = Video chatga taklif qildi: { $names }
+quote-service-video-invited-some = Ishtirokchilarni video chatga taklif qildi
+quote-service-auto-delete = Xabarlarni avtomatik o'chirish muddatini { $duration } qilib belgiladi
+quote-service-auto-delete-off = Avtomatik o'chirishni o'chirib qo'ydi
+quote-service-boost = { $count ->
+        [one] Guruhga boost berdi
+       *[other] Guruhga { $count } marta boost berdi
+    }
+quote-service-background = Chat fonini o'zgartirdi
+quote-service-topic-renamed = Mavzu nomini «{ $name }» ga o'zgartirdi
+quote-service-topic-icon = Mavzu belgisini o'zgartirdi
+quote-service-topic-closed = Mavzuni yopdi
+quote-service-topic-reopened = Mavzuni qayta ochdi
+quote-service-general-hidden = Umumiy mavzuni yashirdi
+quote-service-general-unhidden = Umumiy mavzuni qayta ko'rsatdi
+quote-duration-days = { $count } kun
+quote-duration-hours = { $count } soat
+quote-duration-minutes = { $count } daq
+quote-duration-seconds = { $count } son
 quote-api_error =
     <b>Oops! Nimadir xato ketdi 😅</b>
     Iltimos, ozgina vaqt o'tgach yana urinib ko'ring!

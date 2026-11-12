@@ -120,6 +120,40 @@ quote-checklist-progress = { $done }/{ $total } tamamlandı
 quote-checklist-done = { $count } tapşırıq tamamlanmış kimi qeyd edildi
 quote-checklist-undone = { $count } tapşırıq tamamlanmamış kimi qeyd edildi
 quote-checklist-added = { $count } tapşırıq əlavə edildi
+quote-service-joined = Qrupa qoşuldu
+quote-service-added = Əlavə etdi: { $names }
+quote-service-left = Qrupdan çıxdı
+quote-service-removed = Çıxardı: { $name }
+quote-service-title = Qrupun adını «{ $title }» olaraq dəyişdi
+quote-service-photo = Qrup şəklini dəyişdi
+quote-service-photo-removed = Qrup şəklini sildi
+quote-service-group-created = Qrupu yaratdı
+quote-service-channel-created = Kanalı yaratdı
+quote-service-pinned = Mesajı sancaqladı
+quote-service-pinned-text = Sancaqladı: «{ $text }»
+quote-service-video-scheduled = { DATETIME($date, day: "numeric", month: "short") } tarixinə video söhbət planlaşdırdı
+quote-service-video-scheduled-soon = Video söhbət planlaşdırdı
+quote-service-video-started = Video söhbət başlatdı
+quote-service-video-ended = Video söhbət bitdi
+quote-service-video-invited = Video söhbətə dəvət etdi: { $names }
+quote-service-video-invited-some = İştirakçıları video söhbətə dəvət etdi
+quote-service-auto-delete = Mesajların avtomatik silinmə müddətini { $duration } olaraq təyin etdi
+quote-service-auto-delete-off = Avtomatik silinməni söndürdü
+quote-service-boost = { $count ->
+        [one] Qrupu gücləndirdi
+       *[other] Qrupu { $count } dəfə gücləndirdi
+    }
+quote-service-background = Söhbət fonunu dəyişdi
+quote-service-topic-renamed = Mövzunun adını «{ $name }» olaraq dəyişdi
+quote-service-topic-icon = Mövzu ikonunu dəyişdi
+quote-service-topic-closed = Mövzunu bağladı
+quote-service-topic-reopened = Mövzunu yenidən açdı
+quote-service-general-hidden = Ümumi mövzunu gizlətdi
+quote-service-general-unhidden = Ümumi mövzunu yenidən göstərdi
+quote-duration-days = { $count } gün
+quote-duration-hours = { $count } saat
+quote-duration-minutes = { $count } dəq
+quote-duration-seconds = { $count } san
 quote-api_error =
     <b>Oops! Bir şey səhv getdi 😅</b>
     Bir az sonra yenidən cəhd edin!

@@ -138,6 +138,40 @@ quote-checklist-added = { $count ->
         [one] { $count } taak
        *[other] { $count } taken
     } toegevoegd
+quote-service-joined = Is lid geworden van de groep
+quote-service-added = Heeft { $names } toegevoegd
+quote-service-left = Heeft de groep verlaten
+quote-service-removed = Heeft { $name } verwijderd
+quote-service-title = Heeft de groepsnaam gewijzigd in ‘{ $title }’
+quote-service-photo = Heeft de groepsfoto gewijzigd
+quote-service-photo-removed = Heeft de groepsfoto verwijderd
+quote-service-group-created = Heeft de groep aangemaakt
+quote-service-channel-created = Heeft het kanaal aangemaakt
+quote-service-pinned = Heeft een bericht vastgezet
+quote-service-pinned-text = Heeft ‘{ $text }’ vastgezet
+quote-service-video-scheduled = Heeft een videochat gepland op { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Heeft een videochat gepland
+quote-service-video-started = Heeft een videochat gestart
+quote-service-video-ended = Videochat beëindigd
+quote-service-video-invited = Heeft { $names } uitgenodigd voor de videochat
+quote-service-video-invited-some = Heeft deelnemers uitgenodigd voor de videochat
+quote-service-auto-delete = Berichten worden automatisch verwijderd na { $duration }
+quote-service-auto-delete-off = Automatisch verwijderen uitgeschakeld
+quote-service-boost = { $count ->
+        [one] Heeft de groep geboost
+       *[other] Heeft de groep { $count } keer geboost
+    }
+quote-service-background = Heeft de chatachtergrond gewijzigd
+quote-service-topic-renamed = Heeft het onderwerp hernoemd naar ‘{ $name }’
+quote-service-topic-icon = Heeft het pictogram van het onderwerp gewijzigd
+quote-service-topic-closed = Heeft het onderwerp gesloten
+quote-service-topic-reopened = Heeft het onderwerp heropend
+quote-service-general-hidden = Heeft het onderwerp Algemeen verborgen
+quote-service-general-unhidden = Heeft het onderwerp Algemeen weer zichtbaar gemaakt
+quote-duration-days = { $count } d
+quote-duration-hours = { $count } u
+quote-duration-minutes = { $count } min
+quote-duration-seconds = { $count } s
 quote-api_error =
     <b>Oeps! Er ging iets mis 😅</b>
     Probeer het over een moment opnieuw!

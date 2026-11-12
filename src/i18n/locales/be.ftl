@@ -144,6 +144,41 @@ quote-checklist-added = Дададзена: { $count ->
         [few] { $count } задачы
        *[other] { $count } задач
     }
+quote-service-joined = Цяпер у групе
+quote-service-added = Дададзена ў групу: { $names }
+quote-service-left = Пакідае групу
+quote-service-removed = Выдалена з групы: { $name }
+quote-service-title = Назва групы зменена на «{ $title }»
+quote-service-photo = Фота групы абноўлена
+quote-service-photo-removed = Фота групы выдалена
+quote-service-group-created = Група створана
+quote-service-channel-created = Канал створаны
+quote-service-pinned = Замацавана паведамленне
+quote-service-pinned-text = Замацавана: «{ $text }»
+quote-service-video-scheduled = Відэачат запланаваны на { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = Відэачат запланаваны
+quote-service-video-started = Відэачат пачаты
+quote-service-video-ended = Відэачат завершаны
+quote-service-video-invited = Запрашэнне ў відэачат: { $names }
+quote-service-video-invited-some = Удзельнікі запрошаны ў відэачат
+quote-service-auto-delete = Аўтавыдаленне паведамленняў: праз { $duration }
+quote-service-auto-delete-off = Аўтавыдаленне адключана
+quote-service-boost = { $count ->
+        [one] Група атрымала { $count } буст
+        [few] Група атрымала { $count } бусты
+       *[other] Група атрымала { $count } бустаў
+    }
+quote-service-background = Фон чата зменены
+quote-service-topic-renamed = Тэма перайменавана ў «{ $name }»
+quote-service-topic-icon = Значок тэмы зменены
+quote-service-topic-closed = Тэма закрыта
+quote-service-topic-reopened = Тэма зноў адкрыта
+quote-service-general-hidden = Тэма «General» схавана
+quote-service-general-unhidden = Тэма «General» зноў паказана
+quote-duration-days = { $count } дз.
+quote-duration-hours = { $count } гадз
+quote-duration-minutes = { $count } хв
+quote-duration-seconds = { $count } с
 quote-api_error =
     <b>Ой! Нешта пайшло не так 😅</b>
     Калі ласка, паспрабуйце яшчэ раз пазней!

@@ -135,6 +135,40 @@ quote-checklist-added = { $count ->
         [one] { $count } tâche ajoutée
        *[other] { $count } tâches ajoutées
     }
+quote-service-joined = A rejoint le groupe
+quote-service-added = A ajouté { $names }
+quote-service-left = A quitté le groupe
+quote-service-removed = A exclu { $name }
+quote-service-title = A renommé le groupe en « { $title } »
+quote-service-photo = A changé la photo du groupe
+quote-service-photo-removed = A supprimé la photo du groupe
+quote-service-group-created = A créé le groupe
+quote-service-channel-created = A créé le canal
+quote-service-pinned = A épinglé un message
+quote-service-pinned-text = A épinglé « { $text } »
+quote-service-video-scheduled = A programmé un chat vidéo pour le { DATETIME($date, day: "numeric", month: "short") }
+quote-service-video-scheduled-soon = A programmé un chat vidéo
+quote-service-video-started = A lancé un chat vidéo
+quote-service-video-ended = Chat vidéo terminé
+quote-service-video-invited = A invité { $names } au chat vidéo
+quote-service-video-invited-some = A invité des participants au chat vidéo
+quote-service-auto-delete = A activé la suppression automatique des messages après { $duration }
+quote-service-auto-delete-off = A désactivé la suppression automatique
+quote-service-boost = { $count ->
+        [one] A boosté le groupe
+       *[other] A boosté le groupe { $count } fois
+    }
+quote-service-background = A changé le fond du chat
+quote-service-topic-renamed = A renommé le sujet en « { $name } »
+quote-service-topic-icon = A changé l'icône du sujet
+quote-service-topic-closed = A fermé le sujet
+quote-service-topic-reopened = A rouvert le sujet
+quote-service-general-hidden = A masqué le sujet Général
+quote-service-general-unhidden = A réaffiché le sujet Général
+quote-duration-days = { $count } j
+quote-duration-hours = { $count } h
+quote-duration-minutes = { $count } min
+quote-duration-seconds = { $count } s
 quote-api_error =
     <b>Oups ! Quelque chose s'est mal passé 😅</b>
     Veuillez réessayer dans un instant !
