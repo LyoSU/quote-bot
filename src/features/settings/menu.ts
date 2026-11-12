@@ -5,6 +5,7 @@ import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { freshSettings, refreshSettings } from '../../middlewares/fresh-settings'
 import { deepLink } from '../../helpers/deep-link'
+import { editPanelText, replyEphemeral } from '../../helpers/ephemeral'
 import { DEFAULT_BACKGROUND } from '../quote/color'
 import { DEFAULT_STICKER_EMOJI, QUOTE_BACKDROPS, QUOTE_STYLES, type PartialQuoteMode, type QuoteBackdropPref, type QuoteFormatPref, type QuoteStylePref } from '../quote/render'
 
@@ -322,14 +323,14 @@ function htmlOpts(ctx: BotContext): {
   }
 }
 
-/** Edits the current callback message, or sends a fresh one for the /qsettings command. */
+/**
+ * Edits the current callback message, or sends a fresh one for the /qsettings
+ * command — in a group, visible to the calling admin only.
+ */
 async function show(ctx: BotContext, bodyKey: string, reply_markup: InlineKeyboard, edit: boolean): Promise<void> {
-  if (edit && ctx.callbackQuery) {
-    await ctx
-      .editMessageText(ctx.t(bodyKey), { parse_mode: 'HTML', link_preview_options: { is_disabled: true }, reply_markup })
-      .catch(() => {})
-    return
-  }
+  const panel = { parse_mode: 'HTML' as const, link_preview_options: { is_disabled: true as const }, reply_markup }
+  if (edit && ctx.callbackQuery) return editPanelText(ctx, ctx.t(bodyKey), panel)
+  if (await replyEphemeral(ctx, ctx.t(bodyKey), panel)) return
   await ctx.reply(ctx.t(bodyKey), { ...htmlOpts(ctx), reply_markup })
 }
 
@@ -482,13 +483,11 @@ quoteSettingsMenu.callbackQuery(/^qs:toggle:(media|reply|crop|sendertag|privacy|
 // Open the background-color picker (within Appearance).
 quoteSettingsMenu.callbackQuery('qs:color', async (ctx) => {
   if (await isAdmin(ctx)) {
-    await ctx
-      .editMessageText(ctx.t('qs-color-title'), {
-        parse_mode: 'HTML',
-        link_preview_options: { is_disabled: true },
-        reply_markup: colorKeyboard((k) => ctx.t(k)),
-      })
-      .catch(() => {})
+    await editPanelText(ctx, ctx.t('qs-color-title'), {
+      parse_mode: 'HTML',
+      link_preview_options: { is_disabled: true },
+      reply_markup: colorKeyboard((k) => ctx.t(k)),
+    })
   }
   await ctx.answerCallbackQuery().catch(() => {})
 })
@@ -510,13 +509,11 @@ quoteSettingsMenu.callbackQuery(/^qs:color:set:(\d+)$/, async (ctx) => {
 // Open the sticker-emoji picker (within Appearance).
 quoteSettingsMenu.callbackQuery('qs:suffix', async (ctx) => {
   if (await isAdmin(ctx)) {
-    await ctx
-      .editMessageText(ctx.t('qs-suffix-title'), {
-        parse_mode: 'HTML',
-        link_preview_options: { is_disabled: true },
-        reply_markup: suffixKeyboard((k) => ctx.t(k)),
-      })
-      .catch(() => {})
+    await editPanelText(ctx, ctx.t('qs-suffix-title'), {
+      parse_mode: 'HTML',
+      link_preview_options: { is_disabled: true },
+      reply_markup: suffixKeyboard((k) => ctx.t(k)),
+    })
   }
   await ctx.answerCallbackQuery().catch(() => {})
 })

@@ -2,6 +2,7 @@ import { Composer, InlineKeyboard, InputFile } from 'grammy'
 import type { BotContext } from '../../core/types'
 import { i18n } from '../../i18n'
 import { deepLink } from '../../helpers/deep-link'
+import { editPanelText } from '../../helpers/ephemeral'
 import { updateUserSettings } from '../../db/repositories/user-repository'
 import { updateGroupSettings } from '../../db/repositories/group-repository'
 import { showSettingsMenu } from '../settings/menu'
@@ -98,10 +99,7 @@ const LANG_PICKER_TEXT = '🌍 Choose language\n\nHelp with translation: https:/
 
 async function showLanguagePicker(ctx: BotContext, opts: { edit?: boolean; backCallback?: string } = {}): Promise<void> {
   const reply_markup = languageKeyboard(opts.backCallback)
-  if (opts.edit && ctx.callbackQuery) {
-    await ctx.editMessageText(LANG_PICKER_TEXT, { reply_markup }).catch(() => {})
-    return
-  }
+  if (opts.edit && ctx.callbackQuery) return editPanelText(ctx, LANG_PICKER_TEXT, { reply_markup })
   await ctx.reply(LANG_PICKER_TEXT, { reply_markup })
 }
 
