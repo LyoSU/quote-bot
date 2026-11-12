@@ -377,7 +377,7 @@ export function panelBody(panel: string): string {
 function languageRows(): RichButton[][] {
   const rows: RichButton[][] = []
   i18n.locales.forEach((code, i) => {
-    if (i % 3 === 0) rows.push([])
+    if (i % 2 === 0) rows.push([]) // two per row: three truncate the longer names on phones
     rows.at(-1)!.push({ text: i18n.t(code, 'language_name'), data: `set_language:${code}` })
   })
   return rows
