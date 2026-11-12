@@ -270,7 +270,7 @@ export async function assembleQuoteMessages(
     // Premium emoji status rides next to the name; the Bot API never
     // includes it, so resolve through the Bot API server (positive id = real user).
     if (!from.emoji_status && typeof from.id === 'number' && from.id > 0) {
-      const status = await deps.getUserEmojiStatus(from.id)
+      const status = await deps.getUserEmojiStatus(from.id).catch(() => undefined)
       if (status) from = { ...from, emoji_status: status }
     }
 
